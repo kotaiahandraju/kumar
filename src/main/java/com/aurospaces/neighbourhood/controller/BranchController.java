@@ -168,7 +168,6 @@ public class BranchController {
 			ObjectMapper objectMapper = null;
 			String sJson="";
 			listOrderBeans= branchDao.getBranchDetails(status);
-				 System.out.println("inActiveItem data--"+listOrderBeans.size());
 			objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 
