@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sales&amp;expensesReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="65224a68-88d1-4799-8d40-92525d368ee4">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<subDataset name="dataset1" uuid="8b20b9af-767c-42d1-9c91-f4a5e7c628f6"/>
+	<parameter name="branchId" class="java.lang.String"/>
+	<parameter name="sdate" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT b.branch_Name AS Branch,p.`prod_Desc`AS Product,bi.bill_Date AS BillDate,bd.`quantity` AS Quantity,bd.`rate` AS Rate,bd.amount AS Amount,bi.net_Amt AS TotalSales,ei.expenses_Total AS TotalExpenses FROM bill_info bi
+JOIN bill_details bd ON bd.`bill_Info_Id`=bi.`bill_Info_Id`
+JOIN stock_branch sb ON sb.`prod_Id`=bd.`prod_Id`
+JOIN branch b ON b.`branch_Id`=sb.`branch_Id`
+JOIN product p ON p.`product_Id`=bd.prod_Id
+JOIN expenses_branch eb ON eb.branch_Id=b.branch_Id
+JOIN expense_info ei ON ei.expenses_Id=eb.expenses_Id
+WHERE  b.`branch_Id`=$P{branchId} AND DATE(bi.bill_Date)=$P{sdate}
+GROUP BY p.product_Id,b.branch_Id;]]>
+	</queryString>
+	<field name="Branch" class="java.lang.String"/>
+	<field name="Product" class="java.lang.String"/>
+	<field name="BillDate" class="java.sql.Timestamp"/>
+	<field name="Quantity" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Rate" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Amount" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TotalSales" class="java.lang.Float"/>
+	<field name="TotalExpenses" class="java.lang.Float"/>
+	<variable name="salesTotals" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{TotalSales}]]></variableExpression>
+	</variable>
+	<variable name="expensesTotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{TotalExpenses}]]></variableExpression>
+	</variable>
+	<variable name="balance" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{salesTotals}-$V{expensesTotal}]]></variableExpression>
+	</variable>
+	<variable name="maxSaleProduct" class="java.lang.String" calculation="Highest">
+		<variableExpression><![CDATA[$F{Product}]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<variable name="minSaleProduct" class="java.lang.String" calculation="Lowest">
+		<variableExpression><![CDATA[$F{Product}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="43" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="9d57fec4-b93f-436d-9b61-2b9abfbc7c23" x="13" y="10" width="248" height="23" forecolor="#009999"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Daily Expenses Report  Location Wise:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="8a2ea03f-86e8-4610-ba7f-8a7ded04a7f9" x="0" y="0" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Branch]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="98ff02ad-8016-46ff-b871-ca474bc88f7a" x="69" y="0" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Product]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ed46ee6e-90fb-4c1c-a2a8-1d6db531a171" x="138" y="0" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BillDate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="3480cd89-f84e-476e-bc4c-05c905d05dda" x="207" y="0" width="54" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a49a1416-2eb7-43f1-b277-505cc2da3fe6" x="261" y="0" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="cb36f90c-2c3f-47b8-b33b-a12d6ff77074" x="330" y="0" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="2ca0d725-ec66-476e-b9df-2bc6a3dcbab3" x="399" y="0" width="84" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TotalSales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="a92124ae-ef9c-4e20-9fe2-11374349e459" x="483" y="0" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TotalExpenses]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="179" splitType="Stretch">
+			<textField>
+				<reportElement uuid="fc157c0c-dfcb-4165-a73e-a9bed0a7c797" x="402" y="39" width="81" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{salesTotals}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1afe1d50-9290-4c71-a0ae-96053533be17" x="402" y="59" width="81" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{expensesTotal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9b0b1aa9-6e0f-4011-b8a9-afe9e21f1ceb" x="402" y="80" width="81" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{balance}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="699c9b78-0491-4951-ba3a-7297661be250" x="402" y="79" width="81" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="431d82d9-d9ae-4f8b-83b0-7ecce47050ab" x="402" y="100" width="81" height="1"/>
+			</line>
+			<textField>
+				<reportElement uuid="8173b2af-5453-496b-b801-a0d4eed94b29" x="413" y="111" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{maxSaleProduct}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="23e5e2e6-10dd-4c92-8535-74ca79374da0" x="413" y="131" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{minSaleProduct}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="c743b322-0747-4c04-bbf7-32082c965d1c" x="189" y="39" width="177" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total Sales:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="60f053dd-3883-4ebe-b417-16903d0d3f14" x="189" y="60" width="177" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Total Expenses:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="62f1dae6-124f-4fe4-acc4-6b9d5b2423c6" x="189" y="81" width="177" height="19"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Balance:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="c68d9799-688b-44af-9038-6d315faaa14f" x="166" y="111" width="200" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Maximum Sales Product]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="dd4b3362-6686-4121-a39f-bc2bb029002e" x="166" y="131" width="200" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif" size="10" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Minimum Sales Product:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="64c99293-820e-475c-bf06-a53d1f468092" x="0" y="0" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Branch}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="95fac66a-2a85-4855-93d4-e6e5a53ca135" x="69" y="0" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Product}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="276d0a80-5ca6-4ec0-a37b-4aa05bd8f213" x="138" y="0" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BillDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="9b13ed8a-0094-40db-9a33-7f49bc7b0fa3" x="207" y="0" width="54" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="ad0a0c5b-53bf-4efb-8caa-b0b6e284a5f3" x="261" y="0" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6e35d9d3-183d-4b30-922e-dbdc7cde3c4b" x="330" y="0" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3a0502eb-7945-428d-bc7c-c7340a6a8d67" x="399" y="0" width="84" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TotalSales}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6e3f8168-d7a9-41c3-b970-afed844a87fa" x="483" y="0" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="SansSerif"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TotalExpenses}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="50"/>
+	</columnFooter>
+</jasperReport>

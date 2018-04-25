@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report3" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6dd75bdf-63da-4a49-8454-3ecbfd9f10de">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="53"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Table Dataset 1" uuid="e8e829db-28d6-492a-bb08-f342515a5642">
+		<parameter name="branch" class="java.lang.String"/>
+		<parameter name="cUser" class="java.lang.String"/>
+		<parameter name="sDate" class="java.lang.String"/>
+		<parameter name="eDate" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT CONCAT(cp.`credit_firstname`,' ', cp.`credit_lastname`) AS creditUser,DATE(cbi.`date`) AS DATE,cbi.`bill_Info_Id` AS billId,cbi.`purchase_Amount` AS purchaseAmount,cbi.`pay_Amount` AS payAmount  FROM `credit_bill_info` cbi
+JOIN `credit_party` cp ON cp.`credit_party_Id`=cbi.`creditUser_Id`
+JOIN `creditparty_branch` cpb ON cpb.`credit_party_Id`=cp.`credit_party_Id`
+WHERE cpb.`branch_Id`=$P{branch} AND cbi.`creditUser_Id`=$P{cUser} AND  DATE(cbi.`date`) BETWEEN $P{sDate} AND $P{eDate}]]>
+		</queryString>
+		<field name="creditUser" class="java.lang.String"/>
+		<field name="DATE" class="java.sql.Date">
+			<fieldDescription><![CDATA[]]></fieldDescription>
+		</field>
+		<field name="billId" class="java.lang.String"/>
+		<field name="purchaseAmount" class="java.lang.Double"/>
+		<field name="payAmount" class="java.lang.Double"/>
+	</subDataset>
+	<parameter name="branch" class="java.lang.String"/>
+	<parameter name="cUser" class="java.lang.String"/>
+	<parameter name="sDate" class="java.lang.String"/>
+	<parameter name="eDate" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[select 1 as '1']]>
+	</queryString>
+	<field name="1" class="java.lang.Long"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<componentElement>
+				<reportElement uuid="34b14d44-002d-47d6-9965-a855c21eed51" key="table" style="table" x="38" y="30" width="450" height="50"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Table Dataset 1" uuid="2e73392d-1afd-42d9-a09c-01c01ce5e1e9">
+						<datasetParameter name="branch">
+							<datasetParameterExpression><![CDATA[$P{branch}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="cUser">
+							<datasetParameterExpression><![CDATA[$P{cUser}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="sDate">
+							<datasetParameterExpression><![CDATA[$P{sDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="eDate">
+							<datasetParameterExpression><![CDATA[$P{eDate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="0eb5673f-1700-4030-825d-6d49163bd719">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement uuid="9a430711-83dd-4fc2-8c48-95627f73e5da" style="table_TH" x="0" y="0" width="90" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="11"/>
+								</textElement>
+								<text><![CDATA[creditUser]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement uuid="804b10d4-cbff-4a09-b77e-b222e6af3049" style="table_TD" x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{creditUser}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="8c738e00-50e2-44de-a285-d7853a08935b">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement uuid="1a1f5093-2ccf-470b-aca6-c94a29b519ce" style="table_TH" x="0" y="0" width="90" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="11"/>
+								</textElement>
+								<text><![CDATA[DATE]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement uuid="392a2273-da81-4026-bf77-8930c63d6c63" style="table_TD" x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{DATE}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="153" uuid="0ad623e2-f2c6-400e-a5e1-3b9e536b4c66">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement uuid="27e5f2cc-a378-4ad2-bf88-1a0c2648234b" style="table_TH" x="0" y="0" width="153" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="11"/>
+								</textElement>
+								<text><![CDATA[billId]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement uuid="abc71d86-4140-4fbd-bbfb-b9fe487a7fa5" style="table_TD" x="0" y="0" width="153" height="20"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{billId}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="0c8124c6-b7e7-4d30-a3fe-49d4949396aa">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement uuid="0ac9fa32-148f-4b6c-8432-617f6e8434e6" style="table_TH" x="0" y="0" width="90" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="11"/>
+								</textElement>
+								<text><![CDATA[purchaseAmount]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement uuid="1971d897-b280-4097-aee1-b385effb5e6f" style="table_TD" x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{purchaseAmount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="fae428d9-f274-4b24-904e-e3054a9e049b">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement uuid="6316bdaa-bf61-4d47-a007-7d0cde5cde36" style="table_TH" x="0" y="0" width="90" height="30"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="11"/>
+								</textElement>
+								<text><![CDATA[payAmount]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement uuid="2616802f-8173-4559-bc72-64c4267ca0a3" style="table_TD" x="0" y="0" width="90" height="20"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{payAmount}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

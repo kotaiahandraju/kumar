@@ -1,0 +1,37 @@
+	/*
+  	Flaticon icon font: Flaticon
+  	Creation date: 07/01/2017 06:37
+  	*/
+
+@font-face {
+  font-family: "Flaticon";
+  src: url("../fonts/Flaticon.eot");
+  src: url("../fonts/Flaticond41d.eot?#iefix") format("embedded-opentype"),
+       url("../fonts/Flaticon.woff") format("woff"),
+       url("../fonts/Flaticon.ttf") format("truetype"),
+       url("../fonts/Flaticon.svg#Flaticon") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "Flaticon";
+    src: url("Flaticon.html#Flaticon") format("svg");
+  }
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+  font-family: Flaticon;
+	font-style: normal;
+}
+
+.flaticon-consulting-message:before { content: "\f100"; }
+.flaticon-family-of-three:before { content: "\f101"; }
+.flaticon-group-meeting:before { content: "\f102"; }
+.flaticon-handcuffs:before { content: "\f103"; }
+.flaticon-manager-avatar:before { content: "\f104"; }
+.flaticon-people:before { content: "\f105"; }
+.flaticon-shopping-support-online:before { content: "\f106"; }
+.flaticon-talking:before { content: "\f107"; }

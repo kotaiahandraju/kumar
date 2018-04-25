@@ -1,0 +1,168 @@
+
+/* print table---------------------- */
+
+
+.printTable table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+.printTable table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+.printTable table tr {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+.printTable table th,
+.printTable table td {
+  padding: .165em;
+  text-align: left;
+  line-height:2;
+  font-size:16px;
+}
+.printTable table th {
+  font-size:12.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  width: 150px;
+  font-size:16px;
+  margin-left:15px;
+}
+.tfoot1 {
+	
+	wodth:1000px;
+	
+	
+}
+@media screen and (max-width: 600px) {
+  .printTable table {
+    border: 0;
+  }
+ .printTable  table caption {
+    font-size: 1.3em;
+  }
+ .printTable  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+ .printTable  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  .printTable table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+ .printTable  table td:before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+ .printTable  table td:last-child {
+    border-bottom: 0;
+  }
+}
+.printTable table {
+width:47.8%;
+float:left;
+margin:3px;
+line-height:2;
+}
+.printTable tr{
+	width:100%;
+	margin-left:10px;}
+.printTable th {
+	
+	float:left;
+	
+	}
+	.det {
+	width:100%;
+	float:left;
+	padding:0px;
+	}
+
+	.printTable td {
+		
+		float:left;
+		margin-left:2px;}
+		.custom {
+			border-top-right-radius: 1px;
+    border-top-left-radius: 1px;
+  
+			background:#4f8edc !important;
+			color:#fff !important;
+			Padding:2px !important;
+			font-size:18px !important;
+			}
+			.deliver {
+				width:95%;
+			}
+	.printTable label {
+	margin-bottom:0px;	
+	font-size: 16px;
+	}
+#wrap > .container {
+    padding: 5px;
+}
+		@media print {
+body {-webkit-print-color-adjust: exact;}
+}
+.sno {
+width:20px;
+float:left;
+}
+.ite {
+/* width:60px; */
+float:left;
+}
+.quant {
+width:60px;
+float:left;
+}
+.pri {
+width:60px;
+float:left;
+}
+.tot {
+width:140px;
+float:left;
+}
+.dis {
+width:90px;
+float:left;
+}
+.net {
+width:100px;
+float:left;
+}
+
+
+@media print {
+   
+    html, body {
+        height: auto;
+        font-size: 12pt; /* changing to 10pt has no impact */
+    }
+
+}

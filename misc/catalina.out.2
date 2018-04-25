@@ -1,0 +1,771 @@
+Jul 27, 2015 9:01:28 PM org.apache.catalina.core.AprLifecycleListener init
+INFO: The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /usr/lib32:/usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+Jul 27, 2015 9:01:29 PM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-bio-8090"]
+Jul 27, 2015 9:01:29 PM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-bio-8009"]
+Jul 27, 2015 9:01:29 PM org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 2753 ms
+Jul 27, 2015 9:01:29 PM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service Catalina
+Jul 27, 2015 9:01:29 PM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.42
+Jul 27, 2015 9:01:29 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /home/saihemanth/apache-tomcat-7.0.42/webapps/NBD
+Jul 27, 2015 9:01:51 PM org.apache.catalina.core.ApplicationContext log
+INFO: No Spring WebApplicationInitializer types detected on classpath
+Jul 27, 2015 9:01:51 PM org.apache.catalina.core.ApplicationContext log
+INFO: Initializing Spring root WebApplicationContext
+log4j:WARN No appenders could be found for logger (org.springframework.web.context.ContextLoader).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+ServletContextListener started
+Jul 27, 2015 9:02:05 PM org.apache.catalina.core.ApplicationContext log
+INFO: Set web app root system property: 'webapp.root' = [/home/saihemanth/apache-tomcat-7.0.42/webapps/NBD/]
+Jul 27, 2015 9:02:05 PM org.apache.catalina.core.ApplicationContext log
+INFO: Initializing log4j from [/home/saihemanth/apache-tomcat-7.0.42/webapps/NBD/WEB-INF/log4js/log4j.properties]
+log4j:WARN No such property [datePattern] in org.apache.log4j.FileAppender.
+Jul 27, 2015 9:02:06 PM org.apache.catalina.core.ApplicationContext log
+INFO: org.tuckey.web.filters.urlrewrite.UrlRewriteFilter INFO: loaded (conf ok)
+Jul 27, 2015 9:02:06 PM org.apache.catalina.core.ApplicationContext log
+INFO: Initializing Spring FrameworkServlet 'spring'
+Jul 27, 2015 9:02:11 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /home/saihemanth/apache-tomcat-7.0.42/webapps/host-manager
+Jul 27, 2015 9:02:11 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /home/saihemanth/apache-tomcat-7.0.42/webapps/manager
+Jul 27, 2015 9:02:11 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /home/saihemanth/apache-tomcat-7.0.42/webapps/docs
+Jul 27, 2015 9:02:11 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /home/saihemanth/apache-tomcat-7.0.42/webapps/ROOT
+Jul 27, 2015 9:02:12 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /home/saihemanth/apache-tomcat-7.0.42/webapps/examples
+Jul 27, 2015 9:02:12 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /home/saihemanth/apache-tomcat-7.0.42/webapps/live
+log4j:WARN No appenders could be found for logger (org.springframework.web.context.ContextLoader).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+Jul 27, 2015 9:02:31 PM org.apache.catalina.core.StandardContext startInternal
+SEVERE: Error listenerStart
+Jul 27, 2015 9:02:31 PM org.apache.catalina.core.StandardContext startInternal
+SEVERE: Context [/live] startup failed due to previous errors
+Jul 27, 2015 9:02:32 PM org.apache.catalina.loader.WebappClassLoader clearReferencesJdbc
+SEVERE: The web application [/live] registered the JDBC driver [com.mysql.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+Jul 27, 2015 9:02:32 PM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-bio-8090"]
+Jul 27, 2015 9:02:32 PM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["ajp-bio-8009"]
+Jul 27, 2015 9:02:32 PM org.apache.catalina.startup.Catalina start
+INFO: Server startup in 63014 ms
+
+
+
+BEGIN DOCTOR DATA {"current_location":{"location_id":2,"location_name":"HSR Layout","id":0,"displayOrder":0,"parentCity":0,"isDummy":0,"isBold":0},
+
+
+"service":{"service_id":2,"service_name":"Health Care","service_image":"http://192.168.1.112:8090/NBD/nbdimages/mobile/doctor.png",
+
+
+
+
+"id":0,"displayOrder":0,"isBold":0,"isDummy":0,"active":0},"doctor_booking":{"cust_email_id":"srikantha@aurospaces.com","cust_mobile_no":"9738297049","cust_address":"a ask VN","cust_password":"asdfghj","doctor_type":{"doctor_type_id":2,"doctor_type_name":"Gynecologist","doctor_type_icon":"nbdimages/images/doctor.png","doctor_base_price":"1200.00","doctor_discount":"10.00","doctor_total_price":"1080.00000000"},"is_payment_done":false,"selected_day_slot":"Day After","selected_time_slot":"Evening (4 PM to 7 PM)","
+
+symptoms":["Vomiting"]},"payment_mode":"Pay via PayUMoney","is_payment_done":false}
+END DOCTOR DATA 
+symptoms....Vomiting
+07-27-2015
+==start
+tosrikantha@aurospaces.com
+java.lang.NullPointerException
+	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:673)
+	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:633)
+	at javax.mail.internet.InternetAddress.<init>(InternetAddress.java:111)
+	at com.aurospaces.neighbourhood.util.EmbeddedImageEmailUtil.send(EmbeddedImageEmailUtil.java:81)
+	at com.aurospaces.neighbourhood.util.EmailSendingUtil.sendEmail(EmailSendingUtil.java:433)
+	at com.aurospaces.neighbourhood.controller.RestController.getDoctorData(RestController.java:298)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:219)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:132)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandleMethod(RequestMappingHandlerAdapter.java:745)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:686)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:80)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:856)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:936)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:838)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:812)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.tuckey.web.filters.urlrewrite.RuleChain.handleRewrite(RuleChain.java:176)
+	at org.tuckey.web.filters.urlrewrite.RuleChain.doRules(RuleChain.java:145)
+	at org.tuckey.web.filters.urlrewrite.UrlRewriter.processRequest(UrlRewriter.java:92)
+	at org.tuckey.web.filters.urlrewrite.UrlRewriteFilter.doFilter(UrlRewriteFilter.java:394)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1023)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+<div style="width: 712.5pt;font-size: 14px;">Dear Auro Customer..</div><div style="padding:30px;"><table ><tr><td>Thank you for your order! We are Happy to serve you </td></tr> </table><table> <tr><td><p>We will get back to you with your service provider details shortly!</p></td></tr></table><div style="border:solid;  width: 47%;"> <table ><tr>OrderId: <b>8CF36F3MM7</b></tr><tr><th>Service Details</th><th>Service Date</th><th style="padding-left: 20px;">Service Slot/Time</th><th style="padding-left: 20px;">Price</th></tr><tr style='text-align:center'><td>Health Care</td><td style="padding-left: 20px;">07-27-2015</td><td style="padding-left: 20px;">Evening (4 PM to 7 PM)</td><td style="padding-left: 20px;">Rs.1080.00000000</td></tr></table></div><br><table><tr><td>Total Outstanding Payable by you </td><td style="padding-left:228px;">Rs.1080.00000000</td></tr></table><table ><tr><td><b>Service Delivery Address</b></td></tr><tr><td>Phone: 9738297049</td></tr><tr><td>Address: a ask VN</td></tr></table><div style="width: 712.5pt;font-size: 14px; top:150px;"><ul><img src="cid:image1"></ul><ul>Thanks,<br/>Aurospaces Software Pvt Ltd.</ul></div>  
+customer maili goes--success
+==start
+tonull
+java.lang.NullPointerException
+	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:673)
+	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:633)
+	at javax.mail.internet.InternetAddress.<init>(InternetAddress.java:111)
+	at com.aurospaces.neighbourhood.util.EmbeddedImageEmailUtil.send(EmbeddedImageEmailUtil.java:79)
+	at com.aurospaces.neighbourhood.util.EmailSendingUtil.sendEmail(EmailSendingUtil.java:454)
+	at com.aurospaces.neighbourhood.controller.RestController.getDoctorData(RestController.java:300)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:219)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:132)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandleMethod(RequestMappingHandlerAdapter.java:745)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:686)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:80)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:856)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:936)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:838)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:812)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.tuckey.web.filters.urlrewrite.RuleChain.handleRewrite(RuleChain.java:176)
+	at org.tuckey.web.filters.urlrewrite.RuleChain.doRules(RuleChain.java:145)
+	at org.tuckey.web.filters.urlrewrite.UrlRewriter.processRequest(UrlRewriter.java:92)
+	at org.tuckey.web.filters.urlrewrite.UrlRewriteFilter.doFilter(UrlRewriteFilter.java:394)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1023)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+<table><tr>Hi Mr.Auro,</tr><br><tr ><td style="padding-left:112px; padding-top:5px;">The booking id is 8CF36F3MM7 for the Health Care, Evening (4 PM to 7 PM) on 07-27-2015</td></tr><br></table><table ><tr><td style="padding-left:10px;"><b>Service Delivery Address</b></td></tr><tr><td style="padding-left:10px;">Phone: 9738297049</td></tr><tr><td style="padding-left:10px;">Address: a ask VN</td></tr></table><p style="padding-left:10px;">We Care for our Environment! As a part of our Low Carbon Footprint initiative, we have decided to go paperless and your invoice will be sent to you in softcopy via email.<br></p><div style="width: 712.5pt;font-size: 14px; top:150px;"><ul><img src="cid:image1"></ul><ul>Thanks,<br/>Aurospaces Software Pvt Ltd.</ul></div>
+admin mail goes--success
+filePath--/home/saihemanth/apache-tomcat-7.0.42/webapps/NBD/Resources/userDetails.properties
+We have received your Order No# _order_. It is being processed. For any queries you can reach us at 91 9742557757. Thank You
+http://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=_mobile_&msg=_message_&msg_type=TEXT&userid=_username_&auth_scheme=plain&password=_password_&v=1.1&format=text
+Customer no..9738297049
+order...8CF36F3MM7
+net amount..1080.00000000
+address..a ask VN
+_cmobile_..9738297049
+_scheduleDate_..Mon Jul 27 21:08:45 IST 2015
+_scheduleTime_..Evening (4 PM to 7 PM)
+discount...10.00
+http://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=9738297049&msg=We%20have%20received%20your%20Order%20No%23%208CF36F3MM7.%20It%20is%20being%20processed.%20For%20any%20queries%20you%20can%20reach%20us%20at%2091%209742557757.%20Thank%20You&msg_type=TEXT&userid=2000143438&auth_scheme=plain&password=DlMCnLhGe&v=1.1&format=textsmsUrl
+----------------------------------------
+HTTP/1.1 200 OK
+----------------------------------------
+success | 919738297049 | 2839543052837498978-64945483620595566
+
+filePath--/home/saihemanth/apache-tomcat-7.0.42/webapps/NBD/Resources/userDetails.properties
+7676575029----admin mobille
+Dear admin the customer has booked a service. Order id _order_ Please assign a vendor
+http://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=_mobile_&msg=_message_&msg_type=TEXT&userid=_username_&auth_scheme=plain&password=_password_&v=1.1&format=text
+Customer no..7676575029
+order...8CF36F3MM7
+net amount..1080.00000000
+address..a ask VN
+_cmobile_..7676575029
+_scheduleDate_..Mon Jul 27 21:08:45 IST 2015
+_scheduleTime_..Evening (4 PM to 7 PM)
+discount...10.00
+http://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=7676575029&msg=Dear%20admin%20the%20customer%20has%20booked%20a%20service.%20Order%20id%208CF36F3MM7%20Please%20assign%20a%20vendor&msg_type=TEXT&userid=2000143438&auth_scheme=plain&password=DlMCnLhGe&v=1.1&format=textsmsUrl
+----------------------------------------
+HTTP/1.1 200 OK
+----------------------------------------
+success | 917676575029 | 2839543056746799202-159450532386157962
+
+get Doctor type start...
+order data start...
+BEGIN ORDER DATA 
+{"current_location":{"location_id":2,"location_name":"HSR Layout","id":0,"displayOrder":0,"parentCity":0,"isDummy":0,"isBold":0},"other_booking":{"cust_email_id":"srikantha@aurospaces.com","cust_mobile_no":"9738297049","cust_address":"sfhj to CNN","cust_password":"asdfgh","problem_desc":"hsjkko jjjdvbk","selected_day_slot":"Tomorrow","selected_time_slot":"Afternoon (12 PM to 4 PM)","id":0},"service":{"service_id":5,"service_name":"Up Keeping","service_image":"http://192.168.1.112:8090/NBD/nbdimages/mobile/upkeeping.png","id":0,"displayOrder":0,"isBold":0,"isDummy":0,"active":0},"payment_mode":"Pay via PayUMoney","is_payment_done":false}
+END ORDER DATA 
+Address of customer...
+07-27-2015
+==start
+tosrikantha@aurospaces.com
+java.lang.NullPointerException
+	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:673)
+	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:633)
+	at javax.mail.internet.InternetAddress.<init>(InternetAddress.java:111)
+	at com.aurospaces.neighbourhood.util.EmbeddedImageEmailUtil.send(EmbeddedImageEmailUtil.java:81)
+	at com.aurospaces.neighbourhood.util.EmailSendingUtil.sendEmail(EmailSendingUtil.java:433)
+	at com.aurospaces.neighbourhood.controller.RestController.insertOrderData(RestController.java:158)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:219)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:132)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandleMethod(RequestMappingHandlerAdapter.java:745)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:686)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:80)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:856)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:936)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:838)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:812)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.tuckey.web.filters.urlrewrite.RuleChain.handleRewrite(RuleChain.java:176)
+	at org.tuckey.web.filters.urlrewrite.RuleChain.doRules(RuleChain.java:145)
+	at org.tuckey.web.filters.urlrewrite.UrlRewriter.processRequest(UrlRewriter.java:92)
+	at org.tuckey.web.filters.urlrewrite.UrlRewriteFilter.doFilter(UrlRewriteFilter.java:394)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1023)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+<div style="width: 712.5pt;font-size: 14px;">Dear Auro Customer..</div><div style="padding:30px;"><table ><tr><td>Thank you for your order! We are Happy to serve you </td></tr> </table><table> <tr><td><p>We will get back to you with your service provider details shortly!</p></td></tr></table><div style="border:solid;  width: 47%;"> <table ><tr>OrderId: <b>BRZGOUD19P</b></tr><tr><th>Service Details</th><th>Service Date</th><th style="padding-left: 20px;">Service Slot/Time</th><th style="padding-left: 20px;">Price</th></tr><tr style='text-align:center'><td>Up Keeping</td><td style="padding-left: 20px;">07-27-2015</td><td style="padding-left: 20px;">Afternoon (12 PM to 4 PM)</td><td style="padding-left: 20px;">Rs.Cash on Service</td></tr></table></div><br><table><tr><td>Total Outstanding Payable by you </td><td style="padding-left:228px;">Rs.Cash on Service</td></tr></table><table ><tr><td><b>Service Delivery Address</b></td></tr><tr><td>Phone: 9738297049</td></tr><tr><td>Address: sfhj to CNN</td></tr></table><div style="width: 712.5pt;font-size: 14px; top:150px;"><ul><img src="cid:image1"></ul><ul>Thanks,<br/>Aurospaces Software Pvt Ltd.</ul></div>  
+customer mail goes--success
+==start
+tonull
+java.lang.NullPointerException
+	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:673)
+	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:633)
+	at javax.mail.internet.InternetAddress.<init>(InternetAddress.java:111)
+	at com.aurospaces.neighbourhood.util.EmbeddedImageEmailUtil.send(EmbeddedImageEmailUtil.java:79)
+	at com.aurospaces.neighbourhood.util.EmailSendingUtil.sendEmail(EmailSendingUtil.java:454)
+	at com.aurospaces.neighbourhood.controller.RestController.insertOrderData(RestController.java:160)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:219)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:132)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandleMethod(RequestMappingHandlerAdapter.java:745)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:686)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:80)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:856)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:936)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:838)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:812)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.tuckey.web.filters.urlrewrite.RuleChain.handleRewrite(RuleChain.java:176)
+	at org.tuckey.web.filters.urlrewrite.RuleChain.doRules(RuleChain.java:145)
+	at org.tuckey.web.filters.urlrewrite.UrlRewriter.processRequest(UrlRewriter.java:92)
+	at org.tuckey.web.filters.urlrewrite.UrlRewriteFilter.doFilter(UrlRewriteFilter.java:394)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1023)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+<table><tr>Hi Mr.Auro,</tr><br><tr ><td style="padding-left:112px; padding-top:5px;">The booking id is BRZGOUD19P for the Up Keeping, Afternoon (12 PM to 4 PM) on 07-27-2015</td></tr><br></table><table ><tr><td style="padding-left:10px;"><b>Service Delivery Address</b></td></tr><tr><td style="padding-left:10px;">Phone: 9738297049</td></tr><tr><td style="padding-left:10px;">Address: sfhj to CNN</td></tr></table><p style="padding-left:10px;">We Care for our Environment! As a part of our Low Carbon Footprint initiative, we have decided to go paperless and your invoice will be sent to you in softcopy via email.<br></p><div style="width: 712.5pt;font-size: 14px; top:150px;"><ul><img src="cid:image1"></ul><ul>Thanks,<br/>Aurospaces Software Pvt Ltd.</ul></div>
+admin mail goes--success
+filePath--/home/saihemanth/apache-tomcat-7.0.42/webapps/NBD/Resources/userDetails.properties
+We have received your Order No# _order_. It is being processed. For any queries you can reach us at 91 9742557757. Thank You
+http://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=_mobile_&msg=_message_&msg_type=TEXT&userid=_username_&auth_scheme=plain&password=_password_&v=1.1&format=text
+Customer no..9738297049
+order...BRZGOUD19P
+address..sfhj to CNN
+_cmobile_..9738297049
+_scheduleDate_..Mon Jul 27 21:13:29 IST 2015
+_scheduleTime_..Afternoon (12 PM to 4 PM)
+http://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=9738297049&msg=We%20have%20received%20your%20Order%20No%23%20BRZGOUD19P.%20It%20is%20being%20processed.%20For%20any%20queries%20you%20can%20reach%20us%20at%2091%209742557757.%20Thank%20You&msg_type=TEXT&userid=2000143438&auth_scheme=plain&password=DlMCnLhGe&v=1.1&format=textsmsUrl
+----------------------------------------
+HTTP/1.1 200 OK
+----------------------------------------
+success | 919738297049 | 2839545339593670754-89756009977044823
+
+filePath--/home/saihemanth/apache-tomcat-7.0.42/webapps/NBD/Resources/userDetails.properties
+7676575029----admin mobille
+Dear admin the customer has booked a service. Order id _order_ Please assign a vendor
+http://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=_mobile_&msg=_message_&msg_type=TEXT&userid=_username_&auth_scheme=plain&password=_password_&v=1.1&format=text
+Customer no..7676575029
+order...BRZGOUD19P
+address..sfhj to CNN
+_cmobile_..7676575029
+_scheduleDate_..Mon Jul 27 21:13:29 IST 2015
+_scheduleTime_..Afternoon (12 PM to 4 PM)
+http://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=7676575029&msg=Dear%20admin%20the%20customer%20has%20booked%20a%20service.%20Order%20id%20BRZGOUD19P%20Please%20assign%20a%20vendor&msg_type=TEXT&userid=2000143438&auth_scheme=plain&password=DlMCnLhGe&v=1.1&format=textsmsUrl
+----------------------------------------
+HTTP/1.1 200 OK
+----------------------------------------
+success | 917676575029 | 2839545340692643938-150312198884964624
+
+order data start...
+BEGIN ORDER DATA 
+{"current_location":{"location_id":2,"location_name":"HSR Layout","id":0,"displayOrder":0,"parentCity":0,"isDummy":0,"isBold":0},"other_booking":{"cust_email_id":"srikantha@aurospaces.com","cust_mobile_no":"9738297049","cust_address":"sfhj to CNN","cust_password":"asdfgh","problem_desc":"sgjk","selected_day_slot":"Tomorrow","selected_time_slot":"Afternoon (12 PM to 4 PM)","id":0},"service":{"service_id":5,"service_name":"Up Keeping","service_image":"http://192.168.1.112:8090/NBD/nbdimages/mobile/upkeeping.png","id":0,"displayOrder":0,"isBold":0,"isDummy":0,"active":0},"payment_mode":"Pay via PayUMoney","is_payment_done":false}
+END ORDER DATA 
+Address of customer...
+07-27-2015
+==start
+tosrikantha@aurospaces.com
+java.lang.NullPointerException
+	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:673)
+	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:633)
+	at javax.mail.internet.InternetAddress.<init>(InternetAddress.java:111)
+	at com.aurospaces.neighbourhood.util.EmbeddedImageEmailUtil.send(EmbeddedImageEmailUtil.java:81)
+	at com.aurospaces.neighbourhood.util.EmailSendingUtil.sendEmail(EmailSendingUtil.java:433)
+	at com.aurospaces.neighbourhood.controller.RestController.insertOrderData(RestController.java:158)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:219)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:132)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandleMethod(RequestMappingHandlerAdapter.java:745)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:686)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:80)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:856)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:936)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:838)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:812)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.tuckey.web.filters.urlrewrite.RuleChain.handleRewrite(RuleChain.java:176)
+	at org.tuckey.web.filters.urlrewrite.RuleChain.doRules(RuleChain.java:145)
+	at org.tuckey.web.filters.urlrewrite.UrlRewriter.processRequest(UrlRewriter.java:92)
+	at org.tuckey.web.filters.urlrewrite.UrlRewriteFilter.doFilter(UrlRewriteFilter.java:394)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1023)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+<div style="width: 712.5pt;font-size: 14px;">Dear Auro Customer..</div><div style="padding:30px;"><table ><tr><td>Thank you for your order! We are Happy to serve you </td></tr> </table><table> <tr><td><p>We will get back to you with your service provider details shortly!</p></td></tr></table><div style="border:solid;  width: 47%;"> <table ><tr>OrderId: <b>7GNFT6WZ3X</b></tr><tr><th>Service Details</th><th>Service Date</th><th style="padding-left: 20px;">Service Slot/Time</th><th style="padding-left: 20px;">Price</th></tr><tr style='text-align:center'><td>Up Keeping</td><td style="padding-left: 20px;">07-27-2015</td><td style="padding-left: 20px;">Afternoon (12 PM to 4 PM)</td><td style="padding-left: 20px;">Rs.Cash on Service</td></tr></table></div><br><table><tr><td>Total Outstanding Payable by you </td><td style="padding-left:228px;">Rs.Cash on Service</td></tr></table><table ><tr><td><b>Service Delivery Address</b></td></tr><tr><td>Phone: 9738297049</td></tr><tr><td>Address: sfhj to CNN</td></tr></table><div style="width: 712.5pt;font-size: 14px; top:150px;"><ul><img src="cid:image1"></ul><ul>Thanks,<br/>Aurospaces Software Pvt Ltd.</ul></div>  
+customer mail goes--success
+==start
+tonull
+java.lang.NullPointerException
+	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:673)
+	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:633)
+	at javax.mail.internet.InternetAddress.<init>(InternetAddress.java:111)
+	at com.aurospaces.neighbourhood.util.EmbeddedImageEmailUtil.send(EmbeddedImageEmailUtil.java:79)
+	at com.aurospaces.neighbourhood.util.EmailSendingUtil.sendEmail(EmailSendingUtil.java:454)
+	at com.aurospaces.neighbourhood.controller.RestController.insertOrderData(RestController.java:160)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:219)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:132)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandleMethod(RequestMappingHandlerAdapter.java:745)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:686)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:80)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:856)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:936)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:838)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:812)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.tuckey.web.filters.urlrewrite.RuleChain.handleRewrite(RuleChain.java:176)
+	at org.tuckey.web.filters.urlrewrite.RuleChain.doRules(RuleChain.java:145)
+	at org.tuckey.web.filters.urlrewrite.UrlRewriter.processRequest(UrlRewriter.java:92)
+	at org.tuckey.web.filters.urlrewrite.UrlRewriteFilter.doFilter(UrlRewriteFilter.java:394)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1023)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+<table><tr>Hi Mr.Auro,</tr><br><tr ><td style="padding-left:112px; padding-top:5px;">The booking id is 7GNFT6WZ3X for the Up Keeping, Afternoon (12 PM to 4 PM) on 07-27-2015</td></tr><br></table><table ><tr><td style="padding-left:10px;"><b>Service Delivery Address</b></td></tr><tr><td style="padding-left:10px;">Phone: 9738297049</td></tr><tr><td style="padding-left:10px;">Address: sfhj to CNN</td></tr></table><p style="padding-left:10px;">We Care for our Environment! As a part of our Low Carbon Footprint initiative, we have decided to go paperless and your invoice will be sent to you in softcopy via email.<br></p><div style="width: 712.5pt;font-size: 14px; top:150px;"><ul><img src="cid:image1"></ul><ul>Thanks,<br/>Aurospaces Software Pvt Ltd.</ul></div>
+admin mail goes--success
+filePath--/home/saihemanth/apache-tomcat-7.0.42/webapps/NBD/Resources/userDetails.properties
+We have received your Order No# _order_. It is being processed. For any queries you can reach us at 91 9742557757. Thank You
+http://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=_mobile_&msg=_message_&msg_type=TEXT&userid=_username_&auth_scheme=plain&password=_password_&v=1.1&format=text
+Customer no..9738297049
+order...7GNFT6WZ3X
+address..sfhj to CNN
+_cmobile_..9738297049
+_scheduleDate_..Mon Jul 27 21:17:57 IST 2015
+_scheduleTime_..Afternoon (12 PM to 4 PM)
+http://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=9738297049&msg=We%20have%20received%20your%20Order%20No%23%207GNFT6WZ3X.%20It%20is%20being%20processed.%20For%20any%20queries%20you%20can%20reach%20us%20at%2091%209742557757.%20Thank%20You&msg_type=TEXT&userid=2000143438&auth_scheme=plain&password=DlMCnLhGe&v=1.1&format=textsmsUrl
+----------------------------------------
+HTTP/1.1 200 OK
+----------------------------------------
+success | 919738297049 | 2839547591093403746-372196176850286119
+
+filePath--/home/saihemanth/apache-tomcat-7.0.42/webapps/NBD/Resources/userDetails.properties
+7676575029----admin mobille
+Dear admin the customer has booked a service. Order id _order_ Please assign a vendor
+http://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=_mobile_&msg=_message_&msg_type=TEXT&userid=_username_&auth_scheme=plain&password=_password_&v=1.1&format=text
+Customer no..7676575029
+order...7GNFT6WZ3X
+address..sfhj to CNN
+_cmobile_..7676575029
+_scheduleDate_..Mon Jul 27 21:17:57 IST 2015
+_scheduleTime_..Afternoon (12 PM to 4 PM)
+http://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=7676575029&msg=Dear%20admin%20the%20customer%20has%20booked%20a%20service.%20Order%20id%207GNFT6WZ3X%20Please%20assign%20a%20vendor&msg_type=TEXT&userid=2000143438&auth_scheme=plain&password=DlMCnLhGe&v=1.1&format=textsmsUrl
+----------------------------------------
+HTTP/1.1 200 OK
+----------------------------------------
+success | 917676575029 | 2839547592242765922-426722443274095953
+
+order data start...
+BEGIN ORDER DATA 
+{"current_location":{"location_id":2,"location_name":"HSR Layout","id":0,"displayOrder":0,"parentCity":0,"isDummy":0,"isBold":0},"other_booking":{"cust_email_id":"srikantha@aurospaces.com","cust_mobile_no":"9738297049","cust_address":"sfhj to CNN","cust_password":"asdfgh","problem_desc":"fsjkks","selected_day_slot":"Tomorrow","selected_time_slot":"
+
+
+
+","id":0},
+
+Morning(8-12)     | af566565-addd-4406-8320-e0346cd8a6dd |             |    8 |      1 |
+Afternoon (12 PM to 4 PM)
+
+static Map<String, Integer> timeSlots;
+timeSlots = new HashTable<String, Integer>();
+timeSlots.put("Morning (8 AM to 12 PM)", 1);
+timeSlots.put("Afternoon (12 PM to 4 PM)", 2);
+timeSlots.put("Evening (4 PM to 7 PM)", 3);
+				  
+
+
+|  2 | 2015-07-27 15:53:26 | 2015-07-27 15:53:26 | Afternoon(12-4PM) | d1f9b950-7f62-4a44-ac6d-f484d6be1165 |             |   12 |      1 |
+|  3 | 2015-07-27 15:53:26 | 2015-07-27 15:53:26 | Evening(4-7PM)    | f01ae510-8b23-449c-b96d-ccbd1f65ab4d |             |   16 |      1 |
+
+
+
+
+
+
+"service":{"service_id":13,"service_name":"Carpentry","service_image":"http://192.168.1.112:8090/NBD/nbdimages/mobile/homecaretaker.png","id":0,"displayOrder":0,"isBold":0,"isDummy":0,"active":0},"payment_mode":"Pay via PayUMoney","is_payment_done":false}
+
+END ORDER DATA 
+Address of customer...
+07-27-2015
+==start
+tosrikantha@aurospaces.com
+java.lang.NullPointerException
+	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:673)
+	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:633)
+	at javax.mail.internet.InternetAddress.<init>(InternetAddress.java:111)
+	at com.aurospaces.neighbourhood.util.EmbeddedImageEmailUtil.send(EmbeddedImageEmailUtil.java:81)
+	at com.aurospaces.neighbourhood.util.EmailSendingUtil.sendEmail(EmailSendingUtil.java:433)
+	at com.aurospaces.neighbourhood.controller.RestController.insertOrderData(RestController.java:158)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:219)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:132)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandleMethod(RequestMappingHandlerAdapter.java:745)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:686)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:80)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:856)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:936)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:838)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:812)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.tuckey.web.filters.urlrewrite.RuleChain.handleRewrite(RuleChain.java:176)
+	at org.tuckey.web.filters.urlrewrite.RuleChain.doRules(RuleChain.java:145)
+	at org.tuckey.web.filters.urlrewrite.UrlRewriter.processRequest(UrlRewriter.java:92)
+	at org.tuckey.web.filters.urlrewrite.UrlRewriteFilter.doFilter(UrlRewriteFilter.java:394)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1023)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+<div style="width: 712.5pt;font-size: 14px;">Dear Auro Customer..</div><div style="padding:30px;"><table ><tr><td>Thank you for your order! We are Happy to serve you </td></tr> </table><table> <tr><td><p>We will get back to you with your service provider details shortly!</p></td></tr></table><div style="border:solid;  width: 47%;"> <table ><tr>OrderId: <b>F1FNA2VQPS</b></tr><tr><th>Service Details</th><th>Service Date</th><th style="padding-left: 20px;">Service Slot/Time</th><th style="padding-left: 20px;">Price</th></tr><tr style='text-align:center'><td>Carpentry</td><td style="padding-left: 20px;">07-27-2015</td><td style="padding-left: 20px;">Afternoon (12 PM to 4 PM)</td><td style="padding-left: 20px;">Rs.Cash on Service</td></tr></table></div><br><table><tr><td>Total Outstanding Payable by you </td><td style="padding-left:228px;">Rs.Cash on Service</td></tr></table><table ><tr><td><b>Service Delivery Address</b></td></tr><tr><td>Phone: 9738297049</td></tr><tr><td>Address: sfhj to CNN</td></tr></table><div style="width: 712.5pt;font-size: 14px; top:150px;"><ul><img src="cid:image1"></ul><ul>Thanks,<br/>Aurospaces Software Pvt Ltd.</ul></div>  
+customer mail goes--success
+==start
+tonull
+java.lang.NullPointerException
+	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:673)
+	at javax.mail.internet.InternetAddress.parse(InternetAddress.java:633)
+	at javax.mail.internet.InternetAddress.<init>(InternetAddress.java:111)
+	at com.aurospaces.neighbourhood.util.EmbeddedImageEmailUtil.send(EmbeddedImageEmailUtil.java:79)
+	at com.aurospaces.neighbourhood.util.EmailSendingUtil.sendEmail(EmailSendingUtil.java:454)
+	at com.aurospaces.neighbourhood.controller.RestController.insertOrderData(RestController.java:160)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:219)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:132)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandleMethod(RequestMappingHandlerAdapter.java:745)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:686)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:80)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:856)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:936)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:838)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:812)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.tuckey.web.filters.urlrewrite.RuleChain.handleRewrite(RuleChain.java:176)
+	at org.tuckey.web.filters.urlrewrite.RuleChain.doRules(RuleChain.java:145)
+	at org.tuckey.web.filters.urlrewrite.UrlRewriter.processRequest(UrlRewriter.java:92)
+	at org.tuckey.web.filters.urlrewrite.UrlRewriteFilter.doFilter(UrlRewriteFilter.java:394)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1023)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+<table><tr>Hi Mr.Auro,</tr><br><tr ><td style="padding-left:112px; padding-top:5px;">The booking id is F1FNA2VQPS for the Carpentry, Afternoon (12 PM to 4 PM) on 07-27-2015</td></tr><br></table><table ><tr><td style="padding-left:10px;"><b>Service Delivery Address</b></td></tr><tr><td style="padding-left:10px;">Phone: 9738297049</td></tr><tr><td style="padding-left:10px;">Address: sfhj to CNN</td></tr></table><p style="padding-left:10px;">We Care for our Environment! As a part of our Low Carbon Footprint initiative, we have decided to go paperless and your invoice will be sent to you in softcopy via email.<br></p><div style="width: 712.5pt;font-size: 14px; top:150px;"><ul><img src="cid:image1"></ul><ul>Thanks,<br/>Aurospaces Software Pvt Ltd.</ul></div>
+admin mail goes--success
+filePath--/home/saihemanth/apache-tomcat-7.0.42/webapps/NBD/Resources/userDetails.properties
+We have received your Order No# _order_. It is being processed. For any queries you can reach us at 91 9742557757. Thank You
+http://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=_mobile_&msg=_message_&msg_type=TEXT&userid=_username_&auth_scheme=plain&password=_password_&v=1.1&format=text
+Customer no..9738297049
+order...F1FNA2VQPS
+address..sfhj to CNN
+_cmobile_..9738297049
+_scheduleDate_..Mon Jul 27 21:26:13 IST 2015
+_scheduleTime_..Afternoon (12 PM to 4 PM)
+http://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=9738297049&msg=We%20have%20received%20your%20Order%20No%23%20F1FNA2VQPS.%20It%20is%20being%20processed.%20For%20any%20queries%20you%20can%20reach%20us%20at%2091%209742557757.%20Thank%20You&msg_type=TEXT&userid=2000143438&auth_scheme=plain&password=DlMCnLhGe&v=1.1&format=textsmsUrl
+----------------------------------------
+HTTP/1.1 200 OK
+----------------------------------------
+success | 919738297049 | 2839551755427639394-262848118570492980
+
+filePath--/home/saihemanth/apache-tomcat-7.0.42/webapps/NBD/Resources/userDetails.properties
+7676575029----admin mobille
+Dear admin the customer has booked a service. Order id _order_ Please assign a vendor
+http://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=_mobile_&msg=_message_&msg_type=TEXT&userid=_username_&auth_scheme=plain&password=_password_&v=1.1&format=text
+Customer no..7676575029
+order...F1FNA2VQPS
+address..sfhj to CNN
+_cmobile_..7676575029
+_scheduleDate_..Mon Jul 27 21:26:13 IST 2015
+_scheduleTime_..Afternoon (12 PM to 4 PM)
+http://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=7676575029&msg=Dear%20admin%20the%20customer%20has%20booked%20a%20service.%20Order%20id%20F1FNA2VQPS%20Please%20assign%20a%20vendor&msg_type=TEXT&userid=2000143438&auth_scheme=plain&password=DlMCnLhGe&v=1.1&format=textsmsUrl
+----------------------------------------
+HTTP/1.1 200 OK
+----------------------------------------
+success | 917676575029 | 2839551757088677986-221730682608869491
+
+get pathology start...
+BEGIN PATHOLOGY DATA 
+{"current_location":{"location_id":2,"location_name":"HSR Layout","id":0,"displayOrder":0,"parentCity":0,"isDummy":0,"isBold":0},"service":{"service_id":11,"service_name":"Doctor","id":0,"displayOrder":0,"isBold":0,"isDummy":0,"active":0},"pathology_booking":{"cust_email_id":"srikantha@aurospaces.com","cust_mobile_no":"9738297049","cust_address":"ask EEO","cust_password":"asdfghj","pathology_data":[{"pathology_id":37,"pathology_name":"LEPTOSPIRA-IGG-IGM","pathology_category":"General Tests","pathology_vendor":"HealthNest","pathology_base_price":"2000.0","pathology_discount_percent":"10","pathology_total_price":"1800.0"},{"pathology_id":40,"pathology_name":"COOMBS TEST INDIRECT","pathology_category":"General Tests","pathology_vendor":"HealthNest","pathology_base_price":"500.0","pathology_discount_percent":"10","pathology_total_price":"450.0"}],"is_payment_done":false,"selected_day_slot":"Tomorrow","selected_time_slot":"Afternoon (12 PM to 4 PM)"},"payment_mode":"Pay via PayUMoney","module_name":"Pathology","is_payment_done":false}
+END PATHOLOGY DATA 
+java.lang.NullPointerException
+	at java.lang.String.replace(String.java:2180)
+	at com.aurospaces.neighbourhood.util.EmailSendingUtil.sendEmail(EmailSendingUtil.java:407)
+	at com.aurospaces.neighbourhood.controller.RestController.insertOrder(RestController.java:230)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:219)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:132)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandleMethod(RequestMappingHandlerAdapter.java:745)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:686)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:80)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:856)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:936)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:838)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:812)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.tuckey.web.filters.urlrewrite.RuleChain.handleRewrite(RuleChain.java:176)
+	at org.tuckey.web.filters.urlrewrite.RuleChain.doRules(RuleChain.java:145)
+	at org.tuckey.web.filters.urlrewrite.UrlRewriter.processRequest(UrlRewriter.java:92)
+	at org.tuckey.web.filters.urlrewrite.UrlRewriteFilter.doFilter(UrlRewriteFilter.java:394)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1023)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+customer maili goes--fail
+java.lang.NullPointerException
+	at java.lang.String.replace(String.java:2180)
+	at com.aurospaces.neighbourhood.util.EmailSendingUtil.sendEmail(EmailSendingUtil.java:440)
+	at com.aurospaces.neighbourhood.controller.RestController.insertOrder(RestController.java:232)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:57)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:606)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invoke(InvocableHandlerMethod.java:219)
+	at org.springframework.web.method.support.InvocableHandlerMethod.invokeForRequest(InvocableHandlerMethod.java:132)
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:104)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandleMethod(RequestMappingHandlerAdapter.java:745)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:686)
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:80)
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:925)
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:856)
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:936)
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:838)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:647)
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:812)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:728)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:305)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.tuckey.web.filters.urlrewrite.RuleChain.handleRewrite(RuleChain.java:176)
+	at org.tuckey.web.filters.urlrewrite.RuleChain.doRules(RuleChain.java:145)
+	at org.tuckey.web.filters.urlrewrite.UrlRewriter.processRequest(UrlRewriter.java:92)
+	at org.tuckey.web.filters.urlrewrite.UrlRewriteFilter.doFilter(UrlRewriteFilter.java:394)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:243)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:210)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:222)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:123)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:502)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:171)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:99)
+	at org.apache.catalina.valves.AccessLogValve.invoke(AccessLogValve.java:953)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:118)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:408)
+	at org.apache.coyote.http11.AbstractHttp11Processor.process(AbstractHttp11Processor.java:1023)
+	at org.apache.coyote.AbstractProtocol$AbstractConnectionHandler.process(AbstractProtocol.java:589)
+	at org.apache.tomcat.util.net.JIoEndpoint$SocketProcessor.run(JIoEndpoint.java:310)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+admin mail goes--fail
+filePath--/home/saihemanth/apache-tomcat-7.0.42/webapps/NBD/Resources/userDetails.properties
+We have received your Order No# _order_. It is being processed. For any queries you can reach us at 91 9742557757. Thank You
+http://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=_mobile_&msg=_message_&msg_type=TEXT&userid=_username_&auth_scheme=plain&password=_password_&v=1.1&format=text
+Customer no..9738297049
+order...R3O5QFIGGV
+address..ask EEO
+_cmobile_..9738297049
+_scheduleDate_..Mon Jul 27 21:33:04 IST 2015
+_scheduleTime_..Afternoon (12 PM to 4 PM)
+http://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=9738297049&msg=We%20have%20received%20your%20Order%20No%23%20R3O5QFIGGV.%20It%20is%20being%20processed.%20For%20any%20queries%20you%20can%20reach%20us%20at%2091%209742557757.%20Thank%20You&msg_type=TEXT&userid=2000143438&auth_scheme=plain&password=DlMCnLhGe&v=1.1&format=textsmsUrl
+----------------------------------------
+HTTP/1.1 200 OK
+----------------------------------------
+success | 919738297049 | 2839555204150739042-204533172143884266
+
+filePath--/home/saihemanth/apache-tomcat-7.0.42/webapps/NBD/Resources/userDetails.properties
+7676575029----admin mobille
+Dear admin the customer has booked a service. Order id _order_ Please assign a vendor
+http://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=_mobile_&msg=_message_&msg_type=TEXT&userid=_username_&auth_scheme=plain&password=_password_&v=1.1&format=text
+Customer no..7676575029
+order...R3O5QFIGGV
+address..ask EEO
+_cmobile_..7676575029
+_scheduleDate_..Mon Jul 27 21:33:04 IST 2015
+_scheduleTime_..Afternoon (12 PM to 4 PM)
+http://enterprise.smsgupshup.com/GatewayAPI/rest?method=SendMessage&send_to=7676575029&msg=Dear%20admin%20the%20customer%20has%20booked%20a%20service.%20Order%20id%20R3O5QFIGGV%20Please%20assign%20a%20vendor&msg_type=TEXT&userid=2000143438&auth_scheme=plain&password=DlMCnLhGe&v=1.1&format=textsmsUrl
+----------------------------------------
+HTTP/1.1 200 OK
+----------------------------------------
+success | 917676575029 | 2839555204930916450-126447407169338805
+

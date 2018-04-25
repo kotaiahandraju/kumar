@@ -1,0 +1,113 @@
+<html>
+<head>
+<script  >
+</script>
+<script >
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script>
+</script>
+<script>
+var in1 = {"name" : "chiddu" , "age" : 45 , "height" : 66, "label" : "old" , "id" : "o_one"};
+var in2 = {"name" : "two" , "age" : 44 , "height" : 166 , "label" : "new", "id" : "r_one"};
+var in3 = {"name" : "three" , "age" : 65 , "height" : 226 , "label" : "old", "id" : "p_one"};
+var in4 = {"name" : "four" , "age" : 98 , "height" : 99 , "label" : "new", "id" : "s_one"};
+var in5 = {"name" : "five" , "age" : 101 , "height" : 333 , "label" : "old", "id" : "t_one"};
+var in6 = {"name" : "six" , "age" : 99 , "height" : 454 , "label" : "new", "id" : "u_one"};
+</script>
+
+<script>
+</script>
+
+<script>
+var darr = new Array();
+darr.new = new Array();
+darr.old = new Array();
+darr.all = new Array();
+</script>
+<script>
+
+darr.new[in2["id"]] = in2;
+darr.new[in4["id"]] = in4;
+darr.new[in6["id"]] = in6;
+
+</script>
+<script>
+
+darr.old[in1["id"]] = in1;
+darr.old[in3["id"]] = in3;
+darr.old[in5["id"]] = in5;
+
+</script>
+<script>
+
+darr.all[in1["id"]] = in1;
+
+darr.all[in3["id"]] = in3;
+
+darr.all[in5["id"]] = in5;
+darr.all[in2["id"]] = in2;
+darr.all[in4["id"]] = in4;
+darr.all[in6["id"]] = in6;
+
+
+</script>
+<script>
+
+curtax = "all";
+</script>
+<script>
+
+function dangle(jQueryItem)
+{
+//	var jQueryItem = $(elem);
+
+	var mainobj = darr[curtax];
+
+	innerAttr = jQueryItem["attributes"].getNamedItem("baja").value;
+	outerAttr = jQueryItem["attributes"].getNamedItem("baz0").value;
+	tempvar = mainobj[outerAttr];
+	tempvar[innerAttr] = jQueryItem.value;
+		
+}
+</script>
+<script>
+$( document ).ready(function() {
+$( "#mid" ).blur(function() {
+	curtax = this.value.trim();
+	outerhtml = "";
+	innerArr = darr[curtax];
+	if(!innerArr)
+		return;
+		outerhtml = outerhtml + "<hr>";
+	for (var i in innerArr) {
+		inar = ["name", "age", "height"];
+				for (j = 0 ; j < inar.length; j++)
+				{
+					outerhtml = outerhtml + "&nbsp; &nbsp; | " + inar[j] + "&nbsp; : <input onblur='dangle(this)' type=text id='" + i + "_" + inar[j] + "\' baja=\'" + inar[j] + "\' value=\'" + innerArr[i][inar[j]] + "\' baz0=\'" + i + "\'>"; 
+				}
+				outerhtml = outerhtml + "<br>";
+			}
+ 		// confirm(outerhtml);
+		$( "#inner" ).html(outerhtml);
+	});
+
+
+
+	});
+
+// alert("semi finl one");
+// alert("final one");
+
+</script>
+</head>
+<body>
+<div id="aloha" >
+<div id="outer" >
+Please enter the label that you want to display(new,old,all) <input type=text value="all"  id="mid"  />
+</div>
+<div id="inner" > </div>
+</div>
+</body>
+</html>

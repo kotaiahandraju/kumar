@@ -1,0 +1,58 @@
+:ul 27, 2015 9:34:46 PM org.apache.catalina.core.AprLifecycleListener init
+INFO: The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /usr/lib32:/usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+Jul 27, 2015 9:34:47 PM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["http-bio-8090"]
+Jul 27, 2015 9:34:47 PM org.apache.coyote.AbstractProtocol init
+INFO: Initializing ProtocolHandler ["ajp-bio-8009"]
+Jul 27, 2015 9:34:47 PM org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 2314 ms
+Jul 27, 2015 9:34:47 PM org.apache.catalina.core.StandardService startInternal
+INFO: Starting service Catalina
+Jul 27, 2015 9:34:47 PM org.apache.catalina.core.StandardEngine startInternal
+INFO: Starting Servlet Engine: Apache Tomcat/7.0.42
+Jul 27, 2015 9:34:47 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /home/saihemanth/apache-tomcat-7.0.42/webapps/NBD
+Jul 27, 2015 9:35:00 PM org.apache.catalina.core.ApplicationContext log
+INFO: No Spring WebApplicationInitializer types detected on classpath
+Jul 27, 2015 9:35:01 PM org.apache.catalina.core.ApplicationContext log
+INFO: Initializing Spring root WebApplicationContext
+log4j:WARN No appenders could be found for logger (org.springframework.web.context.ContextLoader).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+ServletContextListener started
+Jul 27, 2015 9:35:14 PM org.apache.catalina.core.ApplicationContext log
+INFO: Set web app root system property: 'webapp.root' = [/home/saihemanth/apache-tomcat-7.0.42/webapps/NBD/]
+Jul 27, 2015 9:35:14 PM org.apache.catalina.core.ApplicationContext log
+INFO: Initializing log4j from [/home/saihemanth/apache-tomcat-7.0.42/webapps/NBD/WEB-INF/log4js/log4j.properties]
+log4j:WARN No such property [datePattern] in org.apache.log4j.FileAppender.
+Jul 27, 2015 9:35:15 PM org.apache.catalina.core.ApplicationContext log
+INFO: org.tuckey.web.filters.urlrewrite.UrlRewriteFilter INFO: loaded (conf ok)
+Jul 27, 2015 9:35:15 PM org.apache.catalina.core.ApplicationContext log
+INFO: Initializing Spring FrameworkServlet 'spring'
+Jul 27, 2015 9:35:19 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /home/saihemanth/apache-tomcat-7.0.42/webapps/host-manager
+Jul 27, 2015 9:35:20 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /home/saihemanth/apache-tomcat-7.0.42/webapps/manager
+Jul 27, 2015 9:35:20 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /home/saihemanth/apache-tomcat-7.0.42/webapps/docs
+Jul 27, 2015 9:35:20 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /home/saihemanth/apache-tomcat-7.0.42/webapps/ROOT
+Jul 27, 2015 9:35:20 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /home/saihemanth/apache-tomcat-7.0.42/webapps/examples
+Jul 27, 2015 9:35:20 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory /home/saihemanth/apache-tomcat-7.0.42/webapps/live
+log4j:WARN No appenders could be found for logger (org.springframework.web.context.ContextLoader).
+log4j:WARN Please initialize the log4j system properly.
+log4j:WARN See http://logging.apache.org/log4j/1.2/faq.html#noconfig for more info.
+Jul 27, 2015 9:35:38 PM org.apache.catalina.core.StandardContext startInternal
+SEVERE: Error listenerStart
+Jul 27, 2015 9:35:38 PM org.apache.catalina.core.StandardContext startInternal
+SEVERE: Context [/live] startup failed due to previous errors
+Jul 27, 2015 9:35:38 PM org.apache.catalina.loader.WebappClassLoader clearReferencesJdbc
+SEVERE: The web application [/live] registered the JDBC driver [com.mysql.jdbc.Driver] but failed to unregister it when the web application was stopped. To prevent a memory leak, the JDBC Driver has been forcibly unregistered.
+Jul 27, 2015 9:35:38 PM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["http-bio-8090"]
+Jul 27, 2015 9:35:38 PM org.apache.coyote.AbstractProtocol start
+INFO: Starting ProtocolHandler ["ajp-bio-8009"]
+Jul 27, 2015 9:35:38 PM org.apache.catalina.startup.Catalina start
+INFO: Server startup in 51381 ms

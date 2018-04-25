@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="DailyExpensesReport" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3b2ae776-3ae0-4d3d-a10a-7caa3e44da3f">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="sdate" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT b.`branch_Name` AS BranchName,p.`prod_Desc`AS ProductDescription,bi.bill_Date AS BillDate,bd.`quantity` AS Quantity,bd.`rate` AS Rate,bd.amount AS Amount,bi.net_Amt AS TotalSales,ei.expenses_Total AS TotalExpenses FROM bill_info bi
+JOIN bill_details bd ON bd.`bill_Info_Id`=bi.`bill_Info_Id`
+JOIN stock_branch sb ON sb.`prod_Id`=bd.`prod_Id`
+JOIN branch b ON b.`branch_Id`=sb.`branch_Id`
+JOIN product p ON p.`product_Id`=bd.prod_Id
+JOIN expenses_branch eb ON eb.branch_Id=b.branch_Id
+JOIN expense_info ei ON ei.expenses_Id=eb.expenses_Id
+WHERE DATE(bi.bill_Date)=$P{sdate}
+GROUP BY p.product_Id,b.branch_Id;]]>
+	</queryString>
+	<field name="BranchName" class="java.lang.String"/>
+	<field name="ProductDescription" class="java.lang.String"/>
+	<field name="BillDate" class="java.sql.Timestamp"/>
+	<field name="Quantity" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Rate" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Amount" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="TotalSales" class="java.lang.Float"/>
+	<field name="TotalExpenses" class="java.lang.Float"/>
+	<variable name="salesTotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{TotalSales}]]></variableExpression>
+	</variable>
+	<variable name="expenTotal" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{TotalExpenses}]]></variableExpression>
+	</variable>
+	<variable name="balance" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{TotalSales}-$F{TotalExpenses}]]></variableExpression>
+	</variable>
+	<variable name="maxProduct" class="java.lang.String" calculation="Highest">
+		<variableExpression><![CDATA[$F{ProductDescription}]]></variableExpression>
+	</variable>
+	<variable name="minProduct" class="java.lang.String" calculation="Lowest">
+		<variableExpression><![CDATA[$F{ProductDescription}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="a35f30b0-2185-44f0-b600-11124e57f989" x="0" y="0" width="89" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BranchName]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bfac5674-181b-497f-9bd0-588df5268e91" x="89" y="0" width="107" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ProductDescription]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="5324800a-d919-4eef-8c0a-0ea4e1d461bf" x="196" y="0" width="55" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BillDate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="7c6bf9de-baa0-42ac-93b5-c05dffdf3f1e" x="251" y="0" width="59" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Quantity]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="8a9b7d8b-121e-44df-a068-e1f0c265eb2a" x="310" y="0" width="67" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Rate]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="6391e711-f954-43d3-828b-6e59b6c4bc1a" x="377" y="0" width="57" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Amount]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="ba627caf-5005-4f4e-85a5-6569bcf2c56f" x="434" y="0" width="62" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TotalSales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="1e5680a2-dd74-4706-b317-866b46ae9667" x="496" y="0" width="56" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TotalExpenses]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="188" splitType="Stretch">
+			<textField>
+				<reportElement uuid="2d6aabb3-c419-4806-8154-f1176e15f936" x="0" y="0" width="89" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BranchName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="7797a415-e033-4381-b062-2bb79ed32497" x="89" y="0" width="107" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ProductDescription}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="6718608f-88c8-490d-bb46-5cd9477aabc0" x="196" y="0" width="55" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{BillDate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1db478d7-53b2-43b7-b5de-7a2ce9827f78" x="251" y="0" width="59" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Quantity}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="36c67745-a885-4968-99fa-d8d38a0f8851" x="310" y="0" width="67" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Rate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="1e2918da-9698-4b54-b936-857c1db5e483" x="377" y="0" width="57" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Amount}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="d710dda1-52c1-428c-96a8-301f3abbd266" x="434" y="0" width="62" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TotalSales}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="3d4b8c5d-f600-46a1-9761-ca86f508f2d5" x="496" y="0" width="56" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TotalExpenses}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="2950748d-9085-48e0-bcb5-2c18c49eeefc" x="176" y="55" width="238" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Total Sales:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="904c6f08-5216-44c2-8a40-1d116e9bc32e" x="414" y="55" width="69" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{salesTotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="fc9e6bd3-1b0b-483f-a6d0-b5f69bc3f82a" x="176" y="75" width="238" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Total Expenses:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="486683c7-dcac-42b3-9e8f-6f8a36cc9020" x="414" y="75" width="69" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{expenTotal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="1329b2a5-0b05-4919-8c37-4a0000a17c81" x="176" y="97" width="238" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Balance:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="d69b4381-128b-4e56-ab67-0c676f8ac377" x="414" y="97" width="69" height="22"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{balance}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="244c57db-f557-4d1f-9da4-194c5d48e151" x="41" y="138" width="373" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Maximum Sale Product:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="da7ef854-f93b-4000-8312-18e0fd8e3374" x="414" y="138" width="100" height="20"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{maxProduct}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement uuid="5e3bb8ef-8162-4c9b-b444-6d61bc73230a" x="41" y="158" width="373" height="19"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<text><![CDATA[Minimum Sale Product:]]></text>
+			</staticText>
+			<textField>
+				<reportElement uuid="4ca335e3-cd50-41cd-8164-d6f37d5494ed" x="414" y="158" width="100" height="19"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{minProduct}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement uuid="e8ebf316-7906-48c3-a557-9c68a4d62565" x="414" y="97" width="69" height="1"/>
+			</line>
+			<line>
+				<reportElement uuid="b4618ee8-bcce-4ef3-a130-f94956460ef2" x="414" y="119" width="69" height="1"/>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="50"/>
+	</columnFooter>
+</jasperReport>

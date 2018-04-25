@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<definition name="base.definition" template="/WEB-INF/Home/home.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/WEB-INF/Home/header.jsp" />
+		<!-- <put-attribute name="menu" value="/WEB-INF/Home/menu.jsp" /> -->
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/Home/footer.jsp" />
+
+	</definition>
+	
+
+	<!-- Login -->
+	<definition name="loginHome" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/login.jsp" />
+	</definition>
+	<!-- <definition name="partnerLoginHome" extends="base.definition"> <put-attribute 
+		name="body" value="/WEB-INF/pages/partnerLogin.jsp" /> </definition> -->
+	<!-- Exception page -->
+
+
+	<definition name="dashboardHome" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/dashboard.jsp" />
+	</definition>
+	
+	<definition name="producttype" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/addProductType.jsp" />
+	</definition>
+	<definition name="productName" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/productname.jsp" />
+	</definition>
+	<definition name="items" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/items.jsp" />
+	</definition>
+	<definition name="branchHome" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/branch.jsp" />
+	</definition>
+	<definition name="employee" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/employee.jsp" />
+	</definition>
+	
+</tiles-definitions>
+
+

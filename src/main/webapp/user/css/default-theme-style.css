@@ -1,0 +1,154 @@
+@charset "utf-8";
+/* CSS Document */
+
+
+
+body{
+	font-size:14px;
+}
+/*========== DEFAULT FONT SIZE STYLE==========*/
+.fs-8{
+	font-size:0.5714285714285714em;
+}
+.fs-10{
+	font-size:0.7142857142857143em;
+}
+.fs-12, h6, .h6{
+	font-size:0.8571428571428571em;
+}
+.fs-14, h5, .h5{
+	font-size:1em;
+}
+.fs-16{
+	font-size:1.1428571428571428em;
+}
+.fs-18, h4, .h4{
+	font-size:1.2857142857142858em;
+}
+.fs-20{
+	font-size:1.4285714285714286em;
+}
+.fs-24, h3, .h3{
+	font-size:1.7142857142857142em;
+}
+.fs-26{
+	font-size:1.8571428571428572em;
+}
+.fs-30, h2, .h2{
+	font-size:2.142857142857143em;
+}
+.fs-36, h1, .h1{
+	font-size:2.5714285714285716em;
+}
+.fs-40{
+	font-size:2.857142857142857em;
+}
+.fs-42{
+	font-size:3em;
+}
+.fs-48{
+	font-size:3.4285714285714284em;
+}
+.fs-60{
+	font-size:4.285714285714286em;
+}
+.fs-72{
+	font-size:5.142857142857143em;
+}
+
+
+/*----------------font-weight---------------------*/
+
+.fw-100{
+	font-weight:100;
+}
+.fw-200{
+	font-weight:200;
+}
+.fw-300{
+	font-weight:300;
+}
+.fw-400{
+	font-weight:400;
+}
+.fw-500{
+	font-weight:500;
+}
+.fw-600{
+	font-weight:600;
+}
+.fw-700{
+	font-weight:700;
+}
+.fw-800{
+	font-weight:800;
+}
+.fw-900{
+	font-weight:900;
+}
+.fw-bold{
+	font-weight:bold;
+}
+
+/*----------------end default font style---------------------*/
+
+
+/*----Some Commen Css---*/
+.clearfix:before,
+.clearfix:after,
+.at-row:before,
+.at-row:after,{
+  content: " ";
+  display: table;
+}
+.clearfix:after,.at-row:after, {
+  clear: both;
+}
+.float-left {
+  float: left !important;
+}
+.float-right {
+  float: right !important;
+}
+.at-text-left {
+  text-align: left;
+}
+.at-text-right {
+  text-align: right;
+}
+.at-text-center {
+  text-align: center;
+}
+.at-text-justify {
+  text-align: justify;
+}
+.at-text-nowrap {
+  white-space: nowrap;
+}
+.at-text-lowercase {
+  text-transform: lowercase;
+}
+.at-text-uppercase {
+  text-transform: uppercase;
+}
+.at-text-capitalize {
+  text-transform: capitalize;
+}
+strong {
+  font-weight: bold;
+}
+dfn {
+  font-style: italic;
+}
+
+
+
+
+
+
+
+
+
+
+
+
