@@ -14,7 +14,9 @@
 
 	</definition>
 	
-
+	<definition name="branchCreation" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/branchCreation.jsp" />
+	</definition>
 	<!-- Login -->
 	<definition name="loginHome" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/login.jsp" />

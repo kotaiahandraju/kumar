@@ -23,9 +23,16 @@ protected String password ;
 protected String mobilenumber ;
 protected String roleId ;
 protected String status ;
+protected String branchCreationStatus ;
 
 
 
+public String getBranchCreationStatus() {
+	return branchCreationStatus;
+}
+public void setBranchCreationStatus(String branchCreationStatus) {
+	this.branchCreationStatus = branchCreationStatus;
+}
 public String getRoleId() {
 	return roleId;
 }
