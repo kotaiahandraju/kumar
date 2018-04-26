@@ -52,11 +52,12 @@ public class DealerCreationController {
 		List<BranchcreationBean> listOrderBeans = null;
 		try {
 			listOrderBeans = branchcreationDao.getBranchcreationDetails("1","3");
+			System.out.println(listOrderBeans.size());
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
 				request.setAttribute("allOrders1", sJson);
-				// System.out.println(sJson);
+				 System.out.println(sJson);
 			} else {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -85,6 +86,7 @@ public class DealerCreationController {
 			
 			branchcreationBean.setStatus("1");
 			branchcreationBean.setRoleId("3");
+			branchcreationBean.setBranchname(objuserBean.getBranchId());
 			BranchcreationBean branchcreationBean2 = branchcreationDao.getBybranchCreationName(branchcreationBean);
 			int dummyId = 0;
 			if (branchcreationBean2 != null) {
