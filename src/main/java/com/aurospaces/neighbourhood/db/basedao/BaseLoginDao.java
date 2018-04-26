@@ -26,7 +26,7 @@ public class BaseLoginDao{
 	JdbcTemplate jdbcTemplate;
 
  
-	public final String INSERT_SQL = "INSERT INTO login( created_time, updated_time, userName, password, roleId, status,empId) values (?, ?, ?, ?, ?, ?,?)"; 
+	public final String INSERT_SQL = "INSERT INTO login( created_time, updated_time, userName, password, roleId, status,empId,branchId) values (?, ?, ?, ?, ?, ?,?,?)"; 
 
 
 
@@ -67,6 +67,7 @@ ps.setString(4, login.getPassword());
 ps.setString(5, login.getRoleId());
 ps.setString(6, login.getStatus());
 ps.setString(7, login.getEmpId());
+ps.setString(8, login.getBranchId());
 
 							return ps;
 						}
@@ -81,9 +82,9 @@ ps.setString(7, login.getEmpId());
 		else
 		{
 
-			String sql = "UPDATE login  set userName = ? ,password = ? ,roleId = ? ,status = ?  where id = ? ";
+			String sql = "UPDATE login  set userName = ? ,password = ? ,roleId = ? ,status = ?,branchId=?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{login.getUserName(),login.getPassword(),login.getRoleId(),login.getStatus(),login.getId()});
+			jdbcTemplate.update(sql, new Object[]{login.getUserName(),login.getPassword(),login.getRoleId(),login.getStatus(),login.getBranchId(),login.getId()});
 		}
 	}
 		

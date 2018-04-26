@@ -95,6 +95,7 @@ public class BranchCreationController {
 					login.setEmpId(branchcreationBean.getEmployeename());
 					login.setUserName(branchcreationBean.getUserName());
 					login.setPassword(branchcreationBean.getPassword());
+					login.setBranchId(branchcreationBean.getBranchname());
 					loginDao.updateLogin(login);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
@@ -110,6 +111,7 @@ public class BranchCreationController {
 				login.setPassword(branchcreationBean.getPassword());
 				login.setStatus("1");
 				login.setRoleId("2");
+				login.setBranchId(branchcreationBean.getBranchname());
 				loginDao.save(login);
 				branchcreationDao.save(branchcreationBean);
 

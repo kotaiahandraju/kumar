@@ -21,8 +21,8 @@ public class LoginDao extends BaseLoginDao
 	public Boolean updateLogin(LoginBean loginBean) {
 		boolean result = false;
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql = "UPDATE login  set userName = ? ,password = ?  where empId = ? ";
-		int results = jdbcTemplate.update(sql, new Object[] {loginBean.getUserName(),loginBean.getPassword(),loginBean.getEmpId()  });
+		String sql = "UPDATE login  set userName = ? ,password = ?,branchId=?  where empId = ? ";
+		int results = jdbcTemplate.update(sql, new Object[] {loginBean.getUserName(),loginBean.getPassword(),loginBean.getBranchId(),loginBean.getEmpId()  });
 		if (results != 0) {
 			result = true;
 		}

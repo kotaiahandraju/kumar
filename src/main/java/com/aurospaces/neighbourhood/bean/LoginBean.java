@@ -40,8 +40,14 @@ protected String roleId ;
 
 /** Field mapping. **/
 protected String status ;
-protected String empId ;
+protected String empId ,branchId;
 
+public String getBranchId() {
+	return branchId;
+}
+public void setBranchId(String branchId) {
+	this.branchId = branchId;
+}
 public String getEmpId() {
 	return empId;
 }
