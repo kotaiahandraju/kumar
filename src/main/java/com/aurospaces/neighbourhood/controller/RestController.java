@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aurospaces.neighbourhood.bean.ItemsBean;
-import com.aurospaces.neighbourhood.bean.loginBean;
+import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.db.dao.KhaibarUsersDao;
 
 /**
@@ -27,7 +27,7 @@ import com.aurospaces.neighbourhood.db.dao.KhaibarUsersDao;
 public class RestController {
 	@Autowired KhaibarUsersDao objKhaibarUsersDao;
 	@RequestMapping(value = "/rest/getLogin")
-	public @ResponseBody String getLogin(@RequestBody loginBean loginBean ,  HttpServletRequest request) throws Exception {
+	public @ResponseBody String getLogin(@RequestBody LoginBean loginBean ,  HttpServletRequest request) throws Exception {
 		List<Map<String,Object>> list=null;
 		JSONObject objJSON = new JSONObject();
 		try{

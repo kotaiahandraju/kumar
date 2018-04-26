@@ -25,7 +25,7 @@ import com.aurospaces.neighbourhood.bean.BranchBean;
 import com.aurospaces.neighbourhood.bean.BranchProducts;
 import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.ProductnameBean;
-import com.aurospaces.neighbourhood.bean.loginBean;
+import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.db.dao.BranchDao;
 import com.aurospaces.neighbourhood.db.dao.BranchProductsDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
@@ -107,7 +107,7 @@ public class ItemController {
 			}
 			if (itemsBean.getId() == 0 && itemsBean2 == null) {
 				itemsDao.save(itemsBean);
-				loginBean objuserBean = (loginBean) session.getAttribute("cacheUserBean");
+				LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
 				if (objuserBean != null && objuserBean.getRoleId().equals("1")) {
 					
 					List<BranchBean> list = branchDao.getBranchDetails("1");

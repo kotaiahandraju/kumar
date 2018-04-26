@@ -9,8 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.aurospaces.neighbourhood.bean.ItemsBean;
-import com.aurospaces.neighbourhood.bean.loginBean;
+import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 import com.aurospaces.neighbourhood.db.basedao.BaseKhaibarUsersDao;
 
@@ -23,26 +22,26 @@ public class KhaibarUsersDao extends BaseKhaibarUsersDao
 	@Autowired
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
-	 public loginBean loginChecking(loginBean userObj) {
+	 public LoginBean loginChecking(LoginBean userObj) {
 		 jdbcTemplate = custom.getJdbcTemplate();
 			String sql = "SELECT * from login where username = ? and password =? and status='1'";
 			System.out.println("aaaaaaaaaaaa");
-			List<loginBean> retlist = jdbcTemplate.query(sql,
-			new Object[]{userObj.getUsername(),userObj.getPassword()},
-			ParameterizedBeanPropertyRowMapper.newInstance(loginBean.class));
+			List<LoginBean> retlist = jdbcTemplate.query(sql,
+			new Object[]{userObj.getUserName(),userObj.getPassword()},
+			ParameterizedBeanPropertyRowMapper.newInstance(LoginBean.class));
 			if(retlist.size() > 0)
 				return retlist.get(0);
 			return null;
 		}
 
 	 
-	 public List<Map<String,Object>> getloginChecking(loginBean userObj){
+	 public List<Map<String,Object>> getloginChecking(LoginBean userObj){
 			List<Map<String,Object>> list=null;
 			
 			try{
 				jdbcTemplate = custom.getJdbcTemplate();
 				String sql ="SELECT * from login where username = ? and password =? and status='1'";
-				list =jdbcTemplate.queryForList(sql, new Object[]{userObj.getUsername(),userObj.getPassword()});
+				list =jdbcTemplate.queryForList(sql, new Object[]{userObj.getUserName(),userObj.getPassword()});
 				System.out.println(sql);
 			}catch(Exception e){
 				e.printStackTrace();
