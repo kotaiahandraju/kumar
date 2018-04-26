@@ -176,10 +176,7 @@ table#dependent_table tbody tr td:first-child::before {
 <!-- container -->
 
 <script type="text/javascript">
-	var listOrders1 = $
-	{
-		allOrders1
-	};
+	var listOrders1 = ${allOrders1};
 
 	console.log(listOrders1);
 	if (listOrders1 != "") {

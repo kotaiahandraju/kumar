@@ -26,7 +26,7 @@ public class BranchcreationDao extends BaseBranchcreationDao
 		 
 		 //String sql="SELECT *, DATE_FORMAT(expirydate,'%d/%m/%Y') AS expirtdate1  FROM cylindermaster";
 		
-		 String sql =  "SELECT b.*,kb.branchname as bName,ke.employeename as empName, CASE WHEN b.status IN ('0') THEN 'Deactive' WHEN b.status in ('1') THEN 'Active'  ELSE '-----' END as branchCreationStatus FROM Kumar_branchcreation b,kumar_branch kb,kumar_employee ke where kb.id=b.branchname and ke.id=b.employeename and b.status='"+status+"' ad b.roleId='"+roleId+"' order by b.id desc";
+		 String sql =  "SELECT b.*,kb.branchname as bName,ke.employeename as empName, CASE WHEN b.status IN ('0') THEN 'Deactive' WHEN b.status in ('1') THEN 'Active'  ELSE '-----' END as branchCreationStatus FROM Kumar_branchcreation b,kumar_branch kb,kumar_employee ke where kb.id=b.branchname and ke.id=b.employeename and b.status='"+status+"' and b.roleId='"+roleId+"' order by b.id desc";
 		List<BranchcreationBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
 				ParameterizedBeanPropertyRowMapper.newInstance(BranchcreationBean.class));
 		
@@ -38,7 +38,7 @@ public class BranchcreationDao extends BaseBranchcreationDao
 	
 	public BranchcreationBean getBybranchCreationName(BranchcreationBean branchname) {
 		 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "SELECT * from Kumar_branchcreation where userName =? or branchname =? or employeename =? ";
+			String sql = "SELECT * from Kumar_branchcreation where userName =?  or employeename =? ";
 			List<BranchcreationBean> retlist = jdbcTemplate.query(sql,
 			new Object[]{branchname.getUserName(),branchname.getBranchname(),branchname.getEmployeename()},
 			ParameterizedBeanPropertyRowMapper.newInstance(BranchcreationBean.class));
