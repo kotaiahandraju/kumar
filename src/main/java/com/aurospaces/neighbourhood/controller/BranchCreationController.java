@@ -22,7 +22,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.BranchcreationBean;
+import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.db.dao.BranchcreationDao;
+import com.aurospaces.neighbourhood.db.dao.LoginDao;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,8 +38,8 @@ public class BranchCreationController {
 	
 	
 	private Logger logger = Logger.getLogger(BranchCreationController.class);
-//	@Autowired
-//	ItemsDao  itemsDao;
+	@Autowired
+	LoginDao  loginDao;
 	@Autowired
 	BranchcreationDao  branchcreationDao;
 	
@@ -96,6 +98,13 @@ public class BranchCreationController {
 				}
 			}
 			if (branchcreationBean.getId() == 0 && branchcreationBean2 == null) {
+				LoginBean login = new LoginBean();
+				login.setEmpId(branchcreationBean.getEmployeename());
+				login.setUserName(branchcreationBean.getUserName());
+				login.setPassword(branchcreationBean.getPassword());
+				login.setStatus("1");
+				login.setRoleId("2");
+				loginDao.save(login);
 				branchcreationDao.save(branchcreationBean);
 
 				redir.addFlashAttribute("msg", "Record Inserted Successfully");
@@ -110,7 +119,7 @@ public class BranchCreationController {
 			System.out.println(e);
 
 		}
-		return "redirect:items";
+		return "redirect:branchCreation";
 	}
 
 	 @RequestMapping(value = "/branchCreationDelete")

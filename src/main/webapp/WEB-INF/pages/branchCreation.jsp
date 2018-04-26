@@ -271,5 +271,5 @@ function productNameFilter(productName){
 
 
 $("#pageName").text("Branch Creation Master");
-$(".branchCreation").addClass("active"); 
+$(".branchcreation").addClass("active"); 
 </script>

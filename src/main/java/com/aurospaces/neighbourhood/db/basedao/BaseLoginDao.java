@@ -1,14 +1,11 @@
-/*
+
 package com.aurospaces.neighbourhood.db.basedao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Date;
-import java.util.UUID;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,13 +13,10 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aurospaces.neighbourhood.bean.loginBean;
+import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
-
-import com.aurospaces.neighbourhood.db.model.Login;
 
 
 public class BaseLoginDao{
@@ -32,15 +26,14 @@ public class BaseLoginDao{
 	JdbcTemplate jdbcTemplate;
 
  
-	public final String INSERT_SQL = "INSERT INTO login( created_time, updated_time, userName, password, roleId, status) values (?, ?, ?, ?, ?, ?)"; 
+	public final String INSERT_SQL = "INSERT INTO login( created_time, updated_time, userName, password, roleId, status,empId) values (?, ?, ?, ?, ?, ?,?)"; 
 
 
 
 
 
-	 this should be conditional based on whether the id is present or not 
 	@Transactional
-	public void save(final loginBean login) 
+	public void save(final LoginBean login) 
 	{
 		jdbcTemplate = custom.getJdbcTemplate();
 	if(login.getId() == 0)	{
@@ -73,6 +66,7 @@ ps.setString(3, login.getUserName());
 ps.setString(4, login.getPassword());
 ps.setString(5, login.getRoleId());
 ps.setString(6, login.getStatus());
+ps.setString(7, login.getEmpId());
 
 							return ps;
 						}
@@ -101,12 +95,12 @@ ps.setString(6, login.getStatus());
 		}
 		
 
-	 public Login getById(int id) {
+	 public LoginBean getById(int id) {
 			jdbcTemplate = custom.getJdbcTemplate();
 			String sql = "SELECT * from login where id = ? ";
-			List<Login> retlist = jdbcTemplate.query(sql,
+			List<LoginBean> retlist = jdbcTemplate.query(sql,
 			new Object[]{id},
-			ParameterizedBeanPropertyRowMapper.newInstance(Login.class));
+			ParameterizedBeanPropertyRowMapper.newInstance(LoginBean.class));
 			if(retlist.size() > 0)
 				return retlist.get(0);
 			return null;
@@ -115,4 +109,3 @@ ps.setString(6, login.getStatus());
 	
 
 }
-*/

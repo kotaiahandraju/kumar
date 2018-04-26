@@ -215,6 +215,8 @@ function tooltip(){
                <c:if test="${roleId=='1' }">
               <li class="employee"><a href="${baseurl }/admin/employee"> <span>Employees</span></a></li>
               <li class="branch"><a href="${baseurl }/admin/branchHome"> <span>Branch</span></a></li>
+               <li class="branchcreation"><a href="${baseurl }/admin/branchCreation"> <span>Branch Creation</span></a></li>
+              
               </c:if>
 				
 			</ul>
