@@ -6,12 +6,7 @@ import java.util.Date;
 
 public class ProductnameBean 
 {
-@Override
-	public String toString() {
-		return "ProductnameBean [id=" + id + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime
-				+ ", productId=" + productId + ", productname=" + productname + ", status=" + status
-				+ ", productnameStatus=" + productnameStatus + "]";
-	}
+
 protected int id   = 0;
 protected Date createdTime ;
 protected Date updatedTime ;
@@ -20,9 +15,28 @@ protected String productname ;
 protected String status ;
 protected String productnameStatus ;
 protected String producttype ;
+protected String delarId,quantity,productlist;
 
 
 
+public String getDelarId() {
+	return delarId;
+}
+public void setDelarId(String delarId) {
+	this.delarId = delarId;
+}
+public String getQuantity() {
+	return quantity;
+}
+public void setQuantity(String quantity) {
+	this.quantity = quantity;
+}
+public String getProductlist() {
+	return productlist;
+}
+public void setProductlist(String productlist) {
+	this.productlist = productlist;
+}
 public String getProducttype() {
 	return producttype;
 }

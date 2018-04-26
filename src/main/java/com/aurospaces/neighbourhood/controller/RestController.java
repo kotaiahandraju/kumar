@@ -8,6 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.LoginBean;
+import com.aurospaces.neighbourhood.bean.OrdersListBean;
+import com.aurospaces.neighbourhood.bean.ProductnameBean;
 import com.aurospaces.neighbourhood.db.dao.KhaibarUsersDao;
+import com.aurospaces.neighbourhood.db.dao.OrdersListDao;
 
 /**
  * @author YOGI
@@ -26,6 +29,7 @@ import com.aurospaces.neighbourhood.db.dao.KhaibarUsersDao;
 @Controller
 public class RestController {
 	@Autowired KhaibarUsersDao objKhaibarUsersDao;
+	@Autowired OrdersListDao ordersListDao;
 	@RequestMapping(value = "/rest/getLogin")
 	public @ResponseBody String getLogin(@RequestBody LoginBean loginBean ,  HttpServletRequest request) throws Exception {
 		List<Map<String,Object>> list=null;
@@ -112,35 +116,29 @@ public class RestController {
 		return String.valueOf(objJSON);
 	}
 	
-	/*@RequestMapping(value="/getproducts", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")  
-	public String  getProductslist() throws JsonProcessingException, JSONException {
-		LOGGER.debug("Calling getproducts at controller");
-		List<Product> listOrderBeans =  productDao.getProductDetails();
-		
-		JSONObject json =new JSONObject();
-		
-		
-		
-		
-			
-			//ObjectMapper objectMapper = new ObjectMapper();
-			//String userjson = objectMapper.writeValueAsString(userBean);
-			//String categoryjson = objectMapper.writeValueAsString(listOrderBeans);
-			
-			if(null != listOrderBeans)
-			{
-				json.put("productDetails", listOrderBeans);
-				
-			}
-			else
-				//code="NOT_FOUND";
-				
-				json.put("productDetails", "NOT_FOUND");
-		
-		
+	@RequestMapping(value = "/rest/placingorder")
+	public @ResponseBody String placingorder(HttpServletRequest request,@RequestBody ProductnameBean productnameBean) {
+		JSONObject objJSON = new JSONObject();
+		System.out.println(productnameBean.getProductlist());
+		JSONArray array = new JSONArray(productnameBean.getProductlist());
+		try{
+			int j=0;
+			 for (int i = 0; i < array.length(); i++)
+		        {
+		            JSONObject jsonObj = array.getJSONObject(i);
+		            OrdersListBean ordersList = new OrdersListBean();
+		            ordersList.setDelerId(String.valueOf(jsonObj.get("delarId")));
+		            ordersList.setQuantity(String.valueOf(jsonObj.get("quantity")));
+		            ordersList.setProductId(String.valueOf(jsonObj.get("productId")));
+		            ordersListDao.save(ordersList);
+		            j++;
+		        }
 
-		
-		return String.valueOf(json);
-	}*/
+			 objJSON.put("msg", "Successfully "+j+" Product's has been ordered");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return String.valueOf(objJSON);
+	}
 }
 	

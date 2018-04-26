@@ -25,7 +25,6 @@ public class KhaibarUsersDao extends BaseKhaibarUsersDao
 	 public LoginBean loginChecking(LoginBean userObj) {
 		 jdbcTemplate = custom.getJdbcTemplate();
 			String sql = "SELECT * from login where username = ? and password =? and status='1'";
-			System.out.println("aaaaaaaaaaaa");
 			List<LoginBean> retlist = jdbcTemplate.query(sql,
 			new Object[]{userObj.getUserName(),userObj.getPassword()},
 			ParameterizedBeanPropertyRowMapper.newInstance(LoginBean.class));
