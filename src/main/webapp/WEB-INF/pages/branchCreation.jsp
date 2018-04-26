@@ -128,7 +128,7 @@ function showTableData(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Branch Name</th><th>Employee Name</th><th>Password</th><th>Role</th><th>Status</th><th></th></tr>'+
+    	'<thead><tr><th>Branch Name</th><th>Employee Name</th><th>UserName</th><th>Password</th><th>Status</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -141,8 +141,8 @@ function showTableData(response){
 		var edit = "<a class='edit editIt' onclick='editBranchCreation("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
-			+ "<td title='"+orderObj.serialno+"'>" + orderObj.branchname + "</td>"
-			+ "<td title='"+orderObj.itemcode+"'>" + orderObj.employeename + "</td>"
+			+ "<td title='"+orderObj.bName+"'>" + orderObj.bName + "</td>"
+			+ "<td title='"+orderObj.empName+"'>" + orderObj.empName + "</td>"
 			+ "<td title='"+orderObj.userName+"'>" + orderObj.userName + "</td>"
 			+ "<td title='"+orderObj.password+"'>" + orderObj.password + "</td>"
 			+ "<td title='"+orderObj.branchCreationStatus+"'>" + orderObj.branchCreationStatus + "</td>"
