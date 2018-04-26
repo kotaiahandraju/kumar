@@ -79,21 +79,19 @@ table#dependent_table tbody tr td:first-child::before {
 	                <form:form  modelAttribute="employeeForm"  action="addPEmployee" class="form-horizontal" method="post" >
                     <div class="panel-body">
                     	<div class="row">
-                    		<div class="col-md-4">
+                    		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Employee Name <span class="impColor">*</span></label>
-                    				<div class="col-md-6">
+                    				<label for="focusedinput" class="col-md-3 control-label">Employee Name <span class="impColor">*</span></label>
+                    				<div class="col-md-5">
 		                            	<form:input type="hidden" path="id"/>
 								      	<form:input type="text" path="employeename" class="form-control validate" placeholder="Employee Name"/>
 								  	</div>
                     			</div>
                     		</div>
-                    	</div>
-                    	<div class="row">
-                    		<div class="col-md-4">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Role<span class="impColor">*</span></label>
-                    				<div class="col-md-6">
+                    		<div class="col-md-6">
+                    		<div class="form-group">
+                    				<label for="focusedinput" class="col-md-3 control-label">Role<span class="impColor">*</span></label>
+                    				<div class="col-md-5">
 								      	<form:select path="roleId" value="" class="form-control validate">
 								    	<form:option value="">-- Select Employee Name --</form:option>
 								    	<form:option value="2">Manager</form:option>
@@ -101,10 +99,9 @@ table#dependent_table tbody tr td:first-child::before {
 								    	</form:select>
 								  	</div>
                     			</div>
-                    		</div>
+                    			</div>
                     	</div>
-                    		
-                    		</div>
+                     </div>
                     	</div>
                     </div>
 					<div class="panel-footer hideme">
