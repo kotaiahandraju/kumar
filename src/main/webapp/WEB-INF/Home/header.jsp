@@ -215,6 +215,7 @@ function tooltip(){
                <c:if test="${roleId=='1' }">
               <li class="employee"><a href="${baseurl }/admin/employee"> <span>Employees</span></a></li>
               <li class="branch"><a href="${baseurl }/admin/branchHome"> <span>Branch</span></a></li>
+             <%--  <li class="BranchProduct"><a href="${baseurl }/admin/branchproductHome"> <span>BranchProduct</span></a></li> --%>
                <li class="branchcreation"><a href="${baseurl }/admin/branchCreation"> <span>Branch Creation</span></a></li>
               
               </c:if>
@@ -229,6 +230,7 @@ function tooltip(){
 	        <div id="page-heading" class="row">
 	        	<div class="col-md-6">
 					<h1 id="pageName"></h1>
+					
 				</div>
 				<div class="col-md-6">
 					<div class="options">
