@@ -3,10 +3,6 @@ package com.aurospaces.neighbourhood.bean;
 
 import java.util.Date;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 
 public class loginBean 
 {
@@ -17,14 +13,16 @@ protected String username ;
 protected String password ;
 protected String roleId ;
 protected String status ;
+protected String empId ;
 
 
-
-@Override
-public String toString() {
-	return "loginBean [id=" + id + ", loginCrTime=" + loginCrTime + ", loginUpTime=" + loginUpTime + ", username="
-			+ username + ", password=" + password + ", roleId=" + roleId + ", status=" + status + "]";
+public String getEmpId() {
+	return empId;
 }
+public void setEmpId(String empId) {
+	this.empId = empId;
+}
+
 public int getId() {
 	return id;
 }
