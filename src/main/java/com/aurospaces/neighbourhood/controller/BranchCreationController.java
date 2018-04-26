@@ -90,6 +90,11 @@ public class BranchCreationController {
 				if (id == dummyId || branchcreationBean2 == null) {
 
 					branchcreationDao.save(branchcreationBean);
+					LoginBean login = new LoginBean();
+					login.setEmpId(branchcreationBean.getEmployeename());
+					login.setUserName(branchcreationBean.getUserName());
+					login.setPassword(branchcreationBean.getPassword());
+					loginDao.updateLogin(login);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
 				} else {
