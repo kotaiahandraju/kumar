@@ -39,7 +39,7 @@ table#dependent_table tbody tr td:first-child::before {
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="#">Home</a></li>
-               <li>Employee </li>
+               <li>Employees </li>
             </ol>
             <div class="clearfix"></div>
         <div class="container" id="lpoMain">
@@ -73,7 +73,7 @@ table#dependent_table tbody tr td:first-child::before {
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Add Product Type</h4>
+                        <h4>Add Employee</h4>
                         <div class="options"></div>
                     </div>
 	                <form:form  modelAttribute="employeeForm"  action="addPEmployee" class="form-horizontal" method="post" >

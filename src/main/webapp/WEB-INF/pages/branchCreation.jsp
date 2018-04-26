@@ -5,6 +5,42 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
+
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+ <link rel="stylesheet" type="text/css" href="../assets/css/img.css">
+ <style>
+ .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td
+ {
+ border: 0px solid black !important;
+ }
+table #dependent_table{
+/* 	width: 100%; */
+	counter-reset: rowNumber;
+}
+
+table tbody tr.rowInc{
+	counter-increment: rowNumber;
+}
+
+table#dependent_table tbody tr td:first-child::before {
+	content: counter(rowNumber);
+/* 	min-width: 1em; */
+/* 	margin-right: 0.5em; */
+}
+
+.addItemButton{
+	cursor: pointer;font-size: small;background: green;color: white;padding: 3px 10px 3px 10px;
+}
+
+#ui-datepicker-div{
+/* 	width: auto !important; */
+}
+
+</style>
+
+
+
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
     	<li><a href="#">Home</a></li>
