@@ -95,8 +95,8 @@ table#dependent_table tbody tr td:first-child::before {
                     				<label for="focusedinput" class="col-md-6 control-label">Role<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 								      	<form:select path="roleId" value="" class="form-control validate">
-								    	<form:option value="">-- Select Employee Name --</form:option>
-								    	<form:option value="2">Manager</form:option>
+								    	<form:option value="">-- Select Role --</form:option>
+								    	<form:option value="2">BranchManager</form:option>
 								    	<form:option value="3">Delear</form:option>
 								    	</form:select>
 								  	</div>
@@ -170,7 +170,7 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Employee Name</th><th>Status</th><th></th></tr>'+
+    	'<thead><tr><th>Employee Name</th><th>Role</th><th>Status</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -185,6 +185,7 @@ function showTableData(response){
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.employeename+"'>" + orderObj.employeename + "</td>"
+			+ "<td title='"+orderObj.roleId+"'>" + orderObj.roleId + "</td>"
 			+ "<td title='"+orderObj.employeeStatus+"'>" + orderObj.employeeStatus + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
 			+"</tr>";
