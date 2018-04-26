@@ -26,7 +26,7 @@ public class BaseEmployeeDao{
 	JdbcTemplate jdbcTemplate;
 
  
-	public final String INSERT_SQL = "INSERT INTO kumar_employee( employee_cr_time, employee_up_time, employeename, status) values (?, ?, ?, ?)"; 
+	public final String INSERT_SQL = "INSERT INTO kumar_employee( employee_cr_time, employee_up_time, employeename, status,roleId) values (?, ?, ?, ?,?)"; 
 
 
 
@@ -65,6 +65,7 @@ public class BaseEmployeeDao{
 ps.setTimestamp(2, employeeUpTime);
 ps.setString(3, employee.getEmployeename());
 ps.setString(4, employee.getStatus());
+ps.setString(5, employee.getRoleId());
 
 							return ps;
 						}
@@ -79,9 +80,9 @@ ps.setString(4, employee.getStatus());
 		else
 		{
 
-			String sql = "UPDATE kumar_employee  set employee_cr_time = ? ,employeename = ? ,status = ?  where id = ? ";
+			String sql = "UPDATE kumar_employee  set employee_cr_time = ? ,employeename = ? ,status = ?,roleId=?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{employee.getEmployeeCrTime(),employee.getEmployeename(),employee.getStatus(),employee.getId()});
+			jdbcTemplate.update(sql, new Object[]{employee.getEmployeeCrTime(),employee.getEmployeename(),employee.getStatus(),employee.getId(),employee.getRoleId()});
 		}
 	}
 		

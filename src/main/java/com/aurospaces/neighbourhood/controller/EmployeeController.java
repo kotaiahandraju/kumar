@@ -72,7 +72,6 @@ public class EmployeeController {
 	@RequestMapping(value = "/addPEmployee")
 	public String addProductType(@ModelAttribute EmployeeBean employeeBean, RedirectAttributes redir) {
 
-			System.out.println("1111111111111getEmployeeDetails11111111111111"+employeeBean);
 		int id = 0;
 		String size = null;
 
@@ -80,7 +79,6 @@ public class EmployeeController {
 			
 			employeeBean.setStatus("1");
 			EmployeeBean employeeBean2 = employeeDao.getByEmployeeName(employeeBean);
-			System.out.println("111111111111113333333333111111111"+employeeBean2);
 			int dummyId = 0;
 			if (employeeBean2 != null) {
 				dummyId = employeeBean2.getId();

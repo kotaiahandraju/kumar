@@ -80,6 +80,7 @@ public class BranchCreationController {
 
 		try {
 			branchcreationBean.setStatus("1");
+			branchcreationBean.setRoleId("2");
 			BranchcreationBean branchcreationBean2 = branchcreationDao.getBybranchCreationName(branchcreationBean);
 			int dummyId = 0;
 			if (branchcreationBean2 != null) {
@@ -213,7 +214,7 @@ public class BranchCreationController {
 		public LinkedHashMap<Integer, String> populateProductNames() {
 			LinkedHashMap<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
 			try {
-				String sSql = "select id,employeename from kumar_employee where  status='1'";
+				String sSql = "select id,employeename from kumar_employee where  status='1' and roleId='2'";
 				List<BranchcreationBean> list = branchcreationDao.employeeNames(sSql);
 				System.out.println("--------List-----"+list.size());
 				for (BranchcreationBean bean : list) {
