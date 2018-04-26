@@ -39,7 +39,7 @@ table#dependent_table tbody tr td:first-child::before {
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="#">Home</a></li>
-               <li>Employee </li>
+               <li>Employees </li>
             </ol>
             <div class="clearfix"></div>
         <div class="container" id="lpoMain">
@@ -73,24 +73,35 @@ table#dependent_table tbody tr td:first-child::before {
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Add Product Type</h4>
+                        <h4>Add Employee</h4>
                         <div class="options"></div>
                     </div>
 	                <form:form  modelAttribute="employeeForm"  action="addPEmployee" class="form-horizontal" method="post" >
                     <div class="panel-body">
                     	<div class="row">
-                    		<div class="col-md-4">
+                    		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Employee Name <span class="impColor">*</span></label>
-                    				<div class="col-md-6">
+                    				<label for="focusedinput" class="col-md-3 control-label">Employee Name <span class="impColor">*</span></label>
+                    				<div class="col-md-5">
 		                            	<form:input type="hidden" path="id"/>
 								      	<form:input type="text" path="employeename" class="form-control validate" placeholder="Employee Name"/>
 								  	</div>
                     			</div>
                     		</div>
+                    		<div class="col-md-6">
+                    		<div class="form-group">
+                    				<label for="focusedinput" class="col-md-3 control-label">Role<span class="impColor">*</span></label>
+                    				<div class="col-md-5">
+								      	<form:select path="roleId" value="" class="form-control validate">
+								    	<form:option value="">-- Select Role --</form:option>
+								    	<form:option value="2">BranchManager</form:option>
+								    	<form:option value="3">Delear</form:option>
+								    	</form:select>
+								  	</div>
+                    			</div>
+                    			</div>
                     	</div>
-                    		
-                    		</div>
+                     </div>
                     	</div>
                     </div>
 					<div class="panel-footer hideme">
@@ -156,7 +167,7 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Employee Name</th><th>Status</th><th></th></tr>'+
+    	'<thead><tr><th>Employee Name</th><th>Role</th><th>Status</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -171,6 +182,7 @@ function showTableData(response){
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.employeename+"'>" + orderObj.employeename + "</td>"
+			+ "<td title='"+orderObj.roleId+"'>" + orderObj.roleId + "</td>"
 			+ "<td title='"+orderObj.employeeStatus+"'>" + orderObj.employeeStatus + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
 			+"</tr>";

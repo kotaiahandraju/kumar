@@ -5,6 +5,42 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
+
+
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+ <link rel="stylesheet" type="text/css" href="../assets/css/img.css">
+ <style>
+ .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td
+ {
+ border: 0px solid black !important;
+ }
+table #dependent_table{
+/* 	width: 100%; */
+	counter-reset: rowNumber;
+}
+
+table tbody tr.rowInc{
+	counter-increment: rowNumber;
+}
+
+table#dependent_table tbody tr td:first-child::before {
+	content: counter(rowNumber);
+/* 	min-width: 1em; */
+/* 	margin-right: 0.5em; */
+}
+
+.addItemButton{
+	cursor: pointer;font-size: small;background: green;color: white;padding: 3px 10px 3px 10px;
+}
+
+#ui-datepicker-div{
+/* 	width: auto !important; */
+}
+
+</style>
+
+
+
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
     	<li><a href="#">Home</a></li>
@@ -68,7 +104,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Employee Name<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-                    	<form:select path="employeename" value="" class="form-control validate">
+                    						<form:select path="employeename" value="" class="form-control validate">
 								    	<form:option value="">-- Select Employee Name --</form:option>
 								    	<form:options items="${employeeName }"></form:options>
 								    	</form:select>
@@ -128,7 +164,7 @@ function showTableData(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Branch Name</th><th>Employee Name</th><th>Password</th><th>Role</th><th>Status</th><th></th></tr>'+
+    	'<thead><tr><th>Branch Name</th><th>Employee Name</th><th>UserName</th><th>Password</th><th>Status</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -141,8 +177,8 @@ function showTableData(response){
 		var edit = "<a class='edit editIt' onclick='editBranchCreation("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
-			+ "<td title='"+orderObj.serialno+"'>" + orderObj.branchname + "</td>"
-			+ "<td title='"+orderObj.itemcode+"'>" + orderObj.employeename + "</td>"
+			+ "<td title='"+orderObj.bName+"'>" + orderObj.bName + "</td>"
+			+ "<td title='"+orderObj.empName+"'>" + orderObj.empName + "</td>"
 			+ "<td title='"+orderObj.userName+"'>" + orderObj.userName + "</td>"
 			+ "<td title='"+orderObj.password+"'>" + orderObj.password + "</td>"
 			+ "<td title='"+orderObj.branchCreationStatus+"'>" + orderObj.branchCreationStatus + "</td>"

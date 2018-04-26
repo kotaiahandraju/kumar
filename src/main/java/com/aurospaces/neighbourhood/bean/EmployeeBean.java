@@ -13,9 +13,16 @@ protected Date employeeUpTime ;
 protected String employeename ;
 protected String status ; 
 protected String employeeStatus ; 
+protected String roleId ; 
 
 
 
+public String getRoleId() {
+	return roleId;
+}
+public void setRoleId(String roleId) {
+	this.roleId = roleId;
+}
 public String getEmployeeStatus() {
 	return employeeStatus;
 }
