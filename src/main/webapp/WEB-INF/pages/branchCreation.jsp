@@ -104,7 +104,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Employee Name<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-                    	<form:select path="employeename" value="" class="form-control validate">
+                    						<form:select path="employeename" value="" class="form-control validate">
 								    	<form:option value="">-- Select Employee Name --</form:option>
 								    	<form:options items="${employeeName }"></form:options>
 								    	</form:select>

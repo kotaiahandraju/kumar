@@ -89,6 +89,20 @@ table#dependent_table tbody tr td:first-child::before {
                     			</div>
                     		</div>
                     	</div>
+                    	<div class="row">
+                    		<div class="col-md-4">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Role<span class="impColor">*</span></label>
+                    				<div class="col-md-6">
+								      	<form:select path="roleId" value="" class="form-control validate">
+								    	<form:option value="">-- Select Employee Name --</form:option>
+								    	<form:option value="2">Manager</form:option>
+								    	<form:option value="3">Delear</form:option>
+								    	</form:select>
+								  	</div>
+                    			</div>
+                    		</div>
+                    	</div>
                     		
                     		</div>
                     	</div>
