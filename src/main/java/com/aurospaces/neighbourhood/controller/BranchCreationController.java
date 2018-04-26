@@ -51,7 +51,7 @@ public class BranchCreationController {
 		String sJson = null;
 		List<BranchcreationBean> listOrderBeans = null;
 		try {
-			listOrderBeans = branchcreationDao.getBranchcreationDetails("1");
+			listOrderBeans = branchcreationDao.getBranchcreationDetails("1","2");
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -150,7 +150,7 @@ public class BranchCreationController {
 				}
 			}
 
-			listOrderBeans = branchcreationDao.getBranchcreationDetails("1");
+			listOrderBeans = branchcreationDao.getBranchcreationDetails("1","2");
 			objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 
@@ -181,7 +181,7 @@ public class BranchCreationController {
 			List<BranchcreationBean> listOrderBeans = null;
 			ObjectMapper objectMapper = null;
 			String sJson="";
-			listOrderBeans= branchcreationDao.getBranchcreationDetails(status);
+			listOrderBeans= branchcreationDao.getBranchcreationDetails(status,"3");
 				 /// System.out.println("inActiveItem data--"+sJson);
 			objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
