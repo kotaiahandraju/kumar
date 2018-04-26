@@ -21,8 +21,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aurospaces.neighbourhood.bean.BranchBean;
+import com.aurospaces.neighbourhood.bean.BranchProducts;
 import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.ProductnameBean;
+import com.aurospaces.neighbourhood.bean.LoginBean;
+import com.aurospaces.neighbourhood.db.dao.BranchDao;
+import com.aurospaces.neighbourhood.db.dao.BranchProductsDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.ProductnameDao;
 import com.fasterxml.jackson.core.JsonGenerationException;
@@ -42,7 +47,8 @@ public class ItemController {
 	ItemsDao  itemsDao;
 	@Autowired
 	ProductnameDao productnameDao;
-	
+	@Autowired BranchProductsDao branchProductsDao;
+	@Autowired  BranchDao branchDao;
 	@RequestMapping(value = "/items")
 	public String items(@Valid @ModelAttribute("itemsForm") ItemsBean itemsBean,
 			ModelMap model, HttpServletRequest request, HttpSession session) {
@@ -72,7 +78,7 @@ public class ItemController {
 	}
 	
 	@RequestMapping(value = "/addItems", method = RequestMethod.POST)
-	public String addProductType(ItemsBean itemsBean,RedirectAttributes redir) {
+	public String addProductType(ItemsBean itemsBean,RedirectAttributes redir,HttpSession session) {
 
 
 		int id = 0;
@@ -101,7 +107,25 @@ public class ItemController {
 			}
 			if (itemsBean.getId() == 0 && itemsBean2 == null) {
 				itemsDao.save(itemsBean);
-
+				LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+				if (objuserBean != null && objuserBean.getRoleId().equals("1")) {
+					
+					List<BranchBean> list = branchDao.getBranchDetails("1");
+					if(list != null){
+					for(BranchBean bean :list){
+						BranchProducts	branchProducts = new BranchProducts();
+						branchProducts.setProductId(itemsBean.getId());
+						branchProducts.setBranchId(String.valueOf(bean.getId()));
+						branchProductsDao.save(branchProducts);
+					}
+					}
+					
+					if (objuserBean != null && objuserBean.getRoleId().equals("2")) {
+						
+					}
+				}
+				
+				
 				redir.addFlashAttribute("msg", "Record Inserted Successfully");
 				redir.addFlashAttribute("cssMsg", "success");
 			}

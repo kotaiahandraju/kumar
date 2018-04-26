@@ -83,7 +83,7 @@ ps.setString(9, branchcreation.getStatus());
 		else
 		{
 
-			String sql = "UPDATE Kumar_branchcreation  set created_time = ? ,branchname = ? ,employeename = ? ,username = ? ,password = ? ,mobilenumber = ? ,role = ? ,status = ?  where id = ? ";
+			String sql = "UPDATE Kumar_branchcreation  set created_time = ? ,branchname = ? ,employeename = ? ,username = ? ,password = ? ,mobilenumber = ? ,roleId = ? ,status = ?  where id = ? ";
 	
 			jdbcTemplate.update(sql, new Object[]{branchcreation.getCreatedTime(),branchcreation.getBranchname(),branchcreation.getEmployeename(),branchcreation.getUserName(),branchcreation.getPassword(),branchcreation.getMobilenumber(),branchcreation.getRoleId(),branchcreation.getStatus(),branchcreation.getId()});
 		}

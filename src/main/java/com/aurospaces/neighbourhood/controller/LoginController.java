@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.KhaibarUsersBean;
-import com.aurospaces.neighbourhood.bean.loginBean;
+import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.db.dao.KhaibarUsersDao;
 
 @Controller
@@ -26,10 +26,10 @@ public class LoginController {
 	public String LoginHome(Map<String, Object> model1, ModelMap model, HttpServletRequest request,
 			HttpSession session)  {
 //		System.out.println("LoginHome page...");
-		loginBean loginBean = new loginBean();
+		LoginBean loginBean = new LoginBean();
 		model.put("loginForm", loginBean);
 		try {
-			loginBean objuserBean = (loginBean) session.getAttribute("cacheUserBean");
+			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
 			if (objuserBean != null) {
 				int rolId =Integer.parseInt(objuserBean.getRoleId());
 				if(rolId == 1 || rolId == 2 || rolId == 3 ){
@@ -48,10 +48,10 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/loginAction")
-	public  String loginAction( @ModelAttribute("loginForm") loginBean userObj, BindingResult result,
+	public  String loginAction( @ModelAttribute("loginForm") LoginBean userObj, BindingResult result,
 			ModelMap model, HttpServletRequest request, HttpSession session, HttpServletResponse responses,RedirectAttributes redirect)	 {
 //		System.out.println("loginAction page...");
-		loginBean objUserBean = null;
+		LoginBean objUserBean = null;
 		JSONObject obj = new JSONObject();
 		String object1 = null;
 		try {
@@ -64,7 +64,7 @@ public class LoginController {
 //				if(objUserBean.getRoleId().equals("1")){
 					session.setAttribute("cacheUserBean", objUserBean);
 					session.setAttribute("roleId", objUserBean.getRoleId());
-					session.setAttribute("userName", objUserBean.getUsername());
+					session.setAttribute("userName", objUserBean.getUserName());
 					return "redirect:admin/dashboard";
 //				}
 				
@@ -88,7 +88,7 @@ public class LoginController {
 		try {
 
 			HttpSession session = request.getSession(false);
-			loginBean objuserBean = (loginBean) session.getAttribute("cacheUserBean");
+			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
 			if (objuserBean != null) {
 				session.removeAttribute("cacheUserBean");
 				session.removeAttribute("cacheGuest");

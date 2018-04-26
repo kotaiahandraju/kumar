@@ -23,9 +23,30 @@ protected String password ;
 protected String mobilenumber ;
 protected String roleId ;
 protected String status ;
+protected String branchCreationStatus ;
+protected String bName ;
+protected String empName ;
 
 
 
+public String getbName() {
+	return bName;
+}
+public void setbName(String bName) {
+	this.bName = bName;
+}
+public String getEmpName() {
+	return empName;
+}
+public void setEmpName(String empName) {
+	this.empName = empName;
+}
+public String getBranchCreationStatus() {
+	return branchCreationStatus;
+}
+public void setBranchCreationStatus(String branchCreationStatus) {
+	this.branchCreationStatus = branchCreationStatus;
+}
 public String getRoleId() {
 	return roleId;
 }

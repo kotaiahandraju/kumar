@@ -1,4 +1,4 @@
-/*package com.aurospaces.neighbourhood.controller;
+package com.aurospaces.neighbourhood.controller;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
@@ -21,11 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.aurospaces.neighbourhood.bean.BranchBean;
 import com.aurospaces.neighbourhood.bean.BranchcreationBean;
-import com.aurospaces.neighbourhood.bean.ItemsBean;
-import com.aurospaces.neighbourhood.bean.ProductnameBean;
+import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.db.dao.BranchcreationDao;
+import com.aurospaces.neighbourhood.db.dao.LoginDao;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,8 +38,8 @@ public class BranchCreationController {
 	
 	
 	private Logger logger = Logger.getLogger(BranchCreationController.class);
-//	@Autowired
-//	ItemsDao  itemsDao;
+	@Autowired
+	LoginDao  loginDao;
 	@Autowired
 	BranchcreationDao  branchcreationDao;
 	
@@ -91,6 +90,11 @@ public class BranchCreationController {
 				if (id == dummyId || branchcreationBean2 == null) {
 
 					branchcreationDao.save(branchcreationBean);
+					LoginBean login = new LoginBean();
+					login.setEmpId(branchcreationBean.getEmployeename());
+					login.setUserName(branchcreationBean.getUserName());
+					login.setPassword(branchcreationBean.getPassword());
+					loginDao.updateLogin(login);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
 				} else {
@@ -99,6 +103,13 @@ public class BranchCreationController {
 				}
 			}
 			if (branchcreationBean.getId() == 0 && branchcreationBean2 == null) {
+				LoginBean login = new LoginBean();
+				login.setEmpId(branchcreationBean.getEmployeename());
+				login.setUserName(branchcreationBean.getUserName());
+				login.setPassword(branchcreationBean.getPassword());
+				login.setStatus("1");
+				login.setRoleId("2");
+				loginDao.save(login);
 				branchcreationDao.save(branchcreationBean);
 
 				redir.addFlashAttribute("msg", "Record Inserted Successfully");
@@ -113,7 +124,7 @@ public class BranchCreationController {
 			System.out.println(e);
 
 		}
-		return "redirect:items";
+		return "redirect:branchCreation";
 	}
 
 	 @RequestMapping(value = "/branchCreationDelete")
@@ -185,10 +196,10 @@ public class BranchCreationController {
 			LinkedHashMap<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
 			try {
 				String sSql = "select id,branchname from kumar_branch where  status='1'";
-				List<BranchBean> list = branchcreationDao.branchNames(sSql);
+				List<BranchcreationBean> list = branchcreationDao.branchNames(sSql);
 				System.out.println("--------List-----"+list.size());
-				for (BranchBean bean : list) {
-					statesMap.put(bean.getId(), bean.getProducttype());
+				for (BranchcreationBean bean : list) {
+					statesMap.put(bean.getId(), bean.getBranchname());
 				}
 
 			} catch (Exception e) {
@@ -203,10 +214,10 @@ public class BranchCreationController {
 			LinkedHashMap<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
 			try {
 				String sSql = "select id,employeename from kumar_employee where  status='1'";
-				List<ep> list = branchcreationDao.employeeNames(sSql);
+				List<BranchcreationBean> list = branchcreationDao.employeeNames(sSql);
 				System.out.println("--------List-----"+list.size());
 				for (BranchcreationBean bean : list) {
-					statesMap.put(bean.getId(), bean.getProductname());
+					statesMap.put(bean.getId(), bean.getEmployeename());
 				}
 
 			} catch (Exception e) {
@@ -216,4 +227,3 @@ public class BranchCreationController {
 			return statesMap;
 		}
 }
-*/

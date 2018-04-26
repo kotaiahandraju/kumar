@@ -69,7 +69,7 @@ window.setTimeout(function() {
 				<div class="col-sm-12">
 					<div class="input-group">
 						<span class="input-group-addon"><i class="fa fa-user"></i></span>
-						<input type="text" class="form-control validate" name="username" id="username" placeholder="Username">
+						<input type="text" class="form-control validate" name="userName" id="username" placeholder="Username">
 					</div>
 				</div>
 			</div>
