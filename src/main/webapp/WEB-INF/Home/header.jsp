@@ -213,6 +213,7 @@ function tooltip(){
               <li class="items"><a href="${baseurl }/admin/items"> <span>Product List</span></a></li>&emsp;
               <li class="employee"><a href="${baseurl }/admin/employee"> <span>Employees</span></a></li>
               <li class="branch"><a href="${baseurl }/admin/branchHome"> <span>Branch</span></a></li>
+             <%--  <li class="BranchProduct"><a href="${baseurl }/admin/branchproductHome"> <span>BranchProduct</span></a></li> --%>
 				
 			</ul>
 		</div>
@@ -224,6 +225,7 @@ function tooltip(){
 	        <div id="page-heading" class="row">
 	        	<div class="col-md-6">
 					<h1 id="pageName"></h1>
+					
 				</div>
 				<div class="col-md-6">
 					<div class="options">

@@ -39,7 +39,7 @@ table#dependent_table tbody tr td:first-child::before {
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="#">Home</a></li>
-               <li>Product </li>
+               <li>Product Category </li>
             </ol>
             <div class="clearfix"></div>
         <div class="container" id="lpoMain">
@@ -47,7 +47,7 @@ table#dependent_table tbody tr td:first-child::before {
               <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h4>Product Type List</h4>
+                            <h4>Product Category List</h4>
                             <div class="options">   
                                 <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
                             </div>
@@ -58,7 +58,7 @@ table#dependent_table tbody tr td:first-child::before {
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
                                 	<tr>
-                                		<th>Product Type</th><th>Status</th>
+                                		<th>Product Category</th><th>Status</th>
                                 	</tr>
                                 </thead>
                                 <tbody></tbody>
@@ -73,7 +73,7 @@ table#dependent_table tbody tr td:first-child::before {
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Add Product Type</h4>
+                        <h4>Add Product Category</h4>
                         <div class="options"></div>
                     </div>
 	                <form:form  modelAttribute="productForm"  action="addProductType" class="form-horizontal" method="post" >
@@ -81,7 +81,7 @@ table#dependent_table tbody tr td:first-child::before {
                     	<div class="row">
                     		<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Product Type <span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Product Category <span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:input type="hidden" path="id"/>
 								      	<form:input type="text" path="producttype" class="form-control validate" placeholder="Product Type"/>
@@ -250,6 +250,6 @@ function inactiveData() {
 				});
 }
 	
-$("#pageName").text("Product Type Master");
+$("#pageName").text("Product Category Master");
 $(".productType").addClass("active");
 </script>
