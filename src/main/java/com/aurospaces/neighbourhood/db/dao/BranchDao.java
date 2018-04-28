@@ -47,7 +47,11 @@ public class BranchDao extends BaseBranchDao
 				return retlist.get(0);
 			return null;
 		}
-
+	public List<BranchBean> populate(String sql ){
+		 jdbcTemplate = custom.getJdbcTemplate();
+				List<BranchBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(BranchBean.class));
+					return retlist;
+		 }
 
 }
 

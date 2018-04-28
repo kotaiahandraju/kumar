@@ -33,8 +33,14 @@ protected String delerId ;
 protected String quantity ;
 
 /** Field mapping. **/
-protected String productId ;
+protected String productId,invoiceId ;
 
+public String getInvoiceId() {
+	return invoiceId;
+}
+public void setInvoiceId(String invoiceId) {
+	this.invoiceId = invoiceId;
+}
 public int getId()
 {
   return id;

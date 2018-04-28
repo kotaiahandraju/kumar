@@ -92,7 +92,34 @@ public class KhaibarUsersDao extends BaseKhaibarUsersDao
 			
 		}
 	 
-	 
+	 public List<Map<String,Object>> getDonarList(String branchId){
+			List<Map<String,Object>> list=null;
+			
+			try{
+				jdbcTemplate = custom.getJdbcTemplate();
+				String sql ="SELECT * from login where roleId = '3' and branchId =? and status='1'";
+				list =jdbcTemplate.queryForList(sql, new Object[]{branchId});
+				System.out.println(sql);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			return list;
+			
+		}
+	 public List<Map<String,Object>> viewOrderList(String delarId){
+			List<Map<String,Object>> list=null;
+			
+			try{
+				jdbcTemplate = custom.getJdbcTemplate();
+				String sql ="SELECT DATE(ol.created_time) AS dateoforder,ol.*,i.* FROM `orders_list` ol,`items` i WHERE `delerId` = ? AND i.id=ol.`productId` order by ol.created_time desc ";
+				list =jdbcTemplate.queryForList(sql, new Object[]{delarId});
+				System.out.println(sql);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			return list;
+			
+		}
 
 }
 

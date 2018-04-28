@@ -15,10 +15,16 @@ protected String productname ;
 protected String status ;
 protected String productnameStatus ;
 protected String producttype ;
-protected String delarId,quantity,productlist;
+protected String delarId,quantity,productlist,branchId;
 
 
 
+public String getBranchId() {
+	return branchId;
+}
+public void setBranchId(String branchId) {
+	this.branchId = branchId;
+}
 public String getDelarId() {
 	return delarId;
 }
