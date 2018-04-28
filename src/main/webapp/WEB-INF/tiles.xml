@@ -48,6 +48,9 @@
  <definition name="dealer" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/dealer.jsp" />
  </definition>
+ <definition name="employeeCreation" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/empCreation.jsp" />
+ </definition>
  
 	
 	

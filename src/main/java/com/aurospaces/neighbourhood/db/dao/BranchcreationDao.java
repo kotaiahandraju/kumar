@@ -40,7 +40,7 @@ public class BranchcreationDao extends BaseBranchcreationDao
 		 jdbcTemplate = custom.getJdbcTemplate();
 			String sql = "SELECT * from Kumar_branchcreation where userName =?  or employeename =? ";
 			List<BranchcreationBean> retlist = jdbcTemplate.query(sql,
-			new Object[]{branchname.getUserName(),branchname.getBranchname(),branchname.getEmployeename()},
+			new Object[]{branchname.getUserName(),branchname.getEmployeename()},
 			ParameterizedBeanPropertyRowMapper.newInstance(BranchcreationBean.class));
 			if(retlist.size() > 0)
 				return retlist.get(0);

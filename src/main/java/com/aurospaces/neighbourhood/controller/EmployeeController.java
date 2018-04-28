@@ -116,7 +116,6 @@ public class EmployeeController {
 	 @RequestMapping(value = "/deleteEmployee")
 	public @ResponseBody String deleteEmployee(ProductTypeBean productTypeBean, ModelMap model,
 			HttpServletRequest request, HttpSession session, BindingResult objBindingResult) {
-		System.out.println("deleteCylinder page...");
 		List<EmployeeBean> listOrderBeans = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
@@ -124,7 +123,6 @@ public class EmployeeController {
 		boolean delete = false;
 		try {
 			
-			System.out.println("1111111111111111111111111111");
 			if (productTypeBean.getId() != 0 && productTypeBean.getStatus() != "") {
 				delete = employeeDao.delete(productTypeBean.getId(),
 						productTypeBean.getStatus());
