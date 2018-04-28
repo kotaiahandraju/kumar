@@ -44,7 +44,7 @@ table#dependent_table tbody tr td:first-child::before {
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
     	<li><a href="#">Home</a></li>
-		<li>Branch Creation</li>
+		<li>Employee Creation</li>
 	</ol>
 	<div class="clearfix"></div>
 	<div class="container">
@@ -52,7 +52,7 @@ table#dependent_table tbody tr td:first-child::before {
 			<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4>Branch Creation List</h4>
+						<h4>Employee  List</h4>
 						<div class="options">   
 							<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
 						</div>
@@ -84,18 +84,18 @@ table#dependent_table tbody tr td:first-child::before {
 			<div class="col-md-12 col-sm-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4>Branch Creation</h4>
+						<h4>Employee Creation</h4>
 					</div>
-					<form:form modelAttribute="branchCreationForm" action="addBranchCreation" class="form-horizontal" method="Post" >
+					<form:form modelAttribute="employeeCreationForm" action="addEmployeeCreation" class="form-horizontal" method="Post" >
 					<div class="panel-body">
 						<div class="row">
 						<div class="col-md-4">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Branch Name<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-                    	<form:select path="branchname" value="" class="form-control validate">
+                    					<form:select path="branchId" value="" class="form-control validate">
 								    	<form:option value="">-- Select Branch Name --</form:option>
-								    	<form:options items="${branchName }"></form:options>
+								    	<form:options items="${branchId }"></form:options>
 								    	</form:select>
 								    	</div>
                     			</div>
@@ -104,25 +104,39 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Employee Name<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-                    						<form:select path="employeename" value="" class="form-control validate">
-								    	<form:option value="">-- Select Employee Name --</form:option>
-								    	<form:options items="${employeeName }"></form:options>
-								    	</form:select>
+                    						<form:input path="emp" class="form-control validate" placeholder="Employee Name"/>
 								    	</div>
                     			</div>
                     		</div>
-                    		
-							<div class="col-md-6">
+                    		<div class="col-md-4">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">E-mail<span class="impColor">*</span></label>
+                    				<div class="col-md-6">
+                    					<form:input path="email" class="form-control validate" placeholder="E-mail"/>
+								    	</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-4">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Mobile Number<span class="impColor">*</span></label>
+                    				<div class="col-md-6">
+                    					<form:input path="mobileNumber" class="form-control validate" placeholder="Mobile Number"/>
+								    	</div>
+                    			</div>
+                    		</div>
+							<div class="col-md-4">
 								<div class="form-group">
 									<form:hidden path="id"/>
-									<label for="username" class="col-md-4 control-label">Username <span class="impColor">*</span></label>
-									<div class="col-md-7">
+									<label for="username" class="col-md-6 control-label">Username <span class="impColor">*</span></label>
+									<div class="col-md-6">
 										<form:input path="userName" class="form-control validate" placeholder="Username"/>
 									</div>
                     			</div>
+                    			</div>
+                    			<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Password <span class="impColor">*</span></label>
-                    				<div class="col-md-7">
+                    				<label for="focusedinput" class="col-md-6 control-label">Password <span class="impColor">*</span></label>
+                    				<div class="col-md-6">
                     				<form:input path="password" class="form-control validate" placeholder="Password"/>
                     				</div>
                     			</div>
@@ -164,24 +178,27 @@ function showTableData(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Branch Name</th><th>Employee Name</th><th>UserName</th><th>Password</th><th>Status</th><th></th></tr>'+
+    	'<thead><tr><th>Branch Name</th><th>Employee Name</th><th>UserName</th><th>Password</th><th>Role</th><th>Email</th><th>Mobile Number</th><th>Status</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='deleteBranchCreation("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
+			var deleterow = "<a class='deactivate' onclick='deleteEmpCreation("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
-			var deleterow = "<a class='activate' onclick='deleteBranchCreation("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
+			var deleterow = "<a class='activate' onclick='deleteEmpCreation("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
-		var edit = "<a class='edit editIt' onclick='editBranchCreation("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
+		var edit = "<a class='edit editIt' onclick='editEmpCreation("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.bName+"'>" + orderObj.bName + "</td>"
-			+ "<td title='"+orderObj.empName+"'>" + orderObj.empName + "</td>"
+			+ "<td title='"+orderObj.emp+"'>" + orderObj.emp + "</td>"
 			+ "<td title='"+orderObj.userName+"'>" + orderObj.userName + "</td>"
 			+ "<td title='"+orderObj.password+"'>" + orderObj.password + "</td>"
-			+ "<td title='"+orderObj.branchCreationStatus+"'>" + orderObj.branchCreationStatus + "</td>"
+			+ "<td title='"+orderObj.roleName+"'>" + orderObj.roleName + "</td>"
+			+ "<td title='"+orderObj.email+"'>" + orderObj.email + "</td>"
+			+ "<td title='"+orderObj.mobileNumber+"'>" + orderObj.mobileNumber + "</td>"
+			+ "<td title='"+orderObj.empCreationStatus+"'>" + orderObj.empCreationStatus + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
@@ -192,18 +209,21 @@ function showTableData(response){
 
 var prodcutName='';
 
-function editBranchCreation(id){
+function editEmpCreation(id){
 	$("#id").val(id);
-	$("#branchname").val(serviceUnitArray[id].branchname);
-	$("#employeename").val(serviceUnitArray[id].employeename);
+	$("#branchId").val(serviceUnitArray[id].branchId);
+	$("#emp").val(serviceUnitArray[id].emp);
 	$("#userName").val(serviceUnitArray[id].userName);
 	$("#password").val(serviceUnitArray[id].password);
+	$("#roleId").val(serviceUnitArray[id].roleId);
+	$("#email").val(serviceUnitArray[id].email);
+	$("#mobileNumber").val(serviceUnitArray[id].mobileNumber);
 	$("#status").val(serviceUnitArray[id].status);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 }
 
-function deleteBranchCreation(id,status){
+function deleteEmpCreation(id,status){
 	var checkstr=null;
 	if(status == 0){
 		 checkstr =  confirm('Are you sure you want to Deactivate?');
@@ -213,28 +233,24 @@ function deleteBranchCreation(id,status){
 		 $('#inActive').prop('checked', false);
 	}
 	if(checkstr == true){
-		$.ajax({
-			type : "POST",
-			url : "branchCreationDelete.htm",
-			data :"id="+id+"&status="+status,
-			beforeSend : function() {
-				$.blockUI({ message: 'Please wait' });
-			},
-			success: function (response) {
-				if(response != null ){
-					$.unblockUI();
-		        	var resJson=JSON.parse(response);
-		            showTableData(resJson.allOrders1);
-		        	tooltip();
-		            
-		            //window.location.reload();
-				}
-		       // window.location.reload();
-			},
-			error: function (e) { 
-		    	$.unblockUI();
-				console.log(e);
+		var formData = new FormData();
+		formData.append('status', status);
+		formData.append('id', id);
+		
+		$.fn.makeMultipartRequest('POST', 'deleteEmpCreation', false,
+				formData, false, 'text', function(data) {
+			if(data != ""){
+				var resJson=JSON.parse(data);
+	            showTableData(resJson);
+				  tooltip();
+	          
+						console.log(resJson);
+			}else{
+// 				alert("Inactive List Empty");
+				 showTableData("");
 			}
+		       // window.location.reload();
+			
 		});
 	}
 }
@@ -250,7 +266,7 @@ function inactiveData() {
 		var formData = new FormData();
 		formData.append('status', status);
 		
-		$.fn.makeMultipartRequest('POST', 'inActiveBranchCreation', false,
+		$.fn.makeMultipartRequest('POST', 'inActiveEmployeeCreation', false,
 				formData, false, 'text', function(data) {
 			if(data != ""){
 				var resJson=JSON.parse(data);

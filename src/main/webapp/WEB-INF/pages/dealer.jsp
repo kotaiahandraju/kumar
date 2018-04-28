@@ -84,7 +84,7 @@ table#dependent_table tbody tr td:first-child::before {
 			<div class="col-md-12 col-sm-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4>Branch Creation</h4>
+						<h4>Dealer Creation</h4>
 					</div>
 					<form:form modelAttribute="dealerForm" action="adddealer" class="form-horizontal" method="Post" >
 					<div class="panel-body">

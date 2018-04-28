@@ -62,7 +62,7 @@ public class ItemController {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
 				request.setAttribute("allOrders1", sJson);
-				// System.out.println(sJson);
+					System.out.println(sJson);
 			} else {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -85,8 +85,8 @@ public class ItemController {
 		String size = null;
 
 		try {
-			itemsBean.setProductId(itemsBean.getProductname());
-			itemsBean.setProductname(itemsBean.getProducttype());
+			itemsBean.setProductId(itemsBean.getProducttype());
+			itemsBean.setProductname(itemsBean.getProductname());
 			itemsBean.setStatus("1");
 			ItemsBean itemsBean2 = itemsDao.getByItemSerialNo(itemsBean);
 			int dummyId = 0;
