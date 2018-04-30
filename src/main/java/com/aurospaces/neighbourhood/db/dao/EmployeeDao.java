@@ -11,8 +11,8 @@ import com.aurospaces.neighbourhood.db.basedao.BaseEmployeeDao;
 
 
 
-@Repository(value = "kumarEmployeeDao")
-public class KumarEmployeeDao extends BaseEmployeeDao
+@Repository(value = "EmployeeDao")
+public class EmployeeDao extends BaseEmployeeDao
 {
 @Autowired
 	CustomConnection custom;

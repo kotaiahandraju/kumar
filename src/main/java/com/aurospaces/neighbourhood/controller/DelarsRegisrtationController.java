@@ -1,4 +1,4 @@
-/*
+
 package com.aurospaces.neighbourhood.controller;
 
 import java.util.LinkedHashMap;
@@ -16,20 +16,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.BranchBean;
-import com.aurospaces.neighbourhood.bean.DelarsBean;
+import com.aurospaces.neighbourhood.bean.EmployeeBean;
 import com.aurospaces.neighbourhood.db.dao.BranchDao;
-import com.aurospaces.neighbourhood.db.dao.DelarsDao;
 
-*//**
+/**
  * @author Kotaiah
  *
- *//*
+ */
 @Controller
 public class DelarsRegisrtationController {
-	@Autowired DelarsDao delarsDao;
 	@Autowired BranchDao branchDao;
 	@RequestMapping(value = "/dealerregistration")
-	public String cylinderHome( @ModelAttribute("delar") DelarsBean delarsBean,	ModelMap model, HttpServletRequest request, HttpSession session) {
+	public String cylinderHome( @ModelAttribute("delar") EmployeeBean employeeBean,	ModelMap model, HttpServletRequest request, HttpSession session) {
 
 		try {
 System.out.println("delar registration");
@@ -44,7 +42,7 @@ System.out.println("delar registration");
 	public String addDelar( @ModelAttribute("delar") DelarsBean delarsBean,	ModelMap model, HttpServletRequest request, HttpSession session,RedirectAttributes redirect) {
 
 		try {
-			DelarsBean objDelarsBean = delarsDao.mobileDuplicateCheck(delarsBean);
+			EmployeeBean objEmployeeBean = delarsDao.mobileDuplicateCheck(delarsBean);
 			if(objDelarsBean != null){
 				redirect.addFlashAttribute("msg", "Alreday Registered ");
 			}else{
@@ -77,4 +75,3 @@ System.out.println("delar registration");
 	}
 	 
 }
-*/
