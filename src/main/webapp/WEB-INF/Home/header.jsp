@@ -219,7 +219,7 @@ function tooltip(){
 			  <li class="productType"><a href="${baseurl }/admin/producttype"><span>Product Category</span></a></li>&emsp;
               <li class="productName"><a href="${baseurl }/admin/productName"> <span>Product Sub Category</span></a></li>&emsp;
               <li class="items"><a href="${baseurl }/admin/items"> <span>Product List</span></a></li>&emsp;
-			  <li class="dealer"><a href="${baseurl }/admin/dealer"> <span>Dealer Creation</span></a></li>
+			   <li class="dealerconfirm"><a href="${baseurl }/admin/dealerconfirm"> <span>Dealer Confirmation </span></a></li>
 			 </c:if>
 			  <c:if test="${roleId=='3' }">
 			  <li class="delarpayment"><a href="${baseurl }/admin/delarpayment"> <span>Dealer Payment</span></a></li>

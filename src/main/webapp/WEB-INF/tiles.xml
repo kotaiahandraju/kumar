@@ -56,6 +56,10 @@
   <definition name="delarPayment" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/delarPayment.jsp" />
  </definition>
+ 
+ <definition name="dealerconfirm" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/dealerconfirm.jsp" />
+ </definition>
 	
 </tiles-definitions>
 

@@ -7,6 +7,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+ <link rel="stylesheet" href="${baseurl }/assets/css/styles.css">
 <%
 	String baseurl =  request.getScheme() + "://" + request.getServerName() +      ":" +   request.getServerPort() +  request.getContextPath();
 	session.setAttribute("baseurl", baseurl);
@@ -28,9 +29,10 @@ window.setTimeout(function() {
 
 .default-class::-webkit-input-placeholder {color: #e73d4a !important;}
 .default-class::-moz-placeholder {color: #e73d4a !important;}
-
+body {
+background:#fff; !important}
 </style>
-    <link rel="stylesheet" href="${baseurl }/assets/css/styles.css">
+   
 
 </head>
 <body>
@@ -46,10 +48,9 @@ window.setTimeout(function() {
 <div class="row" id="moveTo">
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h4>Delar Registration</h4>
+                        <h4 align="center">Delar Registration</h4>
                         <div class="options"></div>
-                    </div>
+                        
                     <form:form class="form-horizontal" modelAttribute="delar"  role="form" id="delar-form" action="addDelar" method="post">
                     <div class="panel-body">
                     <form:hidden path="id"/>

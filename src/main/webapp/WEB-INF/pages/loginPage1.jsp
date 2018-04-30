@@ -86,6 +86,7 @@ window.setTimeout(function() {
 			</div> -->
 		</div>
 		<div class="panel-footer">
+		<span><a href="delarregistration">Sign Up </a></span>
 			<div class="pull-right">
 				<input type="reset" value="Reset" class="btn btn-default cancel"/>
 				<input type="submit" value="Login" id="submit1" class="btn btn-primary">

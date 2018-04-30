@@ -179,24 +179,24 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Amount</th><th>UTR Number</th><th> Payment Date </th></tr>'+
+    	'<thead><tr><th>Amount</th><th>UTR Number</th><th> Payment Date </th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		
-		/* if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='deleteProductType("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
+		 if(orderObj.confirm == "1"){
+			var deleterow = "<a class='deactivate' ><i class='fa fa-check' style='color:#29c10d'></i></a>"
 		}else{  
-			var deleterow = "<a class='activate' onclick='deleteProductType("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
-		} */
-		var edit = "<a class='edit editIt' onclick='editProductType("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
+			var deleterow = "<a class='activate' ><i class='fa fa-times' style='color:#e40d0d'></i></a>"
+		} 
+// 		var edit = "<a class='edit editIt' onclick='editProductType("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.amount+"'>" + orderObj.amount + "</td>"
 			+ "<td title='"+orderObj.qtrNumber+"'>" + orderObj.qtrNumber + "</td>"
 			+ "<td title='"+orderObj.strpaymentDate+"'>" + orderObj.strpaymentDate + "</td>"
-// 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
+			+ "<td style='text-align: center;white-space: nowrap;'>"  + deleterow + "</td>"
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});

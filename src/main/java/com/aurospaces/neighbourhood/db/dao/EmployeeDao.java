@@ -2,6 +2,9 @@
 package com.aurospaces.neighbourhood.db.dao;
 
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -9,6 +12,7 @@ import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.aurospaces.neighbourhood.bean.EmployeeBean;
+import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 import com.aurospaces.neighbourhood.db.basedao.BaseEmployeeDao;
 
@@ -70,7 +74,43 @@ public class EmployeeDao extends BaseEmployeeDao
 		return employee;
 		
 	}
-
+	
+	public EmployeeBean getBranchEmployees(EmployeeBean employeeBean){
+		jdbcTemplate = custom.getJdbcTemplate();
+		try{
+			String sql = "select * from kumar_employee where branch_id='"+employeeBean.getBranchId()+"' and roleId='2'  ";
+			List<EmployeeBean> list = jdbcTemplate.query(sql, new Object[]{},ParameterizedBeanPropertyRowMapper.newInstance(EmployeeBean.class));
+			if(list.size() >0)
+				return list.get(0);
+			return null;
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
+ public List<Map<String,Object>> getAllDelarsConfirm(String status,HttpSession session){
+	 jdbcTemplate =custom.getJdbcTemplate();
+	 try{
+		 StringBuffer buffer = new StringBuffer();
+		 buffer.append("SELECT ke.*,kb.`branchname` FROM `kumar_employee` ke,`kumar_branch` kb WHERE ke.`branch_id`=kb.id and `roleId`='3' ");
+		 
+		 LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			if (objuserBean != null) {
+				 buffer.append(" and ke.branch_id ='"+objuserBean.getBranchId()+"' ");
+			}
+		 String sql=buffer.toString();
+		 List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
+		 if(list.size() >0)
+			 return list;
+		 return null;
+	 }catch(Exception e){
+		 e.printStackTrace();
+	 }
+	 
+	return null;
+	 
+ }
 
 }
 
