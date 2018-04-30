@@ -104,7 +104,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Employee Name<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-                    						<form:input path="emp" class="form-control validate" placeholder="Employee Name"/>
+                    						<form:input path="name" class="form-control validate" placeholder="Employee Name"/>
 								    	</div>
                     			</div>
                     		</div>
@@ -120,7 +120,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Mobile Number<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-                    					<form:input path="mobileNumber" class="form-control validate" placeholder="Mobile Number"/>
+                    					<form:input path="phoneNumber" class="form-control validate numericOnly" placeholder="Mobile Number"/>
 								    	</div>
                     			</div>
                     		</div>
@@ -129,7 +129,7 @@ table#dependent_table tbody tr td:first-child::before {
 									<form:hidden path="id"/>
 									<label for="username" class="col-md-6 control-label">Username <span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="userName" class="form-control validate" placeholder="Username"/>
+										<form:input path="username" class="form-control validate" placeholder="Username"/>
 									</div>
                     			</div>
                     			</div>
@@ -192,12 +192,12 @@ function showTableData(response){
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.bName+"'>" + orderObj.bName + "</td>"
-			+ "<td title='"+orderObj.emp+"'>" + orderObj.emp + "</td>"
-			+ "<td title='"+orderObj.userName+"'>" + orderObj.userName + "</td>"
+			+ "<td title='"+orderObj.name+"'>" + orderObj.name + "</td>"
+			+ "<td title='"+orderObj.username+"'>" + orderObj.username + "</td>"
 			+ "<td title='"+orderObj.password+"'>" + orderObj.password + "</td>"
 			+ "<td title='"+orderObj.roleName+"'>" + orderObj.roleName + "</td>"
 			+ "<td title='"+orderObj.email+"'>" + orderObj.email + "</td>"
-			+ "<td title='"+orderObj.mobileNumber+"'>" + orderObj.mobileNumber + "</td>"
+			+ "<td title='"+orderObj.phoneNumber+"'>" + orderObj.phoneNumber + "</td>"
 			+ "<td title='"+orderObj.empCreationStatus+"'>" + orderObj.empCreationStatus + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
 			+"</tr>";
@@ -212,12 +212,12 @@ var prodcutName='';
 function editEmpCreation(id){
 	$("#id").val(id);
 	$("#branchId").val(serviceUnitArray[id].branchId);
-	$("#emp").val(serviceUnitArray[id].emp);
-	$("#userName").val(serviceUnitArray[id].userName);
+	$("#name").val(serviceUnitArray[id].name);
+	$("#username").val(serviceUnitArray[id].username);
 	$("#password").val(serviceUnitArray[id].password);
 	$("#roleId").val(serviceUnitArray[id].roleId);
 	$("#email").val(serviceUnitArray[id].email);
-	$("#mobileNumber").val(serviceUnitArray[id].mobileNumber);
+	$("#phoneNumber").val(serviceUnitArray[id].phoneNumber);
 	$("#status").val(serviceUnitArray[id].status);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);

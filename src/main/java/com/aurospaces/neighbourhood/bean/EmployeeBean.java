@@ -3,10 +3,6 @@ package com.aurospaces.neighbourhood.bean;
 
 import java.util.Date;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 
 /**
  *
@@ -70,7 +66,38 @@ protected String username ;
 
 /** Field mapping. **/
 protected String status ;
+protected String branchname;
+protected String bName;
+protected String roleName;
+protected String empCreationStatus;
 
+
+
+
+public String getbName() {
+	return bName;
+}
+public void setbName(String bName) {
+	this.bName = bName;
+}
+public String getRoleName() {
+	return roleName;
+}
+public void setRoleName(String roleName) {
+	this.roleName = roleName;
+}
+public String getEmpCreationStatus() {
+	return empCreationStatus;
+}
+public void setEmpCreationStatus(String empCreationStatus) {
+	this.empCreationStatus = empCreationStatus;
+}
+public String getBranchname() {
+	return branchname;
+}
+public void setBranchname(String branchname) {
+	this.branchname = branchname;
+}
 public int getId()
 {
   return id;

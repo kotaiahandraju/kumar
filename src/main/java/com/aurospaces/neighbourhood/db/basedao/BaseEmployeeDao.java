@@ -98,12 +98,18 @@ ps.setString(17, kumarEmployee.getStatus());
 		}
 	}
 		
-		@Transactional
-		public void delete(int id) {
-			jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "DELETE FROM kumar_employee WHERE id=?";
-			jdbcTemplate.update(sql, new Object[]{id});
+	@Transactional
+	public Boolean delete(int id, String status) {
+		boolean result = false;
+		jdbcTemplate = custom.getJdbcTemplate();
+		String sql = "update kumar_employee set status='" + status + "' where id = ?";
+		jdbcTemplate.update(sql, new Object[] { id });
+		int results = jdbcTemplate.update(sql, new Object[] { id });
+		if (results != 0) {
+			result = true;
 		}
+		return result;
+	}
 		
 
 	 public EmployeeBean getById(int id) {
