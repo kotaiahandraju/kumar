@@ -1,4 +1,4 @@
-
+/*
 package com.aurospaces.neighbourhood.controller;
 
 import java.util.LinkedHashMap;
@@ -20,10 +20,10 @@ import com.aurospaces.neighbourhood.bean.DelarsBean;
 import com.aurospaces.neighbourhood.db.dao.BranchDao;
 import com.aurospaces.neighbourhood.db.dao.DelarsDao;
 
-/**
+*//**
  * @author Kotaiah
  *
- */
+ *//*
 @Controller
 public class DelarsRegisrtationController {
 	@Autowired DelarsDao delarsDao;
@@ -77,3 +77,4 @@ System.out.println("delar registration");
 	}
 	 
 }
+*/

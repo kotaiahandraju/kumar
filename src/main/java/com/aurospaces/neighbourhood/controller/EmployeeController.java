@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.aurospaces.neighbourhood.bean.DelarsBean;
 import com.aurospaces.neighbourhood.bean.EmployeeBean;
 import com.aurospaces.neighbourhood.db.dao.LoginDao;
 import com.fasterxml.jackson.core.JsonGenerationException;
@@ -40,7 +39,7 @@ public class EmployeeController {
 	LoginDao  loginDao;
 	
 	@RequestMapping(value = "/employeeCreation")
-	public String employeeCreation( @ModelAttribute("employeeCreationForm") DelarsBean delarsBean,
+	public String employeeCreation( @ModelAttribute("employeeCreationForm") EmployeeBean employeeBean,
 			ModelMap model, HttpServletRequest request, HttpSession session) {
 
 		ObjectMapper objectMapper = null;
@@ -68,7 +67,7 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(value = "/addEmployeeCreation", method = RequestMethod.POST)
-	public String employeeCreationCreation(DelarsBean empcreationBean,RedirectAttributes redir) {
+	public String employeeCreationCreation(EmployeeBean empcreationBean,RedirectAttributes redir) {
 
 		int id = 0;
 		/*try {

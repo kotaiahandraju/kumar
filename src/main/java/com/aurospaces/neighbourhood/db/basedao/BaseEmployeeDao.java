@@ -26,7 +26,7 @@ public class BaseEmployeeDao{
 	JdbcTemplate jdbcTemplate;
 
  
-	public final String INSERT_SQL = "INSERT INTO kumar_employee( employee_cr_time, employee_up_time, employeename, status,roleId) values (?, ?, ?, ?,?)"; 
+	public final String INSERT_SQL = "INSERT INTO kumar_employee( created_time, updated_time, name, shopname, address, city, pincode, shop_phone, gstno, phone_number, email, description, branch_id, roleId, password, username, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
 
 
 
@@ -34,10 +34,10 @@ public class BaseEmployeeDao{
 
 	/* this should be conditional based on whether the id is present or not */
 	@Transactional
-	public void save(final EmployeeBean employee) 
+	public void save(final EmployeeBean kumarEmployee) 
 	{
 		jdbcTemplate = custom.getJdbcTemplate();
-	if(employee.getId() == 0)	{
+	if(kumarEmployee.getId() == 0)	{
 
 	KeyHolder keyHolder = new GeneratedKeyHolder();
 	int update = jdbcTemplate.update(
@@ -45,27 +45,39 @@ public class BaseEmployeeDao{
 					public PreparedStatement 
 					createPreparedStatement(Connection connection) throws SQLException {
 	
-						if(employee.getCreatedTime() == null)
-						{
-							employee.setCreatedTime( new Date());
-						}
-						java.sql.Timestamp createdTime = 
-							new java.sql.Timestamp(employee.getCreatedTime().getTime()); 
-								
-						if(employee.getUpdatedTime() == null)
-						{
-							employee.setUpdatedTime( new Date());
-						}
-						java.sql.Timestamp updatedTime = 
-							new java.sql.Timestamp(employee.getUpdatedTime().getTime()); 
+					if(kumarEmployee.getCreatedTime() == null)
+					{
+					kumarEmployee.setCreatedTime( new Date());
+					}
+					java.sql.Timestamp createdTime = 
+						new java.sql.Timestamp(kumarEmployee.getCreatedTime().getTime()); 
+							
+					if(kumarEmployee.getUpdatedTime() == null)
+					{
+					kumarEmployee.setUpdatedTime( new Date());
+					}
+					java.sql.Timestamp updatedTime = 
+						new java.sql.Timestamp(kumarEmployee.getUpdatedTime().getTime()); 
 							
 					PreparedStatement ps =
 									connection.prepareStatement(INSERT_SQL,new String[]{"id"});
 	ps.setTimestamp(1, createdTime);
-/*ps.setTimestamp(2, updatedTime);
-ps.setString(3, employee.getEmployeename());
-ps.setString(4, employee.getStatus());
-ps.setString(5, employee.getRoleId());*/
+ps.setTimestamp(2, updatedTime);
+ps.setString(3, kumarEmployee.getName());
+ps.setString(4, kumarEmployee.getShopname());
+ps.setString(5, kumarEmployee.getAddress());
+ps.setString(6, kumarEmployee.getCity());
+ps.setString(7, kumarEmployee.getPincode());
+ps.setString(8, kumarEmployee.getShopPhone());
+ps.setString(9, kumarEmployee.getGstno());
+ps.setString(10, kumarEmployee.getPhoneNumber());
+ps.setString(11, kumarEmployee.getEmail());
+ps.setString(12, kumarEmployee.getDescription());
+ps.setString(13, kumarEmployee.getBranchId());
+ps.setString(14, kumarEmployee.getRoleId());
+ps.setString(15, kumarEmployee.getPassword());
+ps.setString(16, kumarEmployee.getUsername());
+ps.setString(17, kumarEmployee.getStatus());
 
 							return ps;
 						}
@@ -73,31 +85,25 @@ ps.setString(5, employee.getRoleId());*/
 				keyHolder);
 				
 				Number unId = keyHolder.getKey();
-				employee.setId(unId.intValue());
+				kumarEmployee.setId(unId.intValue());
 				
 
 		}
 		else
 		{
 
-			String sql = "UPDATE kumar_employee  set employee_cr_time = ? ,employeename = ? ,status = ?,roleId=?  where id = ? ";
+			String sql = "UPDATE kumar_employee  set name = ? ,shopname = ? ,address = ? ,city = ? ,pincode = ? ,shop_phone = ? ,gstno = ? ,phone_number = ? ,email = ? ,description = ? ,branch_id = ? ,roleId = ? ,password = ? ,username = ? ,status = ?  where id = ? ";
 	
-//			jdbcTemplate.update(sql, new Object[]{employee.getEmployeeCrTime(),employee.getEmployeename(),employee.getStatus(),employee.getId(),employee.getRoleId()});
+			jdbcTemplate.update(sql, new Object[]{kumarEmployee.getName(),kumarEmployee.getShopname(),kumarEmployee.getAddress(),kumarEmployee.getCity(),kumarEmployee.getPincode(),kumarEmployee.getShopPhone(),kumarEmployee.getGstno(),kumarEmployee.getPhoneNumber(),kumarEmployee.getEmail(),kumarEmployee.getDescription(),kumarEmployee.getBranchId(),kumarEmployee.getRoleId(),kumarEmployee.getPassword(),kumarEmployee.getUsername(),kumarEmployee.getStatus(),kumarEmployee.getId()});
 		}
 	}
 		
-	@Transactional
-	public Boolean delete(int id, String status) {
-		boolean result = false;
-		jdbcTemplate = custom.getJdbcTemplate();
-		String sql = "update kumar_employee set status='" + status + "' where id = ?";
-		jdbcTemplate.update(sql, new Object[] { id });
-		int results = jdbcTemplate.update(sql, new Object[] { id });
-		if (results != 0) {
-			result = true;
+		@Transactional
+		public void delete(int id) {
+			jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "DELETE FROM kumar_employee WHERE id=?";
+			jdbcTemplate.update(sql, new Object[]{id});
 		}
-		return result;
-	}
 		
 
 	 public EmployeeBean getById(int id) {

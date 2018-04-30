@@ -1,4 +1,4 @@
-
+/*
 package com.aurospaces.neighbourhood.db.dao;
 
 import java.util.List;
@@ -35,3 +35,4 @@ public class DelarsDao extends BaseDelarsDao
 
 }
 
+*/
