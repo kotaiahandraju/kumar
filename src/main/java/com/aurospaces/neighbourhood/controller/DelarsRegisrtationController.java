@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.aurospaces.neighbourhood.bean.BranchBean;
 import com.aurospaces.neighbourhood.bean.EmployeeBean;
 import com.aurospaces.neighbourhood.db.dao.BranchDao;
+import com.aurospaces.neighbourhood.db.dao.EmployeeDao;
 
 /**
  * @author Kotaiah
@@ -26,6 +27,7 @@ import com.aurospaces.neighbourhood.db.dao.BranchDao;
 @Controller
 public class DelarsRegisrtationController {
 	@Autowired BranchDao branchDao;
+	@Autowired EmployeeDao employeeDao;
 	@RequestMapping(value = "/dealerregistration")
 	public String cylinderHome( @ModelAttribute("delar") EmployeeBean employeeBean,	ModelMap model, HttpServletRequest request, HttpSession session) {
 
@@ -39,14 +41,14 @@ System.out.println("delar registration");
 		return "dealerregistration";
 	}
 	@RequestMapping(value = "/addDelar")
-	public String addDelar( @ModelAttribute("delar") DelarsBean delarsBean,	ModelMap model, HttpServletRequest request, HttpSession session,RedirectAttributes redirect) {
+	public String addDelar( @ModelAttribute("delar") EmployeeBean employeeBean,	ModelMap model, HttpServletRequest request, HttpSession session,RedirectAttributes redirect) {
 
 		try {
-			EmployeeBean objEmployeeBean = delarsDao.mobileDuplicateCheck(delarsBean);
-			if(objDelarsBean != null){
+			EmployeeBean objEmployeeBean = employeeDao.mobileDuplicateCheck(employeeBean);
+			if(objEmployeeBean != null){
 				redirect.addFlashAttribute("msg", "Alreday Registered ");
 			}else{
-				delarsDao.save(delarsBean);
+				employeeDao.save(employeeBean);
 				redirect.addFlashAttribute("msg", " Registered Successfully");
 			}
 			
