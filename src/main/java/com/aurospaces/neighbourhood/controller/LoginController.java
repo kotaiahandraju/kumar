@@ -24,7 +24,6 @@ public class LoginController {
 	@RequestMapping(value = "/LoginHome")
 	public String LoginHome(Map<String, Object> model1, ModelMap model, HttpServletRequest request,
 			HttpSession session)  {
-//		System.out.println("LoginHome page...");
 		LoginBean loginBean = new LoginBean();
 		model.put("loginForm", loginBean);
 		try {

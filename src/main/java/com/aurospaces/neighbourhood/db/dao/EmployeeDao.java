@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.aurospaces.neighbourhood.bean.EmployeeBean;
-import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 import com.aurospaces.neighbourhood.db.basedao.BaseEmployeeDao;
 
@@ -26,6 +25,7 @@ public class EmployeeDao extends BaseEmployeeDao
 	public EmployeeBean mobileDuplicateCheck(EmployeeBean employee){
 		
 		try{
+			 jdbcTemplate = custom.getJdbcTemplate();
 			String sql = " select * from kumar_employee where phone_number=?";
 			List<EmployeeBean> retlist = jdbcTemplate.query(sql,
 					new Object[]{employee.getPhoneNumber()},ParameterizedBeanPropertyRowMapper.newInstance(EmployeeBean.class));
