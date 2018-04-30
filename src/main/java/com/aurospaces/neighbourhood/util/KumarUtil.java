@@ -12,7 +12,7 @@ import java.util.Date;
 import org.apache.commons.lang.StringUtils;
 
 
-public class KhaibarGasUtil {
+public class KumarUtil {
 	public static Date  dateFormate(String date){
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMMM-yyyy");
 		Date date1 = null;

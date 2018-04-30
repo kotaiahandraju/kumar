@@ -1,11 +1,9 @@
 package com.aurospaces.neighbourhood.controller;
 
 import java.io.IOException;
-import java.util.LinkedHashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -23,9 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.BranchBean;
-import com.aurospaces.neighbourhood.bean.ProductnameBean;
 import com.aurospaces.neighbourhood.db.dao.BranchDao;
-import com.aurospaces.neighbourhood.db.dao.ProductnameDao;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;

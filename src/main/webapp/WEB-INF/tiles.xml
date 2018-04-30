@@ -48,12 +48,14 @@
  <definition name="dealer" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/dealer.jsp" />
  </definition>
+ 
  <definition name="employeeCreation" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/empCreation.jsp" />
  </definition>
  
-	
-	
+  <definition name="delarPayment" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/delarPayment.jsp" />
+ </definition>
 	
 </tiles-definitions>
 

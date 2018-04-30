@@ -22,7 +22,7 @@ import com.aurospaces.neighbourhood.bean.OrdersListBean;
 import com.aurospaces.neighbourhood.bean.ProductnameBean;
 import com.aurospaces.neighbourhood.db.dao.KhaibarUsersDao;
 import com.aurospaces.neighbourhood.db.dao.OrdersListDao;
-import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
+import com.aurospaces.neighbourhood.util.KumarUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -134,7 +134,7 @@ public class RestController {
 		JSONArray array = new JSONArray(productnameBean.getProductlist());
 		try{
 			int j=0;
-			KhaibarGasUtil utils = new KhaibarGasUtil();
+			KumarUtil utils = new KumarUtil();
 			String invoiceId = utils.randNum();
 			 for (int i = 0; i < array.length(); i++)
 		        {

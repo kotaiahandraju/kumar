@@ -51,6 +51,26 @@ public class EmployeeDao extends BaseEmployeeDao
 				List<EmployeeBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(EmployeeBean.class));
 					return retlist;
 		 }
+	
+	public EmployeeBean mobileDuplicateCheck(EmployeeBean employee){
+		
+		try{
+			 jdbcTemplate = custom.getJdbcTemplate();
+			String sql = " select * from kumar_employee where phone_number=?";
+			List<EmployeeBean> retlist = jdbcTemplate.query(sql,
+					new Object[]{employee.getPhoneNumber()},ParameterizedBeanPropertyRowMapper.newInstance(EmployeeBean.class));
+					if(retlist.size() > 0)
+						return retlist.get(0);
+					return null;
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}
+		return employee;
+		
+	}
+
 
 }
 
