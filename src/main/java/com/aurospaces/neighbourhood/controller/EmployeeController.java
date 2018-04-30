@@ -1,12 +1,11 @@
 package com.aurospaces.neighbourhood.controller;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
 
-import javax.enterprise.inject.Model;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
@@ -21,10 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aurospaces.neighbourhood.bean.DelarsBean;
 import com.aurospaces.neighbourhood.bean.EmployeeBean;
-import com.aurospaces.neighbourhood.bean.ProductTypeBean;
-import com.aurospaces.neighbourhood.db.dao.EmployeeDao;
-import com.aurospaces.neighbourhood.db.dao.ProductTypeDao;
+import com.aurospaces.neighbourhood.db.dao.LoginDao;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,55 +37,59 @@ public class EmployeeController {
 	
 	private Logger logger = Logger.getLogger(EmployeeController.class);
 	@Autowired
-	EmployeeDao employeeDao;
+	LoginDao  loginDao;
 	
-	@RequestMapping(value = "/employee")
-	public String employee(@Valid @ModelAttribute("employeeForm") EmployeeBean employeeBean,
+	@RequestMapping(value = "/employeeCreation")
+	public String employeeCreation( @ModelAttribute("employeeCreationForm") DelarsBean delarsBean,
 			ModelMap model, HttpServletRequest request, HttpSession session) {
 
 		ObjectMapper objectMapper = null;
 		String sJson = null;
 		List<EmployeeBean> listOrderBeans = null;
 		try {
-			listOrderBeans = employeeDao.getEmployeeDetails("1");
+//			listOrderBeans = empcreationDao.getEmployeeDetails("1");
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
 				request.setAttribute("allOrders1", sJson);
-				 System.out.println(sJson);
+				// System.out.println(sJson);
 			} else {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
 				request.setAttribute("allOrders1", "''");
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e);
 
 		}
-		return "employee";
+		return "employeeCreation";
 	}
 	
-	@RequestMapping(value = "/addPEmployee")
-	public String addProductType(@ModelAttribute EmployeeBean employeeBean, RedirectAttributes redir) {
+	@RequestMapping(value = "/addEmployeeCreation", method = RequestMethod.POST)
+	public String employeeCreationCreation(DelarsBean empcreationBean,RedirectAttributes redir) {
 
 		int id = 0;
-		String size = null;
-
-		try {
-			
-			employeeBean.setStatus("1");
-			EmployeeBean employeeBean2 = employeeDao.getByEmployeeName(employeeBean);
+		/*try {
+		empcreationBean.setStatus("1");
+			empcreationBean.setRoleId("2");
+			EmployeeBean empcreationBean2 = empcreationDao.getByEmployeeName(empcreationBean);
 			int dummyId = 0;
-			if (employeeBean2 != null) {
-				dummyId = employeeBean2.getId();
+			if (empcreationBean2 != null) {
+				dummyId = empcreationBean2.getId();
 			}
-			if (employeeBean.getId() != 0) {
-				id = employeeBean.getId();
-				if (id == dummyId || employeeBean2 == null) {
+			if (empcreationBean.getId() != 0) {
+				id = empcreationBean.getId();
+				if (id == dummyId || empcreationBean2 == null) {
 
-					employeeDao.save(employeeBean);
+					empcreationDao.save(empcreationBean);
+					LoginBean login = new LoginBean();
+					login.setEmpId(empcreationBean.getEmp());
+					login.setUserName(empcreationBean.getUserName());
+					login.setPassword(empcreationBean.getPassword());
+					login.setBranchId(empcreationBean.getBranchId());
+					loginDao.updateLogin(login);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
 				} else {
@@ -95,13 +97,21 @@ public class EmployeeController {
 					redir.addFlashAttribute("cssMsg", "danger");
 				}
 			}
-			if (employeeBean.getId() == 0 && employeeBean2 == null) {
-				employeeDao.save(employeeBean);
+			if (empcreationBean.getId() == 0 && empcreationBean2 == null) {
+				LoginBean login = new LoginBean();
+				login.setEmpId(empcreationBean.getEmp());
+				login.setUserName(empcreationBean.getUserName());
+				login.setPassword(empcreationBean.getPassword());
+				login.setStatus("1");
+				login.setRoleId("2");
+				login.setBranchId(empcreationBean.getBranchId());
+				loginDao.save(login);
+				empcreationDao.save(empcreationBean);
 
 				redir.addFlashAttribute("msg", "Record Inserted Successfully");
 				redir.addFlashAttribute("cssMsg", "success");
 			}
-			if (employeeBean.getId() == 0 && employeeBean2 != null) {
+			if (empcreationBean.getId() == 0 && empcreationBean2 != null) {
 				redir.addFlashAttribute("msg", "Already Record Exist");
 				redir.addFlashAttribute("cssMsg", "danger");
 			}
@@ -109,23 +119,23 @@ public class EmployeeController {
 			e.printStackTrace();
 			System.out.println(e);
 
-		}
-		return "redirect:employee";
+		}*/
+		return "redirect:employeeCreation";
 	}
 
-	 @RequestMapping(value = "/deleteEmployee")
-	public @ResponseBody String deleteEmployee(ProductTypeBean productTypeBean, ModelMap model,
+	 @RequestMapping(value = "/deleteEmpCreation")
+	public @ResponseBody String deleteEmpCreation(EmployeeBean empcreationBean, ModelMap model,
 			HttpServletRequest request, HttpSession session, BindingResult objBindingResult) {
+		System.out.println("deleteCylinder page...");
 		List<EmployeeBean> listOrderBeans = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
 		String sJson = null;
 		boolean delete = false;
-		try {
-			
-			if (productTypeBean.getId() != 0 && productTypeBean.getStatus() != "") {
-				delete = employeeDao.delete(productTypeBean.getId(),
-						productTypeBean.getStatus());
+		/*try {
+			if (empcreationBean.getId() != 0 && empcreationBean.getStatus() != "") {
+				delete = empcreationDao.delete(empcreationBean.getId(),
+						empcreationBean.getStatus());
 				if (delete) {
 					jsonObj.put("message", "deleted");
 				} else {
@@ -133,38 +143,31 @@ public class EmployeeController {
 				}
 			}
 
-			listOrderBeans = employeeDao.getEmployeeDetails("1");
+			listOrderBeans = empcreationDao.getEmployeeDetails("1");
 			objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
-				request.setAttribute("allOrders1", sJson);
-				jsonObj.put("allOrders1", listOrderBeans);
 				// System.out.println(sJson);
-			} else {
-				objectMapper = new ObjectMapper();
-				sJson = objectMapper.writeValueAsString(listOrderBeans);
-				request.setAttribute("allOrders1", "''");
-				jsonObj.put("allOrders1", listOrderBeans);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			logger.error(e);
 			logger.fatal("error in deleteRoomType class deleteEducation method  ");
 			jsonObj.put("message", "excetption" + e);
-			return String.valueOf(jsonObj);
+			return sJson;
 
-		}
-		return String.valueOf(jsonObj);
+		}*/
+		return sJson;
 	}
 	 
-	 @RequestMapping(value = "/inActiveEmployee")
-		public @ResponseBody String inActiveEmployee(@RequestParam("status") String status) throws JsonGenerationException, JsonMappingException, IOException {
+	 @RequestMapping(value = "/inActiveEmployeeCreation")
+		public @ResponseBody String inActiveEmployeeCreation(@RequestParam("status") String status) throws JsonGenerationException, JsonMappingException, IOException {
 			List<EmployeeBean> listOrderBeans = null;
 			ObjectMapper objectMapper = null;
 			String sJson="";
-			listOrderBeans= employeeDao.getEmployeeDetails(status);
+//			listOrderBeans= empcreationDao.getEmployeeDetails(status);
 				 /// System.out.println("inActiveItem data--"+sJson);
 			objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
@@ -177,5 +180,23 @@ public class EmployeeController {
 			return sJson;
 		}
 
-		
+	 @ModelAttribute("branchId")
+		public LinkedHashMap<Integer, String> populateCapacity() {
+			LinkedHashMap<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
+			try {
+				String sSql = "select id,branchname from kumar_branch where  status='1'";
+//				List<EmployeeBean> list = empcreationDao.branchNames(sSql);
+//				System.out.println("--------List-----"+list.size());
+//				for (EmployeeBean bean : list) {
+////					statesMap.put(bean.getId(), bean.getBranchname());
+//				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+			}
+			return statesMap;
+		}
+	 
+	
 }

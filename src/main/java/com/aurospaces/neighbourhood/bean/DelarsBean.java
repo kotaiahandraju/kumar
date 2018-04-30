@@ -30,8 +30,14 @@ protected String gstno ;
 protected String phoneNumber ;
 protected String email ;
 protected String description ;
-protected String branchId,status ;
+protected String branchId,status,roleId ;
 
+public String getRoleId() {
+	return roleId;
+}
+public void setRoleId(String roleId) {
+	this.roleId = roleId;
+}
 public String getStatus() {
 	return status;
 }

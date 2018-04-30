@@ -15,7 +15,6 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.bean.ProductTypeBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 
@@ -100,7 +99,7 @@ ps.setString(4, productTypeBean.getStatus());
 	}
 		
 
-	 public CylindermasterBean getById(int id) {
+	/* public CylindermasterBean getById(int id) {
 		 jdbcTemplate = custom.getJdbcTemplate();
 			String sql = "SELECT * from producttype where id = ? ";
 			List<CylindermasterBean> retlist = jdbcTemplate.query(sql,
@@ -109,7 +108,7 @@ ps.setString(4, productTypeBean.getStatus());
 			if(retlist.size() > 0)
 				return retlist.get(0);
 			return null;
-		}
+		}*/
 
 	
 

@@ -1,7 +1,6 @@
 package com.aurospaces.neighbourhood.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,18 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aurospaces.neighbourhood.bean.ddd;
 import com.aurospaces.neighbourhood.db.dao.AddGasDao;
-import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SuppressWarnings("unused")
 @Controller
 @RequestMapping(value="admin")
 public class DashBoardController {
-	@Autowired CylindermasterDao cylindermasterDao;
 	@Autowired AddGasDao addGasDao;
 	private Logger logger = Logger.getLogger(DashBoardController.class);
 	@RequestMapping(value = "/dashboard")

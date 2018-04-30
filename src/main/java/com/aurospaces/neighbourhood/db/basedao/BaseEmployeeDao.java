@@ -45,27 +45,27 @@ public class BaseEmployeeDao{
 					public PreparedStatement 
 					createPreparedStatement(Connection connection) throws SQLException {
 	
-					if(employee.getEmployeeCrTime() == null)
-					{
-					employee.setEmployeeCrTime( new Date());
-					}
-					java.sql.Timestamp employeeCrTime = 
-						new java.sql.Timestamp(employee.getEmployeeCrTime().getTime()); 
-							
-					if(employee.getEmployeeUpTime() == null)
-					{
-					employee.setEmployeeUpTime( new Date());
-					}
-					java.sql.Timestamp employeeUpTime = 
-						new java.sql.Timestamp(employee.getEmployeeUpTime().getTime()); 
+						if(employee.getCreatedTime() == null)
+						{
+							employee.setCreatedTime( new Date());
+						}
+						java.sql.Timestamp createdTime = 
+							new java.sql.Timestamp(employee.getCreatedTime().getTime()); 
+								
+						if(employee.getUpdatedTime() == null)
+						{
+							employee.setUpdatedTime( new Date());
+						}
+						java.sql.Timestamp updatedTime = 
+							new java.sql.Timestamp(employee.getUpdatedTime().getTime()); 
 							
 					PreparedStatement ps =
 									connection.prepareStatement(INSERT_SQL,new String[]{"id"});
-	ps.setTimestamp(1, employeeCrTime);
-ps.setTimestamp(2, employeeUpTime);
+	ps.setTimestamp(1, createdTime);
+/*ps.setTimestamp(2, updatedTime);
 ps.setString(3, employee.getEmployeename());
 ps.setString(4, employee.getStatus());
-ps.setString(5, employee.getRoleId());
+ps.setString(5, employee.getRoleId());*/
 
 							return ps;
 						}
@@ -82,7 +82,7 @@ ps.setString(5, employee.getRoleId());
 
 			String sql = "UPDATE kumar_employee  set employee_cr_time = ? ,employeename = ? ,status = ?,roleId=?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{employee.getEmployeeCrTime(),employee.getEmployeename(),employee.getStatus(),employee.getId(),employee.getRoleId()});
+//			jdbcTemplate.update(sql, new Object[]{employee.getEmployeeCrTime(),employee.getEmployeename(),employee.getStatus(),employee.getId(),employee.getRoleId()});
 		}
 	}
 		

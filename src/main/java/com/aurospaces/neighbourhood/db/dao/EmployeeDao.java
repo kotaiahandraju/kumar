@@ -41,7 +41,7 @@ public class EmployeeDao extends BaseEmployeeDao
 		 jdbcTemplate = custom.getJdbcTemplate();
 			String sql = "SELECT * from kumar_employee where employeename = ?";
 			List<EmployeeBean> retlist = jdbcTemplate.query(sql,
-			new Object[]{employeeBean.getEmployeename()},
+			new Object[]{},
 			ParameterizedBeanPropertyRowMapper.newInstance(EmployeeBean.class));
 			if(retlist.size() > 0)
 				return retlist.get(0);
