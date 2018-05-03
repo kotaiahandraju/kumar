@@ -75,6 +75,35 @@ table#dependent_table tbody tr td:first-child::before {
 		</div>
                     
 	</div> <!-- container -->
+<!-- 	model class -->
+	<div class="container">
+ <h2>Modal Example</h2>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Genarate Dealer login Id</h4>
+        </div>
+        <div class="modal-body">
+       	 User Name:<input type="text" id="username" />
+       	 <input type="hidden" id="userId"  />
+		
+        </div>
+        <div class="modal-footer">
+ 	 <!-- Trigger the modal with a button -->
+		  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="genarateAuthDetails();">Submit</button>
+  	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
 
 <script type="text/javascript">
 var listOrders1 =${allOrders1};
@@ -105,9 +134,9 @@ function showTableData(response){
 			var deleterow = "<a class='activate' onclick='deleteEmpCreation("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
 		if(orderObj.confirm == "1"){
-			var confirm = "<a class='deactivate' onclick='deleteEmpCreation("+ orderObj.id+ ",0)'>Confirmed</i></a>"
+			var confirm = "<a class='deactivate' >Confirmed</i></a>"
 		}else{  
-			var confirm = "<a class='activate' onclick='deleteEmpCreation("+ orderObj.id+ ",1)'>Waiting</a>"
+			var confirm = "<a class='activate' onclick='dealerRegister("+ orderObj.id+ ")'>Waiting</a>"
 		}
 // 		var edit = "<a class='edit editIt' onclick='editEmpCreation("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
@@ -179,6 +208,37 @@ function deleteEmpCreation(id,status){
 			
 		});
 	}
+}
+
+function dealerRegister(id) {
+	alert("model"+id);
+	$("#userId").val(id);
+	
+ 	$("#myModal").modal();
+
+}
+
+function genarateAuthDetails() {
+	
+	var id=$("#userId").val();
+	var username=$("#username").val();
+		var formData = new FormData();
+		formData.append('id', id);
+		formData.append('username', username);
+		
+		$.fn.makeMultipartRequest('POST', 'authDetails', false,
+				formData, false, 'text', function(data) {
+			console.log(data);
+			/* if(data != ""){
+				var resJson=JSON.parse(data);
+	            showTableData(resJson);
+				  tooltip();
+	          
+						console.log(resJson);
+			} */
+			
+				});
+	
 }
 function inactiveData() {
 	
