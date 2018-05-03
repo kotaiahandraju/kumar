@@ -13,7 +13,7 @@
 <head>
     <meta charset="utf-8">
     <title>KPOMS</title>
-<%--     <link rel="shortcut icon" href="${baseurl }/img/logo.jpeg"/> --%>
+<%--     <link rel="shortcut icon" href="${baseurl }/img/logo1.jpeg"/> --%>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -173,7 +173,7 @@ function tooltip(){
 
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
         <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/assets/img/logo.png" class="img-responsive" style="    width: 132px;"></a>
+            <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/assets/img/logo1.png" class="img-responsive" style="    width: 132px;"></a>
             <div class="clearfix"></div>
         </div>
 		<div class="masters">
