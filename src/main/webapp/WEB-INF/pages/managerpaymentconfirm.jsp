@@ -69,58 +69,7 @@ table#dependent_table tbody tr td:first-child::before {
                 </div>
             </div>
 
-            <div class="row" id="moveTo">
-            <div class="col-md-12 col-sm-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h4>Add Payment</h4>
-                        <div class="options"></div>
-                    </div>
-	                <form:form  modelAttribute="delarpayment"  action="adddelarpayment" class="form-horizontal" method="post" >
-                    <div class="panel-body">
-                    	<div class="row">
-                    		<div class="col-md-4">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Amount <span class="impColor">*</span></label>
-                    				<div class="col-md-6">
-		                            	<form:input type="hidden" path="id"/>
-								      	<form:input type="text" path="amount" class="form-control validate numericOnly" placeholder="Amount"/>
-								  	</div>
-                    			</div>
-                    		</div>
-                    		<div class="col-md-4">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">UTR Number <span class="impColor">*</span></label>
-                    				<div class="col-md-6">
-								      	<form:input type="text" path="qtrNumber" class="form-control validate" placeholder="UTR Number"/>
-								  	</div>
-                    			</div>
-                    		</div>
-                    		<div class="col-md-4">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Payment Date <span class="impColor">*</span></label>
-                    				<div class="col-md-6">
-								      	<form:input type="text" path="strpaymentDate" class="form-control validate" placeholder="Payment Date " readonly="true" onfocus="removeBorder(this.id)" onclick="removeBorder(this.id)"/>
-								  	</div>
-                    			</div>
-                    		</div>
-                    	</div>
-                    		
-                    		</div>
-                    	</div>
-                    </div>
-					<div class="panel-footer hideme">
-						<div class="row">
-				      		<div class="col-sm-12">
-				      			<div class="btn-toolbar pull-right">
-					      			<input class="btn-primary btn" type="submit" id="submit1" value="Submit" />
-					      			<input class="btn-danger btn cancel" type="reset" id="clearData" value="Reset" />
-				      			</div>
-				      		</div>
-				    	</div>
-				    </div>
-         			</form:form>				    
-                </div>
+            
             </div>
             
 
@@ -194,8 +143,9 @@ function showTableData(response){
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.amount+"'>" + orderObj.amount + "</td>"
-			+ "<td title='"+orderObj.qtrNumber+"'>" + orderObj.qtrNumber + "</td>"
+			+ "<td title='"+orderObj.qtr_number+"'>" + orderObj.qtr_number + "</td>"
 			+ "<td title='"+orderObj.strpaymentDate+"'>" + orderObj.strpaymentDate + "</td>"
+			+"<td><input class='checkall' type='checkbox' name='checkboxName' onclick='paymentConfirm("+ orderObj.id+ ")'  id='"+orderObj.id+"'      /></td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>"  + deleterow + "</td>"
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
@@ -203,8 +153,21 @@ function showTableData(response){
 	if(isClick=='Yes') $('.datatables').dataTable();
 }
 
-
-
+function paymentConfirm(id){
+	var checkstr=null;
+		 checkstr = confirm('Are you sure you want to Confirm payment?');
+		 if(checkstr == true){
+			 $.fn.makeMultipartRequest('POST', 'paymentConfirmStatus', false,formData, false, 'text', function(data) {
+					var jsonobj = $.parseJSON(data);
+					var alldata = jsonobj.allOrders1;
+					console.log(jsonobj.allOrders1);
+					displayTable(alldata);
+					tooltip();
+						});
+		 }else{
+		 $('#'+id).prop('checked', false);
+		 }
+}
 
 	
 $("#pageName").text("Delar Payment");

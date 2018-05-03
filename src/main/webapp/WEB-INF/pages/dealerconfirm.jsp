@@ -6,7 +6,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
 
-
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
  <link rel="stylesheet" type="text/css" href="../assets/css/img.css">
  <style>
@@ -246,7 +245,6 @@ function productNameFilter(productName){
 
 	}
 } 
-
 
 $("#pageName").text("Employee Creation Master");
 $(".employee").addClass("active"); 

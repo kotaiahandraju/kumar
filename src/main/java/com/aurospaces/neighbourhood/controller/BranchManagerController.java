@@ -25,7 +25,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class BranchManagerController {
 @Autowired EmployeeDao employeeDao;
 @Autowired HttpSession session;
-	@RequestMapping(value="/dealerconfirm")
+	@RequestMapping(value="/dealeraccountconfirm")
 	public String getDelarConfirmation(HttpServletRequest request){
 		List<Map<String,Object>> listOrderBeans =null;
 		String json = null;
@@ -45,4 +45,45 @@ public class BranchManagerController {
 		return "dealerconfirm";
 		
 	}
+	@RequestMapping(value="/dealerpaymentconfirm")
+	public String dealerpaymentconfirm(HttpServletRequest request){
+		List<Map<String,Object>> listOrderBeans =null;
+		String json = null;
+		try{
+			ObjectMapper mapper = new ObjectMapper();
+			listOrderBeans = employeeDao.getAllDelarspayments(session);
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				json =mapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", json);
+			} else {
+				request.setAttribute("allOrders1", "''");
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "managerpaymentconfirm";
+		
+	}
+	@RequestMapping(value="/paymentConfirmStatus")
+	public String paymentConfirmStatus(HttpServletRequest request){
+		List<Map<String,Object>> listOrderBeans =null;
+		String json = null;
+		try{
+			ObjectMapper mapper = new ObjectMapper();
+			listOrderBeans = employeeDao.getAllDelarspayments(session);
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				json =mapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", json);
+			} else {
+				request.setAttribute("allOrders1", "''");
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "managerpaymentconfirm";
+		
+	}
+	
 }

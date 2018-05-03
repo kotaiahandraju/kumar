@@ -60,6 +60,10 @@
  <definition name="dealerconfirm" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/dealerconfirm.jsp" />
  </definition>
+  <definition name="managerpaymentconfirm" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/managerpaymentconfirm.jsp" />
+ </definition>
+	
 	
 </tiles-definitions>
 

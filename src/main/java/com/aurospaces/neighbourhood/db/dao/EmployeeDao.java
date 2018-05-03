@@ -111,6 +111,28 @@ public class EmployeeDao extends BaseEmployeeDao
 	return null;
 	 
  }
+ public List<Map<String,Object>> getAllDelarspayments(HttpSession session){
+	 jdbcTemplate =custom.getJdbcTemplate();
+	 try{
+		 StringBuffer buffer = new StringBuffer();
+		 buffer.append("SELECT *,DATE_FORMAT(payment_date,'%d-%b-%Y') as strpaymentDate FROM `kumar_payment` where 1=1 ");
+		 
+		 LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			if (objuserBean != null) {
+				 buffer.append(" and branchId ='"+objuserBean.getBranchId()+"' ");
+			}
+		 String sql=buffer.toString();
+		 List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
+		 if(list.size() >0)
+			 return list;
+		 return null;
+	 }catch(Exception e){
+		 e.printStackTrace();
+	 }
+	 
+	return null;
+	 
+ }
 
 }
 
