@@ -63,6 +63,9 @@
   <definition name="managerpaymentconfirm" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/managerpaymentconfirm.jsp" />
  </definition>
+ <definition name="orderPlacement" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/orderPlacement.jsp" />
+ </definition>
 	
 	
 </tiles-definitions>
