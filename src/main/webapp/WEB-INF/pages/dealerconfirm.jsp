@@ -63,13 +63,7 @@ table#dependent_table tbody tr td:first-child::before {
 						<table class="table table-striped table-bordered datatables"
 							id="example">
 							<thead>
-								<tr>
-									<th>Branch Name</th>
-									<th>Employee Name</th>
-									<th>Username</th>
-									<th>Password</th>
-									<th>Role</th>
-									<th>Status</th>
+								<tr><th> Name</th><th>Shop Name</th><th>Address</th><th>city</th><th>Pin Code</th><th>GST Number</th><th>Phone Number</th><th>Email</th><th>Branch</th><th>Description</th>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -100,7 +94,7 @@ function showTableData(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Branch Name</th><th>Employee Name</th><th>UserName</th><th>Password</th><th>Role</th><th>Email</th><th>Mobile Number</th><th>Status</th><th></th></tr>'+
+    	'<thead><tr><th> Name</th><th>Shop Name</th><th>Address</th><th>city</th><th>Pin Code</th><th>GST Number</th><th>Shop Phone Number</th><th>Phone Number</th><th>Email</th><th>Branch</th><th>Description</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -110,17 +104,26 @@ function showTableData(response){
 		}else{  
 			var deleterow = "<a class='activate' onclick='deleteEmpCreation("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
-		var edit = "<a class='edit editIt' onclick='editEmpCreation("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
+		if(orderObj.confirm == "1"){
+			var confirm = "<a class='deactivate' onclick='deleteEmpCreation("+ orderObj.id+ ",0)'>Confirmed</i></a>"
+		}else{  
+			var confirm = "<a class='activate' onclick='deleteEmpCreation("+ orderObj.id+ ",1)'>Waiting</a>"
+		}
+// 		var edit = "<a class='edit editIt' onclick='editEmpCreation("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
-			+ "<td title='"+orderObj.bName+"'>" + orderObj.bName + "</td>"
 			+ "<td title='"+orderObj.name+"'>" + orderObj.name + "</td>"
-			+ "<td title='"+orderObj.username+"'>" + orderObj.username + "</td>"
-			+ "<td title='"+orderObj.password+"'>" + orderObj.password + "</td>"
-			+ "<td title='"+orderObj.roleName+"'>" + orderObj.roleName + "</td>"
+			+ "<td title='"+orderObj.shopname+"'>" + orderObj.shopname + "</td>"
+			+ "<td title='"+orderObj.address+"'>" + orderObj.address + "</td>"
+			+ "<td title='"+orderObj.city+"'>" + orderObj.city + "</td>"
+			+ "<td title='"+orderObj.pincode+"'>" + orderObj.pincode + "</td>"
+			+ "<td title='"+orderObj.gstno+"'>" + orderObj.gstno + "</td>"
+			+ "<td title='"+orderObj.shop_phone+"'>" + orderObj.shop_phone + "</td>"
+			+ "<td title='"+orderObj.phone_number+"'>" + orderObj.phone_number + "</td>"
 			+ "<td title='"+orderObj.email+"'>" + orderObj.email + "</td>"
-			+ "<td title='"+orderObj.phoneNumber+"'>" + orderObj.phoneNumber + "</td>"
-			+ "<td title='"+orderObj.empCreationStatus+"'>" + orderObj.empCreationStatus + "</td>"
+			+ "<td title='"+orderObj.branchname+"'>" + orderObj.branchname + "</td>"
+			+ "<td title='"+orderObj.description+"'>" + orderObj.description + "</td>"
+			
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
