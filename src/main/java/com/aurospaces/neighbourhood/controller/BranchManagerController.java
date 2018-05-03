@@ -3,18 +3,32 @@
  */
 package com.aurospaces.neighbourhood.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aurospaces.neighbourhood.bean.EmployeeBean;
+import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.db.dao.EmployeeDao;
+import com.aurospaces.neighbourhood.util.SendSMS;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import CommonUtils.CommonUtils;
 
 /**
  * @author Kotaiah
@@ -24,6 +38,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RequestMapping(value="/admin")
 public class BranchManagerController {
 @Autowired EmployeeDao employeeDao;
+@Autowired ServletContext objContext;
 @Autowired HttpSession session;
 	@RequestMapping(value="/dealeraccountconfirm")
 	public String getDelarConfirmation(HttpServletRequest request){
@@ -86,4 +101,55 @@ public class BranchManagerController {
 		
 	}
 	
+	@RequestMapping(value = "/authDetails")
+	public String authDetails( @ModelAttribute EmployeeBean employeeBean,	ModelMap model, HttpServletRequest request, HttpSession session,RedirectAttributes redirect) {
+		InputStream input = null;
+		String body = null;
+		 Properties prop = new Properties();
+		 LoginBean loginBean=null;
+		 boolean result=false;
+		 EmployeeBean checkEmpId=null;
+		try {
+			System.out.println("authDetailsauthDetailsauthDetails");
+			loginBean=new LoginBean();
+			employeeBean.setPassword(CommonUtils.generatePIN());
+		System.out.println("login id"+CommonUtils.generatePIN());
+		checkEmpId=employeeDao.getByEmployeeId(employeeBean);
+		if(checkEmpId != null) {
+			loginBean.setPassword(CommonUtils.generatePIN());
+			result=employeeDao.updateUsernameAndPasswordInEmp(employeeBean.getId(), employeeBean.getUsername(), employeeBean.getPassword());
+			employeeDao.updateUsernameAndPasswordLogin(employeeBean.getId(), employeeBean.getUsername(), employeeBean.getPassword());
+			if(result) {
+				 String propertiespath = objContext.getRealPath("Resources" +File.separator+"DataBase.properties");
+					//String propertiespath = "C:\\PRO\\Database.properties";
+			
+					input = new FileInputStream(propertiespath);
+					// load a properties file
+					prop.load(input);
+					String msg = prop.getProperty("smsUsernameAndPassword");
+					msg =msg.replace("_username_", employeeBean.getUsername());
+					msg =msg.replace("_pass_", employeeBean.getPassword());
+					if(StringUtils.isNotBlank(checkEmpId.getPhoneNumber())){
+						
+						// delar send sms
+					SendSMS.sendSMS(msg, checkEmpId.getPhoneNumber(), objContext);
+					
+					}
+				/*EmployeeBean empbean =	employeeDao.getBranchEmployees(employeeBean);
+				if(empbean != null){
+					// branch manager send sms
+					SendSMS.sendSMS(msg1, empbean.getPhoneNumber(), objContext);
+				}*/
+				redirect.addFlashAttribute("msg", " Registered Successfully");
+				
+			}
+		}
+//		
+		
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return body;
+	}
 }

@@ -43,7 +43,7 @@ table#dependent_table tbody tr td:first-child::before {
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
     	<li><a href="#">Home</a></li>
-		<li>Employee Creation</li>
+		<li>Dealer Confirm</li>
 	</ol>
 	<div class="clearfix"></div>
 	<div class="container">
@@ -51,7 +51,7 @@ table#dependent_table tbody tr td:first-child::before {
 			<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4>Employee  List</h4>
+						<h4>Dealer Confirm  List</h4>
 						<div class="options">   
 							<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
 						</div>
@@ -76,7 +76,7 @@ table#dependent_table tbody tr td:first-child::before {
 	</div> <!-- container -->
 <!-- 	model class -->
 	<div class="container">
- <h2>Modal Example</h2>
+ <h2></h2>
   <!-- Modal -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -210,7 +210,7 @@ function deleteEmpCreation(id,status){
 }
 
 function dealerRegister(id) {
-	alert("model"+id);
+// 	alert("model"+id);
 	$("#userId").val(id);
 	
  	$("#myModal").modal();
@@ -306,6 +306,6 @@ function productNameFilter(productName){
 	}
 } 
 
-$("#pageName").text("Employee Creation Master");
-$(".employee").addClass("active"); 
+$("#pageName").text("Dealer Confirm");
+$(".dealerconfirm").addClass("active"); 
 </script>
