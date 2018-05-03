@@ -20,7 +20,7 @@ public class CommonUtils {
 	}
 	public static String generatePIN() 
 	{   
-	    int x = (int)(Math.random() * 9);
+	    int x = (int)(Math.random() * 4);
 	    x = x + 1;
 	    String randomPIN = (x + "") + ( ((int)(Math.random()*1000)) + "" );
 	    return randomPIN;
