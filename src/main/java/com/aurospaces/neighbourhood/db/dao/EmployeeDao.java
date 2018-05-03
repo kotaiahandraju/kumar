@@ -111,6 +111,61 @@ public class EmployeeDao extends BaseEmployeeDao
 	return null;
 	 
  }
+ 
+ public Boolean updateUsernameAndPasswordInEmp(int id,String username, String password) {
+		boolean result = false;
+		jdbcTemplate = custom.getJdbcTemplate();
+		String sql = "update kumar_employee set username='" + username + "',password='" + password + "',confirm='1' where id = ?";
+		jdbcTemplate.update(sql, new Object[] { id });
+		int results = jdbcTemplate.update(sql, new Object[] { id });
+		if (results != 0) {
+			result = true;
+		}
+		return result;
+	}
+ public Boolean updateUsernameAndPasswordLogin(int id,String username, String password) {
+		boolean result = false;
+		jdbcTemplate = custom.getJdbcTemplate();
+		String sql = "update login set userName='" + username + "',password='" + password + "' where empId = ?";
+		int results = jdbcTemplate.update(sql, new Object[] { id });
+		if (results != 0) {
+			result = true;
+		}
+		return result;
+	}
+ public EmployeeBean getByEmployeeId(EmployeeBean employeeBean) {
+	 jdbcTemplate = custom.getJdbcTemplate();
+		String sql = "SELECT * from kumar_employee where id='"+employeeBean.getId()+"' ";
+		List<EmployeeBean> retlist = jdbcTemplate.query(sql,
+		new Object[]{},
+		ParameterizedBeanPropertyRowMapper.newInstance(EmployeeBean.class));
+		if(retlist.size() > 0)
+			return retlist.get(0);
+		return null;
+	}
+ public List<Map<String,Object>> getAllDelarspayments(HttpSession session){
+	 jdbcTemplate =custom.getJdbcTemplate();
+	 try{
+		 StringBuffer buffer = new StringBuffer();
+		 buffer.append("SELECT kp.*,DATE_FORMAT(payment_date,'%d-%b-%Y') as strpaymentDate,ke.`name` FROM `kumar_payment`kp,`kumar_employee` ke  where 1=1 and ke.`id`=kp.`empId` ");
+		 
+		 LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			if (objuserBean != null) {
+				 buffer.append(" and kp.branchId ='"+objuserBean.getBranchId()+"' ");
+			}
+		 String sql=buffer.toString();
+		 System.out.println(sql);
+		 List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
+		 if(list.size() >0)
+			 return list;
+		 return null;
+	 }catch(Exception e){
+		 e.printStackTrace();
+	 }
+	 
+	return null;
+	 
+ }
 
 }
 
