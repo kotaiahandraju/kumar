@@ -132,6 +132,9 @@ $(function() {
 	$(".select2").select2();
 });
 
+$(document).ready(function(){
+	tooltip();
+});
 function tooltip(){
 	$('.view').attr('data-toggle','tooltip');
 	$('.view').attr('data-original-title','View');
