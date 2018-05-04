@@ -13,6 +13,7 @@
 	session.setAttribute("baseurl", baseurl);
 %>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kumar</title>
 <script type='text/javascript' src='assets/js/jquery-1.10.2.min.js'></script>
 <script type="text/javascript">
@@ -31,6 +32,9 @@ window.setTimeout(function() {
 .default-class::-moz-placeholder {color: #e73d4a !important;}
 body {
 background:#fff; !important}
+[class*="panel-"].panel .panel-body .panel-footer{
+border-top: 0px solid #dddddd !important;
+}
 </style>
    
 
@@ -53,152 +57,110 @@ background:#fff; !important}
                         
                     <form:form class="form-horizontal" modelAttribute="delar"  role="form" id="delar-form" action="addDelar" method="post">
                     <div class="panel-body">
-                    <div class="col-sm-6">
-                    	<h3>Business Information</h3>
-                    </div>
-                    <div class="col-sm-6">
-                    	<h3>Contact Information</h3>
-                    </div><div class="clearfix"></div>
                     <form:hidden path="id"/>
+                    
                     		<div class="col-md-6">
+                    		<h3>Business Information</h3>
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Business Name  <span class="impColor">*</span></label>
+                    			
+                    				<label for="focusedinput" class="col-md-4 control-label">Business Name <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	<form:input path="name" class="form-control  validate"  placeholder="Name" onkeyup="removeBorder(this.id)" maxlength="20" />
 								    </div>
                     			</div>
-                    		</div>
-                    		
-                    		
-                    		
-                    		<div class="col-md-6">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Contact Person Name<span class="impColor">*</span></label>
-								    <div class="col-md-6">
-								   	   <form:input path="shopname" class="form-control  validate" placeholder="Contact Person Name" onkeyup="removeBorder(this.id)" maxlength="20"/>
-								      	<span class="hasError" id="storeError"></span>
-								    </div>
-                    			</div>
-                    		</div>
-                    		
-                    		
-                    		<div class="clearfix"></div>
-                    		<div class="col-md-6">
-                    			<div class="form-group">
+                    			
+                    		        <div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Address <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	 <form:input path="address" class="form-control  validate" placeholder="Address" onkeyup="removeBorder(this.id)" />
 								      	<span class="hasError" id="lponumberError"></span>
 								    </div>
                     			</div>
-                    		</div>
-                    		<div class="col-md-6">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Designation <span class="impColor">*</span></label>
-								    <div class="col-md-6">
-								   <form:input path="city" class="form-control  validate" placeholder="Designation" onkeyup="removeBorder(this.id)" maxlength="20" />
-								      	<span class="hasError" id="ownercompanyError"></span>
-								    </div>
-                    			</div>
-                    		</div>
-                    		<div class="clearfix"></div>
-                    		<div class="col-md-6">
+                    			
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">City/Town <span class="impColor">*</span></label>
 								    <div class="col-md-6">
+								   <form:input path="city" class="form-control  validate" placeholder="City/Town" onkeyup="removeBorder(this.id)" maxlength="20" />
+								      	<span class="hasError" id="ownercompanyError"></span>
+								    </div>
+                    			</div>
+                    		
+                                 <div class="form-group">
+                    				<label for="focusedinput" class="col-md-4 control-label">Pin code <span class="impColor">*</span></label>
+								    <div class="col-md-6">
 								    	
-			                              <form:input path="pincode" class="form-control  validate mobile" placeholder="City/Town" maxlength="6" onkeyup="removeBorder(this.id)" />   
+			                              <form:input path="pincode" class="form-control  validate mobile" placeholder="Pin code" maxlength="6" onkeyup="removeBorder(this.id)" />   
 								      	<span class="hasError" id="colorError"></span>
 								    </div>
-                    			</div>
-                    		</div>
-                    		<div class="col-md-6">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Contact Phone Number <span class="impColor">*</span></label>
-								    <div class="col-md-6">
-								    	<form:input path="shopPhone" value="" class="form-control validate mobile" placeholder="Phone Number"  maxlength="13"/>
-								      	<span class="hasError" id="madeinError"></span>
-								    </div>
-                    			</div>
-                    		</div>
-                    		<div class="col-md-6">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Pincode <span class="impColor">*</span></label>
-								    <div class="col-md-6">
-
-								    	<form:input path="gstno" class="form-control validate"  placeholder="Pincode"  onkeyup="removeBorder(this.id)"/>
-								      	<span class="hasError" id="expirydateError"></span>
-								    </div>
-                    			</div>
-                    		</div>
-                    		<div class="col-md-6">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Contact Email <span class="impColor">*</span></label>
-								    <div class="col-md-6">
-								    	<form:input path="phoneNumber" value=""  class="form-control validate mobile" placeholder="Email" onkeyup="removeBorder(this.id)" maxlength="10" />
-								      	<span class="hasError" id="locationError"></span>
-								    </div>
-                    			</div>
-                    		</div>
-                    		<div class="col-md-6">
+                    			</div>   		
+                    			
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Shop Phone Number <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="email" value=""  class="form-control " placeholder="Shop Phone Number" />
-								      	<span class="hasError" id="locationError"></span>
+								    	<form:input path="shopPhone" value="" class="form-control validate mobile" placeholder="Shop Phone Number"  onkeyup="removeBorder(this.id)" maxlength="13"/>
+								      	<span class="hasError" id="madeinError"></span>
 								    </div>
                     			</div>
-                    		</div>
-                    		<div class="col-md-6">
+                    			
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Branch <span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Landline/Alternative Number<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-<%-- 								    	<form:input path="branchId" value=""  class="form-control validate" placeholder="Branch" /> --%>
-								    	<form:select path="branchId" onfocus="removeBorder(this.id)"  class="form-control validate">
-								    	<form:option value="">Select Branch</form:option>
-								    	<form:options items="${branches }"/>
-								    	</form:select>
+								    	<form:input path="alternativeNumber" value=""  class="form-control validate mobile" placeholder="Landline/Alternative Number" onkeyup="removeBorder(this.id)" maxlength="10" />
 								      	<span class="hasError" id="locationError"></span>
 								    </div>
                     			</div>
-                    		</div><div class="clearfix"></div>
-                    		<div class="sep">
-                    		<div class="col-md-6">
+                    			
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Landline/Alternate Number<span class="impColor">*</span> </label>
-								    <div class="col-md-6">
-								    	<form:input path="email" value=""  class="form-control " placeholder="Landline/Alternate Number" />
-								      	<span class="hasError" id="locationError"></span>
-								    </div>
-                    			</div>
-                    		</div>
-                    		<!--<div class="col-md-6">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Branch <span class="impColor">*</span></label>
-								    <div class="col-md-6">
-<%-- 								    	<form:input path="branchId" value=""  class="form-control validate" placeholder="Branch" /> --%>
-								    	<form:select path="branchId" onfocus="removeBorder(this.id)"  class="form-control validate">
-								    	<form:option value="">Select Branch</form:option>
-								    	<form:options items="${branches }"/>
-								    	</form:select>
-								      	<span class="hasError" id="locationError"></span>
-								    </div>
-                    			</div>
-                    		</div>-->
-                    		</div><div class="clerfix"></div>
-                    			<div class="col-md-12">
-                    		<div class="col-sm-6">
-                    			<div class="form-group">
+                    			
                     				<label for="focusedinput" class="col-md-4 control-label">GST Number <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="email" value=""  class="form-control " placeholder="GST Number" />
+
+								    	<form:input path="gstno" class="form-control validate"  placeholder="GST Number"  onkeyup="removeBorder(this.id)"/>
+								      	<span class="hasError" id="expirydateError"></span>
+								    </div>
+                    			</div>
+                    			</div>
+                    	
+                    	
+                    	
+                    	 	
+                    	<div class="col-md-6">
+                   <h3>Contact Information</h3>
+                    			<div class="form-group">
+                    			
+                    				<label for="focusedinput" class="col-md-4 control-label">Contact Person Name<span class="impColor">*</span></label>
+								    <div class="col-md-6">
+								   	   <form:input path="shopname" class="form-control  validate" placeholder="Contact Person Name" onkeyup="removeBorder(this.id)" maxlength="20"/>
+								      	<span class="hasError" id="storeError"></span>
+								    </div>
+                    			</div>
+              
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-4 control-label">Designation <span class="impColor">*</span></label>
+								    <div class="col-md-6">
+								    	<form:input path="designation" class="form-control  validate"  placeholder="Designation" onkeyup="removeBorder(this.id)" maxlength="20" />
+								    	<span class="hasError" id="storeError"></span>
+								    </div>
+                    			</div>
+           
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-4 control-label">ContactPhone Number <span class="impColor">*</span></label>
+								    <div class="col-md-6">
+								    	<form:input path="phoneNumber" value=""  class="form-control validate mobile" placeholder="Phone Number" onkeyup="removeBorder(this.id)" maxlength="10" />
 								      	<span class="hasError" id="locationError"></span>
 								    </div>
                     			</div>
-                    		</div>
-                    		<div class="col-sm-6">
+                    		
+                    	<div class="form-group">
+                    				<label for="focusedinput" class="col-md-4 control-label">Contact Email</label>
+								    <div class="col-md-6">
+								    	<form:input path="email" value=""  class="form-control " placeholder="Email" />
+								      	<span class="hasError" id="locationError"></span>
+								    </div>
+                    			</div>
+                    		
                     			<div class="form-group">
-                    				<!--<label for="focusedinput" class="col-md-4 control-label">Branch <span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Branch <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 <%-- 								    	<form:input path="branchId" value=""  class="form-control validate" placeholder="Branch" /> --%>
 								    	<form:select path="branchId" onfocus="removeBorder(this.id)"  class="form-control validate">
@@ -206,12 +168,20 @@ background:#fff; !important}
 								    	<form:options items="${branches }"/>
 								    	</form:select>
 								      	<span class="hasError" id="locationError"></span>
-								    </div>-->
+								    </div>
                     			</div>
+                    		
+                    		
+                    		
+                    		
+                    		
+                    	
+                    			
                     		</div>
-                    		</div><div class="clerfix"></div>
-                    		                    		
-                    	</div>	 
+                    		
+                    		
+                     
+                    	
 	                    <div class="panel-footer">
 					      	<div class="row">
 					      		<div class="col-sm-12">
@@ -224,6 +194,9 @@ background:#fff; !important}
 					      </div>
 					</form:form>
 					</div>
+					
+					
+					
 				      
 			</div>
                     
