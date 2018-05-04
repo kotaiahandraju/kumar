@@ -6,6 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
 
+
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
  <link rel="stylesheet" type="text/css" href="../assets/css/img.css">
  <style>
@@ -43,7 +44,7 @@ table#dependent_table tbody tr td:first-child::before {
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
     	<li><a href="#">Home</a></li>
-		<li>Dealer Confirm</li>
+		<li>Order Placement</li>
 	</ol>
 	<div class="clearfix"></div>
 	<div class="container">
@@ -51,7 +52,7 @@ table#dependent_table tbody tr td:first-child::before {
 			<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4>Dealer Confirm  List</h4>
+						<h4>Order Placement</h4>
 						<div class="options">   
 							<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
 						</div>
@@ -59,10 +60,10 @@ table#dependent_table tbody tr td:first-child::before {
 					<div class="panel-body collapse in">
 					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
 					<div class="table-responsive" id="tableId">
-						<table class="table table-striped table-bordered datatables"
+						<table class="table "
 							id="example">
 							<thead>
-								<tr><th> Name</th><th>Shop Name</th><th>Address</th><th>city</th><th>Pin Code</th><th>GST Number</th><th>Phone Number</th><th>Email</th><th>Branch</th><th>Description</th>
+								<tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>quantity</td>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -74,35 +75,6 @@ table#dependent_table tbody tr td:first-child::before {
 		</div>
                     
 	</div> <!-- container -->
-<!-- 	model class -->
-	<div class="container">
- <h2></h2>
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Genarate Dealer login Id</h4>
-        </div>
-        <div class="modal-body">
-       	 User Name:<input type="text" id="username" />
-       	 <input type="hidden" id="userId"  />
-		
-        </div>
-        <div class="modal-footer">
- 	 <!-- Trigger the modal with a button -->
-		  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="genarateAuthDetails();">Submit</button>
-  	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
-  
-</div>
 
 <script type="text/javascript">
 var listOrders1 =${allOrders1};
@@ -121,39 +93,19 @@ function showTableData(response){
 	var table=$('#tableId').html('');
 	serviceUnitArray = {};
 	var protectType = null;
-	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th> Name</th><th>Shop Name</th><th>Address</th><th>city</th><th>Pin Code</th><th>GST Number</th><th>Shop Phone Number</th><th>Phone Number</th><th>Email</th><th>Branch</th><th>Description</th><th></th></tr>'+
+	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example">'+
+    	'<thead><tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>quantity</td></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
-		
-		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='deleteDealer("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
-		}else{  
-			var deleterow = "<a class='activate' onclick='deleteDealer("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
-		}
-		if(orderObj.confirm == "1"){
-			var confirm = "<a class='' >Confirmed</i></a>"
-		}else{  
-			var confirm = "<a class='' onclick='dealerRegister("+ orderObj.id+ ")'>Waiting</a>"
-		}
-// 		var edit = "<a class='edit editIt' onclick='editEmpCreation("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
-		var tblRow ="<tr>"
-			+ "<td title='"+orderObj.name+"'>" + orderObj.name + "</td>"
-			+ "<td title='"+orderObj.shopname+"'>" + orderObj.shopname + "</td>"
-			+ "<td title='"+orderObj.address+"'>" + orderObj.address + "</td>"
-			+ "<td title='"+orderObj.city+"'>" + orderObj.city + "</td>"
-			+ "<td title='"+orderObj.pincode+"'>" + orderObj.pincode + "</td>"
-			+ "<td title='"+orderObj.gstno+"'>" + orderObj.gstno + "</td>"
-			+ "<td title='"+orderObj.shop_phone+"'>" + orderObj.shop_phone + "</td>"
-			+ "<td title='"+orderObj.phone_number+"'>" + orderObj.phone_number + "</td>"
-			+ "<td title='"+orderObj.email+"'>" + orderObj.email + "</td>"
-			+ "<td title='"+orderObj.branchname+"'>" + orderObj.branchname + "</td>"
-			+ "<td title='"+orderObj.description+"'>" + orderObj.description + "</td>"
-			
-			+ "<td style='text-align: center;white-space: nowrap;'>" +confirm + "&nbsp;&nbsp;" + deleterow + "</td>"
-			+"</tr>";
+		var quantity ="<input type='text' id='"+orderObj.id+"quantity' />"
+		var tblRow = "<tr>"
+				+ "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>"
+				+ "<td title='"+orderObj.productIdName+"'>"	+ orderObj.productIdName + "</td>"
+				+ "<td title='"+orderObj.itemcode+"'>" + orderObj.itemcode+ "</td>" 
+				+ "<td title='"+orderObj.itemdescrption+"'>"+ orderObj.itemdescrption + "</td>"
+				+ "<td title='"+orderObj.quantity+"'>" + quantity+ "</td>"
 		$(tblRow).appendTo("#tableId table tbody");
 		
 	});
@@ -177,7 +129,7 @@ function editEmpCreation(id){
 	$(window).scrollTop($('#moveTo').offset().top);
 }
 
-function deleteDealer(id,status){
+function deleteEmpCreation(id,status){
 	var checkstr=null;
 	if(status == 0){
 		 checkstr =  confirm('Are you sure you want to Deactivate?');
@@ -191,15 +143,14 @@ function deleteDealer(id,status){
 		formData.append('status', status);
 		formData.append('id', id);
 		
-		$.fn.makeMultipartRequest('POST', 'deleteDealer', false,
+		$.fn.makeMultipartRequest('POST', 'deleteEmpCreation', false,
 				formData, false, 'text', function(data) {
 			if(data != ""){
-				var jsonobj = $.parseJSON(data);
-				var alldata = jsonobj.allOrders1;
-				console.log(jsonobj.allOrders1);
-				showTableData(alldata);
+				var resJson=JSON.parse(data);
+	            showTableData(resJson);
 				  tooltip();
 	          
+						console.log(resJson);
 			}else{
 // 				alert("Inactive List Empty");
 				 showTableData("");
@@ -211,7 +162,7 @@ function deleteDealer(id,status){
 }
 
 function dealerRegister(id) {
-// 	alert("model"+id);
+	alert("model"+id);
 	$("#userId").val(id);
 	
  	$("#myModal").modal();
@@ -220,20 +171,23 @@ function dealerRegister(id) {
 
 function genarateAuthDetails() {
 	
-	var id=$("#userId").val();
+	var userId=$("#userId").val();
 	var username=$("#username").val();
 		var formData = new FormData();
-		formData.append('id', id);
+		formData.append('userId', userId);
 		formData.append('username', username);
 		
-		$.fn.makeMultipartRequest('POST', 'authDetails', false,
+		$.fn.makeMultipartRequest('POST', 'inActiveEmployeeCreation', false,
 				formData, false, 'text', function(data) {
-			console.log(data);
-			var jsonobj = $.parseJSON(data);
-			var alldata = jsonobj.allOrders1;
-			console.log(jsonobj.allOrders1);
-			showTableData(alldata);
-			tooltip();
+			if(data != ""){
+				var resJson=JSON.parse(data);
+	            showTableData(resJson);
+				  tooltip();
+	          
+						console.log(resJson);
+			}else{
+				alert("Inactive List Empty");
+			}
 			
 				});
 	
@@ -250,15 +204,14 @@ function inactiveData() {
 		var formData = new FormData();
 		formData.append('status', status);
 		
-		$.fn.makeMultipartRequest('POST', 'inActiveDealer', false,
+		$.fn.makeMultipartRequest('POST', 'inActiveEmployeeCreation', false,
 				formData, false, 'text', function(data) {
 			if(data != ""){
-				var jsonobj = $.parseJSON(data);
-				var alldata = jsonobj.allOrders1;
-				console.log(jsonobj.allOrders1);
-				showTableData(alldata);
+				var resJson=JSON.parse(data);
+	            showTableData(resJson);
 				  tooltip();
 	          
+						console.log(resJson);
 			}else{
 				alert("Inactive List Empty");
 			}
@@ -268,7 +221,45 @@ function inactiveData() {
 }
 
 
+function productNameFilter(productName){
+	var productId = $("#producttype").val();
+	if(productId.length !=0){
+		$('#loadAjax').show();
+	$.ajax({
+		type : "POST",
+		url : "getProductNameFilter.json",
+		data : "productId=" + productId,
+		dataType : "json",
+		success : function(response) {
+			 /* alert(response); */  
+			var optionsForClass = "";
+			optionsForClass = $("#productname").empty();
+			optionsForClass.append(new Option("-- Choose Product --"));
+			$.each(response, function(i, tests) {
+				var id=tests.id;
+				var productname=tests.productname;
+				optionsForClass.append(new Option(productname, id));
+			});
+			$('#loadAjax').hide();
+			if(productName!='') $('#productname').val(productName);
+			$('#productName').trigger("chosen:updated");
+		},
+		error : function(e) {
+			$('#loadAjax').hide();
+		},
+		statusCode : {
+			406 : function() {
+				$('#loadAjax').hide();
+		
+			}
+		}
+	});
+	$('#loadAjax').hide();
 
-$("#pageName").text("Dealer Confirm");
-$(".dealerconfirm").addClass("active"); 
+	}
+} 
+
+
+$("#pageName").text("Order Placement");
+$(".orderPlacement").addClass("active"); 
 </script>

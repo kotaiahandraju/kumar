@@ -99,6 +99,7 @@ public class EmployeeDao extends BaseEmployeeDao
 			if (objuserBean != null) {
 				 buffer.append(" and ke.branch_id ='"+objuserBean.getBranchId()+"' ");
 			}
+			buffer.append(" and ke.status ='"+status+"' ");
 		 String sql=buffer.toString();
 		 List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
 		 if(list.size() >0)
@@ -144,6 +145,29 @@ public class EmployeeDao extends BaseEmployeeDao
 		return null;
 	}
  public List<Map<String,Object>> getAllDelarspayments(HttpSession session){
+	 jdbcTemplate =custom.getJdbcTemplate();
+	 try{
+		 StringBuffer buffer = new StringBuffer();
+		 buffer.append("SELECT kp.*,DATE_FORMAT(payment_date,'%d-%b-%Y') as strpaymentDate,ke.`name` FROM `kumar_payment`kp,`kumar_employee` ke  where 1=1 and ke.`id`=kp.`empId` ");
+		 
+		 LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			if (objuserBean != null) {
+				 buffer.append(" and kp.branchId ='"+objuserBean.getBranchId()+"' ");
+			}
+		 String sql=buffer.toString();
+		 System.out.println(sql);
+		 List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
+		 if(list.size() >0)
+			 return list;
+		 return null;
+	 }catch(Exception e){
+		 e.printStackTrace();
+	 }
+	 
+	return null;
+	 
+ }
+ public List<Map<String,Object>> getO(HttpSession session){
 	 jdbcTemplate =custom.getJdbcTemplate();
 	 try{
 		 StringBuffer buffer = new StringBuffer();
