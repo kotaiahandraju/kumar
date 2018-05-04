@@ -45,7 +45,26 @@ protected String gstno ;
 
 /** Field mapping. **/
 protected String phoneNumber ;
+/** Field mapping. **/
+protected String designation ;
 
+
+protected String alternativeNumber;
+
+
+
+public String getDesignation() {
+	return designation;
+}
+public void setDesignation(String designation) {
+	this.designation = designation;
+}
+public String getAlternativeNumber() {
+	return alternativeNumber;
+}
+public void setAlternativeNumber(String alternativeNumber) {
+	this.alternativeNumber = alternativeNumber;
+}
 /** Field mapping. **/
 protected String email ;
 
@@ -242,5 +261,6 @@ public void setStatus(final String status)
 {
   this.status = status;
 }
+
 
 }
