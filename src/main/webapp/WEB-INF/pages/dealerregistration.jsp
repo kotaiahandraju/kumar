@@ -52,7 +52,9 @@ border-top: 0px solid #dddddd !important;
 <div class="row" id="moveTo">
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
+                <div class="col-md-12">
                         <h2 align="center">Dealer Registration</h2>
+                   
                         <div class="options"></div>
                         
                     <form:form class="form-horizontal" modelAttribute="delar"  role="form" id="delar-form" action="addDelar" method="post">
@@ -123,9 +125,12 @@ border-top: 0px solid #dddddd !important;
                     	
                     	
                     	
-                    	 	
+                    	 
+                    	<h3 class="col-md-5">Contact Information</h3>
+                           <h4 class="col-md-1"><a href="LoginHome">Sign In</a></h4>
                     	<div class="col-md-6">
-                   <h3>Contact Information</h3>
+                       
+                          
                     			<div class="form-group">
                     			
                     				<label for="focusedinput" class="col-md-4 control-label">Contact Person Name<span class="impColor">*</span></label>
@@ -152,9 +157,9 @@ border-top: 0px solid #dddddd !important;
                     			</div>
                     		
                     	<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Contact Email</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Contact Email <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="email" value=""  class="form-control " placeholder="Email" />
+								    	<form:input path="email" value=""  class="form-control validate email" placeholder="Email" onkeyup="removeBorder(this.id)" maxlength="20"  />
 								      	<span class="hasError" id="locationError"></span>
 								    </div>
                     			</div>
