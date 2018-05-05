@@ -194,9 +194,6 @@ border-top: 0px solid #dddddd !important;
 					      </div>
 					</form:form>
 					</div>
-					
-					
-					
 				      
 			</div>
                     

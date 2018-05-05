@@ -31,47 +31,47 @@ protected Date updatedTime ;
 protected String branchId ;
 
 /** Field mapping. **/
-protected double productId ;
+protected String productId ;
 
-public int getId()
-{
-  return id;
+public int getId() {
+	return id;
 }
-public void setId(final int id)
-{
-  this.id = id;
+
+public void setId(int id) {
+	this.id = id;
 }
-public Date getCreatedTime()
-{
-  return createdTime;
+
+public Date getCreatedTime() {
+	return createdTime;
 }
-public void setCreatedTime(final Date createdTime)
-{
-  this.createdTime = createdTime;
+
+public void setCreatedTime(Date createdTime) {
+	this.createdTime = createdTime;
 }
-public Date getUpdatedTime()
-{
-  return updatedTime;
+
+public Date getUpdatedTime() {
+	return updatedTime;
 }
-public void setUpdatedTime(final Date updatedTime)
-{
-  this.updatedTime = updatedTime;
+
+public void setUpdatedTime(Date updatedTime) {
+	this.updatedTime = updatedTime;
 }
-public String getBranchId()
-{
-  return branchId;
+
+public String getBranchId() {
+	return branchId;
 }
-public void setBranchId(final String branchId)
-{
-  this.branchId = branchId;
+
+public void setBranchId(String branchId) {
+	this.branchId = branchId;
 }
-public double getProductId()
-{
-  return productId;
+
+public String getProductId() {
+	return productId;
 }
-public void setProductId(final double productId)
-{
-  this.productId = productId;
+
+public void setProductId(String productId) {
+	this.productId = productId;
 }
+
 
 }

@@ -28,7 +28,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.EmployeeBean;
-import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.db.dao.EmployeeDao;
 import com.aurospaces.neighbourhood.db.dao.LoginDao;

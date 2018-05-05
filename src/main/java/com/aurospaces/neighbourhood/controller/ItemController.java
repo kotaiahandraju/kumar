@@ -24,8 +24,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.aurospaces.neighbourhood.bean.BranchBean;
 import com.aurospaces.neighbourhood.bean.BranchProducts;
 import com.aurospaces.neighbourhood.bean.ItemsBean;
-import com.aurospaces.neighbourhood.bean.ProductnameBean;
 import com.aurospaces.neighbourhood.bean.LoginBean;
+import com.aurospaces.neighbourhood.bean.ProductnameBean;
 import com.aurospaces.neighbourhood.db.dao.BranchDao;
 import com.aurospaces.neighbourhood.db.dao.BranchProductsDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
@@ -105,25 +105,24 @@ public class ItemController {
 					redir.addFlashAttribute("cssMsg", "danger");
 				}
 			}
+			
 			if (itemsBean.getId() == 0 && itemsBean2 == null) {
 				itemsDao.save(itemsBean);
 				LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
 				if (objuserBean != null && objuserBean.getRoleId().equals("1")) {
 					
-					List<BranchBean> list = branchDao.getBranchDetails("1");
-					if(list != null){
-					for(BranchBean bean :list){
 						BranchProducts	branchProducts = new BranchProducts();
-						branchProducts.setProductId(itemsBean.getId());
-						branchProducts.setBranchId(String.valueOf(bean.getId()));
+						branchProducts.setProductId(String.valueOf(itemsBean.getId()));
+						branchProducts.setBranchId("all");
 						branchProductsDao.save(branchProducts);
-					}
-					}
-					
-					if (objuserBean != null && objuserBean.getRoleId().equals("2")) {
-						
-					}
 				}
+					if (objuserBean != null && objuserBean.getRoleId().equals("2")) {
+						BranchProducts	branchProducts1 = new BranchProducts();
+						branchProducts1.setProductId(String.valueOf(itemsBean.getId()));
+						branchProducts1.setBranchId(objuserBean.getBranchId());
+						branchProductsDao.save(branchProducts1);
+					}
+				
 				
 				
 				redir.addFlashAttribute("msg", "Record Inserted Successfully");
