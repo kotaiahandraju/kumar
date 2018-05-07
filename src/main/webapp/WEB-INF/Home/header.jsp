@@ -179,14 +179,37 @@ function tooltip(){
 		<div class="masters">
 	        <ul class="nav navbar-nav pull-right toolbar">
 	            <li class="dropdown">
+	            <c:if test="${cacheUserBean.roleId=='1' }">
 	                <a href="#" class="dropdown-toggle username" data-toggle="dropdown"><span class="hidden-xs">Master Admin <i class="fa fa-caret-down"></i></span><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a>
 	                <ul class="dropdown-menu userinfo arrow">
 	                    <li class="username">
 	                        <a href="#">
 	                            <div class="pull-left"><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt=""/></div>
-	                            <div class="pull-right"><h5>Master Admin!</h5><small>Logged in as <span>Master</span></small></div> 
+	                            <div class="pull-right"><h5>Master Admin!</h5><small>Logged in as <span>${cacheUserBean.userName}</span></small></div> 
 	                        </a>
 	                    </li>
+	            </c:if>
+	            <c:if test="${cacheUserBean.roleId=='2' }">
+	                <a href="#" class="dropdown-toggle username" data-toggle="dropdown"><span class="hidden-xs">Branch Manager <i class="fa fa-caret-down"></i></span><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a>
+	                <ul class="dropdown-menu userinfo arrow">
+	                    <li class="username">
+	                        <a href="#">
+	                            <div class="pull-left"><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt=""/></div>
+	                            <div class="pull-right"><h5>Branch Manager!</h5><small>Logged in as <span>${cacheUserBean.userName}</span></small></div> 
+	                        </a>
+	                    </li>
+	            </c:if>
+	            <c:if test="${cacheUserBean.roleId=='3' }">
+	                <a href="#" class="dropdown-toggle username" data-toggle="dropdown"><span class="hidden-xs">Dealer <i class="fa fa-caret-down"></i></span><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a>
+	                <ul class="dropdown-menu userinfo arrow">
+	                    <li class="username">
+	                        <a href="#">
+	                            <div class="pull-left"><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt=""/></div>
+	                            <div class="pull-right"><h5>Dealer!</h5><small>Logged in as <span>${cacheUserBean.userName}</span></small></div> 
+	                        </a>
+	                    </li>
+	            </c:if>
+	                
 	                    <li class="userlinks">
 	                        <ul class="dropdown-menu">
 	                            <li><a href="#">Edit Profile <i class="pull-right fa fa-pencil"></i></a></li>

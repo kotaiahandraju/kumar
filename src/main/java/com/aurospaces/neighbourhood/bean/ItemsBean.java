@@ -18,11 +18,25 @@ protected String producttype ;
 protected String productname ;
 protected String productTypeName ;
 protected String productIdName ;
+protected String subcategory;
+protected String branchId;
 
 
 
 
 
+public String getBranchId() {
+	return branchId;
+}
+public void setBranchId(String branchId) {
+	this.branchId = branchId;
+}
+public String getSubcategory() {
+	return subcategory;
+}
+public void setSubcategory(String subcategory) {
+	this.subcategory = subcategory;
+}
 public String getProductTypeName() {
 	return productTypeName;
 }

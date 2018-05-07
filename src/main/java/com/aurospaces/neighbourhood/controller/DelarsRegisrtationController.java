@@ -39,7 +39,7 @@ public class DelarsRegisrtationController {
 	@Autowired BranchDao branchDao;
 	@Autowired EmployeeDao employeeDao;
 	@Autowired ServletContext objContext;
-	@RequestMapping(value = "/delarregistration")
+	@RequestMapping(value = "/dealerregistration")
 	public String cylinderHome( @ModelAttribute("delar") EmployeeBean employeeBean,	ModelMap model, HttpServletRequest request, HttpSession session) {
 
 		try {
@@ -49,7 +49,7 @@ System.out.println("delar registration");
 			System.out.println(e);
 
 		}
-		return "delarregistration";
+		return "dealerregistration";
 	}
 	@RequestMapping(value = "/addDelar")
 	public String addDelar( @ModelAttribute("delar") EmployeeBean employeeBean,	ModelMap model, HttpServletRequest request, HttpSession session,RedirectAttributes redirect) {
