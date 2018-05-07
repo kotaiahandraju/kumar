@@ -59,7 +59,7 @@ public class BranchManagerController {
 		String json = null;
 		try{
 			ObjectMapper mapper = new ObjectMapper();
-			listOrderBeans = employeeDao.getAllDelarsConfirm("1",session);
+			listOrderBeans = employeeDao.getAllDelarsConfirm("0",session);
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				json =mapper.writeValueAsString(listOrderBeans);
 				request.setAttribute("allOrders1", json);
@@ -215,7 +215,7 @@ public class BranchManagerController {
 					}
 				}
 
-				listOrderBeans = employeeDao.getAllDelarsConfirm("1",session);
+				listOrderBeans = employeeDao.getAllDelarsConfirm("0",session);
 				if (listOrderBeans != null && listOrderBeans.size() > 0) {
 					jsonObj.put("allOrders1", listOrderBeans);
 				} else {

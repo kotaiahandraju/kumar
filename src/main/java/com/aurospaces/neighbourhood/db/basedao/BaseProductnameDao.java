@@ -26,7 +26,7 @@ public class BaseProductnameDao{
 	JdbcTemplate jdbcTemplate;
 
  
-	public final String INSERT_SQL = "INSERT INTO productname( created_time, updated_time, productId, productname,status) values (?, ?, ?, ?,?)"; 
+	public final String INSERT_SQL = "INSERT INTO productname( created_time, updated_time, productId, productname,documents,status) values (?, ?, ?, ?,?,?)"; 
 
 
 
@@ -65,7 +65,8 @@ public class BaseProductnameDao{
 ps.setTimestamp(2, updatedTime);
 ps.setString(3, productname.getProductId());
 ps.setString(4, productname.getProductname());
-ps.setString(5, productname.getStatus());
+ps.setString(5, productname.getDocuments());
+ps.setString(6, productname.getStatus());
 
 							return ps;
 						}
@@ -80,9 +81,9 @@ ps.setString(5, productname.getStatus());
 		else
 		{
 
-			String sql = "UPDATE productname  set productId = ? ,productname = ?  where id = ? ";
+			String sql = "UPDATE productname  set productId = ? ,productname = ?,documents=?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{productname.getProductId(),productname.getProductname(),productname.getId()});
+			jdbcTemplate.update(sql, new Object[]{productname.getProductId(),productname.getProductname(),productname.getDocuments(),productname.getId()});
 		}
 	}
 		
