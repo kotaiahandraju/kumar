@@ -66,6 +66,10 @@
  <definition name="orderPlacement" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/orderPlacement.jsp" />
  </definition>
+ 
+ <definition name="cardetails" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/cardetails.jsp" />
+ </definition>
 	
 	
 </tiles-definitions>

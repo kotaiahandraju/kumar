@@ -1,7 +1,6 @@
 package com.aurospaces.neighbourhood.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,7 +21,7 @@ public class OrderPlacementController {
 	ItemsDao  itemsDao;
 	@Autowired
 	ProductnameDao productnameDao;
-	@RequestMapping(value="/orderPlacement")
+	@RequestMapping(value="/orderplacing")
 	public String orderPlacement(HttpServletRequest request){
 		ObjectMapper objectMapper = null;
 		String sJson = null;

@@ -60,6 +60,16 @@
 {
 	margin-left: 25px;
 }
+.carth {
+margin-top: 18px;
+    float: left !important;
+    color: #fff;
+    list-style: none;
+    margin-left: 980px;
+    font-size:18px;
+}
+ @media only screen and (max-width: 600px) and (min-width: 400px) {
+ }
 #page-container, #page-content{min-height: auto;}
 .control-label {
 	text-align: right;
@@ -134,6 +144,7 @@ $(function() {
 
 $(document).ready(function(){
 	tooltip();
+	cartCount();
 });
 function tooltip(){
 	$('.view').attr('data-toggle','tooltip');
@@ -149,6 +160,14 @@ function tooltip(){
 	$('.deactivate').attr('data-toggle','tooltip');
 	$('.deactivate').attr('data-original-title','Deactivate');
 		$('[data-toggle="tooltip"]').tooltip();
+}
+function cartCount(){
+	var formData = new FormData();
+	$.fn.makeMultipartRequest('POST', 'countCartdetails', false, formData, false, 'text', function(data){
+		var jsonobj = $.parseJSON(data);
+		var count = jsonobj.count;
+		$("#cartId").text(count);
+	});
 }
 </script>
 </head>
@@ -175,7 +194,7 @@ function tooltip(){
         <div class="navbar-header pull-left">
             <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/assets/img/logo1.png" class="img-responsive" style="    width: 132px;"></a>
             <div class="clearfix"></div>
-        </div>
+        </div><li class="pull-right carth"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="cartId"></span> </li>
 		<div class="masters">
 	        <ul class="nav navbar-nav pull-right toolbar">
 	            <li class="dropdown">
@@ -250,6 +269,8 @@ function tooltip(){
 			 </c:if>
 			  <c:if test="${roleId=='3' }">
 			  <li class="delarpayment"><a href="${baseurl }/admin/delarpayment"> <span>Dealer Payment</span></a></li>
+			  <li class="orderplacing"><a href="${baseurl }/admin/orderplacing"> <span>Order Placing</span></a></li>
+			  
 			 </c:if>
 				
 			</ul>

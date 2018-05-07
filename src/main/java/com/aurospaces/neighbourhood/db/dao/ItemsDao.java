@@ -41,7 +41,7 @@ public class ItemsDao extends BaseItemsDao
 		if(!objuserBean.getRoleId().equals("1")){
 			buffer.append(" AND bp.`branch_id` IN ('all','"+branchId+"') ");
 		}
-		buffer.append(" order by i.id desc ");
+		buffer.append(" and i.status='1' order by pn.productId ,pt.producttype ");
 		 String sql = buffer.toString();
 		 System.out.println(sql);
 		List<ItemsBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
@@ -65,7 +65,7 @@ public class ItemsDao extends BaseItemsDao
 		}
 	public  List<Map<String,Object>> getSubcategory(){
 		 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = " SELECT id,`productname` AS subcategory FROM `productname` ";
+			String sql = " SELECT id,`productname` AS subcategory,documents FROM `productname` ";
 			List<Map<String,Object>> retlist = jdbcTemplate.queryForList(sql);
 			if(retlist.size() > 0)
 				return retlist;

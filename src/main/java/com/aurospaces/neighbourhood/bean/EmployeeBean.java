@@ -46,13 +46,19 @@ protected String gstno ;
 /** Field mapping. **/
 protected String phoneNumber ;
 /** Field mapping. **/
-protected String designation ;
+protected String designation,businessName ;
 
 
 protected String alternativeNumber;
 
 
 
+public String getBusinessName() {
+	return businessName;
+}
+public void setBusinessName(String businessName) {
+	this.businessName = businessName;
+}
 public String getDesignation() {
 	return designation;
 }

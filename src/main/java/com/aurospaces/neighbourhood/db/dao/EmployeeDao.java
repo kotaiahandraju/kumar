@@ -99,7 +99,6 @@ public class EmployeeDao extends BaseEmployeeDao
 			if (objuserBean != null) {
 				 buffer.append(" and ke.branch_id ='"+objuserBean.getBranchId()+"' ");
 			}
-			buffer.append(" and ke.status ='"+status+"' ");
 		 String sql=buffer.toString();
 		 List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
 		 if(list.size() >0)
