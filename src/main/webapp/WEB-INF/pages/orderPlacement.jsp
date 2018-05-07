@@ -72,7 +72,7 @@ table#dependent_table tbody tr td:first-child::before {
 			<br>
 					<div class="pull-right">
 					<span class="btn btn-warning" onclick="orderPopup()"><i class="fa fa-shopping-cart"></i> ADD TO CART</span> 
-					<span class="btn btn-danger"><i class="fa fa-bolt" aria-hidden="true"></i> ORDER NOW</span>
+					<span class="btn btn-danger" onclick="orderPopup()"><i class="fa fa-bolt" aria-hidden="true"></i> ORDER NOW</span>
 					</div>
 				</div>
 				</div>
@@ -83,7 +83,7 @@ table#dependent_table tbody tr td:first-child::before {
 						<table class="table "
 							id="example1">
 							<thead>
-								<tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>quantity</td>
+								<tr><th> Product category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><td>quantity</td>
 								</tr>
 							</thead>
 							<tbody></tbody>

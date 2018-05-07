@@ -65,7 +65,7 @@ margin-top: 18px;
     float: left !important;
     color: #fff;
     list-style: none;
-    margin-left: 980px;
+    margin-left: 950px;
     font-size:18px;
 }
  @media only screen and (max-width: 600px) and (min-width: 400px) {
@@ -194,7 +194,10 @@ function cartCount(){
         <div class="navbar-header pull-left">
             <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/assets/img/logo1.png" class="img-responsive" style="    width: 132px;"></a>
             <div class="clearfix"></div>
-        </div><li class="pull-right carth"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="cartId"></span> </li>
+        </div>
+          <c:if test="${cacheUserBean.roleId=='3' }">
+        <a href="cartdetails"><li class="pull-right carth"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="cartId"></span> </li></a>
+        </c:if>
 		<div class="masters">
 	        <ul class="nav navbar-nav pull-right toolbar">
 	            <li class="dropdown">

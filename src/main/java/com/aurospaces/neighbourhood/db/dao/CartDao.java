@@ -44,7 +44,6 @@ public class CartDao extends BaseCartDao
 			if (objuserBean != null) {
 				userid = objuserBean.getEmpId();
 			}
-		 
 			String sql = " SELECT c.`quantity`,c.id,i.id AS productId,i.`itemcode`,i.`itemdescrption` ,pn.productname AS productIdName,pt.producttype AS productTypeName  FROM  `cart` c, items i, productname pn,producttype pt  WHERE  i.productId=pt.id AND c.`productId`=i.id AND   i.productname=pn.id AND c.userid=? ";
 			
 			List<Map<String,Object>> retlist = jdbcTemplate.queryForList(sql,new Object[]{userid});
