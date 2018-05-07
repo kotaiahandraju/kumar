@@ -52,8 +52,10 @@ border-top: 0px solid #dddddd !important;
 <div class="row" id="moveTo">
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
+                 <h2 class="col-md-10" align="center">Dealer Registration</h2>
+                 <p class="col-md-2" style="padding-top:16px;font-size:16px;"><a href="LoginHome">Sign In</a></p>
                 <div class="col-md-12">
-                        <h2 align="center">Dealer Registration</h2>
+                       
                    
                         <div class="options"></div>
                         
@@ -127,7 +129,7 @@ border-top: 0px solid #dddddd !important;
                     	
                     	 
                     	<h3 class="col-md-5">Contact Information</h3>
-                           <h4 class="col-md-1"><a href="LoginHome">Sign In</a></h4>
+                           
                     	<div class="col-md-6">
                        
                           
