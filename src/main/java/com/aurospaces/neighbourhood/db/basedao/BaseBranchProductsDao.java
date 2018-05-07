@@ -64,7 +64,7 @@ public class BaseBranchProductsDao{
 	ps.setTimestamp(1, createdTime);
 ps.setTimestamp(2, updatedTime);
 ps.setString(3, branchProducts.getBranchId());
-ps.setDouble(4, branchProducts.getProductId());
+ps.setString(4, branchProducts.getProductId());
 
 							return ps;
 						}

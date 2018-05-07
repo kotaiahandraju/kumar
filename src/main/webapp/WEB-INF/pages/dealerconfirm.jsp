@@ -57,7 +57,7 @@ table#dependent_table tbody tr td:first-child::before {
 						</div>
 					</div>
 					<div class="panel-body collapse in">
-					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
+					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Active List</label>
 					<div class="table-responsive" id="tableId">
 						<table class="table table-striped table-bordered datatables"
 							id="example">
@@ -242,9 +242,9 @@ function inactiveData() {
 	
 	var status="0";
 	if($('#inActive').is(":checked") == true){
-		status="0";
-	}else{
 		status="1";
+	}else{
+		status="0";
 	}
 		
 		var formData = new FormData();

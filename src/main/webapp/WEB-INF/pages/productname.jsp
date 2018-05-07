@@ -76,7 +76,7 @@ table#dependent_table tbody tr td:first-child::before {
                         <h4>Add SubCategory</h4>
                         <div class="options"></div>
                     </div>
-	                <form:form modelAttribute="productnameForm" id="formId" action="addProductname" class="form-horizontal" method="post" >
+	                <form:form modelAttribute="productnameForm" id="formId" action="addProductname" class="form-horizontal" method="post" enctype="multipart/form-data" >
                     <div class="panel-body">
                     	<div class="row">
                     	<div class="col-md-4">
@@ -96,6 +96,17 @@ table#dependent_table tbody tr td:first-child::before {
                     				<div class="col-md-6">
 		                            	<form:input type="hidden" path="id"/>
 								      	<form:input type="text" path="productname" class="form-control validate" placeholder="Product Name"/>
+								  	</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-4">
+                    			<div class="form-group">
+                    			
+                    			<img id="imageId" style="display: none;    width: 20%;" src="" ><span id="imageLable" style="display: none;"></span>
+													<form:hidden path="imagePath"/>
+													<input type="file" name="file" style="margin-top: 3%;" id="documents" onchange="" />
+													<span class="hasError" id="documentsError"></span>
+                    			
 								  	</div>
                     			</div>
                     		</div>
@@ -165,7 +176,7 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Product Category</th><th>Product SubCategory</th><th>Status</th><th></th></tr>'+
+    	'<thead><tr><th>Product Category</th><th>Product SubCategory</th><th>Image</th><th>Status</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -180,6 +191,7 @@ function showTableData(response){
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.producttype+"'>" + orderObj.producttype + "</td>"
 			+ "<td title='"+orderObj.productname+"'>" + orderObj.productname + "</td>"
+			+ "<td title='image'><img style='width: 50px;height: 40px;' src=${baseurl }/"+orderObj.documents +"></td>"
 			+ "<td title='"+orderObj.productnameStatus+"'>" + orderObj.productnameStatus + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
 			+"</tr>";
@@ -192,11 +204,17 @@ function editProductName(id) {
 	$("#id").val(id);
 	$("#productname").val(serviceUnitArray[id].productname);
 	$("#producttype").val(serviceUnitArray[id].productId);
-	/*  var optionsForClass = "";
- 	optionsForClass = $("#producttype").empty();
-	optionsForClass.append(new Option("-- Choose Product Type --"));
-		optionsForClass.append(new Option(serviceUnitArray[id].producttype, serviceUnitArray[id].id));
-		$('#producttype').trigger("chosen:updated"); */
+	
+	$("#documents").css('color', 'transparent');
+	$("#imageId").show();
+	$("#imageLable").show();
+	$("#dynamicImage").remove();
+	
+	var editImage=serviceUnitArray[id].documents;
+	var replaceImage=editImage.replace("documents/","");
+	$("#imageId").attr("src","${baseurl }/"+editImage);
+	$("#imageLable").text(replaceImage);
+	$("#imagePath").val(editImage);
 		
 	$("#status").val(serviceUnitArray[id].status);
 	
@@ -267,6 +285,59 @@ function showexpiryDate(value){
 		$('#exporydatediv').hide();
 	}
 }
+
+
+
+	
+	
+$("#documents").change(function(e) {
+	
+	$("#dynamicImage").remove();
+	  $("#imageId").hide();
+	  $("#imageLable").hide();
+	  var checkExtension=$("#documents").val();
+	  var file_size = $('#documents')[0].files[0].size;
+	  
+	  var fileOK = false;
+	  
+	  var ext=checkExtension.substring(checkExtension.lastIndexOf(".")+1,checkExtension.length).toLowerCase();
+	  var validFiles=["bmp","gif","png","jpg","jpeg"];
+	    for (var i=0; i<validFiles.length; i++)
+	    {
+	      if (validFiles[i] == ext)
+	    	  fileOK= true;
+	     		
+	    } 
+	 
+	 
+	if(fileOK == true){
+		 	if(file_size>64000) {
+	    	    alert("File size is greater than 8kb");
+	    		  	return false;
+	    		  } 
+		 for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+		        
+		        var file = e.originalEvent.srcElement.files[i];
+		        
+		        var img = document.createElement("img");
+		        img.id='dynamicImage';
+//		         img.setAttribute('width', '50%');
+		        img.setAttribute('style', 'width: 60px;height: 60px;');
+		        var reader = new FileReader();
+		        reader.onloadend = function() {
+		             img.src = reader.result;
+		        }
+		        reader.readAsDataURL(file);
+		        $("#documents").before(img);
+//		         $("#imageId").css('width', '20%');
+		    }
+	}else{
+		alert("Please Choose Image Only");
+	}
+   
+});
+	
+	
 	
 
 function inactiveData() {

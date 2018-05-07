@@ -48,7 +48,7 @@ table#dependent_table tbody tr td:first-child::before {
 	</ol>
 	<div class="clearfix"></div>
 	<div class="container">
-		<div class="row">
+		<div class="row" id="orderPlacement">
 			<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
@@ -69,12 +69,24 @@ table#dependent_table tbody tr td:first-child::before {
 							<tbody></tbody>
 						</table>
 					</div>
+					<input type="button" value="Place" onclick="orderPopup();">
 				</div>
 				</div>
 			</div>
 		</div>
-                    
-	</div> <!-- container -->
+		<div class="row" id="displayQuantityData" style="display: none;">
+					<div class="table-responsive" id="tabledata">
+						<table class="table "
+							id="example1">
+							<thead>
+								<tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>quantity</td>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+				</div>
+				</div>
 
 <script type="text/javascript">
 var listOrders1 =${allOrders1};
@@ -93,25 +105,72 @@ function showTableData(response){
 	var table=$('#tableId').html('');
 	serviceUnitArray = {};
 	var protectType = null;
-	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example">'+
-    	'<thead><tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>quantity</td></tr>'+
+	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
+    	'<thead><tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>Quantity</td></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		serviceUnitArray[orderObj.id] = orderObj;
-		var quantity ="<input type='text' id='"+orderObj.id+"quantity' />"
+		var quantity ="<input type='text' name='quantity[]' id='"+orderObj.id+"quantity' />"
 		var tblRow = "<tr>"
 				+ "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>"
 				+ "<td title='"+orderObj.productIdName+"'>"	+ orderObj.productIdName + "</td>"
 				+ "<td title='"+orderObj.itemcode+"'>" + orderObj.itemcode+ "</td>" 
 				+ "<td title='"+orderObj.itemdescrption+"'>"+ orderObj.itemdescrption + "</td>"
-				+ "<td title='"+orderObj.quantity+"'>" + quantity+ "</td>"
+				+ "<td >" + quantity+ "</td>"
 		$(tblRow).appendTo("#tableId table tbody");
 		
 	});
 	if(isClick=='Yes') $('.datatables').dataTable();
 	
 }
+
+function orderPopup() {
+	var quantity = [];  
+	var id = []; 
+	var res="";
+	
+	 var table=$('#tabledata').html('');
+	var tableHead = '<table  cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
+	'<thead><tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>Quantity</td></tr>'+
+	"</thead><tbody></tbody></table>";
+	$("#tabledata").html(tableHead);
+
+	$('input[name^=quantity]').each(function(){
+		$("#orderPlacement").hide();
+		 $("#displayQuantityData").show();
+		if($(this).val() != ""){
+			console.log(this.id);
+			quantity.push($(this).val());
+			var str = this.id; 
+			res= str.replace("quantity", "");
+		    console.log(res);
+			id.push(res);
+			
+
+			var tblRow = "<tr id='resDel'>"
+						+ "<td title='"+serviceUnitArray[res].productTypeName+"'>"+ serviceUnitArray[res].productTypeName + "</td>"
+						+ "<td title='"+serviceUnitArray[res].productIdName+"'>"	+ serviceUnitArray[res].productIdName + "</td>"
+						+ "<td title='"+serviceUnitArray[res].itemcode+"'>" + serviceUnitArray[res].itemcode+ "</td>" 
+						+ "<td title='"+serviceUnitArray[res].itemdescrption+"'>"+ serviceUnitArray[res].itemdescrption + "</td>"
+						+ "<td >" + $(this).val()+ "</td>"
+						+"<td id='"+res+"delete' onclick='deleteRow(this.id);'><a  <i class='fa fa-trash' aria-hidden='true'></i></a> </td>"
+						$(tblRow).appendTo("#tabledata table tbody");
+			
+		}
+		
+	});
+	console.log(quantity);
+	console.log(id); 
+	
+}
+
+	function deleteRow(id) {
+		console.log(id);
+		  $("#resDel").remove(); //Deleting the Row (tr) Element 
+	}
+	     
+
 
 var prodcutName='';
 

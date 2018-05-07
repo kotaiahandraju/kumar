@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.bean.OrdersListBean;
 import com.aurospaces.neighbourhood.bean.ProductnameBean;
+import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.KhaibarUsersDao;
 import com.aurospaces.neighbourhood.db.dao.OrdersListDao;
 import com.aurospaces.neighbourhood.util.KumarUtil;
@@ -32,6 +34,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class RestController {
 	@Autowired KhaibarUsersDao objKhaibarUsersDao;
 	@Autowired OrdersListDao ordersListDao;
+	@Autowired ItemsDao itemsDao;
 	@RequestMapping(value = "/rest/getLogin")
 	public @ResponseBody String getLogin(@RequestBody LoginBean loginBean ,  HttpServletRequest request) throws Exception {
 		List<Map<String,Object>>  list=null;
@@ -64,7 +67,7 @@ public class RestController {
 	
 	
 	@SuppressWarnings("unused")
-	@RequestMapping(value = "/rest/getProductList", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
+	@RequestMapping(value = "/rest/getProductListAll", method=RequestMethod.POST, consumes = "application/json", produces = "application/json")
 	public @ResponseBody String getProductList() throws Exception {
 		List<Map<String,Object>> list=null;
 		JSONObject objJSON = new JSONObject();
@@ -174,6 +177,32 @@ public class RestController {
 		try{
 			list = ordersListDao.getInvoiceData(ordersListBean);
 			objJSON.put("ordersList", list);
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return String.valueOf(objJSON);
+	}
+	@RequestMapping(value = "/rest/subcategory")
+	public @ResponseBody String subcategory(HttpServletRequest request) {
+		JSONObject objJSON = new JSONObject();
+		List<Map<String,Object>> list=null;
+		try{
+			list = itemsDao.getSubcategory();
+			objJSON.put("subcategory", list);
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return String.valueOf(objJSON);
+	}
+	@RequestMapping(value = "/rest/getProductList")
+	public @ResponseBody String getProductList(HttpServletRequest request,@RequestBody ItemsBean itemsBean) {
+		JSONObject objJSON = new JSONObject();
+		List<Map<String,Object>> list=null;
+		try{
+			list = itemsDao.getsubgategoryProductList(itemsBean);
+			objJSON.put("productList", list);
 
 		}catch(Exception e){
 			e.printStackTrace();
