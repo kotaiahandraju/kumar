@@ -1,5 +1,6 @@
 package com.aurospaces.neighbourhood.controller;
 
+import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +22,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.ProductnameBean;
 import com.aurospaces.neighbourhood.db.dao.ProductnameDao;
+import com.aurospaces.neighbourhood.util.MiscUtils;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 
 @Controller
@@ -69,13 +76,53 @@ public class ProductNameController {
 	}
 	
 	@RequestMapping(value = "/addProductname", method = RequestMethod.POST)
-	public String addProductname(ProductnameBean productnameBean,RedirectAttributes redir) {
+	public String addProductname(ProductnameBean productnameBean, @RequestParam("file") MultipartFile file,RedirectAttributes redir,HttpServletRequest request) {
 
 		System.out.println("111111111111113333333333111111111"+productnameBean);
+		System.out.println("saving staffDetails page..."+file.getOriginalFilename()+"----------requestImage------"+productnameBean.getImagePath());
 		int id = 0;
 		String size = null;
+		String name=null;
+		String sTomcatRootPath = null;
+		String sDirPath = null;
+		String filepath = null;
 
 		try {
+			
+			if (!file.isEmpty()) {
+				byte[] bytes = file.getBytes();
+				name =file.getOriginalFilename();
+				int n=name.lastIndexOf(".");
+				String ext1 = FilenameUtils.getExtension(name);
+				filepath= MiscUtils.generateRandomString(5)+"."+ext1;
+				//filepath= name+file.getContentType();
+				String rootPath = request.getSession().getServletContext().getRealPath("/");
+				File dir = new File(rootPath + File.separator + "documents");
+				if (!dir.exists()) {
+					dir.mkdirs();
+				}
+
+				File serverFile = new File(dir.getAbsolutePath() + File.separator + filepath);
+				try {
+					try (InputStream is = file.getInputStream(); BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile))) {
+						int i;
+						while ((i = is.read()) != -1) {
+							stream.write(i);
+						}
+						stream.flush();
+					}
+				} catch (IOException e) {
+					System.out.println("error : " + e);
+				}
+				filepath= "documents/"+filepath;
+				productnameBean.setDocuments(filepath);
+				sTomcatRootPath = System.getProperty("catalina.base");
+				sDirPath = sTomcatRootPath + File.separator + "webapps"+ File.separator + "documents" ;
+				System.out.println(sDirPath);
+				File file1 = new File(sDirPath);
+				file.transferTo(file1);
+			}
+			
 			productnameBean.setProductId(productnameBean.getProducttype());
 			productnameBean.setStatus("1");
 			ProductnameBean productnameBean2 = productnameDao.getByProductName(productnameBean);
@@ -86,7 +133,12 @@ public class ProductNameController {
 			if (productnameBean.getId() != 0) {
 				id = productnameBean.getId();
 				if (id == dummyId || productnameBean2 == null) {
-
+					
+					if(productnameBean.getDocuments() == "" || productnameBean.getDocuments() == null){
+						productnameBean.setDocuments(productnameBean.getImagePath());
+						//System.out.println("---------setImagepath------");
+					}
+					
 					productnameDao.save(productnameBean);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");

@@ -16,9 +16,23 @@ protected String status ;
 protected String productnameStatus ;
 protected String producttype ;
 protected String delarId,quantity,productlist,branchId;
+protected String imagePath ;
+protected String documents ;
 
 
 
+public String getDocuments() {
+	return documents;
+}
+public void setDocuments(String documents) {
+	this.documents = documents;
+}
+public String getImagePath() {
+	return imagePath;
+}
+public void setImagePath(String imagePath) {
+	this.imagePath = imagePath;
+}
 public String getBranchId() {
 	return branchId;
 }
