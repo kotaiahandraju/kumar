@@ -68,7 +68,7 @@
  </definition>
  
  <definition name="cardetails" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/cardetails.jsp" />
+		<put-attribute name="body" value="/WEB-INF/pages/cartdetails.jsp" />
  </definition>
 	
 	

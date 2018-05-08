@@ -70,7 +70,7 @@ table#dependent_table tbody tr td:first-child::before {
 					</div>
 			<br>
 					<div class="pull-right">
-					<a href="orderplacing"><span class="btn btn-warning" ><i class="fa fa-shopping-cart"></i> CONTINUE ORDER</span></a> 
+					<a href="orderplacing"><span class="btn btn-warning" ><i class="fa fa-shopping-cart"></i> CONTINUE ORDERING</span></a> 
 					<span class="btn btn-danger"  onclick="ordePlacing();"><i class="fa fa-bolt" aria-hidden="true"></i> ORDER NOW</span>
 					</div>
 				</div>
