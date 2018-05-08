@@ -58,7 +58,6 @@ table#dependent_table tbody tr td:first-child::before {
 						</div>
 					</div>
 					<div class="panel-body collapse in">
-					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
 					<div class="table-responsive" id="tableId">
 						<table class="table "
 							id="example">
@@ -71,8 +70,8 @@ table#dependent_table tbody tr td:first-child::before {
 					</div>
 			<br>
 					<div class="pull-right">
-					<span class="btn btn-warning" onclick="orderPopup()"><i class="fa fa-shopping-cart"></i> ADD TO CART</span> 
-					<span class="btn btn-danger" onclick="orderPopup()"><i class="fa fa-bolt" aria-hidden="true"></i> ORDER NOW</span>
+					<span class="btn btn-warning" onclick="addCart()"><i class="fa fa-shopping-cart"></i> ADD TO CART</span> 
+					<span class="btn btn-danger" onclick="orderNow()"><i class="fa fa-bolt" aria-hidden="true"></i> ORDER NOW</span>
 					</div>
 				</div>
 				</div>
@@ -132,7 +131,7 @@ function showTableData(response){
 var quantity = [];  
 var productId = []; 
 var res="";
-function orderPopup() {
+function addCart() {
 	quantity = [];  
 	productId = [];
 	 res="";
@@ -161,6 +160,7 @@ function orderPopup() {
 		if(data != ""){
 			var jsonobj = $.parseJSON(data);
 			var count = jsonobj.count;
+			alert(jsonobj.msg);
 			$("#cartId").text(count);
 // 		window.location.href = "${baseurl}/admin/cartdetails";
 			$('input[name^=quantity]').each(function(){
@@ -172,14 +172,43 @@ function orderPopup() {
 	
 }
 
-	function deleteRow(id) {
-		console.log(id);
-		  $("#resDel").remove(); //Deleting the Row (tr) Element 
+function orderNow() {
+	quantity = [];  
+	productId = [];
+	 res="";
+	$('input[name^=quantity]').each(function(){
+		if($.trim($(this).val()) != ""){
+			console.log(this.id);
+			quantity.push($(this).val());
+			var str = this.id; 
+			res= str.replace("quantity", "");
+		    console.log(res);
+		    productId.push(res);
+		}
+	});
+	console.log(quantity);
+	console.log(productId); 
+	if(productId == "" || productId== null){
+		alert("No Products selected ");
+		return false;
 	}
+	var formData = new FormData();
+	formData.append('quantity', quantity);
+	formData.append('productId', productId);
+	
+	$.fn.makeMultipartRequest('POST', 'addtocart', false,
+			formData, false, 'text', function(data) {
+		if(data != ""){
+			var jsonobj = $.parseJSON(data);
+			var count = jsonobj.count;
+		window.location.href = "${baseurl}/admin/cartdetails";
+			
+		}
+		
+	});
+	
+}
 	     
-
-
-var prodcutName='';
 
 
 $("#pageName").text("Order Placing");

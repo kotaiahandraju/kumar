@@ -3,10 +3,6 @@ package com.aurospaces.neighbourhood.bean;
 
 import java.util.Date;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 
 /**
  *
@@ -19,22 +15,24 @@ public class OrdersListBean
 {
 
 protected int id   = 0;
-
-/** Field mapping. **/
 protected Date createdTime ;
-
-/** Field mapping. **/
 protected Date updatedTime ;
-
-/** Field mapping. **/
 protected String delerId ;
-
-/** Field mapping. **/
 protected String quantity ;
+protected String productId,invoiceId,orderId,branchId ;
 
-/** Field mapping. **/
-protected String productId,invoiceId ;
-
+public String getBranchId() {
+	return branchId;
+}
+public void setBranchId(String branchId) {
+	this.branchId = branchId;
+}
+public String getOrderId() {
+	return orderId;
+}
+public void setOrderId(String orderId) {
+	this.orderId = orderId;
+}
 public String getInvoiceId() {
 	return invoiceId;
 }

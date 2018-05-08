@@ -101,4 +101,29 @@ public class CartController {
 		
 		return String.valueOf(objJson);
 	}
+	@RequestMapping(value = "/deletecart")
+	public @ResponseBody String deletecart( CartBean cartBean,ModelMap model, HttpServletRequest request, HttpSession session) {
+		JSONObject objJson = new JSONObject();
+		List<Map<String,Object>> listOrderBeans = null;
+		try{
+			int delete=	cartDao.delete(cartBean.getId());
+			if(delete == 0){
+				objJson.put("msg", "failed");
+
+			}else{
+				
+				objJson.put("msg", "success");
+			}
+			listOrderBeans = cartDao.getallcartDetails();
+				objJson.put("allOrders1", listOrderBeans);
+			int count=	cartDao.countcartdetails(cartBean);
+			objJson.put("count", count);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return String.valueOf(objJson);
+	}
+	
+	
 }
