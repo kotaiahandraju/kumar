@@ -44,7 +44,7 @@ table#dependent_table tbody tr td:first-child::before {
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
     	<li><a href="#">Home</a></li>
-		<li>Order Placing</li>
+		<li>My Cart</li>
 	</ol>
 	<div class="clearfix"></div>
 	<div class="container">
@@ -52,13 +52,12 @@ table#dependent_table tbody tr td:first-child::before {
 			<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4>Order Placing</h4>
+						<h4>My Cart List</h4>
 						<div class="options">   
 							<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
 						</div>
 					</div>
 					<div class="panel-body collapse in">
-					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
 					<div class="table-responsive" id="tableId">
 						<table class="table "
 							id="example">
@@ -71,7 +70,8 @@ table#dependent_table tbody tr td:first-child::before {
 					</div>
 			<br>
 					<div class="pull-right">
-					<span class="btn btn-danger"><i class="fa fa-bolt" aria-hidden="true"></i> ORDER NOW</span>
+					<a href="orderplacing"><span class="btn btn-warning" ><i class="fa fa-shopping-cart"></i> CONTINUE ORDER</span></a> 
+					<span class="btn btn-danger"  onclick="ordePlacing();"><i class="fa fa-bolt" aria-hidden="true"></i> ORDER NOW</span>
 					</div>
 				</div>
 				</div>
@@ -92,7 +92,7 @@ table#dependent_table tbody tr td:first-child::before {
 				</div>
 
 <script type="text/javascript">
-var listOrders1 =${allOrders1};
+ var listOrders1 =${allOrders1};
 
 console.log(listOrders1);
 if (listOrders1 != "") {
@@ -133,7 +133,8 @@ function showTableData(response){
 var quantity = [];  
 var productId = []; 
 var res="";
-function orderPopup() {
+
+function ordePlacing() {
 	quantity = [];  
 	productId = [];
 	 res="";
@@ -157,28 +158,37 @@ function orderPopup() {
 	formData.append('quantity', quantity);
 	formData.append('productId', productId);
 	
-	$.fn.makeMultipartRequest('POST', 'addtocart', false,
+	$.fn.makeMultipartRequest('POST', 'dealerorderproducts', false,
 			formData, false, 'text', function(data) {
 		if(data != ""){
 			var jsonobj = $.parseJSON(data);
 			var count = jsonobj.count;
+			alert(jsonobj.msg);
 			$("#cartId").text(count);
-// 		window.location.href = "${baseurl}/admin/cartdetails";
-			$('input[name^=quantity]').each(function(){
-				$(this).val("");
-			});
+		window.location.href = "${baseurl}/admin/cartdetails";
 		}
 		
 	});
 	
 }
 
-var prodcutName='';
 
 function removecartdata(id){
-	alert(id);
+	var formData = new FormData();
+	formData.append('id', id);
+	
+	$.fn.makeMultipartRequest('POST', 'deletecart', false,
+			formData, false, 'text', function(data) {
+		var jsonobj = $.parseJSON(data);
+		var allOrders = jsonobj.allOrders1;
+		showTableData(allOrders);
+		var count = jsonobj.count;
+		$("#cartId").text(count);
+		alert(jsonobj.msg);
+		
+	});
 }
 
-$("#pageName").text("Order Placing");
-$(".orderplacing").addClass("active"); 
+$("#pageName").text("My Cart");
+// $(".orderplacing").addClass("active"); 
 </script>

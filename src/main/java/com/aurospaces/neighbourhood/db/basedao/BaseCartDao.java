@@ -88,10 +88,11 @@ ps.setString(6, cart.getBranchId());
 	}
 		
 		@Transactional
-		public void delete(int id) {
+		public int delete(int id) {
 			jdbcTemplate = custom.getJdbcTemplate();
 			String sql = "DELETE FROM cart WHERE id=?";
-			jdbcTemplate.update(sql, new Object[]{id});
+			 int count =jdbcTemplate.update(sql, new Object[]{id});
+			 return count;
 		}
 		
 
