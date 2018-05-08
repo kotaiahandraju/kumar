@@ -162,7 +162,10 @@ function orderPopup() {
 			var jsonobj = $.parseJSON(data);
 			var count = jsonobj.count;
 			$("#cartId").text(count);
-		window.location.href = "${baseurl}/admin/cartdetails";
+// 		window.location.href = "${baseurl}/admin/cartdetails";
+			$('input[name^=quantity]').each(function(){
+				$(this).val("");
+			});
 		}
 		
 	});
