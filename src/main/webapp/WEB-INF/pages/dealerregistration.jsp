@@ -69,7 +69,7 @@ border-top: 0px solid #dddddd !important;
                     			
                     				<label for="focusedinput" class="col-md-4 control-label">Business Name <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="name" class="form-control  validate"  placeholder="Name" onkeyup="removeBorder(this.id)" maxlength="20" />
+								    	<form:input path="businessName" class="form-control  validate"  placeholder="Business Name" onkeyup="removeBorder(this.id)" maxlength="20" />
 								    </div>
                     			</div>
                     			
@@ -107,9 +107,9 @@ border-top: 0px solid #dddddd !important;
                     			</div>
                     			
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Landline/Alternative Number<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Landline/Alternative Number</label>
 								    <div class="col-md-6">
-								    	<form:input path="alternativeNumber" value=""  class="form-control validate mobile" placeholder="Landline/Alternative Number" onkeyup="removeBorder(this.id)" maxlength="10" />
+								    	<form:input path="alternativeNumber" value=""  class="form-control  mobile" placeholder="Landline/Alternative Number" onkeyup="removeBorder(this.id)" maxlength="13" />
 								      	<span class="hasError" id="locationError"></span>
 								    </div>
                     			</div>
@@ -137,7 +137,7 @@ border-top: 0px solid #dddddd !important;
                     			
                     				<label for="focusedinput" class="col-md-4 control-label">Contact Person Name<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								   	   <form:input path="shopname" class="form-control  validate" placeholder="Contact Person Name" onkeyup="removeBorder(this.id)" maxlength="20"/>
+								   	   <form:input path="name" class="form-control  validate" placeholder="Contact Person Name" onkeyup="removeBorder(this.id)" maxlength="20"/>
 								      	<span class="hasError" id="storeError"></span>
 								    </div>
                     			</div>

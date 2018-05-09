@@ -26,7 +26,7 @@ public class BaseOrdersListDao{
 	JdbcTemplate jdbcTemplate;
 
  
-	public final String INSERT_SQL = "INSERT INTO orders_list( created_time, updated_time, delerId, quantity, productId,invoiceId) values (?,?, ?, ?, ?, ?)"; 
+	public final String INSERT_SQL = "INSERT INTO orders_list( created_time, updated_time, delerId, quantity, productId,invoiceId,branchId) values (?,?, ?, ?, ?, ?,?)"; 
 
 
 
@@ -67,6 +67,7 @@ ps.setString(3, ordersList.getDelerId());
 ps.setString(4, ordersList.getQuantity());
 ps.setString(5, ordersList.getProductId());
 ps.setString(6, ordersList.getInvoiceId());
+ps.setString(7, ordersList.getBranchId());
 
 							return ps;
 						}

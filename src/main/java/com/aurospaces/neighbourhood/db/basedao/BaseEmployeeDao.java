@@ -26,7 +26,7 @@ public class BaseEmployeeDao{
 	JdbcTemplate jdbcTemplate;
 
  
-	public final String INSERT_SQL = "INSERT INTO kumar_employee( created_time, updated_time, name, shopname, address, city, pincode, shop_phone, gstno, phone_number, email, description, branch_id, roleId, password, username, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
+	public final String INSERT_SQL = "INSERT INTO kumar_employee( created_time, updated_time, name, shopname, address, city, pincode, shop_phone, gstno, phone_number, email, description, branch_id, roleId, password, username, status,businessName,alternativeNumber) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)"; 
 
 
 
@@ -78,6 +78,8 @@ ps.setString(14, kumarEmployee.getRoleId());
 ps.setString(15, kumarEmployee.getPassword());
 ps.setString(16, kumarEmployee.getUsername());
 ps.setString(17, kumarEmployee.getStatus());
+ps.setString(18, kumarEmployee.getBusinessName());
+ps.setString(19, kumarEmployee.getAlternativeNumber());
 
 							return ps;
 						}

@@ -44,7 +44,7 @@ table#dependent_table tbody tr td:first-child::before {
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
     	<li><a href="#">Home</a></li>
-		<li>Order Placement</li>
+		<li>Order Placing</li>
 	</ol>
 	<div class="clearfix"></div>
 	<div class="container">
@@ -52,13 +52,12 @@ table#dependent_table tbody tr td:first-child::before {
 			<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4>Order Placement</h4>
+						<h4>Order Placing</h4>
 						<div class="options">   
 							<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
 						</div>
 					</div>
 					<div class="panel-body collapse in">
-					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
 					<div class="table-responsive" id="tableId">
 						<table class="table "
 							id="example">
@@ -69,7 +68,11 @@ table#dependent_table tbody tr td:first-child::before {
 							<tbody></tbody>
 						</table>
 					</div>
-					<input type="button" value="Place" onclick="orderPopup();">
+			<br>
+					<div class="pull-right">
+					<span class="btn btn-warning" onclick="addCart()"><i class="fa fa-shopping-cart"></i> ADD TO CART</span> 
+					<span class="btn btn-danger" onclick="orderNow()"><i class="fa fa-bolt" aria-hidden="true"></i> ORDER NOW</span>
+					</div>
 				</div>
 				</div>
 			</div>
@@ -79,7 +82,7 @@ table#dependent_table tbody tr td:first-child::before {
 						<table class="table "
 							id="example1">
 							<thead>
-								<tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>quantity</td>
+								<tr><th> Product category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><td>quantity</td>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -111,7 +114,7 @@ function showTableData(response){
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		serviceUnitArray[orderObj.id] = orderObj;
-		var quantity ="<input type='text' name='quantity[]' id='"+orderObj.id+"quantity' />"
+		var quantity ="<input type='text' name='quantity[]' class='numericOnly' id='"+orderObj.id+"quantity' />"
 		var tblRow = "<tr>"
 				+ "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>"
 				+ "<td title='"+orderObj.productIdName+"'>"	+ orderObj.productIdName + "</td>"
@@ -125,200 +128,89 @@ function showTableData(response){
 	
 }
 
-function orderPopup() {
-	var quantity = [];  
-	var id = []; 
-	var res="";
-	
-	 var table=$('#tabledata').html('');
-	var tableHead = '<table  cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
-	'<thead><tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>Quantity</td></tr>'+
-	"</thead><tbody></tbody></table>";
-	$("#tabledata").html(tableHead);
-
+var quantity = [];  
+var productId = []; 
+var res="";
+function addCart() {
+	quantity = [];  
+	productId = [];
+	 res="";
 	$('input[name^=quantity]').each(function(){
-		$("#orderPlacement").hide();
-		 $("#displayQuantityData").show();
-		if($(this).val() != ""){
+		if($.trim($(this).val()) != ""){
 			console.log(this.id);
 			quantity.push($(this).val());
 			var str = this.id; 
 			res= str.replace("quantity", "");
 		    console.log(res);
-			id.push(res);
-			
+		    productId.push(res);
+		}
+	});
+	console.log(quantity);
+	console.log(productId); 
+	if(productId == "" || productId== null){
+		alert("No Products selected ");
+		return false;
+	}
+	var formData = new FormData();
+	formData.append('quantity', quantity);
+	formData.append('productId', productId);
+	
+	$.fn.makeMultipartRequest('POST', 'addtocart', false,
+			formData, false, 'text', function(data) {
+		if(data != ""){
+			var jsonobj = $.parseJSON(data);
+			var count = jsonobj.count;
+			alert(jsonobj.msg);
+			$("#cartId").text(count);
+// 		window.location.href = "${baseurl}/admin/cartdetails";
+			$('input[name^=quantity]').each(function(){
+				$(this).val("");
+			});
+		}
+		
+	});
+	
+}
 
-			var tblRow = "<tr id='resDel'>"
-						+ "<td title='"+serviceUnitArray[res].productTypeName+"'>"+ serviceUnitArray[res].productTypeName + "</td>"
-						+ "<td title='"+serviceUnitArray[res].productIdName+"'>"	+ serviceUnitArray[res].productIdName + "</td>"
-						+ "<td title='"+serviceUnitArray[res].itemcode+"'>" + serviceUnitArray[res].itemcode+ "</td>" 
-						+ "<td title='"+serviceUnitArray[res].itemdescrption+"'>"+ serviceUnitArray[res].itemdescrption + "</td>"
-						+ "<td >" + $(this).val()+ "</td>"
-						+"<td id='"+res+"delete' onclick='deleteRow(this.id);'><a  <i class='fa fa-trash' aria-hidden='true'></i></a> </td>"
-						$(tblRow).appendTo("#tabledata table tbody");
+function orderNow() {
+	quantity = [];  
+	productId = [];
+	 res="";
+	$('input[name^=quantity]').each(function(){
+		if($.trim($(this).val()) != ""){
+			console.log(this.id);
+			quantity.push($(this).val());
+			var str = this.id; 
+			res= str.replace("quantity", "");
+		    console.log(res);
+		    productId.push(res);
+		}
+	});
+	console.log(quantity);
+	console.log(productId); 
+	if(productId == "" || productId== null){
+		alert("No Products selected ");
+		return false;
+	}
+	var formData = new FormData();
+	formData.append('quantity', quantity);
+	formData.append('productId', productId);
+	
+	$.fn.makeMultipartRequest('POST', 'addtocart', false,
+			formData, false, 'text', function(data) {
+		if(data != ""){
+			var jsonobj = $.parseJSON(data);
+			var count = jsonobj.count;
+		window.location.href = "${baseurl}/admin/cartdetails";
 			
 		}
 		
 	});
-	console.log(quantity);
-	console.log(id); 
 	
 }
-
-	function deleteRow(id) {
-		console.log(id);
-		  $("#resDel").remove(); //Deleting the Row (tr) Element 
-	}
 	     
 
 
-var prodcutName='';
-
-function editEmpCreation(id){
-	$("#id").val(id);
-	$("#branchId").val(serviceUnitArray[id].branchId);
-	$("#name").val(serviceUnitArray[id].name);
-	$("#username").val(serviceUnitArray[id].username);
-	$("#password").val(serviceUnitArray[id].password);
-	$("#roleId").val(serviceUnitArray[id].roleId);
-	$("#email").val(serviceUnitArray[id].email);
-	$("#phoneNumber").val(serviceUnitArray[id].phoneNumber);
-	$("#status").val(serviceUnitArray[id].status);
-	$("#submit1").val("Update");
-	$(window).scrollTop($('#moveTo').offset().top);
-}
-
-function deleteEmpCreation(id,status){
-	var checkstr=null;
-	if(status == 0){
-		 checkstr =  confirm('Are you sure you want to Deactivate?');
-		 $('#inActive').prop('checked', false);
-	}else{
-		 checkstr =  confirm('Are you sure you want to Activate?');
-		 $('#inActive').prop('checked', false);
-	}
-	if(checkstr == true){
-		var formData = new FormData();
-		formData.append('status', status);
-		formData.append('id', id);
-		
-		$.fn.makeMultipartRequest('POST', 'deleteEmpCreation', false,
-				formData, false, 'text', function(data) {
-			if(data != ""){
-				var resJson=JSON.parse(data);
-	            showTableData(resJson);
-				  tooltip();
-	          
-						console.log(resJson);
-			}else{
-// 				alert("Inactive List Empty");
-				 showTableData("");
-			}
-		       // window.location.reload();
-			
-		});
-	}
-}
-
-function dealerRegister(id) {
-	alert("model"+id);
-	$("#userId").val(id);
-	
- 	$("#myModal").modal();
-
-}
-
-function genarateAuthDetails() {
-	
-	var userId=$("#userId").val();
-	var username=$("#username").val();
-		var formData = new FormData();
-		formData.append('userId', userId);
-		formData.append('username', username);
-		
-		$.fn.makeMultipartRequest('POST', 'inActiveEmployeeCreation', false,
-				formData, false, 'text', function(data) {
-			if(data != ""){
-				var resJson=JSON.parse(data);
-	            showTableData(resJson);
-				  tooltip();
-	          
-						console.log(resJson);
-			}else{
-				alert("Inactive List Empty");
-			}
-			
-				});
-	
-}
-function inactiveData() {
-	
-	var status="0";
-	if($('#inActive').is(":checked") == true){
-		status="0";
-	}else{
-		status="1";
-	}
-		
-		var formData = new FormData();
-		formData.append('status', status);
-		
-		$.fn.makeMultipartRequest('POST', 'inActiveEmployeeCreation', false,
-				formData, false, 'text', function(data) {
-			if(data != ""){
-				var resJson=JSON.parse(data);
-	            showTableData(resJson);
-				  tooltip();
-	          
-						console.log(resJson);
-			}else{
-				alert("Inactive List Empty");
-			}
-			
-				});
-	
-}
-
-
-function productNameFilter(productName){
-	var productId = $("#producttype").val();
-	if(productId.length !=0){
-		$('#loadAjax').show();
-	$.ajax({
-		type : "POST",
-		url : "getProductNameFilter.json",
-		data : "productId=" + productId,
-		dataType : "json",
-		success : function(response) {
-			 /* alert(response); */  
-			var optionsForClass = "";
-			optionsForClass = $("#productname").empty();
-			optionsForClass.append(new Option("-- Choose Product --"));
-			$.each(response, function(i, tests) {
-				var id=tests.id;
-				var productname=tests.productname;
-				optionsForClass.append(new Option(productname, id));
-			});
-			$('#loadAjax').hide();
-			if(productName!='') $('#productname').val(productName);
-			$('#productName').trigger("chosen:updated");
-		},
-		error : function(e) {
-			$('#loadAjax').hide();
-		},
-		statusCode : {
-			406 : function() {
-				$('#loadAjax').hide();
-		
-			}
-		}
-	});
-	$('#loadAjax').hide();
-
-	}
-} 
-
-
-$("#pageName").text("Order Placement");
-$(".orderPlacement").addClass("active"); 
+$("#pageName").text("Order Placing");
+$(".orderplacing").addClass("active"); 
 </script>

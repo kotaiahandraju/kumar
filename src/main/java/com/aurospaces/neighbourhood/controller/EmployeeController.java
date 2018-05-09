@@ -101,15 +101,16 @@ public class EmployeeController {
 				}
 			}
 			if (employeeBean.getId() == 0 && employeeBean2 == null) {
+				empDao.save(employeeBean);
 				LoginBean login = new LoginBean();
-				login.setEmpId(employeeBean.getName());
+				login.setEmpId(String.valueOf(employeeBean.getId()));
 				login.setUserName(employeeBean.getUsername());
 				login.setPassword(employeeBean.getPassword());
 				login.setStatus("1");
 				login.setRoleId("2");
 				login.setBranchId(employeeBean.getBranchId());
 				loginDao.save(login);
-				empDao.save(employeeBean);
+				
 
 				redir.addFlashAttribute("msg", "Record Inserted Successfully");
 				redir.addFlashAttribute("cssMsg", "success");
