@@ -38,7 +38,7 @@ table#dependent_table tbody tr td:first-child::before {
 </style>
         <div class="clearfix"></div>
              <ol class="breadcrumb">
-              <li><a href="#">Home</a></li>
+              <li><a href="dashboard">Home</a></li>
                <li>Product Category </li>
             </ol>
             <div class="clearfix"></div>
