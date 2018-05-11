@@ -23,6 +23,7 @@ window.setTimeout(function() {
     });
 }, 5000);
 </script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
 <style type="text/css">
 .impColor{color:red;}
 .your-class::-webkit-input-placeholder {color: #e73d4a !important;}
@@ -187,49 +188,45 @@ border-top: 0px solid #dddddd !important;
                     	
                     			
                     		</div>
-                    		<div class="container">
-                    		
-							  <div class="modal fade" id="myModal" role="dialog">
-							    <div class="modal-dialog">
-							    
-							      <!-- Modal content-->
-							      <div class="modal-content">
-							        <div class="modal-header">
-							          <button type="button" class="close" data-dismiss="modal">&times;</button>
-							          <h4 class="modal-title">Modal Header</h4>
-							        </div>
-							        <div class="modal-body">
-							          <p>Some text in the modal.</p>
-							          <input type="text" id="mobileNoValidate">
-							          
-							        </div>
-							        <div class="modal-footer">
-							          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							        </div>
-							      </div>
-							      
-							    </div>
-							  </div>
-							  
-							</div>
 					</form:form>
 					</div>
 				       <div class="panel-footer">
 					      	<div class="row">
 					      		<div class="col-sm-12">
 					      			<div class="btn-toolbar text-center">
-						      			<input type="button"  value="Submit" class="btn-primary btn" onclick="checkOTPValidate();" />
+						      			<input type="button" id="submit1" value="Submit" class="btn-primary btn" onclick="checkOTPValidate();" />
 <!-- 										<button id="submit4" class="btn-primary btn" onclick="checkOTPValidate();">Submit</button> -->
 						      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
 					      			</div>
 					      		</div>
 					      	</div>
 					      </div>
+					      
+					      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						        <h4 class="modal-title" id="exampleModalLabel">Otp Validating</h4>
+						      </div>
+						      <div class="modal-body">
+						     <input type="text" id="OTP">
+						      </div>
+						      <div class="modal-footer">
+						       <button type="button" class="btn btn-success" data-dismiss="modal" onclick="dealerCreation();">Submit</button>
+						        <button type="button"  class="btn btn-default" data-dismiss="modal">Close</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
 			</div>
                     
                 </div>
+                <script type='text/javascript' src='${baseurl }/assets/js/jquery-1.10.2.min.js'></script>
                 <script type='text/javascript' src="${baseurl }/js/jquery.blockUI.min.js" ></script>
-<script type='text/javascript' src='${baseurl }/js/ajax.js'></script>
+				<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+			<script type='text/javascript' src='${baseurl }/js/ajax.js'></script>
                 <script type="text/javascript">
                     		
                     		function checkOTPValidate() {
@@ -241,43 +238,66 @@ border-top: 0px solid #dddddd !important;
                 					
                 					 $.fn.makeMultipartRequest('POST','validateOTP', false,formData, false, 'text', function(data) {
                 								console.log(data);
-                								if(data=="success"){
+                								var resJson = JSON.parse(data);
+                								if(resJson.fail=="failed"){
+                									alert("Mobile Numober Already Exist.")
+                								}else{
                 									$("#myModal").modal();
                 								}
-//                 								$.each(jsonobj, function(i, tests) {
-//                 									console.log(tests);
-//                 								}
-                								//$("#roomPrice").text(data);
-
-                							}); 
-                							
-                				/* 	$.ajax({
-                						type : "POST",
-                						url : "validateOTP.htm",
-                						data : formData,
-                						beforeSend : function() {
-                							$.blockUI({
-                								message : 'Please wait'
-                							});
-                						},
-                						success : function(response) {
-                							if (response != null) {
-                								$.unblockUI();
-                								var resJson = JSON.parse(response);
-                								showTableData(resJson.allOrders1);
-                								tooltip();
-
-                								//window.location.reload();
-                							}
-                							// window.location.reload();
-                						},
-                						error : function(e) {
-                							$.unblockUI();
-                							console.log(e);
-                						}
-                					}); */
+             								});
                     				
                     			}
+                    			
+                    		}
+                    			
+
+                        		function dealerCreation() {
+                        			var id = $("#id").val();
+                        			var businessName = $("#businessName").val();
+                        			var address = $("#address").val();
+                        			var city = $("#city").val();
+                        			var pincode = $("#pincode").val();
+                        			var shopPhone = $("#shopPhone").val();
+                        			var alternativeNumber = $("#alternativeNumber").val();
+                        			var gstno = $("#gstno").val();
+                        			var name = $("#name").val();
+                        			var designation = $("#designation").val();
+                        			var phoneNumber = $("#phoneNumber").val();
+                        			var email = $("#email").val();
+                        			var branchId = $("#branchId").val();
+                        			var OTP = $("#OTP").val();
+                        			
+                        			
+                        			if(phoneNumber !=''){
+                        				
+                    					var formData = new FormData();
+                    					formData.append('id', id);
+                    					formData.append('businessName', businessName);
+                    					formData.append('address', address);
+                    					formData.append('city', city);
+                    					formData.append('pincode', pincode);
+                    					formData.append('shopPhone', shopPhone);
+                    					formData.append('alternativeNumber', alternativeNumber);
+                    					formData.append('gstno', gstno);
+                    					formData.append('name', name);
+                    					formData.append('designation', designation);
+                    					formData.append('phoneNumber', phoneNumber);
+                    					formData.append('OTP', OTP);
+                    					formData.append('email', email);
+                    					formData.append('branchId', branchId);
+                    					
+                    					
+                    					 $.fn.makeMultipartRequest('POST','addDelar', false,formData, false, 'text', function(data) {
+                    								console.log(data);
+                    								var resJson = JSON.parse(data);
+                    								if(resJson.msg="success"){
+                    									alert("Alreday Registered");
+                    								}else{
+                    									alert(" Registered Successfully");
+                    								}
+                 								});
+                        				
+                        			}
                     			
                     			
 

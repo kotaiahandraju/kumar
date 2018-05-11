@@ -189,6 +189,24 @@ public class EmployeeDao extends BaseEmployeeDao
 	return null;
 	 
  }
+ public EmployeeBean otpChecking(EmployeeBean employee){
+		
+		try{
+			 jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "select  *from otp where phoneNumber=? and OTP=?";
+			List<EmployeeBean> retlist = jdbcTemplate.query(sql,
+					new Object[]{employee.getPhoneNumber(),employee.getOTP()},ParameterizedBeanPropertyRowMapper.newInstance(EmployeeBean.class));
+					if(retlist.size() > 0)
+						return retlist.get(0);
+					return null;
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			
+		}
+		return employee;
+		
+	}
 
 }
 
