@@ -53,7 +53,7 @@ public class CartController {
 		int count=	cartDao.countcartdetails(cartBean);
 		
 			objJson.put("count", count);
-			objJson.put("msg", "success");
+			objJson.put("msg", "Item successfully added to your cart");
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -112,7 +112,7 @@ public class CartController {
 
 			}else{
 				
-				objJson.put("msg", "success");
+				objJson.put("msg", "Are you sure you want to delete this item?");
 			}
 			listOrderBeans = cartDao.getallcartDetails();
 				objJson.put("allOrders1", listOrderBeans);
