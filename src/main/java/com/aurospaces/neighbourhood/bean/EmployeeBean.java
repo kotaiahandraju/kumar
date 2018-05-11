@@ -49,10 +49,18 @@ protected String phoneNumber ;
 protected String designation,businessName ;
 
 
-protected String alternativeNumber;
+protected String alternativeNumber,OTP;
 
 
 
+
+
+public String getOTP() {
+	return OTP;
+}
+public void setOTP(String oTP) {
+	OTP = oTP;
+}
 public String getBusinessName() {
 	return businessName;
 }

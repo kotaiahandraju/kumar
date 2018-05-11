@@ -110,7 +110,48 @@ System.out.println("delar registration");
 		}
 		return statesMap;
 	}
-	
+	/* @SuppressWarnings("unused")
+		@RequestMapping(value = "/validateOTP")
+			public @ResponseBody String validateOTP(@ModelAttribute OTP otp)  {
+				List<Map<String,Object>> listOrderBeans = null;
+				ObjectMapper objectMapper = null;
+				String sJson="";
+				String sRetList="";
+				OTP otpBean=null;
+				OTP otp2=null;
+				boolean result=false;
+				JSONObject OtpJson=null;
+				try {
+					JSONObject json=new JSONObject();
+					if(otp.getId()==0) {
+						OtpJson=new JSONObject();
+						otpBean=capacityMasterDao.getOtpDetails(otp.getMobileNumber());
+						if(otpBean != null) {
+							System.out.println("otpBean=="+otpBean);
+							OtpJson.put("msg", "mobile number already exist.");
+//							sJson=json.toString();
+							
+						}else {
+							otp.setOtp(CommonUtils.generateOtpPIN());
+							capacityMasterDao.otpSave(otp);
+							otp2=capacityMasterDao.getOtpDetails(otp.getMobileNumber());
+								result=Sms.sendMessage(objContext, otp2);
+								if(result) {
+									OtpJson=new JSONObject(otp2);
+//									System.out.println("OtpData=="+OtpJson);
+//									System.out.println("OtpData=="+otp2.toString());
+									
+							}
+							
+						}
+						
+					}
+					
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				return String.valueOf(OtpJson);
+			}*/
 	
 	
 	 

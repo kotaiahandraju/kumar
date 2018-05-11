@@ -49,7 +49,8 @@ border-top: 0px solid #dddddd !important;
 			</div>
 		</div>
 	</c:if>
-<div class="row" id="moveTo">
+	<div id="someHide">
+
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                  <h2 class="col-md-10" align="center">Dealer Registration</h2>
@@ -60,6 +61,8 @@ border-top: 0px solid #dddddd !important;
                         <div class="options"></div>
                         
                     <form:form class="form-horizontal" modelAttribute="delar"  role="form" id="delar-form" action="addDelar" method="post">
+                    <div class="row" id="moveTo">
+                    
                     <div class="panel-body">
                     <form:hidden path="id"/>
                     
@@ -127,9 +130,9 @@ border-top: 0px solid #dddddd !important;
                     	
                     	
                     	
-                    	 
+                    	
                     	<h3 class="col-md-5">Contact Information</h3>
-                           
+                           <div class="row" id="moveTo">
                     	<div class="col-md-6">
                        
                           
@@ -178,16 +181,43 @@ border-top: 0px solid #dddddd !important;
 								    </div>
                     			</div>
                     		
+                    		</div>
+                    		</div>
                     		
-                    		
-                    		
-                    		
+                    		</div>
                     	
                     			
                     		</div>
+                    		<div class="container">
                     		
-                    		
-                     
+							  <h2>Modal Example</h2>
+							  <!-- Trigger the modal with a button -->
+							  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
+							
+							  <!-- Modal -->
+							  <div class="modal fade" id="myModal" role="dialog">
+							    <div class="modal-dialog">
+							    
+							      <!-- Modal content-->
+							      <div class="modal-content">
+							        <div class="modal-header">
+							          <button type="button" class="close" data-dismiss="modal">&times;</button>
+							          <h4 class="modal-title">Modal Header</h4>
+							        </div>
+							        <div class="modal-body">
+							          <p>Some text in the modal.</p>
+							          <input type="text" id="mobileNoValidate">
+							          
+							        </div>
+							        <div class="modal-footer">
+							          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							        </div>
+							      </div>
+							      
+							    </div>
+							  </div>
+							  
+							</div>
                     	
 	                    <div class="panel-footer">
 					      	<div class="row">
@@ -205,6 +235,36 @@ border-top: 0px solid #dddddd !important;
 			</div>
                     
                 </div>
+                
+                <script type="text/javascript">
+                    		
+                    		function checkOTPValidate() {
+                    			var phoneNumber = $("#phoneNumber").val();
+                    			if(phoneNumber !=''){
+                    				
+                    				$("#myModal").modal();
+                					
+                					var formData = new FormData();
+                					formData.append('phoneNumber', phoneNumber);
+                					
+                					$.fn.makeMultipartRequest('POST','validateOTP', false,
+                							formData, false, 'text', function(data) {
+                								console.log(data);
+//                 								$.each(jsonobj, function(i, tests) {
+//                 									console.log(tests);
+//                 								}
+                								//$("#roomPrice").text(data);
+
+                							});
+                    				
+                    			}
+                    			
+                    			
+
+            				}
+                    		
+                    		
+                    		</script>
 
 </body>
 <script type='text/javascript' src='js/customValidation.js'></script>
