@@ -23,6 +23,7 @@ window.setTimeout(function() {
     });
 }, 5000);
 </script>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
 <style type="text/css">
 .impColor{color:red;}
 .your-class::-webkit-input-placeholder {color: #e73d4a !important;}
@@ -49,7 +50,7 @@ border-top: 0px solid #dddddd !important;
 			</div>
 		</div>
 	</c:if>
-<div class="row" id="moveTo">
+
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                  <h2 class="col-md-10" align="center">Dealer Registration</h2>
@@ -59,7 +60,9 @@ border-top: 0px solid #dddddd !important;
                    
                         <div class="options"></div>
                         
-                    <form:form class="form-horizontal" modelAttribute="delar"  role="form" id="delar-form" action="addDelar" method="post">
+                    <form:form class="form-horizontal" modelAttribute="delar" action="validateOTP" role="form" id="delar-form"  method="post">
+                    <div class="row" id="moveTo">
+                    
                     <div class="panel-body">
                     <form:hidden path="id"/>
                     
@@ -127,9 +130,9 @@ border-top: 0px solid #dddddd !important;
                     	
                     	
                     	
-                    	 
+                    	
                     	<h3 class="col-md-5">Contact Information</h3>
-                           
+                           <div class="row" id="moveTo">
                     	<div class="col-md-6">
                        
                           
@@ -178,33 +181,130 @@ border-top: 0px solid #dddddd !important;
 								    </div>
                     			</div>
                     		
+                    		</div>
+                    		</div>
                     		
-                    		
-                    		
-                    		
+                    		</div>
                     	
                     			
                     		</div>
-                    		
-                    		
-                     
-                    	
-	                    <div class="panel-footer">
+					</form:form>
+					</div>
+				       <div class="panel-footer">
 					      	<div class="row">
 					      		<div class="col-sm-12">
 					      			<div class="btn-toolbar text-center">
-						      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
+						      			<input type="button" id="submit1" value="Submit" class="btn-primary btn" onclick="checkOTPValidate();" />
+<!-- 										<button id="submit4" class="btn-primary btn" onclick="checkOTPValidate();">Submit</button> -->
 						      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
 					      			</div>
 					      		</div>
 					      	</div>
 					      </div>
-					</form:form>
-					</div>
-				      
+					      
+					      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						        <h4 class="modal-title" id="exampleModalLabel">Otp Validating</h4>
+						      </div>
+						      <div class="modal-body">
+						     <input type="text" id="OTP">
+						      </div>
+						      <div class="modal-footer">
+						       <button type="button" class="btn btn-success" data-dismiss="modal" onclick="dealerCreation();">Submit</button>
+						        <button type="button"  class="btn btn-default" data-dismiss="modal">Close</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
 			</div>
                     
                 </div>
+                <script type='text/javascript' src='${baseurl }/assets/js/jquery-1.10.2.min.js'></script>
+                <script type='text/javascript' src="${baseurl }/js/jquery.blockUI.min.js" ></script>
+				<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+
+			<script type='text/javascript' src='${baseurl }/js/ajax.js'></script>
+                <script type="text/javascript">
+                    		
+                    		function checkOTPValidate() {
+                    			var phoneNumber = $("#phoneNumber").val();
+                    			if(phoneNumber !=''){
+                    				
+                					var formData = new FormData();
+                					formData.append('phoneNumber', phoneNumber);
+                					
+                					 $.fn.makeMultipartRequest('POST','validateOTP', false,formData, false, 'text', function(data) {
+                								console.log(data);
+                								var resJson = JSON.parse(data);
+                								if(resJson.fail=="failed"){
+                									alert("Mobile Numober Already Exist.")
+                								}else{
+                									$("#myModal").modal();
+                								}
+             								});
+                    				
+                    			}
+                    			
+                    		}
+                    			
+
+                        		function dealerCreation() {
+                        			var id = $("#id").val();
+                        			var businessName = $("#businessName").val();
+                        			var address = $("#address").val();
+                        			var city = $("#city").val();
+                        			var pincode = $("#pincode").val();
+                        			var shopPhone = $("#shopPhone").val();
+                        			var alternativeNumber = $("#alternativeNumber").val();
+                        			var gstno = $("#gstno").val();
+                        			var name = $("#name").val();
+                        			var designation = $("#designation").val();
+                        			var phoneNumber = $("#phoneNumber").val();
+                        			var email = $("#email").val();
+                        			var branchId = $("#branchId").val();
+                        			var OTP = $("#OTP").val();
+                        			
+                        			
+                        			if(phoneNumber !=''){
+                        				
+                    					var formData = new FormData();
+                    					formData.append('id', id);
+                    					formData.append('businessName', businessName);
+                    					formData.append('address', address);
+                    					formData.append('city', city);
+                    					formData.append('pincode', pincode);
+                    					formData.append('shopPhone', shopPhone);
+                    					formData.append('alternativeNumber', alternativeNumber);
+                    					formData.append('gstno', gstno);
+                    					formData.append('name', name);
+                    					formData.append('designation', designation);
+                    					formData.append('phoneNumber', phoneNumber);
+                    					formData.append('OTP', OTP);
+                    					formData.append('email', email);
+                    					formData.append('branchId', branchId);
+                    					
+                    					
+                    					 $.fn.makeMultipartRequest('POST','addDelar', false,formData, false, 'text', function(data) {
+                    								console.log(data);
+                    								var resJson = JSON.parse(data);
+                    								if(resJson.msg="success"){
+                    									alert("Alreday Registered");
+                    								}else{
+                    									alert(" Registered Successfully");
+                    								}
+                 								});
+                        				
+                        			}
+                    			
+                    			
+
+            				}
+                    		
+                    		
+                    		</script>
 
 </body>
 <script type='text/javascript' src='js/customValidation.js'></script>

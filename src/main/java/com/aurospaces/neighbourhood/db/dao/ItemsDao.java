@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
@@ -73,9 +74,17 @@ public class ItemsDao extends BaseItemsDao
 		
 	}
 	public  List<Map<String,Object>> getsubgategoryProductList(ItemsBean itemsBean){
+		
 		 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = " SELECT * FROM items WHERE `productname`=? ";
-			List<Map<String,Object>> retlist = jdbcTemplate.queryForList(sql,new Object[] {itemsBean.getSubcategory()});
+		 StringBuffer buffer =new StringBuffer();
+		 buffer.append("SELECT i.* ,pn.productname as productIdName,pt.producttype As productTypeName, CASE WHEN i.status IN ('0') THEN 'Deactive' WHEN i.status in ('1') THEN 'Active'  ELSE '-----' END as itemsStatus   FROM items i, productname pn,producttype pt ,`branch_products` bp where i.status='1' and i.productId=pt.id and  i.productname=pn.id AND bp.`product_id`=i.id  ");
+		 if(StringUtils.isNotBlank(itemsBean.getBranchId())){
+				buffer.append(" AND bp.`branch_id` IN ('all','"+itemsBean.getBranchId()+"') ");
+			}
+			buffer.append(" and i.status='1' order by pn.productId ,pt.producttype ");
+			
+			String sql = buffer.toString();
+			List<Map<String,Object>> retlist = jdbcTemplate.queryForList(sql,new Object[] {});
 			if(retlist.size() > 0)
 				return retlist;
 			return null;

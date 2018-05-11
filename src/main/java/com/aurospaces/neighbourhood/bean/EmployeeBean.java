@@ -55,10 +55,24 @@ public String getConfirm() {
 public void setConfirm(String confirm) {
 	this.confirm = confirm;
 }
-protected String alternativeNumber;
+protected String alternativeNumber,OTP,dealerName;
 
 
 
+
+
+public String getDealerName() {
+	return dealerName;
+}
+public void setDealerName(String dealerName) {
+	this.dealerName = dealerName;
+}
+public String getOTP() {
+	return OTP;
+}
+public void setOTP(String oTP) {
+	OTP = oTP;
+}
 public String getBusinessName() {
 	return businessName;
 }

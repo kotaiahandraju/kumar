@@ -3,29 +3,43 @@
  */
 package com.aurospaces.neighbourhood.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aurospaces.neighbourhood.bean.EmployeeBean;
 import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.bean.OrdersListBean;
 import com.aurospaces.neighbourhood.bean.ProductnameBean;
+import com.aurospaces.neighbourhood.db.dao.EmployeeDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.KhaibarUsersDao;
 import com.aurospaces.neighbourhood.db.dao.OrdersListDao;
 import com.aurospaces.neighbourhood.util.KumarUtil;
+import com.aurospaces.neighbourhood.util.SendSMS;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import CommonUtils.CommonUtils;
 
 /**
  * @author YOGI
@@ -35,6 +49,8 @@ public class RestController {
 	@Autowired KhaibarUsersDao objKhaibarUsersDao;
 	@Autowired OrdersListDao ordersListDao;
 	@Autowired ItemsDao itemsDao;
+	@Autowired EmployeeDao empDao;
+	@Autowired ServletContext objContext;
 	@RequestMapping(value = "/rest/getLogin")
 	public @ResponseBody String getLogin(@RequestBody LoginBean loginBean ,  HttpServletRequest request) throws Exception {
 		List<Map<String,Object>>  list=null;
@@ -45,19 +61,12 @@ public class RestController {
 			list = objKhaibarUsersDao.getloginChecking(loginBean);
 			System.out.println(loginBean);
 			if(list != null){
-				
-				for (Map<String, Object> map : list) {
-					System.out.println(map.get("branchId"));
-					branchid = String.valueOf(map.get("branchId"));
-				}
-//				 branchid = list.getBranchId();
 				objJSON.put("loginList", list);
 				
 			}else{
 				objJSON.put("loginList", "");
 			}
-			List<Map<String,Object>> delarlist = objKhaibarUsersDao.getDonarList(branchid);
-			objJSON.put("delarlist", delarlist);
+			
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -209,5 +218,105 @@ public class RestController {
 		}
 		return String.valueOf(objJSON);
 	}
+	@RequestMapping(value = "/rest/sendOtp")
+	public @ResponseBody String sendOtp(HttpServletRequest request,@RequestBody EmployeeBean employeeBean) {
+		JSONObject objJSON = new JSONObject();
+		List<Map<String,Object>> listOrderBeans=null;
+		InputStream input = null;
+		String resultOtp = null;
+		 Properties prop = new Properties();
+		try{
+
+			EmployeeBean objEmployeeBean = empDao.mobileDuplicateCheck(employeeBean);
+			if (objEmployeeBean != null ) {
+				
+				objJSON.put("msg", "false");
+				// System.out.println(sJson);
+			} else {
+				 employeeBean.setOTP(CommonUtils.generatePIN());
+				 String propertiespath = objContext.getRealPath("Resources" +File.separator+"DataBase.properties");
+					//String propertiespath = "C:\\PRO\\Database.properties";
+				 objJSON.put("msg", "true");
+					input = new FileInputStream(propertiespath);
+					// load a properties file
+					prop.load(input);
+					String msg1 = prop.getProperty("OTPForDealer");
+					msg1 =msg1.replace("_otp_", employeeBean.getOTP());
+					if(StringUtils.isNotBlank(employeeBean.getPhoneNumber())){
+						// delar send OTP
+						resultOtp=SendSMS.sendSMS(msg1, employeeBean.getPhoneNumber(), objContext);
+					
+					}
+			}
+			
+			
+			objJSON.put("Otp", employeeBean.getOTP());
+			
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return String.valueOf(objJSON);
+	}
+	@RequestMapping(value = "/rest/getAllBranches")
+	public @ResponseBody String getAllBranches(HttpServletRequest request) {
+		JSONObject objJSON = new JSONObject();
+		try{
+			String sSql = "select id,branchname from kumar_branch where  status='1'";
+			List<EmployeeBean> list1 = empDao.branchNames(sSql);
+			
+			objJSON.put("branches", list1);
+			
+
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return String.valueOf(objJSON);
+	}
+	
+	@RequestMapping(value = "rest/addDelar")
+	public @ResponseBody String addDelar(@RequestBody EmployeeBean employeeBean,	ModelMap model, HttpServletRequest request, HttpSession session,RedirectAttributes redirect) {
+		InputStream input = null;
+		JSONObject jsonObject = new JSONObject();
+		 Properties prop = new Properties();
+		try {
+			EmployeeBean objEmployeeBean = empDao.mobileDuplicateCheck(employeeBean);
+			if(objEmployeeBean != null){
+				jsonObject.put("msg", "Alreday Registered ");
+			}else{
+				employeeBean.setRoleId("3");
+				employeeBean.setStatus("0");
+				empDao.save(employeeBean);
+				 String propertiespath = objContext.getRealPath("Resources" +File.separator+"DataBase.properties");
+					//String propertiespath = "C:\\PRO\\Database.properties";
+			
+					input = new FileInputStream(propertiespath);
+					// load a properties file
+					prop.load(input);
+					String msg = prop.getProperty("send_delar_sms");
+					String msg1 = prop.getProperty("send_branch_manger_delardetails");
+					msg1 =msg1.replace("_name_", employeeBean.getName());
+					msg1 =msg1.replace("_mobile_", employeeBean.getPhoneNumber());
+					if(StringUtils.isNotBlank(employeeBean.getPhoneNumber())){
+						// delar send sms
+					SendSMS.sendSMS(msg, employeeBean.getPhoneNumber(), objContext);
+					
+					}
+				EmployeeBean empbean =	empDao.getBranchEmployees(employeeBean);
+				if(empbean != null){
+					// branch manager send sms
+					SendSMS.sendSMS(msg1, empbean.getPhoneNumber(), objContext);
+				}
+				jsonObject.put("msg", " Registered Successfully ");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+
+		}
+		return String.valueOf(jsonObject);
+	}
+	
 }
 	
