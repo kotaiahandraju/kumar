@@ -38,7 +38,7 @@ table#dependent_table tbody tr td:first-child::before {
 </style>
         <div class="clearfix"></div>
              <ol class="breadcrumb">
-              <li><a href="#">Home</a></li>
+              <li><a href="dashboard">Home</a></li>
                <li>Product SubCategory </li>
             </ol>
             <div class="clearfix"></div>
@@ -102,9 +102,10 @@ table#dependent_table tbody tr td:first-child::before {
                     		<div class="col-md-4">
                     			<div class="form-group">
                     			
-                    			<img id="imageId" style="display: none;    width: 20%;" src="" ><span id="imageLable" style="display: none;"></span>
-													<form:hidden path="imagePath"/>
-													<input type="file" name="file" style="margin-top: 3%;" id="documents" onchange="" />
+                    			<img id="imageId" style="display: none;    width: 20%;" src=""><span id="imageLable" style="display: none;"></span>
+                    			<label for="focusedinput" class="col-md-4 control-label">File Upload<span class="impColor">*</span></label>
+													<input id="imagePath" name="imagePath" type="hidden" value="">
+													<input type="file" name="file" class="col-md-8" style="margin-top: 3%;" id="documents" onchange="">
 													<span class="hasError" id="documentsError"></span>
                     			
 								  	</div>

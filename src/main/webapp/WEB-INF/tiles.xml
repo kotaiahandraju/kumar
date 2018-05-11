@@ -70,6 +70,9 @@
  <definition name="cardetails" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/cartdetails.jsp" />
  </definition>
+ <definition name="orderslist" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/ordersList.jsp" />
+ </definition>
 	
 	
 </tiles-definitions>

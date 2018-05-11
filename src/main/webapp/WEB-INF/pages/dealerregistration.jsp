@@ -49,7 +49,7 @@ border-top: 0px solid #dddddd !important;
 			</div>
 		</div>
 	</c:if>
-<div class="row" id="moveTo">
+
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                  <h2 class="col-md-10" align="center">Dealer Registration</h2>
@@ -59,7 +59,9 @@ border-top: 0px solid #dddddd !important;
                    
                         <div class="options"></div>
                         
-                    <form:form class="form-horizontal" modelAttribute="delar"  role="form" id="delar-form" action="addDelar" method="post">
+                    <form:form class="form-horizontal" modelAttribute="delar" action="validateOTP" role="form" id="delar-form"  method="post">
+                    <div class="row" id="moveTo">
+                    
                     <div class="panel-body">
                     <form:hidden path="id"/>
                     
@@ -127,9 +129,9 @@ border-top: 0px solid #dddddd !important;
                     	
                     	
                     	
-                    	 
+                    	
                     	<h3 class="col-md-5">Contact Information</h3>
-                           
+                           <div class="row" id="moveTo">
                     	<div class="col-md-6">
                        
                           
@@ -178,33 +180,111 @@ border-top: 0px solid #dddddd !important;
 								    </div>
                     			</div>
                     		
+                    		</div>
+                    		</div>
                     		
-                    		
-                    		
-                    		
+                    		</div>
                     	
                     			
                     		</div>
+                    		<div class="container">
                     		
-                    		
-                     
-                    	
-	                    <div class="panel-footer">
+							  <div class="modal fade" id="myModal" role="dialog">
+							    <div class="modal-dialog">
+							    
+							      <!-- Modal content-->
+							      <div class="modal-content">
+							        <div class="modal-header">
+							          <button type="button" class="close" data-dismiss="modal">&times;</button>
+							          <h4 class="modal-title">Modal Header</h4>
+							        </div>
+							        <div class="modal-body">
+							          <p>Some text in the modal.</p>
+							          <input type="text" id="mobileNoValidate">
+							          
+							        </div>
+							        <div class="modal-footer">
+							          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							        </div>
+							      </div>
+							      
+							    </div>
+							  </div>
+							  
+							</div>
+					</form:form>
+					</div>
+				       <div class="panel-footer">
 					      	<div class="row">
 					      		<div class="col-sm-12">
 					      			<div class="btn-toolbar text-center">
-						      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
+						      			<input type="button"  value="Submit" class="btn-primary btn" onclick="checkOTPValidate();" />
+<!-- 										<button id="submit4" class="btn-primary btn" onclick="checkOTPValidate();">Submit</button> -->
 						      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
 					      			</div>
 					      		</div>
 					      	</div>
 					      </div>
-					</form:form>
-					</div>
-				      
 			</div>
                     
                 </div>
+                <script type='text/javascript' src="${baseurl }/js/jquery.blockUI.min.js" ></script>
+<script type='text/javascript' src='${baseurl }/js/ajax.js'></script>
+                <script type="text/javascript">
+                    		
+                    		function checkOTPValidate() {
+                    			var phoneNumber = $("#phoneNumber").val();
+                    			if(phoneNumber !=''){
+                    				
+                					var formData = new FormData();
+                					formData.append('phoneNumber', phoneNumber);
+                					
+                					 $.fn.makeMultipartRequest('POST','validateOTP', false,formData, false, 'text', function(data) {
+                								console.log(data);
+                								if(data=="success"){
+                									$("#myModal").modal();
+                								}
+//                 								$.each(jsonobj, function(i, tests) {
+//                 									console.log(tests);
+//                 								}
+                								//$("#roomPrice").text(data);
+
+                							}); 
+                							
+                				/* 	$.ajax({
+                						type : "POST",
+                						url : "validateOTP.htm",
+                						data : formData,
+                						beforeSend : function() {
+                							$.blockUI({
+                								message : 'Please wait'
+                							});
+                						},
+                						success : function(response) {
+                							if (response != null) {
+                								$.unblockUI();
+                								var resJson = JSON.parse(response);
+                								showTableData(resJson.allOrders1);
+                								tooltip();
+
+                								//window.location.reload();
+                							}
+                							// window.location.reload();
+                						},
+                						error : function(e) {
+                							$.unblockUI();
+                							console.log(e);
+                						}
+                					}); */
+                    				
+                    			}
+                    			
+                    			
+
+            				}
+                    		
+                    		
+                    		</script>
 
 </body>
 <script type='text/javascript' src='js/customValidation.js'></script>

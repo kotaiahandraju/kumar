@@ -38,16 +38,49 @@ table#dependent_table tbody tr td:first-child::before {
 </style>
         <div class="clearfix"></div>
              <ol class="breadcrumb">
-              <li><a href="dashboard">Home</a></li>
+              <li><a href="#">Home</a></li>
                <li>Product Category </li>
             </ol>
             <div class="clearfix"></div>
         <div class="container" id="lpoMain">
+        
+        
+         <div class="row" id="moveTo">
+            <div class="col-md-12 col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4>Add Product Category</h4>
+                        <div class="options"></div>
+                    </div>
+	                <form:form  modelAttribute="orderLstForm"  action="" class="form-horizontal" method="post" >
+                    <div class="panel-body">
+                    	<div class="row">
+                    		<div class="col-md-4">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Deales : <span class="impColor">*</span></label>
+                    				<div class="col-md-6">
+                    					<form:select path="name" class="form-control validate" onchange="orederLists();">
+								    	<form:option value="">-- Select Dealers --</form:option>
+								    	<form:options items="${dealersList }"></form:options>
+								    	</form:select>
+								    	</div>
+                    			</div>
+                    		</div>
+                    	</div>
+                    		
+                    		</div>
+                    	</div>
+                    </div>
+         			</form:form>				    
+                </div>
+        
+        
+        
             <div class="row" id="row1">
               <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h4>Product Category List</h4>
+                            <h4>Order List</h4>
                             <div class="options">   
                                 <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
                             </div>
@@ -58,7 +91,7 @@ table#dependent_table tbody tr td:first-child::before {
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
                                 	<tr>
-                                		<th>Product Category</th><th>Status</th>
+                                		<th>Dealer Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th>
                                 	</tr>
                                 </thead>
                                 <tbody></tbody>
@@ -69,42 +102,7 @@ table#dependent_table tbody tr td:first-child::before {
                 </div>
             </div>
 
-            <div class="row" id="moveTo">
-            <div class="col-md-12 col-sm-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h4>Add Product Category</h4>
-                        <div class="options"></div>
-                    </div>
-	                <form:form  modelAttribute="productForm"  action="addProductType" class="form-horizontal" method="post" >
-                    <div class="panel-body">
-                    	<div class="row">
-                    		<div class="col-md-4">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Product Category <span class="impColor">*</span></label>
-                    				<div class="col-md-6">
-		                            	<form:input type="hidden" path="id"/>
-								      	<form:input type="text" path="producttype" class="form-control validate" placeholder="Product Type"/>
-								  	</div>
-                    			</div>
-                    		</div>
-                    	</div>
-                    		
-                    		</div>
-                    	</div>
-                    </div>
-					<div class="panel-footer hideme">
-						<div class="row">
-				      		<div class="col-sm-12">
-				      			<div class="btn-toolbar pull-right">
-					      			<input class="btn-primary btn" type="submit" id="submit1" value="Submit" />
-					      			<input class="btn-danger btn cancel" type="reset" id="clearData" value="Reset" />
-				      			</div>
-				      		</div>
-				    	</div>
-				    </div>
-         			</form:form>				    
-                </div>
+           
             </div>
             
 
@@ -115,13 +113,13 @@ table#dependent_table tbody tr td:first-child::before {
 /* $(document).ready(function() {
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 }); */
-var lstOrders =${allOrders1};
+// var lstOrders =${allOrders1};
 
-console.log(lstOrders);
+// console.log(lstOrders);
 
-if(lstOrders != ""){
-	showTableData(lstOrders);
-}
+// if(lstOrders != ""){
+// 	showTableData(lstOrders);
+// }
 
 $(function() {
 // 	var listOrders=JSON.parse(lstOrders);
@@ -156,52 +154,34 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Product Category</th><th>Status</th><th></th></tr>'+
+    	'<thead><tr><th>Dealer Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		
-		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='deleteProductType("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
-		}else{  
-			var deleterow = "<a class='activate' onclick='deleteProductType("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
-		}
-		var edit = "<a class='edit editIt' onclick='editProductType("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
-			+ "<td title='"+orderObj.producttype+"'>" + orderObj.producttype + "</td>"
-			+ "<td title='"+orderObj.productstatus+"'>" + orderObj.productstatus + "</td>"
-			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
+			+ "<td title='"+orderObj.dealerName+"'>" + orderObj.dealerName + "</td>"
+			+ "<td title='"+orderObj.categeory+"'>" + orderObj.categeory + "</td>"
+			+ "<td title='"+orderObj.subCategeory+"'>" + orderObj.subCategeory + "</td>"
+			+ "<td title='"+orderObj.itemCode+"'>" + orderObj.itemCode + "</td>"
+			+ "<td title='"+orderObj.itemdescrption+"'>" + orderObj.itemdescrption + "</td>"
+			+ "<td title='"+orderObj.quantity+"'>" + orderObj.quantity + "</td>"
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
 	if(isClick=='Yes') $('.datatables').dataTable();
 }
 
-function editProductType(id) {
-	
-	$("#id").val(id);
-	
-	$("#producttype").val(serviceUnitArray[id].producttype);
-	$("#status").val(serviceUnitArray[id].status);
-	$(window).scrollTop($('#moveTo').offset().top);
-}
 
-function deleteProductType(id,status) {
-	var checkstr=null;
-	if(status == 0){
-		 checkstr =  confirm('Are you sure you want to Deactivate?');
-		 $('#inActive').prop('checked', false);
-	}else{
-		 checkstr =  confirm('Are you sure you want to Activate?');
-		 $('#inActive').prop('checked', false);
-	}
-	if(checkstr == true){
+function orederLists() {
+	
+	var dealerId=$("#name").val();
 		$.ajax({
 					type : "POST",
-					url : "deleteproducttype.htm",
-					data :"id="+id+"&status="+status,
+					url : "orederLists.htm",
+					data :"dealerId="+dealerId,
 					 beforeSend : function() {
 			             $.blockUI({ message: 'Please wait' });
 			          },
@@ -220,35 +200,10 @@ function deleteProductType(id,status) {
 							console.log(e);
 		             }
 				});
-	}
 }
 
 
-function inactiveData() {
-	
-	var status="0";
-	if($('#inActive').is(":checked") == true){
-		status="0";
-	}else{
-		status="1";
-	}
-		
-		var formData = new FormData();
-		formData.append('status', status);
-		
-		$.fn.makeMultipartRequest('POST', 'inActiveProductType', false,
-				formData, false, 'text', function(data) {
-			if(data != ""){
-				var resJson=JSON.parse(data);
-	            showTableData(resJson);
-				  tooltip();
-	          
-						console.log(resJson);
-			}else{
-				alert("Inactive List Empty");
-			}
-				});
-}
+
 	
 $("#pageName").text("Product Category Master");
 $(".productType").addClass("active");

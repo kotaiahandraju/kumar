@@ -14,17 +14,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.BranchBean;
 import com.aurospaces.neighbourhood.bean.EmployeeBean;
 import com.aurospaces.neighbourhood.db.dao.BranchDao;
 import com.aurospaces.neighbourhood.db.dao.EmployeeDao;
+import com.aurospaces.neighbourhood.db.dao.OrdersListDao;
 import com.aurospaces.neighbourhood.util.SendSMS;
 
 /**
@@ -34,6 +37,7 @@ import com.aurospaces.neighbourhood.util.SendSMS;
 @Controller
 public class DelarsRegisrtationController {
 	@Autowired BranchDao branchDao;
+	@Autowired OrdersListDao listDao;
 	@Autowired EmployeeDao employeeDao;
 	@Autowired ServletContext objContext;
 	@RequestMapping(value = "/dealerregistration")
@@ -107,7 +111,48 @@ System.out.println("delar registration");
 		}
 		return statesMap;
 	}
-	
+	 @RequestMapping(value = "/validateOTP")
+		public @ResponseBody String validateOTP(EmployeeBean employeeBean,HttpServletRequest request, HttpSession session) {
+			System.out.println("validateOTP...");
+			List<Map<String, Object>> listOrderBeans = null;
+			JSONObject jsonObj = new JSONObject();
+			InputStream input = null;
+			String resultOtp = null;
+			 Properties prop = new Properties();
+			try {
+
+				listOrderBeans = listDao.getValidateOTP(employeeBean.getPhoneNumber());
+				if (listOrderBeans != null) {
+					
+					jsonObj.put("fail", "Mobile Number Already Exist");
+					// System.out.println(sJson);
+				} else {
+					 employeeBean.setOTP(CommonUtils.generatePIN());
+					 String propertiespath = objContext.getRealPath("Resources" +File.separator+"DataBase.properties");
+						//String propertiespath = "C:\\PRO\\Database.properties";
+				
+						input = new FileInputStream(propertiespath);
+						// load a properties file
+						prop.load(input);
+						String msg1 = prop.getProperty("OTPForDealer");
+						msg1 =msg1.replace("_otp_", employeeBean.getOTP());
+						if(StringUtils.isNotBlank(employeeBean.getPhoneNumber())){
+							// delar send OTP
+							resultOtp=SendSMS.sendSMS(msg1, employeeBean.getPhoneNumber(), objContext);
+						if(resultOtp=="ok") {
+							jsonObj.put("fail",employeeBean.getOTP());
+						}
+						
+						}
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				jsonObj.put("message", "excetption" + e);
+				return String.valueOf(jsonObj);
+
+			}
+			return String.valueOf(jsonObj);
+		}
 	
 	
 	 
