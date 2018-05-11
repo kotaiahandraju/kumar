@@ -42,7 +42,7 @@ table#dependent_table tbody tr td:first-child::before {
 
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
-    	<li><a href="#">Home</a></li>
+    	<li><a href="dashboard">Home</a></li>
 		<li>Dealer Confirm</li>
 	</ol>
 	<div class="clearfix"></div>
@@ -242,9 +242,9 @@ function inactiveData() {
 	
 	var status="0";
 	if($('#inActive').is(":checked") == true){
-		status="1";
-	}else{
 		status="0";
+	}else{
+		status="1";
 	}
 		
 		var formData = new FormData();
@@ -253,11 +253,10 @@ function inactiveData() {
 		$.fn.makeMultipartRequest('POST', 'inActiveDealer', false,
 				formData, false, 'text', function(data) {
 			if(data != ""){
-				var jsonobj = $.parseJSON(data);
-				var alldata = jsonobj.allOrders1;
-				console.log(jsonobj.allOrders1);
-				showTableData(alldata);
+				var jsonobj = JSON.parse(data);
+				showTableData(jsonobj);
 				  tooltip();
+				  console.log(jsonobj);
 	          
 			}else{
 				alert("Inactive List Empty");
