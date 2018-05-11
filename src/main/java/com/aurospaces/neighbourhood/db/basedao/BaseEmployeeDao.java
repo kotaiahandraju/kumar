@@ -99,6 +99,36 @@ ps.setString(19, kumarEmployee.getAlternativeNumber());
 			jdbcTemplate.update(sql, new Object[]{kumarEmployee.getName(),kumarEmployee.getShopname(),kumarEmployee.getAddress(),kumarEmployee.getCity(),kumarEmployee.getPincode(),kumarEmployee.getShopPhone(),kumarEmployee.getGstno(),kumarEmployee.getPhoneNumber(),kumarEmployee.getEmail(),kumarEmployee.getDescription(),kumarEmployee.getBranchId(),kumarEmployee.getRoleId(),kumarEmployee.getPassword(),kumarEmployee.getUsername(),kumarEmployee.getStatus(),kumarEmployee.getId()});
 		}
 	}
+	
+	
+	public void saveOtp( EmployeeBean kumarEmployee) 
+	{
+		jdbcTemplate = custom.getJdbcTemplate();
+
+	KeyHolder keyHolder = new GeneratedKeyHolder();
+	String INSERT_SQL1 = "INSERT INTO otp(OTP,phoneNumber) values (?,?)";
+	
+	int update = jdbcTemplate.update(
+			new PreparedStatementCreator() {
+					public PreparedStatement 
+					createPreparedStatement(Connection connection) throws SQLException {
+						PreparedStatement ps =
+								connection.prepareStatement(INSERT_SQL1,new String[]{"id"});
+	
+						ps.setString(1, kumarEmployee.getOTP());
+						ps.setString(2, kumarEmployee.getPhoneNumber());
+
+							return ps;
+						}
+				},
+				keyHolder);
+				
+				Number unId = keyHolder.getKey();
+				kumarEmployee.setId(unId.intValue());
+				
+
+	}
+	
 		
 	@Transactional
 	public Boolean delete(int id, String status) {
