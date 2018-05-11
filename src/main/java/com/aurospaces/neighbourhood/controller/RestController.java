@@ -238,7 +238,7 @@ public class RestController {
 			EmployeeBean objEmployeeBean = empDao.mobileDuplicateCheck(employeeBean);
 			if (objEmployeeBean != null ) {
 				
-				objJSON.put("msg", "False");
+				objJSON.put("msg", "false");
 				// System.out.println(sJson);
 			} else {
 				 employeeBean.setOTP(CommonUtils.generatePIN());
@@ -253,9 +253,6 @@ public class RestController {
 					if(StringUtils.isNotBlank(employeeBean.getPhoneNumber())){
 						// delar send OTP
 						resultOtp=SendSMS.sendSMS(msg1, employeeBean.getPhoneNumber(), objContext);
-					if(resultOtp=="ok") {
-						objJSON.put("fail",employeeBean.getOTP());
-					}
 					
 					}
 			}
