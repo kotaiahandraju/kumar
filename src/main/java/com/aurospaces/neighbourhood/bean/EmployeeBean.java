@@ -49,12 +49,18 @@ protected String phoneNumber ;
 protected String designation,businessName ;
 
 
-protected String alternativeNumber,OTP;
+protected String alternativeNumber,OTP,dealerName;
 
 
 
 
 
+public String getDealerName() {
+	return dealerName;
+}
+public void setDealerName(String dealerName) {
+	this.dealerName = dealerName;
+}
 public String getOTP() {
 	return OTP;
 }

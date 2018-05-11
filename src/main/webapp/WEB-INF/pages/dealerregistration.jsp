@@ -49,7 +49,6 @@ border-top: 0px solid #dddddd !important;
 			</div>
 		</div>
 	</c:if>
-	<div id="someHide">
 
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
@@ -60,7 +59,7 @@ border-top: 0px solid #dddddd !important;
                    
                         <div class="options"></div>
                         
-                    <form:form class="form-horizontal" modelAttribute="delar"  role="form" id="delar-form" action="addDelar" method="post">
+                    <form:form class="form-horizontal" modelAttribute="delar" action="validateOTP" role="form" id="delar-form"  method="post">
                     <div class="row" id="moveTo">
                     
                     <div class="panel-body">
@@ -190,11 +189,6 @@ border-top: 0px solid #dddddd !important;
                     		</div>
                     		<div class="container">
                     		
-							  <h2>Modal Example</h2>
-							  <!-- Trigger the modal with a button -->
-							  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
-							
-							  <!-- Modal -->
 							  <div class="modal fade" id="myModal" role="dialog">
 							    <div class="modal-dialog">
 							    
@@ -218,44 +212,70 @@ border-top: 0px solid #dddddd !important;
 							  </div>
 							  
 							</div>
-                    	
-	                    <div class="panel-footer">
+					</form:form>
+					</div>
+				       <div class="panel-footer">
 					      	<div class="row">
 					      		<div class="col-sm-12">
 					      			<div class="btn-toolbar text-center">
-						      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
+						      			<input type="button"  value="Submit" class="btn-primary btn" onclick="checkOTPValidate();" />
+<!-- 										<button id="submit4" class="btn-primary btn" onclick="checkOTPValidate();">Submit</button> -->
 						      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
 					      			</div>
 					      		</div>
 					      	</div>
 					      </div>
-					</form:form>
-					</div>
-				      
 			</div>
                     
                 </div>
-                
+                <script type='text/javascript' src="${baseurl }/js/jquery.blockUI.min.js" ></script>
+<script type='text/javascript' src='${baseurl }/js/ajax.js'></script>
                 <script type="text/javascript">
                     		
                     		function checkOTPValidate() {
                     			var phoneNumber = $("#phoneNumber").val();
                     			if(phoneNumber !=''){
                     				
-                    				$("#myModal").modal();
-                					
                 					var formData = new FormData();
                 					formData.append('phoneNumber', phoneNumber);
                 					
-                					$.fn.makeMultipartRequest('POST','validateOTP', false,
-                							formData, false, 'text', function(data) {
+                					 $.fn.makeMultipartRequest('POST','validateOTP', false,formData, false, 'text', function(data) {
                 								console.log(data);
+                								if(data=="success"){
+                									$("#myModal").modal();
+                								}
 //                 								$.each(jsonobj, function(i, tests) {
 //                 									console.log(tests);
 //                 								}
                 								//$("#roomPrice").text(data);
 
+                							}); 
+                							
+                				/* 	$.ajax({
+                						type : "POST",
+                						url : "validateOTP.htm",
+                						data : formData,
+                						beforeSend : function() {
+                							$.blockUI({
+                								message : 'Please wait'
                 							});
+                						},
+                						success : function(response) {
+                							if (response != null) {
+                								$.unblockUI();
+                								var resJson = JSON.parse(response);
+                								showTableData(resJson.allOrders1);
+                								tooltip();
+
+                								//window.location.reload();
+                							}
+                							// window.location.reload();
+                						},
+                						error : function(e) {
+                							$.unblockUI();
+                							console.log(e);
+                						}
+                					}); */
                     				
                     			}
                     			

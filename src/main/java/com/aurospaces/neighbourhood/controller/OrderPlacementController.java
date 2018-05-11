@@ -1,10 +1,15 @@
 package com.aurospaces.neighbourhood.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -30,6 +35,7 @@ import com.aurospaces.neighbourhood.db.dao.EmployeeDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.OrdersListDao;
 import com.aurospaces.neighbourhood.db.dao.ProductnameDao;
+import com.aurospaces.neighbourhood.util.SendSMS;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -43,6 +49,7 @@ public class OrderPlacementController {
 	@Autowired	ProductnameDao productnameDao;
 	@Autowired OrdersListDao ordersListDao;
 	@Autowired OrdersListDao listDao;
+	@Autowired ServletContext objContext;
 	
 	@RequestMapping(value="/orderplacing")
 	public String orderPlacement(HttpServletRequest request){
@@ -177,33 +184,5 @@ public class OrderPlacementController {
 		}
 		return statesMap;
 	}
-	
-	
-	 @RequestMapping(value = "/validateOTP")
-		public @ResponseBody String validateOTP(EmployeeBean employeeBean,HttpServletRequest request, HttpSession session) {
-			System.out.println("validateOTP...");
-			List<Map<String, Object>> listOrderBeans = null;
-			JSONObject jsonObj = new JSONObject();
-			try {
-
-				listOrderBeans = listDao.getValidateOTP(employeeBean.getPhoneNumber());
-				if (listOrderBeans != null && listOrderBeans.size() > 0) {
-					
-					jsonObj.put("fail", "Mobile Number Already Exist");
-					// System.out.println(sJson);
-				} else {
-					 employeeBean.setOTP(CommonUtils.generatePIN());
-					jsonObj.put("OTP",employeeBean.getOTP());
-				}
-			} catch (Exception e) {
-				e.printStackTrace();
-				jsonObj.put("message", "excetption" + e);
-				return String.valueOf(jsonObj);
-
-			}
-			return String.valueOf(jsonObj);
-		}
-	
-	
 	
 }
