@@ -46,9 +46,15 @@ protected String gstno ;
 /** Field mapping. **/
 protected String phoneNumber ;
 /** Field mapping. **/
-protected String designation,businessName ;
+protected String designation,businessName,confirm;
 
 
+public String getConfirm() {
+	return confirm;
+}
+public void setConfirm(String confirm) {
+	this.confirm = confirm;
+}
 protected String alternativeNumber,OTP,dealerName;
 
 

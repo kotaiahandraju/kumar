@@ -21,6 +21,11 @@
 	<definition name="loginHome" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/login.jsp" />
 	</definition>
+	
+	
+	
+	
+	
 	<!-- <definition name="partnerLoginHome" extends="base.definition"> <put-attribute 
 		name="body" value="/WEB-INF/pages/partnerLogin.jsp" /> </definition> -->
 	<!-- Exception page -->
@@ -73,9 +78,16 @@
  <definition name="orderslist" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/ordersList.jsp" />
  </definition>
+
 	<definition name="changePassword" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/changePassword.jsp" />
  </definition>
+
+	
+	<definition name="dealercreation" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/dealercreation.jsp" />
+ </definition>
+	
 	
 </tiles-definitions>
 

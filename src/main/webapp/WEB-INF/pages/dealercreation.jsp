@@ -23,7 +23,6 @@ window.setTimeout(function() {
     });
 }, 5000);
 </script>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
 <style type="text/css">
 .impColor{color:red;}
 .your-class::-webkit-input-placeholder {color: #e73d4a !important;}
@@ -37,6 +36,12 @@ background:#fff; !important}
 border-top: 0px solid #dddddd !important;
 }
 </style>
+
+<div class="clearfix"></div>
+	<ol class="breadcrumb">
+    	<li><a href="dashboard">Home</a></li>
+		<li>Dealer Creation</li>
+	</ol>
    
 
 </head>
@@ -50,19 +55,17 @@ border-top: 0px solid #dddddd !important;
 			</div>
 		</div>
 	</c:if>
-
+<div class="container" id="moveTo">
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
-                 <h2 class="col-md-10" align="center">Dealer Registration</h2>
-                 <p class="col-md-2" style="padding-top:16px;font-size:16px;"><a href="LoginHome">Sign In</a></p>
+                 <h2 class="col-md-12" align="center">Dealer Creation</h2>
+                 
                 <div class="col-md-12">
                        
                    
                         <div class="options"></div>
                         
-                    <form:form class="form-horizontal" modelAttribute="delar" action="validateOTP" role="form" id="delar-form"  method="post">
-                    <div class="row" id="moveTo">
-                    
+                    <form:form class="form-horizontal" modelAttribute="delarForm"  role="form" id="delar-form" action="addDealer" method="post">
                     <div class="panel-body">
                     <form:hidden path="id"/>
                     
@@ -130,9 +133,9 @@ border-top: 0px solid #dddddd !important;
                     	
                     	
                     	
-                    	
+                    	 
                     	<h3 class="col-md-5">Contact Information</h3>
-                           <div class="row" id="moveTo">
+                           
                     	<div class="col-md-6">
                        
                           
@@ -164,148 +167,76 @@ border-top: 0px solid #dddddd !important;
                     	<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Contact Email <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="email" value=""  class="form-control validate email" placeholder="Email" onkeyup="removeBorder(this.id)" maxlength="20"  />
+								    	<form:input path="email" value=""  class="form-control validate email" placeholder="Email" onkeyup="removeBorder(this.id)" maxlength="30"  />
 								      	<span class="hasError" id="locationError"></span>
 								    </div>
                     			</div>
-                    		
+                    			
+                    			
                     			<div class="form-group">
+                    			
+                    				<label for="focusedinput" class="col-md-4 control-label">Username<span class="impColor">*</span></label>
+								    <div class="col-md-6">
+								   	   <form:input path="username" class="form-control  validate" placeholder="Username" onkeyup="removeBorder(this.id)" maxlength="20"/>
+								      	<span class="hasError" id="storeError"></span>
+								    </div>
+                    			</div>
+              
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-4 control-label">Password<span class="impColor">*</span></label>
+								    <div class="col-md-6">
+								    	<form:input path="password" class="form-control  validate"  placeholder="password" onkeyup="removeBorder(this.id)" maxlength="20" />
+								    	<span class="hasError" id="storeError"></span>
+								    </div>
+                    			</div>
+                    			
+                    			
+                    			
+                    		
+                    			<%-- <div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Branch <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-<%-- 								    	<form:input path="branchId" value=""  class="form-control validate" placeholder="Branch" /> --%>
+								    	<form:input path="branchId" value=""  class="form-control validate" placeholder="Branch" />
 								    	<form:select path="branchId" onfocus="removeBorder(this.id)"  class="form-control validate">
 								    	<form:option value="">Select Branch</form:option>
 								    	<form:options items="${branches }"/>
 								    	</form:select>
 								      	<span class="hasError" id="locationError"></span>
 								    </div>
-                    			</div>
+                    			</div> --%>
                     		
-                    		</div>
-                    		</div>
                     		
-                    		</div>
+                    		
+                    		
+                    		
                     	
                     			
                     		</div>
-					</form:form>
-					</div>
-				       <div class="panel-footer">
+                    		
+                    		
+                     
+                    	
+	                    <div class="panel-footer">
 					      	<div class="row">
 					      		<div class="col-sm-12">
 					      			<div class="btn-toolbar text-center">
-						      			<input type="button" id="submit1" value="Submit" class="btn-primary btn" onclick="checkOTPValidate();" />
-<!-- 										<button id="submit4" class="btn-primary btn" onclick="checkOTPValidate();">Submit</button> -->
+						      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
 						      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
 					      			</div>
 					      		</div>
 					      	</div>
 					      </div>
-					      
-					      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						  <div class="modal-dialog">
-						    <div class="modal-content">
-						      <div class="modal-header">
-						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						        <h4 class="modal-title" id="exampleModalLabel">Otp Validating</h4>
-						      </div>
-						      <div class="modal-body">
-						     <input type="text" id="OTP">
-						      </div>
-						      <div class="modal-footer">
-						       <button type="button" class="btn btn-success" data-dismiss="modal" onclick="dealerCreation();">Submit</button>
-						        <button type="button"  class="btn btn-default" data-dismiss="modal">Close</button>
-						      </div>
-						    </div>
-						  </div>
-						</div>
+					</form:form>
+					</div>
+				      
 			</div>
                     
                 </div>
-                <script type='text/javascript' src='${baseurl }/assets/js/jquery-1.10.2.min.js'></script>
-                <script type='text/javascript' src="${baseurl }/js/jquery.blockUI.min.js" ></script>
-				<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
-			<script type='text/javascript' src='${baseurl }/js/ajax.js'></script>
-                <script type="text/javascript">
-                    		
-                    		function checkOTPValidate() {
-                    			var phoneNumber = $("#phoneNumber").val();
-                    			if(phoneNumber !=''){
-                    				
-                					var formData = new FormData();
-                					formData.append('phoneNumber', phoneNumber);
-                					
-                					 $.fn.makeMultipartRequest('POST','validateOTP', false,formData, false, 'text', function(data) {
-                								console.log(data);
-                								var resJson = JSON.parse(data);
-                								if(resJson.fail=="failed"){
-                									alert("Mobile Numober Already Exist.")
-                								}else{
-                									$("#myModal").modal();
-                								}
-             								});
-                    				
-                    			}
-                    			
-                    		}
-                    			
-
-                        		function dealerCreation() {
-                        			var id = $("#id").val();
-                        			var businessName = $("#businessName").val();
-                        			var address = $("#address").val();
-                        			var city = $("#city").val();
-                        			var pincode = $("#pincode").val();
-                        			var shopPhone = $("#shopPhone").val();
-                        			var alternativeNumber = $("#alternativeNumber").val();
-                        			var gstno = $("#gstno").val();
-                        			var name = $("#name").val();
-                        			var designation = $("#designation").val();
-                        			var phoneNumber = $("#phoneNumber").val();
-                        			var email = $("#email").val();
-                        			var branchId = $("#branchId").val();
-                        			var OTP = $("#OTP").val();
-                        			
-                        			
-                        			if(phoneNumber !=''){
-                        				
-                    					var formData = new FormData();
-                    					formData.append('id', id);
-                    					formData.append('businessName', businessName);
-                    					formData.append('address', address);
-                    					formData.append('city', city);
-                    					formData.append('pincode', pincode);
-                    					formData.append('shopPhone', shopPhone);
-                    					formData.append('alternativeNumber', alternativeNumber);
-                    					formData.append('gstno', gstno);
-                    					formData.append('name', name);
-                    					formData.append('designation', designation);
-                    					formData.append('phoneNumber', phoneNumber);
-                    					formData.append('OTP', OTP);
-                    					formData.append('email', email);
-                    					formData.append('branchId', branchId);
-                    					
-                    					
-                    					 $.fn.makeMultipartRequest('POST','addDelar', false,formData, false, 'text', function(data) {
-                    								console.log(data);
-                    								var resJson = JSON.parse(data);
-                    								if(resJson.msg="success"){
-                    									alert("Alreday Registered");
-                    								}else{
-                    									alert(" Registered Successfully");
-                    								}
-                 								});
-                        				
-                        			}
-                    			
-                    			
-
-            				}
-                    		
-                    		
-                    		</script>
 
 </body>
+
 <script type='text/javascript' src='js/customValidation.js'></script>
-</html>
+<script>
+$("#pageName").text("Dealer Creation");
+$(".dealercreation").addClass("active");
+</script>

@@ -55,47 +55,55 @@ System.out.println("delar registration");
 		return "dealerregistration";
 	}
 	@RequestMapping(value = "/addDelar")
-	public String addDelar( @ModelAttribute("delar") EmployeeBean employeeBean,	ModelMap model, HttpServletRequest request, HttpSession session,RedirectAttributes redirect) {
+	@ResponseBody public String addDelar( @ModelAttribute("delar") EmployeeBean employeeBean,	ModelMap model, HttpServletRequest request, HttpSession session,RedirectAttributes redirect) {
 		InputStream input = null;
 		String body = null;
 		 Properties prop = new Properties();
+			JSONObject jsonObj = new JSONObject();
 		try {
-			EmployeeBean objEmployeeBean = employeeDao.mobileDuplicateCheck(employeeBean);
-			if(objEmployeeBean != null){
-				redirect.addFlashAttribute("msg", "Alreday Registered ");
-			}else{
-				employeeBean.setRoleId("3");
-				employeeBean.setStatus("0");
-				employeeDao.save(employeeBean);
-				 String propertiespath = objContext.getRealPath("Resources" +File.separator+"DataBase.properties");
-					//String propertiespath = "C:\\PRO\\Database.properties";
 			
-					input = new FileInputStream(propertiespath);
-					// load a properties file
-					prop.load(input);
-					String msg = prop.getProperty("send_delar_sms");
-					String msg1 = prop.getProperty("send_branch_manger_delardetails");
-					msg1 =msg1.replace("_name_", employeeBean.getName());
-					msg1 =msg1.replace("_mobile_", employeeBean.getPhoneNumber());
-					if(StringUtils.isNotBlank(employeeBean.getPhoneNumber())){
-						// delar send sms
-					SendSMS.sendSMS(msg, employeeBean.getPhoneNumber(), objContext);
+			 EmployeeBean otpChecking= employeeDao.otpChecking(employeeBean);
+			 if(otpChecking.getOTP().equals(employeeBean.getOTP())) {
+				 EmployeeBean objEmployeeBean = employeeDao.mobileDuplicateCheck(employeeBean);
+					if(objEmployeeBean != null){
+//						redirect.addFlashAttribute("msg", "Alreday Registered ");
+						jsonObj.put("msg", "success");
+					}else{
+						employeeBean.setRoleId("3");
+						employeeBean.setStatus("0");
+						employeeDao.save(employeeBean);
+						 String propertiespath = objContext.getRealPath("Resources" +File.separator+"DataBase.properties");
+							//String propertiespath = "C:\\PRO\\Database.properties";
 					
+							input = new FileInputStream(propertiespath);
+							// load a properties file
+							prop.load(input);
+							String msg = prop.getProperty("send_delar_sms");
+							String msg1 = prop.getProperty("send_branch_manger_delardetails");
+							msg1 =msg1.replace("_name_", employeeBean.getName());
+							msg1 =msg1.replace("_mobile_", employeeBean.getPhoneNumber());
+							if(StringUtils.isNotBlank(employeeBean.getPhoneNumber())){
+								// delar send sms
+							SendSMS.sendSMS(msg, employeeBean.getPhoneNumber(), objContext);
+							
+							}
+						EmployeeBean empbean =	employeeDao.getBranchEmployees(employeeBean);
+						if(empbean != null){
+							// branch manager send sms
+							SendSMS.sendSMS(msg1, empbean.getPhoneNumber(), objContext);
+						}
+//						redirect.addFlashAttribute("msg", " Registered Successfully");
+						jsonObj.put("msg", "fail");
 					}
-				EmployeeBean empbean =	employeeDao.getBranchEmployees(employeeBean);
-				if(empbean != null){
-					// branch manager send sms
-					SendSMS.sendSMS(msg1, empbean.getPhoneNumber(), objContext);
-				}
-				redirect.addFlashAttribute("msg", " Registered Successfully");
-			}
+			 }
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e);
 
 		}
-		return "redirect:LoginHome";
+		return String.valueOf(jsonObj);
 	}
 	@ModelAttribute("branches")
 	public Map<Integer, String> populatestores() {
@@ -124,9 +132,9 @@ System.out.println("delar registration");
 			try {
 
 				listOrderBeans = listDao.getValidateOTP(employeeBean.getPhoneNumber());
-				if (listOrderBeans != null) {
+				if (listOrderBeans.size() !=0) {
 					
-					jsonObj.put("fail", "Mobile Number Already Exist");
+					jsonObj.put("fail", "failed");
 					// System.out.println(sJson);
 				} else {
 					 employeeBean.setOTP(CommonUtils.generatePIN());
@@ -139,10 +147,13 @@ System.out.println("delar registration");
 						String msg1 = prop.getProperty("OTPForDealer");
 						msg1 =msg1.replace("_otp_", employeeBean.getOTP());
 						if(StringUtils.isNotBlank(employeeBean.getPhoneNumber())){
+							
+							 employeeDao.saveOtp(employeeBean);
+							
 							// delar send OTP
 							resultOtp=SendSMS.sendSMS(msg1, employeeBean.getPhoneNumber(), objContext);
 						if(resultOtp=="ok") {
-							jsonObj.put("fail",employeeBean.getOTP());
+							jsonObj.put("success",employeeBean.getOTP());
 						}
 						
 						}

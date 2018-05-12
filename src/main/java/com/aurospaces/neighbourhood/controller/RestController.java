@@ -20,7 +20,6 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -62,19 +61,12 @@ public class RestController {
 			list = objKhaibarUsersDao.getloginChecking(loginBean);
 			System.out.println(loginBean);
 			if(list != null){
-				
-				for (Map<String, Object> map : list) {
-					System.out.println(map.get("branchId"));
-					branchid = String.valueOf(map.get("branchId"));
-				}
-//				 branchid = list.getBranchId();
 				objJSON.put("loginList", list);
 				
 			}else{
 				objJSON.put("loginList", "");
 			}
-			List<Map<String,Object>> delarlist = objKhaibarUsersDao.getDonarList(branchid);
-			objJSON.put("delarlist", delarlist);
+			
 			
 		}catch(Exception e){
 			e.printStackTrace();

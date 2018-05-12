@@ -207,6 +207,6 @@ function showTableData(response){
 
 
 	
-$("#pageName").text("Delar Payment");
+$("#pageName").text("Dealer Payment");
 $(".delarpayment").addClass("active");
 </script>
