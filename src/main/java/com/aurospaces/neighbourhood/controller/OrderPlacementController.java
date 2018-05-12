@@ -159,7 +159,7 @@ public class OrderPlacementController {
 			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
 			
 			
-			String sSql = "select id ,name from kumar_employee where roleId='"+objuserBean.getRoleId()+"'";
+			String sSql = "select id ,name from kumar_employee where roleId='3' and branch_id='"+objuserBean.getBranchId()+"' ";
 			List<EmployeeBean> list = listDao.populateDealers(sSql);
 			for (EmployeeBean bean : list) {
 				statesMap.put(bean.getId(), bean.getName());

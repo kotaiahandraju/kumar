@@ -158,6 +158,7 @@ public class RestController {
 		            ordersList.setDelerId(String.valueOf(jsonObj.get("delarId")));
 		            ordersList.setQuantity(String.valueOf(jsonObj.get("quantity")));
 		            ordersList.setProductId(String.valueOf(jsonObj.get("productId")));
+		            ordersList.setBranchId(String.valueOf(jsonObj.get("branchId")));
 		            ordersList.setInvoiceId(invoiceId);
 		            ordersListDao.save(ordersList);
 		            j++;

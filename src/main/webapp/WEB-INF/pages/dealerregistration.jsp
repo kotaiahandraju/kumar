@@ -321,10 +321,10 @@ border-top: 0px solid #dddddd !important;
                     					 $.fn.makeMultipartRequest('POST','addDelar', false,formData, false, 'text', function(data) {
                     								console.log(data);
                     								var resJson = JSON.parse(data);
-                    								if(resJson.msg="success"){
+                    								alert(resJson.msg);
+                    								if(resJson.msg=="success"){
                     									alert(" Registered Successfully");
-                    								}
-                    								if(resJson.msg="fail"){
+                    								}else if(resJson.msg=="fail"){
                     									alert("Please enter valid OTP");
                     									$('#myModal').modal('toggle');
                     									$('#myModal').modal('show');
