@@ -71,15 +71,26 @@ public class OrderPlacementController {
 				String quantityArray[] = orderslistbean.getQuantity().split(",");
 			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
 			if (objuserBean != null) {
+				String prefix = "Kumar";
+				
+				// create instance of Random class
+		        Random rand = new Random();
+		                        
+		        // Generate random integers in range 0 to 999
+		        int rand_int = rand.nextInt(10000);
+				
 				orderslistbean.setDelerId(objuserBean.getEmpId());
 				orderslistbean.setBranchId(objuserBean.getBranchId());
+				prefix = prefix+"-"+ objuserBean.getBranchId()+"-";
+				System.out.println(" Custom generated Sequence value " + prefix.concat(new Integer(rand_int).toString()));
 				for(int i=0;i<productArray.length;i++){
 					orderslistbean.setId(0);
 					orderslistbean.setProductId(productArray[i]);
 					orderslistbean.setQuantity(quantityArray[i]);
+					orderslistbean.setOrderId(prefix.concat(new Integer(rand_int).toString()));
 					ordersListDao.save(orderslistbean);
 				}
-				
+				 cartDao.deleteByUserId(Integer.parseInt(objuserBean.getEmpId()));
 			}
 			}
 			
