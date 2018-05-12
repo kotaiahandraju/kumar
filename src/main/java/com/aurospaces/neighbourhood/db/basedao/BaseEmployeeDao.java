@@ -101,12 +101,12 @@ ps.setString(19, kumarEmployee.getAlternativeNumber());
 	}
 	
 	
-	public void saveOtp( EmployeeBean kumarEmployee) 
+	public void saveOtp( final EmployeeBean kumarEmployee) 
 	{
 		jdbcTemplate = custom.getJdbcTemplate();
 
 	KeyHolder keyHolder = new GeneratedKeyHolder();
-	String INSERT_SQL1 = "INSERT INTO otp(OTP,phoneNumber) values (?,?)";
+	final String INSERT_SQL1 = "INSERT INTO otp(OTP,phoneNumber) values (?,?)";
 	
 	int update = jdbcTemplate.update(
 			new PreparedStatementCreator() {

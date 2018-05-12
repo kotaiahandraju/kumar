@@ -13,7 +13,7 @@
 <head>
     <meta charset="utf-8">
     <title>KPOMS</title>
-<%--     <link rel="shortcut icon" href="${baseurl }/img/logo1.jpeg"/> --%>
+    <link rel="shortcut icon" href="${baseurl }/img/logo1.jpeg"/> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -234,8 +234,8 @@ function cartCount(){
 	                
 	                    <li class="userlinks">
 	                        <ul class="dropdown-menu">
-	                            <li><a href="../dealerregistration">Edit Profile <i class="pull-right fa fa-pencil"></i></a></li>
-	                            <li><a href="../dealerregistration">Change Password <i class="pull-right fa fa-cog"></i></a></li>
+	                           <!--  <li><a href="../dealerregistration">Edit Profile <i class="pull-right fa fa-pencil"></i></a></li> -->
+	                            <li><a href="changePassword">Change Password <i class="pull-right fa fa-cog"></i></a></li>
 	                            <li class="divider"></li>
 	                            <li><a href="../logoutHome" class="text-right">Sign Out</a></li>
 	                        </ul>
@@ -270,6 +270,7 @@ function cartCount(){
 			   <li class="dealerconfirm"><a href="${baseurl }/admin/dealeraccountconfirm"> <span>Dealer Confirmation </span></a></li>
 			    <li class="dealerpaymentconfirm"><a href="${baseurl }/admin/dealerpaymentconfirm"> <span>Payment Status </span></a></li>
 			    <li class="orderslist"><a href="${baseurl }/admin/orderslist"> <span>Order List</span></a></li>
+			    <li class="dealercreation"><a href="${baseurl }/admin/dealercreation"> <span>Dealer Creation </span></a></li>
 			 </c:if>
 			  <c:if test="${roleId=='3' }">
 			  <li class="delarpayment"><a href="${baseurl }/admin/delarpayment"> <span>Dealer Payment</span></a></li>

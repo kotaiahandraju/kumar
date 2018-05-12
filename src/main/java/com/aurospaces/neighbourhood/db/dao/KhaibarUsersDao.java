@@ -39,8 +39,8 @@ public class KhaibarUsersDao extends BaseKhaibarUsersDao
 			
 			try{
 				jdbcTemplate = custom.getJdbcTemplate();
-				String sql ="SELECT * from login where username = ? and password =? and status='1'";
-				list =jdbcTemplate.queryForList(sql, new Object[]{userObj.getUserName(),userObj.getPassword()});
+				String sql ="SELECT * from login where username = '"+userObj.getUserName()+"' and password ='"+userObj.getPassword()+"' and status='1'";
+				list =jdbcTemplate.queryForList(sql, new Object[]{});
 				System.out.println(sql);
 			}catch(Exception e){
 				e.printStackTrace();
