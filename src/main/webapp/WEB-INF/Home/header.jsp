@@ -269,6 +269,7 @@ function cartCount(){
               <li class="items"><a href="${baseurl }/admin/items"> <span>Product List</span></a></li>&emsp;
 			   <li class="dealerconfirm"><a href="${baseurl }/admin/dealeraccountconfirm"> <span>Dealer Confirmation </span></a></li>
 			    <li class="dealerpaymentconfirm"><a href="${baseurl }/admin/dealerpaymentconfirm"> <span>Payment Status </span></a></li>
+			    <li class="orderslist"><a href="${baseurl }/admin/orderslist"> <span>Order List</span></a></li>
 			 </c:if>
 			  <c:if test="${roleId=='3' }">
 			  <li class="delarpayment"><a href="${baseurl }/admin/delarpayment"> <span>Dealer Payment</span></a></li>

@@ -205,6 +205,6 @@ function orederLists() {
 
 
 	
-$("#pageName").text("Product Category Master");
-$(".productType").addClass("active");
+$("#pageName").text("Order List");
+$(".orderslist").addClass("active");
 </script>
