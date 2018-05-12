@@ -1,13 +1,8 @@
 package com.aurospaces.neighbourhood.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -18,15 +13,12 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.aurospaces.neighbourhood.bean.BranchBean;
-import com.aurospaces.neighbourhood.bean.CartBean;
 import com.aurospaces.neighbourhood.bean.EmployeeBean;
 import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.LoginBean;
@@ -35,12 +27,7 @@ import com.aurospaces.neighbourhood.db.dao.EmployeeDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.OrdersListDao;
 import com.aurospaces.neighbourhood.db.dao.ProductnameDao;
-import com.aurospaces.neighbourhood.util.SendSMS;
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import CommonUtils.CommonUtils;
 @Controller
 @RequestMapping(value="/admin")
 public class OrderPlacementController {
