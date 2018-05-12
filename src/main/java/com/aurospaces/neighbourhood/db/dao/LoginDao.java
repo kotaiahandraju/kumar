@@ -29,5 +29,17 @@ public class LoginDao extends BaseLoginDao
 		return result;
 	}
 
+	public Boolean UpdatePassword(String password, int id)
+	{
+		boolean result = false;
+		jdbcTemplate = custom.getJdbcTemplate();
+		String hql="UPDATE login  set password = ? where id = ? ";
+		int results=jdbcTemplate.update(hql, new Object[] {password,id});
+				
+				if (results != 0) {
+					result = true;
+				}
+				return result;
+	}
 }
 

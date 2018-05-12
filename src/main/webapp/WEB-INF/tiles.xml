@@ -73,7 +73,9 @@
  <definition name="orderslist" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/ordersList.jsp" />
  </definition>
-	
+	<definition name="changePassword" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/changePassword.jsp" />
+ </definition>
 	
 </tiles-definitions>
 
