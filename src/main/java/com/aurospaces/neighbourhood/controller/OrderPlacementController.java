@@ -3,6 +3,7 @@ package com.aurospaces.neighbourhood.controller;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,7 @@ import com.aurospaces.neighbourhood.bean.EmployeeBean;
 import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.bean.OrdersListBean;
+import com.aurospaces.neighbourhood.db.dao.CartDao;
 import com.aurospaces.neighbourhood.db.dao.EmployeeDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.OrdersListDao;
@@ -37,7 +39,7 @@ public class OrderPlacementController {
 	@Autowired OrdersListDao ordersListDao;
 	@Autowired OrdersListDao listDao;
 	@Autowired ServletContext objContext;
-	
+	@Autowired CartDao cartDao;
 	@RequestMapping(value="/orderplacing")
 	public String orderPlacement(HttpServletRequest request){
 		ObjectMapper objectMapper = null;
