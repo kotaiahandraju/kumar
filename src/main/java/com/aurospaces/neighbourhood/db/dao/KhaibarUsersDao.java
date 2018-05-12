@@ -4,11 +4,14 @@ package com.aurospaces.neighbourhood.db.dao;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.aurospaces.neighbourhood.bean.CartBean;
 import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 import com.aurospaces.neighbourhood.db.basedao.BaseKhaibarUsersDao;
@@ -21,6 +24,7 @@ public class KhaibarUsersDao extends BaseKhaibarUsersDao
 {
 	@Autowired
 	CustomConnection custom;
+	@Autowired HttpSession session;
 	JdbcTemplate jdbcTemplate;
 	 public LoginBean loginChecking(LoginBean userObj) {
 		 jdbcTemplate = custom.getJdbcTemplate();
@@ -120,6 +124,19 @@ public class KhaibarUsersDao extends BaseKhaibarUsersDao
 			return list;
 			
 		}
+	 public  List<Map<String,Object>> getallcartDetails(CartBean cartBean){
+		 jdbcTemplate = custom.getJdbcTemplate();
+		 String userid = null;
+		 
+				userid = cartBean.getUserId();
+			String sql = " SELECT c.`quantity`,c.id,i.id AS productId,i.`itemcode`,i.`itemdescrption` ,pn.productname AS productIdName,pt.producttype AS productTypeName  FROM  `cart` c, items i, productname pn,producttype pt  WHERE  i.productId=pt.id AND c.`productId`=i.id AND   i.productname=pn.id AND c.userid=? ";
+			
+			List<Map<String,Object>> retlist = jdbcTemplate.queryForList(sql,new Object[]{userid});
+			if(retlist.size() > 0)
+				return retlist;
+			return null;
+		
+	}
 
 }
 

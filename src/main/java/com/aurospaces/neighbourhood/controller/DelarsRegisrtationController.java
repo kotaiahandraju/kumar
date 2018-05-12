@@ -66,8 +66,8 @@ System.out.println("delar registration");
 			 if(otpChecking.getOTP().equals(employeeBean.getOTP())) {
 				 EmployeeBean objEmployeeBean = employeeDao.mobileDuplicateCheck(employeeBean);
 					if(objEmployeeBean != null){
+						jsonObj.put("msg", "fail");
 //						redirect.addFlashAttribute("msg", "Alreday Registered ");
-						jsonObj.put("msg", "success");
 					}else{
 						employeeBean.setRoleId("3");
 						employeeBean.setStatus("0");
@@ -86,6 +86,7 @@ System.out.println("delar registration");
 								// delar send sms
 							SendSMS.sendSMS(msg, employeeBean.getPhoneNumber(), objContext);
 							
+							jsonObj.put("msg", "success");
 							}
 						EmployeeBean empbean =	employeeDao.getBranchEmployees(employeeBean);
 						if(empbean != null){
@@ -93,8 +94,10 @@ System.out.println("delar registration");
 							SendSMS.sendSMS(msg1, empbean.getPhoneNumber(), objContext);
 						}
 //						redirect.addFlashAttribute("msg", " Registered Successfully");
-						jsonObj.put("msg", "fail");
+						
 					}
+			 }else{
+				 jsonObj.put("msg", "fail");
 			 }
 			
 			
@@ -134,12 +137,10 @@ System.out.println("delar registration");
 				listOrderBeans = listDao.getValidateOTP(employeeBean.getPhoneNumber());
 				if (listOrderBeans.size() !=0) {
 					
-					jsonObj.put("fail", "failed");
-					// System.out.println(sJson);
+					jsonObj.put("msg", "failed");
 				} else {
 					 employeeBean.setOTP(CommonUtils.generatePIN());
 					 String propertiespath = objContext.getRealPath("Resources" +File.separator+"DataBase.properties");
-						//String propertiespath = "C:\\PRO\\Database.properties";
 				
 						input = new FileInputStream(propertiespath);
 						// load a properties file
@@ -152,8 +153,11 @@ System.out.println("delar registration");
 							
 							// delar send OTP
 							resultOtp=SendSMS.sendSMS(msg1, employeeBean.getPhoneNumber(), objContext);
-						if(resultOtp=="ok") {
 							jsonObj.put("success",employeeBean.getOTP());
+						if(resultOtp.equals("OK")) {
+							jsonObj.put("msg", "success");
+						}else{
+							jsonObj.put("msg", "failed");
 						}
 						
 						}

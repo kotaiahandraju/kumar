@@ -193,7 +193,7 @@ public class EmployeeDao extends BaseEmployeeDao
 		
 		try{
 			 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "select  *from otp where phoneNumber=? and OTP=?";
+			String sql = "select  * from otp where phoneNumber=? and OTP=? order by id desc limit 1";
 			List<EmployeeBean> retlist = jdbcTemplate.query(sql,
 					new Object[]{employee.getPhoneNumber(),employee.getOTP()},ParameterizedBeanPropertyRowMapper.newInstance(EmployeeBean.class));
 					if(retlist.size() > 0)

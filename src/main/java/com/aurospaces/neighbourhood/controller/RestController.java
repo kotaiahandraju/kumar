@@ -26,11 +26,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aurospaces.neighbourhood.bean.CartBean;
 import com.aurospaces.neighbourhood.bean.EmployeeBean;
 import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.bean.OrdersListBean;
 import com.aurospaces.neighbourhood.bean.ProductnameBean;
+import com.aurospaces.neighbourhood.db.dao.CartDao;
 import com.aurospaces.neighbourhood.db.dao.EmployeeDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.KhaibarUsersDao;
@@ -50,6 +52,7 @@ public class RestController {
 	@Autowired OrdersListDao ordersListDao;
 	@Autowired ItemsDao itemsDao;
 	@Autowired EmployeeDao empDao;
+	@Autowired CartDao cartDao;
 	@Autowired ServletContext objContext;
 	@RequestMapping(value = "/rest/getLogin")
 	public @ResponseBody String getLogin(@RequestBody LoginBean loginBean ,  HttpServletRequest request) throws Exception {
@@ -316,6 +319,57 @@ public class RestController {
 
 		}
 		return String.valueOf(jsonObject);
+	}
+	@RequestMapping(value = "rest/addtocart")
+	public @ResponseBody String addtocart(@RequestBody CartBean cartBean,	ModelMap model, HttpServletRequest request, HttpSession session) {
+		JSONObject objJSON = new JSONObject();
+		System.out.println(cartBean.getCartList());
+		JSONArray array = new JSONArray(cartBean.getCartList());
+		CartBean ordersList= null;
+		try{
+			int j=0;
+			
+			 for (int i = 0; i < array.length(); i++)
+		        {
+		            JSONObject jsonObj = array.getJSONObject(i);
+		             ordersList = new CartBean();
+		            ordersList.setUserId(String.valueOf(jsonObj.get("userId")));
+		            ordersList.setQuantity(String.valueOf(jsonObj.get("quantity")));
+		            ordersList.setProductId(String.valueOf(jsonObj.get("productId")));
+		            ordersList.setBranchId(String.valueOf(jsonObj.get("branchId")));
+		            cartDao.save(ordersList);
+		            j++;
+		        }
+
+			 
+		int count=	cartDao.countcartdetails(ordersList);
+		
+		objJSON.put("count", count);
+		objJSON.put("msg", "Item successfully added to your cart");
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			objJSON.put("msg", "failed");
+		}
+		
+		
+				return String.valueOf(objJSON);
+	}
+	@RequestMapping(value = "rest/cartdetails")
+	public @ResponseBody String cartdetails(@RequestBody CartBean cartBean,	ModelMap model, HttpServletRequest request, HttpSession session) {
+		List<Map<String,Object>> listOrderBeans = null;
+		ObjectMapper objectMapper =null;
+		String sJson = null;
+		JSONObject objJson = new JSONObject();
+		try{
+			listOrderBeans = objKhaibarUsersDao.getallcartDetails(cartBean);
+			objJson.put("cartList", listOrderBeans);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return String.valueOf(objJson);
 	}
 	
 }
