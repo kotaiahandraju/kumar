@@ -90,6 +90,56 @@ table#dependent_table tbody tr td:first-child::before {
 					</div>
 				</div>
 				</div>
+				
+			
+				<!-- Invoice Model Start  -->
+				
+				 <div class="modal fade" id="invoiceModal" data-backdrop="static" data-keyboard="false" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header" style="background: #166eaf;">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title" style="color: white;">Kumar Invoice </h4>
+        	</div>
+        	<div style="max-width:90%; margin:0 auto; background:#FFFFFF;" class="modal-body">
+        		<div align="center" class="text"><span class="impColor0"></span></div>
+        		<div class="row">
+        			<div class="col-md-12">
+				
+							
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Invoice Id</label>
+									<div class="col-md-3">
+										<span id="invoiceId" class="form-control"></span> 
+									</div>
+								</div>
+								
+								
+								<div class="form-group">
+									<label class="col-md-3 control-label no-padding-right">Order Id</label> 
+									<div class="col-md-3">
+										<span id="orderId" class="form-control"></span>
+									</div>
+								</div>
+								
+        			</div>
+        					</div>				
+								
+									<div class="panel-footer">
+				      	
+			      	</div>
+
+                    		
+                    	
+                    		
+                    		</div>
+                    		
+				</div> 
+					
+				</div> 
+				</div>
+				<!-- Invoice Model End -->	
 
 <script type="text/javascript">
  var listOrders1 =${allOrders1};
@@ -163,10 +213,14 @@ function ordePlacing() {
 			formData, false, 'text', function(data) {
 		if(data != ""){
 			var jsonobj = $.parseJSON(data);
-			var count = jsonobj.count;
-			alert(jsonobj.msg);
-			$("#cartId").text(count);
-		window.location.href = "${baseurl}/admin/cartdetails";
+			var orderId = jsonobj.orderId;
+			var invoiceId = jsonobj.invoiceId;
+			$("#invoiceModal").modal();
+			
+			$("#invoiceId").text(invoiceId);
+			$("#orderId").text(orderId);
+			
+		//window.location.href = "${baseurl}/admin/cartdetails";
 		}
 		
 	});

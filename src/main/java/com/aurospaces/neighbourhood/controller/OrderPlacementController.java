@@ -29,6 +29,7 @@ import com.aurospaces.neighbourhood.db.dao.EmployeeDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.OrdersListDao;
 import com.aurospaces.neighbourhood.db.dao.ProductnameDao;
+import com.aurospaces.neighbourhood.util.KumarUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 @RequestMapping(value="/admin")
@@ -40,6 +41,7 @@ public class OrderPlacementController {
 	@Autowired OrdersListDao listDao;
 	@Autowired ServletContext objContext;
 	@Autowired CartDao cartDao;
+	KumarUtil kumarUtil= new KumarUtil();
 	@RequestMapping(value="/orderplacing")
 	public String orderPlacement(HttpServletRequest request){
 		ObjectMapper objectMapper = null;
@@ -67,6 +69,7 @@ public class OrderPlacementController {
 	}
 	@RequestMapping(value="/dealerorderproducts")
 	public @ResponseBody String dealerorderproducts(OrdersListBean orderslistbean,ModelMap model,HttpServletRequest request,RedirectAttributes redir,HttpSession session){
+		JSONObject jsonObj = new JSONObject();
 		try{
 			if(StringUtils.isNotBlank(orderslistbean.getProductId())){
 				String productArray[] = orderslistbean.getProductId().split(",");
@@ -89,8 +92,12 @@ public class OrderPlacementController {
 					orderslistbean.setId(0);
 					orderslistbean.setProductId(productArray[i]);
 					orderslistbean.setQuantity(quantityArray[i]);
+					orderslistbean.setInvoiceId(kumarUtil.randNum());
 					orderslistbean.setOrderId(prefix.concat(new Integer(rand_int).toString()));
 					ordersListDao.save(orderslistbean);
+					jsonObj.put("invoiceId", orderslistbean.getInvoiceId());
+					jsonObj.put("orderId", orderslistbean.getOrderId());
+					jsonObj.put(orderslistbean.getProductId(), orderslistbean.getQuantity()) ;
 				}
 				 cartDao.deleteByUserId(Integer.parseInt(objuserBean.getEmpId()));
 			}
@@ -99,7 +106,7 @@ public class OrderPlacementController {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return "orderPlacement";
+		return String.valueOf(jsonObj);
 		
 	}
 	
