@@ -128,15 +128,15 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Dealer Name</th><th>Amount</th><th>UTR Number</th><th> Payment Date </th><th></th><th></th></tr>'+
+    	'<thead><tr><th>Dealer Name</th><th>Amount</th><th>UTR Number</th><th> Payment Date </th><th>Payment Confirmation </th><th>Payment Status</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		
 		 if(orderObj.confirm == "1"){
-			var deleterow = "<a  ><i class='fa fa-check' style='color:#29c10d'></i></a>"
+			var confirm = "<a  ><i class='fa fa-check' style='color:#29c10d'></i></a>"
 		}else{  
-			var deleterow = "<a  ><i class='fa fa-times' style='color:#e40d0d'></i></a>"
+			var confirm = "<a  ><i class='fa fa-times' style='color:#e40d0d'></i></a>"
 		} 
 		 if(orderObj.confirm == "0" || orderObj.confirm == null){
 			 var checkbox = "<input class='checkall' type='checkbox' name='checkboxName' onclick='paymentConfirm("+ orderObj.empId+ ")'  id='"+orderObj.id+"'      />";
@@ -152,7 +152,7 @@ function showTableData(response){
 			+ "<td title='"+orderObj.qtr_number+"'>" + orderObj.qtr_number + "</td>"
 			+ "<td title='"+orderObj.strpaymentDate+"'>" + orderObj.strpaymentDate + "</td>"
 			+"<td>"+checkbox+"</td>"
-			+ "<td style='text-align: center;white-space: nowrap;'>"  + deleterow + "</td>"
+			+ "<td style='text-align: center;white-space: nowrap;'>"  + confirm + "</td>"
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});

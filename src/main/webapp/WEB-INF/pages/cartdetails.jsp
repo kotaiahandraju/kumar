@@ -114,7 +114,7 @@ function showTableData(response){
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		serviceUnitArray[orderObj.id] = orderObj;
-		var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" class='numericOnly' id='"+orderObj.id+"quantity' />"
+		var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" class='numericOnly' id='"+orderObj.productId+"quantity' />"
 		var tblRow = "<tr>"
 				+ "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>"
 				+ "<td title='"+orderObj.productIdName+"'>"	+ orderObj.productIdName + "</td>"
@@ -141,6 +141,7 @@ function ordePlacing() {
 	$('input[name^=quantity]').each(function(){
 		if($.trim($(this).val()) != ""){
 			console.log(this.id);
+			
 			quantity.push($(this).val());
 			var str = this.id; 
 			res= str.replace("quantity", "");
