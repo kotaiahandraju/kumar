@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -101,33 +102,7 @@ ps.setString(19, kumarEmployee.getAlternativeNumber());
 	}
 	
 	
-	public void saveOtp( final EmployeeBean kumarEmployee) 
-	{
-		jdbcTemplate = custom.getJdbcTemplate();
-
-	KeyHolder keyHolder = new GeneratedKeyHolder();
-	final String INSERT_SQL1 = "INSERT INTO otp(OTP,phoneNumber) values (?,?)";
 	
-	int update = jdbcTemplate.update(
-			new PreparedStatementCreator() {
-					public PreparedStatement 
-					createPreparedStatement(Connection connection) throws SQLException {
-						PreparedStatement ps =
-								connection.prepareStatement(INSERT_SQL1,new String[]{"id"});
-	
-						ps.setString(1, kumarEmployee.getOTP());
-						ps.setString(2, kumarEmployee.getPhoneNumber());
-
-							return ps;
-						}
-				},
-				keyHolder);
-				
-				Number unId = keyHolder.getKey();
-				kumarEmployee.setId(unId.intValue());
-				
-
-	}
 	
 		
 	@Transactional
