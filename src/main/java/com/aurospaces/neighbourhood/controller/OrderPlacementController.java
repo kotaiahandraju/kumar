@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -69,7 +70,9 @@ public class OrderPlacementController {
 	}
 	@RequestMapping(value="/dealerorderproducts")
 	public @ResponseBody String dealerorderproducts(OrdersListBean orderslistbean,ModelMap model,HttpServletRequest request,RedirectAttributes redir,HttpSession session){
-		JSONObject jsonObj = new JSONObject();
+		JSONArray jsonArray = new JSONArray();
+		
+		
 		try{
 			if(StringUtils.isNotBlank(orderslistbean.getProductId())){
 				String productArray[] = orderslistbean.getProductId().split(",");
@@ -88,6 +91,8 @@ public class OrderPlacementController {
 				orderslistbean.setBranchId(objuserBean.getBranchId());
 				prefix = prefix+"-"+ objuserBean.getBranchId()+"-";
 				System.out.println(" Custom generated Sequence value " + prefix.concat(new Integer(rand_int).toString()));
+				JSONObject jsonObj1 = new JSONObject();
+				JSONObject jsonObj2 = new JSONObject();
 				for(int i=0;i<productArray.length;i++){
 					orderslistbean.setId(0);
 					orderslistbean.setProductId(productArray[i]);
@@ -95,9 +100,15 @@ public class OrderPlacementController {
 					orderslistbean.setInvoiceId(kumarUtil.randNum());
 					orderslistbean.setOrderId(prefix.concat(new Integer(rand_int).toString()));
 					ordersListDao.save(orderslistbean);
-					jsonObj.put("invoiceId", orderslistbean.getInvoiceId());
-					jsonObj.put("orderId", orderslistbean.getOrderId());
-					jsonObj.put(orderslistbean.getProductId(), orderslistbean.getQuantity()) ;
+					jsonObj1.put("invoiceId", orderslistbean.getInvoiceId());
+					jsonObj1.put("orderId", orderslistbean.getOrderId());
+					
+					jsonObj2.put(orderslistbean.getProductId(), orderslistbean.getQuantity()) ;
+					
+					model.addAttribute("invoiceDetails", jsonObj1);
+					model.addAttribute("productList", jsonObj2);
+					jsonArray.put(jsonObj1);
+					jsonArray.put(jsonObj2);
 				}
 				 cartDao.deleteByUserId(Integer.parseInt(objuserBean.getEmpId()));
 			}
@@ -106,7 +117,7 @@ public class OrderPlacementController {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return String.valueOf(jsonObj);
+		return String.valueOf(jsonArray);
 		
 	}
 	

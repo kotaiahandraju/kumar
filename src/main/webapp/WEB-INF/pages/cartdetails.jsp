@@ -123,6 +123,21 @@ table#dependent_table tbody tr td:first-child::before {
 									</div>
 								</div>
 								
+								<div class="form-group" id= "productsList">
+									
+									<div class="table-responsive" id="tabledata">
+						<table class="table "
+							id="example1">
+							<thead>
+								<tr><th>Item Code</th><th>quantity</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+									
+								</div>
+								
         			</div>
         					</div>				
 								
@@ -211,10 +226,29 @@ function ordePlacing() {
 	
 	$.fn.makeMultipartRequest('POST', 'dealerorderproducts', false,
 			formData, false, 'text', function(data) {
+		console.log(data);
 		if(data != ""){
 			var jsonobj = $.parseJSON(data);
-			var orderId = jsonobj.orderId;
-			var invoiceId = jsonobj.invoiceId;
+			var orderId = jsonobj[0].orderId;
+			var invoiceId = jsonobj[0].invoiceId;
+			var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
+	    	'<thead><tr><th>Item Code</th><th>Quantity</th><th></th></tr>'+
+	    	"</thead><tbody></tbody></table>";
+		$("#productsList").html(tableHead);
+		
+		/* $.each(result[0], function(key, value){
+		    console.log(key, value);
+		}); */
+		$.each(jsonobj[1],function(key, value) {
+			//produ = orderObj[1];
+			//var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" class='numericOnly' id='"+orderObj.productId+"quantity' />"
+			var tblRow = "<tr>"
+					+ "<td title='"+key+"'>"+ value + "</td>"
+					
+			$(tblRow).appendTo("#productsList table tbody");
+			
+		});
+			
 			$("#invoiceModal").modal();
 			
 			$("#invoiceId").text(invoiceId);
