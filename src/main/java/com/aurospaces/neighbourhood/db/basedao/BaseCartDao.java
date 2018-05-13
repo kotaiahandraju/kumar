@@ -96,6 +96,14 @@ ps.setString(6, cart.getBranchId());
 		}
 		
 
+	@Transactional
+		public int deleteByUserId(int userId) {
+			jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "DELETE FROM cart WHERE userId=?";
+			 int count =jdbcTemplate.update(sql, new Object[]{userId});
+			 return count;
+		}
+	
 	 public CartBean getById(int id) {
 			jdbcTemplate = custom.getJdbcTemplate();
 			String sql = "SELECT * from cart where id = ? ";

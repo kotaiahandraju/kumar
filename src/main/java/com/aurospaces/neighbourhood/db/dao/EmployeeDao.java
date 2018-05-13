@@ -116,7 +116,7 @@ public class EmployeeDao extends BaseEmployeeDao
  public Boolean updateUsernameAndPasswordInEmp(int id,String username, String password) {
 		boolean result = false;
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql = "update kumar_employee set username='" + username + "',password='" + password + "',confirm='1' where id = ?";
+		String sql = "update kumar_employee set username='" + username + "',password='" + password + "',confirm='1',status='1' where id = ?";
 		jdbcTemplate.update(sql, new Object[] { id });
 		int results = jdbcTemplate.update(sql, new Object[] { id });
 		if (results != 0) {

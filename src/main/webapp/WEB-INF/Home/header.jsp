@@ -65,7 +65,7 @@ margin-top: 18px;
     float: left !important;
     color: #fff;
     list-style: none;
-    margin-left: 950px;
+    margin-left: 800px;
     font-size:18px;
 }
  @media only screen and (max-width: 600px) and (min-width: 400px) {

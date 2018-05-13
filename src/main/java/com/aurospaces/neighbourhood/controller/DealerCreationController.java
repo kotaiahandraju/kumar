@@ -50,10 +50,7 @@ System.out.println("Dealer Creation Page");
 	}
 	@RequestMapping(value = "/addDealer")
 	public String addDealer( @ModelAttribute("delar") EmployeeBean employeeBean,ModelMap model, HttpServletRequest request, HttpSession session,RedirectAttributes redirect) {
-		InputStream input = null;
-		String body = null;
 		LoginBean objLoginBean = new LoginBean();
-		 Properties prop = new Properties();
 		try {
 			EmployeeBean objEmployeeBean = employeeDao.mobileDuplicateCheck(employeeBean);
 			if(objEmployeeBean != null){
@@ -73,8 +70,11 @@ System.out.println("Dealer Creation Page");
 				objLoginBean.setEmpId(String.valueOf(employeeBean.getId()));
 				objLoginBean.setStatus("1");
 				objLoginBean.setRoleId("3");
+				objLoginBean.setUserName(employeeBean.getUsername());
+				objLoginBean.setPassword(employeeBean.getPassword());
 				loginDao.save(objLoginBean);
 				redirect.addFlashAttribute("msg", " Registered Successfully");
+				redirect.addFlashAttribute("cssMsg", "success");
 			}
 			
 		} catch (Exception e) {

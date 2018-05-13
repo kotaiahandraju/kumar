@@ -3,12 +3,14 @@ package com.aurospaces.neighbourhood.controller;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
+import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,10 +25,12 @@ import com.aurospaces.neighbourhood.bean.EmployeeBean;
 import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.bean.OrdersListBean;
+import com.aurospaces.neighbourhood.db.dao.CartDao;
 import com.aurospaces.neighbourhood.db.dao.EmployeeDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.OrdersListDao;
 import com.aurospaces.neighbourhood.db.dao.ProductnameDao;
+import com.aurospaces.neighbourhood.util.KumarUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 @RequestMapping(value="/admin")
@@ -37,7 +41,8 @@ public class OrderPlacementController {
 	@Autowired OrdersListDao ordersListDao;
 	@Autowired OrdersListDao listDao;
 	@Autowired ServletContext objContext;
-	
+	@Autowired CartDao cartDao;
+	KumarUtil kumarUtil= new KumarUtil();
 	@RequestMapping(value="/orderplacing")
 	public String orderPlacement(HttpServletRequest request){
 		ObjectMapper objectMapper = null;
@@ -65,28 +70,54 @@ public class OrderPlacementController {
 	}
 	@RequestMapping(value="/dealerorderproducts")
 	public @ResponseBody String dealerorderproducts(OrdersListBean orderslistbean,ModelMap model,HttpServletRequest request,RedirectAttributes redir,HttpSession session){
+		JSONArray jsonArray = new JSONArray();
+		
+		
 		try{
 			if(StringUtils.isNotBlank(orderslistbean.getProductId())){
 				String productArray[] = orderslistbean.getProductId().split(",");
 				String quantityArray[] = orderslistbean.getQuantity().split(",");
 			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
 			if (objuserBean != null) {
+				String prefix = "Kumar";
+				
+				// create instance of Random class
+		        Random rand = new Random();
+		                        
+		        // Generate random integers in range 0 to 999
+		        int rand_int = rand.nextInt(10000);
+				
 				orderslistbean.setDelerId(objuserBean.getEmpId());
 				orderslistbean.setBranchId(objuserBean.getBranchId());
+				prefix = prefix+"-"+ objuserBean.getBranchId()+"-";
+				System.out.println(" Custom generated Sequence value " + prefix.concat(new Integer(rand_int).toString()));
+				JSONObject jsonObj1 = new JSONObject();
+				JSONObject jsonObj2 = new JSONObject();
 				for(int i=0;i<productArray.length;i++){
 					orderslistbean.setId(0);
 					orderslistbean.setProductId(productArray[i]);
 					orderslistbean.setQuantity(quantityArray[i]);
+					orderslistbean.setInvoiceId(kumarUtil.randNum());
+					orderslistbean.setOrderId(prefix.concat(new Integer(rand_int).toString()));
 					ordersListDao.save(orderslistbean);
+					jsonObj1.put("invoiceId", orderslistbean.getInvoiceId());
+					jsonObj1.put("orderId", orderslistbean.getOrderId());
+					
+					jsonObj2.put(orderslistbean.getProductId(), orderslistbean.getQuantity()) ;
+					
+					model.addAttribute("invoiceDetails", jsonObj1);
+					model.addAttribute("productList", jsonObj2);
+					jsonArray.put(jsonObj1);
+					jsonArray.put(jsonObj2);
 				}
-				
+				 cartDao.deleteByUserId(Integer.parseInt(objuserBean.getEmpId()));
 			}
 			}
 			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return "orderPlacement";
+		return String.valueOf(jsonArray);
 		
 	}
 	
