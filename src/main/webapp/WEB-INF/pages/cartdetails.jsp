@@ -232,7 +232,7 @@ function ordePlacing() {
 			var orderId = jsonobj[0].orderId;
 			var invoiceId = jsonobj[0].invoiceId;
 			var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
-	    	'<thead><tr><th>Item Code</th><th>Quantity</th><th></th></tr>'+
+	    	'<thead><tr><th>Product Name</th><th>Item Code</th><th>Quantity</th><th>Price<i class="fas fa-rupee-sign"></i></th><th></th></tr>'+
 	    	"</thead><tbody></tbody></table>";
 		$("#productsList").html(tableHead);
 		
@@ -243,8 +243,10 @@ function ordePlacing() {
 			//produ = orderObj[1];
 			//var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" class='numericOnly' id='"+orderObj.productId+"quantity' />"
 			var tblRow = "<tr>"
-					+ "<td title='"+key+"'>"+ value + "</td>"
-					
+					+ "<td title=''></td>"
+					+ "<td title='"+key+"'>"+ key + "</td>"
+					+ "<td title='"+value+"'>"+ value + "</td>"
+					+ "<td title=''></td>"
 			$(tblRow).appendTo("#productsList table tbody");
 			
 		});
