@@ -1,4 +1,3 @@
-
 package com.aurospaces.neighbourhood.db.dao;
 
 import java.util.List;
@@ -70,6 +69,8 @@ public class PaymentDao extends BasePaymentDao
 		return null;
 		
 	}
+
+
 
 }
 

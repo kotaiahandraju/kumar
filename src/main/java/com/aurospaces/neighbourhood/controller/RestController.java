@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.aurospaces.neighbourhood.controller;
 
 import java.io.File;
@@ -155,11 +152,10 @@ public class RestController {
 			int j=0;
 			KumarUtil utils = new KumarUtil();
 			String invoiceId = utils.randNum();
-			OrdersListBean ordersList = null;
 			 for (int i = 0; i < array.length(); i++)
 		        {
 		            JSONObject jsonObj = array.getJSONObject(i);
-		             ordersList = new OrdersListBean();
+		            OrdersListBean ordersList = new OrdersListBean();
 		            ordersList.setDelerId(String.valueOf(jsonObj.get("delarId")));
 		            ordersList.setQuantity(String.valueOf(jsonObj.get("quantity")));
 		            ordersList.setProductId(String.valueOf(jsonObj.get("productId")));
@@ -168,7 +164,7 @@ public class RestController {
 		            ordersListDao.save(ordersList);
 		            j++;
 		        }
-			 cartDao.deleteByUserId(Integer.parseInt(ordersList.getDelerId()));
+
 			 objJSON.put("msg", "Successfully "+j+" Product's has been ordered");
 		}catch(Exception e){
 			e.printStackTrace();
@@ -353,7 +349,7 @@ public class RestController {
 		objJSON.put("count", count);
 		objJSON.put("msg", "Item successfully added to your cart");
 			
- 		}catch(Exception e){
+		}catch(Exception e){
 			e.printStackTrace();
 			objJSON.put("msg", "failed");
 		}
@@ -408,21 +404,6 @@ public class RestController {
 					}else{
 						jsonObj.put("msg", "failed");
 					}
-		} catch (Exception e) {
-			e.printStackTrace();
-			System.out.println(e);
-
-		}
-		return String.valueOf(jsonObj);
-	}
-	@RequestMapping(value = "rest/delarpaymentdetails")
-	public @ResponseBody String delarpaymentdetails(@RequestBody PaymentBean paymentBean) {
-      JSONObject jsonObj = new JSONObject();
-      List<PaymentBean> listOrderBeans = null;
-		try {
-			
-			listOrderBeans = paymentDao.getdelarpaymentdetails(paymentBean);
-					jsonObj.put("paymentlist", listOrderBeans);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e);

@@ -261,7 +261,7 @@ function cartCount(){
               <li class="productName"><a href="${baseurl }/admin/productName"> <span>Product Sub Category</span></a></li>&emsp;
               <li class="items"><a href="${baseurl }/admin/items"> <span>Product List</span></a></li>&emsp;
               <li class="employee"><a href="${baseurl }/admin/employeeCreation"> <span>Employees Creation</span></a></li>
-              
+             
               </c:if>
 			 <c:if test="${roleId=='2' }">
 			  <li class="productType"><a href="${baseurl }/admin/producttype"><span>Product Category</span></a></li>&emsp;
@@ -275,7 +275,7 @@ function cartCount(){
 			  <c:if test="${roleId=='3' }">
 			  <li class="delarpayment"><a href="${baseurl }/admin/delarpayment"> <span>Dealer Payment</span></a></li>
 			  <li class="orderplacing"><a href="${baseurl }/admin/orderplacing"> <span>Order Placing</span></a></li>
-			  
+			   <li class="ordersList"><a href="${baseurl }/admin/myorderLists"> <span>My Orders</span></a></li>
 			 </c:if>
 				
 			</ul>

@@ -87,6 +87,9 @@
 	<definition name="dealercreation" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/dealercreation.jsp" />
  </definition>
+ <definition name="ordersList" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/ordersList.jsp" />
+ </definition>
 	
 	
 </tiles-definitions>

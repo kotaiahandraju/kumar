@@ -1,4 +1,3 @@
-
 package com.aurospaces.neighbourhood.db.dao;
 
 import java.util.List;
