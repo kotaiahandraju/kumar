@@ -57,7 +57,19 @@ public class PaymentDao extends BasePaymentDao
 		}
 		return result;
 	}
-
+	public List<PaymentBean> getdelarpaymentdetails(PaymentBean paymentBean){
+		jdbcTemplate = custom.getJdbcTemplate();
+		
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(" select *,DATE_FORMAT(payment_date,'%d-%b-%Y') as strpaymentDate  from kumar_payment where 1=1 ");
+				buffer.append(" and empId= '"+paymentBean.getEmpId()+"' ");
+		String sql =buffer.toString();
+		List<PaymentBean> list = jdbcTemplate.query(sql, new Object[]{},ParameterizedBeanPropertyRowMapper.newInstance(PaymentBean.class));
+		if(list.size() > 0)
+			return list;
+		return null;
+		
+	}
 
 }
 
