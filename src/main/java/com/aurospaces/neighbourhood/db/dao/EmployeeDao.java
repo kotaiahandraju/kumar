@@ -286,5 +286,20 @@ public class EmployeeDao extends BaseEmployeeDao
 			return "";
 		}
 	}
+ public boolean isUsernameDuplicate(String userName){
+	 jdbcTemplate =custom.getJdbcTemplate();
+	 try{
+		 StringBuffer buffer = new StringBuffer();
+		 buffer.append(" select count(*) from login where userName = '"+userName+"' ");
+		 int count = jdbcTemplate.queryForInt(buffer.toString());
+		 if(count>0){
+			 return true; 
+		 }else
+			 return false;
+	 }catch(Exception e){
+		 e.printStackTrace();
+	 }
+	 return false;
+ }
 }
 

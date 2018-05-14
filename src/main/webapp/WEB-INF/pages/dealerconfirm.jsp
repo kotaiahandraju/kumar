@@ -135,7 +135,7 @@ function showTableData(response){
 		if(orderObj.confirm == "1"){
 			var confirm = "<a class='' >Confirmed</i></a>"
 		}else{  
-			var confirm = "<a class='' onclick='dealerRegister("+ orderObj.id+ ")'>Waiting</a>"
+			var confirm = "<a class='' onclick='dealerRegister("+ orderObj.id+ ")'>Pending</a>"
 		}
 // 		var edit = "<a class='edit editIt' onclick='editEmpCreation("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
@@ -231,6 +231,12 @@ function genarateAuthDetails() {
 				formData, false, 'text', function(data) {
 			console.log(data);
 			var jsonobj = $.parseJSON(data);
+			var username_duplicate = jsonobj.duplicate;
+			if(typeof username_duplicate != "undefined" && username_duplicate=="true"){
+				alert("Username already exists. Please try another.");
+				$("#myModal").modal("show");
+				return false;
+			}
 			var alldata = jsonobj.allOrders1;
 			console.log(jsonobj.allOrders1);
 			showTableData(alldata);
