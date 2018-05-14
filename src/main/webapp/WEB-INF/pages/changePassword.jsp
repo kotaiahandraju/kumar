@@ -57,7 +57,7 @@
 								<div class="col-md-12" style="text-align:right;">
 								<div class="form-group">
 									<div class="col-md-offset-3 col-md-6">
-										<input type="submit" id="submit1"  class="btn btn-success"  value="Submit"/>
+										<input type="submit" id="submit4"  class="btn btn-success"  value="Submit"/>
 										<input class="btn-danger btn cancel"  type="reset"  value="Reset" />
 									</div>
 								</div></div>
@@ -79,11 +79,11 @@
 <!-- Body ends here -->
 <script type="text/javascript">
 $('#submit4').click(function() {
-	
+	alert("hello");
 		var npassword =$('#npassword').val();
 		var cpassword =$('#cpassword').val();
 		var password =$('#password').val();
-		/* if(password =="" || password== null || password== "undefined")
+		if(password =="" || password== null || password== "undefined")
 			{
 			$('#password').css('border-color', 'red');
 			return false;
@@ -99,11 +99,11 @@ $('#submit4').click(function() {
 			{
 			$('#cpassword').css('border-color', 'red');
 			return false;
-			} */
+			} 
 		
 		if(npassword != cpassword)
 			{
-				$('#errorMsg').text( "* Password Not Matched") ;
+				$('#errorMsg').text( "* New and confirm Passwords Must Be Matched") ;
 				setTimeout(function() { $("#errorMsg").hide(); }, 3000);
 				return false;										
 			}

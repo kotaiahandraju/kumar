@@ -45,19 +45,19 @@ table#dependent_table tbody tr td:first-child::before {
         <div class="container" id="lpoMain">
         
         
-         <div class="row" id="moveTo">
+         <%-- <div class="row" id="moveTo">
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4>Add Product Category</h4>
                         <div class="options"></div>
                     </div>
-	                <form:form  modelAttribute="orderLstForm"  action="" class="form-horizontal" method="post" >
+	                <form:form  modelAttribute="orderLstForm"  action="myorderLists" class="form-horizontal" method="post" >
                     <div class="panel-body">
                     	<div class="row">
                     		<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Deales : <span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Dealers : <span class="impColor">*</span></label>
                     				<div class="col-md-6">
                     					<form:select path="name" class="form-control validate" onchange="orederLists();">
 								    	<form:option value="">-- Select Dealers --</form:option>
@@ -72,7 +72,7 @@ table#dependent_table tbody tr td:first-child::before {
                     	</div>
                     </div>
          			</form:form>				    
-                </div>
+                </div> --%>
         
         
         
@@ -91,7 +91,7 @@ table#dependent_table tbody tr td:first-child::before {
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
                                 	<tr>
-                                		<th>Dealer Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th>
+                                		<th>OrderId</th><th>InvoiceId</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th>
                                 	</tr>
                                 </thead>
                                 <tbody></tbody>
@@ -113,13 +113,13 @@ table#dependent_table tbody tr td:first-child::before {
 /* $(document).ready(function() {
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 }); */
-// var lstOrders =${allOrders1};
+ var lstOrders =${allOrders1};
 
-// console.log(lstOrders);
+console.log(lstOrders);
 
-// if(lstOrders != ""){
-// 	showTableData(lstOrders);
-// }
+if(lstOrders != ""){
+ 	showTableData(lstOrders);
+ }
 
 $(function() {
 // 	var listOrders=JSON.parse(lstOrders);
@@ -154,7 +154,7 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Dealer Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th></tr>'+
+    	'<thead><tr><th>Order Id</th><th>Invoice Id</th><th>Product Category</th><th>Product Sub Category </th><th>Item Code</th><th>Item Description</th><th>Quantity</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -162,12 +162,14 @@ function showTableData(response){
 		
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
-			+ "<td title='"+orderObj.dealerName+"'>" + orderObj.dealerName + "</td>"
-			+ "<td title='"+orderObj.categeory+"'>" + orderObj.categeory + "</td>"
-			+ "<td title='"+orderObj.subCategeory+"'>" + orderObj.subCategeory + "</td>"
-			+ "<td title='"+orderObj.itemCode+"'>" + orderObj.itemCode + "</td>"
+			+ "<td title='"+orderObj.orderId+"'>" + orderObj.orderId + "</td>"
+			+ "<td title='"+orderObj.invoiceId+"'>" + orderObj.invoiceId + "</td>"
+			+ "<td title='"+orderObj.productname+"'>" + orderObj.productname + "</td>"
+			+ "<td title='"+orderObj.producttype+"'>" + orderObj.producttype + "</td>"
+			+ "<td title='"+orderObj.itemcode+"'>" + orderObj.itemcode + "</td>"
 			+ "<td title='"+orderObj.itemdescrption+"'>" + orderObj.itemdescrption + "</td>"
 			+ "<td title='"+orderObj.quantity+"'>" + orderObj.quantity + "</td>"
+			
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
@@ -205,6 +207,6 @@ function orederLists() {
 
 
 	
-$("#pageName").text("Product Category Master");
-$(".productType").addClass("active");
+$("#pageName").text("My Orders");
+$(".ordersList").addClass("active");
 </script>
