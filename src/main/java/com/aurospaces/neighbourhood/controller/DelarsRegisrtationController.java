@@ -209,7 +209,7 @@ System.out.println("delar registration");
 				String otp = employeeDao.getOtpOf(mobileNum);
 			   if(StringUtils.isNotBlank(otp)){
 				   try{
-					   String response = SendSMS.sendSMS("Thanks for registering with Aarna Matrimony. OTP for your registration is: "+otp, mobileNum,objContext);
+					   String response = SendSMS.sendSMS("OTP for your registration is: "+otp, mobileNum,objContext);
 					   
 					   if("OK".equalsIgnoreCase(response)){
 						   objJson.put("message", "success");

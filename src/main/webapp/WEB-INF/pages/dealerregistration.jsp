@@ -225,10 +225,12 @@ border-top: 0px solid #dddddd !important;
 						    <div class="modal-content">
 						      <div class="modal-header">
 						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						        <h4 class="modal-title" id="exampleModalLabel">Otp Validating</h4>
+						        <h4 class="modal-title" id="exampleModalLabel">Otp Validation</h4>
 						      </div>
 						      <div class="modal-body">
-						     <input type="text" id="OTP">
+						      <span id="displayMsg"></span> <br>
+						     <input type="text" id="OTP"><br>
+						     <button type="button" class="btn btn-success" onclick="resendOtp();">Resend OTP</button>
 						      </div>
 						      <div class="modal-footer">
 						       <button type="button" class="btn btn-success" data-dismiss="modal" onclick="dealerCreation();">Submit</button>
@@ -272,6 +274,8 @@ border-top: 0px solid #dddddd !important;
                 								if(resJson.msg=="failed"){
                 									alert("Mobile Numober Already Exist.")
                 								}else{
+                									var mobileStr = resJson.mobileStr;
+                									$("#displayMsg").html("Enter OTP that has been sent on your mobile number xxxxxxx"+mobileStr);
                 									$('#myModal').modal('toggle');
                 									$('#myModal').modal('show');
                 								}
@@ -321,13 +325,26 @@ border-top: 0px solid #dddddd !important;
                     					 $.fn.makeMultipartRequest('POST','addDelar', false,formData, false, 'text', function(data) {
                     								console.log(data);
                     								var resJson = JSON.parse(data);
-                    								alert(resJson.msg);
+                    								//alert(resJson.msg);
                     								if(resJson.msg=="success"){
                     									alert(" Registered Successfully");
+                    									$("#OTP").val('');
+                    									$("#displayMsg").html("");
+                    									//$('#myModal').modal('toggle');
+                    									$('#myModal').modal('hide');
                     								}else if(resJson.msg=="fail"){
-                    									alert("Please enter valid OTP");
-                    									$('#myModal').modal('toggle');
-                    									$('#myModal').modal('show');
+                    									var otp_result = resJson.otp_result;
+                    									if(otp_result=="count_exceeded"){
+                    										alert("OTP limit for the day has been exceeded. Please try again later.");
+                    										$('#myModal').modal('hide');
+                    									}else if(otp_result=="mismatched"){
+                    										//alert("OTPs mismatched! Please try again.");
+                    										$("#displayMsg").html("OTPs mismatched! Please try again.");
+                    										$('#myModal').modal('show');
+                    									}
+                    									//alert("Please enter valid OTP");
+                    									//$('#myModal').modal('toggle');
+                    									
                     								}
                  								});
                         				
@@ -336,6 +353,24 @@ border-top: 0px solid #dddddd !important;
                     			
 
             				}
+                       		function resendOtp(){
+                       			var phoneNumber = $("#phoneNumber").val();
+                       			var formData = new FormData();
+                       			formData.append('phoneNumber', phoneNumber);
+                       			
+                       		 		$.fn.makeMultipartRequest('POST', 'resendOtp', false,
+                       						formData, false, 'text', function(data){
+                       					var jsonobj = $.parseJSON(data);
+                       					var msg = jsonobj.message;
+                       					var mobileStr = jsonobj.mobileStr;
+                       					if(msg != "undefined" && "success"==msg){
+                       						$("#displayMsg").html("OTP has been resent on your mobile no. xxxxxxx"+mobileStr);
+                       						$('#myModal').modal('show');
+                       					}	
+                       					
+                       				});
+                       			
+                       		}
                     		
                     		
                     		</script>
