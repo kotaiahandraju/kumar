@@ -1,4 +1,3 @@
-
 package com.aurospaces.neighbourhood.controller;
 
 import java.io.File;
@@ -62,44 +61,59 @@ System.out.println("delar registration");
 		 Properties prop = new Properties();
 			JSONObject jsonObj = new JSONObject();
 		try {
-			
-			 EmployeeBean otpChecking= employeeDao.otpChecking(employeeBean);
-			 if(otpChecking.getOTP().equals(employeeBean.getOTP())) {
-				 EmployeeBean objEmployeeBean = employeeDao.mobileDuplicateCheck(employeeBean);
-					if(objEmployeeBean != null){
-						jsonObj.put("msg", "fail");
-//						redirect.addFlashAttribute("msg", "Alreday Registered ");
-					}else{
-						employeeBean.setRoleId("3");
-						employeeBean.setStatus("0");
-						employeeDao.save(employeeBean);
-						 String propertiespath = objContext.getRealPath("Resources" +File.separator+"DataBase.properties");
-							//String propertiespath = "C:\\PRO\\Database.properties";
-					
-							input = new FileInputStream(propertiespath);
-							// load a properties file
-							prop.load(input);
-							String msg = prop.getProperty("send_delar_sms");
-							String msg1 = prop.getProperty("send_branch_manger_delardetails");
-							msg1 =msg1.replace("_name_", employeeBean.getName());
-							msg1 =msg1.replace("_mobile_", employeeBean.getPhoneNumber());
-							if(StringUtils.isNotBlank(employeeBean.getPhoneNumber())){
-								// delar send sms
-							SendSMS.sendSMS(msg, employeeBean.getPhoneNumber(), objContext);
+			 
+					 EmployeeBean objEmployeeBean = employeeDao.mobileDuplicateCheck(employeeBean);
+						if(objEmployeeBean != null){
+							jsonObj.put("msg", "fail");
+	//						redirect.addFlashAttribute("msg", "Alreday Registered ");
+						}else{
 							
-							jsonObj.put("msg", "success");
+							String result = this.isValidOtp(employeeBean);
+							if(result.equalsIgnoreCase("count_exceeded")){
+								jsonObj.put("msg", "fail"); 
+								jsonObj.put("otp_result", "count_exceeded");
+								return String.valueOf(jsonObj);
+							}else if(result.equalsIgnoreCase("mismatched")){
+								jsonObj.put("msg", "fail"); 
+								jsonObj.put("otp_result", "mismatched");
+								return String.valueOf(jsonObj);
+							}else if(result.equalsIgnoreCase("matched")){
+								jsonObj.put("otp_result", "matched");
+								employeeBean.setRoleId("3");
+								employeeBean.setStatus("0");
+								employeeDao.save(employeeBean);
+								 String propertiespath = objContext.getRealPath("Resources" +File.separator+"DataBase.properties");
+									//String propertiespath = "C:\\PRO\\Database.properties";
+							
+									input = new FileInputStream(propertiespath);
+									// load a properties file
+									prop.load(input);
+									String msg = prop.getProperty("send_delar_sms");
+									String msg1 = prop.getProperty("send_branch_manger_delardetails");
+									msg1 =msg1.replace("_name_", employeeBean.getName());
+									msg1 =msg1.replace("_mobile_", employeeBean.getPhoneNumber());
+									if(StringUtils.isNotBlank(employeeBean.getPhoneNumber())){
+										// delar send sms
+									SendSMS.sendSMS(msg, employeeBean.getPhoneNumber(), objContext);
+									
+									jsonObj.put("msg", "success");
+									}
+								EmployeeBean empbean =	employeeDao.getBranchEmployees(employeeBean);
+								if(empbean != null){
+									// branch manager send sms
+									SendSMS.sendSMS(msg1, empbean.getPhoneNumber(), objContext);
+								}
+								jsonObj.put("msg", "success");
 							}
-						EmployeeBean empbean =	employeeDao.getBranchEmployees(employeeBean);
-						if(empbean != null){
-							// branch manager send sms
-							SendSMS.sendSMS(msg1, empbean.getPhoneNumber(), objContext);
+							
+	//						redirect.addFlashAttribute("msg", " Registered Successfully");
+							
 						}
-//						redirect.addFlashAttribute("msg", " Registered Successfully");
-						
-					}
-			 }else{
+				// }
+			 
+			 /*else{
 				 jsonObj.put("msg", "fail");
-			 }
+			 }*/
 			
 			
 		} catch (Exception e) {
@@ -135,33 +149,46 @@ System.out.println("delar registration");
 			 Properties prop = new Properties();
 			try {
 
+				
 				listOrderBeans = listDao.getValidateOTP(employeeBean.getPhoneNumber());
 				if (listOrderBeans.size() !=0) {
 					
 					jsonObj.put("msg", "failed");
 				} else {
-					 employeeBean.setOTP(CommonUtils.generatePIN());
-					 String propertiespath = objContext.getRealPath("Resources" +File.separator+"DataBase.properties");
-				
-						input = new FileInputStream(propertiespath);
-						// load a properties file
-						prop.load(input);
-						String msg1 = prop.getProperty("OTPForDealer");
-						msg1 =msg1.replace("_otp_", employeeBean.getOTP());
-						if(StringUtils.isNotBlank(employeeBean.getPhoneNumber())){
+					/*String result = this.isValidOtp(employeeBean);
+					if(result.equalsIgnoreCase("count_exceeded")){
+						jsonObj.put("msg", "fail"); 
+						jsonObj.put("otp_result", "count_exceeded");
+						return String.valueOf(jsonObj);
+					}else if(result.equalsIgnoreCase("mismatched")){
+						jsonObj.put("msg", "fail"); 
+						jsonObj.put("otp_result", "mismatched");
+						return String.valueOf(jsonObj);
+					}else if(result.equalsIgnoreCase("matched")){*/
+						employeeBean.setOTP(CommonUtils.generatePIN());
+						 String propertiespath = objContext.getRealPath("Resources" +File.separator+"DataBase.properties");
+					
+							input = new FileInputStream(propertiespath);
+							// load a properties file
+							prop.load(input);
+							String msg1 = prop.getProperty("OTPForDealer");
+							msg1 =msg1.replace("_otp_", employeeBean.getOTP());
+							if(StringUtils.isNotBlank(employeeBean.getPhoneNumber())){
+								
+								 boolean success = employeeDao.saveOtp(employeeBean);
+								 jsonObj.put("mobileStr", employeeBean.getPhoneNumber().substring(employeeBean.getPhoneNumber().length()-3));
+								// delar send OTP
+								resultOtp=SendSMS.sendSMS(msg1, employeeBean.getPhoneNumber(), objContext);
+								jsonObj.put("success",employeeBean.getOTP());
+							if(resultOtp.equals("OK")) {
+								jsonObj.put("msg", "success");
+							}else{
+								jsonObj.put("msg", "failed");
+							}
 							
-							 employeeDao.saveOtp(employeeBean);
-							
-							// delar send OTP
-							resultOtp=SendSMS.sendSMS(msg1, employeeBean.getPhoneNumber(), objContext);
-							jsonObj.put("success",employeeBean.getOTP());
-						if(resultOtp.equals("OK")) {
-							jsonObj.put("msg", "success");
-						}else{
-							jsonObj.put("msg", "failed");
-						}
-						
-						}
+							}
+					//}
+					 
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -172,6 +199,65 @@ System.out.println("delar registration");
 			return String.valueOf(jsonObj);
 		}
 	
-	
+	 @RequestMapping(value = "/resendOtp")
+	 public @ResponseBody String resendOtp(EmployeeBean employeeBean,HttpServletRequest request, HttpSession session) {
+	   JSONObject objJson = new JSONObject();
+		try {
+				String mobileNum = employeeBean.getPhoneNumber();
+				objJson.put("mobileStr", mobileNum.substring(mobileNum.length()-3));
+				String otp = employeeDao.getOtpOf(mobileNum);
+			   if(StringUtils.isNotBlank(otp)){
+				   try{
+					   String response = SendSMS.sendSMS("OTP for your registration is: "+otp, mobileNum,objContext);
+					   
+					   if("OK".equalsIgnoreCase(response)){
+						   objJson.put("message", "success");
+					   }else{
+						   objJson.put("message", "failed");
+					   }
+				   }catch(Exception e){
+					   e.printStackTrace();
+					   objJson.put("message", "failed");
+				   }
+				   
+				   
+			   }else{
+				   objJson.put("message", "failed");
+			   }
+			   
+			
+		} catch (Exception e) {
+		   e.printStackTrace();
+		   objJson.put("message", "failed");
+		 }
+		return objJson.toString();
+	 }
+	 
+	   public String   isValidOtp(EmployeeBean employeeBean)
+	   {
+		   String mobileNum = employeeBean.getPhoneNumber();
+		   String received_otp = employeeBean.getOTP();
+		   /*************
+			check OTP limit for the day
+			
+			*************/
+		   int count = employeeDao.getOTPCount(mobileNum);
+		   if(count<=4){
+			   String otp = employeeDao.getOtpOf(employeeBean.getPhoneNumber())+"";
+			   if(StringUtils.isNotBlank(received_otp)  &&  otp.equals(received_otp)){
+				   employeeDao.updateOtpStatus(mobileNum,otp);
+				   return "matched";
+			   }else{
+				   employeeDao.updateCount(mobileNum, otp);
+				   return "mismatched";
+			   }
+		   }else{
+			   return "count_exceeded";
+		   }
+		   
+		   
+		   
+
+	   }
 	 
 }

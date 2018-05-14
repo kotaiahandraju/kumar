@@ -139,6 +139,11 @@ public class BranchManagerController {
 			System.out.println("authDetailsauthDetailsauthDetails");
 			
 			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			boolean duplicate = employeeDao.isUsernameDuplicate(employeeBean.getUsername());
+			if(duplicate){
+				jsonObject.putOnce("duplicate", "true");
+				return jsonObject.toString();
+			}
 			String password=CommonUtils.generatePIN();
 			loginBean=new LoginBean();
 			employeeBean.setPassword(password);

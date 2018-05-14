@@ -67,7 +67,7 @@ public List<Map<String,Object>> getValidateOTP(String mobileNo){
 	
 	try{
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql ="select *from kumar_employee where phone_number=?";
+		String sql ="select * from kumar_employee where phone_number=?";
 		list =jdbcTemplate.queryForList(sql, new Object[]{mobileNo});
 		System.out.println(sql);
 	}catch(Exception e){
