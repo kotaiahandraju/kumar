@@ -6,6 +6,7 @@ package com.aurospaces.neighbourhood.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -26,15 +27,19 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aurospaces.neighbourhood.bean.CartBean;
 import com.aurospaces.neighbourhood.bean.EmployeeBean;
 import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.bean.OrdersListBean;
+import com.aurospaces.neighbourhood.bean.PaymentBean;
 import com.aurospaces.neighbourhood.bean.ProductnameBean;
+import com.aurospaces.neighbourhood.db.dao.CartDao;
 import com.aurospaces.neighbourhood.db.dao.EmployeeDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.KhaibarUsersDao;
 import com.aurospaces.neighbourhood.db.dao.OrdersListDao;
+import com.aurospaces.neighbourhood.db.dao.PaymentDao;
 import com.aurospaces.neighbourhood.util.KumarUtil;
 import com.aurospaces.neighbourhood.util.SendSMS;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -50,6 +55,8 @@ public class RestController {
 	@Autowired OrdersListDao ordersListDao;
 	@Autowired ItemsDao itemsDao;
 	@Autowired EmployeeDao empDao;
+	@Autowired CartDao cartDao;
+	@Autowired PaymentDao paymentDao;
 	@Autowired ServletContext objContext;
 	@RequestMapping(value = "/rest/getLogin")
 	public @ResponseBody String getLogin(@RequestBody LoginBean loginBean ,  HttpServletRequest request) throws Exception {
@@ -155,6 +162,7 @@ public class RestController {
 		            ordersList.setDelerId(String.valueOf(jsonObj.get("delarId")));
 		            ordersList.setQuantity(String.valueOf(jsonObj.get("quantity")));
 		            ordersList.setProductId(String.valueOf(jsonObj.get("productId")));
+		            ordersList.setBranchId(String.valueOf(jsonObj.get("branchId")));
 		            ordersList.setInvoiceId(invoiceId);
 		            ordersListDao.save(ordersList);
 		            j++;
@@ -317,6 +325,94 @@ public class RestController {
 		}
 		return String.valueOf(jsonObject);
 	}
+	@RequestMapping(value = "rest/addtocart")
+	public @ResponseBody String addtocart(@RequestBody CartBean cartBean,	ModelMap model, HttpServletRequest request, HttpSession session) {
+		JSONObject objJSON = new JSONObject();
+		System.out.println(cartBean.getCartList());
+		JSONArray array = new JSONArray(cartBean.getCartList());
+		CartBean ordersList= null;
+		try{
+			int j=0;
+			
+			 for (int i = 0; i < array.length(); i++)
+		        {
+		            JSONObject jsonObj = array.getJSONObject(i);
+		             ordersList = new CartBean();
+		            ordersList.setUserId(String.valueOf(jsonObj.get("userId")));
+		            ordersList.setQuantity(String.valueOf(jsonObj.get("quantity")));
+		            ordersList.setProductId(String.valueOf(jsonObj.get("productId")));
+		            ordersList.setBranchId(String.valueOf(jsonObj.get("branchId")));
+		            cartDao.save(ordersList);
+		            j++;
+		        }
+
+			 
+		int count=	cartDao.countcartdetails(ordersList);
+		
+		objJSON.put("count", count);
+		objJSON.put("msg", "Item successfully added to your cart");
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			objJSON.put("msg", "failed");
+		}
+		
+		
+				return String.valueOf(objJSON);
+	}
+	@RequestMapping(value = "rest/cartdetails")
+	public @ResponseBody String cartdetails(@RequestBody CartBean cartBean,	ModelMap model, HttpServletRequest request, HttpSession session) {
+		List<Map<String,Object>> listOrderBeans = null;
+		ObjectMapper objectMapper =null;
+		String sJson = null;
+		JSONObject objJson = new JSONObject();
+		try{
+			listOrderBeans = objKhaibarUsersDao.getallcartDetails(cartBean);
+			objJson.put("cartList", listOrderBeans);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return String.valueOf(objJson);
+	}
 	
+	@RequestMapping(value = "rest/adddelarpayment")
+	public @ResponseBody String addProductType(@RequestBody PaymentBean paymentBean) {
+      JSONObject jsonObj = new JSONObject();
+		try {
+					if(StringUtils.isNotBlank(paymentBean.getStrpaymentDate()))	{
+						Date date = KumarUtil.dateFormate(paymentBean.getStrpaymentDate());
+						paymentBean.setPaymentDate(date);
+					}
+					
+					paymentDao.save(paymentBean);
+					jsonObj.put("msg", "Paymnet Created Successfully");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+
+		}
+		return String.valueOf(jsonObj);
+	}
+	
+	@RequestMapping(value = "rest/deletecart")
+	public @ResponseBody String deletecart(@RequestBody CartBean cartBean) {
+      JSONObject jsonObj = new JSONObject();
+		try {
+					
+					int i = cartDao.delete(cartBean.getId());
+					if(i !=0){
+					jsonObj.put("msg", "deleted");
+					}else{
+						jsonObj.put("msg", "failed");
+					}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+
+		}
+		return String.valueOf(jsonObj);
+	}
 }
 	

@@ -115,7 +115,7 @@ public class EmployeeDao extends BaseEmployeeDao
  public Boolean updateUsernameAndPasswordInEmp(int id,String username, String password) {
 		boolean result = false;
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql = "update kumar_employee set username='" + username + "',password='" + password + "',confirm='1' where id = ?";
+		String sql = "update kumar_employee set username='" + username + "',password='" + password + "',confirm='1',status='1' where id = ?";
 		jdbcTemplate.update(sql, new Object[] { id });
 		int results = jdbcTemplate.update(sql, new Object[] { id });
 		if (results != 0) {
@@ -193,7 +193,7 @@ public class EmployeeDao extends BaseEmployeeDao
 		
 		try{
 			 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "select  *from otp where phoneNumber=? and OTP=?";
+			String sql = "select  * from otp where phoneNumber=? and OTP=? order by id desc limit 1";
 			List<EmployeeBean> retlist = jdbcTemplate.query(sql,
 					new Object[]{employee.getPhoneNumber(),employee.getOTP()},ParameterizedBeanPropertyRowMapper.newInstance(EmployeeBean.class));
 					if(retlist.size() > 0)

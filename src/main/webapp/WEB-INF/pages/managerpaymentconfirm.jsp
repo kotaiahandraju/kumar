@@ -72,6 +72,63 @@ table#dependent_table tbody tr td:first-child::before {
             
             </div>
             
+            <!-- 	model class -->
+	<div class="container">
+ <h2></h2>
+  <!-- Modal -->
+  <div class="modal fade" id="paymentStatusModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="col-md-12 col-md-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4>Edit Payment Status</h4>
+                        <div class="options"></div>
+                    </div>
+	                <form >
+                    <div class="panel-body">
+                    	<div class="row">
+                    		
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Payment Status<span class="impColor">*</span></label>
+                    				<div class="col-md-6">
+		                            	<input type="hidden" id="id"/>
+								      	<select id="confirm" class="form-control validate numericOnly">
+								      	<option value="0">Pending</option>
+								      	<option value="1">Payed</option>
+								      	</select>
+								  	</div>
+                    			</div>
+                    		<div class="clearfix"></div></br>
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Comment</label>
+                    				<div class="col-md-6">
+								      	<textarea id="comment" class="form-control validate" placeholder="Comment"></textarea>
+								  	</div>
+                    			</div>
+                    		
+                    		
+                    	</div>
+                    		
+                    		</div>
+                    	</div>
+                    </div>
+                     <div class="modal-footer">
+ 	 <!-- Trigger the modal with a button -->
+		  <button type="button"  id="updatePaymentSubmit" class="btn btn-info btn-lg"  onclick="updatePaymentStatus();">Submit</button>
+  	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+       
+        </form>
+        
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
 
 
 <!-- <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script> -->
@@ -128,22 +185,22 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Dealer Name</th><th>Amount</th><th>UTR Number</th><th> Payment Date </th><th></th><th></th></tr>'+
+    	'<thead><tr><th>Dealer Name</th><th>Amount</th><th>UTR Number</th><th> Payment Date </th><th>Payment Status</th><th>Add Comment </th><th> Options </th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		
 		 if(orderObj.confirm == "1"){
-			var deleterow = "<a  ><i class='fa fa-check' style='color:#29c10d'></i></a>"
+			var confirm = "<a  ><i class='fa fa-check' style='color:#29c10d'></i></a>"
 		}else{  
-			var deleterow = "<a  ><i class='fa fa-times' style='color:#e40d0d'></i></a>"
+			var confirm = "<a  ><i class='fa fa-times' style='color:#e40d0d'></i></a>"
 		} 
 		 if(orderObj.confirm == "0" || orderObj.confirm == null){
 			 var checkbox = "<input class='checkall' type='checkbox' name='checkboxName' onclick='paymentConfirm("+ orderObj.empId+ ")'  id='"+orderObj.id+"'      />";
 		 }else{
 			 var checkbox="";
 		 }
-// 		var edit = "<a class='edit editIt' onclick='editProductType("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
+	var edit = "<a class='edit editIt' onclick='editPaymentStatus("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
@@ -151,15 +208,17 @@ function showTableData(response){
 			+ "<td title='"+orderObj.amount+"'>" + orderObj.amount + "</td>"
 			+ "<td title='"+orderObj.qtr_number+"'>" + orderObj.qtr_number + "</td>"
 			+ "<td title='"+orderObj.strpaymentDate+"'>" + orderObj.strpaymentDate + "</td>"
-			+"<td>"+checkbox+"</td>"
-			+ "<td style='text-align: center;white-space: nowrap;'>"  + deleterow + "</td>"
+// 			+"<td>"+checkbox+"</td>"
+			+ "<td style='text-align: center;white-space: nowrap;'>"  + confirm + "</td>"
+			+"<td title='"+orderObj.comment+"'>" + orderObj.comment + "</td>"
+			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "</td>"
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
 	if(isClick=='Yes') $('.datatables').dataTable();
 }
 
-function paymentConfirm(id){
+/* function paymentConfirm(id){
 	var checkstr=null;
 		 checkstr = confirm('Are you sure you want to Confirm payment?');
 		 if(checkstr == true){
@@ -176,7 +235,42 @@ function paymentConfirm(id){
 		 }else{
 		 $('#'+id).prop('checked', false);
 		 }
+} */
+
+function updatePaymentStatus(){
+	var id =$("#id").val();
+	var confirm=$("#confirm").val();
+	var comment=$("#comment").val()
+	var checkstr=null;
+		// checkstr = confirm('Are you sure you want to Confirm payment?');
+		 //if(checkstr == true){
+			 var formData = new FormData();
+				formData.append('confirm', confirm);
+				formData.append('id', id);
+				formData.append('comment',comment);
+			 $.fn.makeMultipartRequest('POST', 'paymentConfirmStatus', false,formData, false, 'text', function(data) {
+					var jsonobj = $.parseJSON(data);
+					var alldata = jsonobj.allOrders1;
+					console.log(jsonobj.allOrders1);
+					showTableData(alldata);
+					tooltip();
+						});
+		// }else{
+		// $('#'+id).prop('checked', false);
+		// }
+} 
+
+function editPaymentStatus(id) {
+	
+	$("#paymentStatusModal").modal();
+	$("#id").val(id);
+	$("#confirm").val(serviceUnitArray[id].confirm);
+	
+	
+	$("#updatePaymentSubmit").val("Update");
+	//$(window).scrollTop($('#moveTo').offset().top);
 }
+
 
 	
 $("#pageName").text("Payment Status");

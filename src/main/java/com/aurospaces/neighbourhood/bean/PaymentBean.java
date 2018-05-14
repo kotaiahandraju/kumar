@@ -24,7 +24,14 @@ protected String confirm ;
 protected Date paymentDate ;
 protected String strpaymentDate ;
 protected String qtrNumber ;
+protected String comment ;
 
+public String getComment() {
+	return comment;
+}
+public void setComment(String comment) {
+	this.comment = comment;
+}
 public String getStrpaymentDate() {
 	return strpaymentDate;
 }

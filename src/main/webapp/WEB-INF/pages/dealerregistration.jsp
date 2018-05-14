@@ -23,7 +23,14 @@ window.setTimeout(function() {
     });
 }, 5000);
 </script>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet"/>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+			<script type='text/javascript' src='${baseurl }/js/ajax.js'></script>
+  
+                <script type='text/javascript' src="${baseurl }/js/jquery.blockUI.min.js" ></script>
+				  <script type='text/javascript' src='js/customValidation.js'></script>
+
 <style type="text/css">
 .impColor{color:red;}
 .your-class::-webkit-input-placeholder {color: #e73d4a !important;}
@@ -202,7 +209,18 @@ border-top: 0px solid #dddddd !important;
 					      	</div>
 					      </div>
 					      
-					      <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					      
+			</div>
+                    
+                </div>
+                
+     <div class="container">
+  <h2>Basic Modal Example</h2>
+  <!-- Trigger the modal with a button -->
+<!--   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
+
+  <!-- Modal -->
+   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						  <div class="modal-dialog">
 						    <div class="modal-content">
 						      <div class="modal-header">
@@ -218,15 +236,27 @@ border-top: 0px solid #dddddd !important;
 						      </div>
 						    </div>
 						  </div>
-						</div>
-			</div>
-                    
-                </div>
-                <script type='text/javascript' src='${baseurl }/assets/js/jquery-1.10.2.min.js'></script>
-                <script type='text/javascript' src="${baseurl }/js/jquery.blockUI.min.js" ></script>
-				<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-
-			<script type='text/javascript' src='${baseurl }/js/ajax.js'></script>
+				</div>
+  
+</div>
+                <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						  <div class="modal-dialog">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						        <h4 class="modal-title" id="exampleModalLabel">Otp Validating</h4>
+						      </div>
+						      <div class="modal-body">
+						     <input type="text" id="OTP">
+						      </div>
+						      <div class="modal-footer">
+						       <button type="button" class="btn btn-success" data-dismiss="modal" onclick="dealerCreation();">Submit</button>
+						        <button type="button"  class="btn btn-default" data-dismiss="modal">Close</button>
+						      </div>
+						    </div>
+						  </div>
+				</div> -->
+               
                 <script type="text/javascript">
                     		
                     		function checkOTPValidate() {
@@ -239,10 +269,11 @@ border-top: 0px solid #dddddd !important;
                 					 $.fn.makeMultipartRequest('POST','validateOTP', false,formData, false, 'text', function(data) {
                 								console.log(data);
                 								var resJson = JSON.parse(data);
-                								if(resJson.fail=="failed"){
+                								if(resJson.msg=="failed"){
                 									alert("Mobile Numober Already Exist.")
                 								}else{
-                									$("#myModal").modal();
+                									$('#myModal').modal('toggle');
+                									$('#myModal').modal('show');
                 								}
              								});
                     				
@@ -290,10 +321,13 @@ border-top: 0px solid #dddddd !important;
                     					 $.fn.makeMultipartRequest('POST','addDelar', false,formData, false, 'text', function(data) {
                     								console.log(data);
                     								var resJson = JSON.parse(data);
-                    								if(resJson.msg="success"){
-                    									alert("Alreday Registered");
-                    								}else{
+                    								alert(resJson.msg);
+                    								if(resJson.msg=="success"){
                     									alert(" Registered Successfully");
+                    								}else if(resJson.msg=="fail"){
+                    									alert("Please enter valid OTP");
+                    									$('#myModal').modal('toggle');
+                    									$('#myModal').modal('show');
                     								}
                  								});
                         				
@@ -307,5 +341,5 @@ border-top: 0px solid #dddddd !important;
                     		</script>
 
 </body>
-<script type='text/javascript' src='js/customValidation.js'></script>
+
 </html>

@@ -98,12 +98,14 @@ public class BranchManagerController {
 		List<Map<String,Object>> listOrderBeans =null;
 		String json = null;
 		String confirm = null;
+		String comment = null;
 		JSONObject jsonObject = new JSONObject();
 		int id =0;
 		try{
 			id = Integer.parseInt(request.getParameter("id"));
 			confirm = request.getParameter("confirm");
-			paymentDao.updateConfirmStatus(id,confirm);
+			comment = request.getParameter("comment");
+			paymentDao.updateConfirmStatus(id,confirm,comment);
 			ObjectMapper mapper = new ObjectMapper();
 			listOrderBeans = employeeDao.getAllDelarspayments(session);
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {

@@ -31,8 +31,15 @@ protected String quantity ;
 protected String userId ;
 
 /** Field mapping. **/
-protected String branchId ;
+protected String branchId,cartList ;
 
+
+public String getCartList() {
+	return cartList;
+}
+public void setCartList(String cartList) {
+	this.cartList = cartList;
+}
 public int getId()
 {
   return id;

@@ -57,7 +57,7 @@ table#dependent_table tbody tr td:first-child::before {
 						</div>
 					</div>
 					<div class="panel-body collapse in">
-					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Active List</label>
+<!-- 					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Active List</label> -->
 					<div class="table-responsive" id="tableId">
 						<table class="table table-striped table-bordered datatables"
 							id="example">
@@ -94,7 +94,7 @@ table#dependent_table tbody tr td:first-child::before {
         </div>
         <div class="modal-footer">
  	 <!-- Trigger the modal with a button -->
-		  <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal" onclick="genarateAuthDetails();">Submit</button>
+		  <button type="button" class="btn btn-info btn-lg"  onclick="genarateAuthDetails();">Submit</button>
   	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
@@ -122,7 +122,7 @@ function showTableData(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th> Name</th><th>Shop Name</th><th>Address</th><th>city</th><th>Pin Code</th><th>GST Number</th><th>Shop Phone Number</th><th>Phone Number</th><th>Email</th><th>Branch</th><th>Description</th><th></th></tr>'+
+    	'<thead><tr><th> Name</th><th>Business Name</th><th>Address</th><th>city</th><th>Pin Code</th><th>GST Number</th><th>Shop Phone Number</th><th>Phone Number</th><th>Email</th><th>Branch</th><th>Description</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -141,7 +141,7 @@ function showTableData(response){
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.name+"'>" + orderObj.name + "</td>"
-			+ "<td title='"+orderObj.shopname+"'>" + orderObj.shopname + "</td>"
+			+ "<td title='"+orderObj.businessName+"'>" + orderObj.businessName + "</td>"
 			+ "<td title='"+orderObj.address+"'>" + orderObj.address + "</td>"
 			+ "<td title='"+orderObj.city+"'>" + orderObj.city + "</td>"
 			+ "<td title='"+orderObj.pincode+"'>" + orderObj.pincode + "</td>"
@@ -221,7 +221,8 @@ function dealerRegister(id) {
 function genarateAuthDetails() {
 	
 	var id=$("#userId").val();
-	var username=$("#username").val();
+	var username=$("#username").val().trim();
+	if(username != ""){
 		var formData = new FormData();
 		formData.append('id', id);
 		formData.append('username', username);
@@ -234,8 +235,12 @@ function genarateAuthDetails() {
 			console.log(jsonobj.allOrders1);
 			showTableData(alldata);
 			tooltip();
-			
+			$("#myModal").modal("hide");
 				});
+	}else{
+		alert("Please enter user name")
+		return false;
+	}
 	
 }
 function inactiveData() {
