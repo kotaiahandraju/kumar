@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
@@ -207,6 +208,98 @@ public class EmployeeDao extends BaseEmployeeDao
 		return employee;
 		
 	}
+ public boolean updateOtpStatus(String mobileNum,String otp){
+		jdbcTemplate = custom.getJdbcTemplate();
+		String qryStr = "update otp set status='1'  where phoneNumber = "+mobileNum+"  and otp = "+otp+" and date(updated_time) = current_date() ";
+		try{
+			int updated_count = jdbcTemplate.update(qryStr);
+			if(updated_count==1)
+				return true;
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		return false;
+	}
+ public boolean updateCount(String mobileNum,String otp){
+	jdbcTemplate = custom.getJdbcTemplate();
+	String qryStr = "update otp set count=(count+1)  where phoneNumber = "+mobileNum+"  and otp = "+otp+" and date(updated_time) = current_date() ";
+	try{
+		int updated_count = jdbcTemplate.update(qryStr);
+		if(updated_count==1)
+			return true;
+		
+	}catch(Exception e){
+		e.printStackTrace();
+		return false;
+	}
+	return false;
+}
+	public boolean saveOtp( final EmployeeBean kumarEmployee) 
+	{
+		jdbcTemplate = custom.getJdbcTemplate();
+		try{
+			// check if an entry exists for the current date
+			String selectQry = "select count(*) from otp  where  phoneNumber = "+kumarEmployee.getPhoneNumber()+" and date(updated_time) = current_date() ";
+			int existing_count = jdbcTemplate.queryForInt(selectQry);
+			String qryStr = "";
+			if(existing_count==0){
+				qryStr = "insert into otp(created_time,OTP,phoneNumber,status,count) "
+						+" values('"+new java.sql.Timestamp(new DateTime().getMillis())+"','"+kumarEmployee.getOTP()+"',"+kumarEmployee.getPhoneNumber()+",'0',0)";
+			}else{
+				qryStr = "update otp set OTP = '"+kumarEmployee.getOTP()+"', count = (count+1) where phoneNumber = '"+kumarEmployee.getPhoneNumber()+"' and date(updated_time) = current_date() ";
+			}
+		
+			int updated_count = jdbcTemplate.update(qryStr);
+			if(updated_count==1)
+				return true;
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		return false;
+	}
+ public int getOTPCount(String mobileNum){
+		jdbcTemplate = custom.getJdbcTemplate();
+		String qryStr = "select count from otp where phoneNumber = "+mobileNum+" and date(updated_time) = current_date() ";
+		try{
+			int count = jdbcTemplate.queryForInt(qryStr);
+			return count;
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return 0;
+		}
 
+	}
+ public String getOtpOf(String mobileNum){
+		jdbcTemplate = custom.getJdbcTemplate();
+		String qryStr = "select otp from otp where  phoneNumber = "+mobileNum+" and date(updated_time) = current_date() ";
+		try{
+			long otp = jdbcTemplate.queryForLong(qryStr);
+			return otp+"";
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return "";
+		}
+	}
+ public boolean isUsernameDuplicate(String userName){
+	 jdbcTemplate =custom.getJdbcTemplate();
+	 try{
+		 StringBuffer buffer = new StringBuffer();
+		 buffer.append(" select count(*) from login where userName = '"+userName+"' ");
+		 int count = jdbcTemplate.queryForInt(buffer.toString());
+		 if(count>0){
+			 return true; 
+		 }else
+			 return false;
+	 }catch(Exception e){
+		 e.printStackTrace();
+	 }
+	 return false;
+ }
 }
 
