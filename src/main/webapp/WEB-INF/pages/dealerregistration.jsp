@@ -300,8 +300,12 @@ border-top: 0px solid #dddddd !important;
                         			var phoneNumber = $("#phoneNumber").val();
                         			var email = $("#email").val();
                         			var branchId = $("#branchId").val();
-                        			var OTP = $("#OTP").val();
-                        			
+                        			var OTP = $("#OTP").val().trim();
+                        			if(OTP==""){
+                        				alert("Please enter valid OTP");
+                        				$('#myModal').modal('show');
+                        				return false;
+                        			}
                         			
                         			if(phoneNumber !=''){
                         				
