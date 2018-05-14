@@ -352,7 +352,7 @@ public class RestController {
 		objJSON.put("count", count);
 		objJSON.put("msg", "Item successfully added to your cart");
 			
-		}catch(Exception e){
+ 		}catch(Exception e){
 			e.printStackTrace();
 			objJSON.put("msg", "failed");
 		}
