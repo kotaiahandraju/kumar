@@ -49,8 +49,7 @@ public class PaymentDao extends BasePaymentDao
 	public Boolean updateConfirmStatus(int id, String status,String comment) {
 		boolean result = false;
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql = "update kumar_payment set confirm='" + status + "', comment='" + comment +"' where empId = ?";
-		jdbcTemplate.update(sql, new Object[] { id });
+		String sql = "update kumar_payment set confirm='" + status + "', comment='" + comment +"' where id = ?";
 		int results = jdbcTemplate.update(sql, new Object[] { id });
 		if (results != 0) {
 			result = true;
