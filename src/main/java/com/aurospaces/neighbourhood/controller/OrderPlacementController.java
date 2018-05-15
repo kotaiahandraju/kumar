@@ -1,5 +1,6 @@
 package com.aurospaces.neighbourhood.controller;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -201,6 +202,60 @@ public class OrderPlacementController {
 		} finally {
 		}
 		return statesMap;
+	}
+	
+	@RequestMapping("/getItemsOfOrder")
+	public @ResponseBody String getItemsOfOrder(HttpServletRequest request,HttpSession session) {
+		JSONObject jsonObj = new JSONObject();
+		try {
+			
+			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			
+			
+			String order_id = request.getParameter("order_id");
+			List<Map<String,Object>> itemsList = listDao.getItemsOfOrder(order_id);
+			if(itemsList.size()>0){
+				jsonObj.put("itemsList", itemsList);
+			}else{
+				jsonObj.put("itemsList", "");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return jsonObj.toString();
+	}
+	
+	@RequestMapping("/saveDispatchedItemsData")
+	public @ResponseBody String saveDispatchedItemsData(HttpServletRequest request,HttpSession session) {
+		JSONObject jsonObj = new JSONObject();
+		try {
+			
+			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			
+			
+			String order_id = request.getParameter("order_id");
+			String product_id = request.getParameter("product_id");
+			String quantity = request.getParameter("quantity");
+			Map<String,String> data = new HashMap<String,String>();
+			data.put("order_id", order_id);
+			data.put("product_id", product_id);
+			data.put("quantity", quantity);
+			//generate invoice number
+			data.put("invoice_no", "eee");
+			boolean success = listDao.saveInvoice(data);
+			if(success){
+				jsonObj.put("message", "success");
+			}else{
+				jsonObj.put("message", "failed");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return jsonObj.toString();
 	}
 	
 }

@@ -290,7 +290,7 @@ public class EmployeeDao extends BaseEmployeeDao
 	 jdbcTemplate =custom.getJdbcTemplate();
 	 try{
 		 StringBuffer buffer = new StringBuffer();
-		 buffer.append(" select count(*) from login where userName = '"+userName+"' ");
+		 buffer.append(" select count(*) from login where upper(userName) = upper('"+userName+"') ");
 		 int count = jdbcTemplate.queryForInt(buffer.toString());
 		 if(count>0){
 			 return true; 
