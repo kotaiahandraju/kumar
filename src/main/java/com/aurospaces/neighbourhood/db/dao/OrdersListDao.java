@@ -108,4 +108,21 @@ public boolean saveInvoice(Map<String,String> invoiceData){
 	
 }
 
+public List<Map<String, Object>> getMyOrdersList() 
+{
+List<Map<String,Object>> list=null;
+	
+	try{
+		jdbcTemplate = custom.getJdbcTemplate();
+		String sql ="SELECT i.created_time,i.updated_time,i.itemcode,i.itemdescrption,pn.productname as productCategory,pt.producttype as productSubCategory ,ol.orderId ,ol. invoiceId,ol.quantity "  
+				+"FROM items i, productname pn,producttype pt ,branch_products bp,orders_list ol "
+				+"where i.productId=pt.id AND  i.productname=pn.id AND bp.product_id=i.id ORDER BY ol.updated_time Desc ";
+		list =jdbcTemplate.queryForList(sql, new Object[]{});
+		System.out.println(sql);
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+	return list;
+	
+}
 }

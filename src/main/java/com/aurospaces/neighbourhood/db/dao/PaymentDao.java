@@ -1,7 +1,7 @@
-
 package com.aurospaces.neighbourhood.db.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -49,14 +49,38 @@ public class PaymentDao extends BasePaymentDao
 	public Boolean updateConfirmStatus(int id, String status,String comment) {
 		boolean result = false;
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql = "update kumar_payment set confirm='" + status + "', comment='" + comment +"' where empId = ?";
-		jdbcTemplate.update(sql, new Object[] { id });
+		String sql = "update kumar_payment set confirm='" + status + "', comment='" + comment +"' where id = ?";
 		int results = jdbcTemplate.update(sql, new Object[] { id });
 		if (results != 0) {
 			result = true;
 		}
 		return result;
 	}
+	public List<PaymentBean> getdelarpaymentdetails(PaymentBean paymentBean){
+		jdbcTemplate = custom.getJdbcTemplate();
+		
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(" select *,DATE_FORMAT(payment_date,'%d-%b-%Y') as strpaymentDate  from kumar_payment where 1=1 ");
+				buffer.append(" and empId= '"+paymentBean.getEmpId()+"' ");
+		String sql =buffer.toString();
+		List<PaymentBean> list = jdbcTemplate.query(sql, new Object[]{},ParameterizedBeanPropertyRowMapper.newInstance(PaymentBean.class));
+		if(list.size() > 0)
+			return list;
+		return null;
+		
+	}
+	public List<Map<String,Object>>  getdelarpaymentdetailsBranches(PaymentBean paymentBean){
+		jdbcTemplate = custom.getJdbcTemplate();
+		
+	String sql =" select kp.*,DATE_FORMAT(payment_date,'%d-%b-%Y') as strpaymentDate  from kumar_payment kp,kumar_employee ke where 1=1 and kp.empId=ke.id 	 and branchId= '"+paymentBean.getBranchId()+"' ";
+		System.out.println(sql);
+		List<Map<String,Object>>  list = jdbcTemplate.queryForList(sql, new Object[]{});
+		if(list.size() > 0)
+			return list;
+		return null;
+		
+	}
+
 
 
 }

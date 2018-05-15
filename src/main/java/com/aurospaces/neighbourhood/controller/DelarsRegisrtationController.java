@@ -1,4 +1,3 @@
-
 package com.aurospaces.neighbourhood.controller;
 
 import java.io.File;
@@ -25,7 +24,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.BranchBean;
 import com.aurospaces.neighbourhood.bean.EmployeeBean;
-import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.db.dao.BranchDao;
 import com.aurospaces.neighbourhood.db.dao.EmployeeDao;
 import com.aurospaces.neighbourhood.db.dao.OrdersListDao;

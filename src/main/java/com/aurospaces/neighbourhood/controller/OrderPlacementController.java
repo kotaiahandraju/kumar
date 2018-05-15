@@ -15,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -258,4 +259,45 @@ public class OrderPlacementController {
 		return jsonObj.toString();
 	}
 	
+
+
+	@RequestMapping(value = "/myorderLists")
+	public  String myOrders(Model model,HttpServletRequest request) 
+	{
+		/*System.out.println("...............enter into myorders list...............");
+		model.addAttribute("orderLstForm",new OrdersListBean());
+		return "ordersList";*/
+		System.out.println("orederLists page...");
+		List<Map<String, Object>> listOrderBeans = null;
+		JSONObject jsonObj = new JSONObject();
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		boolean delete = false;
+		try {
+
+			//String dealerId=request.getParameter("dealerId");
+			listOrderBeans = listDao.getMyOrdersList();
+			objectMapper = new ObjectMapper();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				jsonObj.put("allOrders1", listOrderBeans);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+				jsonObj.put("allOrders1", listOrderBeans);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			jsonObj.put("message", "excetption" + e);
+			return String.valueOf(jsonObj);
+
+		}
+		return "ordersList";
+		
+	}
 }

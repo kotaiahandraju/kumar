@@ -1,4 +1,3 @@
-
 package com.aurospaces.neighbourhood.db.dao;
 
 import java.util.List;
@@ -301,5 +300,27 @@ public class EmployeeDao extends BaseEmployeeDao
 	 }
 	 return false;
  }
+ 
+ //mobile app using 
+ public List<Map<String,Object>> getAllDelarsConfirm1(EmployeeBean employeeBean){
+	 jdbcTemplate =custom.getJdbcTemplate();
+	 try{
+		 StringBuffer buffer = new StringBuffer();
+		 buffer.append("SELECT ke.*,kb.`branchname` FROM `kumar_employee` ke,`kumar_branch` kb WHERE ke.`branch_id`=kb.id and `roleId`='3' ");
+		 
+				 buffer.append(" and ke.branch_id ='"+employeeBean.getBranchId()+"' ");
+		 String sql=buffer.toString();
+		 List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
+		 if(list.size() >0)
+			 return list;
+		 return null;
+	 }catch(Exception e){
+		 e.printStackTrace();
+	 }
+	 
+	return null;
+	 
+ }
+ 
 }
 
