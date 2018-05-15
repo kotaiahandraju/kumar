@@ -1,6 +1,7 @@
 package com.aurospaces.neighbourhood.db.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -64,6 +65,17 @@ public class PaymentDao extends BasePaymentDao
 				buffer.append(" and empId= '"+paymentBean.getEmpId()+"' ");
 		String sql =buffer.toString();
 		List<PaymentBean> list = jdbcTemplate.query(sql, new Object[]{},ParameterizedBeanPropertyRowMapper.newInstance(PaymentBean.class));
+		if(list.size() > 0)
+			return list;
+		return null;
+		
+	}
+	public List<Map<String,Object>>  getdelarpaymentdetailsBranches(PaymentBean paymentBean){
+		jdbcTemplate = custom.getJdbcTemplate();
+		
+	String sql =" select kp.*,DATE_FORMAT(payment_date,'%d-%b-%Y') as strpaymentDate  from kumar_payment kp,kumar_employee ke where 1=1 and kp.empId=ke.id 	 and branchId= '"+paymentBean.getBranchId()+"' ";
+		System.out.println(sql);
+		List<Map<String,Object>>  list = jdbcTemplate.queryForList(sql, new Object[]{});
 		if(list.size() > 0)
 			return list;
 		return null;
