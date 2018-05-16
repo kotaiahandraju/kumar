@@ -29,7 +29,7 @@ window.setTimeout(function() {
 			<script type='text/javascript' src='${baseurl }/js/ajax.js'></script>
   
                 <script type='text/javascript' src="${baseurl }/js/jquery.blockUI.min.js" ></script>
-				  <script type='text/javascript' src='js/customValidation.js'></script>
+				
 
 <style type="text/css">
 .impColor{color:red;}
@@ -79,7 +79,7 @@ border-top: 0px solid #dddddd !important;
                     			
                     				<label for="focusedinput" class="col-md-4 control-label">Business Name <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="businessName" class="form-control  validate"  placeholder="Business Name" onkeyup="removeBorder(this.id)" maxlength="20" />
+								    	<form:input path="businessName" class="form-control  validate onlyCharacters"  placeholder="Business Name" onkeyup="removeBorder(this.id)" maxlength="20" />
 								    </div>
                     			</div>
                     			
@@ -119,7 +119,7 @@ border-top: 0px solid #dddddd !important;
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Landline/Alternative Number</label>
 								    <div class="col-md-6">
-								    	<form:input path="alternativeNumber" value=""  class="form-control  mobile" placeholder="Landline/Alternative Number" onkeyup="removeBorder(this.id)" maxlength="13" />
+								    	<form:input path="alternativeNumber" value=""  class="form-control validate mobile" placeholder="Landline/Alternative Number" onkeyup="removeBorder(this.id)" maxlength="13" />
 								      	<span class="hasError" id="locationError"></span>
 								    </div>
                     			</div>
@@ -147,7 +147,7 @@ border-top: 0px solid #dddddd !important;
                     			
                     				<label for="focusedinput" class="col-md-4 control-label">Contact Person Name<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								   	   <form:input path="name" class="form-control  validate" placeholder="Contact Person Name" onkeyup="removeBorder(this.id)" maxlength="20"/>
+								   	   <form:input path="name" class="form-control  validate onlyCharacters" placeholder="Contact Person Name" onkeyup="removeBorder(this.id)" maxlength="20"/>
 								      	<span class="hasError" id="storeError"></span>
 								    </div>
                     			</div>
@@ -155,13 +155,13 @@ border-top: 0px solid #dddddd !important;
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Designation <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="designation" class="form-control  validate"  placeholder="Designation" onkeyup="removeBorder(this.id)" maxlength="20" />
+								    	<form:input path="designation" class="form-control  validate onlyCharacters"  placeholder="Designation" onkeyup="removeBorder(this.id)" maxlength="20" />
 								    	<span class="hasError" id="storeError"></span>
 								    </div>
                     			</div>
            
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">ContactPhone Number <span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Contact Phone Number <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	<form:input path="phoneNumber" value=""  class="form-control validate mobile" placeholder="Phone Number" onkeyup="removeBorder(this.id)" maxlength="10" />
 								      	<span class="hasError" id="locationError"></span>
@@ -180,7 +180,7 @@ border-top: 0px solid #dddddd !important;
                     				<label for="focusedinput" class="col-md-4 control-label">Branch <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 <%-- 								    	<form:input path="branchId" value=""  class="form-control validate" placeholder="Branch" /> --%>
-								    	<form:select path="branchId" onfocus="removeBorder(this.id)"  class="form-control validate">
+								    	<form:select path="branchId" onfocus="removeBorder(this.id)"  class="form-control validate ">
 								    	<form:option value="">Select Branch</form:option>
 								    	<form:options items="${branches }"/>
 								    	</form:select>
@@ -194,8 +194,8 @@ border-top: 0px solid #dddddd !important;
                     		</div>
                     	
                     			
-                    		</div>
-					</form:form>
+                    		
+					
 					</div>
 				       <div class="panel-footer">
 					      	<div class="row">
@@ -203,10 +203,12 @@ border-top: 0px solid #dddddd !important;
 					      			<div class="btn-toolbar text-center">
 						      			<input type="button" id="submit1" value="Submit" class="btn-primary btn" onclick="checkOTPValidate();" />
 <!-- 										<button id="submit4" class="btn-primary btn" onclick="checkOTPValidate();">Submit</button> -->
-						      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
+						      			<input style="margin-left:20px;" type="reset" value="Reset" class="btn-danger btn cancel"/>
 					      			</div>
 					      		</div>
 					      	</div>
+					      </div>
+					      </form:form>
 					      </div>
 					      
 					      
@@ -219,7 +221,7 @@ border-top: 0px solid #dddddd !important;
 <!--   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->
 
   <!-- Modal -->
-   <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal fade" id="myModal"  role="dialog"  data-backdrop="static"  data-keyboard="false" >
 						  <div class="modal-dialog">
 						    <div class="modal-content">
 						      <div class="modal-header">
@@ -228,12 +230,12 @@ border-top: 0px solid #dddddd !important;
 						      </div>
 						      <div class="modal-body">
 						      <span id="displayMsg"></span> <br>
-						     <input type="text" id="OTP"><br>
+						     <input type="password" id="OTP" onkeydown="removeBorder(this.id)" maxlength="4" class="form-control numericOnly" placeholder="OTP" ><br>
 						     <button type="button" class="btn btn-success" onclick="resendOtp();">Resend OTP</button>
 						      </div>
 						      <div class="modal-footer">
-						       <button type="button" class="btn btn-success" data-dismiss="modal" onclick="dealerCreation();">Submit</button>
-						        <button type="button"  class="btn btn-default" data-dismiss="modal">Close</button>
+						       <button type="button" class="btn btn-success" onclick="dealerCreation();">Submit</button>
+						      <!--   <button type="button"  class="btn btn-default" data-dismiss="modal">Close</button> -->
 						      </div>
 						    </div>
 						  </div>
@@ -300,11 +302,11 @@ border-top: 0px solid #dddddd !important;
                         			var email = $("#email").val();
                         			var branchId = $("#branchId").val();
                         			var OTP = $("#OTP").val().trim();
-                        			if(OTP==""){
+                        			 if(OTP==""){
                         				alert("Please enter valid OTP");
                         				$('#myModal').modal('show');
                         				return false;
-                        			}
+                        			} 
                         			
                         			if(phoneNumber !=''){
                         				
@@ -335,6 +337,7 @@ border-top: 0px solid #dddddd !important;
                     									$("#displayMsg").html("");
                     									//$('#myModal').modal('toggle');
                     									$('#myModal').modal('hide');
+                    									window.location.reload();
                     								}else if(resJson.msg=="fail"){
                     									var otp_result = resJson.otp_result;
                     									if(otp_result=="count_exceeded"){
@@ -377,6 +380,7 @@ border-top: 0px solid #dddddd !important;
                     		
                     		
                     		</script>
+    <script type='text/javascript' src='js/customValidation.js'></script>
 
 </body>
 

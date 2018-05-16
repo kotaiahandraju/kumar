@@ -113,6 +113,8 @@ ps.setString(20, kumarEmployee.getConfirm());
 		String sql = "update kumar_employee set status='" + status + "' where id = ?";
 		jdbcTemplate.update(sql, new Object[] { id });
 		int results = jdbcTemplate.update(sql, new Object[] { id });
+		
+		deleteAtLoginTable(id,status);//also de-active dealer not able to login
 		if (results != 0) {
 			result = true;
 		}
@@ -131,6 +133,19 @@ ps.setString(20, kumarEmployee.getConfirm());
 			return null;
 		}
 
+	 
+	 @Transactional
+		public Boolean deleteAtLoginTable(int id, String status) {
+			boolean result = false;
+			jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "update login set status='" + status + "' where empId = ?";
+			jdbcTemplate.update(sql, new Object[] { id });
+			int results = jdbcTemplate.update(sql, new Object[] { id });
+			if (results != 0) {
+				result = true;
+			}
+			return result;
+		}
 	
 
 }
