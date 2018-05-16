@@ -41,9 +41,9 @@ public class EmployeeDao extends BaseEmployeeDao
 	
 	public EmployeeBean getByEmployeeName(EmployeeBean employeeBean) {
 		 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "SELECT * from kumar_employee where username =?  or phone_number=? ";
+			String sql = "SELECT * from kumar_employee where username =?  or phone_number=?  or branch_id =?";
 			List<EmployeeBean> retlist = jdbcTemplate.query(sql,
-			new Object[]{employeeBean.getUsername(),employeeBean.getPhoneNumber()},
+			new Object[]{employeeBean.getUsername(),employeeBean.getPhoneNumber(),employeeBean.getBranchId()},
 			ParameterizedBeanPropertyRowMapper.newInstance(EmployeeBean.class));
 			if(retlist.size() > 0)
 				return retlist.get(0);

@@ -72,7 +72,7 @@ public class PaymentDao extends BasePaymentDao
 	public List<Map<String,Object>>  getdelarpaymentdetailsBranches(PaymentBean paymentBean){
 		jdbcTemplate = custom.getJdbcTemplate();
 		
-	String sql =" select kp.*,DATE_FORMAT(payment_date,'%d-%b-%Y') as strpaymentDate  from kumar_payment kp,kumar_employee ke where 1=1 and kp.empId=ke.id 	 and branchId= '"+paymentBean.getBranchId()+"' ";
+	String sql =" select kp.*,DATE_FORMAT(payment_date,'%d-%b-%Y') as strpaymentDate,ke.name  from kumar_payment kp,kumar_employee ke where 1=1 and kp.empId=ke.id 	 and branchId= '"+paymentBean.getBranchId()+"' ";
 		System.out.println(sql);
 		List<Map<String,Object>>  list = jdbcTemplate.queryForList(sql, new Object[]{});
 		if(list.size() > 0)

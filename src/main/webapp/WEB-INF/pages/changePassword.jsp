@@ -22,8 +22,10 @@
 					<div class="panel-body collapse in">
 					
 					<div class="page-body">
+					<div align="center"><span id="errorMsg" style="color:red; text-align:center;"></span></div> 
 							<form action="changePassword" class="form-horizontal" method="Post"  >
-							
+							          
+							           
 										<div class="col-md-6">
 											<div class="form-group" id="passwordDiv">
 												<label class="col-md-3 control-label no-padding-right">Current	Password<span class="impColor">*</span></label>
@@ -48,7 +50,7 @@
 												<div class="col-md-6">
 													<input type ="password"	name="cpassword" id="cpassword" class="form-control validate"	placeholder="Re-Enter New Password" />
 												</div>
-								           <span id="errorMsg" style="color:red;"></span>
+								           
 											</div>
 
 										</div>
@@ -78,8 +80,9 @@
 
 <!-- Body ends here -->
 <script type="text/javascript">
+
+
 $('#submit4').click(function() {
-	alert("hello");
 		var npassword =$('#npassword').val();
 		var cpassword =$('#cpassword').val();
 		var password =$('#password').val();
@@ -101,10 +104,19 @@ $('#submit4').click(function() {
 			return false;
 			} 
 		
+		
+		if(npassword == password)
+		{
+			$('#errorMsg').text( "* new password must differ from old password") ;
+			setTimeout(function() { $("#errorMsg").text(''); }, 3000);
+			return false;										
+		}
+		
+		
 		if(npassword != cpassword)
 			{
 				$('#errorMsg').text( "* New and confirm Passwords Must Be Matched") ;
-				setTimeout(function() { $("#errorMsg").hide(); }, 3000);
+				setTimeout(function() { $("#errorMsg").text(''); }, 3000);
 				return false;										
 			}
 }); 
