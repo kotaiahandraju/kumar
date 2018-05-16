@@ -308,6 +308,15 @@ function saveDeliverableItemsData(objId){
 	var order_id = serviceUnitArray1[objId].orderId;
 	var product_id = serviceUnitArray1[objId].productId;
 	var quantity = $("#qty"+objId).val().trim();
+	var pending_qty = serviceUnitArray1[objId].pending_qty;
+	if(quantity==""){
+		alert("Enter some quantity and click Submit");
+		return false;
+	}
+	if(quantity>pending_qty){
+		alert("Quantity should not be greater than pending quantity.");
+		return false;
+	}
 	$.ajax({
 		type : "POST",
 		url : "saveDispatchedItemsData.htm",
