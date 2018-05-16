@@ -196,9 +196,12 @@ function showTableData(response){
 			var confirm = "<a  ><i class='fa fa-times' style='color:#e40d0d'></i></a>"
 		} 
 		 if(orderObj.confirm == "0" || orderObj.confirm == null){
-			 var checkbox = "<input class='checkall' type='checkbox' name='checkboxName' onclick='paymentConfirm("+ orderObj.empId+ ")'  id='"+orderObj.id+"'      />";
+			 var checkbox = "<input class='checkall' type='checkbox' name='checkboxName' onclick='paymentConfirm("+ orderObj.id+ ")'  id='"+orderObj.id+"'      />";
 		 }else{
 			 var checkbox="";
+		 }
+		 if(orderObj.comment == "" || orderObj.comment == null){
+			 orderObj.comment= "--";
 		 }
 	var edit = "<a class='edit editIt' onclick='editPaymentStatus("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		
@@ -253,6 +256,7 @@ function updatePaymentStatus(){
 					var alldata = jsonobj.allOrders1;
 					console.log(jsonobj.allOrders1);
 					showTableData(alldata);
+					$("#paymentStatusModal").modal("hide");
 					tooltip();
 						});
 		// }else{

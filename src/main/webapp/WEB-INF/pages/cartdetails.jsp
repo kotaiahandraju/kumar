@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+\<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
@@ -47,7 +47,7 @@ table#dependent_table tbody tr td:first-child::before {
 		<li>My Cart</li>
 	</ol>
 	<div class="clearfix"></div>
-	<div class="container">
+	<div class="container" id ="hideForInvoice">
 		<div class="row" id="orderPlacement">
 			<div class="col-md-12">
 				<div class="panel panel-primary">
@@ -94,7 +94,7 @@ table#dependent_table tbody tr td:first-child::before {
 			
 				<!-- Invoice Model Start  -->
 				
-				 <div class="modal fade" id="invoiceModal" data-backdrop="static" data-keyboard="false" role="dialog">
+				 <div id="invoiceModal" data-backdrop="static" data-keyboard="false" role="dialog">
 	<div class="modal-dialog">
 		<!-- Modal content-->
 		<div class="modal-content">
@@ -198,7 +198,7 @@ function showTableData(response){
 var quantity = [];  
 var productId = []; 
 var res="";
-
+$("#invoiceModal").hide();
 function ordePlacing() {
 	quantity = [];  
 	productId = [];
@@ -250,8 +250,9 @@ function ordePlacing() {
 			$(tblRow).appendTo("#productsList table tbody");
 			
 		});
-			
-			$("#invoiceModal").modal();
+		
+			$("#hideForInvoice").hide();			
+			$("#invoiceModal").show();
 			
 			$("#invoiceId").text(invoiceId);
 			$("#orderId").text(orderId);
