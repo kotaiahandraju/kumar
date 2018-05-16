@@ -35,6 +35,10 @@ table#dependent_table tbody tr td:first-child::before {
 #ui-datepicker-div{
 /* 	width: auto !important; */
 }
+.dealercon {
+padding-top:15px;
+padding-bottom:15px;
+}
 
 </style>
 
@@ -46,7 +50,7 @@ table#dependent_table tbody tr td:first-child::before {
 		<li>Dealer Confirm</li>
 	</ol>
 	<div class="clearfix"></div>
-	<div class="container">
+	<div class="container-fluid dealercon">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-primary">
@@ -57,7 +61,7 @@ table#dependent_table tbody tr td:first-child::before {
 						</div>
 					</div>
 					<div class="panel-body collapse in">
-<!-- 					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Active List</label> -->
+					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Active List</label>
 					<div class="table-responsive" id="tableId">
 						<table class="table table-striped table-bordered datatables"
 							id="example">
@@ -133,9 +137,9 @@ function showTableData(response){
 			var deleterow = "<a class='activate' onclick='deleteDealer("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
 		if(orderObj.confirm == "1"){
-			var confirm = "<a class='' >Confirmed</i></a>"
+			var confirm = "<a class='' >UsernameAssigned</i></a>"
 		}else{  
-			var confirm = "<a class='' onclick='dealerRegister("+ orderObj.id+ ")'>Pending</a>"
+			var confirm = "<a class='' onclick='dealerRegister("+ orderObj.id+ ")'>UsernameNotAssigned</a>"
 		}
 // 		var edit = "<a class='edit editIt' onclick='editEmpCreation("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
@@ -264,8 +268,9 @@ function inactiveData() {
 		$.fn.makeMultipartRequest('POST', 'inActiveDealer', false,
 				formData, false, 'text', function(data) {
 			if(data != ""){
-				var jsonobj = JSON.parse(data);
-				showTableData(jsonobj);
+				var jsonobj = $.parseJSON(data);
+				var alldata = jsonobj.allOrders1;
+				showTableData(alldata);
 				  tooltip();
 				  console.log(jsonobj);
 	          

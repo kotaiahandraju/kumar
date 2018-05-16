@@ -55,6 +55,7 @@ System.out.println("Dealer Creation Page");
 			EmployeeBean objEmployeeBean = employeeDao.mobileDuplicateCheck(employeeBean);
 			if(objEmployeeBean != null){
 				redirect.addFlashAttribute("msg", "Alreday Registered ");
+				redirect.addFlashAttribute("cssMsg", "warning");
 			}else{
 				employeeBean.setRoleId("3");
 				employeeBean.setStatus("0");
@@ -100,6 +101,9 @@ System.out.println("Dealer Creation Page");
 		}
 		return statesMap;
 	}
+	
+	
+	
 	
 	
 	

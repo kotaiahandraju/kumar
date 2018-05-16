@@ -241,18 +241,44 @@ public class BranchManagerController {
 	
 	
 	 @RequestMapping(value = "/inActiveDealer")
-		public @ResponseBody String inActiveDealer(@RequestParam("status") String status) throws JsonGenerationException, JsonMappingException, IOException {
-		 JSONObject jsonObject=new JSONObject();
+		public @ResponseBody String inActiveDealer(EmployeeBean  objdept,HttpServletRequest request) throws JsonGenerationException, JsonMappingException, IOException {
+		 JSONObject jsonObj = new JSONObject();
+			ObjectMapper objectMapper = null;
+			String sJson=null;
+
 			List<Map<String, Object>> listOrderBeans = null;
-			String sJson="";
-			listOrderBeans = employeeDao.getAllDelarsConfirm(status,session);
-			if (listOrderBeans != null && listOrderBeans.size() > 0) {
-				jsonObject.put("allOrders1", listOrderBeans);
-			} else {
-				jsonObject.put("allOrders1", listOrderBeans);
-			}
 			
-			return String.valueOf(jsonObject);
+			try{
+			if(objdept.getStatus().equals("0"))
+			listOrderBeans = employeeDao.getInactiveDelarsConfirm("0",session);
+			else
+				listOrderBeans = employeeDao.getAllDelarsConfirm("1",session);
+				
+			
+			 objectMapper = new ObjectMapper();
+				if (listOrderBeans != null && listOrderBeans.size() > 0) {
+
+					objectMapper = new ObjectMapper();
+					sJson = objectMapper.writeValueAsString(listOrderBeans);
+					request.setAttribute("allOrders1", sJson);
+					jsonObj.put("allOrders1", listOrderBeans);
+					// System.out.println(sJson);
+				} else {
+					objectMapper = new ObjectMapper();
+					sJson = objectMapper.writeValueAsString(listOrderBeans);
+					request.setAttribute("allOrders1", "''");
+					jsonObj.put("allOrders1", listOrderBeans);
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+		System.out.println(e);
+				return String.valueOf(jsonObj);
+
+			}
+			return String.valueOf(jsonObj);
+
 		}
+	 
+	 
 	
 }

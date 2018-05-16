@@ -93,7 +93,7 @@ public class EmployeeDao extends BaseEmployeeDao
 	 jdbcTemplate =custom.getJdbcTemplate();
 	 try{
 		 StringBuffer buffer = new StringBuffer();
-		 buffer.append("SELECT ke.*,kb.`branchname` FROM `kumar_employee` ke,`kumar_branch` kb WHERE ke.`branch_id`=kb.id and `roleId`='3' ");
+		 buffer.append("SELECT ke.*,kb.`branchname` FROM `kumar_employee` ke,`kumar_branch` kb WHERE ke.`branch_id`=kb.id and `roleId`='3' and confirm ='0'  ");
 		 
 		 LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
 			if (objuserBean != null) {
@@ -309,6 +309,30 @@ public class EmployeeDao extends BaseEmployeeDao
 		 buffer.append("SELECT ke.*,kb.`branchname` FROM `kumar_employee` ke,`kumar_branch` kb WHERE ke.`branch_id`=kb.id and `roleId`='3' ");
 		 
 				 buffer.append(" and ke.branch_id ='"+employeeBean.getBranchId()+"' ");
+		 String sql=buffer.toString();
+		 List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
+		 if(list.size() >0)
+			 return list;
+		 return null;
+	 }catch(Exception e){
+		 e.printStackTrace();
+	 }
+	 
+	return null;
+	 
+ }
+ 
+ 
+ public List<Map<String,Object>> getInactiveDelarsConfirm(String status,HttpSession session){
+	 jdbcTemplate =custom.getJdbcTemplate();
+	 try{
+		 StringBuffer buffer = new StringBuffer();
+		 buffer.append("SELECT ke.*,kb.`branchname` FROM `kumar_employee` ke,`kumar_branch` kb WHERE ke.`branch_id`=kb.id and `roleId`='3' and confirm ='1'  ");
+		 
+		 LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			if (objuserBean != null) {
+				 buffer.append(" and ke.branch_id ='"+objuserBean.getBranchId()+"' ");
+			}
 		 String sql=buffer.toString();
 		 List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
 		 if(list.size() >0)
