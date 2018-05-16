@@ -159,6 +159,8 @@ function tooltip(){
 	$('.printlpo').attr('data-original-title','Print');
 	$('.deactivate').attr('data-toggle','tooltip');
 	$('.deactivate').attr('data-original-title','Deactivate');
+	$('.notAssigned').attr('data-toggle','tooltip');
+	$('.notAssigned').attr('data-original-title','UsernameNotAssigned');
 		$('[data-toggle="tooltip"]').tooltip();
 }
 function cartCount(){

@@ -239,4 +239,42 @@ border-top: 0px solid #dddddd !important;
 <script>
 $("#pageName").text("Dealer Creation");
 $(".dealercreation").addClass("active");
+
+
+$('#username').blur(function() {
+	var username=$(this).val();
+
+	$.ajax({
+				type : "GET",
+				url : "checkUsername",
+				data : {"username":username},
+				dataType : "text",
+				beforeSend : function() {
+		             $.blockUI({ message: 'Please wait' });
+		          }, 
+				success : function(data) {
+					if(data ==='true')
+						{
+						alert("username already exists")
+	 					$('#username').css('border-color', 'red');
+						 $('#submit1').prop('disabled', true);
+						}
+					else
+						{
+						$('#username').css('border-color', 'none');
+						$('#submit1').prop('disabled', false);
+						}
+					
+				},
+				complete: function () {
+		            
+		            $.unblockUI();
+		       },
+				error :  function(e){$.unblockUI();console.log(e);}
+				
+			});
+
+		}); 
+		
+
 </script>

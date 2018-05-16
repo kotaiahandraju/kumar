@@ -204,4 +204,15 @@ public class EmployeeController {
 		}
 	 
 	 
+	 
+	 @RequestMapping("/checkUsername")
+		public  @ResponseBody  Boolean getUserName(HttpServletRequest request, HttpSession session)
+		{
+			String username=request.getParameter("username");
+
+			username = username.replaceAll("\\s+","");
+			return empDao.isUsernameDuplicate(username);
+		}
+	 
+	 
 }
