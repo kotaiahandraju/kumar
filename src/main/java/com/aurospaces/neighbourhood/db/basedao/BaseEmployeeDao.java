@@ -138,7 +138,7 @@ ps.setString(20, kumarEmployee.getConfirm());
 		public Boolean deleteAtLoginTable(int id, String status) {
 			boolean result = false;
 			jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "update login set status='" + status + "' where id = ?";
+			String sql = "update login set status='" + status + "' where empId = ?";
 			jdbcTemplate.update(sql, new Object[] { id });
 			int results = jdbcTemplate.update(sql, new Object[] { id });
 			if (results != 0) {
