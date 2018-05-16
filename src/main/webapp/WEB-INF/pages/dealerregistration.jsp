@@ -337,6 +337,7 @@ border-top: 0px solid #dddddd !important;
                     									$("#displayMsg").html("");
                     									//$('#myModal').modal('toggle');
                     									$('#myModal').modal('hide');
+                    									window.location.reload();
                     								}else if(resJson.msg=="fail"){
                     									var otp_result = resJson.otp_result;
                     									if(otp_result=="count_exceeded"){
