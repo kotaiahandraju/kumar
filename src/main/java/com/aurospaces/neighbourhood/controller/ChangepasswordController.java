@@ -48,13 +48,14 @@ public class ChangepasswordController
 			return "redirect:changePassword";
 		}
 		
-		if(objuserBean.getPassword().equals(currentpassword)) 
+		if(objuserBean.getPassword().equalsIgnoreCase(currentpassword)) 
 		{
 			/*objuserBean.setPassword(objuserBean.getPassword());*/
 			logindao.UpdatePassword(newpassword, objuserBean.getId());
+			logindao.UpdatePasswordInEmployee(newpassword, objuserBean.getId());
 			redirect.addFlashAttribute("msg", "Password Updated Successfully");
-			redirect.addFlashAttribute("cssMsg", "success");
-			return "redirect:changePassword";
+			redirect.addFlashAttribute("cssMsg", "warning");
+			return "redirect:../logoutHome";
 		}
 		else
 		{

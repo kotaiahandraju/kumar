@@ -75,7 +75,7 @@ border-top: 0px solid #dddddd !important;
                     			
                     				<label for="focusedinput" class="col-md-4 control-label">Business Name <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="businessName" class="form-control  validate"  placeholder="Business Name" onkeyup="removeBorder(this.id)" maxlength="20" />
+								    	<form:input path="businessName" class="form-control  validate onlyCharacters"  placeholder="Business Name" onkeyup="removeBorder(this.id)" maxlength="20" />
 								    </div>
                     			</div>
                     			
@@ -90,7 +90,7 @@ border-top: 0px solid #dddddd !important;
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">City/Town <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								   <form:input path="city" class="form-control  validate" placeholder="City/Town" onkeyup="removeBorder(this.id)" maxlength="20" />
+								   <form:input path="city" class="form-control  validate onlyCharacters" placeholder="City/Town" onkeyup="removeBorder(this.id)" maxlength="20" />
 								      	<span class="hasError" id="ownercompanyError"></span>
 								    </div>
                     			</div>
@@ -99,7 +99,7 @@ border-top: 0px solid #dddddd !important;
                     				<label for="focusedinput" class="col-md-4 control-label">Pin code <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	
-			                              <form:input path="pincode" class="form-control  validate mobile" placeholder="Pin code" maxlength="6" onkeyup="removeBorder(this.id)" />   
+			                              <form:input path="pincode" class="form-control  validate numericOnly" placeholder="Pin code" maxlength="6" onkeyup="removeBorder(this.id)" />   
 								      	<span class="hasError" id="colorError"></span>
 								    </div>
                     			</div>   		
@@ -143,7 +143,7 @@ border-top: 0px solid #dddddd !important;
                     			
                     				<label for="focusedinput" class="col-md-4 control-label">Contact Person Name<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								   	   <form:input path="name" class="form-control  validate" placeholder="Contact Person Name" onkeyup="removeBorder(this.id)" maxlength="20"/>
+								   	   <form:input path="name" class="form-control  validate onlyCharacters" placeholder="Contact Person Name" onkeyup="removeBorder(this.id)" maxlength="20"/>
 								      	<span class="hasError" id="storeError"></span>
 								    </div>
                     			</div>
@@ -151,7 +151,7 @@ border-top: 0px solid #dddddd !important;
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Designation <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="designation" class="form-control  validate"  placeholder="Designation" onkeyup="removeBorder(this.id)" maxlength="20" />
+								    	<form:input path="designation" class="form-control  validate onlyCharacters"  placeholder="Designation" onkeyup="removeBorder(this.id)" maxlength="20" />
 								    	<span class="hasError" id="storeError"></span>
 								    </div>
                     			</div>
@@ -167,7 +167,7 @@ border-top: 0px solid #dddddd !important;
                     	<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Contact Email <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="email" value=""  class="form-control validate email" placeholder="Email" onkeyup="removeBorder(this.id)" maxlength="30"  />
+								    	<form:input path="email" value=""  class="form-control validate email" placeholder="Email" onkeyup="removeBorder(this.id)" maxlength="50"  />
 								      	<span class="hasError" id="locationError"></span>
 								    </div>
                     			</div>
@@ -177,7 +177,7 @@ border-top: 0px solid #dddddd !important;
                     			
                     				<label for="focusedinput" class="col-md-4 control-label">Username<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								   	   <form:input path="username" class="form-control  validate" placeholder="Username" onkeyup="removeBorder(this.id)" maxlength="20"/>
+								   	   <form:input path="username" class="form-control  validate " placeholder="Username" onkeyup="removeBorder(this.id)" maxlength="20"/>
 								      	<span class="hasError" id="storeError"></span>
 								    </div>
                     			</div>

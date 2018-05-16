@@ -139,7 +139,7 @@ function showTableData(response){
 		if(orderObj.confirm == "1"){
 			var confirm = "<a class='' >UsernameAssigned</i></a>"
 		}else{  
-			var confirm = "<a class='' onclick='dealerRegister("+ orderObj.id+ ")'>UsernameNotAssigned</a>"
+			var confirm = "<a class='notAssigned' onclick='dealerRegister("+ orderObj.id+ ")'>UsernameNotAssigned</a>"
 		}
 // 		var edit = "<a class='edit editIt' onclick='editEmpCreation("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
