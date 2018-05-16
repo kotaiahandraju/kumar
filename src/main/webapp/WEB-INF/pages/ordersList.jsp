@@ -230,6 +230,14 @@ function displayDealerOrderItems(response){
 		serviceUnitArray1[orderObj.id] = orderObj;
 		if(i==0)
 			$("#dealer_name_str").html(orderObj.dealerName+"\'s order("+orderObj.orderId+") items");
+		var text_field_str = '<td colspan="2" align="center">Completed</td>';
+		if(typeof orderObj.pending_qty != "undefined"){
+				var int_val = parseInt(orderObj.pending_qty);
+				if(int_val>0){
+					text_field_str = "<td><input type='text' id='qty"+orderObj.id+"' /></td>"
+									+"<td><input type='button' id='deliverable_submit_btn' value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>";
+				}
+		}
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.dealerName+"'>" + orderObj.dealerName + "</td>"
 			+ "<td title='"+orderObj.categeory+"'>" + orderObj.categeory + "</td>"
@@ -237,8 +245,9 @@ function displayDealerOrderItems(response){
 			+ "<td title='"+orderObj.itemCode+"'>" + orderObj.itemCode + "</td>"
 			+ "<td title='"+orderObj.itemdescrption+"'>" + orderObj.itemdescrption + "</td>"
 			+ "<td title='"+orderObj.pending_qty+"'>" + orderObj.pending_qty + "</td>"
-			+ "<td><input type='text' id='qty"+orderObj.id+"' /></td>"
-			+ "<td><input type='button' id='deliverable_submit_btn' value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>"
+			+ text_field_str
+			//+ "<td>"+text_field_str+"</td>"
+			//+ "<td><input type='button' id='deliverable_submit_btn' value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>"
 			+"</tr>";
 		$(tblRow).appendTo("#modal_body");
 	});
