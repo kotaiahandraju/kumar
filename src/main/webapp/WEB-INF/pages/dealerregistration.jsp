@@ -263,7 +263,9 @@ border-top: 0px solid #dddddd !important;
                 <script type="text/javascript">
                     		
                     		function checkOTPValidate() {
-                    			$('#myModal').modal('show');
+                    			
+                    			$('#OTP').val("");
+                    			
                     			var phoneNumber = $("#phoneNumber").val();
                     			if(phoneNumber !=''){
                     				
@@ -279,6 +281,7 @@ border-top: 0px solid #dddddd !important;
                 									var mobileStr = resJson.mobileStr;
                 									$("#displayMsg").html("Enter OTP that has been sent on your mobile number xxxxxxx"+mobileStr);
                 									//$('#myModal').modal('toggle');
+                									$('#myModal').modal('show');
                 									
                 								}
              								});
