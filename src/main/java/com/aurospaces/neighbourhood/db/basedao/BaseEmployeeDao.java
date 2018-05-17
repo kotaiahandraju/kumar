@@ -96,9 +96,9 @@ ps.setString(20, kumarEmployee.getConfirm());
 		else
 		{
 
-			String sql = "UPDATE kumar_employee  set name = ? ,shopname = ? ,address = ? ,city = ? ,pincode = ? ,shop_phone = ? ,gstno = ? ,phone_number = ? ,email = ? ,description = ? ,branch_id = ? ,roleId = ? ,password = ? ,username = ? ,status = ?  where id = ? ";
+			String sql = "UPDATE kumar_employee  set name = ? ,shopname = ? ,address = ? ,city = ? ,pincode = ? ,shop_phone = ? ,gstno = ? ,phone_number = ? ,email = ? ,description = ? ,branch_id = ? ,roleId = ? ,password = ? ,username = ?   where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{kumarEmployee.getName(),kumarEmployee.getShopname(),kumarEmployee.getAddress(),kumarEmployee.getCity(),kumarEmployee.getPincode(),kumarEmployee.getShopPhone(),kumarEmployee.getGstno(),kumarEmployee.getPhoneNumber(),kumarEmployee.getEmail(),kumarEmployee.getDescription(),kumarEmployee.getBranchId(),kumarEmployee.getRoleId(),kumarEmployee.getPassword(),kumarEmployee.getUsername(),kumarEmployee.getStatus(),kumarEmployee.getId()});
+			jdbcTemplate.update(sql, new Object[]{kumarEmployee.getName(),kumarEmployee.getShopname(),kumarEmployee.getAddress(),kumarEmployee.getCity(),kumarEmployee.getPincode(),kumarEmployee.getShopPhone(),kumarEmployee.getGstno(),kumarEmployee.getPhoneNumber(),kumarEmployee.getEmail(),kumarEmployee.getDescription(),kumarEmployee.getBranchId(),kumarEmployee.getRoleId(),kumarEmployee.getPassword(),kumarEmployee.getUsername(),kumarEmployee.getId()});
 		}
 	}
 	
