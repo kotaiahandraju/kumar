@@ -88,7 +88,7 @@ public class EmployeeController {
 
 					empDao.save(employeeBean);
 					LoginBean login = new LoginBean();
-					login.setEmpId(employeeBean.getName());
+					login.setEmpId(String.valueOf(employeeBean.getId()));
 					login.setUserName(employeeBean.getUsername());
 					login.setPassword(employeeBean.getPassword());
 					login.setBranchId(employeeBean.getBranchId());

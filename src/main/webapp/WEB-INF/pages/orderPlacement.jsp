@@ -71,7 +71,7 @@ table#dependent_table tbody tr td:first-child::before {
 			<br>
 					<div class="pull-right">
 					<span class="btn btn-warning" onclick="addCart()"><i class="fa fa-shopping-cart"></i> ADD TO CART</span> 
-					<span class="btn btn-danger" onclick="orderNow()"><i class="fa fa-bolt" aria-hidden="true"></i> ORDER NOW</span>
+					<span class="btn btn-danger" onclick="orderNow()"><i class="fa fa-bolt" aria-hidden="true"></i> ORDER PLACING</span>
 					</div>
 				</div>
 				</div>

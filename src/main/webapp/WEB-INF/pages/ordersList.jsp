@@ -188,7 +188,7 @@ function showTableData(response){
 			+ "<td title='"+orderObj.orderId+"'>" + orderObj.orderId + "</td>"
 			+ "<td title='"+orderObj.created_on+"'>" + orderObj.created_on + "</td>"
 			+ "<td title='"+orderObj.total_quantity+"'>" + orderObj.total_quantity + "</td>"
-			+ "<td title='"+orderObj.status+"'>" + orderObj.status + "</td>"
+			+ "<td title='"+orderObj.completed_status+"'>" + orderObj.completed_status + "</td>"
 			+ '<td><a href="" type="button" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">Display Items</a></td>'
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
@@ -334,10 +334,11 @@ function saveDeliverableItemsData(objId){
 		alert("Quantity should not be greater than pending quantity.");
 		return false;
 	}
+	var balance_qty = pending_qty - quantity;
 	$.ajax({
 		type : "POST",
 		url : "saveDispatchedItemsData.htm",
-		data :"order_id="+order_id+"&product_id="+product_id+"&quantity="+quantity,
+		data :"order_id="+order_id+"&product_id="+product_id+"&quantity="+quantity+"&balance_qty="+balance_qty,
 		 beforeSend : function() {
              $.blockUI({ message: 'Please wait' });
           },
