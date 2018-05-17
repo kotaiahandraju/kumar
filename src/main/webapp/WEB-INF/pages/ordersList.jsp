@@ -10,8 +10,14 @@
  <style>
  .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td
  {
- border: 0px solid black !important;
+ border: px solid black !important;
  }
+ @media (min-width: 768px) {
+.modal-dialog {
+    width: 997px;
+    margin: 30px auto;
+}
+}
 table #dependent_table{
 /* 	width: 100%; */
 	counter-reset: rowNumber;
@@ -42,7 +48,7 @@ table#dependent_table tbody tr td:first-child::before {
                <li>Product Category </li>
             </ol>
             <div class="clearfix"></div>
-        <div class="container" id="lpoMain">
+        <div class="container-fluid" id="lpoMain">
         
         
          <div class="row" id="moveTo">
@@ -113,6 +119,7 @@ table#dependent_table tbody tr td:first-child::before {
 		        <h4 class="modal-title" id="exampleModalLabel"><span id="dealer_name_str"></span></h4>
 		      </div>
 		      <div class="modal-body" id="modal_body">
+		      
 				      
 		      </div>
 		      <div class="modal-footer">
@@ -221,7 +228,7 @@ function displayDealerOrderItems(response){
 	$('#modal_body').html('');
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Dealer Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th></tr>'+
+    	'<thead><tr><th>Dealer Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th><th colspan="2"></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#modal_body").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -249,8 +256,9 @@ function displayDealerOrderItems(response){
 			//+ "<td>"+text_field_str+"</td>"
 			//+ "<td><input type='button' id='deliverable_submit_btn' value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>"
 			+"</tr>";
-		$(tblRow).appendTo("#modal_body");
+		$(tblRow).appendTo("#modal_body tbody");
 	});
+	
 	//$('#orderListModal').modal('show');
 	//if(isClick=='Yes') $('.datatables').dataTable();
 }

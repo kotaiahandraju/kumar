@@ -42,7 +42,7 @@ table#dependent_table tbody tr td:first-child::before {
                <li>Add Payment</li>
             </ol>
             <div class="clearfix"></div>
-        <div class="container" id="lpoMain">
+        <div class="container-fluid" id="lpoMain">
             <div class="row" id="row1">
               <div class="col-md-12">
                     <div class="panel panel-primary">
@@ -113,8 +113,8 @@ table#dependent_table tbody tr td:first-child::before {
 						<div class="row">
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar pull-right">
-					      			<input class="btn-primary btn" type="submit" id="submit1" value="Submit" />
-					      			<input class="btn-danger btn cancel" type="reset" id="clearData" value="Reset" />
+					      			<input class="btn-primary btn " type="submit" id="submit1" value="Submit" />
+					      			<input class="btn-danger btn  cancel" type="reset" id="clearData" value="Reset" />
 				      			</div>
 				      		</div>
 				    	</div>

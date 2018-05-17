@@ -47,7 +47,7 @@ table#dependent_table tbody tr td:first-child::before {
 		<li>Employee Creation</li>
 	</ol>
 	<div class="clearfix"></div>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-primary">

@@ -47,7 +47,7 @@ table#dependent_table tbody tr td:first-child::before {
 		<li>My Cart</li>
 	</ol>
 	<div class="clearfix"></div>
-	<div class="container" id ="hideForInvoice">
+	<div class="container-fluid" id ="hideForInvoice">
 		<div class="row" id="orderPlacement">
 			<div class="col-md-12">
 				<div class="panel panel-primary">

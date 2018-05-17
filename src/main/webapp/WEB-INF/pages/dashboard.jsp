@@ -67,7 +67,7 @@ $(document).ready(function(){
               <li><a href="#">Dashboard</a></li>
             </ol>
             <div class="clearfix"></div>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
             <div align="center" style="padding-top:20px"><h1>Welcome to KPOMS</h1></div>
 	            		<%-- <div class="col-md-3 col-xs-12 col-sm-6">

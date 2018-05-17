@@ -42,7 +42,7 @@ table#dependent_table tbody tr td:first-child::before {
                <li>Branch </li>
             </ol>
             <div class="clearfix"></div>
-        <div class="container" id="lpoMain">
+        <div class="container-fluid" id="lpoMain">
             <div class="row" id="row1">
               <div class="col-md-12">
                     <div class="panel panel-primary">
