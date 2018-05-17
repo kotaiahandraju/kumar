@@ -67,7 +67,7 @@ border-top: 0px solid #dddddd !important;
                    
                         <div class="options"></div>
                         
-                    <form:form class="form-horizontal" modelAttribute="delar" action="validateOTP" role="form" id="delar-form"  method="post">
+                    <form:form class="form-horizontal" modelAttribute="delar" action="#" role="form" id="delar-form"  method="post">
                     <div class="row" id="moveTo">
                     
                     <div class="panel-body">
@@ -171,7 +171,7 @@ border-top: 0px solid #dddddd !important;
                     	<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Contact Email <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="email" value=""  class="form-control validate email" placeholder="Email" onkeyup="removeBorder(this.id)" maxlength="20"  />
+								    	<form:input path="email" value=""  class="form-control validate email" placeholder="Email" onkeyup="removeBorder(this.id)" maxlength="50"  />
 								      	<span class="hasError" id="locationError"></span>
 								    </div>
                     			</div>
@@ -201,7 +201,7 @@ border-top: 0px solid #dddddd !important;
 					      	<div class="row">
 					      		<div class="col-sm-12">
 					      			<div class="btn-toolbar text-center">
-						      			<input type="button" id="submit1" value="Submit" class="btn-primary btn" onclick="checkOTPValidate();" />
+						      			<input type="button"  value="Submit" class="btn-primary btn" onclick="checkOTPValidate();" />
 <!-- 										<button id="submit4" class="btn-primary btn" onclick="checkOTPValidate();">Submit</button> -->
 						      			<input style="margin-left:20px;" type="reset" value="Reset" class="btn-danger btn cancel"/>
 					      			</div>
@@ -263,6 +263,7 @@ border-top: 0px solid #dddddd !important;
                 <script type="text/javascript">
                     		
                     		function checkOTPValidate() {
+                    			$('#myModal').modal('show');
                     			var phoneNumber = $("#phoneNumber").val();
                     			if(phoneNumber !=''){
                     				
@@ -277,8 +278,8 @@ border-top: 0px solid #dddddd !important;
                 								}else{
                 									var mobileStr = resJson.mobileStr;
                 									$("#displayMsg").html("Enter OTP that has been sent on your mobile number xxxxxxx"+mobileStr);
-                									$('#myModal').modal('toggle');
-                									$('#myModal').modal('show');
+                									//$('#myModal').modal('toggle');
+                									
                 								}
              								});
                     				
@@ -346,6 +347,7 @@ border-top: 0px solid #dddddd !important;
                     									}else if(otp_result=="mismatched"){
                     										//alert("OTPs mismatched! Please try again.");
                     										$("#displayMsg").html("OTPs mismatched! Please try again.");
+                    										$("#displayMsg").css("color", "red");
                     										$('#myModal').modal('show');
                     									}
                     									//alert("Please enter valid OTP");
@@ -371,6 +373,7 @@ border-top: 0px solid #dddddd !important;
                        					var mobileStr = jsonobj.mobileStr;
                        					if(msg != "undefined" && "success"==msg){
                        						$("#displayMsg").html("OTP has been resent on your mobile no. xxxxxxx"+mobileStr);
+                       						$("#displayMsg").css("color","");
                        						$('#myModal').modal('show');
                        					}	
                        					
