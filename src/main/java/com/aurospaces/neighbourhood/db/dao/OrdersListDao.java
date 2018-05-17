@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.aurospaces.neighbourhood.bean.BranchBean;
 import com.aurospaces.neighbourhood.bean.EmployeeBean;
@@ -54,7 +55,7 @@ public List<Map<String,Object>> getOrderList(String dealerId){
 	
 	try{
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql ="select ol.*,ke.name as dealerName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption, sum(ol.quantity) as total_quantity,date_format(ol.created_time,'%d-%b-%Y') as created_on,if(ol.status='1','Not Completed','Delivered') as status from orders_list ol,items i,kumar_employee ke,producttype pt,productname pn where delerId=? and ke.id=ol.delerId and ol.productId=i.id and i.productId=pt.id and i.productname=pn.id group by ol.orderId ORDER BY ol.updated_time Desc";
+		String sql ="select ol.*,ke.name as dealerName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption, sum(ol.quantity) as total_quantity,date_format(ol.created_time,'%d-%b-%Y') as created_on,if((select count(*) from orders_list where orderId = ol.orderId and status = '1')=0,'Completed','Not Completed') as completed_status from orders_list ol,items i,kumar_employee ke,producttype pt,productname pn where delerId=? and ke.id=ol.delerId and ol.productId=i.id and i.productId=pt.id and i.productname=pn.id group by ol.orderId ORDER BY ol.updated_time Desc";
 		list =jdbcTemplate.queryForList(sql, new Object[]{dealerId});
 		System.out.println(sql);
 	}catch(Exception e){
@@ -91,21 +92,31 @@ public List<Map<String,Object>> getValidateOTP(String mobileNo){
 	return list;
 	
 }
-public boolean saveInvoice(Map<String,String> invoiceData){
+
+@Transactional
+public boolean saveInvoice(Map<String,String> invoiceData,int balance_qty){
 	jdbcTemplate = custom.getJdbcTemplate();
 	try{
 		String sql ="insert into invoice(created_time,updated_time,order_id,invoice_no,dispatched_items_quantity,product_id) "
 				+" values('"+new java.sql.Timestamp(new DateTime().getMillis())+"','"+new java.sql.Timestamp(new DateTime().getMillis())+"',"
-				+" '"+invoiceData.get("order_id")+"','"+invoiceData.get("invoice_no")+"','"+invoiceData.get("quantity")+"',"+invoiceData.get("product_id")+")";
+				+" '"+invoiceData.get("order_id")+"','"+invoiceData.get("invoice_no")+"','"+invoiceData.get("quantity")+"','"+invoiceData.get("product_id")+"')";
 		int inserted_count = jdbcTemplate.update(sql);
 		if(inserted_count==1)
-			return true;
+		{
+			if(balance_qty==0){
+				//update status
+				String qry = "update orders_list set status = '0' where orderId = '"+invoiceData.get("order_id")+"'  and productId = '"+invoiceData.get("product_id")+"'";
+				int updated_count = jdbcTemplate.update(qry);
+				if(updated_count==1){
+					return true;
+				}
+			}
+		}
+		return false;
 	}catch(Exception e){
 		e.printStackTrace();
 		return false;
 	}
-	return false;
-	
 }
 
 public List<Map<String, Object>> getMyOrdersList() 
