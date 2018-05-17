@@ -35,11 +35,13 @@ table#dependent_table tbody tr td:first-child::before {
 #ui-datepicker-div{
 /* 	width: auto !important; */
 }
-.dealercon {
-padding-top:15px;
-padding-bottom:15px;
+.btn-danger {
+border-radius:5px;
 }
-
+.fouser {
+padding: 3px 14px 0px 11px;
+    margin-left: 5px;
+}
 </style>
 
 
@@ -50,7 +52,7 @@ padding-bottom:15px;
 		<li>Dealer Confirm</li>
 	</ol>
 	<div class="clearfix"></div>
-	<div class="container-fluid dealercon">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-primary">
@@ -92,14 +94,14 @@ padding-bottom:15px;
           <h4 class="modal-title">Genarate Dealer login Id</h4>
         </div>
         <div class="modal-body">
-       	 User Name:<input type="text" id="username" />
+       	 User Name:<input type="text" id="username" class="fouser" />
        	 <input type="hidden" id="userId"  />
 		
         </div>
         <div class="modal-footer">
  	 <!-- Trigger the modal with a button -->
-		  <button type="button" class="btn btn-info btn-lg"  onclick="genarateAuthDetails();">Submit</button>
-  	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  <button type="button" class="btn btn-primary "  onclick="genarateAuthDetails();">Submit</button>
+  	        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
       </div>
       
@@ -139,7 +141,7 @@ function showTableData(response){
 		if(orderObj.confirm == "1"){
 			var confirm = "<a class='' >UsernameAssigned</i></a>"
 		}else{  
-			var confirm = "<a class='notAssigned' onclick='dealerRegister("+ orderObj.id+ ")'>UsernameNotAssigned</a>"
+			var confirm = "<a class='notAssigned' style='cursor:pointer; text-decoration:none; list-style:none;' onclick='dealerRegister("+ orderObj.id+ ")'>UsernameNotAssigned</a>"
 		}
 // 		var edit = "<a class='edit editIt' onclick='editEmpCreation("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
@@ -219,6 +221,8 @@ function dealerRegister(id) {
 	$("#userId").val(id);
 	
  	$("#myModal").modal();
+ 	
+ 	$("#username").val("");
 
 }
 

@@ -79,14 +79,14 @@ border-top: 0px solid #dddddd !important;
                     			
                     				<label for="focusedinput" class="col-md-4 control-label">Business Name <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="businessName" class="form-control  validate onlyCharacters"  placeholder="Business Name" onkeyup="removeBorder(this.id)" maxlength="20" />
+								    	<form:input path="businessName" class="form-control  validate1 onlyCharacters "  placeholder="Business Name" onkeyup="removeBorder(this.id)" maxlength="20" />
 								    </div>
                     			</div>
                     			
                     		        <div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Address <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	 <form:input path="address" class="form-control  validate" placeholder="Address" onkeyup="removeBorder(this.id)" />
+								    	 <form:input path="address" class="form-control  validate1" placeholder="Address" onkeyup="removeBorder(this.id)" />
 								      	<span class="hasError" id="lponumberError"></span>
 								    </div>
                     			</div>
@@ -94,7 +94,7 @@ border-top: 0px solid #dddddd !important;
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">City/Town <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								   <form:input path="city" class="form-control  validate" placeholder="City/Town" onkeyup="removeBorder(this.id)" maxlength="20" />
+								   <form:input path="city" class="form-control  validate1" placeholder="City/Town" onkeyup="removeBorder(this.id)" maxlength="20" />
 								      	<span class="hasError" id="ownercompanyError"></span>
 								    </div>
                     			</div>
@@ -103,7 +103,7 @@ border-top: 0px solid #dddddd !important;
                     				<label for="focusedinput" class="col-md-4 control-label">Pin code <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	
-			                              <form:input path="pincode" class="form-control  validate mobile" placeholder="Pin code" maxlength="6" onkeyup="removeBorder(this.id)" />   
+			                              <form:input path="pincode" class="form-control  validate1  mobile" placeholder="Pin code" maxlength="6" onkeyup="removeBorder(this.id)" />   
 								      	<span class="hasError" id="colorError"></span>
 								    </div>
                     			</div>   		
@@ -111,15 +111,15 @@ border-top: 0px solid #dddddd !important;
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Shop Phone Number <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="shopPhone" value="" class="form-control validate mobile" placeholder="Shop Phone Number"  onkeyup="removeBorder(this.id)" maxlength="13"/>
+								    	<form:input path="shopPhone" value="" class="form-control validate1  mobile " placeholder="Shop Phone Number"  onkeyup="removeBorder(this.id)" maxlength="13"/>
 								      	<span class="hasError" id="madeinError"></span>
 								    </div>
                     			</div>
                     			
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Landline/Alternative Number</label>
-								    <div class="col-md-6">
-								    	<form:input path="alternativeNumber" value=""  class="form-control validate mobile" placeholder="Landline/Alternative Number" onkeyup="removeBorder(this.id)" maxlength="13" />
+								    <div class="col-md-6"> 
+								    	<form:input path="alternativeNumber" value=""  class="form-control validate1 mobile " placeholder="Landline/Alternative Number" onkeyup="removeBorder(this.id)" maxlength="13" />
 								      	<span class="hasError" id="locationError"></span>
 								    </div>
                     			</div>
@@ -129,7 +129,7 @@ border-top: 0px solid #dddddd !important;
                     				<label for="focusedinput" class="col-md-4 control-label">GST Number <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 
-								    	<form:input path="gstno" class="form-control validate"  placeholder="GST Number"  onkeyup="removeBorder(this.id)"/>
+								    	<form:input path="gstno" class="form-control validate1"  placeholder="GST Number"  onkeyup="removeBorder(this.id)"/>
 								      	<span class="hasError" id="expirydateError"></span>
 								    </div>
                     			</div>
@@ -147,7 +147,7 @@ border-top: 0px solid #dddddd !important;
                     			
                     				<label for="focusedinput" class="col-md-4 control-label">Contact Person Name<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								   	   <form:input path="name" class="form-control  validate onlyCharacters" placeholder="Contact Person Name" onkeyup="removeBorder(this.id)" maxlength="20"/>
+								   	   <form:input path="name" class="form-control  validate1  onlyCharacters " placeholder="Contact Person Name" onkeyup="removeBorder(this.id)" maxlength="20"/>
 								      	<span class="hasError" id="storeError"></span>
 								    </div>
                     			</div>
@@ -155,7 +155,7 @@ border-top: 0px solid #dddddd !important;
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Designation <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="designation" class="form-control  validate onlyCharacters"  placeholder="Designation" onkeyup="removeBorder(this.id)" maxlength="20" />
+								    	<form:input path="designation" class="form-control  validate1 onlyCharacters "  placeholder="Designation" onkeyup="removeBorder(this.id)" maxlength="20" />
 								    	<span class="hasError" id="storeError"></span>
 								    </div>
                     			</div>
@@ -163,7 +163,7 @@ border-top: 0px solid #dddddd !important;
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Contact Phone Number <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="phoneNumber" value=""  class="form-control validate mobile" placeholder="Phone Number" onkeyup="removeBorder(this.id)" maxlength="10" />
+								    	<form:input path="phoneNumber" value=""  class="form-control validate1  mobile" placeholder="Phone Number" onkeyup="removeBorder(this.id)" maxlength="10" />
 								      	<span class="hasError" id="locationError"></span>
 								    </div>
                     			</div>
@@ -171,7 +171,7 @@ border-top: 0px solid #dddddd !important;
                     	<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Contact Email <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="email" value=""  class="form-control validate email" placeholder="Email" onkeyup="removeBorder(this.id)" maxlength="50"  />
+								    	<form:input path="email" value=""  class="form-control validate1 " placeholder="Email" onkeyup="removeBorder(this.id)" maxlength="50"   />
 								      	<span class="hasError" id="locationError"></span>
 								    </div>
                     			</div>
@@ -201,7 +201,7 @@ border-top: 0px solid #dddddd !important;
 					      	<div class="row">
 					      		<div class="col-sm-12">
 					      			<div class="btn-toolbar text-center">
-						      			<input type="button"  value="Submit" class="btn-primary btn" onclick="checkOTPValidate();" />
+						      			<input type="button"  id="submit2"  value="Submit" class="btn-primary btn" onclick="checkOTPValidate();" />
 <!-- 										<button id="submit4" class="btn-primary btn" onclick="checkOTPValidate();">Submit</button> -->
 						      			<input style="margin-left:20px;" type="reset" value="Reset" class="btn-danger btn cancel"/>
 					      			</div>
@@ -263,7 +263,9 @@ border-top: 0px solid #dddddd !important;
                 <script type="text/javascript">
                     		
                     		function checkOTPValidate() {
-                    			
+                    			if(customValidation1())
+                    				{
+                    				
                     			$('#OTP').val("");
                     			
                     			var phoneNumber = $("#phoneNumber").val();
@@ -287,6 +289,12 @@ border-top: 0px solid #dddddd !important;
              								});
                     				
                     			}
+                    				}
+                    			else
+                    			{
+                    				return false;
+                    			}
+                    			
                     			
                     		}
                     			
@@ -396,6 +404,101 @@ border-top: 0px solid #dddddd !important;
                        				});
                        			
                        		}
+                       		
+                       		
+                       		var idArray =null;
+                       		
+                       		function customValidation1()
+                       		{
+                       		
+                       		var styleBlock = '.placeholder-style.placeholder-style::-moz-placeholder {color: #cc0000;} .placeholder-style::-webkit-input-placeholder {color: #cc0000;}';
+                       		$('.validate1').blur(function() {
+                       			var id = $(this).attr('id');
+                       			var placeholder = $(this).attr('placeholder');
+                       			var value1 = $("#" + id).val();
+                       			var value=$.trim(value1);
+                       			if (value == null || value == "" || value == "undefined") {
+                       				$('style').append(styleBlock);
+                       				$("#" + id ).attr("placeholder", placeholder);
+                       				$("#" + id ).css('border-color','#e73d4a');
+                       				$("#" + id ).css('color','#e73d4a');
+                       				$("#" + id ).addClass('placeholder-style your-class');
+                       				
+                       				if ($("#" + id+"_chosen").length)
+                       				{
+                       					$("#" + id+"_chosen").children('a').css('border-color','#e73d4a');
+                       				}
+//                       				$("#" + id + "Error").text("Please " + placeholder);
+                       			} else {
+                       				$("#" + id + "Error").text("");
+                       			}
+                       		});
+                       		
+                       		
+                       		 idArray = $.makeArray($('.validate1').map(function() {
+                       			return this.id;
+                       		}));
+                       		
+                       		var validation1 = true;
+                       		
+                       	
+                       			$.each(idArray, function(i, val) {
+                       				var value = $("#" + idArray[i]).val();
+                       				var placeholder = $("#" + idArray[i]).attr('placeholder');
+                       				if (value == null || value == "" || value == "undefined") {
+                       					$('style').append(styleBlock);
+                       					$("#" + idArray[i] ).attr("placeholder", placeholder);
+                       					$("#" + idArray[i] ).css('border-color','#e73d4a');
+                       					$("#" + idArray[i] ).css('color','#e73d4a');
+                       					$("#" + idArray[i] ).addClass('placeholder-style your-class');
+                       					 var id11 = $("#" + idArray[i]+"_chosen").length;
+                       					if ($("#" + idArray[i]+"_chosen").length)
+                       					{
+                       						$("#" + idArray[i]+"_chosen").children('a').css('border-color','#e73d4a');
+                       					}
+//                       					$("#" + idArray[i] + "Error").text("Please " + placeholder);
+                       					validation1 = false;
+                       				} 
+                       			});
+                       			if(validation1 && subValidation) {
+                       				
+                       				/* /* $("#submit2").attr("disabled",true);
+                       				$("#submit2").val("Please wait...");
+                       				$("form").submit();	 								
+                       				event.preventDefault(); */
+                       				return true;
+                       			}else {
+                       				return false;
+                       				event.preventDefault();
+                       			}
+                       		
+                       		
+                       		}
+                       		
+                       		
+                       		$('#email').blur(function() {
+                       			
+                       			
+                       			
+                       			var editFields =0;
+                       			var cemail=$(this).val();
+                       			
+                       			var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                       			  if( regex.test(cemail))
+                       				  {
+                       				  subValidation =true;
+                       				  }
+                       			 else
+                       			  
+                       			{
+                       				
+                       				  $('#email').css('border-color', 'red');
+                       				 alert("Enter Valid Email");
+                       				  subValidation =false;
+                       				  
+                       			}
+
+                       				}); 
                     		
                     		
                     		</script>

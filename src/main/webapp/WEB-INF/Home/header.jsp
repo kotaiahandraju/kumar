@@ -56,6 +56,16 @@
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 <style type="text/css">
+@media only screen and (max-width: 640px) and (min-width: 320px) {
+.carth {
+margin-left:10px !important;
+}
+}
+@media only screen  (max-width: 1024px) {
+.carth {
+margin-left:643px !important;
+}
+}
 .navbar-nav li
 {
 	margin-left: 25px;
@@ -95,7 +105,12 @@ span.has-error,span.hasError
   display: block !important;
   position: absolute;
 }
-
+.btn-danger {
+border-radius:5px;
+}
+.btn-warning {
+border-radius:5px;
+}
 .error{color: red; font-weight: bold;}
 
 .alert-success, .alert-warning, .alert-danger{color: white !important;}

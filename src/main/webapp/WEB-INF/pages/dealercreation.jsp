@@ -55,7 +55,7 @@ border-top: 0px solid #dddddd !important;
 			</div>
 		</div>
 	</c:if>
-<div class="container" id="moveTo">
+<div class="container-fluid" id="moveTo">
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                  <h2 class="col-md-12" align="center">Dealer Creation</h2>
