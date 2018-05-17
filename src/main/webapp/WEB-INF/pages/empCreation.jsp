@@ -120,7 +120,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Mobile Number<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-                    					<form:input path="phoneNumber" class="form-control validate numericOnly" placeholder="Mobile Number"  maxlength="10"/>
+                    					<form:input path="phoneNumber" class="form-control validate mobile" placeholder="Mobile Number"  maxlength="10"/>
 								    	</div>
                     			</div>
                     		</div>
