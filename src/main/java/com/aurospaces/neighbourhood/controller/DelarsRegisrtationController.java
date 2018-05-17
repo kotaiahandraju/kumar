@@ -230,10 +230,10 @@ System.out.println("delar registration");
 					   
 				   }else{
 					   objJson.put("message", "failed");
-					   objJson.put("otp_result", "count_exceeded");
+					   
 				   }
 				}else{
-					
+					objJson.put("otp_result", "count_exceeded");
 				}
 				
 			   
