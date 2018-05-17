@@ -239,13 +239,18 @@ public class OrderPlacementController {
 			String order_id = request.getParameter("order_id");
 			String product_id = request.getParameter("product_id");
 			String quantity = request.getParameter("quantity");
+			String balance_qty = request.getParameter("balance_qty");
 			Map<String,String> data = new HashMap<String,String>();
 			data.put("order_id", order_id);
 			data.put("product_id", product_id);
 			data.put("quantity", quantity);
 			//generate invoice number
 			data.put("invoice_no", "eee");
-			boolean success = listDao.saveInvoice(data);
+			int bal_qty = 1;
+			if(StringUtils.isNotBlank("balance_qty")){
+				bal_qty = Integer.parseInt(balance_qty);
+			}
+			boolean success = listDao.saveInvoice(data,bal_qty);
 			if(success){
 				jsonObj.put("message", "success");
 			}else{
