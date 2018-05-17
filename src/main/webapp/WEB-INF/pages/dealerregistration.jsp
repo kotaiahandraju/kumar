@@ -368,11 +368,18 @@ border-top: 0px solid #dddddd !important;
                        						formData, false, 'text', function(data){
                        					var jsonobj = $.parseJSON(data);
                        					var msg = jsonobj.message;
-                       					var mobileStr = jsonobj.mobileStr;
-                       					if(msg != "undefined" && "success"==msg){
-                       						$("#displayMsg").html("OTP has been resent on your mobile no. xxxxxxx"+mobileStr);
+                       					var otp_result = jsonobj.otp_result;
+                       					if(typeof otp_result != "undefined" && otp_result=="count_exceeded"){
+                       						$("#displayMsg").html("OTP limit for the day has been exceeded. Please try again later.");
                        						$('#myModal').modal('show');
-                       					}	
+                       					}else{
+                       						var mobileStr = jsonobj.mobileStr;
+                           					if(msg != "undefined" && "success"==msg){
+                           						$("#displayMsg").html("OTP has been resent on your mobile no. xxxxxxx"+mobileStr);
+                           						$('#myModal').modal('show');
+                           					}	
+                       					}
+                       						
                        					
                        				});
                        			
