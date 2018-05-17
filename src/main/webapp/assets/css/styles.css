@@ -3299,7 +3299,7 @@ button.close {
   pointer-events: none;
 }
 .breadcrumb {
-  padding: 7px 15px;
+  padding: 7px 28px;
   margin-bottom: 20px;
   list-style: none;
   background-color: #ececec;
@@ -3318,6 +3318,9 @@ button.close {
 }
 .breadcrumb > .active {
   color: #aeafb1;
+}
+.container-fluid {
+	    padding: 10px 20px 12px 24px;
 }
 .pagination {
   display: inline-block;
@@ -10359,7 +10362,7 @@ body.collapse-leftbar #search.keep-open form button[type="submit"] {
 }
 .navbar-brand {
   float: left;
-  padding: 5px 15px;
+  padding: 11px 27px;
   font-size: 18px;
   line-height:auto;
 }

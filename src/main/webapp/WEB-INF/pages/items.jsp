@@ -51,7 +51,7 @@ table#dependent_table tbody tr td:first-child::before {
 	<li>Products List</li>
 </ol>
 <div class="clearfix"></div>
-<div class="container" id="lpoMain">
+<div class="container-fluid" id="lpoMain">
 	<div class="row" id="row1">
 		<div class="col-md-12">
 			<div class="panel panel-primary">
@@ -95,12 +95,12 @@ table#dependent_table tbody tr td:first-child::before {
 					class="form-horizontal" method="Post">
 					<div class="panel-body">
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Product
+									<label for="focusedinput" class="col-md-4 control-label">Product
 										Category <span class="impColor">*</span>
 									</label>
-									<div class="col-md-6">
+									<div class="col-md-7">
 										<form:select path="producttype" value=""
 											class="form-control validate"
 											onchange="productNameFilter('');">
@@ -111,12 +111,12 @@ table#dependent_table tbody tr td:first-child::before {
 								</div>
 							</div>
 
-							<div class="col-md-4">
+							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-6 control-label">Product
+									<label for="focusedinput" class="col-md-4 control-label">Product
 										SubCategory <span class="impColor">*</span>
 									</label>
-									<div class="col-md-6">
+									<div class="col-md-7">
 										<form:select path="productname" value=""
 											class="form-control validate"
 											onchange="removeBorder(this.id)">

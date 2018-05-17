@@ -47,7 +47,7 @@ table#dependent_table tbody tr td:first-child::before {
 		<li>Dealer Creation</li>
 	</ol>
 	<div class="clearfix"></div>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-primary">
@@ -123,7 +123,7 @@ table#dependent_table tbody tr td:first-child::before {
 				      	<div class="row">
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar text-center">
-					      			<input class="btn-primary btn" type="submit" value="Submit" id="submit1"/>
+					      			<input class="btn-primary btn " type="submit" value="Submit" id="submit1"/>
 					      			<input class="btn-danger btn cancel" type="reset" value="Reset" />
 				      			</div>
 				      		</div>

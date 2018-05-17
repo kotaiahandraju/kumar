@@ -30,9 +30,16 @@ table#dependent_table tbody tr td:first-child::before {
 .addItemButton{
 	cursor: pointer;font-size: small;background: green;color: white;padding: 3px 10px 3px 10px;
 }
-
+.btn-danger {
+border-radius:5px;
+}
 #ui-datepicker-div{
 /* 	width: auto !important; */
+}
+.editpay {
+
+padding-left:0px;
+padding-right:0px;
 }
 
 </style>
@@ -42,7 +49,7 @@ table#dependent_table tbody tr td:first-child::before {
                <li>Payment Status</li>
             </ol>
             <div class="clearfix"></div>
-        <div class="container" id="lpoMain">
+        <div class="container-fluid" id="lpoMain">
             <div class="row" id="row1">
               <div class="col-md-12">
                     <div class="panel panel-primary">
@@ -81,7 +88,7 @@ table#dependent_table tbody tr td:first-child::before {
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="col-md-12 col-md-12">
+        <div class="col-md-12 editpay">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4>Edit Payment Status</h4>
@@ -92,7 +99,8 @@ table#dependent_table tbody tr td:first-child::before {
                     	<div class="row">
                     		
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Payment Status<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Payment Status<span class="impColor">*</span></label>
+                    					<div class="col-md-1"></div>
                     				<div class="col-md-6">
 		                            	<input type="hidden" id="id"/>
 								      	<select id="confirm" class="form-control validate numericOnly">
@@ -103,7 +111,8 @@ table#dependent_table tbody tr td:first-child::before {
                     			</div>
                     		<div class="clearfix"></div></br>
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Comment</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Comment</label>
+                    				<div class="col-md-1"></div>
                     				<div class="col-md-6">
 								      	<textarea id="comment" class="form-control validate" placeholder="Comment"></textarea>
 								  	</div>
@@ -117,8 +126,8 @@ table#dependent_table tbody tr td:first-child::before {
                     </div>
                      <div class="modal-footer">
  	 <!-- Trigger the modal with a button -->
-		  <button type="button"  id="updatePaymentSubmit" class="btn btn-info btn-lg"  onclick="updatePaymentStatus();">Submit</button>
-  	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		  <button type="button"  id="updatePaymentSubmit" class="btn btn-primary"  onclick="updatePaymentStatus();">Submit</button>
+  	        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
         </div>
        
         </form>

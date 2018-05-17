@@ -93,7 +93,7 @@ public class EmployeeDao extends BaseEmployeeDao
 	 jdbcTemplate =custom.getJdbcTemplate();
 	 try{
 		 StringBuffer buffer = new StringBuffer();
-		 buffer.append("SELECT ke.*,kb.`branchname` FROM `kumar_employee` ke,`kumar_branch` kb WHERE ke.`branch_id`=kb.id and `roleId`='3' and confirm ='0'  ");
+		 buffer.append("SELECT ke.*,kb.`branchname` FROM `kumar_employee` ke,`kumar_branch` kb WHERE ke.`branch_id`=kb.id and `roleId`='3' and confirm ='0'   ");
 		 
 		 LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
 			if (objuserBean != null) {
