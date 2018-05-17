@@ -21,6 +21,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,6 +39,7 @@ import com.aurospaces.neighbourhood.db.dao.CartDao;
 import com.aurospaces.neighbourhood.db.dao.EmployeeDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.KhaibarUsersDao;
+import com.aurospaces.neighbourhood.db.dao.LoginDao;
 import com.aurospaces.neighbourhood.db.dao.OrdersListDao;
 import com.aurospaces.neighbourhood.db.dao.PaymentDao;
 import com.aurospaces.neighbourhood.util.KumarUtil;
@@ -57,6 +59,7 @@ public class RestController {
 	@Autowired EmployeeDao empDao;
 	@Autowired CartDao cartDao;
 	@Autowired PaymentDao paymentDao;
+	@Autowired LoginDao loginDao;
 	@Autowired ServletContext objContext;
 	@RequestMapping(value = "/rest/getLogin")
 	public @ResponseBody String getLogin(@RequestBody LoginBean loginBean ,  HttpServletRequest request) throws Exception {
@@ -459,6 +462,72 @@ public class RestController {
 
 		}
 		return String.valueOf(jsonObj);
+	}
+	@RequestMapping(value = "rest/authDetails")
+	@ResponseBody public String authDetails(@RequestBody EmployeeBean employeeBean,	ModelMap model, HttpServletRequest request, HttpSession session,RedirectAttributes redirect) {
+		InputStream input = null;
+		String body = null;
+		 Properties prop = new Properties();
+		 LoginBean loginBean=null;
+		 boolean result=false;
+		 EmployeeBean checkEmpId=null;
+		 List<Map<String,Object>> listOrderBeans =null;
+			String json = null;
+			JSONObject jsonObject=new JSONObject();
+		try {
+			System.out.println("authDetailsauthDetailsauthDetails");
+			
+			boolean duplicate = empDao.isUsernameDuplicate(employeeBean.getUsername());
+			if(duplicate){
+				jsonObject.putOnce("msg", "true");
+				return jsonObject.toString();
+			}
+			String password=CommonUtils.generatePIN();
+			loginBean=new LoginBean();
+			employeeBean.setPassword(password);
+		loginBean.setUserName(employeeBean.getUsername());
+		
+		loginBean.setPassword(password);
+		loginBean.setBranchId(employeeBean.getBranchId());
+		loginBean.setRoleId("3");
+		loginBean.setStatus("1");
+		loginBean.setEmpId(String.valueOf(employeeBean.getId()));
+		checkEmpId=empDao.getByEmployeeId(employeeBean);
+		if(checkEmpId != null) {
+			result=empDao.updateUsernameAndPasswordInEmp(employeeBean.getId(), employeeBean.getUsername(), employeeBean.getPassword());
+			
+			loginDao.save(loginBean);
+			
+//			employeeDao.updateUsernameAndPasswordLogin(employeeBean.getId(), employeeBean.getUsername(), employeeBean.getPassword());
+			if(result) {
+				 String propertiespath = objContext.getRealPath("Resources" +File.separator+"DataBase.properties");
+					//String propertiespath = "C:\\PRO\\Database.properties";
+			
+					input = new FileInputStream(propertiespath);
+					// load a properties file
+					prop.load(input);
+					String msg = prop.getProperty("smsUsernameAndPassword");
+					msg =msg.replace("_username_", employeeBean.getUsername());
+					msg =msg.replace("_pass_", employeeBean.getPassword());
+					if(StringUtils.isNotBlank(checkEmpId.getPhoneNumber())){
+						
+						// delar send sms
+					SendSMS.sendSMS(msg, checkEmpId.getPhoneNumber(), objContext);
+					
+					}
+				jsonObject.put("msg",  " Registered Successfully");
+				
+				
+				
+			}
+		}
+//		
+		
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		return String.valueOf(jsonObject);
 	}
 }
 	

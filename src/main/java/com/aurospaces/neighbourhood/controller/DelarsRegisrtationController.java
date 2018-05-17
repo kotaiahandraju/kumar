@@ -80,6 +80,7 @@ System.out.println("delar registration");
 								jsonObj.put("otp_result", "matched");
 								employeeBean.setRoleId("3");
 								employeeBean.setStatus("0");
+								employeeBean.setConfirm("0");
 								employeeDao.save(employeeBean);
 								 String propertiespath = objContext.getRealPath("Resources" +File.separator+"DataBase.properties");
 									//String propertiespath = "C:\\PRO\\Database.properties";
