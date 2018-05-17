@@ -139,7 +139,7 @@ function showTableData(response){
 		if(orderObj.confirm == "1"){
 			var confirm = "<a class='' >UsernameAssigned</i></a>"
 		}else{  
-			var confirm = "<a class='notAssigned' onclick='dealerRegister("+ orderObj.id+ ")'>UsernameNotAssigned</a>"
+			var confirm = "<a class='notAssigned' style='cursor:pointer; text-decoration:none; list-style:none;' onclick='dealerRegister("+ orderObj.id+ ")'>UsernameNotAssigned</a>"
 		}
 // 		var edit = "<a class='edit editIt' onclick='editEmpCreation("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
@@ -219,6 +219,8 @@ function dealerRegister(id) {
 	$("#userId").val(id);
 	
  	$("#myModal").modal();
+ 	
+ 	$("#username").val("");
 
 }
 
