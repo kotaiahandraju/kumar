@@ -93,7 +93,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Branch Name<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-                    					<form:select path="branchId" value="" class="form-control validate">
+                    					<form:select path="branchId" value="" class="form-control validate " onfocus="removeBorder(this.id)">
 								    	<form:option value="">-- Select Branch Name --</form:option>
 								    	<form:options items="${branchId }"></form:options>
 								    	</form:select>
@@ -104,7 +104,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Employee Name<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-                    						<form:input path="name" class="form-control validate" placeholder="Employee Name"/>
+                    						<form:input path="name" class="form-control validate " placeholder="Employee Name"/>
 								    	</div>
                     			</div>
                     		</div>
@@ -112,7 +112,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">E-mail<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-                    					<form:input path="email" class="form-control validate" placeholder="E-mail"/>
+                    					<form:input path="email" class="form-control validate emailOnly" placeholder="E-mail"/>
 								    	</div>
                     			</div>
                     		</div>
@@ -120,7 +120,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Mobile Number<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-                    					<form:input path="phoneNumber" class="form-control validate numericOnly" placeholder="Mobile Number"/>
+                    					<form:input path="phoneNumber" class="form-control validate mobile" placeholder="Mobile Number"  maxlength="10"/>
 								    	</div>
                     			</div>
                     		</div>
