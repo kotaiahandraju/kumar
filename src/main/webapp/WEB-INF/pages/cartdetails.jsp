@@ -118,7 +118,7 @@ font-weight:600;
 								<div class="clearfix"></div>	
 									
 									<div class="table-responsive" id="tableIdm">
-						<table class="table table-bordered">
+						<table class="table table-bordered table-striped">
 							<thead>
 								<tr><th>Product Category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><th>Quantity</th>
 								</tr>
