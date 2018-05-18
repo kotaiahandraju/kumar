@@ -74,8 +74,8 @@ font-weight:600;
 					</div>
 			<br>
 					<div class="pull-right">
-					<a href="orderplacing"><span class="btn btn-warning" ><i class="fa fa-shopping-cart"></i> CONTINUE ORDERING</span></a> 
-					<span class="btn btn-danger"  onclick="ordePlacing();"><i class="fa fa-bolt" aria-hidden="true"></i> ORDER NOW</span>
+					<a href="orderplacing"><span class="btn btn-warning" ><i class="fa fa-shopping-cart"></i> ADD MORE ITEMS</span></a> 
+					<span class="btn btn-danger"  onclick="ordePlacing();"><i class="fa fa-bolt" aria-hidden="true"></i>CONFIRM ORDER</span>
 					</div>
 				</div>
 				</div>
@@ -222,7 +222,7 @@ function showTableData(response){
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		serviceUnitArray[orderObj.id] = orderObj;
-		var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" class='numericOnly' id='"+orderObj.productId+"quantity' />"
+		var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" class='numericOnly' maxlength='3' id='"+orderObj.productId+"quantity' />"
 		var tblRow = "<tr>"
 				+ "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>"
 				+ "<td title='"+orderObj.productIdName+"'>"	+ orderObj.productIdName + "</td>"

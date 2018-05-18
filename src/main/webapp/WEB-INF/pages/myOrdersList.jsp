@@ -177,7 +177,7 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Order ID</th><th>Created On </th><th>Total Items</th><th>Delivered Status</th><th></th></tr>'+
+    	'<thead><tr><th>Order ID</th><th>Created On </th><th>Total Items</th><th>Delivered Status</th><th>View</th></tr>'+
     	"</thead><tbody></tbody></table>"; 
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -190,7 +190,7 @@ function showTableData(response){
 			+ "<td title='"+orderObj.created_on+"'>" + orderObj.created_on + "</td>"
 			+ "<td title='"+orderObj.total_quantity+"'>" + orderObj.total_quantity + "</td>"
 			+ "<td title='"+orderObj.completed_status+"'>" + orderObj.completed_status + "</td>"
-			+ '<td><a href="" type="button" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">Display Items</a></td>'
+			+ '<td><a href="" type="button" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">View Order</a></td>'
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
@@ -362,6 +362,6 @@ function saveDeliverableItemsData(objId){
 }
 
 	
-$("#pageName").text("Order List");
-$(".orderslist").addClass("active");
+$("#pageName").text("My Orders");
+$(".ordersList").addClass("active");
 </script>

@@ -82,7 +82,7 @@ border-top: 0px solid #dddddd !important;
                     			</div>
                     			
                     		        <div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Address <span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label"> Business Address <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	 <form:input path="address" class="form-control  validate" placeholder="Address" onkeyup="removeBorder(this.id)" />
 								      	<span class="hasError" id="lponumberError"></span>
@@ -115,9 +115,9 @@ border-top: 0px solid #dddddd !important;
                     			</div>
                     			
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Landline/Alternative Number</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Alternative Mobile</label>
 								    <div class="col-md-6">
-								    	<form:input path="alternativeNumber" value=""  class="form-control  mobile" placeholder="Landline/Alternative Number" onkeyup="removeBorder(this.id)" maxlength="13" />
+								    	<form:input path="alternativeNumber" value=""  class="form-control  mobile" placeholder="Alternative Mobile" onkeyup="removeBorder(this.id)" maxlength="13" />
 								      	<span class="hasError" id="locationError"></span>
 								    </div>
                     			</div>
@@ -127,7 +127,7 @@ border-top: 0px solid #dddddd !important;
                     				<label for="focusedinput" class="col-md-4 control-label">GST Number <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 
-								    	<form:input path="gstno" class="form-control validate"  placeholder="GST Number"  onkeyup="removeBorder(this.id)"/>
+								    	<form:input path="gstno" class="form-control validate"  placeholder="GST Number"  maxlength="15" onkeyup="removeBorder(this.id)"/>
 								      	<span class="hasError" id="expirydateError"></span>
 								    </div>
                     			</div>

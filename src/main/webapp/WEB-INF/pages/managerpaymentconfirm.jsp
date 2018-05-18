@@ -46,7 +46,7 @@ padding-right:0px;
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="dashboard">Home</a></li>
-               <li>Payment Status</li>
+               <li>Confirm Payment</li>
             </ol>
             <div class="clearfix"></div>
         <div class="container-fluid" id="lpoMain">
@@ -54,7 +54,7 @@ padding-right:0px;
               <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h4>Payment Status</h4>
+                            <h4>Confirm Payment</h4>
                             <div class="options">   
                                 <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
                             </div>
@@ -104,8 +104,8 @@ padding-right:0px;
                     				<div class="col-md-6">
 		                            	<input type="hidden" id="id"/>
 								      	<select id="confirm" class="form-control validate numericOnly">
-								      	<option value="0">Pending</option>
-								      	<option value="1">Payed</option>
+								      	<option value="0">Not Yet Received</option>
+								      	<option value="1">Received</option>
 								      	</select>
 								  	</div>
                     			</div>
@@ -194,7 +194,7 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Dealer Name</th><th>Amount</th><th>UTR Number</th><th> Payment Date </th><th>Payment Status</th><th>Add Comment </th><th> Options </th></tr>'+
+    	'<thead><tr><th>Dealer Name</th><th>Amount</th><th>UTR Number</th><th> Payment Date </th><th>Payment Status</th><th>Add Comment </th><th> Confirmation Status </th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -286,6 +286,6 @@ function editPaymentStatus(id) {
 
 
 	
-$("#pageName").text("Payment Status");
+$("#pageName").text("Confirm Payment");
 $(".dealerpaymentconfirm").addClass("active");
 </script>
