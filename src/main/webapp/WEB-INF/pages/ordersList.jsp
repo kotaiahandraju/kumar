@@ -242,16 +242,16 @@ function displayDealerOrderItems(response){
 				var int_val = parseInt(orderObj.pending_qty);
 				if(int_val>0){
 					text_field_str = "<td><input type='text' id='qty"+orderObj.id+"' /></td>"
-									+"<td><input type='button' id='deliverable_submit_btn' value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>";
+									+"<td><input type='button' value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>";
 				}
 		}
-		var tblRow ="<tr>"
+		var tblRow ="<tr id='row"+orderObj.id+"'>"
 			+ "<td title='"+orderObj.dealerName+"'>" + orderObj.dealerName + "</td>"
 			+ "<td title='"+orderObj.categeory+"'>" + orderObj.categeory + "</td>"
 			+ "<td title='"+orderObj.subCategeory+"'>" + orderObj.subCategeory + "</td>"
 			+ "<td title='"+orderObj.itemCode+"'>" + orderObj.itemCode + "</td>"
 			+ "<td title='"+orderObj.itemdescrption+"'>" + orderObj.itemdescrption + "</td>"
-			+ "<td title='"+orderObj.pending_qty+"'>" + orderObj.pending_qty + "</td>"
+			+ "<td id='pending_qty"+orderObj.id+"' title='"+orderObj.pending_qty+"'>" + orderObj.pending_qty + "</td>"
 			+ text_field_str
 			//+ "<td>"+text_field_str+"</td>"
 			//+ "<td><input type='button' id='deliverable_submit_btn' value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>"
@@ -349,6 +349,15 @@ function saveDeliverableItemsData(objId){
              if(typeof msg != "undefined"){
             	 	if(msg=="success"){
             	 		alert("Data saved successfully");
+            	 		serviceUnitArray1[objId].pending_qty = balance_qty;
+            	 		$("#pending_qty"+objId).html(balance_qty);
+            	 		if(balance_qty==0){
+            	 			//$("#modal_body tbody ")
+            	 			$('#row'+objId).find("td").last().remove();
+            	 			$('#row'+objId).find("td").last().remove();
+            	 			var new_td = '<td colspan="2" align="center">Completed</td>';
+            	 			$(new_td).appendTo($('#row'+objId));
+            	 		}
             	 	}else{
             	 		alert("Some problem occured! Please try again.");
             	 	}

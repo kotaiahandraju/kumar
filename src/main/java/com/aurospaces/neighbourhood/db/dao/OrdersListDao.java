@@ -111,6 +111,7 @@ public boolean saveInvoice(Map<String,String> invoiceData,int balance_qty){
 					return true;
 				}
 			}
+			return true;
 		}
 		return false;
 	}catch(Exception e){
