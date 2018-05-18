@@ -36,7 +36,10 @@ table#dependent_table tbody tr td:first-child::before {
 #ui-datepicker-div{
 /* 	width: auto !important; */
 }
-
+.invo {
+padding-top:15px;
+font-weight:600;
+}
 </style>
 
 
@@ -53,6 +56,7 @@ table#dependent_table tbody tr td:first-child::before {
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<h4>My Cart List</h4>
+						<span id="orderSuccessMsg"></span>
 						<div class="options">   
 							<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
 						</div>
@@ -70,8 +74,8 @@ table#dependent_table tbody tr td:first-child::before {
 					</div>
 			<br>
 					<div class="pull-right">
-					<a href="orderplacing"><span class="btn btn-warning" ><i class="fa fa-shopping-cart"></i> CONTINUE ORDERING</span></a> 
-					<span class="btn btn-danger"  onclick="ordePlacing();"><i class="fa fa-bolt" aria-hidden="true"></i> ORDER NOW</span>
+					<a href="orderplacing"><span class="btn btn-warning" ><i class="fa fa-shopping-cart"></i> ADD MORE ITEMS</span></a> 
+					<span class="btn btn-danger"  onclick="ordePlacing();"><i class="fa fa-bolt" aria-hidden="true"></i>CONFIRM ORDER</span>
 					</div>
 				</div>
 				</div>
@@ -90,7 +94,44 @@ table#dependent_table tbody tr td:first-child::before {
 					</div>
 				</div>
 				</div>
-				
+				<div class="clearfix"></div>
+				<div class="container-fluid " id="invoicediv">
+        			<div class="col-md-12">
+        			<div class="col-md-4"></div>
+        			        			<div class="col-md-3"><img height="100px" src="${baseurl }/img/klogo.png"/>
+        			        			</div>
+        				<div class="col-md-5">
+				<h1 class="invo">Invoice</h1>
+							</div>
+							<div class="clearfix"></div>
+								 <div class="form-group">
+    <label class="col-md-1" for="Invoiceid">Invoice ID</label>
+    <span  type="invoice" class="col-md-11 " id="invoice">fsd</span>
+  </div>
+							<div class="clearfix"></div>	
+								
+								 <div class="form-group">
+    <label class="col-md-1" for="Orderid">Order ID &nbsp; &nbsp;</label>
+    <span type="order" class="col-md-11 " id="order">dfds</span>
+  </div>
+								
+								<div class="clearfix"></div>	
+									
+									<div class="table-responsive" id="tableIdm">
+						<table class="table table-bordered table-striped">
+							<thead>
+								<tr><th>Product Category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><th>Quantity</th>
+								</tr>
+								<tr><td>V6 SUBMERSIBLES	</td><td>V6 SUBMERSIBLES, 50 FEET / STAGE RF, THREE PHASE (2", 2½" DELIVERY)	</td><td>KS63005RFP3(2)	</td><td>3.0/5/30 - 44/234 - 120	</td><td>12</td></tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+									
+								
+								
+        			</div>
+        					</div>	
 			
 				<!-- Invoice Model Start  -->
 				
@@ -129,7 +170,7 @@ table#dependent_table tbody tr td:first-child::before {
 						<table class="table "
 							id="example1">
 							<thead>
-								<tr><th>Item Code</th><th>quantity</th>
+								<tr><th></<th>Item Code</th><th>quantity</th>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -158,6 +199,8 @@ table#dependent_table tbody tr td:first-child::before {
 
 <script type="text/javascript">
  var listOrders1 =${allOrders1};
+ 
+ $('#invoicediv').hide();
 
 console.log(listOrders1);
 if (listOrders1 != "") {
@@ -179,7 +222,7 @@ function showTableData(response){
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		serviceUnitArray[orderObj.id] = orderObj;
-		var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" class='numericOnly' id='"+orderObj.productId+"quantity' />"
+		var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" class='numericOnly' maxlength='3' id='"+orderObj.productId+"quantity' />"
 		var tblRow = "<tr>"
 				+ "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>"
 				+ "<td title='"+orderObj.productIdName+"'>"	+ orderObj.productIdName + "</td>"
@@ -231,15 +274,28 @@ function ordePlacing() {
 			var jsonobj = $.parseJSON(data);
 			var orderId = jsonobj[0].orderId;
 			var invoiceId = jsonobj[0].invoiceId;
-			var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
+		
+			$('#orderSuccessMsg').text("Order Sucessfully");
+			$('#cartId').text("0");
+			   $('#invoice').text(invoiceId);
+			   $('#order').text(orderId);
+			   
+			   if (listOrders1 != "") {
+					showTableDataOnInvoice(listOrders1);
+				}
+			   
+			   $('#orderPlacement').hide();
+			   $('#invoicediv').show();
+			   
+			/* var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
 	    	'<thead><tr><th>Product Name</th><th>Item Code</th><th>Quantity</th><th>Price<i class="fas fa-rupee-sign"></i></th><th></th></tr>'+
 	    	"</thead><tbody></tbody></table>";
-		$("#productsList").html(tableHead);
+		$("#productsList").html(tableHead); */
 		
 		/* $.each(result[0], function(key, value){
 		    console.log(key, value);
 		}); */
-		$.each(jsonobj[1],function(key, value) {
+		/* $.each(jsonobj[1],function(key, value) {
 			//produ = orderObj[1];
 			//var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" class='numericOnly' id='"+orderObj.productId+"quantity' />"
 			var tblRow = "<tr>"
@@ -247,15 +303,15 @@ function ordePlacing() {
 					+ "<td title='"+key+"'>"+ key + "</td>"
 					+ "<td title='"+value+"'>"+ value + "</td>"
 					+ "<td title=''></td>"
-			$(tblRow).appendTo("#productsList table tbody");
+			//$(tblRow).appendTo("#productsList table tbody");
 			
-		});
+		}); */
 		
-			$("#hideForInvoice").hide();			
+			 /* $("#hideForInvoice").hide();			
 			$("#invoiceModal").show();
 			
 			$("#invoiceId").text(invoiceId);
-			$("#orderId").text(orderId);
+			$("#orderId").text(orderId);  */
 			
 		//window.location.href = "${baseurl}/admin/cartdetails";
 		}
@@ -279,6 +335,29 @@ function removecartdata(id){
 		alert(jsonobj.msg);
 		
 	});
+}
+
+function showTableDataOnInvoice(response){
+	var table=$('#tableId').html('');
+	serviceUnitArray = {};
+	var protectType = null;
+	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
+    	'<thead><tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
+    	"</thead><tbody></tbody></table>";
+	$("#tableId").html(tableHead);
+	$.each(response,function(i, orderObj) {
+		serviceUnitArray[orderObj.id] = orderObj;
+		var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" class='numericOnly' id='"+orderObj.productId+"quantity' />"
+		var tblRow = "<tr>"
+				+ "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>"
+				+ "<td title='"+orderObj.productIdName+"'>"	+ orderObj.productIdName + "</td>"
+				+ "<td title='"+orderObj.itemcode+"'>" + orderObj.itemcode+ "</td>" 
+				+ "<td title='"+orderObj.itemdescrption+"'>"+ orderObj.itemdescrption + "</td>"
+				+ "<td title='"+orderObj.quantity+"'>"+ orderObj.quantity + "</td>"
+		$(tblRow).appendTo("#tableIdm table tbody");
+		
+	});
+	
 }
 
 $("#pageName").text("My Cart");

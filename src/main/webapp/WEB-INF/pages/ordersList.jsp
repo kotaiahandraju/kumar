@@ -45,7 +45,7 @@ table#dependent_table tbody tr td:first-child::before {
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="#">Home</a></li>
-               <li>Product Category </li>
+               <li>Orders List </li>
             </ol>
             <div class="clearfix"></div>
         <div class="container-fluid" id="lpoMain">
@@ -55,7 +55,7 @@ table#dependent_table tbody tr td:first-child::before {
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Add Product Category</h4>
+                        <h4>Select Dealer</h4>
                         <div class="options"></div>
                     </div>
 	                <form:form  modelAttribute="orderLstForm"   class="form-horizontal" method="post" >
@@ -86,18 +86,18 @@ table#dependent_table tbody tr td:first-child::before {
               <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h4>Order List</h4>
+                            <h4>Orders List</h4>
                             <div class="options">   
                                 <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
                             </div>
                         </div>
                         <div class="panel-body collapse in">
-                        <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
+                   <!--      <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label> -->
                         <div class="table-responsive" id="tableId" >
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
                                 	<tr>
-                                		<th>Dealer Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th>
+                                		<th>Business Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th>
                                 	</tr>
                                 </thead>
                                 <tbody></tbody>
@@ -176,7 +176,7 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Dealer Name</th><th>Order ID</th><th>Created On </th><th>Total Items</th><th>Delivered Status</th><th></th></tr>'+
+    	'<thead><tr><th>Business Name</th><th>Order ID</th><th>Created On </th><th>Total Items</th><th>Delivered Status</th><th>View</th></tr>'+
     	"</thead><tbody></tbody></table>"; 
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -189,7 +189,7 @@ function showTableData(response){
 			+ "<td title='"+orderObj.created_on+"'>" + orderObj.created_on + "</td>"
 			+ "<td title='"+orderObj.total_quantity+"'>" + orderObj.total_quantity + "</td>"
 			+ "<td title='"+orderObj.completed_status+"'>" + orderObj.completed_status + "</td>"
-			+ '<td><a href="" type="button" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">Display Items</a></td>'
+			+ '<td><a href="" type="button" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">View Order</a></td>'
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
@@ -228,7 +228,7 @@ function displayDealerOrderItems(response){
 	$('#modal_body').html('');
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Dealer Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th><th colspan="2"></th></tr>'+
+    	'<thead><tr><th>Business Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th><th colspan="2"></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#modal_body").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -363,6 +363,6 @@ function saveDeliverableItemsData(objId){
 }
 
 	
-$("#pageName").text("Order List");
+$("#pageName").text("Delivery Status");
 $(".orderslist").addClass("active");
 </script>

@@ -49,7 +49,7 @@ padding: 3px 14px 0px 11px;
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
     	<li><a href="dashboard">Home</a></li>
-		<li>Dealer Confirm</li>
+		<li>Confirm Dealer</li>
 	</ol>
 	<div class="clearfix"></div>
 	<div class="container-fluid">
@@ -288,6 +288,6 @@ function inactiveData() {
 
 
 
-$("#pageName").text("Dealer Confirm");
+$("#pageName").text("Confirm Dealer");
 $(".dealerconfirm").addClass("active"); 
 </script>
