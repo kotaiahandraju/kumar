@@ -69,19 +69,24 @@ public class PaymentDao extends BasePaymentDao
 		return null;
 		
 	}
-	public List<Map<String,Object>>  getdelarpaymentdetailsBranches(PaymentBean paymentBean){
+	public List<PaymentBean>  getdelarpaymentdetailsBranches(PaymentBean paymentBean){
 		jdbcTemplate = custom.getJdbcTemplate();
 		
 	String sql =" select kp.*,DATE_FORMAT(payment_date,'%d-%b-%Y') as strpaymentDate,ke.name  from kumar_payment kp,kumar_employee ke where 1=1 and kp.empId=ke.id 	 and branchId= '"+paymentBean.getBranchId()+"' ";
 		System.out.println(sql);
-		List<Map<String,Object>>  list = jdbcTemplate.queryForList(sql, new Object[]{});
+		List<PaymentBean>  list = jdbcTemplate.query(sql, new Object[]{},ParameterizedBeanPropertyRowMapper.newInstance(PaymentBean.class));
 		if(list.size() > 0)
 			return list;
 		return null;
 		
 	}
 
-
+	public void dealerpaymentstatusupdate(PaymentBean paymentBean) {
+		jdbcTemplate = custom.getJdbcTemplate();
+		String sql = "update kumar_payment set `comment`=?,  `confirm`=? WHERE id=?";
+		jdbcTemplate.update(sql, new Object[]{paymentBean.getComment(),paymentBean.getConfirm(),paymentBean.getId()});
+	}
+	
 
 }
 
