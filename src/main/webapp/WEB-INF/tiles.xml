@@ -71,6 +71,9 @@
  <definition name="orderPlacement" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/orderPlacement.jsp" />
  </definition>
+ <definition name="myOrdersList" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/myOrdersList.jsp" />
+ </definition>
  
  <definition name="cardetails" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/cartdetails.jsp" />

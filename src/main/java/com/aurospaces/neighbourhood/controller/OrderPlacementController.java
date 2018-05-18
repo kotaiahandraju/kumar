@@ -267,7 +267,7 @@ public class OrderPlacementController {
 
 
 	@RequestMapping(value = "/myorderLists")
-	public  String myOrders(Model model,HttpServletRequest request) 
+	public  String myOrders(@ModelAttribute("orderLstForm") EmployeeBean employeeBean,Model model,HttpServletRequest request,HttpSession session) 
 	{
 		/*System.out.println("...............enter into myorders list...............");
 		model.addAttribute("orderLstForm",new OrdersListBean());
@@ -279,22 +279,25 @@ public class OrderPlacementController {
 		String sJson = null;
 		boolean delete = false;
 		try {
-
-			//String dealerId=request.getParameter("dealerId");
-			listOrderBeans = listDao.getMyOrdersList();
-			objectMapper = new ObjectMapper();
-			if (listOrderBeans != null && listOrderBeans.size() > 0) {
-
+			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			if(objuserBean != null){
+				
+				//String dealerId=request.getParameter("dealerId");
+				listOrderBeans = listDao.getOrderList(objuserBean.getEmpId()+"");
 				objectMapper = new ObjectMapper();
-				sJson = objectMapper.writeValueAsString(listOrderBeans);
-				request.setAttribute("allOrders1", sJson);
-				jsonObj.put("allOrders1", listOrderBeans);
-				// System.out.println(sJson);
-			} else {
-				objectMapper = new ObjectMapper();
-				sJson = objectMapper.writeValueAsString(listOrderBeans);
-				request.setAttribute("allOrders1", "''");
-				jsonObj.put("allOrders1", listOrderBeans);
+				if (listOrderBeans != null && listOrderBeans.size() > 0) {
+	
+					objectMapper = new ObjectMapper();
+					sJson = objectMapper.writeValueAsString(listOrderBeans);
+					request.setAttribute("allOrders1", sJson);
+					jsonObj.put("allOrders1", listOrderBeans);
+					// System.out.println(sJson);
+				} else {
+					objectMapper = new ObjectMapper();
+					sJson = objectMapper.writeValueAsString(listOrderBeans);
+					request.setAttribute("allOrders1", "''");
+					jsonObj.put("allOrders1", listOrderBeans);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -302,7 +305,7 @@ public class OrderPlacementController {
 			return String.valueOf(jsonObj);
 
 		}
-		return "ordersList";
+		return "myOrdersList";
 		
 	}
 }

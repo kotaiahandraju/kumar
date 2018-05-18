@@ -119,7 +119,7 @@ public boolean saveInvoice(Map<String,String> invoiceData,int balance_qty){
 	}
 }
 
-public List<Map<String, Object>> getMyOrdersList() 
+/*public List<Map<String, Object>> getMyOrdersList() 
 {
 List<Map<String,Object>> list=null;
 	
@@ -135,5 +135,5 @@ List<Map<String,Object>> list=null;
 	}
 	return list;
 	
-}
+}*/
 }
