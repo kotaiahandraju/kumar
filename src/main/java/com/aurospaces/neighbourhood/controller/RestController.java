@@ -436,7 +436,7 @@ public class RestController {
 	@RequestMapping(value = "rest/delarpaymentbranches")
 	public @ResponseBody String delarpaymentbranches(@RequestBody PaymentBean paymentBean) {
       JSONObject jsonObj = new JSONObject();
-      List<Map<String,Object>>  listOrderBeans = null;
+      List<PaymentBean>  listOrderBeans = null;
 		try {
 			
 			listOrderBeans = paymentDao.getdelarpaymentdetailsBranches(paymentBean);
@@ -529,5 +529,21 @@ public class RestController {
 		}
 		return String.valueOf(jsonObject);
 	}
+	
+	@RequestMapping(value = "rest/dealerpaymentstatus")
+	public @ResponseBody String dealerpaymentstatus(@RequestBody PaymentBean paymentBean) {
+      JSONObject jsonObj = new JSONObject();
+		try {
+			
+			paymentDao.dealerpaymentstatusupdate(paymentBean);
+			jsonObj.put("msg", "success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+			jsonObj.put("msg", "failed");
+		}
+		return String.valueOf(jsonObj);
+	}
+	
 }
 	

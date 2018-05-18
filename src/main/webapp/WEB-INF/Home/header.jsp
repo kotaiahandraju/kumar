@@ -61,9 +61,34 @@
 margin-left:10px !important;
 }
 }
-@media only screen  (max-width: 1024px) {
+@media only screen and (min-width:600px) and (max-width:640px){
+.carth {
+margin-left:300px !important;
+}
+}
+@media only screen and (min-width: 1024px) {
 .carth {
 margin-left:643px !important;
+}
+}
+@media only screen and (min-width: 1280px) {
+.carth {
+margin-left:881px !important;
+}
+}
+@media only screen and (min-width: 1366px) {
+.carth {
+margin-left:965px !important;
+}
+}
+@media only screen and (min-width: 1440px) {
+.carth {
+margin-left:1044px !important;
+}
+}
+@media only screen and (min-width: 1600px) {
+.carth {
+margin-left:1195px !important;
 }
 }
 .navbar-nav li
@@ -75,7 +100,7 @@ margin-top: 18px;
     float: left !important;
     color: #fff;
     list-style: none;
-    margin-left: 800px;
+    margin-left: 881px;
     font-size:18px;
 }
  @media only screen and (max-width: 600px) and (min-width: 400px) {
@@ -274,6 +299,7 @@ function cartCount(){
             
             <li class="dashboard"><a href="${baseurl }/admin/dashboard"> <span>Dashboard</span></a></li>&emsp;
                <c:if test="${roleId=='1' }">
+               <li class="employee"><a href="${baseurl }/admin/branchHome"> <span>Branch</span></a></li>
                 <li class="productType"><a href="${baseurl }/admin/producttype"><span>Product Category</span></a></li>&emsp;
               <li class="productName"><a href="${baseurl }/admin/productName"> <span>Product Sub Category</span></a></li>&emsp;
               <li class="items"><a href="${baseurl }/admin/items"> <span>Product List</span></a></li>&emsp;
@@ -284,14 +310,15 @@ function cartCount(){
 			  <li class="productType"><a href="${baseurl }/admin/producttype"><span>Product Category</span></a></li>&emsp;
               <li class="productName"><a href="${baseurl }/admin/productName"> <span>Product Sub Category</span></a></li>&emsp;
               <li class="items"><a href="${baseurl }/admin/items"> <span>Product List</span></a></li>&emsp;
-			   <li class="dealerconfirm"><a href="${baseurl }/admin/dealeraccountconfirm"> <span>Dealer Confirmation </span></a></li>
-			    <li class="dealerpaymentconfirm"><a href="${baseurl }/admin/dealerpaymentconfirm"> <span>Payment Status </span></a></li>
-			    <li class="orderslist"><a href="${baseurl }/admin/orderslist"> <span>Order List</span></a></li>
-			    <li class="dealercreation"><a href="${baseurl }/admin/dealercreation"> <span>Dealer Creation </span></a></li>
+               <li class="dealercreation"><a href="${baseurl }/admin/dealercreation"> <span>Dealer Creation </span></a></li>
+			   <li class="dealerconfirm"><a href="${baseurl }/admin/dealeraccountconfirm"> <span> Confirm  Dealer</span></a></li>
+			    <li class="dealerpaymentconfirm"><a href="${baseurl }/admin/dealerpaymentconfirm"> <span>Confirm Payments </span></a></li>
+			    <li class="orderslist"><a href="${baseurl }/admin/orderslist"> <span>Delivery Status</span></a></li>
+			   
 			 </c:if>
 			  <c:if test="${roleId=='3' }">
-			  <li class="delarpayment"><a href="${baseurl }/admin/delarpayment"> <span>Dealer Payment</span></a></li>
-			  <li class="orderplacing"><a href="${baseurl }/admin/orderplacing"> <span>Order Placing</span></a></li>
+			  <li class="delarpayment"><a href="${baseurl }/admin/delarpayment"> <span>Payment Information</span></a></li>
+			  <li class="orderplacing"><a href="${baseurl }/admin/orderplacing"> <span>Order Product</span></a></li>
 			   <li class="ordersList"><a href="${baseurl }/admin/myorderLists"> <span>My Orders</span></a></li>
 			 </c:if>
 				

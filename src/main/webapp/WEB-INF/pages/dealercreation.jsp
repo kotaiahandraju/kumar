@@ -15,7 +15,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kumar</title>
-<script type='text/javascript' src='assets/js/jquery-1.10.2.min.js'></script>
+<!-- <script type='text/javascript' src='assets/js/jquery-1.10.2.min.js'></script> -->
 <script type="text/javascript">
 window.setTimeout(function() {
     $(".msgcss").fadeTo(500, 0).slideUp(500, function(){
@@ -62,14 +62,16 @@ border-top: 0px solid #dddddd !important;
                  
                 <div class="col-md-12">
                        
-                   
+                    <span id="errorMsg"></span>
                         <div class="options"></div>
+                           
                         
                     <form:form class="form-horizontal" modelAttribute="delarForm"  role="form" id="delar-form" action="addDealer" method="post">
                     <div class="panel-body">
                     <form:hidden path="id"/>
-                    
+                          
                     		<div class="col-md-6">
+                    		 <span id="errorMsg"></span>
                     		<h3>Business Information</h3>
                     			<div class="form-group">
                     			
@@ -80,7 +82,7 @@ border-top: 0px solid #dddddd !important;
                     			</div>
                     			
                     		        <div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Address <span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label"> Business Address <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	 <form:input path="address" class="form-control  validate" placeholder="Address" onkeyup="removeBorder(this.id)" />
 								      	<span class="hasError" id="lponumberError"></span>
@@ -113,9 +115,9 @@ border-top: 0px solid #dddddd !important;
                     			</div>
                     			
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Landline/Alternative Number</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Alternative Mobile</label>
 								    <div class="col-md-6">
-								    	<form:input path="alternativeNumber" value=""  class="form-control  mobile" placeholder="Landline/Alternative Number" onkeyup="removeBorder(this.id)" maxlength="13" />
+								    	<form:input path="alternativeNumber" value=""  class="form-control  mobile" placeholder="Alternative Mobile" onkeyup="removeBorder(this.id)" maxlength="13" />
 								      	<span class="hasError" id="locationError"></span>
 								    </div>
                     			</div>
@@ -125,7 +127,7 @@ border-top: 0px solid #dddddd !important;
                     				<label for="focusedinput" class="col-md-4 control-label">GST Number <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 
-								    	<form:input path="gstno" class="form-control validate"  placeholder="GST Number"  onkeyup="removeBorder(this.id)"/>
+								    	<form:input path="gstno" class="form-control validate"  placeholder="GST Number"  maxlength="15" onkeyup="removeBorder(this.id)"/>
 								      	<span class="hasError" id="expirydateError"></span>
 								    </div>
                     			</div>
@@ -220,7 +222,7 @@ border-top: 0px solid #dddddd !important;
 					      	<div class="row">
 					      		<div class="col-sm-12">
 					      			<div class="btn-toolbar text-center">
-						      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
+						      			<input type="submit" id="submit2" value="Submit" class="btn-primary btn"/>
 						      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
 					      			</div>
 					      		</div>
@@ -235,10 +237,16 @@ border-top: 0px solid #dddddd !important;
 
 </body>
 
-<script type='text/javascript' src='js/customValidation.js'></script>
+<!-- <script type='text/javascript' src='js/customValidation.js'></script> -->
 <script>
 $("#pageName").text("Dealer Creation");
 $(".dealercreation").addClass("active");
+
+var usernamevalidation =false;
+var emailvalidation =false;
+var mobilevalidation =false;
+
+
 
 
 $('#username').blur(function() {
@@ -255,14 +263,17 @@ $('#username').blur(function() {
 				success : function(data) {
 					if(data ==='true')
 						{
-						alert("username already exists")
 	 					$('#username').css('border-color', 'red');
-						 $('#submit1').prop('disabled', true);
+						 $('#errorMsg').text( "* Username already Exists ") ;
+						 $('#errorMsg').css('color','red');
+							setTimeout(function() { $("#errorMsg").text(''); }, 3000);
+						 usernamevalidation =false;
 						}
 					else
 						{
 						$('#username').css('border-color', 'none');
 						$('#submit1').prop('disabled', false);
+						usernamevalidation =true;
 						}
 					
 				},
@@ -275,6 +286,109 @@ $('#username').blur(function() {
 			});
 
 		}); 
+		
+		
+		
+$('#email').blur(function() {
+		
+		
+		
+		var editFields =0;
+		var cemail=$(this).val();
+		
+		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+		  if( regex.test(cemail))
+			  {
+			  emailvalidation =true;
+			  }
+		 else
+		  
+		{
+			
+			  $('#email').css('border-color', 'red');
+			  $('#errorMsg').text( "* Enter Valid Email ") ;
+				 $('#errorMsg').css('color','red');
+					setTimeout(function() { $("#errorMsg").text(''); }, 3000);
+			 emailvalidation =false;
+			  
+		}
+
+			}); 
+			
+			
+$('#phoneNumber').blur(function() {
+	
+	
+	
+	
+	var phoneNumber=$(this).val();
+	
+	alert(phoneNumber.length);
+	
+	  if( phoneNumber.length == 10)
+		  {
+		  mobilevalidation =true;
+		  }
+	 else
+	  
+	{
+		
+		  $('#phoneNumber').css('border-color', 'red');
+		 $('#errorMsg').text( "* Enter Valid Mobile Number ") ;
+		 $('#errorMsg').css('color','red');
+			setTimeout(function() { $("#errorMsg").text(''); }, 3000);
+		 mobilevalidation =false;
+		  
+	}
+
+		}); 
+		
+			
+			
+			
+$('#submit2').click(function(event) {
+	
+	
+	if(usernamevalidation && emailvalidation && mobilevalidation)
+	 {
+	$('#submit1').trigger('click');
+	
+	 }
+	else
+		{
+		showValidations();
+		return false;
+		
+		}
+	
+});
+
+
+
+
+function showValidations(){
+	
+	
+	$.each(idArray, function(i, val) {
+		var value = $("#" + idArray[i]).val();
+		var placeholder = $("#" + idArray[i]).attr('placeholder');
+		if (value == null || value == "" || value == "undefined") {
+			$('style').append(styleBlock);
+			$("#" + idArray[i] ).attr("placeholder", placeholder);
+			$("#" + idArray[i] ).css('border-color','#e73d4a');
+			$("#" + idArray[i] ).css('color','#e73d4a');
+			$("#" + idArray[i] ).addClass('placeholder-style your-class');
+			 var id11 = $("#" + idArray[i]+"_chosen").length;
+			if ($("#" + idArray[i]+"_chosen").length)
+			{
+				$("#" + idArray[i]+"_chosen").children('a').css('border-color','#e73d4a');
+			}
+//			$("#" + idArray[i] + "Error").text("Please " + placeholder);
+			validation = false;
+		} 
+	});
+	
+}
 		
 
 </script>

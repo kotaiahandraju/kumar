@@ -69,7 +69,7 @@ public class LoginController {
 					
 			} else {
 				redirect.addFlashAttribute("msg", "Login Failed");
-				request.setAttribute("msg", "Login Failed");
+				request.setAttribute("msg", "Enter Valid Username/Password");
 				return "loginPage1";
 			}
 		} catch (Exception e) {
