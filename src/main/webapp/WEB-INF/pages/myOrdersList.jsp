@@ -12,6 +12,12 @@
  {
  border: 0px solid black !important;
  }
+  @media (min-width: 768px) {
+.modal-dialog {
+    width: 957px;
+    margin: 30px auto;
+}
+}
 table #dependent_table{
 /* 	width: 100%; */
 	counter-reset: rowNumber;
@@ -42,7 +48,7 @@ table#dependent_table tbody tr td:first-child::before {
                <li>My Orders </li>
             </ol>
             <div class="clearfix"></div>
-        <div class="container" id="lpoMain">
+        <div class="container-fluid" id="lpoMain">
         
         
          <%-- <div class="row" id="moveTo">
@@ -109,14 +115,16 @@ table#dependent_table tbody tr td:first-child::before {
 		  <div class="modal-dialog"> 
 		    <div class="modal-content">
 		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		       <span aria-hidden="true">&times;</span>
+		        </button>
 		        <h4 class="modal-title" id="exampleModalLabel"><span id="dealer_name_str"></span></h4>
 		      </div>
 		      <div class="modal-body" id="modal_body">
 				      
 		      </div>
 		      <div class="modal-footer">
-		       <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+		       <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
 		      </div>
 		    </div>
 		  </div>
@@ -248,7 +256,7 @@ function displayDealerOrderItems(response){
 			//+ "<td>"+text_field_str+"</td>"
 			//+ "<td><input type='button' id='deliverable_submit_btn' value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>"
 			+"</tr>";
-		$(tblRow).appendTo("#modal_body");
+		$(tblRow).appendTo("#modal_body tbody");
 	});
 	//$('#orderListModal').modal('show');
 	//if(isClick=='Yes') $('.datatables').dataTable();
