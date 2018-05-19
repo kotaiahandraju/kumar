@@ -1,8 +1,10 @@
+
 package com.aurospaces.neighbourhood.controller;
 
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -213,6 +215,10 @@ public class EmployeeController {
 			username = username.replaceAll("\\s+","");
 			return empDao.isUsernameDuplicate(username);
 		}
+	 
+	 
+	
+
 	 
 	 
 }
