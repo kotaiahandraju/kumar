@@ -8908,8 +8908,9 @@ footer #back-to-top {
   }
 }
 .focusedform {
-  background: #e6e7e8 url(../img/bbg.jpg);
+  background-image:  url("../img/bglogin.jpg");
   padding: 0;
+  background-size:cover;
 }
 .focusedform .panel {
   width: 400px;
@@ -8922,7 +8923,7 @@ footer #back-to-top {
 }
 .focusedform .verticalcenter {
   position: absolute;
-  top: 42%;
+  top: 50%;
   left: 50%;
   margin-top: -186px;
   margin-left: -200px;

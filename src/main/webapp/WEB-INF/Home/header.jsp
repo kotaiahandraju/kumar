@@ -60,6 +60,13 @@
 .carth {
 margin-left:10px !important;
 }
+.oms {
+font-size:14px !important;
+line-height:5 !important;
+}
+.focusedform .verticalcenter {
+margin-top:50px;
+}
 }
 @media only screen and (min-width:600px) and (max-width:640px){
 .carth {
@@ -162,6 +169,17 @@ border-radius:5px;
 	font-size: 14px;
 	z-index:99999;
 }
+.navbar-brand {
+    float: left;
+    padding: 2px 27px;
+    font-size: 18px;
+    line-height: auto;
+}
+.oms {
+color:#fff;
+font-size:24px;
+line-height:2;
+}
 .select2
 {
 /* 	max-width: 100% !important; */
@@ -234,7 +252,8 @@ function cartCount(){
 
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
         <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/assets/img/logo1.png" class="img-responsive" style="    width: 132px;"></a>
+            <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/img/klogo1.png" class="img-responsive" style="    width: 132px;"></a>
+            <span class="oms">Order Management System</span>
             <div class="clearfix"></div>
         </div>
           <c:if test="${cacheUserBean.roleId=='3' }">

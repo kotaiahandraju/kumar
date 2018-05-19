@@ -130,6 +130,7 @@ table#dependent_table tbody tr td:first-child::before {
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		        <h4 class="modal-title" id="exampleModalLabel"><span id="dealer_name_str"></span></h4>
+		      <span class="col-md-4" id="dname">as</span>  <span class="col-md-4" id="kumarid">as</span>  <span class="col-md-4" id="korderdDate">as</span><br>
 		      </div>
 		      <div class="modal-body" id="modal_body">
 		      
@@ -181,7 +182,7 @@ var damageId = 0;
 // var serviceUnitArray1 ={};
 var data = {};
 
-
+var orderedDate =0;
 function showTableData(response){
 	serviceUnitArray ={};
 	//serviceUnitArray1 ={};
@@ -189,12 +190,12 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Business Name</th><th>Order ID</th><th>Created On </th><th>Total Items</th><th>Delivered Status</th><th>View</th></tr>'+
+    	'<thead><tr><th>Business Name</th><th>Order ID</th><th>Ordered Date </th><th>Total Items</th><th>Delivered Status</th><th>View</th></tr>'+
     	"</thead><tbody></tbody></table>"; 
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		
-		
+		orderedDate= orderObj.created_on;
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.dealerName+"'>" + orderObj.dealerName + "</td>"
@@ -241,15 +242,20 @@ function displayDealerOrderItems(response){
 	$('#modal_body').html('');
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Business Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Ordered Quantity</th><th>Pending Quantity</th><th colspan="2"></th></tr>'+
+    	'<thead><tr><th>Business Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Ordered Quantity</th><th>Pending Quantity</th><th colspan="2">Order Status</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#modal_body").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		
+		  $('#dname').text(orderObj.dealerName);
+		  $('#kumarid').text(orderObj.orderId);
+		  $('#korderdDate').text(orderObj.created_time );
+		  
+		
 		
 		serviceUnitArray1[orderObj.id] = orderObj;
 		if(i==0)
-			$("#dealer_name_str").html(orderObj.dealerName+"\'s order("+orderObj.orderId+") items");
+			/* $("#dealer_name_str").html(orderObj.dealerName+"\'s order("+orderObj.orderId+") items"); */
 		var text_field_str = '<td colspan="2" align="center">Completed</td>';
 		if(typeof orderObj.pending_qty != "undefined"){
 				var int_val = parseInt(orderObj.pending_qty);

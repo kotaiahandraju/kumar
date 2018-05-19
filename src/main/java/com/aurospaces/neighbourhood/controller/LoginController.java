@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -122,6 +123,13 @@ public class LoginController {
 	}
 	
 	
+	
+	@RequestMapping("/forgetpassword")
+	 public String ShowForgetPasswordPage(Model model)
+	 {
+         return "forGetPassword";		 
+		 
+	 }
 	
 	@RequestMapping(value = "/forgepasssword",method=RequestMethod.POST)
 		public String LoginHome(ModelMap model, HttpServletRequest request,HttpSession session) throws IOException
