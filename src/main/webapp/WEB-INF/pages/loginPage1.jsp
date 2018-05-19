@@ -87,6 +87,7 @@ window.setTimeout(function() {
 		</div>
 		<div class="panel-footer">
 		<span><a href="dealerregistration">Sign Up </a></span>
+		<span><a href="">Forget Password </a></span>
 			<div class="pull-right">
 				<input type="reset" value="Reset" class="btn btn-default cancel"/>
 				<input type="submit" value="Login" id="submit1" class="btn btn-primary">
