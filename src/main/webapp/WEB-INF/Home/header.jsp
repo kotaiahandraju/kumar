@@ -60,6 +60,13 @@
 .carth {
 margin-left:10px !important;
 }
+.oms {
+font-size:14px !important;
+line-height:5 !important;
+}
+.focusedform .verticalcenter {
+margin-top:50px;
+}
 }
 @media only screen and (min-width:600px) and (max-width:640px){
 .carth {
@@ -73,7 +80,7 @@ margin-left:643px !important;
 }
 @media only screen and (min-width: 1280px) {
 .carth {
-margin-left:881px !important;
+margin-left:593px !important;
 }
 }
 @media only screen and (min-width: 1366px) {
@@ -162,6 +169,17 @@ border-radius:5px;
 	font-size: 14px;
 	z-index:99999;
 }
+.navbar-brand {
+    float: left;
+    padding: 2px 27px;
+    font-size: 18px;
+    line-height: auto;
+}
+.oms {
+color:#fff;
+font-size:24px;
+line-height:2;
+}
 .select2
 {
 /* 	max-width: 100% !important; */
@@ -234,7 +252,8 @@ function cartCount(){
 
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
         <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/assets/img/logo1.png" class="img-responsive" style="    width: 132px;"></a>
+            <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/img/klogo1.png" class="img-responsive" style="    width: 132px;"></a>
+            <span class="oms">Order Management System</span>
             <div class="clearfix"></div>
         </div>
           <c:if test="${cacheUserBean.roleId=='3' }">
@@ -297,22 +316,31 @@ function cartCount(){
         <div class="collapse navbar-collapse navbar-ex1-collapse" id="horizontal-navbar" style="padding:0px">
             <ul class="nav navbar-nav">
             
-            <li class="dashboard"><a href="${baseurl }/admin/dashboard"> <span>Dashboard</span></a></li>&emsp;
+            <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-dashboard"></i>
+             <span>Dashboard</span></a></li>&emsp;
                <c:if test="${roleId=='1' }">
-               <li class="employee"><a href="${baseurl }/admin/branchHome"> <span>Branch</span></a></li>
-                <li class="productType"><a href="${baseurl }/admin/producttype"><span>Product Category</span></a></li>&emsp;
-              <li class="productName"><a href="${baseurl }/admin/productName"> <span>Product Sub Category</span></a></li>&emsp;
-              <li class="items"><a href="${baseurl }/admin/items"> <span>Product List</span></a></li>&emsp;
-              <li class="employee"><a href="${baseurl }/admin/employeeCreation"> <span>Employees</span></a></li>
+               <li class="employee"><a href="${baseurl }/admin/branchHome"><i class="fa fa-university"></i> <span>Branch</span></a></li>
+                <li class="productType"><a href="${baseurl }/admin/producttype"><i class="fa fa-clone"></i>
+
+ <span>Product Category</span></a></li>&emsp;
+              <li class="productName"><a href="${baseurl }/admin/productName"><i class="fa fa-bookmark"></i>
+
+               <span>Product Sub Category</span></a></li>&emsp;
+              <li class="items"><a href="${baseurl }/admin/items"><i class="fa fa-list-alt"></i>
+
+               <span>Product List</span></a></li>&emsp;
+              <li class="employee"><a href="${baseurl }/admin/employeeCreation"><i class="fa fa-user"></i> <span>Employees</span></a></li>
              
               </c:if>
 			 <c:if test="${roleId=='2' }">
-			  <li class="productType"><a href="${baseurl }/admin/producttype"><span>Product Category</span></a></li>&emsp;
-              <li class="productName"><a href="${baseurl }/admin/productName"> <span>Product Sub Category</span></a></li>&emsp;
-              <li class="items"><a href="${baseurl }/admin/items"> <span>Product List</span></a></li>&emsp;
-               <li class="dealercreation"><a href="${baseurl }/admin/dealercreation"> <span>Dealer Creation </span></a></li>
-			   <li class="dealerconfirm"><a href="${baseurl }/admin/dealeraccountconfirm"> <span> Confirm  Dealer</span></a></li>
-			    <li class="dealerpaymentconfirm"><a href="${baseurl }/admin/dealerpaymentconfirm"> <span>Confirm Payments </span></a></li>
+			  <li class="productType"><a href="${baseurl }/admin/producttype"><i class="fa fa-clone"></i>
+
+			  <span>Product Category</span></a></li>&emsp;
+              <li class="productName"><a href="${baseurl }/admin/productName"><i class="fa fa-bookmark"></i> <span>Product Sub Category</span></a></li>&emsp;
+              <li class="items"><a href="${baseurl }/admin/items"><i class="fa fa-list-alt"></i> <span>Product List</span></a></li>&emsp;
+               <li class="dealercreation"><a href="${baseurl }/admin/dealercreation"> <i class="fa fa-user-secret"></i><span>Dealer Creation </span></a></li>
+			   <li class="dealerconfirm"><a href="${baseurl }/admin/dealeraccountconfirm"><i class="fa fa-check-square"></i><span> Confirm  Dealer</span></a></li>
+			    <li class="dealerpaymentconfirm"><a href="${baseurl }/admin/dealerpaymentconfirm"><i class="fa fa-file-check"></i><span>Confirm Payments </span></a></li>
 			    <li class="orderslist"><a href="${baseurl }/admin/orderslist"> <span>Delivery Status</span></a></li>
 			   
 			 </c:if>
