@@ -135,13 +135,13 @@ table#dependent_table tbody tr td:first-child::before {
 /* $(document).ready(function() {
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 }); */
-// var lstOrders =${allOrders1};
+ var lstOrders =${all_orders};
 
 // console.log(lstOrders);
 
-// if(lstOrders != ""){
-// 	showTableData(lstOrders);
-// }
+ if(lstOrders != ""){
+ 	showTableData(lstOrders);
+ }
 
 $(function() {
 // 	var listOrders=JSON.parse(lstOrders);
@@ -228,7 +228,7 @@ function displayDealerOrderItems(response){
 	$('#modal_body').html('');
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Business Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th><th colspan="2"></th></tr>'+
+    	'<thead><tr><th>Business Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Ordered Quantity</th><th>Pending Quantity</th><th colspan="2"></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#modal_body").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -249,8 +249,9 @@ function displayDealerOrderItems(response){
 			+ "<td title='"+orderObj.dealerName+"'>" + orderObj.dealerName + "</td>"
 			+ "<td title='"+orderObj.categeory+"'>" + orderObj.categeory + "</td>"
 			+ "<td title='"+orderObj.subCategeory+"'>" + orderObj.subCategeory + "</td>"
-			+ "<td title='"+orderObj.itemCode+"'>" + orderObj.itemCode + "</td>"
+			+ "<td title='"+orderObj.itemcode+"'>" + orderObj.itemcode + "</td>"
 			+ "<td title='"+orderObj.itemdescrption+"'>" + orderObj.itemdescrption + "</td>"
+			+ "<td title='"+orderObj.quantity+"'>" + orderObj.quantity + "</td>"
 			+ "<td id='pending_qty"+orderObj.id+"' title='"+orderObj.pending_qty+"'>" + orderObj.pending_qty + "</td>"
 			+ text_field_str
 			//+ "<td>"+text_field_str+"</td>"
