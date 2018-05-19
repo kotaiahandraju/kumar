@@ -200,7 +200,6 @@ window.setTimeout(function() {
 				<div class="pull-right"><label><input type="checkbox" style="margin-bottom: -5px;"> Remember Me</label></div>
 			</div> -->
 		</div>
-<<<<<<< HEAD
 		<!-- <div class="panel-footer pb">
 		
 		
