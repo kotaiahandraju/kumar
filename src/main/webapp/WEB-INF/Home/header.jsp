@@ -340,14 +340,18 @@ function cartCount(){
               <li class="items"><a href="${baseurl }/admin/items"><i class="fa fa-list-alt"></i> <span>Product List</span></a></li>&emsp;
                <li class="dealercreation"><a href="${baseurl }/admin/dealercreation"> <i class="fa fa-user-secret"></i><span>Dealer Creation </span></a></li>
 			   <li class="dealerconfirm"><a href="${baseurl }/admin/dealeraccountconfirm"><i class="fa fa-check-square"></i><span> Confirm  Dealer</span></a></li>
-			    <li class="dealerpaymentconfirm"><a href="${baseurl }/admin/dealerpaymentconfirm"><i class="fa fa-file-check"></i><span>Confirm Payments </span></a></li>
-			    <li class="orderslist"><a href="${baseurl }/admin/orderslist"> <span>Delivery Status</span></a></li>
+			    <li class="dealerpaymentconfirm"><a href="${baseurl }/admin/dealerpaymentconfirm"><i class="fa fa-bolt"></i><span>Confirm Payments </span></a></li>
+			    <li class="orderslist"><a href="${baseurl }/admin/orderslist"><i class="fa fa-clipboard"></i>
+
+<span>Delivery Status</span></a></li>
 			   
 			 </c:if>
 			  <c:if test="${roleId=='3' }">
-			  <li class="delarpayment"><a href="${baseurl }/admin/delarpayment"> <span>Payment Information</span></a></li>
-			  <li class="orderplacing"><a href="${baseurl }/admin/orderplacing"> <span>Order Product</span></a></li>
-			   <li class="ordersList"><a href="${baseurl }/admin/myorderLists"> <span>My Orders</span></a></li>
+			  <li class="delarpayment"><a href="${baseurl }/admin/delarpayment"> <i class="fa fa-bookmark"></i><span>Payment Information</span></a></li>
+			  <li class="orderplacing"><a href="${baseurl }/admin/orderplacing"><i class="fa fa-clipboard"></i> <span>Order Product</span></a></li>
+			   <li class="ordersList"><a href="${baseurl }/admin/myorderLists"><i class="fa fa-first-order"></i>
+
+ <span>My Orders</span></a></li>
 			 </c:if>
 				
 			</ul>
