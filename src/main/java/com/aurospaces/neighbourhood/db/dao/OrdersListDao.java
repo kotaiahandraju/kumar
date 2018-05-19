@@ -151,4 +151,20 @@ List<Map<String,Object>> list=null;
 	return list;
 	
 }*/
+
+// rest api
+public List<Map<String,Object>> getOrderListForMobile(String dealerId){
+	List<Map<String,Object>> list=null;
+	
+	try{
+		jdbcTemplate = custom.getJdbcTemplate();
+		String sql ="select ol.*,ke.name as dealerName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption, sum(ol.quantity) as total_quantity,date_format(ol.created_time,'%d-%b-%Y') as created_on,if((select count(*) from orders_list where orderId = ol.orderId and status = '1')=0,'Completed','Not Completed') as completed_status from orders_list ol,items i,kumar_employee ke,producttype pt,productname pn where delerId=? and ke.id=ol.delerId and ol.productId=i.id and i.productId=pt.id and i.productname=pn.id group by ol.orderId ORDER BY ol.updated_time Desc";
+		list =jdbcTemplate.queryForList(sql, new Object[]{dealerId});
+		System.out.println(sql);
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+	return list;
+	
+}
 }

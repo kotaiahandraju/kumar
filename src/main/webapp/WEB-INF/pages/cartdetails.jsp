@@ -1,4 +1,4 @@
-\<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
@@ -74,8 +74,8 @@ font-weight:600;
 					</div>
 			<br>
 					<div class="pull-right">
-					<a href="orderplacing"><span class="btn btn-warning" ><i class="fa fa-shopping-cart"></i> ADD MORE ITEMS</span></a> 
-					<span class="btn btn-danger"  onclick="ordePlacing();"><i class="fa fa-bolt" aria-hidden="true"></i>CONFIRM ORDER</span>
+					<a href="orderplacing"><span class="btn btn-warning" ><!-- <i class="fa fa-shopping-cart"></i> --> ADD MORE ITEMS</span></a> 
+					<span class="btn btn-danger"  onclick="ordePlacing();"><!-- <i class="fa fa-bolt" aria-hidden="true"></i> -->CONFIRM ORDER</span>
 					</div>
 				</div>
 				</div>

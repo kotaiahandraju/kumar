@@ -241,8 +241,8 @@ function displayDealerOrderItems(response){
 		if(typeof orderObj.pending_qty != "undefined"){
 				var int_val = parseInt(orderObj.pending_qty);
 				if(int_val>0){
-					text_field_str = "<td><input type='text' id='qty"+orderObj.id+"' /></td>"
-									+"<td><input type='button' value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>";
+					text_field_str = "<td><input type='text'  maxlength ='3' class='mobile' id='qty"+orderObj.id+"' /></td>"
+									+"<td><input type='button'   value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>";
 				}
 		}
 		var tblRow ="<tr id='row"+orderObj.id+"'>"
@@ -258,6 +258,26 @@ function displayDealerOrderItems(response){
 			//+ "<td><input type='button' id='deliverable_submit_btn' value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>"
 			+"</tr>";
 		$(tblRow).appendTo("#modal_body tbody");
+		
+		
+		
+		$(".mobile").keydown(function (e) {
+		    // Allow: backspace, delete, tab, escape, enter and .
+		    if ($.inArray(e.keyCode, [8, 9, 27, 13, 110]) !== -1 ||
+		         // Allow: Ctrl+A, Command+A
+		        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+		         // Allow: home, end, left, right, down, up
+		        (e.keyCode >= 35 && e.keyCode <= 40)) {
+		             // let it happen, don't do anything
+		             return;
+		    }
+		    // Ensure that it is a number and stop the keypress
+		    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+		        e.preventDefault();
+		    }
+		});
+		
+		
 	});
 	
 	//$('#orderListModal').modal('show');
