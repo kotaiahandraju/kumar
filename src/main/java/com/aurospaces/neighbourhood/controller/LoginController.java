@@ -1,7 +1,9 @@
 package com.aurospaces.neighbourhood.controller;
 
+import java.io.IOException;
 import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,14 +15,22 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aurospaces.neighbourhood.bean.EmployeeBean;
 import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.db.dao.KhaibarUsersDao;
+import com.aurospaces.neighbourhood.db.dao.LoginDao;
+import com.aurospaces.neighbourhood.util.SendSMS;
 
 @Controller
 public class LoginController {
 	@Autowired KhaibarUsersDao objKhaibarUsersDao;
+	
+	@Autowired SendSMS sendSMS;
+	
+	@Autowired LoginDao loginDao;
 	@RequestMapping(value = "/LoginHome")
 	public String LoginHome(Map<String, Object> model1, ModelMap model, HttpServletRequest request,
 			HttpSession session)  {
@@ -110,4 +120,32 @@ public class LoginController {
 		}
 		return "redirect:LoginHome";
 	}
+	
+	
+	
+	@RequestMapping(value = "/forgepasssword",method=RequestMethod.POST)
+		public String LoginHome(ModelMap model, HttpServletRequest request,HttpSession session) throws IOException
+	{
+			String mobilenumber =request.getParameter("mobile");
+			
+			EmployeeBean employee =loginDao.getLoginBeanByMbile(mobilenumber);
+			
+			if(employee != null)
+			{
+				String msg ="your password is"+employee.getPassword();
+				ServletContext objContext = null;
+				sendSMS.sendSMS(msg, mobilenumber, objContext);
+				
+			}
+			else
+			{
+				System.out.println("employee not registered");
+				
+			}
+			
+			
+			
+		 
+			return "loginPage1";
+		}
 }
