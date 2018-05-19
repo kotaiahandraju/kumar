@@ -72,6 +72,19 @@ table#dependent_table tbody tr td:first-child::before {
 								    	</div>
                     			</div>
                     		</div>
+                    		<div class="col-md-4">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Delivery Status : </label>
+                    				<div class="col-md-6">
+                    					<form:select path="status" class="form-control validate" onchange="orederLists();">
+								    	<form:option value="all">All</form:option>
+								    	<form:option value="pending">Pending</form:option>
+								    	<form:option value="partially">Partially delivered</form:option>
+								    	<form:option value="completed">Completed</form:option>
+								    	</form:select>
+								    	</div>
+                    			</div>
+                    		</div>
                     	</div>
                     		
                     		</div>
@@ -318,10 +331,11 @@ function displayDealerOrderItems(response){
 function orederLists() {
 	
 	var dealerId=$("#name").val();
+	var status=$("#status").val();
 		$.ajax({
 					type : "POST",
 					url : "orederLists.htm",
-					data :"dealerId="+dealerId,
+					data :"dealerId="+dealerId+"&status="+status,
 					 beforeSend : function() {
 			             $.blockUI({ message: 'Please wait' });
 			          },
