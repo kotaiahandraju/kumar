@@ -184,12 +184,26 @@ List<Map<String,Object>> list=null;
 }*/
 
 // rest api
-public List<Map<String,Object>> getOrderListForMobile(String dealerId){
+public List<Map<String,Object>> getOrderListAllForMobile(String branch_id){
+List<Map<String,Object>> list=null;
+	
+	try{
+		jdbcTemplate = custom.getJdbcTemplate();
+		String sql ="select ol.*,ke.name as dealerName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption, sum(ol.quantity) as total_quantity,date_format(ol.created_time,'%d-%b-%Y') as created_on,CASE WHEN (select count(*) from orders_list where orderId = ol.orderId and status = '1')=0 THEN 'Completed' WHEN ifnull((select sum(inv.dispatched_items_quantity) from invoice inv where inv.order_id=ol.orderId),0)=0 THEN 'Pending'  ELSE 'Partially delivered' END as completed_status from orders_list ol,items i,kumar_employee ke,producttype pt,productname pn where ol.branchId=? and ke.id=ol.delerId and ol.productId=i.id and i.productId=pt.id and i.productname=pn.id and ((select count(*) from orders_list where orderId = ol.orderId and status = '1')>0)  group by ol.orderId ORDER BY ol.updated_time Desc";
+		list =jdbcTemplate.queryForList(sql, new Object[]{branch_id});
+		System.out.println(sql);
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+	return list;
+	
+}
+public List<Map<String,Object>> getOrderListDealerForMobile(String dealerId){
 	List<Map<String,Object>> list=null;
 	
 	try{
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql ="select ol.*,ke.name as dealerName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption, sum(ol.quantity) as total_quantity,date_format(ol.created_time,'%d-%b-%Y') as created_on,if((select count(*) from orders_list where orderId = ol.orderId and status = '1')=0,'Completed','Not Completed') as completed_status from orders_list ol,items i,kumar_employee ke,producttype pt,productname pn where delerId=? and ke.id=ol.delerId and ol.productId=i.id and i.productId=pt.id and i.productname=pn.id group by ol.orderId ORDER BY ol.updated_time Desc";
+		String sql ="select ol.*,ke.name as dealerName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption, sum(ol.quantity) as total_quantity,date_format(ol.created_time,'%d-%b-%Y') as created_on,if((select count(*) from orders_list where orderId = ol.orderId and status = '1')=0,'Completed','Pending') as completed_status from orders_list ol,items i,kumar_employee ke,producttype pt,productname pn where delerId=? and ke.id=ol.delerId and ol.productId=i.id and i.productId=pt.id and i.productname=pn.id group by ol.orderId ORDER BY ol.updated_time Desc";
 		list =jdbcTemplate.queryForList(sql, new Object[]{dealerId});
 		System.out.println(sql);
 	}catch(Exception e){
@@ -198,4 +212,5 @@ public List<Map<String,Object>> getOrderListForMobile(String dealerId){
 	return list;
 	
 }
+
 }
