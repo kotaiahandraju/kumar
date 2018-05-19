@@ -28,7 +28,7 @@ import com.aurospaces.neighbourhood.util.SendSMS;
 public class LoginController {
 	@Autowired KhaibarUsersDao objKhaibarUsersDao;
 	
-	@Autowired SendSMS sendSMS;
+//	@Autowired SendSMS sendSMS;
 	
 	@Autowired LoginDao loginDao;
 	@RequestMapping(value = "/LoginHome")
@@ -134,7 +134,7 @@ public class LoginController {
 			{
 				String msg ="your password is"+employee.getPassword();
 				ServletContext objContext = null;
-				sendSMS.sendSMS(msg, mobilenumber, objContext);
+				//sendSMS.sendSMS(msg, mobilenumber, objContext);
 				
 			}
 			else
