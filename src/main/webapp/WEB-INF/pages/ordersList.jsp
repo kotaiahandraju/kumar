@@ -66,7 +66,7 @@ table#dependent_table tbody tr td:first-child::before {
                     				<label for="focusedinput" class="col-md-6 control-label">Dealer : <span class="impColor">*</span></label>
                     				<div class="col-md-6">
                     					<form:select path="name" class="form-control validate" onchange="orederLists();">
-								    	<form:option value="">-- Select Dealers --</form:option>
+								    	<form:option value="all">All</form:option>
 								    	<form:options items="${dealersList }"></form:options>
 								    	</form:select>
 								    	</div>
@@ -77,6 +77,7 @@ table#dependent_table tbody tr td:first-child::before {
                     				<label for="focusedinput" class="col-md-6 control-label">Delivery Status : </label>
                     				<div class="col-md-6">
                     					<form:select path="status" class="form-control validate" onchange="orederLists();">
+                    					<form:option value="">--- Select Status ---</form:option>
 								    	<form:option value="all">All</form:option>
 								    	<form:option value="pending">Pending</form:option>
 								    	<form:option value="partially">Partially delivered</form:option>

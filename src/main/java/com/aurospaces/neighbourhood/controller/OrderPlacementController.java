@@ -124,7 +124,7 @@ public class OrderPlacementController {
 	}
 	
 	 @RequestMapping(value = "/orederLists")
-		public @ResponseBody String orederLists(@RequestParam("dealerId") String dealerId,HttpServletRequest request, HttpSession session) {
+		public @ResponseBody String orederLists(@RequestParam("dealerId") String dealerId,@RequestParam("status") String status,HttpServletRequest request, HttpSession session) {
 			System.out.println("orederLists page...");
 			List<Map<String, Object>> listOrderBeans = null;
 			JSONObject jsonObj = new JSONObject();
@@ -133,7 +133,7 @@ public class OrderPlacementController {
 			boolean delete = false;
 			try {
 
-				listOrderBeans = listDao.getOrderList(dealerId);
+				listOrderBeans = listDao.getOrdersList(dealerId,status);
 				objectMapper = new ObjectMapper();
 				if (listOrderBeans != null && listOrderBeans.size() > 0) {
 
