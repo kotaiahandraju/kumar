@@ -45,7 +45,7 @@ table#dependent_table tbody tr td:first-child::before {
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="#">Home</a></li>
-               <li>Product Category </li>
+               <li>Orders List </li>
             </ol>
             <div class="clearfix"></div>
         <div class="container-fluid" id="lpoMain">
@@ -55,7 +55,7 @@ table#dependent_table tbody tr td:first-child::before {
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Add Product Category</h4>
+                        <h4>Select Dealer</h4>
                         <div class="options"></div>
                     </div>
 	                <form:form  modelAttribute="orderLstForm"   class="form-horizontal" method="post" >
@@ -86,18 +86,18 @@ table#dependent_table tbody tr td:first-child::before {
               <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h4>Order List</h4>
+                            <h4>Orders List</h4>
                             <div class="options">   
                                 <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
                             </div>
                         </div>
                         <div class="panel-body collapse in">
-                        <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
+                   <!--      <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label> -->
                         <div class="table-responsive" id="tableId" >
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
                                 	<tr>
-                                		<th>Dealer Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th>
+                                		<th>Business Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th>
                                 	</tr>
                                 </thead>
                                 <tbody></tbody>
@@ -117,6 +117,7 @@ table#dependent_table tbody tr td:first-child::before {
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		        <h4 class="modal-title" id="exampleModalLabel"><span id="dealer_name_str"></span></h4>
+		      <span class="col-md-4" id="dname">as</span>  <span class="col-md-4" id="kumarid">as</span>  <span class="col-md-4" id="korderdDate">as</span><br>
 		      </div>
 		      <div class="modal-body" id="modal_body">
 		      
@@ -135,13 +136,13 @@ table#dependent_table tbody tr td:first-child::before {
 /* $(document).ready(function() {
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 }); */
-// var lstOrders =${allOrders1};
+ var lstOrders =${all_orders};
 
 // console.log(lstOrders);
 
-// if(lstOrders != ""){
-// 	showTableData(lstOrders);
-// }
+ if(lstOrders != ""){
+ 	showTableData(lstOrders);
+ }
 
 $(function() {
 // 	var listOrders=JSON.parse(lstOrders);
@@ -168,7 +169,7 @@ var damageId = 0;
 // var serviceUnitArray1 ={};
 var data = {};
 
-
+var orderedDate =0;
 function showTableData(response){
 	serviceUnitArray ={};
 	//serviceUnitArray1 ={};
@@ -176,12 +177,12 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Dealer Name</th><th>Order ID</th><th>Created On </th><th>Total Items</th><th>Delivered Status</th><th></th></tr>'+
+    	'<thead><tr><th>Business Name</th><th>Order ID</th><th>Ordered Date </th><th>Total Items</th><th>Delivered Status</th><th>View</th></tr>'+
     	"</thead><tbody></tbody></table>"; 
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		
-		
+		orderedDate= orderObj.created_on;
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.dealerName+"'>" + orderObj.dealerName + "</td>"
@@ -189,7 +190,7 @@ function showTableData(response){
 			+ "<td title='"+orderObj.created_on+"'>" + orderObj.created_on + "</td>"
 			+ "<td title='"+orderObj.total_quantity+"'>" + orderObj.total_quantity + "</td>"
 			+ "<td title='"+orderObj.completed_status+"'>" + orderObj.completed_status + "</td>"
-			+ '<td><a href="" type="button" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">Display Items</a></td>'
+			+ '<td><a href="" type="button" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">View Order</a></td>'
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
@@ -228,35 +229,61 @@ function displayDealerOrderItems(response){
 	$('#modal_body').html('');
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Dealer Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th><th colspan="2"></th></tr>'+
+    	'<thead><tr><th>Business Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Ordered Quantity</th><th>Pending Quantity</th><th colspan="2">Order Status</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#modal_body").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		
+		  $('#dname').text(orderObj.dealerName);
+		  $('#kumarid').text(orderObj.orderId);
+		  $('#korderdDate').text(orderObj.created_time );
+		  
+		
 		
 		serviceUnitArray1[orderObj.id] = orderObj;
 		if(i==0)
-			$("#dealer_name_str").html(orderObj.dealerName+"\'s order("+orderObj.orderId+") items");
+			/* $("#dealer_name_str").html(orderObj.dealerName+"\'s order("+orderObj.orderId+") items"); */
 		var text_field_str = '<td colspan="2" align="center">Completed</td>';
 		if(typeof orderObj.pending_qty != "undefined"){
 				var int_val = parseInt(orderObj.pending_qty);
 				if(int_val>0){
-					text_field_str = "<td><input type='text' id='qty"+orderObj.id+"' /></td>"
-									+"<td><input type='button' id='deliverable_submit_btn' value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>";
+					text_field_str = "<td><input type='text'  maxlength ='3' class='mobile' id='qty"+orderObj.id+"' /></td>"
+									+"<td><input type='button'   value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>";
 				}
 		}
-		var tblRow ="<tr>"
+		var tblRow ="<tr id='row"+orderObj.id+"'>"
 			+ "<td title='"+orderObj.dealerName+"'>" + orderObj.dealerName + "</td>"
 			+ "<td title='"+orderObj.categeory+"'>" + orderObj.categeory + "</td>"
 			+ "<td title='"+orderObj.subCategeory+"'>" + orderObj.subCategeory + "</td>"
-			+ "<td title='"+orderObj.itemCode+"'>" + orderObj.itemCode + "</td>"
+			+ "<td title='"+orderObj.itemcode+"'>" + orderObj.itemcode + "</td>"
 			+ "<td title='"+orderObj.itemdescrption+"'>" + orderObj.itemdescrption + "</td>"
-			+ "<td title='"+orderObj.pending_qty+"'>" + orderObj.pending_qty + "</td>"
+			+ "<td title='"+orderObj.quantity+"'>" + orderObj.quantity + "</td>"
+			+ "<td id='pending_qty"+orderObj.id+"' title='"+orderObj.pending_qty+"'>" + orderObj.pending_qty + "</td>"
 			+ text_field_str
 			//+ "<td>"+text_field_str+"</td>"
 			//+ "<td><input type='button' id='deliverable_submit_btn' value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>"
 			+"</tr>";
 		$(tblRow).appendTo("#modal_body tbody");
+		
+		
+		
+		$(".mobile").keydown(function (e) {
+		    // Allow: backspace, delete, tab, escape, enter and .
+		    if ($.inArray(e.keyCode, [8, 9, 27, 13, 110]) !== -1 ||
+		         // Allow: Ctrl+A, Command+A
+		        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+		         // Allow: home, end, left, right, down, up
+		        (e.keyCode >= 35 && e.keyCode <= 40)) {
+		             // let it happen, don't do anything
+		             return;
+		    }
+		    // Ensure that it is a number and stop the keypress
+		    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+		        e.preventDefault();
+		    }
+		});
+		
+		
 	});
 	
 	//$('#orderListModal').modal('show');
@@ -349,6 +376,15 @@ function saveDeliverableItemsData(objId){
              if(typeof msg != "undefined"){
             	 	if(msg=="success"){
             	 		alert("Data saved successfully");
+            	 		serviceUnitArray1[objId].pending_qty = balance_qty;
+            	 		$("#pending_qty"+objId).html(balance_qty);
+            	 		if(balance_qty==0){
+            	 			//$("#modal_body tbody ")
+            	 			$('#row'+objId).find("td").last().remove();
+            	 			$('#row'+objId).find("td").last().remove();
+            	 			var new_td = '<td colspan="2" align="center">Completed</td>';
+            	 			$(new_td).appendTo($('#row'+objId));
+            	 		}
             	 	}else{
             	 		alert("Some problem occured! Please try again.");
             	 	}
@@ -363,6 +399,6 @@ function saveDeliverableItemsData(objId){
 }
 
 	
-$("#pageName").text("Order List");
+$("#pageName").text("Delivery Status");
 $(".orderslist").addClass("active");
 </script>

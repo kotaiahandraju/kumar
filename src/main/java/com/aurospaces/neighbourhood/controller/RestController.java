@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -436,7 +437,7 @@ public class RestController {
 	@RequestMapping(value = "rest/delarpaymentbranches")
 	public @ResponseBody String delarpaymentbranches(@RequestBody PaymentBean paymentBean) {
       JSONObject jsonObj = new JSONObject();
-      List<Map<String,Object>>  listOrderBeans = null;
+      List<PaymentBean>  listOrderBeans = null;
 		try {
 			
 			listOrderBeans = paymentDao.getdelarpaymentdetailsBranches(paymentBean);
@@ -526,6 +527,52 @@ public class RestController {
 			
 		}catch (Exception e) {
 			e.printStackTrace();
+		}
+		return String.valueOf(jsonObject);
+	}
+	
+	@RequestMapping(value = "rest/dealerpaymentstatus")
+	public @ResponseBody String dealerpaymentstatus(@RequestBody PaymentBean paymentBean) {
+      JSONObject jsonObj = new JSONObject();
+		try {
+			
+			paymentDao.dealerpaymentstatusupdate(paymentBean);
+			jsonObj.put("msg", "success");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+			jsonObj.put("msg", "failed");
+		}
+		return String.valueOf(jsonObj);
+	}
+	
+	@RequestMapping(value = "rest/dealersList") 
+	public @ResponseBody  String populateDealers(@RequestBody PaymentBean paymentBean, HttpSession session) {
+		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
+		JSONObject jsonObject =new JSONObject();
+		try {
+			
+			String sSql = "select id ,CONCAT(name, ' ( ', businessName,' )') AS   name from kumar_employee where roleId='3' and branch_id='"+paymentBean.getBranchId()+"' ";
+			List<EmployeeBean> list = ordersListDao.populateDealers(sSql);
+			jsonObject.put("dealersList", list);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return String.valueOf(jsonObject);
+	}
+	@RequestMapping(value = "rest/orderslist") 
+	public @ResponseBody  String orderslist(@RequestBody OrdersListBean ordersListBean, HttpSession session) {
+		List<Map<String, Object>> listOrderBeans = null;
+		JSONObject jsonObject =new JSONObject();
+		try {
+			listOrderBeans = ordersListDao.getOrderListForMobile(ordersListBean.getDelerId());
+			jsonObject.put("orderslist", listOrderBeans);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 		}
 		return String.valueOf(jsonObject);
 	}

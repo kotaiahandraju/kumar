@@ -92,7 +92,7 @@ table#dependent_table tbody tr td:first-child::before {
                             </div>
                         </div>
                         <div class="panel-body collapse in">
-                        <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
+                        <!-- <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label> -->
                         <div class="table-responsive" id="tableId" >
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
@@ -177,7 +177,7 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Order ID</th><th>Created On </th><th>Total Items</th><th>Delivered Status</th><th></th></tr>'+
+    	'<thead><tr><th>Order ID</th><th>Ordered Date </th><th>Total Items</th><th>Order Status</th><th>View</th></tr>'+
     	"</thead><tbody></tbody></table>"; 
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -190,7 +190,7 @@ function showTableData(response){
 			+ "<td title='"+orderObj.created_on+"'>" + orderObj.created_on + "</td>"
 			+ "<td title='"+orderObj.total_quantity+"'>" + orderObj.total_quantity + "</td>"
 			+ "<td title='"+orderObj.completed_status+"'>" + orderObj.completed_status + "</td>"
-			+ '<td><a href="" type="button" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">Display Items</a></td>'
+			+ '<td><a href="" type="button" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">View Order</a></td>'
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
@@ -242,7 +242,7 @@ function displayDealerOrderItems(response){
 		if(typeof orderObj.pending_qty != "undefined"){
 			var int_val = parseInt(orderObj.pending_qty);
 			if(int_val>0){
-				text_field_str = '<td align="center">Not Completed</td>';
+				text_field_str = '<td align="center">Pending</td>';
 			}
 	}
 		var tblRow ="<tr>"
@@ -362,6 +362,6 @@ function saveDeliverableItemsData(objId){
 }
 
 	
-$("#pageName").text("Order List");
-$(".orderslist").addClass("active");
+$("#pageName").text("My Orders");
+$(".ordersList").addClass("active");
 </script>

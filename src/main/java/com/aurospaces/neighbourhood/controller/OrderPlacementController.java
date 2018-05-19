@@ -159,23 +159,20 @@ public class OrderPlacementController {
 	
 
 	@RequestMapping(value="/orderslist")
-	public String orderslist(@ModelAttribute("orderLstForm") EmployeeBean employeeBean,HttpServletRequest request){
+	public String orderslist(@ModelAttribute("orderLstForm") EmployeeBean employeeBean,HttpServletRequest request,HttpSession session){
 		ObjectMapper objectMapper = null;
 		String sJson = null;
-		List<ItemsBean> listOrderBeans = null;
+		List<Map<String,Object>> all_orders = null;
 		try{
-			/*System.out.println("orderPlacementorderPlacementorderPlacement");
-			listOrderBeans = itemsDao.getItems("1");
-			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			all_orders = listDao.getAllOrders(objuserBean.getBranchId());
+			if (all_orders != null && all_orders.size() > 0) {
 				objectMapper = new ObjectMapper();
-				sJson = objectMapper.writeValueAsString(listOrderBeans);
-				request.setAttribute("allOrders1", sJson);
-					System.out.println(sJson);
+				sJson = objectMapper.writeValueAsString(all_orders);
+				request.setAttribute("all_orders", sJson);
 			} else {
-				objectMapper = new ObjectMapper();
-				sJson = objectMapper.writeValueAsString(listOrderBeans);
-				request.setAttribute("allOrders1", "''");
-			}*/
+				request.setAttribute("all_orders", "''");
+			}
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -192,7 +189,7 @@ public class OrderPlacementController {
 			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
 			
 			
-			String sSql = "select id ,name from kumar_employee where roleId='3' and branch_id='"+objuserBean.getBranchId()+"' ";
+			String sSql = "select id ,CONCAT(name, ' ( ', businessName,' )') AS   name from kumar_employee where roleId='3' and branch_id='"+objuserBean.getBranchId()+"' ";
 			List<EmployeeBean> list = listDao.populateDealers(sSql);
 			for (EmployeeBean bean : list) {
 				statesMap.put(bean.getId(), bean.getName());

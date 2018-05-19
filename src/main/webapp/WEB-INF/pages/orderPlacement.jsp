@@ -44,7 +44,7 @@ table#dependent_table tbody tr td:first-child::before {
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
     	<li><a href="dashboard">Home</a></li>
-		<li>Order Placing</li>
+		<li>Order Product</li>
 	</ol>
 	<div class="clearfix"></div>
 	<div class="container-fluid">
@@ -52,7 +52,7 @@ table#dependent_table tbody tr td:first-child::before {
 			<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4>Order Placing</h4>
+						<h4>Order Product</h4>
 						<div class="options">   
 							<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
 						</div>
@@ -62,7 +62,7 @@ table#dependent_table tbody tr td:first-child::before {
 						<table class="table "
 							id="example">
 							<thead>
-								<tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>quantity</td>
+								<tr><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>quantity</td>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -71,7 +71,7 @@ table#dependent_table tbody tr td:first-child::before {
 			<br>
 					<div class="pull-right">
 					<span class="btn btn-warning" onclick="addCart()"><i class="fa fa-shopping-cart"></i> ADD TO CART</span> 
-					<span class="btn btn-danger" onclick="orderNow()"><i class="fa fa-bolt" aria-hidden="true"></i> ORDER PLACING</span>
+					<span class="btn btn-danger" onclick="orderNow()"><!-- <i class="fa fa-bolt" aria-hidden="true"></i> -->PLACE ORDER</span>
 					</div>
 				</div>
 				</div>
@@ -109,14 +109,14 @@ function showTableData(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
-    	'<thead><tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>Quantity</td></tr>'+
+    	'<thead><tr><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>Quantity</td></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		serviceUnitArray[orderObj.id] = orderObj;
-		var quantity ="<input type='text' name='quantity[]' class='numericOnly' id='"+orderObj.id+"quantity' />"
+		var quantity ="<input type='text' name='quantity[]' maxlength='3' class='numericOnly' id='"+orderObj.id+"quantity' />"
 		var tblRow = "<tr>"
-				+ "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>"
+				/* + "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>" */
 				+ "<td title='"+orderObj.productIdName+"'>"	+ orderObj.productIdName + "</td>"
 				+ "<td title='"+orderObj.itemcode+"'>" + orderObj.itemcode+ "</td>" 
 				+ "<td title='"+orderObj.itemdescrption+"'>"+ orderObj.itemdescrption + "</td>"
@@ -211,6 +211,6 @@ function orderNow() {
 	     
 
 
-$("#pageName").text("Order Placing");
+$("#pageName").text("Order Product");
 $(".orderplacing").addClass("active"); 
 </script>
