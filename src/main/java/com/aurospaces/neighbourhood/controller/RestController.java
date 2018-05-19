@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -545,5 +546,21 @@ public class RestController {
 		return String.valueOf(jsonObj);
 	}
 	
+	@RequestMapping(value = "rest/dealersList") 
+	public @ResponseBody  String populateDealers(@RequestBody PaymentBean paymentBean, HttpSession session) {
+		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
+		JSONObject jsonObject =new JSONObject();
+		try {
+			
+			String sSql = "select id ,CONCAT(name, ' ( ', businessName,' )') AS   name from kumar_employee where roleId='3' and branch_id='"+paymentBean.getBranchId()+"' ";
+			List<EmployeeBean> list = ordersListDao.populateDealers(sSql);
+			jsonObject.put("dealersList", list);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return String.valueOf(jsonObject);
+	}
 }
 	
