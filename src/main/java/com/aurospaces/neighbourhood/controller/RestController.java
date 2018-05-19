@@ -567,7 +567,7 @@ public class RestController {
 		List<Map<String, Object>> listOrderBeans = null;
 		JSONObject jsonObject =new JSONObject();
 		try {
-			listOrderBeans = ordersListDao.getOrderListForMobile(ordersListBean.getDelerId());
+			listOrderBeans = ordersListDao.getOrderListAllForMobile(ordersListBean.getBranchId());
 			jsonObject.put("orderslist", listOrderBeans);
 
 		} catch (Exception e) {
@@ -576,5 +576,20 @@ public class RestController {
 		}
 		return String.valueOf(jsonObject);
 	}
+	@RequestMapping(value = "rest/orderslistbasedealer") 
+	public @ResponseBody  String orderslistbasedealer(@RequestBody OrdersListBean ordersListBean, HttpSession session) {
+		List<Map<String, Object>> listOrderBeans = null;
+		JSONObject jsonObject =new JSONObject();
+		try {
+			listOrderBeans = ordersListDao.getOrderListDealerForMobile(ordersListBean.getDelerId());
+			jsonObject.put("orderslist", listOrderBeans);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return String.valueOf(jsonObject);
+	}
+	
 }
 	
