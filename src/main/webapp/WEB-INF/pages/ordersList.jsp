@@ -243,7 +243,7 @@ function displayDealerOrderItems(response){
 	$('#modal_body').html('');
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Business Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Ordered Quantity</th><th>Pending Quantity</th><th colspan="2">Order Status</th></tr>'+
+    	'<thead><tr><th>Business Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Ordered Quantity</th><th>Pending Quantity</th><th colspan="2">Status</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#modal_body").html(tableHead);
 	$.each(response,function(i, orderObj) {
