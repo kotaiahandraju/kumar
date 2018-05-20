@@ -244,7 +244,7 @@ public class OrderPlacementController {
 			//generate invoice number
 			data.put("invoice_no", "eee");
 			int bal_qty = 1;
-			if(StringUtils.isNotBlank("balance_qty")){
+			if(StringUtils.isNotBlank(balance_qty)){
 				bal_qty = Integer.parseInt(balance_qty);
 			}
 			boolean success = listDao.saveInvoice(data,bal_qty);

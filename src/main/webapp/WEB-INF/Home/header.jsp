@@ -319,7 +319,7 @@ function cartCount(){
             <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-dashboard"></i>
              <span>Dashboard</span></a></li>&emsp;
                <c:if test="${roleId=='1' }">
-               <li class="employee"><a href="${baseurl }/admin/branchHome"><i class="fa fa-university"></i> <span>Branch</span></a></li>
+               <li class="branch"><a href="${baseurl }/admin/branchHome"><i class="fa fa-university"></i> <span>Branch</span></a></li>
                 <li class="productType"><a href="${baseurl }/admin/producttype"><i class="fa fa-clone"></i>
 
  <span>Product Category</span></a></li>&emsp;
