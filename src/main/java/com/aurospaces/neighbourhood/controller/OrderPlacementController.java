@@ -225,6 +225,26 @@ public class OrderPlacementController {
 		return jsonObj.toString();
 	}
 	
+	@RequestMapping("/getDeliveredItemsHistory")
+	public @ResponseBody String getDeliveredItemsHistory(HttpServletRequest request,HttpSession session) {
+		JSONObject jsonObj = new JSONObject();
+		try {
+			
+			String order_id = request.getParameter("order_id");
+			List<Map<String,Object>> itemsList = listDao.getDeliveredItemsHistory(order_id);
+			if(itemsList.size()>0){
+				jsonObj.put("itemsList", itemsList);
+			}else{
+				jsonObj.put("itemsList", "");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return jsonObj.toString();
+	}
+	
 	@RequestMapping("/saveDispatchedItemsData")
 	public @ResponseBody String saveDispatchedItemsData(HttpServletRequest request,HttpSession session) {
 		JSONObject jsonObj = new JSONObject();
