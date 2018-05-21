@@ -2948,7 +2948,7 @@ button.close {
 .nav > li > a {
   position: relative;
   display: block;
-  padding: 10px 5px;
+  padding: 10px 15px;
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
@@ -10412,7 +10412,7 @@ body.collapse-leftbar #search.keep-open form button[type="submit"] {
 @media (min-width: 768px) {
   .navbar-nav {
     float: left;
-    margin: 0;
+    margin: 0 15px;
   }
   .navbar-nav > li {
     float: left;

@@ -49,7 +49,7 @@ z-index:1;
     font-size: 15px;
     font-weight: 600;
     height: 32px;
-    line-height: 32px;
+    line-height: 26px;
     overflow: hidden;
     outline-width: 1px;
     padding: 0;

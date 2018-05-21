@@ -154,9 +154,16 @@ focusedform .lfotter {
 position:relative;
 }
 
- control-label {
+ .control-label {
  font-weight:normal;
- }
+font-family: 'Source Sans Pro', 'Segoe UI', 'Droid Sans', Tahoma, Arial, sans-serif;
+font-size: 14px;
+ }}
+ .panel-heading {
+    padding: 1px 15px !important; }
+    .dr {
+    margin-top:54px;
+    }
 </style>
    
 
@@ -180,7 +187,7 @@ position:relative;
  </div>
 </div>
 <div class="clearfix"></div>
-            <div class="col-md-12 col-sm-12"><br><br>
+            <div class="col-md-12 col-sm-12 dr">
                <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h4>Dealer Registration</h4>

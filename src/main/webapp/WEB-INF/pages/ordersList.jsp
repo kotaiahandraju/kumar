@@ -110,14 +110,17 @@ table#dependent_table tbody tr td:first-child::before {
 
            
             </div>
-            
-<div class="modal fade" id="orderListModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <input type="submit" id="submitButton"/>
+
+
+  
+<div class="modal fade" id="orderListModal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog"> 
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		        <h4 class="modal-title" id="exampleModalLabel"><span id="dealer_name_str"></span></h4>
-		      <span class="col-md-4" id="dname">as</span>  <span class="col-md-4" id="kumarid">as</span>  <span class="col-md-4" id="korderdDate">as</span><br>
+		      <span class="col-md-4" id="dname">as</span>  <span class="col-md-4" id="kumarid">as</span>  <span class="col-md-3" id="korderdDate">as</span><br>
 		      </div>
 		      <div class="modal-body" id="modal_body">
 		      
@@ -133,6 +136,11 @@ table#dependent_table tbody tr td:first-child::before {
 <!-- <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script> -->
 <script type="text/javascript">
 
+$(document).ready(function(){
+    $("#submitButton").click(function(){
+        $("#orderListModal").modal();
+    });
+});
 /* $(document).ready(function() {
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 }); */
@@ -190,7 +198,7 @@ function showTableData(response){
 			+ "<td title='"+orderObj.created_on+"'>" + orderObj.created_on + "</td>"
 			+ "<td title='"+orderObj.total_quantity+"'>" + orderObj.total_quantity + "</td>"
 			+ "<td title='"+orderObj.completed_status+"'>" + orderObj.completed_status + "</td>"
-			+ '<td><a href="" type="button" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">View Order</a></td>'
+			+ '<td><a   href="" type="button" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">View Order</a></td>'
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
@@ -398,7 +406,6 @@ function saveDeliverableItemsData(objId){
 	});
 }
 
-	
 $("#pageName").text("Delivery Status");
 $(".orderslist").addClass("active");
 </script>
