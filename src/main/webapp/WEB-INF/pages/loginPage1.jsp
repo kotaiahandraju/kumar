@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <title>KPOMS</title>
-   <!-- <link rel="shortcut icon" href="img/logo.jpeg"/>-->
+    <link rel="shortcut icon" href="img/logo1.jpeg"/> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
