@@ -80,6 +80,32 @@ padding: 3px 14px 0px 11px;
 		</div>
                     
 	</div> <!-- container -->
+	
+	
+	  <!-- Modal -->
+  <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div>
+        <div class="modal-body">
+          <p>Some text in the modal.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+	
+	
+	
+	
 <!-- 	model class -->
 	<div class="container">
  <h2></h2>
@@ -107,8 +133,34 @@ padding: 3px 14px 0px 11px;
       
     </div>
   </div>
+  <!-- <div class="modal fade" id="ordersListModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog"> 
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		      </div>
+		      <div class="modal-body" id="modal_body">
+				      
+		      </div>
+		      <div class="modal-footer">
+		       <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+</div> -->
+
+
+
+ 
+
+
+  </div>
   
-</div>
+  
+  
+
+
+
 
 <script type="text/javascript">
 var listOrders1 =${allOrders1};
@@ -127,10 +179,10 @@ function showTableData(response){
 	var table=$('#tableId').html('');
 	serviceUnitArray = {};
 	var protectType = null;
-	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
+	var tableHeadm = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
     	'<thead><tr><th> Name</th><th>Business Name</th><th>Address</th><th>city</th><th>GST Number</th><th>Phone Number</th><th>Branch</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
-	$("#tableId").html(tableHead);
+	$("#tableId").html(tableHeadm);
 	$.each(response,function(i, orderObj) {
 		
 		if(orderObj.status == "1"){
@@ -147,7 +199,8 @@ function showTableData(response){
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.name+"'>" + orderObj.name + "</td>"
-			+ "<td title='"+orderObj.businessName+"'>" + orderObj.businessName + "</td>"
+			+ '<td><a href="" type="button" onclick="getDealerDetails();">'+orderObj.businessName+'</a></td>'
+			/* + "<td title='"+orderObj.businessName+"'>" + orderObj.businessName + "</td>" */
 			+ "<td title='"+orderObj.address+"'>" + orderObj.address + "</td>"
 			+ "<td title='"+orderObj.city+"'>" + orderObj.city + "</td>"
 			/* + "<td title='"+orderObj.pincode+"'>" + orderObj.pincode + "</td>" */
@@ -285,6 +338,62 @@ function inactiveData() {
 				});
 	
 }
+
+function getDealerDetails(){
+	//$("#myModal").modal();
+	
+	 //displayDelerDetails(listOrders1);
+	  //$('#orderListModal').modal('toggle');
+		$('#myModal1').modal();
+	
+}
+
+
+function displayDelerDetails(response){
+	
+	var table=$('#modal_body').html('');
+	serviceUnitArray1 = {};
+	var protectType = null;
+	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
+    	'<thead><tr><th> Name</th><th>Business Name</th><th>Address</th><th>city</th><th>Pin Code</th><th>GST Number</th><th>Shoap Number</th><th>Phone Number</th><th>Email</th><th></th></tr>'+
+    	"</thead><tbody></tbody></table>";
+	$("#modal_body").html(tableHead);
+	$.each(response,function(i, orderObj) {
+		
+		if(orderObj.status == "1"){
+			var deleterow = "<a class='deactivate' onclick='deleteDealer("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
+		}else{  
+			var deleterow = "<a class='activate' onclick='deleteDealer("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
+		}
+		if(orderObj.confirm == "1"){
+			var confirm = "<a class='' >UsernameAssigned</i></a>"
+		}else{  
+			var confirm = "<a class='notAssigned' style='cursor:pointer; text-decoration:none; list-style:none;' onclick='dealerRegister("+ orderObj.id+ ")'>UsernameNotAssigned</a>"
+		}
+// 		var edit = "<a class='edit editIt' onclick='editEmpCreation("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
+		serviceUnitArray1[orderObj.id] = orderObj;
+		var tblRow ="<tr>"
+			+ "<td title='"+orderObj.name+"'>" + orderObj.name + "</td>"
+			+ "<td title='"+orderObj.businessName+"'>" + orderObj.businessName + "</td>"
+			+ "<td title='"+orderObj.address+"'>" + orderObj.address + "</td>"
+			+ "<td title='"+orderObj.city+"'>" + orderObj.city + "</td>"
+		    + "<td title='"+orderObj.pincode+"'>" + orderObj.pincode + "</td>" 
+			+ "<td title='"+orderObj.gstno+"'>" + orderObj.gstno + "</td>"
+		 	+ "<td title='"+orderObj.shop_phone+"'>" + orderObj.shop_phone + "</td>" 
+			+ "<td title='"+orderObj.phone_number+"'>" + orderObj.phone_number + "</td>"
+			+ "<td title='"+orderObj.email+"'>" + orderObj.email + "</td>" 
+			/* + "<td title='"+orderObj.branchname+"'>" + orderObj.branchname + "</td>" */
+			/* + "<td title='"+orderObj.description+"'>" + orderObj.description + "</td>" */
+			
+			/* + "<td style='text-align: center;white-space: nowrap;'>" +confirm + "&nbsp;&nbsp;" + deleterow + "</td>" */
+			+"</tr>";
+		$(tblRow).appendTo("#modal_body tbody");
+		
+	});
+	
+}
+
+
 
 
 
