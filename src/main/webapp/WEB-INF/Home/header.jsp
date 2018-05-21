@@ -316,7 +316,7 @@ function cartCount(){
 
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
         <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/img/klogo1.png" class="img-responsive" style="    width: 132px;"></a>
+            <a class="navbar-brand" href="dashboard"><img src="${baseurl }/img/klogo1.png" class="img-responsive" style="    width: 132px;"></a>
             <span class="oms">Order Management System</span>
             <div class="clearfix"></div>
         </div>

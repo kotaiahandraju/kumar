@@ -132,7 +132,7 @@ public class LoginController {
 	 }
 	
 	@RequestMapping(value = "/forgepasssword",method=RequestMethod.POST)
-		public String LoginHome(ModelMap model, HttpServletRequest request,HttpSession session) throws IOException
+		public String LoginHome(ModelMap model, HttpServletRequest request,HttpSession session,RedirectAttributes redir) throws IOException
 	{
 			String mobilenumber =request.getParameter("mobile");
 			
@@ -144,16 +144,21 @@ public class LoginController {
 				
 				SendSMS.sendSMS(msg, mobilenumber, objContext);
 				
+				redir.addFlashAttribute("msg", "Password Sent Your Registered Mobile Number");
+				redir.addFlashAttribute("cssMsg", "warning");
+				
 			}
 			else
 			{
 				System.out.println("employee not registered");
+				redir.addFlashAttribute("msg", "Employee Mobile Number Not Registered");
+				redir.addFlashAttribute("cssMsg", "warning");
 				
 			}
 			
 			
 			
 		 
-			return "loginPage1";
+			return "redirect:LoginHome";
 		}
 }
