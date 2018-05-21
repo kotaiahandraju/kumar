@@ -257,10 +257,12 @@ public class OrderPlacementController {
 			String product_id = request.getParameter("product_id");
 			String quantity = request.getParameter("quantity");
 			String balance_qty = request.getParameter("balance_qty");
+			String nullify_qty = request.getParameter("nullify_qty");
 			Map<String,String> data = new HashMap<String,String>();
 			data.put("order_id", order_id);
 			data.put("product_id", product_id);
 			data.put("quantity", quantity);
+			data.put("nullified_qty", StringUtils.isNotBlank(nullify_qty)?nullify_qty:"0");
 			//generate invoice number
 			data.put("invoice_no", "eee");
 			int bal_qty = 1;

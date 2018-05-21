@@ -142,14 +142,14 @@ public List<Map<String,Object>> getValidateOTP(String mobileNo){
 public boolean saveInvoice(Map<String,String> invoiceData,int balance_qty){
 	jdbcTemplate = custom.getJdbcTemplate();
 	try{
-		String sql ="insert into invoice(created_time,updated_time,order_id,invoice_no,dispatched_items_quantity,product_id) "
+		String sql ="insert into invoice(created_time,updated_time,order_id,invoice_no,dispatched_items_quantity,nullified_qty,product_id) "
 				+" values('"+new java.sql.Timestamp(new DateTime().getMillis())+"','"+new java.sql.Timestamp(new DateTime().getMillis())+"',"
-				+" '"+invoiceData.get("order_id")+"','"+invoiceData.get("invoice_no")+"','"+invoiceData.get("quantity")+"','"+invoiceData.get("product_id")+"')";
+				+" '"+invoiceData.get("order_id")+"','"+invoiceData.get("invoice_no")+"',"+invoiceData.get("quantity")+","+invoiceData.get("nullified_qty")+",'"+invoiceData.get("product_id")+"')";
 		int inserted_count = jdbcTemplate.update(sql);
 		if(inserted_count==1)
 		{
 			if(balance_qty==0){
-				//update status
+				//update status in orders_list table
 				String qry = "update orders_list set status = '0' where orderId = '"+invoiceData.get("order_id")+"'  and productId = '"+invoiceData.get("product_id")+"'";
 				int updated_count = jdbcTemplate.update(qry);
 				if(updated_count==1){
