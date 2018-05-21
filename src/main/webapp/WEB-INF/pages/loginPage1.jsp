@@ -153,7 +153,7 @@ window.setTimeout(function() {
  <img  src="img/klogo1.png"/><span class="oms">Order Management System</span>
  </div>
  <div class="col-md-6 col-xs-4 pull-right">
- <p class="plogin" align="right"><a href="#">Join Now </a></p>
+ <p class="plogin" align="right"><a href="dealerregistration">Join Now </a></p>
  </div>
 </div>
 <div class="clearfix"></div>
