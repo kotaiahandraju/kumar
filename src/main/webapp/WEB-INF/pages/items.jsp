@@ -224,8 +224,10 @@ table#dependent_table tbody tr td:first-child::before {
 			$(tblRow).appendTo("#tableId table tbody");
 
 		});
+	
 		if (isClick == 'Yes')
 			$('.datatables').dataTable();
+		
 	}
 
 	var prodcutName = '';

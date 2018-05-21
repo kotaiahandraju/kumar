@@ -2948,7 +2948,7 @@ button.close {
 .nav > li > a {
   position: relative;
   display: block;
-  padding: 10px 5px;
+  padding: 10px 15px;
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
@@ -8908,8 +8908,9 @@ footer #back-to-top {
   }
 }
 .focusedform {
-  background: #e6e7e8 url(../img/bbg.jpg);
+  background-image:  url("../img/bglogin.jpg");
   padding: 0;
+  background-size:cover;
 }
 .focusedform .panel {
   width: 400px;
@@ -8922,7 +8923,7 @@ footer #back-to-top {
 }
 .focusedform .verticalcenter {
   position: absolute;
-  top: 42%;
+  top: 50%;
   left: 50%;
   margin-top: -186px;
   margin-left: -200px;
@@ -10411,7 +10412,7 @@ body.collapse-leftbar #search.keep-open form button[type="submit"] {
 @media (min-width: 768px) {
   .navbar-nav {
     float: left;
-    margin: 0;
+    margin: 0 15px;
   }
   .navbar-nav > li {
     float: left;

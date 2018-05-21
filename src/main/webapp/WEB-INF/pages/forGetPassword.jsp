@@ -33,6 +33,7 @@ background:#293f4b;
 height:auto;
 left:0;
 right:0;
+top:0;
 position:fixed;
 z-index:1;
 }
@@ -69,9 +70,10 @@ padding:5px 15px;
 list-style:none;
 text-decoration:none;
 }
-.lfotter {
+ .lfotter {
 position: fixed;
     left: 0;
+    right:0;
     bottom: 0;
     width: 100%;
     background-color: #293f4b;
@@ -83,13 +85,21 @@ position: fixed;
 color:#fff;
 font-size:24px;
 }
-.lis {
-list-style:none;
-text-decoration:none !important;
+.forgotp {
+padding:50px;
+margin:0 150px;
 }
-.pb {
-    background: rgba(255,255,255,0.7) !important;
-    padding: 30px 40px !important;
+.forgotp h1 {
+font-size: 32px;
+    line-height: 40px;
+    font-weight: 400;
+    color: rgba(0,0,0,0.9);
+    padding: 32px 0 8px;
+    font-weight: 400;
+}
+.forgote {
+padding-left:0px;
+padding-right:0px;
 }
 .alert-success, .alert-warning, .alert-danger{color: white !important;}
 .alert-success{background-color: #4CAF50 !important;}
@@ -101,39 +111,6 @@ text-decoration:none !important;
 
 .default-class::-webkit-input-placeholder {color: #e73d4a !important;}
 .default-class::-moz-placeholder {color: #e73d4a !important;}
-@media only screen and (max-width: 640px) and (min-width: 320px) {
-.loghead { 
-position:absolute;
-}
-focusedform .lfotter {
-position:relative;
-}
-
-.oms {
-font-size:12px;
-}
-.pb h4 {
-font-size:18px !important;
-}
-.focusedform .verticalcenter {
-margin-top:0px;
-top:27%;
-left:50%;
-}
-}
-@media only screen and (min-width:600px) and (max-width:640px){ 
-.focusedform .verticalcenter {
-margin-top:0px;
-top:47%;
-left:50%;
-}
-.oms {
-font-size:11px;
-}
-focusedform .lfotter {
-position:relative;
-}
-}
 </style>
 
 <script type='text/javascript' src='assets/js/jquery-1.10.2.min.js'></script>
@@ -147,74 +124,28 @@ window.setTimeout(function() {
 
 </head>
 
-<body class="focusedform">
+<body>
 <div class="col-md-12 loghead">
-  <div class="col-md-6 col-xs-6">
+  <div class="col-md-6">
  <img  src="img/klogo1.png"/><span class="oms">Order Management System</span>
  </div>
- <div class="col-md-6 col-xs-4 pull-right">
+ <div class="col-md-6 pull-right">
  <p class="plogin" align="right"><a href="#">Join Now </a></p>
  </div>
 </div>
 <div class="clearfix"></div>
-<div class="verticalcenter">
-<!-- 	<h1 align="center">KHAIBAR GAS</h1> -->
-	<div class="panel panel-primary">
-<!-- <div><img src="assets/img/logo.png" class="img-responsive"></div> -->
-		<form name='loginForm' action="loginAction" method='POST' class="form-horizontal" style="margin-bottom: 0px !important;">
-		<div class="panel-body pb">
-			<h4 class="text-center" style="margin-bottom: 25px; color:#006699 ; font-size:25px;">Order Management System</h4>
-			<c:if test="${not empty msg}">
-				<div class="col-sm-12" style="margin-bottom: -1.3em;">
-					<div class="form-group">
-						<div class="msgcss fadeIn animated alert alert-danger" style="text-align: center;">${msg}</div>
+<div class="container forgotp">
+<h1>Let's find your account</h1>
+<h4>Please enter your email or phone</h4>
+<p>Email or phone *</p>
+<div class="form-group">
+					<div class="col-md-3 forgote">
+						<input type="text" class="form-control validate" name="userName" id="username" placeholder="Enter Your Email or Phone Number">
 					</div>
-				</div>
-			</c:if>
-			<div class="form-group">
-				<div class="col-sm-12">
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-user"></i></span>
-						<input type="text" class="form-control validate" name="userName" id="username" placeholder="Username">
-					</div>
-				</div>
+				
 			</div>
-			<div class="form-group">
-				<div class="col-sm-12">
-					<div class="input-group">
-						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-						<input type="password" class="form-control validate" name="password" id="password" placeholder="Password">
-					</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-12">
-					
-							<input type="submit" value="Login" id="submit1" class="btn btn-primary form-control" style="width:100%;">
-							
-				</div>
-			</div>
-			<div align="center"><span><a class="lis" href="forgetpassword">Forgot Password? </a></span><br>
-		<span><a class="lis" href="dealerregistration"><span style="color:#000;">Not a Register?</span> Join Now </a></span></div>
-			<!-- <div class="clearfix">
-				<div class="pull-right"><label><input type="checkbox" style="margin-bottom: -5px;"> Remember Me</label></div>
-			</div> -->
-		</div>
-		<!-- <div class="panel-footer pb">
-		
-		
-=======
-		<div class="panel-footer">
-		<span><a href="dealerregistration">Sign Up </a></span>
-		<span><a href="">Forget Password </a></span>
->>>>>>> fc79d166cef53ee6e532ccfc9464b7c27dcc636e
-			<div class="pull-right">
-				<input type="reset" value="Reset" class="btn btn-default cancel"/>
-				<input type="submit" value="Login" id="submit1" class="btn btn-primary">
-			</div> 
-		</div>-->
-		</form>
-	</div>
+<div class="clearfix"></div>
+<div class=""><br><span class="btn btn-primary">Submit</span></div>
 </div>
 <div class="clearfix"></div>
 <div class="lfotter ">

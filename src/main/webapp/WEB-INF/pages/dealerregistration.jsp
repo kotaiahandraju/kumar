@@ -43,6 +43,127 @@ background:#fff; !important}
 [class*="panel-"].panel .panel-body .panel-footer{
 border-top: 0px solid #dddddd !important;
 }
+.loghead {
+padding:5px;
+background:#293f4b;
+height:auto;
+left:0;
+top:0;
+right:0;
+position:fixed;
+z-index:1;
+}
+.plogin  {
+    margin-top: 10px !important;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.7), inset 0 0 0 2px rgba(0,0,0,0), inset 0 0 0 3px rgba(0,0,0,0);
+    background-color: rgba(0,0,0,0);
+    border: 1px solid transparent;
+    border-radius: 2px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+    height: 32px;
+    line-height: 32px;
+    overflow: hidden;
+    outline-width: 1px;
+    padding: 0;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    transition-duration: 167ms;
+    transition-property: background-color, box-shadow, color;
+    transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+    vertical-align: middle;
+    z-index: 0;
+    float:right;
+}
+.plogin a {
+color:#fff !important;
+padding:5px 15px;
+list-style:none;
+text-decoration:none;
+}
+.lfotter {
+position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #293f4b;
+    color: white;
+    text-align: center;
+    padding:5px;
+}
+.oms {
+color:#fff;
+font-size:24px;
+}
+.lis {
+list-style:none;
+text-decoration:none !important;
+}
+.pb {
+    background: rgba(255,255,255,0.7) !important;
+    padding: 30px 40px !important;
+}
+@media only screen and (max-width: 640px) and (min-width: 320px) {
+.loghead { 
+position:absolute;
+}
+focusedform .lfotter {
+position:relative;
+}
+.form-horizontal .control-label {
+    text-align: right;
+    margin-bottom: 0;
+    padding-top: 7px;
+    font-weight:normal;
+  }
+.oms {
+font-size:12px;
+}
+.pb h4 {
+font-size:18px !important;
+}
+.focusedform .verticalcenter {
+margin-top:0px;
+top:27%;
+left:50%;
+}
+}
+@media (min-width: 768px) {
+  .form-horizontal .control-label {
+    text-align: right;
+    margin-bottom: 0;
+    padding-top: 7px;
+    font-weight:normal;
+  }
+}
+@media only screen and (min-width:600px) and (max-width:640px){ 
+.focusedform .verticalcenter {
+margin-top:0px;
+top:47%;
+left:50%;
+}
+.oms {
+font-size:11px;
+}
+focusedform .lfotter {
+position:relative;
+}
+
+ .control-label {
+ font-weight:normal;
+font-family: 'Source Sans Pro', 'Segoe UI', 'Droid Sans', Tahoma, Arial, sans-serif;
+font-size: 14px;
+ }}
+ .panel-heading {
+    padding: 1px 15px !important; }
+    .dr {
+    margin-top:54px;
+    }
 </style>
    
 
@@ -57,11 +178,27 @@ border-top: 0px solid #dddddd !important;
 			</div>
 		</div>
 	</c:if>
-
-            <div class="col-md-12 col-sm-12">
-                <div class="panel panel-primary">
-                 <h2 class="col-md-10" align="center">Dealer Registration</h2>
-                 <p class="col-md-2" style="padding-top:16px;font-size:16px;"><a href="LoginHome">Sign In</a></p>
+<div class="col-md-12 loghead">
+  <div class="col-md-6 col-xs-6">
+ <img  src="img/klogo1.png"/><span class="oms">Order Management System</span>
+ </div>
+ <div class="col-md-6 col-xs-4 pull-right">
+ <p class="plogin" align="right"><a href="LoginHome">Join Now </a></p>
+ </div>
+</div>
+<div class="clearfix"></div>
+            <div class="col-md-12 col-sm-12 dr">
+               <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4>Dealer Registration</h4>
+                            <!-- <div class="options">   
+                                <a href="" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
+                            </div> -->
+                        </div>
+                        <div class="panel-body collapse in">
+            
+                <!--  <h2 align="center">Dealer Registration</h2> -->
+                <!--  <p style="padding-top:16px;font-size:16px;"><a href="LoginHome">Sign In</a></p> -->
                 <div class="col-md-12">
                        
                    
@@ -70,7 +207,7 @@ border-top: 0px solid #dddddd !important;
                     <form:form class="form-horizontal" modelAttribute="delar" action="#" role="form" id="delar-form"  method="post">
                     <div class="row" id="moveTo">
                     
-                    <div class="panel-body">
+                   
                     <form:hidden path="id"/>
                     
                     		<div class="col-md-6">
@@ -191,31 +328,35 @@ border-top: 0px solid #dddddd !important;
                     		</div>
                     		</div>
                     		
-                    		</div>
+                    		
                     	
                     			
                     		
 					
-					</div>
-				       <div class="panel-footer">
+					
 					      	<div class="row">
 					      		<div class="col-sm-12">
-					      			<div class="btn-toolbar text-center">
+					      		<div class="col-sm-4"></div>
+					      			<div class="btn-toolbar text-center col-sm-4">
 						      			<input type="button"  id="submit2"  value="Submit" class="btn-primary btn" onclick="checkOTPValidate();" />
 <!-- 										<button id="submit4" class="btn-primary btn" onclick="checkOTPValidate();">Submit</button> -->
 						      			<input style="margin-left:20px;" type="reset" value="Reset" class="btn-danger btn cancel"/>
 					      			</div>
+					      			<div class="col-sm-4"></div>
 					      		</div>
 					      	</div>
-					      </div>
+					     </div>
 					      </form:form>
 					      </div>
-					      
+					      </div>
 					      
 			</div>
                     
                 </div>
-                
+            <div class="clearfix"></div><br><br>
+<div class="lfotter ">
+<p> All Rights Reserved </p>
+</div>    
      <div class="container">
   <!-- Trigger the modal with a button -->
 <!--   <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> -->

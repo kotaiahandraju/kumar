@@ -124,7 +124,7 @@ public class OrderPlacementController {
 	}
 	
 	 @RequestMapping(value = "/orederLists")
-		public @ResponseBody String orederLists(@RequestParam("dealerId") String dealerId,HttpServletRequest request, HttpSession session) {
+		public @ResponseBody String orederLists(@RequestParam("dealerId") String dealerId,@RequestParam("status") String status,HttpServletRequest request, HttpSession session) {
 			System.out.println("orederLists page...");
 			List<Map<String, Object>> listOrderBeans = null;
 			JSONObject jsonObj = new JSONObject();
@@ -133,7 +133,7 @@ public class OrderPlacementController {
 			boolean delete = false;
 			try {
 
-				listOrderBeans = listDao.getOrderList(dealerId);
+				listOrderBeans = listDao.getOrdersList(dealerId,status);
 				objectMapper = new ObjectMapper();
 				if (listOrderBeans != null && listOrderBeans.size() > 0) {
 
@@ -225,6 +225,26 @@ public class OrderPlacementController {
 		return jsonObj.toString();
 	}
 	
+	@RequestMapping("/getDeliveredItemsHistory")
+	public @ResponseBody String getDeliveredItemsHistory(HttpServletRequest request,HttpSession session) {
+		JSONObject jsonObj = new JSONObject();
+		try {
+			
+			String order_id = request.getParameter("order_id");
+			List<Map<String,Object>> itemsList = listDao.getDeliveredItemsHistory(order_id);
+			if(itemsList.size()>0){
+				jsonObj.put("itemsList", itemsList);
+			}else{
+				jsonObj.put("itemsList", "");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return jsonObj.toString();
+	}
+	
 	@RequestMapping("/saveDispatchedItemsData")
 	public @ResponseBody String saveDispatchedItemsData(HttpServletRequest request,HttpSession session) {
 		JSONObject jsonObj = new JSONObject();
@@ -244,7 +264,7 @@ public class OrderPlacementController {
 			//generate invoice number
 			data.put("invoice_no", "eee");
 			int bal_qty = 1;
-			if(StringUtils.isNotBlank("balance_qty")){
+			if(StringUtils.isNotBlank(balance_qty)){
 				bal_qty = Integer.parseInt(balance_qty);
 			}
 			boolean success = listDao.saveInvoice(data,bal_qty);
