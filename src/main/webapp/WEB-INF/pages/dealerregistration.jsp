@@ -122,7 +122,7 @@ position:relative;
     font-weight:normal;
   }
 .oms {
-font-size:12px;
+font-size:11px;
 }
 .pb h4 {
 font-size:18px !important;
@@ -183,11 +183,11 @@ font-size: 14px;
  <img  src="img/klogo1.png"/><span class="oms">Order Management System</span>
  </div>
  <div class="col-md-6 col-xs-4 pull-right">
- <p class="plogin" align="right"><a href="LoginHome">Join Now </a></p>
+ <p class="plogin" align="right"><a href="LoginHome">Sign In </a></p>
  </div>
 </div>
-<div class="clearfix"></div>
-            <div class="col-md-12 col-sm-12 dr">
+<div class="clearfix dr"></div>
+            <div class="col-md-12 col-sm-12 ">
                <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h4>Dealer Registration</h4>

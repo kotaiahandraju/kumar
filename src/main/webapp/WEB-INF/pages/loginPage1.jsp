@@ -5,7 +5,7 @@
 <head>
     <meta charset="utf-8">
     <title>KPOMS</title>
-   <!-- <link rel="shortcut icon" href="img/logo.jpeg"/>-->
+    <link rel="shortcut icon" href="img/logo1.jpeg"/> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -153,7 +153,7 @@ window.setTimeout(function() {
  <img  src="img/klogo1.png"/><span class="oms">Order Management System</span>
  </div>
  <div class="col-md-6 col-xs-4 pull-right">
- <p class="plogin" align="right"><a href="#">Join Now </a></p>
+ <p class="plogin" align="right"><a href="dealerregistration">Join Now </a></p>
  </div>
 </div>
 <div class="clearfix"></div>
