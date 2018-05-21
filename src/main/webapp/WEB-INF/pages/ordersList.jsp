@@ -66,8 +66,22 @@ table#dependent_table tbody tr td:first-child::before {
                     				<label for="focusedinput" class="col-md-6 control-label">Dealer : <span class="impColor">*</span></label>
                     				<div class="col-md-6">
                     					<form:select path="name" class="form-control validate" onchange="orederLists();">
-								    	<form:option value="">-- Select Dealers --</form:option>
+								    	<form:option value="all">All</form:option>
 								    	<form:options items="${dealersList }"></form:options>
+								    	</form:select>
+								    	</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-4">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Delivery Status : </label>
+                    				<div class="col-md-6">
+                    					<form:select path="status" class="form-control validate" onchange="orederLists();">
+                    					<form:option value="">--- Select Status ---</form:option>
+								    	<form:option value="all">All</form:option>
+								    	<form:option value="pending">Pending</form:option>
+								    	<form:option value="partially">Partially delivered</form:option>
+								    	<form:option value="completed">Completed</form:option>
 								    	</form:select>
 								    	</div>
                     			</div>
@@ -110,16 +124,38 @@ table#dependent_table tbody tr td:first-child::before {
 
            
             </div>
-            
-<div class="modal fade" id="orderListModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+           <!--  <input type="submit" id="submitButton"/> -->
+
+
+  
+<div class="modal fade" id="orderListModal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog"> 
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		        <h4 class="modal-title" id="exampleModalLabel"><span id="dealer_name_str"></span></h4>
-		     <span class="col-md-1">Name:</span><span class="col-md-3" id="dname">as</span>     <span class="col-md-1">Order Id:</span>  <span class="col-md-3" id="kumarid">as</span>     <span class="col-md-1">Date:</span> <span class="col-md-2" id="korderdDate">as</span><br>
+		      <span class="col-md-4" id="dname">as</span>  <span class="col-md-4" id="kumarid">as</span>  <span class="col-md-3" id="korderdDate">as</span><br>
 		      </div>
 		      <div class="modal-body" id="modal_body">
+		      
+				      
+		      </div>
+		      <div class="modal-footer">
+		       <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+</div>
+
+<div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog"> 
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="exampleModalLabel"><span id="dealer_name_str"></span></h4>
+		      <span class="col-md-4" id="dname"></span>  <span class="col-md-4" id="kumarid2"></span>  <span class="col-md-4" id="korderdDate2"></span><br>
+		      </div>
+		      <div class="modal-body" id="history_modal_body">
 		      
 				      
 		      </div>
@@ -133,6 +169,11 @@ table#dependent_table tbody tr td:first-child::before {
 <!-- <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script> -->
 <script type="text/javascript">
 
+$(document).ready(function(){
+    $("#submitButton").click(function(){
+        $("#orderListModal").modal();
+    });
+});
 /* $(document).ready(function() {
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 }); */
@@ -177,7 +218,7 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Business Name</th><th>Order ID</th><th>Ordered Date </th><th>Total Items</th><th>Delivered Status</th><th>View</th></tr>'+
+    	'<thead><tr><th>Business Name</th><th>Order ID</th><th>Ordered Date </th><th>Total Items</th><th>Delivery Status</th><th>View</th><th>Delivered Items History</th></tr>'+
     	"</thead><tbody></tbody></table>"; 
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -224,8 +265,6 @@ function getDealerOrdersItems(order_id){
 				});
 	
 }
-<<<<<<< HEAD
-=======
 function getDeliveredItemsHistory(order_id){
 	//event.preventDefault();
 	
@@ -253,21 +292,20 @@ function getDeliveredItemsHistory(order_id){
 				});
 	
 }
->>>>>>> 82afa5aab627401a5f293db2c20c44e8b10a19e9
 function displayDealerOrderItems(response){
 	//serviceUnitArray ={};
 	serviceUnitArray1 ={};
 	$('#modal_body').html('');
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Business Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Ordered Quantity</th><th>Pending Quantity</th><th colspan="2">Order Status</th></tr>'+
+    	'<thead><tr><th>Business Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Ordered Quantity</th><th>Pending Quantity</th><th colspan="2">Status</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#modal_body").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		
 		  $('#dname').text(orderObj.dealerName);
 		  $('#kumarid').text(orderObj.orderId);
-		  $('#korderdDate').text(orderObj.created_time);
+		  $('#korderdDate').text(orderObj.created_time );
 		  
 		
 		
@@ -296,7 +334,57 @@ function displayDealerOrderItems(response){
 			+"</tr>";
 		$(tblRow).appendTo("#modal_body tbody");
 		
+	});
+	
+	//$('#orderListModal').modal('show');
+	//if(isClick=='Yes') $('.datatables').dataTable();
+}
+function displayHistory(response){
+	//serviceUnitArray ={};
+	serviceUnitArray1 ={};
+	$('#history_modal_body').html('');
+	var protectType = null;
+	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
+    	'<thead><tr><th>Business Name</th><th>Delivered Product Categeory</th><th>Delivered Product Sub Categeory </th><th>Delivered  Item Code</th><th>Delivered Item Description</th><th>Delivered  Quantity</th><th>Delivered On</th></tr>'+
+    	"</thead><tbody></tbody></table>";
+	$("#history_modal_body").html(tableHead);
+	$.each(response,function(i, orderObj) {
 		
+		  //$('#dname').text(orderObj.dealerName);
+		  $('#kumarid2').text("Order ID:"+orderObj.order_id);
+		  $('#korderdDate2').text("Ordered On:"+orderObj.ordered_date );
+		  
+		
+		
+		serviceUnitArray1[orderObj.id] = orderObj;
+		if(i==0)
+			/* $("#dealer_name_str").html(orderObj.dealerName+"\'s order("+orderObj.orderId+") items"); */
+		var text_field_str = '<td colspan="2" align="center">Completed</td>';
+		if(typeof orderObj.pending_qty != "undefined"){
+				var int_val = parseInt(orderObj.pending_qty);
+				if(int_val>0){
+					text_field_str = "<td><input type='text'  maxlength ='3' class='mobile' id='qty"+orderObj.id+"' /></td>"
+									+"<td><input type='button'   value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>";
+				}
+		}
+		var tblRow ="<tr id='row"+orderObj.id+"'>"
+			+ "<td title='"+orderObj.dealerName+"'>" + orderObj.dealerName + "</td>"
+			+ "<td title='"+orderObj.categeory+"'>" + orderObj.categeory + "</td>"
+			+ "<td title='"+orderObj.subCategeory+"'>" + orderObj.subCategeory + "</td>"
+			+ "<td title='"+orderObj.itemcode+"'>" + orderObj.itemcode + "</td>"
+			+ "<td title='"+orderObj.itemdescrption+"'>" + orderObj.itemdescrption + "</td>"
+			+ "<td title='"+orderObj.dispatched_items_quantity+"'>" + orderObj.dispatched_items_quantity + "</td>"
+			+ "<td title='"+orderObj.delivered_on+"'>" + orderObj.delivered_on + "</td>"
+			//+ "<td>"+text_field_str+"</td>"
+			//+ "<td><input type='button' id='deliverable_submit_btn' value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>"
+			+"</tr>";
+		$(tblRow).appendTo("#history_modal_body tbody");
+		
+	});
+	
+	//$('#orderListModal').modal('show');
+	//if(isClick=='Yes') $('.datatables').dataTable();
+}	
 		
 		$(".mobile").keydown(function (e) {
 		    // Allow: backspace, delete, tab, escape, enter and .
@@ -315,11 +403,7 @@ function displayDealerOrderItems(response){
 		});
 		
 		
-	});
-	
-	//$('#orderListModal').modal('show');
-	//if(isClick=='Yes') $('.datatables').dataTable();
-}
+
 
 /* function getDealerOrdersList(order_id,event) {
 	//event.preventDefault();
@@ -355,10 +439,11 @@ function displayDealerOrderItems(response){
 function orederLists() {
 	
 	var dealerId=$("#name").val();
+	var status=$("#status").val();
 		$.ajax({
 					type : "POST",
 					url : "orederLists.htm",
-					data :"dealerId="+dealerId,
+					data :"dealerId="+dealerId+"&status="+status,
 					 beforeSend : function() {
 			             $.blockUI({ message: 'Please wait' });
 			          },
@@ -429,7 +514,6 @@ function saveDeliverableItemsData(objId){
 	});
 }
 
-	
 $("#pageName").text("Delivery Status");
 $(".orderslist").addClass("active");
 </script>
