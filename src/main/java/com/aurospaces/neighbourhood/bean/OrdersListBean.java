@@ -19,8 +19,15 @@ protected Date createdTime ;
 protected Date updatedTime ;
 protected String delerId ;
 protected String quantity ;
-protected String productId,invoiceId,orderId,branchId ;
+protected String productId,invoiceId,orderId,branchId,balanceqty ;
 
+
+public String getBalanceqty() {
+	return balanceqty;
+}
+public void setBalanceqty(String balanceqty) {
+	this.balanceqty = balanceqty;
+}
 public String getBranchId() {
 	return branchId;
 }

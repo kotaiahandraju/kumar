@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -590,6 +591,53 @@ public class RestController {
 		}
 		return String.valueOf(jsonObject);
 	}
+	@RequestMapping("rest/getItemsOfOrder")
+	public @ResponseBody String getItemsOfOrder(@RequestBody OrdersListBean ordersListBean, HttpServletRequest request,HttpSession session) {
+		JSONObject jsonObj = new JSONObject();
+		try {
+			
+			List<Map<String,Object>> itemsList = ordersListDao.getItemsOfOrder(ordersListBean.getOrderId());
+			if(itemsList.size()>0){
+				jsonObj.put("itemsList", itemsList);
+			}else{
+				jsonObj.put("itemsList", "");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return jsonObj.toString();
+	}
 	
+	@RequestMapping("rest/saveDispatchedItemsData")
+	public @ResponseBody String saveDispatchedItemsData(@RequestBody OrdersListBean ordersListBean,HttpServletRequest request,HttpSession session) {
+		JSONObject jsonObj = new JSONObject();
+		Map<String,String> data = new HashMap<String,String>();
+		try {
+			
+			String balance_qty = ordersListBean.getBalanceqty();
+			data.put("order_id", ordersListBean.getOrderId());
+			data.put("product_id", ordersListBean.getProductId());
+			data.put("quantity", ordersListBean.getQuantity());
+			//generate invoice number
+			data.put("invoice_no", "eee");
+			int bal_qty = 1;
+			if(StringUtils.isNotBlank(balance_qty)){
+				bal_qty = Integer.parseInt(balance_qty);
+			}
+			boolean success = ordersListDao.saveInvoice(data,bal_qty);
+			if(success){
+				jsonObj.put("message", "success");
+			}else{
+				jsonObj.put("message", "failed");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return jsonObj.toString();
+	}
 }
 	
