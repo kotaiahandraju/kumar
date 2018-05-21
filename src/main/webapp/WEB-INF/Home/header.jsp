@@ -56,9 +56,64 @@
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 <style type="text/css">
-@media only screen and (max-width: 640px) and (min-width: 320px) {
+@media only screen and (max-width: 320px) {
+.oms {
+font-size:11px !important;
+line-height:5 !important;
+}
+#page-heading h1 {
+font-size:34px !important;
+}
+.navbar-toggle {
+margin-top:8px;
+}
+.pagination {
+    display: inline;
+    padding-left: 0;
+    margin: 20px 0 !important;
+    border-radius: 1px;
+}
+.toolbar.navbar-nav {
+margin-top:3px !important;
+}
+.nav > li > a {
+    position: relative;
+    display: block;
+    padding: 12px 25px;
+    }
+    .pagination > li > a, .pagination > li span {
+    padding: 6px 15px;
+    width: 100%;
+}
+}
+
+@media only screen and (max-width: 640px) and (min-width: 325px) {
 .carth {
 margin-left:10px !important;
+}
+.pagination {
+    display: inline;
+    padding-left: 0;
+    margin: 20px 0 !important;
+    border-radius: 1px;
+}
+.pagination > li > a, .pagination > li span {
+    padding: 6px 15px;
+    width: 100%;
+}
+.nav > li > a {
+    position: relative;
+    display: block;
+    padding: 12px 25px;
+    }
+.toolbar.navbar-nav {
+margin-top:3px !important;
+}
+#page-heading h1 {
+font-size:27px !important;
+}
+.navbar-toggle {
+margin-top:17px;
 }
 .oms {
 font-size:14px !important;
@@ -77,30 +132,39 @@ margin-left:300px !important;
 .carth {
 margin-left:643px !important;
 }
+.pagination {
+display:inline-block;
+}
 }
 @media only screen and (min-width: 1280px) {
 .carth {
 margin-left:593px !important;
 }
+.pagination {
+display:inline-block;
+}
 }
 @media only screen and (min-width: 1366px) {
 .carth {
-margin-left:965px !important;
+margin-left:678px !important;
+}
+.pagination {
+display:inline-block;
 }
 }
 @media only screen and (min-width: 1440px) {
 .carth {
-margin-left:1044px !important;
+margin-left:680px !important;
 }
 }
 @media only screen and (min-width: 1600px) {
 .carth {
-margin-left:1195px !important;
+margin-left:700px !important;
 }
 }
 .navbar-nav li
 {
-	margin-left: 25px;
+	/* margin-left: 25px; */
 }
 .carth {
 margin-top: 18px;
@@ -252,7 +316,7 @@ function cartCount(){
 
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
         <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/img/klogo1.png" class="img-responsive" style="    width: 132px;"></a>
+            <a class="navbar-brand" href="dashboard"><img src="${baseurl }/img/klogo1.png" class="img-responsive" style="    width: 132px;"></a>
             <span class="oms">Order Management System</span>
             <div class="clearfix"></div>
         </div>
@@ -329,7 +393,7 @@ function cartCount(){
               <li class="items"><a href="${baseurl }/admin/items"><i class="fa fa-list-alt"></i>
 
                <span>Product List</span></a></li>&emsp;
-              <li class="employee"><a href="${baseurl }/admin/employeeCreation"><i class="fa fa-user"></i> <span>Employees</span></a></li>
+              <li class="employee"><a href="${baseurl }/admin/employeeCreation"><i class="fa fa-users"></i> <span>Employees</span></a></li>
              
               </c:if>
 			 <c:if test="${roleId=='2' }">

@@ -50,7 +50,7 @@ z-index:1;
     font-size: 15px;
     font-weight: 600;
     height: 32px;
-    line-height: 32px;
+    line-height: 26px;
     overflow: hidden;
     outline-width: 1px;
     padding: 0;
@@ -135,17 +135,21 @@ window.setTimeout(function() {
 </div>
 <div class="clearfix"></div>
 <div class="container forgotp">
+<form  action="forgepasssword"  class="form-horizontal" method="post" >
 <h1>Let's find your account</h1>
 <h4>Please enter your email or phone</h4>
-<p>Email or phone *</p>
+<p>Mobile Number *</p>
 <div class="form-group">
 					<div class="col-md-3 forgote">
-						<input type="text" class="form-control validate" name="userName" id="username" placeholder="Enter Your Email or Phone Number">
+						<input type="text" class="form-control validate" id="mobile" name="mobile" placeholder="Enter Your Email or Phone Number" />
 					</div>
 				
 			</div>
 <div class="clearfix"></div>
-<div class=""><br><span class="btn btn-primary">Submit</span></div>
+<div class=""><br>
+<input type="submit" value="Submit" class="btn btn-primary">
+</div>
+</form>
 </div>
 <div class="clearfix"></div>
 <div class="lfotter ">
