@@ -190,14 +190,15 @@ function showTableData(response){
 			+ "<td title='"+orderObj.created_on+"'>" + orderObj.created_on + "</td>"
 			+ "<td title='"+orderObj.total_quantity+"'>" + orderObj.total_quantity + "</td>"
 			+ "<td title='"+orderObj.completed_status+"'>" + orderObj.completed_status + "</td>"
-			+ '<td><a href="" type="button" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">View Order</a></td>'
+			+ '<td><a   href="#" type="button" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">View Order</a></td>'
+			+ '<td><a href="#" type="button" onclick="getDeliveredItemsHistory(\''+orderObj.orderId+'\');">View History</a></td>'
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
 	if(isClick=='Yes') $('.datatables').dataTable();
 }
 function getDealerOrdersItems(order_id){
-	event.preventDefault();
+	//event.preventDefault();
 	
 		$.ajax({
 					type : "POST",
@@ -223,6 +224,36 @@ function getDealerOrdersItems(order_id){
 				});
 	
 }
+<<<<<<< HEAD
+=======
+function getDeliveredItemsHistory(order_id){
+	//event.preventDefault();
+	
+		$.ajax({
+					type : "POST",
+					url : "getDeliveredItemsHistory.htm",
+					data :"order_id="+order_id,
+					 beforeSend : function() {
+			             $.blockUI({ message: 'Please wait' });
+			          },
+					success: function (response) {
+		                	 $.unblockUI();
+		                	 
+		                 if(response != null ){
+		                	 var resJson=JSON.parse(response);
+		                	 displayHistory(resJson.itemsList);
+		                	}
+		                 $('#historyModal').modal('toggle');
+	                		$('#historyModal').modal('show');
+		                 },
+		             error: function (e) { 
+		            	 $.unblockUI();
+							console.log(e);
+		             }
+				});
+	
+}
+>>>>>>> 82afa5aab627401a5f293db2c20c44e8b10a19e9
 function displayDealerOrderItems(response){
 	//serviceUnitArray ={};
 	serviceUnitArray1 ={};
