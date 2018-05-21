@@ -9,6 +9,15 @@
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
  <link rel="stylesheet" type="text/css" href="../assets/css/img.css">
  <style>
+ @media only screen and (min-width: 768px) {
+.modal-dialog {
+    width: 79%;
+    margin: 30px auto;
+}
+}
+table {
+       border-collapse: inherit;
+}
  .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td
  {
  border: 0px solid black !important;
@@ -133,7 +142,7 @@ padding: 3px 14px 0px 11px;
       
     </div>
   </div>
-  <!-- <div class="modal fade" id="ordersListModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="ordersListModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog"> 
 		    <div class="modal-content">
 		      <div class="modal-header">
@@ -143,11 +152,11 @@ padding: 3px 14px 0px 11px;
 				      
 		      </div>
 		      <div class="modal-footer">
-		       <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+		       <button type="button" class="btn btn-success" data-dismiss="modal" id="closeModel">Close</button>
 		      </div>
 		    </div>
 		  </div>
-</div> -->
+</div> 
 
 
 
@@ -199,7 +208,7 @@ function showTableData(response){
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.name+"'>" + orderObj.name + "</td>"
-			+ '<td><a href="" type="button" onclick="getDealerDetails();">'+orderObj.businessName+'</a></td>'
+			+ '<td><a href="#" onclick="getDealerDetails();">'+orderObj.businessName+'</a></td>'
 			/* + "<td title='"+orderObj.businessName+"'>" + orderObj.businessName + "</td>" */
 			+ "<td title='"+orderObj.address+"'>" + orderObj.address + "</td>"
 			+ "<td title='"+orderObj.city+"'>" + orderObj.city + "</td>"
@@ -342,12 +351,17 @@ function inactiveData() {
 function getDealerDetails(){
 	//$("#myModal").modal();
 	
-	 //displayDelerDetails(listOrders1);
-	  //$('#orderListModal').modal('toggle');
-		$('#myModal1').modal();
+	 
+	 $('#ordersListModal').modal('toggle');
+	 displayDelerDetails(listOrders1);
+// 		$('#myModal1').modal();
 	
 }
-
+$("#closeModel").click(function(){
+	
+	 displayDelerDetails("");
+	
+});
 
 function displayDelerDetails(response){
 	
@@ -360,17 +374,6 @@ function displayDelerDetails(response){
 	$("#modal_body").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		
-		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='deleteDealer("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
-		}else{  
-			var deleterow = "<a class='activate' onclick='deleteDealer("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
-		}
-		if(orderObj.confirm == "1"){
-			var confirm = "<a class='' >UsernameAssigned</i></a>"
-		}else{  
-			var confirm = "<a class='notAssigned' style='cursor:pointer; text-decoration:none; list-style:none;' onclick='dealerRegister("+ orderObj.id+ ")'>UsernameNotAssigned</a>"
-		}
-// 		var edit = "<a class='edit editIt' onclick='editEmpCreation("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray1[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.name+"'>" + orderObj.name + "</td>"
@@ -382,10 +385,6 @@ function displayDelerDetails(response){
 		 	+ "<td title='"+orderObj.shop_phone+"'>" + orderObj.shop_phone + "</td>" 
 			+ "<td title='"+orderObj.phone_number+"'>" + orderObj.phone_number + "</td>"
 			+ "<td title='"+orderObj.email+"'>" + orderObj.email + "</td>" 
-			/* + "<td title='"+orderObj.branchname+"'>" + orderObj.branchname + "</td>" */
-			/* + "<td title='"+orderObj.description+"'>" + orderObj.description + "</td>" */
-			
-			/* + "<td style='text-align: center;white-space: nowrap;'>" +confirm + "&nbsp;&nbsp;" + deleterow + "</td>" */
 			+"</tr>";
 		$(tblRow).appendTo("#modal_body tbody");
 		
