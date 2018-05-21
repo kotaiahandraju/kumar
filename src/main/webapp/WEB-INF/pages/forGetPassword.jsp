@@ -111,6 +111,46 @@ padding-right:0px;
 
 .default-class::-webkit-input-placeholder {color: #e73d4a !important;}
 .default-class::-moz-placeholder {color: #e73d4a !important;}
+@media only screen and (max-width: 640px) and (min-width: 320px) {
+.loghead { 
+position:absolute;
+}
+focusedform .lfotter {
+position:relative;
+}
+.forgotp {
+padding:17px !important;
+margin:0px !important;
+}
+.oms {
+font-size:12px;
+}
+.pb h4 {
+font-size:18px !important;
+}
+.focusedform .verticalcenter {
+margin-top:0px;
+top:27%;
+left:50%;
+}
+}
+@media only screen and (min-width:600px) and (max-width:640px){ 
+.focusedform .verticalcenter {
+margin-top:0px;
+top:47%;
+left:50%;
+}
+.forgotp {
+padding:25px !imporatnt;
+margin:0px !important;
+}
+.oms {
+font-size:11px;
+}
+focusedform .lfotter {
+position:relative;
+}
+}
 </style>
 
 <script type='text/javascript' src='assets/js/jquery-1.10.2.min.js'></script>
@@ -130,7 +170,7 @@ window.setTimeout(function() {
  <img  src="img/klogo1.png"/><span class="oms">Order Management System</span>
  </div>
  <div class="col-md-6 pull-right">
- <p class="plogin" align="right"><a href="#">Join Now </a></p>
+ <p class="plogin" align="right"><a href="dealerregistration">Join Now </a></p>
  </div>
 </div>
 <div class="clearfix"></div>
