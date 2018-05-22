@@ -218,7 +218,7 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Business Name</th><th>Order ID</th><th>Ordered Date </th><th>Total Items</th><th>Delivery Status</th><th>View</th><th>Delivered Items History</th></tr>'+
+    	'<thead><tr><th>Business Name</th><th>Order ID</th><th>Ordered Date </th><th>Total Items</th><th>Delivery Status</th><th>Delivered Items History</th></tr>'+
     	"</thead><tbody></tbody></table>"; 
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -227,12 +227,13 @@ function showTableData(response){
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.dealerName+"'>" + orderObj.dealerName + "</td>"
-			+ "<td title='"+orderObj.orderId+"'>" + orderObj.orderId + "</td>"
+			//+ "<td title='"+orderObj.orderId+"'>" + orderObj.orderId + "</td>"
+			+ '<td><a   href="#" type="button" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">' + orderObj.orderId + '</a></td>'
 			+ "<td title='"+orderObj.created_on+"'>" + orderObj.created_on + "</td>"
 			+ "<td title='"+orderObj.total_quantity+"'>" + orderObj.total_quantity + "</td>"
 			+ "<td title='"+orderObj.completed_status+"'>" + orderObj.completed_status + "</td>"
 			+ '<td><a   href="#"  onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">View Order</a></td>'
-			+ '<td><a href="#" onclick="getDeliveredItemsHistory(\''+orderObj.orderId+'\');">View History</a></td>'
+			+ '<td><a href="#" type="button" onclick="getDeliveredItemsHistory(\''+orderObj.orderId+'\');">View History</a></td>'
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
@@ -298,7 +299,7 @@ function displayDealerOrderItems(response){
 	$('#modal_body').html('');
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Business Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Ordered Quantity</th><th>Pending Quantity</th><th colspan="2">Status</th></tr>'+
+    	'<thead><tr><th>Business Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Ordered Quantity</th><th>Delivered Quantity</th><th>Nullified Quantity</th><th>Pending Quantity</th><th colspan="3">Status</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#modal_body").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -310,13 +311,14 @@ function displayDealerOrderItems(response){
 		
 		
 		serviceUnitArray1[orderObj.id] = orderObj;
-		if(i==0)
+		//if(i==0)
 			/* $("#dealer_name_str").html(orderObj.dealerName+"\'s order("+orderObj.orderId+") items"); */
-		var text_field_str = '<td colspan="2" align="center">Completed</td>';
+		var text_field_str = '<td colspan="3" align="center">Completed</td>';
 		if(typeof orderObj.pending_qty != "undefined"){
 				var int_val = parseInt(orderObj.pending_qty);
 				if(int_val>0){
 					text_field_str = "<td><input type='text'  maxlength ='3' class='mobile' id='qty"+orderObj.id+"' /></td>"
+									+"<td><input type='text'  maxlength ='3' class='mobile' id='nullify_qty"+orderObj.id+"' value='0'/></td>"
 									+"<td><input type='button'   value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>";
 				}
 		}
@@ -327,6 +329,8 @@ function displayDealerOrderItems(response){
 			+ "<td title='"+orderObj.itemcode+"'>" + orderObj.itemcode + "</td>"
 			+ "<td title='"+orderObj.itemdescrption+"'>" + orderObj.itemdescrption + "</td>"
 			+ "<td title='"+orderObj.quantity+"'>" + orderObj.quantity + "</td>"
+			+ "<td title='"+orderObj.delivered_qty+"'>" + orderObj.delivered_qty + "</td>"
+			+ "<td title='"+orderObj.nullified_qty+"'>" + orderObj.nullified_qty + "</td>"
 			+ "<td id='pending_qty"+orderObj.id+"' title='"+orderObj.pending_qty+"'>" + orderObj.pending_qty + "</td>"
 			+ text_field_str
 			//+ "<td>"+text_field_str+"</td>"
@@ -469,6 +473,7 @@ function saveDeliverableItemsData(objId){
 	var product_id = serviceUnitArray1[objId].productId;
 	var quantity = $("#qty"+objId).val().trim();
 	var pending_qty = serviceUnitArray1[objId].pending_qty;
+	var nullify_qty = $("#nullify_qty"+objId).val().trim();
 	if(quantity==""){
 		alert("Enter some quantity and click Submit");
 		return false;
@@ -477,11 +482,11 @@ function saveDeliverableItemsData(objId){
 		alert("Quantity should not be greater than pending quantity.");
 		return false;
 	}
-	var balance_qty = pending_qty - quantity;
+	var balance_qty = pending_qty - quantity - nullify_qty;
 	$.ajax({
 		type : "POST",
 		url : "saveDispatchedItemsData.htm",
-		data :"order_id="+order_id+"&product_id="+product_id+"&quantity="+quantity+"&balance_qty="+balance_qty,
+		data :"order_id="+order_id+"&product_id="+product_id+"&quantity="+quantity+"&balance_qty="+balance_qty+"&nullify_qty="+nullify_qty,
 		 beforeSend : function() {
              $.blockUI({ message: 'Please wait' });
           },

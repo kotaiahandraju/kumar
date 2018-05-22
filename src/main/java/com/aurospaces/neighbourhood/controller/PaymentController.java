@@ -73,7 +73,7 @@ public class PaymentController {
 							paymentBean.setBranchId(objuserBean.getBranchId());
 						}
 						paymentDao.save(paymentBean);
-					redir.addFlashAttribute("msg", "Paymnet Created Successfully");
+					redir.addFlashAttribute("msg", "Payment Created Successfully");
 					redir.addFlashAttribute("cssMsg", "success");
 			} catch (Exception e) {
 				e.printStackTrace();

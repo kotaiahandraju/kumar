@@ -160,6 +160,7 @@ public class RestController {
 			int j=0;
 			KumarUtil utils = new KumarUtil();
 			String invoiceId = utils.randNum();
+			String delarId = null;
 			OrdersListBean ordersList = null;
 			 for (int i = 0; i < array.length(); i++)
 		        {
@@ -172,8 +173,9 @@ public class RestController {
 		            ordersList.setInvoiceId(invoiceId);
 		            ordersListDao.save(ordersList);
 		            j++;
+		            delarId =String.valueOf(jsonObj.get("delarId"));
 		        }
-			 cartDao.deleteByUserId(Integer.parseInt(ordersList.getDelerId()));
+			 cartDao.deleteByUserId(Integer.parseInt(delarId));
 			 objJSON.put("msg", "Successfully "+j+" Product's has been ordered");
 		}catch(Exception e){
 			e.printStackTrace();
@@ -300,6 +302,7 @@ public class RestController {
 			}else{
 				employeeBean.setRoleId("3");
 				employeeBean.setStatus("0");
+				employeeBean.setConfirm("0");
 				empDao.save(employeeBean);
 				 String propertiespath = objContext.getRealPath("Resources" +File.separator+"DataBase.properties");
 					//String propertiespath = "C:\\PRO\\Database.properties";
@@ -353,7 +356,7 @@ public class RestController {
 		        }
 
 			 
-		int count=	cartDao.countcartdetails(ordersList);
+		int count=	cartDao.countcartdetailsforMobile(ordersList);
 		
 		objJSON.put("count", count);
 		objJSON.put("msg", "Item successfully added to your cart");
@@ -391,7 +394,8 @@ public class RestController {
 						Date date = KumarUtil.dateFormate(paymentBean.getStrpaymentDate());
 						paymentBean.setPaymentDate(date);
 					}
-					
+					paymentBean.setConfirm("0");
+					paymentBean.setComment(" ");
 					paymentDao.save(paymentBean);
 					jsonObj.put("msg", "Paymnet Created Successfully");
 		} catch (Exception e) {
