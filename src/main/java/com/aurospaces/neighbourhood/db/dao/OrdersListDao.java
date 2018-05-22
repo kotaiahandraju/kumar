@@ -117,7 +117,7 @@ public List<Map<String,Object>> getItemsOfOrder(String order_id){
 		String sql ="select (ol.quantity-ifnull((select sum(inv.dispatched_items_quantity) from invoice inv where inv.order_id=ol.orderId and inv.product_id=ol.productId),0)-ifnull((select sum(inv.nullified_qty) from invoice inv where inv.order_id=ol.orderId and inv.product_id=ol.productId),0)) as pending_qty, "
 				+" ifnull((select sum(inv.dispatched_items_quantity) from invoice inv where inv.order_id=ol.orderId and inv.product_id=ol.productId),0) as delivered_qty, "
 				+" ifnull((select sum(inv.nullified_qty) from invoice inv where inv.order_id=ol.orderId and inv.product_id=ol.productId),0) as  nullified_qty,"
-				+" ol.*,ke.name as dealerName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption  from orders_list ol,items i,kumar_employee ke,producttype pt,productname pn where ol.orderId = ? and ke.id=ol.delerId and ol.productId=i.id and i.productId=pt.id and i.productname=pn.id ORDER BY ol.updated_time Desc";
+				+" ol.*,ke.name as dealerName,ke.businessName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption  from orders_list ol,items i,kumar_employee ke,producttype pt,productname pn where ol.orderId = ? and ke.id=ol.delerId and ol.productId=i.id and i.productId=pt.id and i.productname=pn.id ORDER BY ol.updated_time Desc";
 		list =jdbcTemplate.queryForList(sql, new Object[]{order_id});
 	}catch(Exception e){
 		e.printStackTrace();
@@ -172,7 +172,7 @@ public List<Map<String,Object>> getDeliveredItemsHistory(String order_id){
 	
 	try{
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql ="select inv.*,date_format(inv.updated_time,'%d-%b-%Y') as delivered_on,(select date_format(ol.created_time,'%d-%b-%Y') from orders_list ol where ol.orderId=inv.order_id limit 1) as ordered_date,ke.name as dealerName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption from invoice inv,items i,kumar_employee ke,producttype pt,productname pn where inv.order_id = '"+order_id+"' and ke.id=(select ol.delerId from orders_list ol where ol.orderId=inv.order_id limit 1)and inv.product_id=i.id and i.productId=pt.id and i.productname=pn.id order by inv.updated_time";
+		String sql ="select inv.*,date_format(inv.updated_time,'%d-%b-%Y') as delivered_on,(select date_format(ol.created_time,'%d-%b-%Y') from orders_list ol where ol.orderId=inv.order_id limit 1) as ordered_date,ke.name as dealerName,ke.businessName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption from invoice inv,items i,kumar_employee ke,producttype pt,productname pn where inv.order_id = '"+order_id+"' and ke.id=(select ol.delerId from orders_list ol where ol.orderId=inv.order_id limit 1)and inv.product_id=i.id and i.productId=pt.id and i.productname=pn.id order by inv.updated_time";
 		list =jdbcTemplate.queryForList(sql);
 		System.out.println(sql);
 	}catch(Exception e){
