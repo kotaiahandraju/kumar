@@ -237,7 +237,7 @@ public List<BranchBean> getOrderListCountByBranchId(String branchId){
 		System.out.println(branchId);
 		
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql ="SELECT COUNT(*) as branchCount FROM `orders_list` ol WHERE `branchId`=? GROUP BY `orderId`";
+		String sql ="SELECT COUNT(DISTINCT orderId) FROM `orders_list` WHERE branchId=?";
 		
 //		list =jdbcTemplate.queryForList(sql, new Object[]{branchId});
 	 retlist = jdbcTemplate.query(sql, new Object[]{branchId},ParameterizedBeanPropertyRowMapper.newInstance(BranchBean.class));
