@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aurospaces.neighbourhood.bean.BranchBean;
 import com.aurospaces.neighbourhood.bean.EmployeeBean;
 import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.LoginBean;
@@ -34,6 +35,8 @@ import com.aurospaces.neighbourhood.db.dao.OrdersListDao;
 import com.aurospaces.neighbourhood.db.dao.ProductnameDao;
 import com.aurospaces.neighbourhood.util.KumarUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import CommonUtils.CommonUtils;
 @Controller
 @RequestMapping(value="/admin")
 public class OrderPlacementController {
@@ -91,8 +94,16 @@ public class OrderPlacementController {
 				
 				orderslistbean.setDelerId(objuserBean.getEmpId());
 				orderslistbean.setBranchId(objuserBean.getBranchId());
-				prefix = prefix+"-"+ objuserBean.getBranchId()+"-";
-				System.out.println(" Custom generated Sequence value " + prefix.concat(new Integer(rand_int).toString()));
+				List<BranchBean> orderList=ordersListDao.getOrderListByBranchId(objuserBean.getBranchId());
+				String branchCode=null;
+				int branchCount=0;
+				for (BranchBean branchBean : orderList) {
+					branchCode=branchBean.getBranchcode();
+					 branchCount=branchBean.getBranchCount()+1;
+				}
+				System.out.println("branchCountbranchCount"+branchCount+"---branchCode---"+branchCode);
+//				prefix = prefix+"-"+ objuserBean.getBranchId()+"-";
+//				System.out.println(" Custom generated Sequence value " + prefix.concat(new Integer(rand_int).toString()));
 				JSONObject jsonObj1 = new JSONObject();
 				JSONObject jsonObj2 = new JSONObject();
 				for(int i=0;i<productArray.length;i++){
@@ -100,7 +111,8 @@ public class OrderPlacementController {
 					orderslistbean.setProductId(productArray[i]);
 					orderslistbean.setQuantity(quantityArray[i]);
 					orderslistbean.setInvoiceId(kumarUtil.randNum());
-					orderslistbean.setOrderId(prefix.concat(new Integer(rand_int).toString()));
+					int year=Integer.parseInt(CommonUtils.getYear())+1;
+					orderslistbean.setOrderId(branchCode+"/"+CommonUtils.getYear()+""+year+"/"+CommonUtils.getMonth()+"/"+branchCount);
 					ordersListDao.save(orderslistbean);
 					jsonObj1.put("invoiceId", orderslistbean.getInvoiceId());
 					jsonObj1.put("orderId", orderslistbean.getOrderId());

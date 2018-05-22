@@ -228,4 +228,24 @@ public List<Map<String,Object>> getOrderListDealerForMobile(String dealerId){
 	
 }
 
+public List<BranchBean> getOrderListByBranchId(String branchId){
+	List<BranchBean> retlist=null;
+	
+	try{
+		System.out.println(branchId);
+		
+		jdbcTemplate = custom.getJdbcTemplate();
+		String sql ="SELECT kb.branchcode,ol.orderId,COUNT(*) as branchCount FROM `orders_list` ol,kumar_branch kb WHERE `branchId`=? and kb.id=ol.branchId GROUP BY `orderId`" + 
+				"";
+		
+//		list =jdbcTemplate.queryForList(sql, new Object[]{branchId});
+	 retlist = jdbcTemplate.query(sql, new Object[]{branchId},ParameterizedBeanPropertyRowMapper.newInstance(BranchBean.class));
+		System.out.println(sql);
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+	return retlist;
+	
+}
+
 }
