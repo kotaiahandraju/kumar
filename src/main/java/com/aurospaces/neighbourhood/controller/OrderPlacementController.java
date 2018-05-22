@@ -28,6 +28,7 @@ import com.aurospaces.neighbourhood.bean.EmployeeBean;
 import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.bean.OrdersListBean;
+import com.aurospaces.neighbourhood.db.dao.BranchDao;
 import com.aurospaces.neighbourhood.db.dao.CartDao;
 import com.aurospaces.neighbourhood.db.dao.EmployeeDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
@@ -47,6 +48,7 @@ public class OrderPlacementController {
 	@Autowired OrdersListDao listDao;
 	@Autowired ServletContext objContext;
 	@Autowired CartDao cartDao;
+	@Autowired BranchDao branchDao;
 	KumarUtil kumarUtil= new KumarUtil();
 	@RequestMapping(value="/orderplacing")
 	public String orderPlacement(HttpServletRequest request){
@@ -91,16 +93,26 @@ public class OrderPlacementController {
 		                        
 		        // Generate random integers in range 0 to 999
 		        int rand_int = rand.nextInt(10000);
-				
+		        String branchCode=null;
+				int branchCount=0;
 				orderslistbean.setDelerId(objuserBean.getEmpId());
 				orderslistbean.setBranchId(objuserBean.getBranchId());
-				List<BranchBean> orderList=ordersListDao.getOrderListByBranchId(objuserBean.getBranchId());
-				String branchCode=null;
-				int branchCount=0;
-				for (BranchBean branchBean : orderList) {
-					branchCode=branchBean.getBranchcode();
-					 branchCount=branchBean.getBranchCount()+1;
+				List<BranchBean> orderList=ordersListDao.getOrderListCountByBranchId(objuserBean.getBranchId());
+				BranchBean branchList= branchDao.getBybranchCodeById(objuserBean.getBranchId());
+				branchCode=branchList.getBranchcode();
+				
+				if(orderList.isEmpty()) {
+					System.out.println("2222222");
+					branchCount=1;
+					
+				}else {
+					System.out.println("111111111");
+					for (BranchBean branchBean : orderList) {
+						
+						 branchCount=branchBean.getBranchCount()+1;
+					}
 				}
+				
 				System.out.println("branchCountbranchCount"+branchCount+"---branchCode---"+branchCode);
 //				prefix = prefix+"-"+ objuserBean.getBranchId()+"-";
 //				System.out.println(" Custom generated Sequence value " + prefix.concat(new Integer(rand_int).toString()));
