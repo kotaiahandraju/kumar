@@ -124,7 +124,9 @@ public class OrderPlacementController {
 					orderslistbean.setQuantity(quantityArray[i]);
 					orderslistbean.setInvoiceId(kumarUtil.randNum());
 					int year=Integer.parseInt(CommonUtils.getYear())+1;
-					orderslistbean.setOrderId(branchCode+"/"+CommonUtils.getYear()+""+year+"/"+CommonUtils.getMonth()+"/"+branchCount);
+					branchCount=Integer.parseInt(String.format("%4s", branchCount).replace(' ', '0'));
+					System.out.println(String.format("%4s", branchCount).replace(' ', '0'));
+					orderslistbean.setOrderId(branchCode+"/"+CommonUtils.getYear()+""+year+"/"+CommonUtils.getMonth()+"/"+String.format("%4s", branchCount).replace(' ', '0'));
 					ordersListDao.save(orderslistbean);
 					jsonObj1.put("invoiceId", orderslistbean.getInvoiceId());
 					jsonObj1.put("orderId", orderslistbean.getOrderId());
