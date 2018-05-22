@@ -88,7 +88,9 @@ table#dependent_table tbody tr td:first-child::before {
 					</div>
 					<form:form modelAttribute="employeeCreationForm" action="addEmployeeCreation" class="form-horizontal" method="Post" >
 					<div class="panel-body">
+					<span id="errorMsg"></span>
 						<div class="row">
+						
 						<div class="col-md-4">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Branch Name<span class="impColor">*</span></label>
@@ -319,7 +321,35 @@ function productNameFilter(productName){
 	$('#loadAjax').hide();
 
 	}
-} 
+}
+
+
+
+$('#phoneNumber').blur(function() {
+	
+	var phoneNumber=$(this).val();
+	
+	//alert(phoneNumber.length);
+	
+	  if( phoneNumber.length == 10)
+		  {
+		  mobilevalidation =true;
+		  $('#submit1').prop("disabled",false);
+		  }
+	 else
+	  
+	{
+		 $('#submit1').prop("disabled",true);
+		
+		  $('#phoneNumber').css('border-color', 'red');
+		 $('#errorMsg').text( "* Enter Valid Mobile Number ") ;
+		 $('#errorMsg').css('color','red');
+			setTimeout(function() { $("#errorMsg").text(''); }, 3000);
+		 mobilevalidation =false;
+		  
+	}
+
+		}); 
 
 
 $("#pageName").text("Employee Creation Master");

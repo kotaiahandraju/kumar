@@ -220,7 +220,7 @@ function showTableData(response){
 			+ "<td title='"+orderObj.branchname+"'>" + orderObj.branchname + "</td>"
 			/* + "<td title='"+orderObj.description+"'>" + orderObj.description + "</td>" */
 			
-			+ "<td style='text-align: center;white-space: nowrap;'>" +confirm + "&nbsp;&nbsp;" + deleterow + "</td>"
+			+ "<td style='text-align: center;white-space: nowrap;'>"  + deleterow + "</td>"
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 		

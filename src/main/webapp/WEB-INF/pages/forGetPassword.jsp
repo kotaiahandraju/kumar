@@ -177,17 +177,18 @@ window.setTimeout(function() {
 <div class="container forgotp">
 <form  action="forgepasssword"  class="form-horizontal" method="post" >
 <h1>Let's find your account</h1>
-<h4>Please enter your email or phone</h4>
-<p>Mobile Number *</p>
+<h4>Enter your Mobile number</h4>
+<span id="errorMsg"> </span>
+<!-- <p>Mobile Number *</p> -->
 <div class="form-group">
 					<div class="col-md-3 forgote">
-						<input type="text" class="form-control validate" id="mobile" name="mobile" placeholder="Enter Your Email or Phone Number" />
+						<input type="text" class="form-control validate mobile" id="phoneNumber" name="mobile"  maxlength="10" placeholder="Mobile Number" />
 					</div>
 				
 			</div>
 <div class="clearfix"></div>
 <div class=""><br>
-<input type="submit" value="Submit" class="btn btn-primary">
+<input type="submit" id="submit1" value="Submit" class="btn btn-primary">
 </div>
 </form>
 </div>
@@ -197,4 +198,37 @@ window.setTimeout(function() {
 </div>
 <script type='text/javascript' src='js/customValidation.js'></script> 
 </body>
+<script type="text/javascript">
+
+$('#phoneNumber').blur(function() {
+	
+	
+	
+	
+	var phoneNumber=$(this).val();
+	
+	//alert(phoneNumber.length);
+	
+	  if( phoneNumber.length == 10)
+		  {
+		  mobilevalidation =true;
+		  }
+	 else
+	  
+	{
+		
+		  $('#phoneNumber').css('border-color', 'red');
+		 $('#errorMsg').text( "* Enter Valid Mobile Number ") ;
+		 $('#errorMsg').css('color','red');
+			setTimeout(function() { $("#errorMsg").text(''); }, 3000);
+		 mobilevalidation =false;
+		  
+	}
+
+		}); 
+		
+</script>
+
+
 </html>
+

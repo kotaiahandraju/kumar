@@ -255,7 +255,7 @@ function showTableData(response){
 		orderedDate= orderObj.created_on;
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
-			+ "<td title='"+orderObj.dealerName+"'>" + orderObj.dealerName + "</td>"
+			+ "<td title='"+orderObj.businessName+"'>" + orderObj.businessName + "</td>"
 			//+ "<td title='"+orderObj.orderId+"'>" + orderObj.orderId + "</td>"
 			+ '<td><a   href="#" type="button" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">' + orderObj.orderId + '</a></td>'
 			+ "<td title='"+orderObj.created_on+"'>" + orderObj.created_on + "</td>"
@@ -276,7 +276,9 @@ function getDealerOrdersItems(order_id){
 					url : "getItemsOfOrder.htm",
 					data :"order_id="+order_id,
 					 beforeSend : function() {
-			             $.blockUI({ message: 'Please wait' });
+			             $.blockUI({ message: 'Please wait' });displayDealerOrderItems
+			             
+			             
 			          },
 					success: function (response) {
 		                	 $.unblockUI();
@@ -352,7 +354,7 @@ function displayDealerOrderItems(response){
 				}
 		}
 		var tblRow ="<tr id='row"+orderObj.id+"'>"
-			+ "<td title='"+orderObj.dealerName+"'>" + orderObj.dealerName + "</td>"
+			+ "<td title='"+orderObj.businessName+"'>" + orderObj.businessName + "</td>"
 			+ "<td title='"+orderObj.categeory+"'>" + orderObj.categeory + "</td>"
 			+ "<td title='"+orderObj.subCategeory+"'>" + orderObj.subCategeory + "</td>"
 			+ "<td title='"+orderObj.itemcode+"'>" + orderObj.itemcode + "</td>"
@@ -401,7 +403,7 @@ function displayHistory(response){
 				}
 		}
 		var tblRow ="<tr id='row"+orderObj.id+"'>"
-			+ "<td title='"+orderObj.dealerName+"'>" + orderObj.dealerName + "</td>"
+			+ "<td title='"+orderObj.businessName+"'>" + orderObj.businessName + "</td>"
 			+ "<td title='"+orderObj.categeory+"'>" + orderObj.categeory + "</td>"
 			+ "<td title='"+orderObj.subCategeory+"'>" + orderObj.subCategeory + "</td>"
 			+ "<td title='"+orderObj.itemcode+"'>" + orderObj.itemcode + "</td>"
