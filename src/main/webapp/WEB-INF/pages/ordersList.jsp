@@ -12,9 +12,38 @@
  {
  border: px solid black !important;
  }
- @media (min-width: 768px) {
+ .mobile {
+ width:40px;
+ border:1px solid #ccc;
+ }
+ @media only screen and (max-width: 640px) and (min-width: 320px) {
+ .modal-dialog {
+    width: 100%;
+    margin: 30px auto;
+}
+.modal-content {
+box-shadow:none !important;
+border:none !important;
+}
+#exampleModalLabel .col-md-4 {
+width:400px;
+
+}
+ }
+ .table-striped > tbody > tr:nth-of-type(2n+2) {
+    background-color: #fff;
+}
 .modal-dialog {
-    width: 997px;
+    width: 90%;
+    margin: 30px auto;
+    background:#fff;
+}
+.table-striped > tbody > tr:nth-of-type(even) {
+background:#fff;
+}
+ @media only screen  (max-width: 1366px) {
+.modal-dialog {
+    width: 90%;
     margin: 30px auto;
 }
 }
@@ -129,7 +158,7 @@ table#dependent_table tbody tr td:first-child::before {
 
   
 <div class="modal fade" id="orderListModal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog"> 
+		  <div class="modal-dialog table-responsive"> 
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -148,7 +177,7 @@ table#dependent_table tbody tr td:first-child::before {
 </div>
 
 <div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog"> 
+		  <div class="modal-dialog table-responsive"> 
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -317,8 +346,8 @@ function displayDealerOrderItems(response){
 		if(typeof orderObj.pending_qty != "undefined"){
 				var int_val = parseInt(orderObj.pending_qty);
 				if(int_val>0){
-					text_field_str = "<td><input type='text'  maxlength ='3' class='mobile' id='qty"+orderObj.id+"' /></td>"
-									+"<td><input type='text'  maxlength ='3' class='mobile' id='nullify_qty"+orderObj.id+"' value='0'/></td>"
+					text_field_str = "<td><input type='text' width='40px'  maxlength ='4' class='mobile' id='qty"+orderObj.id+"' /></td>"
+									+"<td><input type='text' width='40px'  maxlength ='4' class='mobile' id='nullify_qty"+orderObj.id+"' value='0'/></td>"
 									+"<td><input type='button'   value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>";
 				}
 		}
@@ -367,7 +396,7 @@ function displayHistory(response){
 		if(typeof orderObj.pending_qty != "undefined"){
 				var int_val = parseInt(orderObj.pending_qty);
 				if(int_val>0){
-					text_field_str = "<td><input type='text'  maxlength ='3' class='mobile' id='qty"+orderObj.id+"' /></td>"
+					text_field_str = "<td><input type='text' width='40px'  maxlength ='4' class='mobile' id='qty"+orderObj.id+"' /></td>"
 									+"<td><input type='button'   value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>";
 				}
 		}
