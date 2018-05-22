@@ -122,7 +122,6 @@ font-weight:600;
 							<thead>
 								<tr><th>Product Category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><th>Quantity</th>
 								</tr>
-								<tr><td>V6 SUBMERSIBLES	</td><td>V6 SUBMERSIBLES, 50 FEET / STAGE RF, THREE PHASE (2", 2½" DELIVERY)	</td><td>KS63005RFP3(2)	</td><td>3.0/5/30 - 44/234 - 120	</td><td>12</td></tr>
 							</thead>
 							<tbody></tbody>
 						</table>
