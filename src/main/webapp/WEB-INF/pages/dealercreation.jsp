@@ -323,7 +323,6 @@ $('#phoneNumber').blur(function() {
 	
 	var phoneNumber=$(this).val();
 	
-	alert(phoneNumber.length);
 	
 	  if( phoneNumber.length == 10)
 		  {
