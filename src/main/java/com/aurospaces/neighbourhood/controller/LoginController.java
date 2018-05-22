@@ -1,7 +1,11 @@
 package com.aurospaces.neighbourhood.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -134,13 +138,24 @@ public class LoginController {
 	@RequestMapping(value = "/forgepasssword",method=RequestMethod.POST)
 		public String LoginHome(ModelMap model, HttpServletRequest request,HttpSession session,RedirectAttributes redir) throws IOException
 	{
+		InputStream input = null;
+		 Properties prop = new Properties();
+		 
+		 String propertiespath = objContext.getRealPath("Resources" +File.separator+"DataBase.properties");
+		 input = new FileInputStream(propertiespath);
+		 String  msg = prop.getProperty("resetPassword");
+		
+		 
 			String mobilenumber =request.getParameter("mobile");
 			
 			EmployeeBean employee =loginDao.getLoginBeanByMbile(mobilenumber);
 			
 			if(employee != null)
 			{
-				String msg ="your password is"+employee.getPassword();
+				//String msg ="your password is"+employee.getPassword();
+				msg =msg.replace("_pass_", employee.getPassword());
+				 msg =msg.replace("_username_",mobilenumber );
+				 
 				
 				SendSMS.sendSMS(msg, mobilenumber, objContext);
 				

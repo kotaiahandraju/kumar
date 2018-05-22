@@ -184,14 +184,14 @@ border-top: 0px solid #dddddd !important;
 								    </div>
                     			</div>
               
-                    			<div class="form-group">
+                    			<%-- <div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Password<span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	<form:input path="password" class="form-control  validate"  placeholder="password" onkeyup="removeBorder(this.id)" maxlength="20" />
 								    	<span class="hasError" id="storeError"></span>
 								    </div>
                     			</div>
-                    			
+                    			 --%>
                     			
                     			
                     		
@@ -317,15 +317,9 @@ $('#email').blur(function() {
 			
 			
 $('#phoneNumber').blur(function() {
-	
-	
-	
-	
 	var phoneNumber=$(this).val();
-	
-	
 	  if( phoneNumber.length == 10)
-		  {
+	  {
 		  mobilevalidation =true;
 		  }
 	 else
