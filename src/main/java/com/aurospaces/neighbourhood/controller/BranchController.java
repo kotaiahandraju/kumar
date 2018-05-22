@@ -70,7 +70,6 @@ public class BranchController {
 	@RequestMapping(value = "/addBranch", method = RequestMethod.POST)
 	public String addProductname(BranchBean branchBean,RedirectAttributes redir) {
 
-		System.out.println("111111111111113addBranch333333333111111111"+branchBean);
 		int id = 0;
 		String size = null;
 

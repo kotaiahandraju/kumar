@@ -88,6 +88,14 @@ table#dependent_table tbody tr td:first-child::before {
 								  	</div>
                     			</div>
                     		</div>
+                    		<div class="col-md-4">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Branch Code<span class="impColor">*</span></label>
+                    				<div class="col-md-6">
+								      	<form:input type="text" path="branchcode" class="form-control validate" placeholder="Branch Code"/>
+								  	</div>
+                    			</div>
+                    		</div>
                     	</div>
                     		
                     		</div>
@@ -171,6 +179,7 @@ function showTableData(response){
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.branchname+"'>" + orderObj.branchname + "</td>"
+			+ "<td title='"+orderObj.branchcode+"'>" + orderObj.branchcode + "</td>"
 			+ "<td title='"+orderObj.branchStatus+"'>" + orderObj.branchStatus + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
 			+"</tr>";
@@ -184,6 +193,7 @@ function editBranch(id) {
 	$("#id").val(id);
 	
 	$("#branchname").val(serviceUnitArray[id].branchname);
+	$("#branchcode").val(serviceUnitArray[id].branchcode);
 	$("#status").val(serviceUnitArray[id].status);
 	$(window).scrollTop($('#moveTo').offset().top);
 }

@@ -26,7 +26,7 @@ public class BaseBranchDao{
 	JdbcTemplate jdbcTemplate;
 
  
-	public final String INSERT_SQL = "INSERT INTO kumar_branch( branch_cr_time, branch_up_time, branchname, status) values (?, ?, ?, ?)"; 
+	public final String INSERT_SQL = "INSERT INTO kumar_branch( branch_cr_time, branch_up_time, branchname,branchcode,status) values (?, ?, ?, ?,?)"; 
 
 
 
@@ -64,7 +64,8 @@ public class BaseBranchDao{
 	ps.setTimestamp(1, branchCrTime);
 ps.setTimestamp(2, branchUpTime);
 ps.setString(3, branch.getBranchname());
-ps.setString(4, branch.getStatus());
+ps.setString(4, branch.getBranchcode());
+ps.setString(5, branch.getStatus());
 
 							return ps;
 						}
@@ -79,9 +80,9 @@ ps.setString(4, branch.getStatus());
 		else
 		{
 
-			String sql = "UPDATE kumar_branch  set branch_cr_time = ? ,branchname = ? ,status = ?  where id = ? ";
+			String sql = "UPDATE kumar_branch  set branch_cr_time = ? ,branchname = ?,branchcode =?,status = ?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{branch.getBranchCrTime(),branch.getBranchname(),branch.getStatus(),branch.getId()});
+			jdbcTemplate.update(sql, new Object[]{branch.getBranchCrTime(),branch.getBranchname(),branch.getBranchcode(),branch.getStatus(),branch.getId()});
 		}
 	}
 		
