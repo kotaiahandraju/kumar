@@ -261,7 +261,7 @@ function showTableData(response){
 			+ "<td title='"+orderObj.created_on+"'>" + orderObj.created_on + "</td>"
 			+ "<td title='"+orderObj.total_quantity+"'>" + orderObj.total_quantity + "</td>"
 			+ "<td title='"+orderObj.completed_status+"'>" + orderObj.completed_status + "</td>"
-			+ '<td><a   href="#"  onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">View Order</a></td>'
+		/* 	+ '<td><a   href="#"  onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">View Order</a></td>' */
 			+ '<td><a href="#" type="button" onclick="getDeliveredItemsHistory(\''+orderObj.orderId+'\');">View History</a></td>'
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
@@ -373,6 +373,22 @@ function displayDealerOrderItems(response){
 	
 	//$('#orderListModal').modal('show');
 	//if(isClick=='Yes') $('.datatables').dataTable();
+	
+	$(".mobile").keydown(function (e) {
+	    // Allow: backspace, delete, tab, escape, enter and .
+	    if ($.inArray(e.keyCode, [8, 9, 27, 13, 110]) !== -1 ||
+	         // Allow: Ctrl+A, Command+A
+	        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+	         // Allow: home, end, left, right, down, up
+	        (e.keyCode >= 35 && e.keyCode <= 40)) {
+	             // let it happen, don't do anything
+	             return;
+	    }
+	    // Ensure that it is a number and stop the keypress
+	    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+	        e.preventDefault();
+	    }
+	});
 }
 function displayHistory(response){
 	//serviceUnitArray ={};
@@ -421,21 +437,7 @@ function displayHistory(response){
 	//if(isClick=='Yes') $('.datatables').dataTable();
 }	
 		
-		$(".mobile").keydown(function (e) {
-		    // Allow: backspace, delete, tab, escape, enter and .
-		    if ($.inArray(e.keyCode, [8, 9, 27, 13, 110]) !== -1 ||
-		         // Allow: Ctrl+A, Command+A
-		        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
-		         // Allow: home, end, left, right, down, up
-		        (e.keyCode >= 35 && e.keyCode <= 40)) {
-		             // let it happen, don't do anything
-		             return;
-		    }
-		    // Ensure that it is a number and stop the keypress
-		    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-		        e.preventDefault();
-		    }
-		});
+		
 		
 		
 
