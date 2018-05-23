@@ -36,6 +36,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 
 @Controller
@@ -123,7 +124,15 @@ public class ProductNameController {
 				file.transferTo(file1);
 			}
 			
+			
+			String productname = productnameBean.getProductname(); 
+			byte[] bytes = productname.getBytes(StandardCharsets.ISO_8859_1);
+			productname = new String(bytes, StandardCharsets.UTF_8);
+			productnameBean.setProductname(productname);
+			
+			
 			productnameBean.setProductId(productnameBean.getProducttype());
+			
 			productnameBean.setStatus("1");
 			ProductnameBean productnameBean2 = productnameDao.getByProductName(productnameBean);
 			int dummyId = 0;

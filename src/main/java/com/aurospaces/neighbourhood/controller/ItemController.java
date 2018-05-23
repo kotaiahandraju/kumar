@@ -1,6 +1,7 @@
 package com.aurospaces.neighbourhood.controller;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -84,6 +85,19 @@ public class ItemController {
 		String size = null;
 
 		try {
+			
+			String itemdescrption = itemsBean.getItemdescrption(); 
+			byte[] bytes = itemdescrption.getBytes(StandardCharsets.ISO_8859_1);
+			itemdescrption = new String(bytes, StandardCharsets.UTF_8);
+			itemsBean.setItemdescrption(itemdescrption);
+			
+			String itemcode = itemsBean.getItemcode(); 
+			byte[] bytes1 = itemcode.getBytes(StandardCharsets.ISO_8859_1);
+			itemcode = new String(bytes1, StandardCharsets.UTF_8);
+			itemsBean.setItemcode(itemcode);
+			
+			
+			
 			itemsBean.setProductId(itemsBean.getProducttype());
 			itemsBean.setProductname(itemsBean.getProductname());
 			itemsBean.setStatus("1");
