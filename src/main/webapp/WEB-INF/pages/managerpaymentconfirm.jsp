@@ -286,6 +286,6 @@ function editPaymentStatus(id) {
 
 
 	
-$("#pageName").text("Confirm Payment");
-$(".dealerpaymentconfirm").addClass("active");
+$("#pageName").text("Order Product");
+$(".managerorderplace").addClass("active");
 </script>
