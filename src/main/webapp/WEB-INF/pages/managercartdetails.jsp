@@ -74,7 +74,7 @@ font-weight:600;
 					</div>
 			<br>
 					<div class="pull-right">
-					<a href="managercartdetails"><span class="btn btn-warning" ><!-- <i class="fa fa-shopping-cart"></i> --> ADD MORE ITEMS</span></a> 
+					<a href="managerorderplace"><span class="btn btn-warning" ><!-- <i class="fa fa-shopping-cart"></i> --> ADD MORE ITEMS</span></a> 
 					<span class="btn btn-danger"  onclick="ordePlacing();"><!-- <i class="fa fa-bolt" aria-hidden="true"></i> -->CONFIRM ORDER</span>
 					</div>
 				</div>
@@ -323,9 +323,14 @@ function ordePlacing() {
 
 
 function removecartdata(id){
+	if(delerId ==""){
+		alert('');
+		return false;
+		
+	}
 	var formData = new FormData();
 	formData.append('id', id);
-	
+	formData.append('delerId', delerId);
 	$.fn.makeMultipartRequest('POST', 'managerdeletecart', false,
 			formData, false, 'text', function(data) {
 		var jsonobj = $.parseJSON(data);
