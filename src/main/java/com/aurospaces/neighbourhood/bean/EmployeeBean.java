@@ -47,8 +47,15 @@ protected String gstno ;
 protected String phoneNumber ;
 /** Field mapping. **/
 protected String designation,businessName,confirm;
+protected String delerId ;
 
 
+public String getDelerId() {
+	return delerId;
+}
+public void setDelerId(String delerId) {
+	this.delerId = delerId;
+}
 public String getConfirm() {
 	return confirm;
 }

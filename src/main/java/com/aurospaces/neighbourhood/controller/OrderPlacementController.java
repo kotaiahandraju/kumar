@@ -96,7 +96,9 @@ public class OrderPlacementController {
 		        int rand_int = rand.nextInt(10000);
 		        String branchCode=null;
 				int branchCount=0;
-				orderslistbean.setDelerId(objuserBean.getEmpId());
+				if(StringUtils.isEmpty(orderslistbean.getDelerId())) {
+					orderslistbean.setDelerId(objuserBean.getEmpId());
+				}
 				orderslistbean.setBranchId(objuserBean.getBranchId());
 //				List<BranchBean> orderList=ordersListDao.getOrderListCountByBranchId(objuserBean.getBranchId());
 				BranchBean branchList= branchDao.getBybranchCodeById(objuserBean.getBranchId());
@@ -132,7 +134,11 @@ public class OrderPlacementController {
 					jsonArray.put(jsonObj1);
 					jsonArray.put(jsonObj2);
 				}
+				if(StringUtils.isEmpty(orderslistbean.getDelerId())) {
 				 cartDao.deleteByUserId(Integer.parseInt(objuserBean.getEmpId()));
+				}else {
+					cartDao.deleteByUserId(Integer.parseInt(orderslistbean.getDelerId()));
+				}
 			}
 			}
 			
@@ -142,6 +148,7 @@ public class OrderPlacementController {
 		return String.valueOf(jsonArray);
 		
 	}
+	
 	
 	 @RequestMapping(value = "/orederLists")
 		public @ResponseBody String orederLists(@RequestParam("dealerId") String dealerId,@RequestParam("status") String status,HttpServletRequest request, HttpSession session) {
@@ -351,6 +358,33 @@ public class OrderPlacementController {
 		return "myOrdersList";
 		
 	}
+	
+	@RequestMapping(value="/managerorderplace")
+	public String managerorderplace(@ModelAttribute("managerorderLstForm") OrdersListBean ordersListBean,HttpServletRequest request){
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		List<ItemsBean> listOrderBeans = null;
+		try{
+			System.out.println("dealerOrderPlacedealerOrderPlacedealerOrderPlace");
+			listOrderBeans = itemsDao.getItems("1");
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+					System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "managerorderplace";
+		
+	}
+	
 	
 	@RequestMapping(value = "/getProductsDeliveredQtyBranchWise")
 	public  String getProductsDeliveredQtyBranchWise(@ModelAttribute("orderLstForm") EmployeeBean employeeBean,Model model,HttpServletRequest request,HttpSession session) 

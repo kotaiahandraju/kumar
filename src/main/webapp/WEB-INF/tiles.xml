@@ -96,7 +96,12 @@
  <definition name="ordersList" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/ordersList.jsp" />
  </definition>
-	
+ <definition name="managerorderplace" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/managerOrderPlacing.jsp" />
+ </definition>
+	<definition name="managercartdetails" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/managercartdetails.jsp" />
+ </definition>
 	
 </tiles-definitions>
 
