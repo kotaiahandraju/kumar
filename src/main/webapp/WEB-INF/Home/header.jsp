@@ -394,7 +394,7 @@ function cartCount(){
 
                <span>Product List</span></a></li>&emsp;
               <li class="employee"><a href="${baseurl }/admin/employeeCreation"><i class="fa fa-users"></i> <span>Employees</span></a></li>
-             
+              <li class="items"><a href="${baseurl }/admin/getProductsDeliveredQtyBranchWise"><i class="fa fa-users"></i> <span>Padma</span></a></li>
               </c:if>
 			 <c:if test="${roleId=='2' }">
 			  <li class="productType"><a href="${baseurl }/admin/producttype"><i class="fa fa-clone"></i>

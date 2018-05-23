@@ -182,6 +182,22 @@ public List<Map<String,Object>> getDeliveredItemsHistory(String order_id){
 	
 }
 
+public List<Map<String,Object>> getProductsDeliveredQtyBranchWise(){
+	List<Map<String,Object>> list=null;
+	
+	try{
+		jdbcTemplate = custom.getJdbcTemplate();
+		String sql ="select (select ol.branchId from orders_list ol where ol.orderId = order_id limit 1) as branch,product_id,ifnull(sum(dispatched_items_quantity),0) as ordered, ifnull(sum(nullified_qty),0) as nullified from invoice "
+					+" group by branch, product_id";
+		list =jdbcTemplate.queryForList(sql);
+		System.out.println(sql);
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+	return list;
+	
+}
+
 /*public List<Map<String, Object>> getMyOrdersList() 
 {
 List<Map<String,Object>> list=null;
