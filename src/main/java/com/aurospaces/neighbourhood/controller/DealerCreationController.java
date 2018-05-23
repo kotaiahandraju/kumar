@@ -29,6 +29,7 @@ import com.aurospaces.neighbourhood.db.dao.BranchDao;
 import com.aurospaces.neighbourhood.db.dao.EmployeeDao;
 import com.aurospaces.neighbourhood.db.dao.LoginDao;
 import com.aurospaces.neighbourhood.util.SendSMS;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * @author Kotaiah
@@ -45,15 +46,24 @@ public class DealerCreationController {
 	@RequestMapping(value = "/dealercreation")
 	public String dealercreation( @ModelAttribute("delarForm") EmployeeBean employeeBean, HttpServletRequest request, HttpSession session) {
 
-		try {
-System.out.println("Dealer Creation Page");
-		} catch (Exception e) {
+		List<Map<String,Object>> listOrderBeans =null;
+		String json = null;
+		try{
+			ObjectMapper mapper = new ObjectMapper();
+			listOrderBeans = employeeDao.getAllDelarsConfirm("1",session);
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				json =mapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", json);
+			} else {
+				request.setAttribute("allOrders1", "''");
+			}
+			
+		}catch(Exception e){
 			e.printStackTrace();
-			System.out.println(e);
-
 		}
 		return "dealercreation";
 	}
+	@SuppressWarnings("unused")
 	@RequestMapping(value = "/addDealer")
 	public String addDealer( @ModelAttribute("delar") EmployeeBean employeeBean,ModelMap model, HttpServletRequest request, HttpSession session,RedirectAttributes redirect) throws IOException {
 		LoginBean objLoginBean = new LoginBean();
@@ -71,30 +81,52 @@ System.out.println("Dealer Creation Page");
 		
 		 String propertiespath = objContext.getRealPath("Resources" +File.separator+"DataBase.properties");
 		 input = new FileInputStream(propertiespath);
+		// load a properties file
+					prop.load(input);
 		       String  msg = prop.getProperty("smsUsernameAndPassword");
 		 msg =msg.replace("_username_",phnumber );
 		 msg =msg.replace("_pass_", employeeBean.getPassword());
 		 
 		
-	
-		
+			int id = 0;
+			String size = null;
+			employeeBean.setRoleId("3");
+			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			if (objuserBean != null) {
+				employeeBean.setBranchId(objuserBean.getBranchId());
+				objLoginBean.setBranchId(objuserBean.getBranchId());
+
+}
 		
 		try {
 			EmployeeBean objEmployeeBean = employeeDao.mobileDuplicateCheck(employeeBean);
-			if(objEmployeeBean != null){
-				redirect.addFlashAttribute("msg", "Alreday Registered ");
-				redirect.addFlashAttribute("cssMsg", "warning");
-			}else{
-				employeeBean.setRoleId("3");
+			int dummyId = 0;
+			if (objEmployeeBean != null) {
+				dummyId = objEmployeeBean.getId();
+			}
+			
+			if (employeeBean.getId() != 0) {
+				id = employeeBean.getId();
+				if (id == dummyId || objEmployeeBean == null) {
+
+					employeeDao.save(employeeBean);
+					redirect.addFlashAttribute("msg", "Record Updated Successfully");
+					redirect.addFlashAttribute("cssMsg", "warning");
+				} else {
+					redirect.addFlashAttribute("msg", "Already Record Exist");
+					redirect.addFlashAttribute("cssMsg", "danger");
+				}
+			}
+			
+			
+			
+			if (employeeBean.getId() == 0 && objEmployeeBean == null) 
+			{
+				
 				employeeBean.setStatus("0");
 				employeeBean.setStatus("1");
 				employeeBean.setConfirm("1");
-				LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
-				if (objuserBean != null) {
-					employeeBean.setBranchId(objuserBean.getBranchId());
-					objLoginBean.setBranchId(objuserBean.getBranchId());
-
-	}
+				
 				employeeDao.save(employeeBean);
 				objLoginBean.setEmpId(String.valueOf(employeeBean.getId()));
 				objLoginBean.setStatus("1");
@@ -106,6 +138,10 @@ System.out.println("Dealer Creation Page");
 				redirect.addFlashAttribute("msg", " Registered Successfully");
 				redirect.addFlashAttribute("cssMsg", "success");
 				
+			}
+			if (employeeBean.getId() == 0 && objEmployeeBean != null) {
+				redirect.addFlashAttribute("msg", "Already Record Exist");
+				redirect.addFlashAttribute("cssMsg", "danger");
 			}
 			
 		} catch (Exception e) {

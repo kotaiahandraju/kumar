@@ -182,7 +182,7 @@ window.setTimeout(function() {
 <!-- <p>Mobile Number *</p> -->
 <div class="form-group">
 					<div class="col-md-3 forgote">
-						<input type="text" class="form-control validate mobile" id="phoneNumber" name="mobile"  maxlength="10" placeholder="Mobile Number" />
+						<input type="text" class="form-control validate mobile" id="phoneNumber" name="phoneNumber"  maxlength="10" placeholder="Mobile Number" />
 					</div>
 				
 			</div>

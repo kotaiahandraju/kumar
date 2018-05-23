@@ -107,6 +107,7 @@ public class ManagerCartController {
 		JSONObject objJson = new JSONObject();
 		List<Map<String,Object>> listOrderBeans = null;
 		try{
+			String delerId=request.getParameter("delerId");
 			int delete=	cartDao.delete(cartBean.getId());
 			if(delete == 0){
 				objJson.put("msg", "failed");
@@ -115,7 +116,7 @@ public class ManagerCartController {
 				
 				objJson.put("msg", "Are you sure you want to delete this item?");
 			}
-			listOrderBeans = cartDao.getallcartDetails();
+			listOrderBeans = cartDao.getallManagercartDetails(delerId);
 				objJson.put("allOrders1", listOrderBeans);
 			int count=	cartDao.countcartdetails(cartBean);
 			objJson.put("count", count);
