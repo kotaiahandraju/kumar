@@ -10,10 +10,23 @@ protected Date branchCrTime ;
 protected Date branchUpTime ;
 protected String branchname ;
 protected String status ; 
-protected String branchStatus ; 
+protected String branchStatus,branchcode; 
+protected int branchCount ;
 
 
 
+public int getBranchCount() {
+	return branchCount;
+}
+public void setBranchCount(int branchCount) {
+	this.branchCount = branchCount;
+}
+public String getBranchcode() {
+	return branchcode;
+}
+public void setBranchcode(String branchcode) {
+	this.branchcode = branchcode;
+}
 public String getBranchStatus() {
 	return branchStatus;
 }

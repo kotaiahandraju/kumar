@@ -1,11 +1,15 @@
 
 package com.aurospaces.neighbourhood.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Random;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +28,7 @@ import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.db.dao.BranchDao;
 import com.aurospaces.neighbourhood.db.dao.EmployeeDao;
 import com.aurospaces.neighbourhood.db.dao.LoginDao;
+import com.aurospaces.neighbourhood.util.SendSMS;
 
 /**
  * @author Kotaiah
@@ -36,6 +41,7 @@ public class DealerCreationController {
 	@Autowired EmployeeDao employeeDao;
 	@Autowired ServletContext objContext;
 	@Autowired LoginDao loginDao;
+	
 	@RequestMapping(value = "/dealercreation")
 	public String dealercreation( @ModelAttribute("delarForm") EmployeeBean employeeBean, HttpServletRequest request, HttpSession session) {
 
@@ -49,8 +55,30 @@ System.out.println("Dealer Creation Page");
 		return "dealercreation";
 	}
 	@RequestMapping(value = "/addDealer")
-	public String addDealer( @ModelAttribute("delar") EmployeeBean employeeBean,ModelMap model, HttpServletRequest request, HttpSession session,RedirectAttributes redirect) {
+	public String addDealer( @ModelAttribute("delar") EmployeeBean employeeBean,ModelMap model, HttpServletRequest request, HttpSession session,RedirectAttributes redirect) throws IOException {
 		LoginBean objLoginBean = new LoginBean();
+		InputStream input = null;
+		 Properties prop = new Properties();
+		// String msg ="";
+		 
+		Random random = new Random();
+		String  randompassword = String.format("%05d", random.nextInt(100000));
+		employeeBean.setPassword(randompassword);
+		
+		String phnumber =employeeBean.getPhoneNumber();
+		
+		//String msg ="your KMPOS login details are username : "+phnumber+" password is :"+employeeBean.getPassword();
+		
+		 String propertiespath = objContext.getRealPath("Resources" +File.separator+"DataBase.properties");
+		 input = new FileInputStream(propertiespath);
+		       String  msg = prop.getProperty("smsUsernameAndPassword");
+		 msg =msg.replace("_username_",phnumber );
+		 msg =msg.replace("_pass_", employeeBean.getPassword());
+		 
+		
+	
+		
+		
 		try {
 			EmployeeBean objEmployeeBean = employeeDao.mobileDuplicateCheck(employeeBean);
 			if(objEmployeeBean != null){
@@ -74,8 +102,10 @@ System.out.println("Dealer Creation Page");
 				objLoginBean.setUserName(employeeBean.getUsername());
 				objLoginBean.setPassword(employeeBean.getPassword());
 				loginDao.save(objLoginBean);
+				SendSMS.sendSMS(msg, phnumber, objContext);
 				redirect.addFlashAttribute("msg", " Registered Successfully");
 				redirect.addFlashAttribute("cssMsg", "success");
+				
 			}
 			
 		} catch (Exception e) {

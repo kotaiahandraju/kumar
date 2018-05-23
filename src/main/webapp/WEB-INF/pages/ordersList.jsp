@@ -12,9 +12,38 @@
  {
  border: px solid black !important;
  }
- @media (min-width: 768px) {
+ .mobile {
+ width:40px;
+ border:1px solid #ccc;
+ }
+ @media only screen and (max-width: 640px) and (min-width: 320px) {
+ .modal-dialog {
+    width: 100%;
+    margin: 30px auto;
+}
+.modal-content {
+box-shadow:none !important;
+border:none !important;
+}
+#exampleModalLabel .col-md-4 {
+width:400px;
+
+}
+ }
+ .table-striped > tbody > tr:nth-of-type(2n+2) {
+    background-color: #fff;
+}
 .modal-dialog {
-    width: 997px;
+    width: 90%;
+    margin: 30px auto;
+    background:#fff;
+}
+.table-striped > tbody > tr:nth-of-type(even) {
+background:#fff;
+}
+ @media only screen  (max-width: 1366px) {
+.modal-dialog {
+    width: 90%;
     margin: 30px auto;
 }
 }
@@ -129,7 +158,7 @@ table#dependent_table tbody tr td:first-child::before {
 
   
 <div class="modal fade" id="orderListModal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog"> 
+		  <div class="modal-dialog table-responsive"> 
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -148,7 +177,7 @@ table#dependent_table tbody tr td:first-child::before {
 </div>
 
 <div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog"> 
+		  <div class="modal-dialog table-responsive"> 
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -226,13 +255,13 @@ function showTableData(response){
 		orderedDate= orderObj.created_on;
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
-			+ "<td title='"+orderObj.dealerName+"'>" + orderObj.dealerName + "</td>"
+			+ "<td title='"+orderObj.businessName+"'>" + orderObj.businessName + "</td>"
 			//+ "<td title='"+orderObj.orderId+"'>" + orderObj.orderId + "</td>"
 			+ '<td><a   href="#" type="button" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">' + orderObj.orderId + '</a></td>'
 			+ "<td title='"+orderObj.created_on+"'>" + orderObj.created_on + "</td>"
 			+ "<td title='"+orderObj.total_quantity+"'>" + orderObj.total_quantity + "</td>"
 			+ "<td title='"+orderObj.completed_status+"'>" + orderObj.completed_status + "</td>"
-			//+ '<td><a   href="#" type="button" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">View Order</a></td>'
+		/* 	+ '<td><a   href="#"  onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">View Order</a></td>' */
 			+ '<td><a href="#" type="button" onclick="getDeliveredItemsHistory(\''+orderObj.orderId+'\');">View History</a></td>'
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
@@ -247,7 +276,9 @@ function getDealerOrdersItems(order_id){
 					url : "getItemsOfOrder.htm",
 					data :"order_id="+order_id,
 					 beforeSend : function() {
-			             $.blockUI({ message: 'Please wait' });
+			             $.blockUI({ message: 'Please wait' });displayDealerOrderItems
+			             
+			             
 			          },
 					success: function (response) {
 		                	 $.unblockUI();
@@ -317,13 +348,13 @@ function displayDealerOrderItems(response){
 		if(typeof orderObj.pending_qty != "undefined"){
 				var int_val = parseInt(orderObj.pending_qty);
 				if(int_val>0){
-					text_field_str = "<td><input type='text'  maxlength ='3' class='mobile' id='qty"+orderObj.id+"' /></td>"
-									+"<td><input type='text'  maxlength ='3' class='mobile' id='nullify_qty"+orderObj.id+"' value='0'/></td>"
+					text_field_str = "<td><input type='text' width='40px'  maxlength ='4' class='mobile' id='qty"+orderObj.id+"' /></td>"
+									+"<td><input type='text' width='40px'  maxlength ='4' class='mobile' id='nullify_qty"+orderObj.id+"' value='0'/></td>"
 									+"<td><input type='button'   value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>";
 				}
 		}
 		var tblRow ="<tr id='row"+orderObj.id+"'>"
-			+ "<td title='"+orderObj.dealerName+"'>" + orderObj.dealerName + "</td>"
+			+ "<td title='"+orderObj.businessName+"'>" + orderObj.businessName + "</td>"
 			+ "<td title='"+orderObj.categeory+"'>" + orderObj.categeory + "</td>"
 			+ "<td title='"+orderObj.subCategeory+"'>" + orderObj.subCategeory + "</td>"
 			+ "<td title='"+orderObj.itemcode+"'>" + orderObj.itemcode + "</td>"
@@ -342,6 +373,22 @@ function displayDealerOrderItems(response){
 	
 	//$('#orderListModal').modal('show');
 	//if(isClick=='Yes') $('.datatables').dataTable();
+	
+	$(".mobile").keydown(function (e) {
+	    // Allow: backspace, delete, tab, escape, enter and .
+	    if ($.inArray(e.keyCode, [8, 9, 27, 13, 110]) !== -1 ||
+	         // Allow: Ctrl+A, Command+A
+	        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+	         // Allow: home, end, left, right, down, up
+	        (e.keyCode >= 35 && e.keyCode <= 40)) {
+	             // let it happen, don't do anything
+	             return;
+	    }
+	    // Ensure that it is a number and stop the keypress
+	    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+	        e.preventDefault();
+	    }
+	});
 }
 function displayHistory(response){
 	//serviceUnitArray ={};
@@ -367,12 +414,12 @@ function displayHistory(response){
 		if(typeof orderObj.pending_qty != "undefined"){
 				var int_val = parseInt(orderObj.pending_qty);
 				if(int_val>0){
-					text_field_str = "<td><input type='text'  maxlength ='3' class='mobile' id='qty"+orderObj.id+"' /></td>"
+					text_field_str = "<td><input type='text' width='40px'  maxlength ='4' class='mobile' id='qty"+orderObj.id+"' /></td>"
 									+"<td><input type='button'   value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>";
 				}
 		}
 		var tblRow ="<tr id='row"+orderObj.id+"'>"
-			+ "<td title='"+orderObj.dealerName+"'>" + orderObj.dealerName + "</td>"
+			+ "<td title='"+orderObj.businessName+"'>" + orderObj.businessName + "</td>"
 			+ "<td title='"+orderObj.categeory+"'>" + orderObj.categeory + "</td>"
 			+ "<td title='"+orderObj.subCategeory+"'>" + orderObj.subCategeory + "</td>"
 			+ "<td title='"+orderObj.itemcode+"'>" + orderObj.itemcode + "</td>"
@@ -390,21 +437,7 @@ function displayHistory(response){
 	//if(isClick=='Yes') $('.datatables').dataTable();
 }	
 		
-		$(".mobile").keydown(function (e) {
-		    // Allow: backspace, delete, tab, escape, enter and .
-		    if ($.inArray(e.keyCode, [8, 9, 27, 13, 110]) !== -1 ||
-		         // Allow: Ctrl+A, Command+A
-		        (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
-		         // Allow: home, end, left, right, down, up
-		        (e.keyCode >= 35 && e.keyCode <= 40)) {
-		             // let it happen, don't do anything
-		             return;
-		    }
-		    // Ensure that it is a number and stop the keypress
-		    if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
-		        e.preventDefault();
-		    }
-		});
+		
 		
 		
 

@@ -90,6 +90,17 @@ margin-top:3px !important;
 @media only screen and (max-width: 640px) and (min-width: 325px) {
 .carth {
 margin-left:10px !important;
+    margin-top: 6px !important;
+}
+.modal-dialog {
+    width: 100%;
+    margin: 30px auto;
+    background:#fff;
+}
+.modal-content {
+box-shadow:none !important;
+border:none !important;
+
 }
 .pagination {
     display: inline;

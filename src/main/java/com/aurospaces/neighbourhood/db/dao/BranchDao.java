@@ -52,6 +52,17 @@ public class BranchDao extends BaseBranchDao
 				List<BranchBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(BranchBean.class));
 					return retlist;
 		 }
+	
+	public BranchBean getBybranchCodeById(String branchId) {
+		 jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "SELECT branchcode,(SELECT COUNT(DISTINCT orderId) FROM `orders_list` WHERE branchId=kb.id ) as branchCount FROM `kumar_branch` kb LEFT JOIN orders_list ol ON ol.branchId=kb.id WHERE kb.id=? GROUP BY branchcode";
+			List<BranchBean> retlist = jdbcTemplate.query(sql,
+			new Object[]{branchId},
+			ParameterizedBeanPropertyRowMapper.newInstance(BranchBean.class));
+			if(retlist.size() > 0)
+				return retlist.get(0);
+			return null;
+		}
 
 }
 
