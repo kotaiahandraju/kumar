@@ -7,7 +7,9 @@
 
 
 
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+<script src="${baseurl }/tablesearch/multifilter.js"></script>
+<link rel="stylesheet" href="${baseurl }/tablesearch/style.css" />
+
  <link rel="stylesheet" type="text/css" href="../assets/css/img.css">
  <style>
  .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td
@@ -57,12 +59,27 @@ table#dependent_table tbody tr td:first-child::before {
 							<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
 						</div>
 					</div>
+<div class='container'>
+<div class='filters'>
+<div class='filter-container'>
+<input autocomplete='off' class='filter' name='Product Sub Category' placeholder='ProductSubcategory' data-col='Product Sub Category'/>
+</div>
+
+<div class='filter-container'>
+<input autocomplete='off' class='filter' name='Item Code' placeholder='Item Code' data-col='Item Code'/>
+</div>
+<div class='filter-container'>
+<input autocomplete='off' class='filter' name='Description' placeholder='Description' data-col='Description'/>
+</div>
+<div class='clearfix'></div>
+</div>
+</div>
 					<div class="panel-body collapse in">
 					<div class="table-responsive" id="tableId">
 						<table class="table "
 							id="example">
 							<thead>
-								<tr><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>quantity</td>
+								<tr><th>Product Sub Category</th><td>ItemCode</td><th>Description</th><td>quantity</td>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -90,6 +107,13 @@ table#dependent_table tbody tr td:first-child::before {
 					</div>
 				</div>
 				</div>
+  <script type='text/javascript'>
+    //<![CDATA[
+      $(document).ready(function() {
+        $('.filter').multifilter()
+      })
+    //]]>
+  </script>
 
 <script type="text/javascript">
 var listOrders1 =${allOrders1};
@@ -108,13 +132,13 @@ function showTableData(response){
 	var table=$('#tableId').html('');
 	serviceUnitArray = {};
 	var protectType = null;
-	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
-    	'<thead><tr><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>Quantity</td></tr>'+
+	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table " id="example1">'+
+    	'<thead><tr><th>Product Sub Category</th><th>Item Code</th><th>Description</th><th>quantity</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		serviceUnitArray[orderObj.id] = orderObj;
-		var quantity ="<input type='text' name='quantity[]' maxlength='3' class='numericOnly' id='"+orderObj.id+"quantity' />"
+		var quantity ="<input type='text' name='quantity[]' maxlength='4' class='numericOnly' id='"+orderObj.id+"quantity' />"
 		var tblRow = "<tr>"
 				/* + "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>" */
 				+ "<td title='"+orderObj.productIdName+"'>"	+ orderObj.productIdName + "</td>"
@@ -124,6 +148,7 @@ function showTableData(response){
 		$(tblRow).appendTo("#tableId table tbody");
 		
 	});
+	
 	if(isClick=='Yes') $('.datatables').dataTable();
 	
 }
