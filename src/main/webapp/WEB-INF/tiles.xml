@@ -57,6 +57,9 @@
  <definition name="employeeCreation" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/empCreation.jsp" />
  </definition>
+ <definition name="productsDeliveredQtyBranchWise" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/productsDeliveredQtyBranchWise.jsp" />
+ </definition>
  
   <definition name="delarPayment" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/delarPayment.jsp" />
