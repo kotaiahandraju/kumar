@@ -153,6 +153,10 @@ public class OrderPlacementController {
 			boolean delete = false;
 			try {
 
+				LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+				if(objuserBean.getRoleId().equals("3")){ // means dealer
+					dealerId = objuserBean.getEmpId();
+				}
 				listOrderBeans = listDao.getOrdersList(dealerId,status);
 				objectMapper = new ObjectMapper();
 				if (listOrderBeans != null && listOrderBeans.size() > 0) {
@@ -347,4 +351,68 @@ public class OrderPlacementController {
 		return "myOrdersList";
 		
 	}
+	
+	@RequestMapping(value = "/getProductsDeliveredQtyBranchWise")
+	public  String getProductsDeliveredQtyBranchWise(@ModelAttribute("orderLstForm") EmployeeBean employeeBean,Model model,HttpServletRequest request,HttpSession session) 
+	{
+		List<Map<String, Object>> branch_prod_list = null;
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		try {
+			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			Map<String,Object> prod_map = new HashMap<String,Object>();
+			Map<String,String> branches_map = new HashMap<String,String>();
+			if(objuserBean != null){
+				branch_prod_list = listDao.getProductsDeliveredQtyBranchWise();
+				for(Map<String, Object> row:branch_prod_list){
+					if(!branches_map.containsKey((String)row.get("branch"))){
+						branches_map.put((String)row.get("branch"), (String)row.get("branch"));
+					}
+					int product_id = (Integer)row.get("product_id");
+					if(prod_map.containsKey(product_id+"")){
+						Map<String,Object> branch = (Map<String,Object>)prod_map.get(product_id+"");
+						branch.put((String)row.get("branch"), row.get("ordered")+","+row.get("nullified"));
+					}else{
+						Map<String,Object> branch = new HashMap<String,Object>();
+						branch.put((String)row.get("branch"), row.get("ordered")+","+row.get("nullified"));
+						prod_map.put(product_id+"", branch);
+					}
+					
+				}
+				/*Map<String,Object> branch = new HashMap<String,Object>();
+				branch.put("vijayawada", "30,10");
+				branch.put("guntur", "10,0");
+				
+				
+				Map<String,Object> branch2 = new HashMap<String,Object>();
+				branch2.put("guntur", "100,0");
+				branch2.put("vijayawada", "300,10");*/
+				
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(branches_map);
+				request.setAttribute("branches_map", sJson);
+				
+				
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(prod_map);
+				request.setAttribute("delivered_qty_list", sJson);
+				
+				/*branch_prod_list = listDao.getProductsDeliveredQtyBranchWise();
+				objectMapper = new ObjectMapper();
+				if (branch_prod_list != null && branch_prod_list.size() > 0) {
+	
+					objectMapper = new ObjectMapper();
+					sJson = objectMapper.writeValueAsString(branch_prod_list);
+					request.setAttribute("delivered_qty_list", sJson);
+				} else {
+					request.setAttribute("delivered_qty_list", "''");
+				}*/
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return "productsDeliveredQtyBranchWise";
+		
+	}	
 }
