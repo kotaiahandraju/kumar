@@ -157,7 +157,7 @@ public class OrderPlacementController {
 				if(objuserBean.getRoleId().equals("3")){ // means dealer
 					dealerId = objuserBean.getEmpId();
 				}
-				listOrderBeans = listDao.getOrdersList(dealerId,status);
+				listOrderBeans = listDao.getOrdersList(dealerId,objuserBean.getBranchId(),status);
 				objectMapper = new ObjectMapper();
 				if (listOrderBeans != null && listOrderBeans.size() > 0) {
 
@@ -285,7 +285,7 @@ public class OrderPlacementController {
 			Map<String,String> data = new HashMap<String,String>();
 			data.put("order_id", order_id);
 			data.put("product_id", product_id);
-			data.put("quantity", quantity);
+			data.put("quantity", StringUtils.isNotBlank(quantity)?quantity:"0");
 			data.put("nullified_qty", StringUtils.isNotBlank(nullify_qty)?nullify_qty:"0");
 			//generate invoice number
 			data.put("invoice_no", "eee");
