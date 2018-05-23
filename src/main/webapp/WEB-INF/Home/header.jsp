@@ -331,7 +331,7 @@ function cartCount(){
             <span class="oms">Order Management System</span>
             <div class="clearfix"></div>
         </div>
-          <c:if test="${cacheUserBean.roleId=='3' }">
+          <c:if test="${cacheUserBean.roleId=='3' || cacheUserBean.roleId=='2'}">
         <a href="cartdetails"><li class="pull-right carth"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="cartId"></span> </li></a>
         </c:if>
 		<div class="masters">
@@ -353,7 +353,7 @@ function cartCount(){
 	                    <li class="username">
 	                        <a href="#">
 	                            <div class="pull-left"><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt=""/></div>
-	                            <div class="pull-right"><h5>Branch Manager!</h5><small>Logged in as <span>${cacheUserBean.userName}</span></small></div> 
+	                            <div class="pull-right"><h5>${cacheUserBean.branchName} Branch</h5><small>Logged in as <span>${cacheUserBean.userName}</span></small></div> 
 	                        </a>
 	                    </li>
 	            </c:if>
@@ -363,7 +363,7 @@ function cartCount(){
 	                    <li class="username">
 	                        <a href="#">
 	                            <div class="pull-left"><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt=""/></div>
-	                            <div class="pull-right"><h5>Dealer!</h5><small>Logged in as <span>${cacheUserBean.userName}</span></small></div> 
+	                            <div class="pull-right"><h5>${cacheUserBean.branchName} Branch</h5><small>Logged in as <span>${cacheUserBean.userName}</span></small></div> 
 	                        </a>
 	                    </li>
 	            </c:if>
