@@ -60,9 +60,9 @@ public class EmployeeDao extends BaseEmployeeDao
 		
 		try{
 			 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = " select * from kumar_employee where phone_number=?";
+			String sql = " select * from kumar_employee where phone_number=? or  gstno =? ";
 			List<EmployeeBean> retlist = jdbcTemplate.query(sql,
-					new Object[]{employee.getPhoneNumber()},ParameterizedBeanPropertyRowMapper.newInstance(EmployeeBean.class));
+					new Object[]{employee.getPhoneNumber(),employee.getGstno()},ParameterizedBeanPropertyRowMapper.newInstance(EmployeeBean.class));
 					if(retlist.size() > 0)
 						return retlist.get(0);
 					return null;
