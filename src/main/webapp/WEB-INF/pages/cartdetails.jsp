@@ -39,6 +39,13 @@ table#dependent_table tbody tr td:first-child::before {
 .invo {
 padding-top:15px;
 font-weight:600;
+font-size:28px;
+}
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0,0,0,.05);
 }
 </style>
 <script src="jquery.PrintArea.js"></script>
@@ -97,21 +104,20 @@ font-weight:600;
 				<div class="clearfix"></div>
 				<div class="container-fluid " id="invoicediv">
         			<div class="col-md-12">
-        			<div class="col-md-4"></div>
-        			        			<div class="col-md-3"><img height="100px" src="${baseurl }/img/klogo.png"/>
-        			        			</div>
-        				<div class="col-md-5">
-				<h1 class="invo">Invoice</h1>
+        			<div align="center"><img height="80px" src="${baseurl }/img/klogo.png"/>
+        			        			
+				<span class="invo"><b>Invoice</b></span>
+							</div>
 							</div>
 							<div class="clearfix"></div>
 								 <div class="form-group">
-    <label class="col-md-1" for="Invoiceid">Invoice ID</label>
+    <label class="col-md-1" for="Invoiceid"><b>Invoice ID</b></label>
     <span  type="invoice" class="col-md-11 " id="invoice">fsd</span>
   </div>
 							<div class="clearfix"></div>	
 								
 								 <div class="form-group">
-    <label class="col-md-1" for="Orderid">Order ID &nbsp; &nbsp;</label>
+    <label class="col-md-1" for="Orderid"><b>Order ID &nbsp; &nbsp;</b></label>
     <span type="order" class="col-md-11 " id="order">dfds</span>
   </div>
 								
@@ -127,10 +133,10 @@ font-weight:600;
 						</table>
 					</div>
 									
-								
-								
+						<div align="center"><button onclick="printInvoice()" id="printbtn" class="btn btn-primary">Print</button>		
+							</div>	
         			</div>
-        			<button onclick="printInvoice()" id="printbtn">Print this page</button>
+        			
         					</div>	
 			
 				<!-- Invoice Model Start  -->
@@ -215,7 +221,7 @@ function showTableData(response){
 	var table=$('#tableId').html('');
 	serviceUnitArray = {};
 	var protectType = null;
-	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
+	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped  datatables" id="example1">'+
     	'<thead><tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
@@ -340,7 +346,7 @@ function showTableDataOnInvoice(response){
 	var table=$('#tableId').html('');
 	serviceUnitArray = {};
 	var protectType = null;
-	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
+	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped  datatables" id="example1">'+
     	'<thead><tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
