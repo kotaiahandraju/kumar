@@ -41,11 +41,12 @@ padding-top:15px;
 font-weight:600;
 }
 </style>
+<script src="jquery.PrintArea.js"></script>
 
 
 
 	<div class="clearfix"></div>
-	<ol class="breadcrumb">
+	<ol class="breadcrumb" id="pbreadcrumb">
     	<li><a href="dashboard">Home</a></li>
 		<li>My Cart</li>
 	</ol>
@@ -129,6 +130,7 @@ font-weight:600;
 								
 								
         			</div>
+        			<button onclick="printInvoice()" id="printbtn">Print this page</button>
         					</div>	
 			
 				<!-- Invoice Model Start  -->
@@ -356,6 +358,33 @@ function showTableDataOnInvoice(response){
 	});
 	
 }
+
+
+function printInvoice() {
+    //window.print();
+      $("#printbtn").hide();
+      $("#pbreadcrumb").hide();
+      $("#pageName").hide();
+      
+      
+      
+      
+
+    
+      window.print();
+      
+	/* var newWindow = window.open();
+    newWindow.document.write(document.getElementById("invoicediv").innerHTML);
+    newWindow.print(); */ 
+}
+
+
+
+
+
+
+
+
 
 $("#pageName").text("My Cart");
 // $(".orderplacing").addClass("active"); 
