@@ -34,7 +34,23 @@ table#dependent_table tbody tr td:first-child::before {
 .addItemButton{
 	cursor: pointer;font-size: small;background: green;color: white;padding: 3px 10px 3px 10px;
 }
-
+.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+    padding: 10px;
+    line-height: 1.428571429;
+    vertical-align: top;
+    border-top: 1px solid #e6e7e8;
+    
+    width: 146px;
+}
+input {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    text-align: center;
+}
+.numericOnly {
+width:40px;
+}
 #ui-datepicker-div{
 /* 	width: auto !important; */
 }
@@ -62,14 +78,14 @@ table#dependent_table tbody tr td:first-child::before {
 <div class='container'>
 <div class='filters'>
 <div class='filter-container'>
-<input autocomplete='off' class='filter' name='Product Sub Category' placeholder='ProductSubcategory' data-col='Product Sub Category'/>
+
 </div>
 
 <div class='filter-container'>
-<input autocomplete='off' class='filter' name='Item Code' placeholder='Item Code' data-col='Item Code'/>
+
 </div>
 <div class='filter-container'>
-<input autocomplete='off' class='filter' name='Description' placeholder='Description' data-col='Description'/>
+
 </div>
 <div class='clearfix'></div>
 </div>
@@ -132,9 +148,13 @@ function showTableData(response){
 	var table=$('#tableId').html('');
 	serviceUnitArray = {};
 	var protectType = null;
-	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table " id="example1">'+
-    	'<thead><tr><th>Product Sub Category</th><th>Item Code</th><th>Description</th><th>quantity</th></tr>'+
-    	"</thead><tbody></tbody></table>";
+	var tableHead = "<table cellpadding='0' cellspacing='0' border='0' class='table' id='example1'>"
+    	+"<thead><tr><th style='width:20%'>Product Sub Category</th><th style='width:16%'>Item Code</th><th style='width:49%'>Description</th><th>quantity</th></tr>"
+    	+"<tr><th><input autocomplete='off' class='filter' name='Product Sub Category' placeholder='Product Sub Category' data-col='Product Sub Category'/></th>"
+    	+"<th><input autocomplete='off' class='filter' name='Item Code' placeholder='Item Code' data-col='Item Code'/></th>"
+    	+"<th><input autocomplete='off' class='filter' name='Description' placeholder='Description' data-col='Description'/></th></tr>"
+   		+ "</thead><tbody></tbody>"
+    	+"</table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		serviceUnitArray[orderObj.id] = orderObj;
