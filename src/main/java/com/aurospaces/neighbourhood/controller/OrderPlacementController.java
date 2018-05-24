@@ -1,10 +1,13 @@
 package com.aurospaces.neighbourhood.controller;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -394,7 +397,7 @@ public class OrderPlacementController {
 		String sJson = null;
 		try {
 			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
-			Map<String,Object> prod_map = new HashMap<String,Object>();
+			Map<String,Map<String,Object>> prod_map = new HashMap<String,Map<String,Object>>();
 			Map<String,String> branches_map = new HashMap<String,String>();
 			if(objuserBean != null){
 				branch_prod_list = listDao.getProductsDeliveredQtyBranchWise();
@@ -410,6 +413,20 @@ public class OrderPlacementController {
 						Map<String,Object> branch = new HashMap<String,Object>();
 						branch.put((String)row.get("branch"), row.get("ordered")+","+row.get("nullified"));
 						prod_map.put(product_id+"", branch);
+					}
+					
+				}
+				Collection<Map<String,Object>> branch_maps = prod_map.values();
+				Iterator<Map<String,Object>> iter = branch_maps.iterator();
+				while(iter.hasNext()){
+					Map<String, Object> branch_map = iter.next();
+					Set br_keys = branches_map.keySet();
+					Iterator iter2 = br_keys.iterator();
+					while(iter2.hasNext()){
+						String branch_name = (String)iter2.next();
+						if(!branch_map.containsKey(branch_name)){
+							branch_map.put(branch_name, "0,0");
+						}
 					}
 					
 				}
