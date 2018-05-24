@@ -375,17 +375,17 @@ public class OrderPlacementController {
 			if(objuserBean != null){
 				branch_prod_list = listDao.getProductsDeliveredQtyBranchWise();
 				for(Map<String, Object> row:branch_prod_list){
-					if(!branches_map.containsKey((String)row.get("branch"))){
-						branches_map.put((String)row.get("branch"), (String)row.get("branch"));
+					if(!branches_map.containsKey((String)row.get("branch_name"))){
+						branches_map.put((String)row.get("branch_name"), (String)row.get("branch_name"));
 					}
-					int product_id = (Integer)row.get("product_id");
-					if(prod_map.containsKey(product_id+"")){
-						Map<String,Object> branch = (Map<String,Object>)prod_map.get(product_id+"");
-						branch.put((String)row.get("branch"), row.get("ordered")+","+row.get("nullified"));
+					String product_id = (String)row.get("product_name");
+					if(prod_map.containsKey(product_id)){
+						Map<String,Object> branch = (Map<String,Object>)prod_map.get(product_id);
+						branch.put((String)row.get("branch_name"), row.get("ordered")+","+row.get("nullified"));
 					}else{
 						Map<String,Object> branch = new HashMap<String,Object>();
-						branch.put((String)row.get("branch"), row.get("ordered")+","+row.get("nullified"));
-						prod_map.put(product_id+"", branch);
+						branch.put((String)row.get("branch_name"), row.get("ordered")+","+row.get("nullified"));
+						prod_map.put(product_id, branch);
 					}
 					
 				}
