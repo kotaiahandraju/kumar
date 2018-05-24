@@ -32,6 +32,19 @@ table#dependent_table tbody tr td:first-child::before {
 .addItemButton{
 	cursor: pointer;font-size: small;background: green;color: white;padding: 3px 10px 3px 10px;
 }
+@media print {
+body {-webkit-print-color-adjust: exact;}
+}
+@media print {
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0,0,0,.05);
+
+    -webkit-print-color-adjust: exact; 
+}}
+
 
 #ui-datepicker-div{
 /* 	width: auto !important; */
@@ -89,7 +102,7 @@ font-size:28px;
 				</div>
 			</div>
 		</div>
-		<div class="row" id="displayQuantityData" style="display: none;">
+		<!-- <div class="row" id="displayQuantityData" style="display: none;">
 					<div class="table-responsive" id="tabledata">
 						<table class="table "	id="example1">
 							<thead>
@@ -99,10 +112,10 @@ font-size:28px;
 							<tbody></tbody>
 						</table>
 					</div>
-				</div>
+				</div> -->
 				</div>
 				<div class="clearfix"></div>
-				<div class="container-fluid " id="invoicediv">
+				<div class="container-fluid " id="invoicediv" style="display: none;">
         			<div class="col-md-12">
         			<div align="center"><img height="80px" src="${baseurl }/img/klogo.png"/>
         			        			
@@ -141,9 +154,9 @@ font-size:28px;
 			
 				<!-- Invoice Model Start  -->
 				
-				 <div id="invoiceModal" data-backdrop="static" data-keyboard="false" role="dialog">
+				 <!-- <div id="invoiceModal" data-backdrop="static" data-keyboard="false" role="dialog">
 	<div class="modal-dialog">
-		<!-- Modal content-->
+		Modal content
 		<div class="modal-content">
 			<div class="modal-header" style="background: #166eaf;">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -199,7 +212,7 @@ font-size:28px;
 				</div> 
 					
 				</div> 
-				</div>
+				</div> -->
 				<!-- Invoice Model End -->	
 
 <script type="text/javascript">
@@ -222,7 +235,7 @@ function showTableData(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped  datatables" id="example1">'+
-    	'<thead><tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
+    	'<thead><tr  style="background:#4f8edc;color:#fff;"><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -347,7 +360,7 @@ function showTableDataOnInvoice(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped  datatables" id="example1">'+
-    	'<thead><tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
+    	'<thead><tr style="background:#4f8edc;color:#fff;"><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -378,7 +391,7 @@ function printInvoice() {
 
     
       window.print();
-      
+      $("#printbtn").show();
 	/* var newWindow = window.open();
     newWindow.document.write(document.getElementById("invoicediv").innerHTML);
     newWindow.print(); */ 

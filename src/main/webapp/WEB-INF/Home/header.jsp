@@ -149,7 +149,7 @@ display:inline-block;
 }
 @media only screen and (min-width: 1280px) {
 .carth {
-margin-left:593px !important;
+margin-left:570px !important;
 }
 .pagination {
 display:inline-block;
@@ -432,7 +432,7 @@ function managercartCount(){
 		<%-- 	   <li class="dealerconfirm"><a href="${baseurl }/admin/dealeraccountconfirm"><i class="fa fa-check-square"></i><span> Confirm  Dealer</span></a></li> --%>
 			    <li class="dealerpaymentconfirm"><a href="${baseurl }/admin/dealerpaymentconfirm"><i class="fa fa-bolt"></i><span>Confirm Payments </span></a></li>
 			    <li class="orderslist"><a href="${baseurl }/admin/orderslist"><i class="fa fa-clipboard"></i><span>Delivery Status</span></a></li>
-			     <li class="managerorderplace"><a href="${baseurl }/admin/managerorderplace"><i class="fa fa-clipboard"></i><span>Order Product</span></a></li>
+			     <li class="orderplacing"><a href="${baseurl }/admin/managerorderplace"><i class="fa fa-clipboard"></i><span>Order Product</span></a></li>
 			    
 			   
 			 </c:if>
