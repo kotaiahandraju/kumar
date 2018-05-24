@@ -51,15 +51,14 @@ table#dependent_table tbody tr td:first-child::before {
 	<div class="col-md-12 col-sm-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h4>Add Product</h4>
+					<h4>Select Dealer</h4>
 				</div>
 				<form:form class="form-horizontal" modelAttribute="managerorderLstForm" action="" method="Post">
 					<div class="panel-body" style="border-radius: 0px;">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-4 control-label">Product
-										SubCategory <span class="impColor">*</span>
+									<label for="focusedinput" class="col-md-4 control-label">Select Dealer <span class="impColor">*</span>
 									</label>
 									<div class="col-md-7">
 										<form:select path="delerId" class="form-control" >
