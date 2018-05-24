@@ -203,7 +203,7 @@ function addCart() {
 			var jsonobj = $.parseJSON(data);
 			var count = jsonobj.count;
 			alert(jsonobj.msg);
-			$("#cartId").text(count);
+			$("#managercartId").text(count);
 // 		window.location.href = "${baseurl}/admin/cartdetails";
 			$('input[name^=quantity]').each(function(){
 				$(this).val("");

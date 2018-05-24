@@ -347,7 +347,10 @@ function managercartCount(){
         <a href="cartdetails"><li class="pull-right carth"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="cartId"></span> </li></a>
         </c:if>
          <c:if test="${cacheUserBean.roleId=='2' }">
-        <a href="managercartdetails"><li class="pull-right carth"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="managercartId"></span> </li></a>
+         <script>var paramid = $("#delerId").val(); 
+         $('#tagId').attr('href','managercartdetails?delerId='+paramid);
+         </script>
+        <a href="" id="tagId"><li class="pull-right carth"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="managercartId"></span> </li></a>
         </c:if>
 		<div class="masters">
 	        <ul class="nav navbar-nav pull-right toolbar">
