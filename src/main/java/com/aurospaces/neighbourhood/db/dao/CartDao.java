@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -27,13 +28,22 @@ public class CartDao extends BaseCartDao
 	@Autowired HttpSession session;
 	public int countcartdetails(CartBean objCartBean){
 		 jdbcTemplate = custom.getJdbcTemplate();
-		 LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
-			if (objuserBean != null) {
-				objCartBean.setUserId(objuserBean.getEmpId());
-			}
-		 String sql =" SELECT COUNT(*) FROM `cart` WHERE `userId`=? ";
+		 int count;
+		 if(StringUtils.isEmpty(objCartBean.getUserId())) {
+			 LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+				if (objuserBean != null) {
+					objCartBean.setUserId(objuserBean.getEmpId());
+				}
+			 String sql =" SELECT COUNT(*) FROM `cart` WHERE `userId`=? ";
+			 
+			  count = jdbcTemplate.queryForInt(sql,new Object []{objCartBean.getUserId()});
+			
+		 }else {
+			 String sql =" SELECT COUNT(*) FROM `cart` WHERE `userId`=? ";
+			 
+			  count = jdbcTemplate.queryForInt(sql,new Object []{objCartBean.getUserId()});
+		 }
 		 
-		 int count = jdbcTemplate.queryForInt(sql,new Object []{objCartBean.getUserId()});
 		return count;
 		
 	}

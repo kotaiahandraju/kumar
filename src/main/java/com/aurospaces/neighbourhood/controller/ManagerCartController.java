@@ -3,6 +3,7 @@
  */
 package com.aurospaces.neighbourhood.controller;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,13 +15,19 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aurospaces.neighbourhood.bean.CartBean;
+import com.aurospaces.neighbourhood.bean.EmployeeBean;
+import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.LoginBean;
+import com.aurospaces.neighbourhood.bean.OrdersListBean;
 import com.aurospaces.neighbourhood.db.dao.CartDao;
+import com.aurospaces.neighbourhood.db.dao.ItemsDao;
+import com.aurospaces.neighbourhood.db.dao.OrdersListDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -28,6 +35,35 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RequestMapping(value = "/admin")
 public class ManagerCartController {
 	@Autowired CartDao cartDao;
+	@Autowired	ItemsDao  itemsDao;
+	@Autowired OrdersListDao listDao;
+	
+	@RequestMapping(value="/managerorderplace")
+	public String managerorderplace(@ModelAttribute("managerorderLstForm") OrdersListBean ordersListBean,HttpServletRequest request){
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		List<ItemsBean> listOrderBeans = null;
+		try{
+			System.out.println("dealerOrderPlacedealerOrderPlacedealerOrderPlace");
+			listOrderBeans = itemsDao.getItems("1");
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+					System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "managerorderplace";
+		
+	}
+	
 	@RequestMapping(value = "/manageraddtocart")
 	public @ResponseBody String manageraddtocart( CartBean cartBean,ModelMap model, HttpServletRequest request, HttpSession session) {
 		JSONObject objJson = new JSONObject();
@@ -62,7 +98,7 @@ public class ManagerCartController {
 				return String.valueOf(objJson);
 	}
 	@RequestMapping(value = "/managercartdetails")
-	public String managercartdetails( CartBean cartBean,ModelMap model, HttpServletRequest request, HttpSession session) {
+	public String managercartdetails( @ModelAttribute("managercartdetailsForm") OrdersListBean ordersListBean,ModelMap model, HttpServletRequest request, HttpSession session) {
 		List<Map<String,Object>> listOrderBeans = null;
 		ObjectMapper objectMapper =null;
 		String sJson = null;
@@ -125,6 +161,27 @@ public class ManagerCartController {
 		}
 		
 		return String.valueOf(objJson);
+	}
+	
+	@ModelAttribute("dealersList")
+	public Map<Integer, String> populateDealers(HttpSession session) {
+		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
+		try {
+			
+			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			
+			
+			String sSql = "select id ,CONCAT(name, ' ( ', businessName,' )') AS   name from kumar_employee where roleId='3' and branch_id='"+objuserBean.getBranchId()+"' ";
+			List<EmployeeBean> list = listDao.populateDealers(sSql);
+			for (EmployeeBean bean : list) {
+				statesMap.put(bean.getId(), bean.getName());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return statesMap;
 	}
 	
 	

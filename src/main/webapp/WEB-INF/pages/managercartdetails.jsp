@@ -51,6 +51,41 @@ font-weight:600;
 	</ol>
 	<div class="clearfix"></div>
 	<div class="container-fluid" id ="hideForInvoice">
+	<div class="col-md-12 col-sm-12">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h4>Select Dealer</h4>
+				</div>
+				<form id="managerorderLstForm" class="form-horizontal" action="/NBD/admin/managerorderplace" method="Post">
+					<div class="panel-body" style="border-radius: 0px;">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="focusedinput" class="col-md-4 control-label">Select Dealer <span class="impColor">*</span>
+									</label>
+									<div class="col-md-7">
+										<select id="delerId" name="delerId" class="form-control">
+								    	<option value="">-- Select Dealer --</option>
+								    	<option value="34">Prasad ( Lakshmi Electricals )</option><option value="38">pavan ( aaaaaaa )</option>
+								    	</select>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+					<!-- <div class="panel-footer">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="btn-toolbar text-center">
+									<input class="btn-primary btn" type="submit" value="Submit" id="submit1"> <input class="btn-danger btn cancel" type="reset" value="Reset">
+								</div>
+							</div>
+						</div>
+					</div> -->
+				</form>
+			</div>
+		</div>
 		<div class="row" id="orderPlacement">
 			<div class="col-md-12">
 				<div class="panel panel-primary">
@@ -241,6 +276,11 @@ var quantity = [];
 var productId = []; 
 var res="";
 var delerId='${dealerId}';
+if(delerId !=""){
+	$("#delerId").val(delerId);
+}
+
+
 $("#invoiceModal").hide();
 function ordePlacing() {
 	quantity = [];  
