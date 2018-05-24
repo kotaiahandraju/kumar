@@ -78,6 +78,7 @@ public class LoginController {
 					session.setAttribute("cacheUserBean", objUserBean);
 					session.setAttribute("roleId", objUserBean.getRoleId());
 					session.setAttribute("userName", objUserBean.getUserName());
+					session.setAttribute("branchName", objUserBean.getBranchName());
 					return "redirect:admin/dashboard";
 //				}
 				
@@ -107,6 +108,7 @@ public class LoginController {
 				session.removeAttribute("cacheGuest");
 				session.removeAttribute("rolId");
 				session.removeAttribute("userName");
+				session.removeAttribute("branchName");
 				session.invalidate();
 				response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");// HTTP
 																							// 1.1

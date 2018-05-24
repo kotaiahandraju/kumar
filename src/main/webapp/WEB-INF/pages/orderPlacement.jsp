@@ -48,7 +48,7 @@ input {
     line-height: inherit;
     text-align: center;
 }
-.numericOnly {
+.mobile {
 width:40px;
 }
 #ui-datepicker-div{
@@ -165,7 +165,8 @@ function showTableData(response){
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		serviceUnitArray[orderObj.id] = orderObj;
-		var quantity ="<input type='text' name='quantity[]' maxlength='4' class='numericOnly' id='"+orderObj.id+"quantity' />"
+		
+		var quantity ="<input type='text' name='quantity[]' maxlength='4' class='mobile' id='"+orderObj.id+"quantity' />"
 		var tblRow = "<tr>"
 				/* + "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>" */
 				+ "<td title='"+orderObj.productIdName+"'>"	+ orderObj.productIdName + "</td>"
