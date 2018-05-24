@@ -278,6 +278,7 @@ $(function() {
 $(document).ready(function(){
 	tooltip();
 	cartCount();
+	managercartCount();
 });
 function tooltip(){
 	$('.view').attr('data-toggle','tooltip');
@@ -302,6 +303,17 @@ function cartCount(){
 		var jsonobj = $.parseJSON(data);
 		var count = jsonobj.count;
 		$("#cartId").text(count);
+	});
+}
+
+function managercartCount(){
+	var userId=$("#delerId").val();
+	var formData = new FormData();
+	formData.append('userId', userId);
+	$.fn.makeMultipartRequest('POST', 'managercountCartdetails', false, formData, false, 'text', function(data){
+		var jsonobj = $.parseJSON(data);
+		var count = jsonobj.count;
+		$("#managercartId").text(count);
 	});
 }
 </script>
@@ -333,6 +345,9 @@ function cartCount(){
         </div>
           <c:if test="${cacheUserBean.roleId=='3' }">
         <a href="cartdetails"><li class="pull-right carth"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="cartId"></span> </li></a>
+        </c:if>
+         <c:if test="${cacheUserBean.roleId=='2' }">
+        <a href="managercartdetails"><li class="pull-right carth"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="managercartId"></span> </li></a>
         </c:if>
 		<div class="masters">
 	        <ul class="nav navbar-nav pull-right toolbar">
