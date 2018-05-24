@@ -41,11 +41,12 @@ padding-top:15px;
 font-weight:600;
 }
 </style>
+<script src="jquery.PrintArea.js"></script>
 
 
 
 	<div class="clearfix"></div>
-	<ol class="breadcrumb">
+	<ol class="breadcrumb" id="pbreadcrumb">
     	<li><a href="dashboard">Home</a></li>
 		<li>My Cart</li>
 	</ol>
@@ -362,34 +363,25 @@ function showTableDataOnInvoice(response){
 function printInvoice() {
     //window.print();
       $("#printbtn").hide();
+      $("#pbreadcrumb").hide();
+      $("#pageName").hide();
       
-      $("#div3").addClass("printable");
+      
+      
+      
+
     
       window.print();
       
 	/* var newWindow = window.open();
     newWindow.document.write(document.getElementById("invoicediv").innerHTML);
-    newWindow.print(); */
+    newWindow.print(); */ 
 }
 
 
 
-function PrintElem(elem)
-{
-      
-    
-}
 
-function Popup(data)
-{
-    var mywindow = window.open('', 'new div');
-    mywindow.document.write('<html><head><title>Student Application</title></head>');
-    mywindow.document.write(data);
-    mywindow.print();
-    mywindow.close();
-    $("#printbtn").show();
-    return true;
-}
+
 
 
 
