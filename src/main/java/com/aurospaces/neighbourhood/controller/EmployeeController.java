@@ -1,11 +1,16 @@
 
 package com.aurospaces.neighbourhood.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -27,6 +32,7 @@ import com.aurospaces.neighbourhood.bean.EmployeeBean;
 import com.aurospaces.neighbourhood.bean.LoginBean;
 import com.aurospaces.neighbourhood.db.dao.EmployeeDao;
 import com.aurospaces.neighbourhood.db.dao.LoginDao;
+import com.aurospaces.neighbourhood.util.SendSMS;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -44,6 +50,7 @@ public class EmployeeController {
 	EmployeeDao empDao;
 	@Autowired
 	LoginDao loginDao;
+	@Autowired ServletContext objContext;
 	@SuppressWarnings("unused")
 	@RequestMapping(value = "/employeeCreation")
 	public String employeeCreation( @ModelAttribute("employeeCreationForm") EmployeeBean employeeBean,
@@ -74,7 +81,17 @@ public class EmployeeController {
 	}
 	
 	@RequestMapping(value = "/addEmployeeCreation", method = RequestMethod.POST)
-	public String employeeCreationCreation(EmployeeBean employeeBean,RedirectAttributes redir) {
+	public String employeeCreationCreation(EmployeeBean employeeBean,RedirectAttributes redir) throws IOException {
+		InputStream input = null;
+		 Properties prop = new Properties();
+		 
+		 String propertiespath = objContext.getRealPath("Resources" +File.separator+"DataBase.properties");
+		 input = new FileInputStream(propertiespath);
+		// load a properties file
+					prop.load(input);
+		       String  msg = prop.getProperty("smsUsernameAndPassword");
+		 msg =msg.replace("_username_",employeeBean.getPhoneNumber() );
+		 msg =msg.replace("_pass_", employeeBean.getPassword());
 
 		int id = 0;
 		try {
@@ -113,7 +130,7 @@ public class EmployeeController {
 				login.setRoleId("2");
 				login.setBranchId(employeeBean.getBranchId());
 				loginDao.save(login);
-				
+				SendSMS.sendSMS(msg, employeeBean.getPhoneNumber(), objContext);
 
 				redir.addFlashAttribute("msg", "Record Inserted Successfully");
 				redir.addFlashAttribute("cssMsg", "success");

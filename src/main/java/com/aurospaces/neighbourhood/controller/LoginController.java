@@ -143,10 +143,12 @@ public class LoginController {
 		 
 		 String propertiespath = objContext.getRealPath("Resources" +File.separator+"DataBase.properties");
 		 input = new FileInputStream(propertiespath);
+		// load a properties file
+			prop.load(input);
 		 String  msg = prop.getProperty("resetPassword");
 		
 		 
-			String mobilenumber =request.getParameter("mobile");
+			String mobilenumber =request.getParameter("phoneNumber");
 			
 			EmployeeBean employee =loginDao.getLoginBeanByMbile(mobilenumber);
 			

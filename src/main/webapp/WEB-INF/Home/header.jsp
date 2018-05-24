@@ -331,7 +331,7 @@ function cartCount(){
             <span class="oms">Order Management System</span>
             <div class="clearfix"></div>
         </div>
-          <c:if test="${cacheUserBean.roleId=='3' || cacheUserBean.roleId=='2'}">
+          <c:if test="${cacheUserBean.roleId=='3' }">
         <a href="cartdetails"><li class="pull-right carth"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="cartId"></span> </li></a>
         </c:if>
 		<div class="masters">
@@ -414,11 +414,11 @@ function cartCount(){
               <li class="productName"><a href="${baseurl }/admin/productName"><i class="fa fa-bookmark"></i> <span>Product Sub Category</span></a></li>&emsp;
               <li class="items"><a href="${baseurl }/admin/items"><i class="fa fa-list-alt"></i> <span>Product List</span></a></li>&emsp;
                <li class="dealercreation"><a href="${baseurl }/admin/dealercreation"> <i class="fa fa-user-secret"></i><span>Dealer Creation </span></a></li>
-			   <li class="dealerconfirm"><a href="${baseurl }/admin/dealeraccountconfirm"><i class="fa fa-check-square"></i><span> Confirm  Dealer</span></a></li>
+		<%-- 	   <li class="dealerconfirm"><a href="${baseurl }/admin/dealeraccountconfirm"><i class="fa fa-check-square"></i><span> Confirm  Dealer</span></a></li> --%>
 			    <li class="dealerpaymentconfirm"><a href="${baseurl }/admin/dealerpaymentconfirm"><i class="fa fa-bolt"></i><span>Confirm Payments </span></a></li>
-			    <li class="orderslist"><a href="${baseurl }/admin/orderslist"><i class="fa fa-clipboard"></i>
-
-<span>Delivery Status</span></a></li>
+			    <li class="orderslist"><a href="${baseurl }/admin/orderslist"><i class="fa fa-clipboard"></i><span>Delivery Status</span></a></li>
+			     <li class="managerorderplace"><a href="${baseurl }/admin/managerorderplace"><i class="fa fa-clipboard"></i><span>Order Product</span></a></li>
+			    
 			   
 			 </c:if>
 			  <c:if test="${roleId=='3' }">

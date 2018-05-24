@@ -182,13 +182,13 @@ window.setTimeout(function() {
 <!-- <p>Mobile Number *</p> -->
 <div class="form-group">
 					<div class="col-md-3 forgote">
-						<input type="text" class="form-control validate mobile" id="phoneNumber" name="mobile"  maxlength="10" placeholder="Mobile Number" />
+						<input type="text" class="form-control validate mobile" id="phoneNumber" name="phoneNumber"  maxlength="10" placeholder="Mobile Number" />
 					</div>
 				
 			</div>
 <div class="clearfix"></div>
 <div class=""><br>
-<input type="submit" id="submit1" value="Submit" class="btn btn-primary">
+<input type="submit" id="submit2" value="Submit" class="btn btn-primary">
 </div>
 </form>
 </div>
@@ -200,18 +200,20 @@ window.setTimeout(function() {
 </body>
 <script type="text/javascript">
 
-$('#phoneNumber').blur(function() {
+
 	
 	
+	function phvalidation()
+	{
 	
 	
-	var phoneNumber=$(this).val();
 	
 	//alert(phoneNumber.length);
 	
 	  if( phoneNumber.length == 10)
 		  {
 		  mobilevalidation =true;
+		  return true;
 		  }
 	 else
 	  
@@ -222,10 +224,31 @@ $('#phoneNumber').blur(function() {
 		 $('#errorMsg').css('color','red');
 			setTimeout(function() { $("#errorMsg").text(''); }, 3000);
 		 mobilevalidation =false;
+		 return false;
 		  
 	}
+	}
 
-		}); 
+	
+		
+		
+		
+$('#submit2').click(function() {
+	
+	
+	var phoneNumber=$('#phoneNumber').val();
+	
+	
+	if(phoneNumber =="" || phoneNumber== null || phoneNumber== "undefined" ||phoneNumber.length != 10)
+	{
+	$('#phoneNumber').css('border-color', 'red');
+	 $('#errorMsg').text( "* Enter Valid Mobile Number ") ;
+	 $('#errorMsg').css('color','red');
+		setTimeout(function() { $("#errorMsg").text(''); }, 3000);
+	return false;
+	}
+	
+}); 
 		
 </script>
 
