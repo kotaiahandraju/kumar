@@ -90,10 +90,11 @@ width:40px;
 <div class='clearfix'></div>
 </div>
 </div>
+
 					<div class="panel-body collapse in">
+					<input id="myInput" type="text" class="pull-right" placeholder="Search..">
 					<div class="table-responsive" id="tableId">
-						<table class="table "
-							id="example">
+						<table class="table table-bordered table-stripped "  width="100%" id="example">
 							<thead>
 								<tr><th>Product Sub Category</th><td>ItemCode</td><th>Description</th><td>quantity</td>
 								</tr>
@@ -112,7 +113,7 @@ width:40px;
 		</div>
 		<div class="row" id="displayQuantityData" style="display: none;">
 					<div class="table-responsive" id="tabledata">
-						<table class="table "
+						<table class="table table-bordered table-stripped " width="100%"
 							id="example1">
 							<thead>
 								<tr><th> Product category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><td>quantity</td>
@@ -148,8 +149,8 @@ function showTableData(response){
 	var table=$('#tableId').html('');
 	serviceUnitArray = {};
 	var protectType = null;
-	var tableHead = "<table cellpadding='0' cellspacing='0' border='0' class='table' id='example1'>"
-    	+"<thead><tr><th style='width:20%'>Product Sub Category</th><th style='width:16%'>Item Code</th><th style='width:49%'>Description</th><th>quantity</th></tr>"
+	var tableHead = "<table cellpadding='0' cellspacing='0' border='0'  class='table table-bordered table-stripped' width='100%' id='example1'>"
+    	+"<thead><tr><th style='width:20%'>Product Sub Category</th><th style='width:16%'>Item Code</th><th style='width:49%'>Description</th><th>Quantity</th></tr>"
     	+"<tr><th><input autocomplete='off' class='filter' name='Product Sub Category' placeholder='Product Sub Category' data-col='Product Sub Category'/></th>"
     	+"<th><input autocomplete='off' class='filter' name='Item Code' placeholder='Item Code' data-col='Item Code'/></th>"
     	+"<th><input autocomplete='off' class='filter' name='Description' placeholder='Description' data-col='Description'/></th></tr>"
@@ -254,7 +255,12 @@ function orderNow() {
 	
 }
 	     
-
+$("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#example1 tbody tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
 
 $("#pageName").text("Order Product");
 $(".orderplacing").addClass("active"); 
