@@ -362,33 +362,6 @@ public class OrderPlacementController {
 		
 	}
 	
-	@RequestMapping(value="/managerorderplace")
-	public String managerorderplace(@ModelAttribute("managerorderLstForm") OrdersListBean ordersListBean,HttpServletRequest request){
-		ObjectMapper objectMapper = null;
-		String sJson = null;
-		List<ItemsBean> listOrderBeans = null;
-		try{
-			System.out.println("dealerOrderPlacedealerOrderPlacedealerOrderPlace");
-			listOrderBeans = itemsDao.getItems("1");
-			if (listOrderBeans != null && listOrderBeans.size() > 0) {
-				objectMapper = new ObjectMapper();
-				sJson = objectMapper.writeValueAsString(listOrderBeans);
-				request.setAttribute("allOrders1", sJson);
-					System.out.println(sJson);
-			} else {
-				objectMapper = new ObjectMapper();
-				sJson = objectMapper.writeValueAsString(listOrderBeans);
-				request.setAttribute("allOrders1", "''");
-			}
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return "managerorderplace";
-		
-	}
-	
-	
 	@RequestMapping(value = "/getProductsDeliveredQtyBranchWise")
 	public  String getProductsDeliveredQtyBranchWise(@ModelAttribute("orderLstForm") EmployeeBean employeeBean,Model model,HttpServletRequest request,HttpSession session) 
 	{

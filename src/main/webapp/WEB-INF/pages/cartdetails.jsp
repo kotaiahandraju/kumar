@@ -41,11 +41,12 @@ padding-top:15px;
 font-weight:600;
 }
 </style>
+<script src="jquery.PrintArea.js"></script>
 
 
 
 	<div class="clearfix"></div>
-	<ol class="breadcrumb">
+	<ol class="breadcrumb" id="pbreadcrumb">
     	<li><a href="dashboard">Home</a></li>
 		<li>My Cart</li>
 	</ol>
@@ -83,8 +84,7 @@ font-weight:600;
 		</div>
 		<div class="row" id="displayQuantityData" style="display: none;">
 					<div class="table-responsive" id="tabledata">
-						<table class="table "
-							id="example1">
+						<table class="table "	id="example1">
 							<thead>
 								<tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>quantity</td>
 								</tr>
@@ -130,6 +130,7 @@ font-weight:600;
 								
 								
         			</div>
+        			<button onclick="printInvoice()" id="printbtn">Print this page</button>
         					</div>	
 			
 				<!-- Invoice Model Start  -->
@@ -166,8 +167,7 @@ font-weight:600;
 								<div class="form-group" id= "productsList">
 									
 									<div class="table-responsive" id="tabledata">
-						<table class="table "
-							id="example1">
+						<table class="table " id="example1">
 							<thead>
 								<tr><th></<th>Item Code</th><th>quantity</th>
 								</tr>
@@ -221,7 +221,7 @@ function showTableData(response){
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		serviceUnitArray[orderObj.id] = orderObj;
-		var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" class='numericOnly' maxlength='3' id='"+orderObj.productId+"quantity' />"
+		var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" class='numericOnly' maxlength='4' id='"+orderObj.productId+"quantity' />"
 		var tblRow = "<tr>"
 				+ "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>"
 				+ "<td title='"+orderObj.productIdName+"'>"	+ orderObj.productIdName + "</td>"
@@ -233,8 +233,8 @@ function showTableData(response){
 		$(tblRow).appendTo("#tableId table tbody");
 		
 	});
-	if(isClick=='Yes') $('.datatables').dataTable();
 	
+	if(isClick=='Yes') $('.datatables').dataTable({ "pageLength": 50});
 }
 
 var quantity = [];  
@@ -358,6 +358,33 @@ function showTableDataOnInvoice(response){
 	});
 	
 }
+
+
+function printInvoice() {
+    //window.print();
+      $("#printbtn").hide();
+      $("#pbreadcrumb").hide();
+      $("#pageName").hide();
+      
+      
+      
+      
+
+    
+      window.print();
+      
+	/* var newWindow = window.open();
+    newWindow.document.write(document.getElementById("invoicediv").innerHTML);
+    newWindow.print(); */ 
+}
+
+
+
+
+
+
+
+
 
 $("#pageName").text("My Cart");
 // $(".orderplacing").addClass("active"); 

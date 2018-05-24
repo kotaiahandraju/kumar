@@ -176,6 +176,6 @@ public class LoginController {
 			
 			
 		 
-			return "redirect:LoginHome";
+			return "redirect:forgetpassword";
 		}
 }
