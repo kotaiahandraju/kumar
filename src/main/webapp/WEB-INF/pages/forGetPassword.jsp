@@ -87,7 +87,7 @@ font-size:24px;
 }
 .forgotp {
 padding:50px;
-margin:0 150px;
+/* //margin:0 150px; */
 }
 .forgotp h1 {
 font-size: 32px;
@@ -179,6 +179,14 @@ window.setTimeout(function() {
 <h1>Let's find your account</h1>
 <h4>Enter your Mobile number</h4>
 <span id="errorMsg"> </span>
+<c:if test="${not empty msg}">
+				<div class="col-sm-12" style="margin-bottom: -1.3em;">
+					<div class="form-group col-md-4">
+						<div class="msgcss fadeIn animated alert alert-danger" style="text-align: center;">${msg}</div><div class="col-sm-4" ></div>
+					</div>
+					<div class="col-sm-4" ></div></div><div class="clearfix"></div>
+				
+			</c:if>
 <!-- <p>Mobile Number *</p> -->
 <div class="form-group">
 					<div class="col-md-3 forgote">
@@ -189,6 +197,7 @@ window.setTimeout(function() {
 <div class="clearfix"></div>
 <div class=""><br>
 <input type="submit" id="submit2" value="Submit" class="btn btn-primary">
+<!-- <button onclick="goBack()" class="btn btn-primary"> <i class="fa fa-step-backward"></i> Back  </button> -->
 </div>
 </form>
 </div>
@@ -249,6 +258,10 @@ $('#submit2').click(function() {
 	}
 	
 }); 
+
+function goBack() {
+    window.history.go(-1);
+}
 		
 </script>
 

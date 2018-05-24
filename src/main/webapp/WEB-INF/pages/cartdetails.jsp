@@ -129,6 +129,7 @@ font-weight:600;
 								
 								
         			</div>
+        			<button onclick="printInvoice()" id="printbtn">Print this page</button>
         					</div>	
 			
 				<!-- Invoice Model Start  -->
@@ -356,6 +357,42 @@ function showTableDataOnInvoice(response){
 	});
 	
 }
+
+
+function printInvoice() {
+    //window.print();
+      $("#printbtn").hide();
+      
+      $("#div3").addClass("printable");
+    
+      window.print();
+      
+	/* var newWindow = window.open();
+    newWindow.document.write(document.getElementById("invoicediv").innerHTML);
+    newWindow.print(); */
+}
+
+
+
+function PrintElem(elem)
+{
+      
+    
+}
+
+function Popup(data)
+{
+    var mywindow = window.open('', 'new div');
+    mywindow.document.write('<html><head><title>Student Application</title></head>');
+    mywindow.document.write(data);
+    mywindow.print();
+    mywindow.close();
+    $("#printbtn").show();
+    return true;
+}
+
+
+
 
 $("#pageName").text("My Cart");
 // $(".orderplacing").addClass("active"); 
