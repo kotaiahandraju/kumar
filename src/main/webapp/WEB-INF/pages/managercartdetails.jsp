@@ -366,6 +366,6 @@ function showTableDataOnInvoice(response){
 	
 }
 
-$("#pageName").text("My Cart");
+$("#pageName").text("Cart");
 // $(".orderplacing").addClass("active"); 
 </script>
