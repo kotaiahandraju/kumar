@@ -55,7 +55,7 @@ public List<Map<String,Object>> getOrderList(String dealerId){
 	
 	try{
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql ="select ol.*,ke.name as dealerName,ke.businessName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption, sum(ol.quantity) as total_quantity,date_format(ol.created_time,'%d-%b-%Y') as created_on,CASE WHEN (select count(*) from orders_list where orderId = ol.orderId and status = '1')=0 THEN 'Completed' WHEN ifnull((select sum(inv.dispatched_items_quantity) from invoice inv where inv.order_id=ol.orderId),0)=0 THEN 'Pending'  ELSE 'Partially delivered' END as completed_status from orders_list ol,items i,kumar_employee ke,producttype pt,productname pn where delerId=? and ke.id=ol.delerId and ol.productId=i.id and i.productId=pt.id and i.productname=pn.id group by ol.orderId ORDER BY ol.updated_time Desc";
+		String sql ="select ol.*,ke.name as dealerName,ke.businessName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption, sum(ol.quantity) as total_quantity,date_format(ol.created_time,'%d-%b-%Y') as created_on,CASE WHEN (select count(*) from orders_list where orderId = ol.orderId and status = '1')=0 THEN 'Completed' WHEN ifnull((select sum(inv.dispatched_items_quantity+inv.nullified_qty) from invoice inv where inv.order_id=ol.orderId),0)=0 THEN 'Pending'  ELSE 'Partially delivered' END as completed_status from orders_list ol,items i,kumar_employee ke,producttype pt,productname pn where delerId=? and ke.id=ol.delerId and ol.productId=i.id and i.productId=pt.id and i.productname=pn.id group by ol.orderId ORDER BY ol.updated_time Desc";
 		list =jdbcTemplate.queryForList(sql, new Object[]{dealerId});
 		System.out.println(sql);
 	}catch(Exception e){
@@ -64,7 +64,7 @@ public List<Map<String,Object>> getOrderList(String dealerId){
 	return list;
 	
 }
-public List<Map<String,Object>> getOrdersList(String dealerId,String status){
+public List<Map<String,Object>> getOrdersList(String dealerId,String branch_id,String status){
 	List<Map<String,Object>> list=null;
 	
 	try{
@@ -79,14 +79,14 @@ public List<Map<String,Object>> getOrdersList(String dealerId,String status){
 		if(status.equalsIgnoreCase("all")){
 			status_clause = " 1";
 		}else if(status.equalsIgnoreCase("pending")){
-			status_clause = " ifnull((select sum(inv.dispatched_items_quantity) from invoice inv where inv.order_id=ol.orderId),0)=0 ";
+			status_clause = " ifnull((select sum(inv.dispatched_items_quantity+inv.nullified_qty) from invoice inv where inv.order_id=ol.orderId),0)=0 ";
 		}else if(status.equalsIgnoreCase("partially")){
-			status_clause = " (ifnull((select sum(inv.dispatched_items_quantity) from invoice inv where inv.order_id=ol.orderId),0)>0 and ifnull((select sum(inv.dispatched_items_quantity) from invoice inv where inv.order_id=ol.orderId),0)<(select sum(ols.quantity) from orders_list ols where ols.orderId=ol.orderId)) ";
+			status_clause = " (ifnull((select sum(inv.dispatched_items_quantity+inv.nullified_qty) from invoice inv where inv.order_id=ol.orderId),0)>0 and ifnull((select sum(inv.dispatched_items_quantity+inv.nullified_qty) from invoice inv where inv.order_id=ol.orderId),0)<(select sum(ols.quantity) from orders_list ols where ols.orderId=ol.orderId)) ";
 		}else if(status.equalsIgnoreCase("completed")){
 			status_clause = " ((select count(*) from orders_list where orderId = ol.orderId and status = '1')=0) ";
 		}
 		//String sql ="select ol.*,ke.name as dealerName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption, sum(ol.quantity) as total_quantity,date_format(ol.created_time,'%d-%b-%Y') as created_on,if((select count(*) from orders_list where orderId = ol.orderId and status = '1')=0,'Completed','Pending') as completed_status from orders_list ol,items i,kumar_employee ke,producttype pt,productname pn where delerId=? and ke.id=ol.delerId and ol.productId=i.id and i.productId=pt.id and i.productname=pn.id group by ol.orderId ORDER BY ol.updated_time Desc";
-		String sql ="select ol.*,ke.name as dealerName,ke.businessName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption, sum(ol.quantity) as total_quantity,date_format(ol.created_time,'%d-%b-%Y') as created_on,CASE WHEN (select count(*) from orders_list where orderId = ol.orderId and status = '1')=0 THEN 'Completed' WHEN ifnull((select sum(inv.dispatched_items_quantity) from invoice inv where inv.order_id=ol.orderId),0)=0 THEN 'Pending'  ELSE 'Partially delivered' END as completed_status from orders_list ol,items i,kumar_employee ke,producttype pt,productname pn where "+dealer_clause+" and "+status_clause+"  and ke.id=ol.delerId and ol.productId=i.id and i.productId=pt.id and i.productname=pn.id  group by ol.orderId ORDER BY ol.updated_time Desc";
+		String sql ="select ol.*,ke.name as dealerName,ke.businessName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption, sum(ol.quantity) as total_quantity,date_format(ol.created_time,'%d-%b-%Y') as created_on,CASE WHEN (select count(*) from orders_list where orderId = ol.orderId and status = '1')=0 THEN 'Completed' WHEN ifnull((select sum(inv.dispatched_items_quantity+inv.nullified_qty) from invoice inv where inv.order_id=ol.orderId),0)=0 THEN 'Pending'  ELSE 'Partially delivered' END as completed_status from orders_list ol,items i,kumar_employee ke,producttype pt,productname pn where "+dealer_clause+" and "+status_clause+"  and ol.branchId='"+branch_id+"' and ke.id=ol.delerId and ol.productId=i.id and i.productId=pt.id and i.productname=pn.id  group by ol.orderId ORDER BY ol.updated_time Desc";
 		list =jdbcTemplate.queryForList(sql);
 		System.out.println(sql);
 	}catch(Exception e){
@@ -100,7 +100,7 @@ public List<Map<String,Object>> getAllOrders(String branch_id){
 	
 	try{
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql ="select ol.*,ke.name as dealerName,ke.businessName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption, sum(ol.quantity) as total_quantity,date_format(ol.created_time,'%d-%b-%Y') as created_on,CASE WHEN (select count(*) from orders_list where orderId = ol.orderId and status = '1')=0 THEN 'Completed' WHEN ifnull((select sum(inv.dispatched_items_quantity) from invoice inv where inv.order_id=ol.orderId),0)=0 THEN 'Pending'  ELSE 'Partially delivered' END as completed_status from orders_list ol,items i,kumar_employee ke,producttype pt,productname pn where ol.branchId=? and ke.id=ol.delerId and ol.productId=i.id and i.productId=pt.id and i.productname=pn.id and ((select count(*) from orders_list where orderId = ol.orderId and status = '1')>0)  group by ol.orderId ORDER BY ol.updated_time Desc";
+		String sql ="select ol.*,ke.name as dealerName,ke.businessName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption, sum(ol.quantity) as total_quantity,date_format(ol.created_time,'%d-%b-%Y') as created_on,CASE WHEN (select count(*) from orders_list where orderId = ol.orderId and status = '1')=0 THEN 'Completed' WHEN ifnull((select sum(inv.dispatched_items_quantity+inv.nullified_qty) from invoice inv where inv.order_id=ol.orderId),0)=0 THEN 'Pending'  ELSE 'Partially delivered' END as completed_status from orders_list ol,items i,kumar_employee ke,producttype pt,productname pn where ol.branchId=? and ke.id=ol.delerId and ol.productId=i.id and i.productId=pt.id and i.productname=pn.id and ((select count(*) from orders_list where orderId = ol.orderId and status = '1')>0)  group by ol.orderId ORDER BY ol.created_time Desc";
 		list =jdbcTemplate.queryForList(sql, new Object[]{branch_id});
 		System.out.println(sql);
 	}catch(Exception e){
@@ -114,7 +114,7 @@ public List<Map<String,Object>> getItemsOfOrder(String order_id){
 	
 	try{
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql ="select (ol.quantity-ifnull((select sum(inv.dispatched_items_quantity) from invoice inv where inv.order_id=ol.orderId and inv.product_id=ol.productId),0)-ifnull((select sum(inv.nullified_qty) from invoice inv where inv.order_id=ol.orderId and inv.product_id=ol.productId),0)) as pending_qty, "
+		String sql ="select (ol.quantity-ifnull((select sum(inv.dispatched_items_quantity+inv.nullified_qty) from invoice inv where inv.order_id=ol.orderId and inv.product_id=ol.productId),0)) as pending_qty, "
 				+" ifnull((select sum(inv.dispatched_items_quantity) from invoice inv where inv.order_id=ol.orderId and inv.product_id=ol.productId),0) as delivered_qty, "
 				+" ifnull((select sum(inv.nullified_qty) from invoice inv where inv.order_id=ol.orderId and inv.product_id=ol.productId),0) as  nullified_qty,"
 				+" ol.*,ke.name as dealerName,ke.businessName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption  from orders_list ol,items i,kumar_employee ke,producttype pt,productname pn where ol.orderId = ? and ke.id=ol.delerId and ol.productId=i.id and i.productId=pt.id and i.productname=pn.id ORDER BY ol.updated_time Desc";
@@ -172,7 +172,7 @@ public List<Map<String,Object>> getDeliveredItemsHistory(String order_id){
 	
 	try{
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql ="select inv.*,date_format(inv.updated_time,'%d-%b-%Y') as delivered_on,(select date_format(ol.created_time,'%d-%b-%Y') from orders_list ol where ol.orderId=inv.order_id limit 1) as ordered_date,ke.name as dealerName,ke.businessName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption from invoice inv,items i,kumar_employee ke,producttype pt,productname pn where inv.order_id = '"+order_id+"' and ke.id=(select ol.delerId from orders_list ol where ol.orderId=inv.order_id limit 1)and inv.product_id=i.id and i.productId=pt.id and i.productname=pn.id order by inv.updated_time";
+		String sql ="select inv.*,date_format(inv.updated_time,'%d-%b-%Y') as delivered_on,(select date_format(ol.created_time,'%d-%b-%Y') from orders_list ol where ol.orderId=inv.order_id limit 1) as ordered_date,ke.name as dealerName,ke.businessName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption from invoice inv,items i,kumar_employee ke,producttype pt,productname pn where inv.order_id = '"+order_id+"' and inv.dispatched_items_quantity not in (0) and ke.id=(select ol.delerId from orders_list ol where ol.orderId=inv.order_id limit 1)and inv.product_id=i.id and i.productId=pt.id and i.productname=pn.id order by inv.updated_time";
 		list =jdbcTemplate.queryForList(sql);
 		System.out.println(sql);
 	}catch(Exception e){
@@ -222,7 +222,7 @@ List<Map<String,Object>> list=null;
 	
 	try{
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql ="select ol.*,ke.name as dealerName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption, sum(ol.quantity) as total_quantity,date_format(ol.created_time,'%d-%b-%Y') as created_on,CASE WHEN (select count(*) from orders_list where orderId = ol.orderId and status = '1')=0 THEN 'Completed' WHEN ifnull((select sum(inv.dispatched_items_quantity) from invoice inv where inv.order_id=ol.orderId),0)=0 THEN 'Pending'  ELSE 'Partially delivered' END as completed_status from orders_list ol,items i,kumar_employee ke,producttype pt,productname pn where ol.branchId=? and ke.id=ol.delerId and ol.productId=i.id and i.productId=pt.id and i.productname=pn.id and ((select count(*) from orders_list where orderId = ol.orderId and status = '1')>0)  group by ol.orderId ORDER BY ol.updated_time Desc";
+		String sql ="select ol.*,ke.name as dealerName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption, sum(ol.quantity) as total_quantity,date_format(ol.created_time,'%d-%b-%Y') as created_on,CASE WHEN (select count(*) from orders_list where orderId = ol.orderId and status = '1')=0 THEN 'Completed' WHEN ifnull((select sum(inv.dispatched_items_quantity+inv.nullified_qty) from invoice inv where inv.order_id=ol.orderId),0)=0 THEN 'Pending'  ELSE 'Partially delivered' END as completed_status from orders_list ol,items i,kumar_employee ke,producttype pt,productname pn where ol.branchId=? and ke.id=ol.delerId and ol.productId=i.id and i.productId=pt.id and i.productname=pn.id and ((select count(*) from orders_list where orderId = ol.orderId and status = '1')>0)  group by ol.orderId ORDER BY ol.updated_time Desc";
 		list =jdbcTemplate.queryForList(sql, new Object[]{branch_id});
 		System.out.println(sql);
 	}catch(Exception e){

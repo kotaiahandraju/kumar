@@ -360,8 +360,8 @@ function displayDealerOrderItems(response){
 			+ "<td title='"+orderObj.itemcode+"'>" + orderObj.itemcode + "</td>"
 			+ "<td title='"+orderObj.itemdescrption+"'>" + orderObj.itemdescrption + "</td>"
 			+ "<td title='"+orderObj.quantity+"'>" + orderObj.quantity + "</td>"
-			+ "<td title='"+orderObj.delivered_qty+"'>" + orderObj.delivered_qty + "</td>"
-			+ "<td title='"+orderObj.nullified_qty+"'>" + orderObj.nullified_qty + "</td>"
+			+ "<td id='delivered_qty"+orderObj.id+"' title='"+orderObj.delivered_qty+"'>" + orderObj.delivered_qty + "</td>"
+			+ "<td id='nullified_qty"+orderObj.id+"' title='"+orderObj.nullified_qty+"'>" + orderObj.nullified_qty + "</td>"
 			+ "<td id='pending_qty"+orderObj.id+"' title='"+orderObj.pending_qty+"'>" + orderObj.pending_qty + "</td>"
 			+ text_field_str
 			//+ "<td>"+text_field_str+"</td>"
@@ -504,14 +504,32 @@ function orederLists() {
 function saveDeliverableItemsData(objId){
 	var order_id = serviceUnitArray1[objId].orderId;
 	var product_id = serviceUnitArray1[objId].productId;
-	var quantity = $("#qty"+objId).val().trim();
+	var quantity = $("#qty"+objId).val();
 	var pending_qty = serviceUnitArray1[objId].pending_qty;
-	var nullify_qty = $("#nullify_qty"+objId).val().trim();
-	if(quantity==""){
-		alert("Enter some quantity and click Submit");
+	var nullify_qty = $("#nullify_qty"+objId).val();
+	if((quantity=="undefined" && nullify_qty=="undefined") ||
+	   (quantity==0 && nullify_qty==0)	|| (quantity.trim()=="" && nullify_qty.trim()=="")){
+		alert("Enter some valid quantity and click Submit");
 		return false;
 	}
-	if(quantity>pending_qty){
+	if(quantity.trim()=="0"){
+		alert("Invalid quantity for delivery");
+		return false;
+	}
+	if(quantity!="undefined"){
+		quantity = quantity.trim();
+	}
+	if(nullify_qty!="undefined"){
+		nullify_qty = nullify_qty.trim();
+	}
+	if(quantity=="undefined" || quantity==""){
+		quantity = 0;
+	}
+	if(nullify_qty=="undefined" || nullify_qty==""){
+		nullify_qty = 0;
+	}
+	
+	if((parseInt(quantity)+parseInt(nullify_qty))>parseInt(pending_qty)){
 		alert("Quantity should not be greater than pending quantity.");
 		return false;
 	}
@@ -531,12 +549,18 @@ function saveDeliverableItemsData(objId){
             	 	if(msg=="success"){
             	 		alert("Data saved successfully");
             	 		serviceUnitArray1[objId].pending_qty = balance_qty;
+            	 		serviceUnitArray1[objId].delivered_qty = parseInt(serviceUnitArray1[objId].delivered_qty)+parseInt(quantity);
+            	 		serviceUnitArray1[objId].nullified_qty = parseInt(serviceUnitArray1[objId].nullified_qty)+parseInt(nullify_qty);
+            	 		$("#delivered_qty"+objId).html(serviceUnitArray1[objId].delivered_qty);
+            	 		$("#nullified_qty"+objId).html(serviceUnitArray1[objId].nullified_qty);
             	 		$("#pending_qty"+objId).html(balance_qty);
+            	 		
             	 		if(balance_qty==0){
             	 			//$("#modal_body tbody ")
             	 			$('#row'+objId).find("td").last().remove();
             	 			$('#row'+objId).find("td").last().remove();
-            	 			var new_td = '<td colspan="2" align="center">Completed</td>';
+            	 			$('#row'+objId).find("td").last().remove();
+            	 			var new_td = '<td colspan="3" align="center">Completed</td>';
             	 			$(new_td).appendTo($('#row'+objId));
             	 		}
             	 	}else{
