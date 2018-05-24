@@ -29,7 +29,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ManagerCartController {
 	@Autowired CartDao cartDao;
 	@RequestMapping(value = "/manageraddtocart")
-	public @ResponseBody String manageraddtocart( CartBean cartBean,	ModelMap model, HttpServletRequest request, HttpSession session) {
+	public @ResponseBody String manageraddtocart( CartBean cartBean,ModelMap model, HttpServletRequest request, HttpSession session) {
 		JSONObject objJson = new JSONObject();
 		try{
 			System.out.println("manager cart11");
