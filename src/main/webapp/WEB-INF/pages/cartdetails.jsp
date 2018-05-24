@@ -139,7 +139,7 @@ font-size:28px;
 									<div class="table-responsive" id="tableIdm">
 						<table class="table table-bordered table-striped">
 							<thead>
-								<tr><th>Product Category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><th>Quantity</th>
+								<tr  style="background:#4f8edc;color:#fff;"><th>Product Category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><th>Quantity</th>
 								</tr>
 							</thead>
 							<tbody></tbody>
