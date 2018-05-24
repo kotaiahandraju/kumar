@@ -200,7 +200,7 @@ padding: 3px 14px 0px 11px;
                     				<label for="focusedinput" class="col-md-4 control-label">GST Number <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 
-								    	<form:input path="gstno" class="form-control validate"  placeholder="GST Number"  maxlength="15" onkeyup="removeBorder(this.id)"/>
+								    	<form:input path="gstno" class="form-control validate nospecialCharacter"  placeholder="GST Number"  maxlength="15" onkeyup="removeBorder(this.id)"/>
 								      	<span class="hasError" id="expirydateError"></span>
 								    </div>
                     			</div>
