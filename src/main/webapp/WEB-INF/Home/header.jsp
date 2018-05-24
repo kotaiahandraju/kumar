@@ -278,7 +278,6 @@ $(function() {
 $(document).ready(function(){
 	tooltip();
 	cartCount();
-	managercartCount();
 });
 function tooltip(){
 	$('.view').attr('data-toggle','tooltip');
@@ -306,16 +305,6 @@ function cartCount(){
 	});
 }
 
-function managercartCount(){
-	var userId=$("#delerId").val();
-	var formData = new FormData();
-	formData.append('userId', userId);
-	$.fn.makeMultipartRequest('POST', 'managercountCartdetails', false, formData, false, 'text', function(data){
-		var jsonobj = $.parseJSON(data);
-		var count = jsonobj.count;
-		$("#managercartId").text(count);
-	});
-}
 </script>
 </head>
 
@@ -348,9 +337,9 @@ function managercartCount(){
         </c:if>
          <c:if test="${cacheUserBean.roleId=='2' }">
          <script>var paramid = $("#delerId").val(); 
-         $('#tagId').attr('href','managercartdetails?delerId='+paramid);
+         $('#tagId').attr('href','managercartdetails?dealerId='+paramid);
          </script>
-        <a href="" id="tagId"><li class="pull-right carth"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="managercartId"></span> </li></a>
+        <a href="managercartdetails" id="tagId"><li class="pull-right carth"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="managercartId"></span> </li></a>
         </c:if>
 		<div class="masters">
 	        <ul class="nav navbar-nav pull-right toolbar">
