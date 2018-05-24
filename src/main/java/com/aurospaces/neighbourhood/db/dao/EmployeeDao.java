@@ -41,9 +41,9 @@ public class EmployeeDao extends BaseEmployeeDao
 	
 	public EmployeeBean getByEmployeeName(EmployeeBean employeeBean) {
 		 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "SELECT * from kumar_employee where username =?  or phone_number=?  or branch_id =?";
+			String sql = "SELECT * from kumar_employee where username =?  or phone_number=?  or branch_id =? or email =?";
 			List<EmployeeBean> retlist = jdbcTemplate.query(sql,
-			new Object[]{employeeBean.getUsername(),employeeBean.getPhoneNumber(),employeeBean.getBranchId()},
+			new Object[]{employeeBean.getUsername(),employeeBean.getPhoneNumber(),employeeBean.getBranchId(),employeeBean.getEmail()},
 			ParameterizedBeanPropertyRowMapper.newInstance(EmployeeBean.class));
 			if(retlist.size() > 0)
 				return retlist.get(0);
@@ -60,9 +60,9 @@ public class EmployeeDao extends BaseEmployeeDao
 		
 		try{
 			 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = " select * from kumar_employee where phone_number=? or  gstno =? ";
+			String sql = " select * from kumar_employee where phone_number=? or  gstno =? or email =? ";
 			List<EmployeeBean> retlist = jdbcTemplate.query(sql,
-					new Object[]{employee.getPhoneNumber(),employee.getGstno()},ParameterizedBeanPropertyRowMapper.newInstance(EmployeeBean.class));
+					new Object[]{employee.getPhoneNumber(),employee.getGstno(),employee.getEmail()},ParameterizedBeanPropertyRowMapper.newInstance(EmployeeBean.class));
 					if(retlist.size() > 0)
 						return retlist.get(0);
 					return null;

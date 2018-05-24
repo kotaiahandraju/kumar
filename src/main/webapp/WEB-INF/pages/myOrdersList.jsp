@@ -299,7 +299,7 @@ function displayDealerOrderItems(response){
 			//+ "<td title='"+orderObj.dealerName+"'>" + orderObj.dealerName + "</td>"
 			+ "<td title='"+orderObj.categeory+"'>" + orderObj.categeory + "</td>"
 			+ "<td title='"+orderObj.subCategeory+"'>" + orderObj.subCategeory + "</td>"
-			+ "<td title='"+orderObj.itemCode+"'>" + orderObj.itemCode + "</td>"
+			+ "<td title='"+orderObj.itemCode+"'>" + orderObj.itemcode + "</td>"
 			+ "<td title='"+orderObj.itemdescrption+"'>" + orderObj.itemdescrption + "</td>"
 			+ "<td title='"+orderObj.quantity+"'>" + orderObj.quantity + "</td>"
 			+ "<td title='"+orderObj.pending_qty+"'>" + orderObj.pending_qty + "</td>"
