@@ -1,10 +1,13 @@
 package com.aurospaces.neighbourhood.controller;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -359,33 +362,6 @@ public class OrderPlacementController {
 		
 	}
 	
-	@RequestMapping(value="/managerorderplace")
-	public String managerorderplace(@ModelAttribute("managerorderLstForm") OrdersListBean ordersListBean,HttpServletRequest request){
-		ObjectMapper objectMapper = null;
-		String sJson = null;
-		List<ItemsBean> listOrderBeans = null;
-		try{
-			System.out.println("dealerOrderPlacedealerOrderPlacedealerOrderPlace");
-			listOrderBeans = itemsDao.getItems("1");
-			if (listOrderBeans != null && listOrderBeans.size() > 0) {
-				objectMapper = new ObjectMapper();
-				sJson = objectMapper.writeValueAsString(listOrderBeans);
-				request.setAttribute("allOrders1", sJson);
-					System.out.println(sJson);
-			} else {
-				objectMapper = new ObjectMapper();
-				sJson = objectMapper.writeValueAsString(listOrderBeans);
-				request.setAttribute("allOrders1", "''");
-			}
-			
-		}catch(Exception e){
-			e.printStackTrace();
-		}
-		return "managerorderplace";
-		
-	}
-	
-	
 	@RequestMapping(value = "/getProductsDeliveredQtyBranchWise")
 	public  String getProductsDeliveredQtyBranchWise(@ModelAttribute("orderLstForm") EmployeeBean employeeBean,Model model,HttpServletRequest request,HttpSession session) 
 	{
@@ -394,22 +370,36 @@ public class OrderPlacementController {
 		String sJson = null;
 		try {
 			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
-			Map<String,Object> prod_map = new HashMap<String,Object>();
+			Map<String,Map<String,Object>> prod_map = new HashMap<String,Map<String,Object>>();
 			Map<String,String> branches_map = new HashMap<String,String>();
 			if(objuserBean != null){
 				branch_prod_list = listDao.getProductsDeliveredQtyBranchWise();
 				for(Map<String, Object> row:branch_prod_list){
-					if(!branches_map.containsKey((String)row.get("branch"))){
-						branches_map.put((String)row.get("branch"), (String)row.get("branch"));
+					if(!branches_map.containsKey((String)row.get("branch_name"))){
+						branches_map.put((String)row.get("branch_name"), (String)row.get("branch_name"));
 					}
-					int product_id = (Integer)row.get("product_id");
-					if(prod_map.containsKey(product_id+"")){
-						Map<String,Object> branch = (Map<String,Object>)prod_map.get(product_id+"");
-						branch.put((String)row.get("branch"), row.get("ordered")+","+row.get("nullified"));
+					String product_id = (String)row.get("product_name");
+					if(prod_map.containsKey(product_id)){
+						Map<String,Object> branch = (Map<String,Object>)prod_map.get(product_id);
+						branch.put((String)row.get("branch_name"), row.get("ordered")+","+row.get("nullified"));
 					}else{
 						Map<String,Object> branch = new HashMap<String,Object>();
-						branch.put((String)row.get("branch"), row.get("ordered")+","+row.get("nullified"));
-						prod_map.put(product_id+"", branch);
+						branch.put((String)row.get("branch_name"), row.get("ordered")+","+row.get("nullified"));
+						prod_map.put(product_id, branch);
+					}
+					
+				}
+				Collection<Map<String,Object>> branch_maps = prod_map.values();
+				Iterator<Map<String,Object>> iter = branch_maps.iterator();
+				while(iter.hasNext()){
+					Map<String, Object> branch_map = iter.next();
+					Set br_keys = branches_map.keySet();
+					Iterator iter2 = br_keys.iterator();
+					while(iter2.hasNext()){
+						String branch_name = (String)iter2.next();
+						if(!branch_map.containsKey(branch_name)){
+							branch_map.put(branch_name, "0,0");
+						}
 					}
 					
 				}

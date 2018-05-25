@@ -51,18 +51,17 @@ table#dependent_table tbody tr td:first-child::before {
 	<div class="col-md-12 col-sm-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h4>Add Product</h4>
+					<h4>Select Dealer</h4>
 				</div>
 				<form:form class="form-horizontal" modelAttribute="managerorderLstForm" action="" method="Post">
 					<div class="panel-body" style="border-radius: 0px;">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-4 control-label">Product
-										SubCategory <span class="impColor">*</span>
+									<label for="focusedinput" class="col-md-4 control-label">Select Dealer <span class="impColor">*</span>
 									</label>
 									<div class="col-md-7">
-										<form:select path="delerId" class="form-control" >
+										<form:select path="delerId" class="form-control" onchange="managercartCount();">
 								    	<form:option value="">-- Select Dealer --</form:option>
 								    	<form:options items="${dealersList }"></form:options>
 								    	</form:select>
@@ -167,6 +166,7 @@ function showTableData(response){
 var quantity = [];  
 var productId = []; 
 var res="";
+
 function addCart() {
 	quantity = [];  
 	productId = [];
@@ -204,12 +204,13 @@ function addCart() {
 			var jsonobj = $.parseJSON(data);
 			var count = jsonobj.count;
 			alert(jsonobj.msg);
-			$("#cartId").text(count);
+			$("#managercartId").text(count);
 // 		window.location.href = "${baseurl}/admin/cartdetails";
 			$('input[name^=quantity]').each(function(){
 				$(this).val("");
 			});
 		}
+		$('#tagId').attr('href','managercartdetails?dealerId='+dealerId);
 		
 	});
 	
@@ -256,7 +257,19 @@ function orderNow() {
 	});
 	
 }
-	     
+	
+function managercartCount(){
+	var userId=$("#delerId").val();
+	var formData = new FormData();
+	formData.append('userId', userId);
+	$.fn.makeMultipartRequest('POST', 'managercountCartdetails', false, formData, false, 'text', function(data){
+		var jsonobj = $.parseJSON(data);
+		var count = jsonobj.count;
+		$("#managercartId").text(count);
+	
+	});
+}
+
 
 
 $("#pageName").text("Order Product");

@@ -32,6 +32,19 @@ table#dependent_table tbody tr td:first-child::before {
 .addItemButton{
 	cursor: pointer;font-size: small;background: green;color: white;padding: 3px 10px 3px 10px;
 }
+@media print {
+body {-webkit-print-color-adjust: exact;}
+}
+@media print {
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0,0,0,.05);
+
+    -webkit-print-color-adjust: exact; 
+}}
+
 
 #ui-datepicker-div{
 /* 	width: auto !important; */
@@ -39,13 +52,21 @@ table#dependent_table tbody tr td:first-child::before {
 .invo {
 padding-top:15px;
 font-weight:600;
+font-size:28px;
+}
+.table-bordered {
+    border: 1px solid #dee2e6;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0,0,0,.05);
 }
 </style>
+<script src="jquery.PrintArea.js"></script>
 
 
 
 	<div class="clearfix"></div>
-	<ol class="breadcrumb">
+	<ol class="breadcrumb" id="pbreadcrumb">
     	<li><a href="dashboard">Home</a></li>
 		<li>My Cart</li>
 	</ol>
@@ -81,7 +102,7 @@ font-weight:600;
 				</div>
 			</div>
 		</div>
-		<div class="row" id="displayQuantityData" style="display: none;">
+		<!-- <div class="row" id="displayQuantityData" style="display: none;">
 					<div class="table-responsive" id="tabledata">
 						<table class="table "	id="example1">
 							<thead>
@@ -91,26 +112,25 @@ font-weight:600;
 							<tbody></tbody>
 						</table>
 					</div>
-				</div>
+				</div> -->
 				</div>
 				<div class="clearfix"></div>
-				<div class="container-fluid " id="invoicediv">
+				<div class="container-fluid " id="invoicediv" style="display: none;">
         			<div class="col-md-12">
-        			<div class="col-md-4"></div>
-        			        			<div class="col-md-3"><img height="100px" src="${baseurl }/img/klogo.png"/>
-        			        			</div>
-        				<div class="col-md-5">
-				<h1 class="invo">Invoice</h1>
+        			<div align="center"><img height="80px" src="${baseurl }/img/klogo.png"/>
+        			        			
+				<span class="invo"><b>Invoice</b></span>
+							</div>
 							</div>
 							<div class="clearfix"></div>
 								 <div class="form-group">
-    <label class="col-md-1" for="Invoiceid">Invoice ID</label>
+    <label class="col-md-1" for="Invoiceid"><b>Invoice ID</b></label>
     <span  type="invoice" class="col-md-11 " id="invoice">fsd</span>
   </div>
 							<div class="clearfix"></div>	
 								
 								 <div class="form-group">
-    <label class="col-md-1" for="Orderid">Order ID &nbsp; &nbsp;</label>
+    <label class="col-md-1" for="Orderid"><b>Order ID &nbsp; &nbsp;</b></label>
     <span type="order" class="col-md-11 " id="order">dfds</span>
   </div>
 								
@@ -119,24 +139,24 @@ font-weight:600;
 									<div class="table-responsive" id="tableIdm">
 						<table class="table table-bordered table-striped">
 							<thead>
-								<tr><th>Product Category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><th>Quantity</th>
+								<tr  style="background:#4f8edc;color:#fff;"><th>Product Category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><th>Quantity</th>
 								</tr>
 							</thead>
 							<tbody></tbody>
 						</table>
 					</div>
 									
-								
-								
+						<div align="center"><button onclick="printInvoice()" id="printbtn" class="btn btn-primary">Print</button>		
+							</div>	
         			</div>
-        			<button onclick="printInvoice()" id="printbtn">Print this page</button>
+        			
         					</div>	
 			
 				<!-- Invoice Model Start  -->
 				
-				 <div id="invoiceModal" data-backdrop="static" data-keyboard="false" role="dialog">
+				 <!-- <div id="invoiceModal" data-backdrop="static" data-keyboard="false" role="dialog">
 	<div class="modal-dialog">
-		<!-- Modal content-->
+		Modal content
 		<div class="modal-content">
 			<div class="modal-header" style="background: #166eaf;">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -192,7 +212,7 @@ font-weight:600;
 				</div> 
 					
 				</div> 
-				</div>
+				</div> -->
 				<!-- Invoice Model End -->	
 
 <script type="text/javascript">
@@ -214,8 +234,8 @@ function showTableData(response){
 	var table=$('#tableId').html('');
 	serviceUnitArray = {};
 	var protectType = null;
-	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
-    	'<thead><tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
+	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped  datatables" id="example1">'+
+    	'<thead><tr  style="background:#4f8edc;color:#fff;"><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -339,8 +359,8 @@ function showTableDataOnInvoice(response){
 	var table=$('#tableId').html('');
 	serviceUnitArray = {};
 	var protectType = null;
-	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
-    	'<thead><tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
+	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped  datatables" id="example1">'+
+    	'<thead><tr style="background:#4f8edc;color:#fff;"><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -362,34 +382,25 @@ function showTableDataOnInvoice(response){
 function printInvoice() {
     //window.print();
       $("#printbtn").hide();
+      $("#pbreadcrumb").hide();
+      $("#pageName").hide();
       
-      $("#div3").addClass("printable");
+      
+      
+      
+
     
       window.print();
-      
+      $("#printbtn").show();
 	/* var newWindow = window.open();
     newWindow.document.write(document.getElementById("invoicediv").innerHTML);
-    newWindow.print(); */
+    newWindow.print(); */ 
 }
 
 
 
-function PrintElem(elem)
-{
-      
-    
-}
 
-function Popup(data)
-{
-    var mywindow = window.open('', 'new div');
-    mywindow.document.write('<html><head><title>Student Application</title></head>');
-    mywindow.document.write(data);
-    mywindow.print();
-    mywindow.close();
-    $("#printbtn").show();
-    return true;
-}
+
 
 
 

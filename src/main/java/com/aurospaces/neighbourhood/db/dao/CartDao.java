@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -27,13 +28,22 @@ public class CartDao extends BaseCartDao
 	@Autowired HttpSession session;
 	public int countcartdetails(CartBean objCartBean){
 		 jdbcTemplate = custom.getJdbcTemplate();
-		 LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
-			if (objuserBean != null) {
-				objCartBean.setUserId(objuserBean.getEmpId());
-			}
-		 String sql =" SELECT COUNT(*) FROM `cart` WHERE `userId`=? ";
+		 int count;
+		 if(StringUtils.isEmpty(objCartBean.getUserId())) {
+			 LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+				if (objuserBean != null) {
+					objCartBean.setUserId(objuserBean.getEmpId());
+				}
+			 String sql =" SELECT COUNT(*) FROM `cart` WHERE `userId`=? ";
+			 
+			  count = jdbcTemplate.queryForInt(sql,new Object []{objCartBean.getUserId()});
+			
+		 }else {
+			 String sql =" SELECT COUNT(*) FROM `cart` WHERE `userId`=? ";
+			 
+			  count = jdbcTemplate.queryForInt(sql,new Object []{objCartBean.getUserId()});
+		 }
 		 
-		 int count = jdbcTemplate.queryForInt(sql,new Object []{objCartBean.getUserId()});
 		return count;
 		
 	}
@@ -53,13 +63,29 @@ public class CartDao extends BaseCartDao
 		
 	}
 	public  List<Map<String,Object>> getallManagercartDetails(String dealerId){
-		 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = " SELECT c.`quantity`,c.id,i.id AS productId,i.`itemcode`,i.`itemdescrption` ,pn.productname AS productIdName,pt.producttype AS productTypeName  FROM  `cart` c, items i, productname pn,producttype pt  WHERE  i.productId=pt.id AND c.`productId`=i.id AND   i.productname=pn.id AND c.userid=? ";
+		if(StringUtils.isNotEmpty(dealerId)) {
 			
-			List<Map<String,Object>> retlist = jdbcTemplate.queryForList(sql,new Object[]{dealerId});
-			if(retlist.size() > 0)
-				return retlist;
-			return null;
+			 jdbcTemplate = custom.getJdbcTemplate();
+				String sql = " SELECT c.`quantity`,c.id,i.id AS productId,i.`itemcode`,i.`itemdescrption` ,pn.productname AS productIdName,pt.producttype AS productTypeName  FROM  `cart` c, items i, productname pn,producttype pt  WHERE  i.productId=pt.id AND c.`productId`=i.id AND   i.productname=pn.id AND c.userid=? ";
+				
+				List<Map<String,Object>> retlist = jdbcTemplate.queryForList(sql,new Object[]{dealerId});
+				if(retlist.size() > 0)
+					return retlist;
+				return null;
+		}else {
+			 String userid = null;
+			 LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+				if (objuserBean != null) {
+					userid = objuserBean.getEmpId();
+				}
+				String sql = " SELECT c.`quantity`,c.id,i.id AS productId,i.`itemcode`,i.`itemdescrption` ,pn.productname AS productIdName,pt.producttype AS productTypeName  FROM  `cart` c, items i, productname pn,producttype pt  WHERE  i.productId=pt.id AND c.`productId`=i.id AND   i.productname=pn.id AND c.userid=? ";
+				
+				List<Map<String,Object>> retlist = jdbcTemplate.queryForList(sql,new Object[]{userid});
+				if(retlist.size() > 0)
+					return retlist;
+				return null;
+		}
+		
 		
 	}
 	public int countcartdetailsforMobile(CartBean objCartBean){

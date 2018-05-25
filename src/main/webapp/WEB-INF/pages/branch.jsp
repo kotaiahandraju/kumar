@@ -260,6 +260,10 @@ function inactiveData() {
 			
 				});
 }
+
+/* $('#branchname').bind('keydown',function(evt){
+	alert(evt.keyCode);
+}); */
 	
 $("#pageName").text("Branch Master");
 $(".branch").addClass("active");
