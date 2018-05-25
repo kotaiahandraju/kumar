@@ -112,7 +112,7 @@ font-weight:600;
 					</div>
 			<br>
 					<div class="pull-right">
-					<a href="managerorderplace"><span class="btn btn-warning" ><!-- <i class="fa fa-shopping-cart"></i> --> ADD MORE ITEMS</span></a> 
+					<a href="managerorderplace" id="cartTag"><span class="btn btn-warning" ><!-- <i class="fa fa-shopping-cart"></i> --> ADD MORE ITEMS</span></a> 
 					<span class="btn btn-danger"  onclick="ordePlacing();"><!-- <i class="fa fa-bolt" aria-hidden="true"></i> -->CONFIRM ORDER</span>
 					</div>
 				</div>
@@ -394,6 +394,7 @@ function removecartdata(id){
 		var jsonobj = $.parseJSON(data);
 		var allOrders = jsonobj.allOrders1;
 		showTableData(allOrders);
+		listOrders1=allOrders;
 		var count = jsonobj.count;
 		$("#cartId").text(count);
 		alert(jsonobj.msg);
@@ -429,8 +430,10 @@ function managercartCount(){
 	var formData = new FormData();
 	formData.append('userId', userId);
 	$.fn.makeMultipartRequest('POST', 'managercountCartdetails', false, formData, false, 'text', function(data){
+		$('#tagId').attr('href','managercartdetails?dealerId='+userId);
 		var jsonobj = $.parseJSON(data);
 		var count = jsonobj.count;
+		
 		$("#managercartId").text(count);
 	
 	});
@@ -451,6 +454,9 @@ function managercartList(){
 $(document).ready(function(){
 	managercartCount();
 });
+
+var cartDealerId = $("#delerId").val(); 
+$('#cartTag').attr('href','managerorderplace?dealerId='+cartDealerId);
 
 $("#pageName").text("Cart");
 // $(".orderplacing").addClass("active"); 

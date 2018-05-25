@@ -348,6 +348,8 @@ padding: 3px 14px 0px 11px;
 var usernamevalidation =false;
 var emailvalidation =false;
 var mobilevalidation =false;
+var gstvalidation=false;
+var editFields =0;
 
 
 
@@ -393,16 +395,48 @@ $('#username').blur(function() {
 		
 		
 $('#email').blur(function() {
-		
-		
-		
-		var editFields =0;
+	
 		var cemail=$(this).val();
 		
 		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		  if( regex.test(cemail))
 			  {
-			  emailvalidation =true;
+			
+			  
+			  $.ajax({
+					type : "GET",
+					url : "checkemailexists",
+					data : "cemail="+cemail+"&editFields="+editFields,
+					dataType : "text",
+					beforeSend : function() {
+			             $.blockUI({ message: 'Please wait' });
+			          }, 
+					success : function(data) {
+						if(data ==='true')
+							{
+		 					$('#email').css('border-color', 'red');
+							 $('#errorMsg').text( "* Email already Exists ") ;
+							 $('#errorMsg').css('color','red');
+								setTimeout(function() { $("#errorMsg").text(''); }, 3000);
+								emailvalidation =false;
+							}
+						else
+							{
+							$('#email').css('border-color', 'none');
+							$('#submit1').prop('disabled', false);
+							emailvalidation =true;
+							}
+						
+					},
+					complete: function () {
+			            
+			            $.unblockUI();
+			       },
+					error :  function(e){$.unblockUI();console.log(e);}
+					
+				});
+			  
+			  
 			  }
 		 else
 		  
@@ -419,11 +453,95 @@ $('#email').blur(function() {
 			}); 
 			
 			
+			
+			
+			
+			
+$('#gstno').blur(function() {
+	
+	var cgstno=$(this).val();	  
+		  $.ajax({
+				type : "GET",
+				url : "checkgstexists",
+				data : "cgstno="+cgstno+"&editFields="+editFields,
+				dataType : "text",
+				beforeSend : function() {
+		             $.blockUI({ message: 'Please wait' });
+		          }, 
+				success : function(data) {
+					if(data ==='true')
+						{
+	 					$('#gstno').css('border-color', 'red');
+						 $('#errorMsg').text( "* GstNo already Exists ") ;
+						 $('#errorMsg').css('color','red');
+							setTimeout(function() { $("#errorMsg").text(''); }, 3000);
+							gstvalidation =false;
+						}
+					else
+						{
+						$('#gstno').css('border-color', 'none');
+						$('#submit1').prop('disabled', false);
+						 gstvalidation =true;
+						}
+					
+				},
+				complete: function () {
+		            
+		            $.unblockUI();
+		       },
+				error :  function(e){$.unblockUI();console.log(e);}
+				
+			});	
+	
+	  
+
+		}); 
+		
+			
+			
+			
 $('#phoneNumber').blur(function() {
 	var phoneNumber=$(this).val();
 	  if( phoneNumber.length == 10)
 	  {
 		  mobilevalidation =true;
+		  
+		  $.ajax({
+				type : "GET",
+				url : "checkmobileexists",
+				data : "phoneNumber="+phoneNumber+"&editFields="+editFields,
+				dataType : "text",
+				beforeSend : function() {
+		             $.blockUI({ message: 'Please wait' });
+		          }, 
+				success : function(data) {
+					if(data ==='true')
+						{
+	 					$('#phoneNumber').css('border-color', 'red');
+						 $('#errorMsg').text( "* ContactPhone Number already Exists ") ;
+						 $('#errorMsg').css('color','red');
+							setTimeout(function() { $("#errorMsg").text(''); }, 3000);
+							emailvalidation =false;
+						}
+					else
+						{
+						$('#phoneNumber').css('border-color', 'none');
+						$('#submit1').prop('disabled', false);
+						emailvalidation =true;
+						}
+					
+				},
+				complete: function () {
+		            
+		            $.unblockUI();
+		       },
+				error :  function(e){$.unblockUI();console.log(e);}
+				
+			});
+		  
+		  
+		  
+		  
 		  }
 	 else
 	  
@@ -554,6 +672,10 @@ function showTableData(response){
 var prodcutName='';
 
 function editEmpCreation(id){
+	editFields =id;
+	
+	
+	
 	$("#id").val(id);
 	$("#businessName").val(serviceUnitArray[id].businessName);
 	$("#address").val(serviceUnitArray[id].address);
@@ -574,7 +696,7 @@ function editEmpCreation(id){
 	usernamevalidation =true;
 	emailvalidation =true;
 	mobilevalidation=true;
-	
+	gstvalidation=true;
 }
 
 function deleteDealer(id,status){

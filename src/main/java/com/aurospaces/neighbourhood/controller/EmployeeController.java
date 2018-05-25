@@ -236,5 +236,80 @@ public class EmployeeController {
 	 
 	 
 	 
+	 @RequestMapping("/checkemailexists")
+		public  @ResponseBody  Boolean checkEmailExists(HttpServletRequest request, HttpSession session)
+		{
+			String cemail=request.getParameter("cemail");
+			String editFields=request.getParameter("editFields");
+			
+			
+			if(editFields.equals("0"))
+			{
+				return empDao.dealerEmailExistsOrNot(cemail);
+				
+			}
+			else
+			{
+				return empDao.dealerEmailExistsOrNotOnEdit(cemail,editFields);
+				
+			}
+			
+			
+			
+
+			
+		}
+	 @RequestMapping("/checkgstexists")
+		public  @ResponseBody  Boolean checkGstExists(HttpServletRequest request, HttpSession session)
+		{
+			String cgstno=request.getParameter("cgstno");
+			String editFields=request.getParameter("editFields");
+			
+			
+			if(editFields.equals("0"))
+			{
+				return empDao.dealerGstExistsOrNot(cgstno);
+				
+			}
+			else
+			{
+				return empDao.dealerGstExistsOrNotOnEdit(cgstno,editFields);
+				
+			}
+			
+			
+			
+
+			
+		}
+	 
+	 
+	 @RequestMapping("/checkmobileexists")
+		public  @ResponseBody  Boolean checkContackPhoneNumberExists(HttpServletRequest request, HttpSession session)
+		{
+			String phoneNumber=request.getParameter("phoneNumber");
+			String editFields=request.getParameter("editFields");
+			
+			
+			if(editFields.equals("0"))
+			{
+				return empDao.dealerContactPhoneExistsOrNot(phoneNumber);
+				
+			}
+			else
+			{
+				return empDao.dealerContactPhoneExistsOrNotOnEdit(phoneNumber,editFields);
+				
+			}
+			
+			
+			
+
+			
+		}
+	 
+	 
+	 
+	 
 	 
 }
