@@ -394,6 +394,7 @@ function removecartdata(id){
 		var jsonobj = $.parseJSON(data);
 		var allOrders = jsonobj.allOrders1;
 		showTableData(allOrders);
+		listOrders1=allOrders;
 		var count = jsonobj.count;
 		$("#cartId").text(count);
 		alert(jsonobj.msg);
@@ -431,6 +432,7 @@ function managercartCount(){
 	$.fn.makeMultipartRequest('POST', 'managercountCartdetails', false, formData, false, 'text', function(data){
 		var jsonobj = $.parseJSON(data);
 		var count = jsonobj.count;
+		
 		$("#managercartId").text(count);
 	
 	});

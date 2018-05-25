@@ -349,6 +349,8 @@ var usernamevalidation =false;
 var emailvalidation =false;
 var mobilevalidation =false;
 
+var editFields =0;
+
 
 
 
@@ -393,16 +395,49 @@ $('#username').blur(function() {
 		
 		
 $('#email').blur(function() {
-		
-		
-		
-		var editFields =0;
+	
 		var cemail=$(this).val();
 		
 		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		  if( regex.test(cemail))
 			  {
 			  emailvalidation =true;
+			  
+			  
+			  $.ajax({
+					type : "GET",
+					url : "checkemailexists",
+					data : "cemail="+cemail+"&editFields="+editFields,
+					dataType : "text",
+					beforeSend : function() {
+			             $.blockUI({ message: 'Please wait' });
+			          }, 
+					success : function(data) {
+						if(data ==='true')
+							{
+		 					$('#username').css('border-color', 'red');
+							 $('#errorMsg').text( "* Email already Exists ") ;
+							 $('#errorMsg').css('color','red');
+								setTimeout(function() { $("#errorMsg").text(''); }, 3000);
+								emailvalidation =false;
+							}
+						else
+							{
+							$('#username').css('border-color', 'none');
+							$('#submit1').prop('disabled', false);
+							emailvalidation =true;
+							}
+						
+					},
+					complete: function () {
+			            
+			            $.unblockUI();
+			       },
+					error :  function(e){$.unblockUI();console.log(e);}
+					
+				});
+			  
+			  
 			  }
 		 else
 		  
@@ -554,6 +589,10 @@ function showTableData(response){
 var prodcutName='';
 
 function editEmpCreation(id){
+	editFields =id;
+	
+	
+	
 	$("#id").val(id);
 	$("#businessName").val(serviceUnitArray[id].businessName);
 	$("#address").val(serviceUnitArray[id].address);

@@ -236,5 +236,31 @@ public class EmployeeController {
 	 
 	 
 	 
+	 @RequestMapping("/checkemailexists")
+		public  @ResponseBody  Boolean checkEmailExists(HttpServletRequest request, HttpSession session)
+		{
+			String cemail=request.getParameter("cemail");
+			String editFields=request.getParameter("editFields");
+			
+			
+			if(editFields.equals("0"))
+			{
+				return empDao.dealerEmailExistsOrNot(cemail);
+				
+			}
+			else
+			{
+				return empDao.dealerEmailExistsOrNotOnEdit(cemail,editFields);
+				
+			}
+			
+			
+			
+
+			
+		}
+	 
+	 
+	 
 	 
 }

@@ -345,6 +345,34 @@ public class EmployeeDao extends BaseEmployeeDao
 	return null;
 	 
  }
+
+public Boolean dealerEmailExistsOrNot(String cemail) {
+	
+	
+	 jdbcTemplate =custom.getJdbcTemplate();
+		
+		 String  hql =" select count(*) from kumar_employee where  email='"+cemail+"' ";
+		 
+		 int count = jdbcTemplate.queryForInt(hql);
+		 if(count>0){
+			 return true; 
+		 }else
+			 return false;
+}
+
+public Boolean dealerEmailExistsOrNotOnEdit(String cemail, String editFields) {
+	jdbcTemplate =custom.getJdbcTemplate();
+		
+		 String  hql =" select count(*) from kumar_employee where  email='"+cemail+"' and id <>  "+editFields+" ";
+		 
+		 System.out.println(hql);
+		 
+		 int count = jdbcTemplate.queryForInt(hql);
+		 if(count>0){
+			 return true; 
+		 }else
+			 return false;
+}
  
 }
 
