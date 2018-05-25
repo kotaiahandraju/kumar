@@ -475,15 +475,13 @@ $('#gstno').blur(function() {
 						 $('#errorMsg').text( "* GstNo already Exists ") ;
 						 $('#errorMsg').css('color','red');
 							setTimeout(function() { $("#errorMsg").text(''); }, 3000);
-							emailvalidation =false;
+							gstvalidation =false;
 						}
 					else
 						{
-						$('#gstno').css('border-color', 'red');
-						  $('#errorMsg').text( "* Enter Valid Gstno ") ;
-							 $('#errorMsg').css('color','red');
-								setTimeout(function() { $("#errorMsg").text(''); }, 3000);
-						 gstvalidation =false;
+						$('#gstno').css('border-color', 'none');
+						$('#submit1').prop('disabled', false);
+						 gstvalidation =true;
 						}
 					
 				},
