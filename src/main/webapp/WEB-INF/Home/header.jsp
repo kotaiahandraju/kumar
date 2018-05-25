@@ -339,7 +339,7 @@ function cartCount(){
          <script>var paramid = $("#delerId").val(); 
          $('#tagId').attr('href','managercartdetails?dealerId='+paramid);
          </script>
-        <a href="managercartdetails" id="tagId"><li class="pull-right carth"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="managercartId"></span> </li></a>
+        <a href="managercartdetails" id="tagId"><li class="carth"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="managercartId"></span> </li></a>
         </c:if>
 		<div class="masters">
 	        <ul class="nav navbar-nav pull-right toolbar">
