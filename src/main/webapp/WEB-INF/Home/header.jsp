@@ -339,7 +339,7 @@ function cartCount(){
          <script>var paramid = $("#delerId").val(); 
          $('#tagId').attr('href','managercartdetails?dealerId='+paramid);
          </script>
-        <a href="managercartdetails" id="tagId"><li class="pull-right carth"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="managercartId"></span> </li></a>
+        <a href="managercartdetails" id="tagId"><li class="carth"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="managercartId"></span> </li></a>
         </c:if>
 		<div class="masters">
 	        <ul class="nav navbar-nav pull-right toolbar">
@@ -398,8 +398,7 @@ function cartCount(){
         <div class="collapse navbar-collapse navbar-ex1-collapse" id="horizontal-navbar" style="padding:0px">
             <ul class="nav navbar-nav">
             
-            <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-dashboard"></i>
-             <span>Dashboard</span></a></li>&emsp;
+            <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
                <c:if test="${roleId=='1' }">
                <li class="branch"><a href="${baseurl }/admin/branchHome"><i class="fa fa-university"></i> <span>Branch</span></a></li>
                 <li class="productType"><a href="${baseurl }/admin/producttype"><i class="fa fa-clone"></i>
@@ -431,9 +430,7 @@ function cartCount(){
 			  <c:if test="${roleId=='3' }">
 			  <li class="delarpayment"><a href="${baseurl }/admin/delarpayment"> <i class="fa fa-bookmark"></i><span>Payment Information</span></a></li>
 			  <li class="orderplacing"><a href="${baseurl }/admin/orderplacing"><i class="fa fa-clipboard"></i> <span>Order Product</span></a></li>
-			   <li class="ordersList"><a href="${baseurl }/admin/myorderLists"><i class="fa fa-first-order"></i>
-
- <span>My Orders</span></a></li>
+			   <li class="ordersList"><a href="${baseurl }/admin/myorderLists"><i class="fa fa-first-order"></i><span>My Orders</span></a></li>
 			 </c:if>
 				
 			</ul>
