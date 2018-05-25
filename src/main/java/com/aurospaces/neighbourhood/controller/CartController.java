@@ -38,6 +38,7 @@ public class CartController {
 				String productArray[] = cartBean.getProductId().split(",");
 				String quantityArray[] = cartBean.getQuantity().split(",");
 			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			
 			if (objuserBean != null) {
 				cartBean.setUserId(objuserBean.getEmpId());
 				cartBean.setBranchId(objuserBean.getBranchId());
@@ -45,10 +46,30 @@ public class CartController {
 					cartBean.setId(0);
 					cartBean.setProductId(productArray[i]);
 					cartBean.setQuantity(quantityArray[i]);
-					cartDao.save(cartBean);
+					List<CartBean> cartList= cartDao.checkProductIdAndDealerId(cartBean);
+					if(cartList.size() > 0) {
+						for (CartBean cartBean2 : cartList) {
+							String existProductId=cartBean2.getProductId();
+							String existQty=cartBean2.getQuantity();
+							if(existProductId.equals(cartBean.getProductId())) {
+								
+								int iQty=Integer.parseInt(existQty)+Integer.parseInt(quantityArray[i]);
+								cartBean.setQuantity(String.valueOf(iQty));
+							}
+							cartDao.updateCart(cartBean);
+						}
+						
+							
+					}else {
+						cartDao.save(cartBean);
+					}
+					
+					
+					
 				}
 				
 			}
+			
 			}
 		int count=	cartDao.countcartdetails(cartBean);
 		

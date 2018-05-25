@@ -313,7 +313,7 @@ padding: 3px 14px 0px 11px;
 	<!-- Modal -->
 	
   <div class="modal fade" id="ordersListModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog"> 
+		  <div class="modal-dialog table-responsive"> 
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -348,6 +348,8 @@ padding: 3px 14px 0px 11px;
 var usernamevalidation =false;
 var emailvalidation =false;
 var mobilevalidation =false;
+var gstvalidation=false;
+var editFields =0;
 
 
 
@@ -393,16 +395,48 @@ $('#username').blur(function() {
 		
 		
 $('#email').blur(function() {
-		
-		
-		
-		var editFields =0;
+	
 		var cemail=$(this).val();
 		
 		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		  if( regex.test(cemail))
 			  {
-			  emailvalidation =true;
+			
+			  
+			  $.ajax({
+					type : "GET",
+					url : "checkemailexists",
+					data : "cemail="+cemail+"&editFields="+editFields,
+					dataType : "text",
+					beforeSend : function() {
+			             $.blockUI({ message: 'Please wait' });
+			          }, 
+					success : function(data) {
+						if(data ==='true')
+							{
+		 					$('#email').css('border-color', 'red');
+							 $('#errorMsg').text( "* Email already Exists ") ;
+							 $('#errorMsg').css('color','red');
+								setTimeout(function() { $("#errorMsg").text(''); }, 3000);
+								emailvalidation =false;
+							}
+						else
+							{
+							$('#email').css('border-color', 'none');
+							$('#submit1').prop('disabled', false);
+							emailvalidation =true;
+							}
+						
+					},
+					complete: function () {
+			            
+			            $.unblockUI();
+			       },
+					error :  function(e){$.unblockUI();console.log(e);}
+					
+				});
+			  
+			  
 			  }
 		 else
 		  
@@ -419,11 +453,95 @@ $('#email').blur(function() {
 			}); 
 			
 			
+			
+			
+			
+			
+$('#gstno').blur(function() {
+	
+	var cgstno=$(this).val();	  
+		  $.ajax({
+				type : "GET",
+				url : "checkgstexists",
+				data : "cgstno="+cgstno+"&editFields="+editFields,
+				dataType : "text",
+				beforeSend : function() {
+		             $.blockUI({ message: 'Please wait' });
+		          }, 
+				success : function(data) {
+					if(data ==='true')
+						{
+	 					$('#gstno').css('border-color', 'red');
+						 $('#errorMsg').text( "* GstNo already Exists ") ;
+						 $('#errorMsg').css('color','red');
+							setTimeout(function() { $("#errorMsg").text(''); }, 3000);
+							gstvalidation =false;
+						}
+					else
+						{
+						$('#gstno').css('border-color', 'none');
+						$('#submit1').prop('disabled', false);
+						 gstvalidation =true;
+						}
+					
+				},
+				complete: function () {
+		            
+		            $.unblockUI();
+		       },
+				error :  function(e){$.unblockUI();console.log(e);}
+				
+			});	
+	
+	  
+
+		}); 
+		
+			
+			
+			
 $('#phoneNumber').blur(function() {
 	var phoneNumber=$(this).val();
 	  if( phoneNumber.length == 10)
 	  {
 		  mobilevalidation =true;
+		  
+		  $.ajax({
+				type : "GET",
+				url : "checkmobileexists",
+				data : "phoneNumber="+phoneNumber+"&editFields="+editFields,
+				dataType : "text",
+				beforeSend : function() {
+		             $.blockUI({ message: 'Please wait' });
+		          }, 
+				success : function(data) {
+					if(data ==='true')
+						{
+	 					$('#phoneNumber').css('border-color', 'red');
+						 $('#errorMsg').text( "* ContactPhone Number already Exists ") ;
+						 $('#errorMsg').css('color','red');
+							setTimeout(function() { $("#errorMsg").text(''); }, 3000);
+							emailvalidation =false;
+						}
+					else
+						{
+						$('#phoneNumber').css('border-color', 'none');
+						$('#submit1').prop('disabled', false);
+						emailvalidation =true;
+						}
+					
+				},
+				complete: function () {
+		            
+		            $.unblockUI();
+		       },
+				error :  function(e){$.unblockUI();console.log(e);}
+				
+			});
+		  
+		  
+		  
+		  
 		  }
 	 else
 	  
@@ -510,7 +628,7 @@ function showTableData(response){
 	var table=$('#tableId').html('');
 	serviceUnitArray = {};
 	var protectType = null;
-	var tableHeadm = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
+	var tableHeadm = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables table-responsive" id="example">'+
     	'<thead><tr><th> Name</th><th>Business Name</th><th>Address</th><th>city</th><th>GST Number</th><th>Phone Number</th><th>Branch</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHeadm);
@@ -554,6 +672,10 @@ function showTableData(response){
 var prodcutName='';
 
 function editEmpCreation(id){
+	editFields =id;
+	
+	
+	
 	$("#id").val(id);
 	$("#businessName").val(serviceUnitArray[id].businessName);
 	$("#address").val(serviceUnitArray[id].address);
@@ -574,7 +696,7 @@ function editEmpCreation(id){
 	usernamevalidation =true;
 	emailvalidation =true;
 	mobilevalidation=true;
-	
+	gstvalidation=true;
 }
 
 function deleteDealer(id,status){
@@ -705,7 +827,7 @@ $('#ordersListModal').modal('toggle');
 	var table=$('#modal_body').html('');
 	serviceUnitArray1 = {};
 	var protectType = null;
-	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
+	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables table-responsive" id="example">'+
     	'<thead style="background:#4f8edc; color:#ffffff;"><tr><th> Name</th><th>Business Name</th><th>Designation</th><th>Address</th><th>city</th><th>Pin Code</th><th>GST Number</th><th>Shop Number</th><th>Phone Number</th><th>Email</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#modal_body").html(tableHead);

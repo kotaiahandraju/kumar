@@ -29,6 +29,7 @@ import com.aurospaces.neighbourhood.db.dao.CartDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.OrdersListDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 
 
 @Controller
@@ -44,13 +45,11 @@ public class ManagerCartController {
 		String sJson = null;
 		List<ItemsBean> listOrderBeans = null;
 		try{
-			System.out.println("dealerOrderPlacedealerOrderPlacedealerOrderPlace");
 			listOrderBeans = itemsDao.getItems("1");
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
 				request.setAttribute("allOrders1", sJson);
-					System.out.println(sJson);
 			} else {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -79,7 +78,26 @@ public class ManagerCartController {
 					cartBean.setId(0);
 					cartBean.setProductId(productArray[i]);
 					cartBean.setQuantity(quantityArray[i]);
-					cartDao.save(cartBean);
+					List<CartBean> cartList= cartDao.checkProductIdAndDealerId(cartBean);
+					if(cartList.size() > 0) {
+						for (CartBean cartBean2 : cartList) {
+							String existProductId=cartBean2.getProductId();
+							String existQty=cartBean2.getQuantity();
+							if(existProductId.equals(cartBean.getProductId())) {
+								
+								int iQty=Integer.parseInt(existQty)+Integer.parseInt(quantityArray[i]);
+								cartBean.setQuantity(String.valueOf(iQty));
+							}
+							cartDao.updateCart(cartBean);
+						}
+						
+							
+					}else {
+						cartDao.save(cartBean);
+					}
+					
+					
+					
 				}
 				
 			}
@@ -104,7 +122,6 @@ public class ManagerCartController {
 		String sJson = null;
 		try{
 			String dealerId=request.getParameter("dealerId");
-			System.out.println("dealerId---"+dealerId);
 			request.setAttribute("dealerId", dealerId);
 			listOrderBeans = cartDao.getallManagercartDetails(dealerId);
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
@@ -161,6 +178,24 @@ public class ManagerCartController {
 		}
 		
 		return String.valueOf(objJson);
+	}
+	@RequestMapping(value = "/managercartList")
+	@ResponseBody public String managercartList(OrdersListBean ordersListBean,ModelMap model, HttpServletRequest request, HttpSession session) {
+		List<Map<String,Object>> listOrderBeans = null;
+		ObjectMapper objectMapper =null;
+		String sJson = null;
+		JSONObject jsonObject=new JSONObject();
+		try{
+			listOrderBeans = cartDao.getallManagercartDetails(ordersListBean.getDelerId());
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+//				System.out.println(listOrderBeans);
+				jsonObject.put("list", listOrderBeans);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return String.valueOf(jsonObject);
 	}
 	
 	@ModelAttribute("dealersList")

@@ -61,7 +61,7 @@ table#dependent_table tbody tr td:first-child::before {
 									<label for="focusedinput" class="col-md-4 control-label">Select Dealer <span class="impColor">*</span>
 									</label>
 									<div class="col-md-7">
-										<form:select path="delerId" class="form-control" >
+										<form:select path="delerId" class="form-control" onchange="managercartCount();">
 								    	<form:option value="">-- Select Dealer --</form:option>
 								    	<form:options items="${dealersList }"></form:options>
 								    	</form:select>
@@ -125,7 +125,18 @@ table#dependent_table tbody tr td:first-child::before {
 					</div>
 				</div>
 				</div>
-
+	<c:choose>
+<c:when test="${empty param.dealerId}">
+   <script> var delerId1 = "";</script>
+</c:when>
+<c:otherwise>
+   <script> var delerId1 = "${param.dealerId}";
+   
+   $("#delerId").val(delerId1);
+//    managercartCount();
+   </script>
+</c:otherwise>
+</c:choose>
 <script type="text/javascript">
 var listOrders1 =${allOrders1};
 
@@ -166,6 +177,7 @@ function showTableData(response){
 var quantity = [];  
 var productId = []; 
 var res="";
+
 function addCart() {
 	quantity = [];  
 	productId = [];
@@ -209,6 +221,7 @@ function addCart() {
 				$(this).val("");
 			});
 		}
+		$('#tagId').attr('href','managercartdetails?dealerId='+dealerId);
 		
 	});
 	
@@ -245,6 +258,7 @@ function orderNow() {
 	formData.append('userId', dealerId);
 	$.fn.makeMultipartRequest('POST', 'manageraddtocart', false,
 			formData, false, 'text', function(data) {
+		$('#tagId').attr('href','managercartdetails?dealerId='+dealerId);
 		if(data != ""){
 			var jsonobj = $.parseJSON(data);
 			var count = jsonobj.count;
@@ -255,7 +269,20 @@ function orderNow() {
 	});
 	
 }
-	     
+	
+function managercartCount(){
+	var userId=$("#delerId").val();
+	var formData = new FormData();
+	formData.append('userId', userId);
+	$.fn.makeMultipartRequest('POST', 'managercountCartdetails', false, formData, false, 'text', function(data){
+		$('#tagId').attr('href','managercartdetails?dealerId='+userId);
+		var jsonobj = $.parseJSON(data);
+		var count = jsonobj.count;
+		$("#managercartId").text(count);
+	
+	});
+}
+
 
 
 $("#pageName").text("Order Product");

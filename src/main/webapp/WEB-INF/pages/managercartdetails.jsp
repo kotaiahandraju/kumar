@@ -9,6 +9,9 @@
 
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
  <link rel="stylesheet" type="text/css" href="../assets/css/img.css">
+ 
+ 
+ 
  <style>
  .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td
  {
@@ -56,7 +59,7 @@ font-weight:600;
 				<div class="panel-heading">
 					<h4>Select Dealer</h4>
 				</div>
-				<form id="managerorderLstForm" class="form-horizontal" action="/NBD/admin/managerorderplace" method="Post">
+				<form:form class="form-horizontal" modelAttribute="managercartdetailsForm" action="" method="Post">
 					<div class="panel-body" style="border-radius: 0px;">
 						<div class="row">
 							<div class="col-md-6">
@@ -64,10 +67,10 @@ font-weight:600;
 									<label for="focusedinput" class="col-md-4 control-label">Select Dealer <span class="impColor">*</span>
 									</label>
 									<div class="col-md-7">
-										<select id="delerId" name="delerId" class="form-control">
-								    	<option value="">-- Select Dealer --</option>
-								    	<option value="34">Prasad ( Lakshmi Electricals )</option><option value="38">pavan ( aaaaaaa )</option>
-								    	</select>
+										<form:select path="delerId" class="form-control" onchange="managercartCount(),managercartList();">
+								    	<form:option value="">-- Select Dealer --</form:option>
+								    	<form:options items="${dealersList }"></form:options>
+								    	</form:select>
 									</div>
 								</div>
 							</div>
@@ -83,7 +86,7 @@ font-weight:600;
 							</div>
 						</div>
 					</div> -->
-				</form>
+				</form:form>
 			</div>
 		</div>
 		<div class="row" id="orderPlacement">
@@ -109,7 +112,7 @@ font-weight:600;
 					</div>
 			<br>
 					<div class="pull-right">
-					<a href="managerorderplace"><span class="btn btn-warning" ><!-- <i class="fa fa-shopping-cart"></i> --> ADD MORE ITEMS</span></a> 
+					<a href="managerorderplace" id="cartTag"><span class="btn btn-warning" ><!-- <i class="fa fa-shopping-cart"></i> --> ADD MORE ITEMS</span></a> 
 					<span class="btn btn-danger"  onclick="ordePlacing();"><!-- <i class="fa fa-bolt" aria-hidden="true"></i> -->CONFIRM ORDER</span>
 					</div>
 				</div>
@@ -229,7 +232,22 @@ font-weight:600;
 					
 				</div> 
 				</div>
-				<!-- Invoice Model End -->	
+				
+				
+				
+				<c:choose>
+<c:when test="${empty param.dealerId}">
+   <script> var delerId1 = "";</script>
+</c:when>
+<c:otherwise>
+   <script> var delerId1 = "${param.delerId}";
+   
+   $("#delerId").val(delerId1);
+//    managercartCount();
+   </script>
+</c:otherwise>
+</c:choose>
+ 
 
 <script type="text/javascript">
  var listOrders1 =${allOrders1};
@@ -376,6 +394,7 @@ function removecartdata(id){
 		var jsonobj = $.parseJSON(data);
 		var allOrders = jsonobj.allOrders1;
 		showTableData(allOrders);
+		listOrders1=allOrders;
 		var count = jsonobj.count;
 		$("#cartId").text(count);
 		alert(jsonobj.msg);
@@ -405,6 +424,39 @@ function showTableDataOnInvoice(response){
 	});
 	
 }
+
+function managercartCount(){
+	var userId=$("#delerId").val();
+	var formData = new FormData();
+	formData.append('userId', userId);
+	$.fn.makeMultipartRequest('POST', 'managercountCartdetails', false, formData, false, 'text', function(data){
+		$('#tagId').attr('href','managercartdetails?dealerId='+userId);
+		var jsonobj = $.parseJSON(data);
+		var count = jsonobj.count;
+		
+		$("#managercartId").text(count);
+	
+	});
+}
+function managercartList(){
+	var delerId=$("#delerId").val();
+	var formData = new FormData();
+	formData.append('delerId', delerId);
+	$.fn.makeMultipartRequest('POST', 'managercartList', false, formData, false, 'text', function(data){
+		var jsonobj = $.parseJSON(data);
+// 		console.log(jsonobj);
+		showTableData(jsonobj.list);
+	
+	});
+}
+
+
+$(document).ready(function(){
+	managercartCount();
+});
+
+var cartDealerId = $("#delerId").val(); 
+$('#cartTag').attr('href','managerorderplace?dealerId='+cartDealerId);
 
 $("#pageName").text("Cart");
 // $(".orderplacing").addClass("active"); 
