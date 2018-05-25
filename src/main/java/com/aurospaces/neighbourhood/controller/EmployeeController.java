@@ -259,6 +259,29 @@ public class EmployeeController {
 
 			
 		}
+	 @RequestMapping("/checkgstexists")
+		public  @ResponseBody  Boolean checkGstExists(HttpServletRequest request, HttpSession session)
+		{
+			String cgstno=request.getParameter("cgst");
+			String editFields=request.getParameter("editFields");
+			
+			
+			if(editFields.equals("0"))
+			{
+				return empDao.dealerGstExistsOrNot(cgstno);
+				
+			}
+			else
+			{
+				return empDao.dealerGstExistsOrNotOnEdit(cgstno,editFields);
+				
+			}
+			
+			
+			
+
+			
+		}
 	 
 	 
 	 

@@ -373,6 +373,33 @@ public Boolean dealerEmailExistsOrNotOnEdit(String cemail, String editFields) {
 		 }else
 			 return false;
 }
+
+public Boolean dealerGstExistsOrNot(String cgstno) {
+	
+	jdbcTemplate =custom.getJdbcTemplate();
+	
+	 String  hql =" select count(*) from kumar_employee where  gstno='"+cgstno+"' ";
+	 
+	 int count = jdbcTemplate.queryForInt(hql);
+	 if(count>0){
+		 return true; 
+	 }else
+		 return false;
+}
+
+public Boolean dealerGstExistsOrNotOnEdit(String cgstno, String editFields) {
+	jdbcTemplate =custom.getJdbcTemplate();
+	
+	 String  hql =" select count(*) from kumar_employee where  cgstno='"+cgstno+"' and id <>  "+editFields+" ";
+	 
+	 System.out.println(hql);
+	 
+	 int count = jdbcTemplate.queryForInt(hql);
+	 if(count>0){
+		 return true; 
+	 }else
+		 return false;
+}
  
 }
 

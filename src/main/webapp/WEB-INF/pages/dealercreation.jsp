@@ -348,7 +348,7 @@ padding: 3px 14px 0px 11px;
 var usernamevalidation =false;
 var emailvalidation =false;
 var mobilevalidation =false;
-
+var gstvalidation=false;
 var editFields =0;
 
 
@@ -452,6 +452,55 @@ $('#email').blur(function() {
 		}
 
 			}); 
+			
+			
+			
+			
+			
+			
+$('#gstno').blur(function() {
+	
+	var cgstno=$(this).val();	  
+		  $.ajax({
+				type : "GET",
+				url : "checkgstexists",
+				data : "cgstno="+cgstno+"&editFields="+editFields,
+				dataType : "text",
+				beforeSend : function() {
+		             $.blockUI({ message: 'Please wait' });
+		          }, 
+				success : function(data) {
+					if(data ==='true')
+						{
+	 					$('#gstno').css('border-color', 'red');
+						 $('#errorMsg').text( "* GstNo already Exists ") ;
+						 $('#errorMsg').css('color','red');
+							setTimeout(function() { $("#errorMsg").text(''); }, 3000);
+							emailvalidation =false;
+						}
+					else
+						{
+						$('#gstno').css('border-color', 'red');
+						  $('#errorMsg').text( "* Enter Valid Gstno ") ;
+							 $('#errorMsg').css('color','red');
+								setTimeout(function() { $("#errorMsg").text(''); }, 3000);
+						 gstvalidation =false;
+						}
+					
+				},
+				complete: function () {
+		            
+		            $.unblockUI();
+		       },
+				error :  function(e){$.unblockUI();console.log(e);}
+				
+			});	
+	
+	  
+
+		}); 
+		
+			
 			
 			
 $('#phoneNumber').blur(function() {
@@ -613,7 +662,7 @@ function editEmpCreation(id){
 	usernamevalidation =true;
 	emailvalidation =true;
 	mobilevalidation=true;
-	
+	gstvalidation=true;
 }
 
 function deleteDealer(id,status){
