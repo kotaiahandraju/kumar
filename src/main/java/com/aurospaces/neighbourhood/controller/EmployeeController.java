@@ -261,6 +261,32 @@ public class EmployeeController {
 		}
 	 
 	 
+	 @RequestMapping("/checkmobileexists")
+		public  @ResponseBody  Boolean checkContackPhoneNumberExists(HttpServletRequest request, HttpSession session)
+		{
+			String phoneNumber=request.getParameter("phoneNumber");
+			String editFields=request.getParameter("editFields");
+			
+			
+			if(editFields.equals("0"))
+			{
+				return empDao.dealerContactPhoneExistsOrNot(phoneNumber);
+				
+			}
+			else
+			{
+				return empDao.dealerContactPhoneExistsOrNotOnEdit(phoneNumber,editFields);
+				
+			}
+			
+			
+			
+
+			
+		}
+	 
+	 
+	 
 	 
 	 
 }

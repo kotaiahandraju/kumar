@@ -401,8 +401,7 @@ $('#email').blur(function() {
 		var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		  if( regex.test(cemail))
 			  {
-			  emailvalidation =true;
-			  
+			
 			  
 			  $.ajax({
 					type : "GET",
@@ -415,7 +414,7 @@ $('#email').blur(function() {
 					success : function(data) {
 						if(data ==='true')
 							{
-		 					$('#username').css('border-color', 'red');
+		 					$('#email').css('border-color', 'red');
 							 $('#errorMsg').text( "* Email already Exists ") ;
 							 $('#errorMsg').css('color','red');
 								setTimeout(function() { $("#errorMsg").text(''); }, 3000);
@@ -423,7 +422,7 @@ $('#email').blur(function() {
 							}
 						else
 							{
-							$('#username').css('border-color', 'none');
+							$('#email').css('border-color', 'none');
 							$('#submit1').prop('disabled', false);
 							emailvalidation =true;
 							}
@@ -459,6 +458,43 @@ $('#phoneNumber').blur(function() {
 	  if( phoneNumber.length == 10)
 	  {
 		  mobilevalidation =true;
+		  
+		  $.ajax({
+				type : "GET",
+				url : "checkmobileexists",
+				data : "phoneNumber="+phoneNumber+"&editFields="+editFields,
+				dataType : "text",
+				beforeSend : function() {
+		             $.blockUI({ message: 'Please wait' });
+		          }, 
+				success : function(data) {
+					if(data ==='true')
+						{
+	 					$('#phoneNumber').css('border-color', 'red');
+						 $('#errorMsg').text( "* ContactPhone Number already Exists ") ;
+						 $('#errorMsg').css('color','red');
+							setTimeout(function() { $("#errorMsg").text(''); }, 3000);
+							emailvalidation =false;
+						}
+					else
+						{
+						$('#phoneNumber').css('border-color', 'none');
+						$('#submit1').prop('disabled', false);
+						emailvalidation =true;
+						}
+					
+				},
+				complete: function () {
+		            
+		            $.unblockUI();
+		       },
+				error :  function(e){$.unblockUI();console.log(e);}
+				
+			});
+		  
+		  
+		  
+		  
 		  }
 	 else
 	  

@@ -373,6 +373,32 @@ public Boolean dealerEmailExistsOrNotOnEdit(String cemail, String editFields) {
 		 }else
 			 return false;
 }
+
+public Boolean dealerContactPhoneExistsOrNot(String phoneNumber) {
+	 jdbcTemplate =custom.getJdbcTemplate();
+		
+	 String  hql =" select count(*) from kumar_employee where  phone_number='"+phoneNumber+"' ";
+	 
+	 int count = jdbcTemplate.queryForInt(hql);
+	 if(count>0){
+		 return true; 
+	 }else
+		 return false;
+}
+
+public Boolean dealerContactPhoneExistsOrNotOnEdit(String phoneNumber, String editFields) {
+	jdbcTemplate =custom.getJdbcTemplate();
+	
+	 String  hql =" select count(*) from kumar_employee where  phone_number='"+phoneNumber+"' and id <>  "+editFields+" ";
+	 
+	 System.out.println(hql);
+	 
+	 int count = jdbcTemplate.queryForInt(hql);
+	 if(count>0){
+		 return true; 
+	 }else
+		 return false;
+}
  
 }
 
