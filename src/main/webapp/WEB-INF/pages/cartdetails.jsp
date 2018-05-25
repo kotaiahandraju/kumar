@@ -48,7 +48,7 @@ font-size:28px;
     background-color: rgba(0,0,0,.05);
 }
 </style>
-<script src="jquery.PrintArea.js"></script>
+<!-- <script src="jquery.PrintArea.js"></script> -->
 
 
 
@@ -335,6 +335,10 @@ function removecartdata(id){
 		var jsonobj = $.parseJSON(data);
 		var allOrders = jsonobj.allOrders1;
 		showTableData(allOrders);
+	/* 	showTableDataOnInvoice(allOrders); */
+	
+	listOrders1 =allOrders;
+	    /*  console.log("hello"+listOrders1); */
 		var count = jsonobj.count;
 		$("#cartId").text(count);
 		alert(jsonobj.msg);
