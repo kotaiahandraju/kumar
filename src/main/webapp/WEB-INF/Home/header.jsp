@@ -149,7 +149,7 @@ display:inline-block;
 }
 @media only screen and (min-width: 1280px) {
 .carth {
-margin-left:593px !important;
+margin-left:570px !important;
 }
 .pagination {
 display:inline-block;
@@ -278,7 +278,6 @@ $(function() {
 $(document).ready(function(){
 	tooltip();
 	cartCount();
-	managercartCount();
 });
 function tooltip(){
 	$('.view').attr('data-toggle','tooltip');
@@ -306,16 +305,6 @@ function cartCount(){
 	});
 }
 
-function managercartCount(){
-	var userId=$("#delerId").val();
-	var formData = new FormData();
-	formData.append('userId', userId);
-	$.fn.makeMultipartRequest('POST', 'managercountCartdetails', false, formData, false, 'text', function(data){
-		var jsonobj = $.parseJSON(data);
-		var count = jsonobj.count;
-		$("#managercartId").text(count);
-	});
-}
 </script>
 </head>
 
@@ -348,9 +337,9 @@ function managercartCount(){
         </c:if>
          <c:if test="${cacheUserBean.roleId=='2' }">
          <script>var paramid = $("#delerId").val(); 
-         $('#tagId').attr('href','managercartdetails?delerId='+paramid);
+         $('#tagId').attr('href','managercartdetails?dealerId='+paramid);
          </script>
-        <a href="" id="tagId"><li class="pull-right carth"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="managercartId"></span> </li></a>
+        <a href="managercartdetails" id="tagId"><li class="pull-right carth"><i class="fa fa-shopping-cart"></i> Cart <span class="badge" id="managercartId"></span> </li></a>
         </c:if>
 		<div class="masters">
 	        <ul class="nav navbar-nav pull-right toolbar">
@@ -435,7 +424,7 @@ function managercartCount(){
 		<%-- 	   <li class="dealerconfirm"><a href="${baseurl }/admin/dealeraccountconfirm"><i class="fa fa-check-square"></i><span> Confirm  Dealer</span></a></li> --%>
 			    <li class="dealerpaymentconfirm"><a href="${baseurl }/admin/dealerpaymentconfirm"><i class="fa fa-bolt"></i><span>Confirm Payments </span></a></li>
 			    <li class="orderslist"><a href="${baseurl }/admin/orderslist"><i class="fa fa-clipboard"></i><span>Delivery Status</span></a></li>
-			     <li class="managerorderplace"><a href="${baseurl }/admin/managerorderplace"><i class="fa fa-clipboard"></i><span>Order Product</span></a></li>
+			     <li class="orderplacing"><a href="${baseurl }/admin/managerorderplace"><i class="fa fa-clipboard"></i><span>Order Product</span></a></li>
 			    
 			   
 			 </c:if>

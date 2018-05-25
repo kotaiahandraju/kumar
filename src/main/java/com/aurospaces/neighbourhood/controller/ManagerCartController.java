@@ -29,6 +29,7 @@ import com.aurospaces.neighbourhood.db.dao.CartDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.OrdersListDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 
 
 @Controller
@@ -161,6 +162,25 @@ public class ManagerCartController {
 		}
 		
 		return String.valueOf(objJson);
+	}
+	@RequestMapping(value = "/managercartList")
+	@ResponseBody public String managercartList(OrdersListBean ordersListBean,ModelMap model, HttpServletRequest request, HttpSession session) {
+		List<Map<String,Object>> listOrderBeans = null;
+		ObjectMapper objectMapper =null;
+		String sJson = null;
+		JSONObject jsonObject=new JSONObject();
+		try{
+			System.out.println("dealerId---"+ordersListBean.getDelerId());
+			listOrderBeans = cartDao.getallManagercartDetails(ordersListBean.getDelerId());
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				System.out.println(listOrderBeans);
+				jsonObject.put("list", listOrderBeans);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		return String.valueOf(jsonObject);
 	}
 	
 	@ModelAttribute("dealersList")

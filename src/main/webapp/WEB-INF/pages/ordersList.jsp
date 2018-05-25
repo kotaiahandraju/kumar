@@ -549,6 +549,8 @@ function saveDeliverableItemsData(objId){
             	 var msg = resJson.message;
              if(typeof msg != "undefined"){
             	 	if(msg=="success"){
+            	 		$("#qty"+objId).val("");
+            	 		$("#nullify_qty"+objId).val("");
             	 		alert("Data saved successfully");
             	 		serviceUnitArray1[objId].pending_qty = balance_qty;
             	 		serviceUnitArray1[objId].delivered_qty = parseInt(serviceUnitArray1[objId].delivered_qty)+parseInt(quantity);
