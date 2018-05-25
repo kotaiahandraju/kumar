@@ -387,13 +387,11 @@ public Boolean dealerGstExistsOrNot(String cgstno) {
 		 return false;
 }
 
+
 public Boolean dealerGstExistsOrNotOnEdit(String cgstno, String editFields) {
 	jdbcTemplate =custom.getJdbcTemplate();
 	
-	 String  hql =" select count(*) from kumar_employee where  cgstno='"+cgstno+"' and id <>  "+editFields+" ";
-	 
-	 System.out.println(hql);
-	 
+	 String  hql =" select count(*) from kumar_employee where  cgstno='"+cgstno+"' and id <>  "+editFields+" ";	 
 	 int count = jdbcTemplate.queryForInt(hql);
 	 if(count>0){
 		 return true; 
