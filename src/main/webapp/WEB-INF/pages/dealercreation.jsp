@@ -843,7 +843,7 @@ $('#ordersListModal').modal('toggle');
 			+ "<td title='"+ serviceUnitArray[id].address+"'>" + serviceUnitArray[id].address + "</td>"
 			+ "<td title='"+serviceUnitArray[id].city+"'>" + serviceUnitArray[id].city + "</td>"
 		    + "<td title='"+serviceUnitArray[id].pincode+"'>" + serviceUnitArray[id].pincode + "</td>" 
-			+ "<td title='"+serviceUnitArray[id].businessName+"'>" + serviceUnitArray[id].businessName + "</td>"
+			+ "<td title='"+serviceUnitArray[id].gstno+"'>" + serviceUnitArray[id].gstno + "</td>"
 		 	+ "<td title='"+serviceUnitArray[id].shop_phone+"'>" + serviceUnitArray[id].shop_phone + "</td>" 
 			+ "<td title='"+serviceUnitArray[id].phone_number+"'>" + serviceUnitArray[id].phone_number + "</td>"
 			+ "<td title='"+serviceUnitArray[id].email+"'>" + serviceUnitArray[id].email + "</td>" 
