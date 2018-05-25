@@ -284,7 +284,7 @@ public class EmployeeController {
 		}
 	 
 	 
-/*	 @RequestMapping("/checkmobileexists")
+	 @RequestMapping("/checkmobileexists")
 		public  @ResponseBody  Boolean checkContackPhoneNumberExists(HttpServletRequest request, HttpSession session)
 		{
 			String phoneNumber=request.getParameter("phoneNumber");
@@ -306,7 +306,7 @@ public class EmployeeController {
 			
 
 			
-		}*/
+		}
 	 
 	 
 	 

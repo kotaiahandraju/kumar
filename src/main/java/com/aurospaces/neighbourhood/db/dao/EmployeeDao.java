@@ -391,13 +391,37 @@ public Boolean dealerGstExistsOrNot(String cgstno) {
 public Boolean dealerGstExistsOrNotOnEdit(String cgstno, String editFields) {
 	jdbcTemplate =custom.getJdbcTemplate();
 	
-	 String  hql =" select count(*) from kumar_employee where  cgstno='"+cgstno+"' and id <>  "+editFields+" ";	 
+	 String  hql =" select count(*) from kumar_employee where  gstno='"+cgstno+"' and id <>  "+editFields+" ";	 
 	 int count = jdbcTemplate.queryForInt(hql);
 	 if(count>0){
 		 return true; 
 	 }else
 		 return false;
 }
+
+public Boolean dealerContactPhoneExistsOrNot(String phoneNumber) {
+	jdbcTemplate =custom.getJdbcTemplate();
+	
+	 String  hql =" select count(*) from kumar_employee where  phone_number='"+phoneNumber+"' ";
+	 
+	 int count = jdbcTemplate.queryForInt(hql);
+	 if(count>0){
+		 return true; 
+	 }else
+		 return false;
+}
+
+public Boolean dealerContactPhoneExistsOrNotOnEdit(String phoneNumber, String editFields) {
+	jdbcTemplate =custom.getJdbcTemplate();
+	
+	 String  hql =" select count(*) from kumar_employee where  phone_number='"+phoneNumber+"' and id <>  "+editFields+" ";	 
+	 int count = jdbcTemplate.queryForInt(hql);
+	 if(count>0){
+		 return true; 
+	 }else
+		 return false;
+}
+
  
 }
 
