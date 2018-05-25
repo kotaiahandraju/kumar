@@ -86,6 +86,15 @@ ps.setString(6, cart.getBranchId());
 			jdbcTemplate.update(sql, new Object[]{cart.getProductId(),cart.getQuantity(),cart.getUserId(),cart.getBranchId(),cart.getId()});
 		}
 	}
+	
+	public void updateCart( CartBean cart) 
+	{
+		jdbcTemplate = custom.getJdbcTemplate();
+
+			String sql = "UPDATE cart  set quantity = ?  where userId = ? and productId = ?";
+	
+			int update =jdbcTemplate.update(sql, new Object[]{cart.getQuantity(),cart.getUserId(),cart.getProductId()});
+	}
 		
 		@Transactional
 		public int delete(int id) {

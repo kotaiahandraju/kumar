@@ -262,7 +262,7 @@ public class EmployeeController {
 	 @RequestMapping("/checkgstexists")
 		public  @ResponseBody  Boolean checkGstExists(HttpServletRequest request, HttpSession session)
 		{
-			String cgstno=request.getParameter("cgst");
+			String cgstno=request.getParameter("cgstno");
 			String editFields=request.getParameter("editFields");
 			
 			

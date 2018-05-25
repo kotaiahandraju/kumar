@@ -125,7 +125,18 @@ table#dependent_table tbody tr td:first-child::before {
 					</div>
 				</div>
 				</div>
-
+	<c:choose>
+<c:when test="${empty param.dealerId}">
+   <script> var delerId1 = "";</script>
+</c:when>
+<c:otherwise>
+   <script> var delerId1 = "${param.dealerId}";
+   
+   $("#delerId").val(delerId1);
+//    managercartCount();
+   </script>
+</c:otherwise>
+</c:choose>
 <script type="text/javascript">
 var listOrders1 =${allOrders1};
 
@@ -247,6 +258,7 @@ function orderNow() {
 	formData.append('userId', dealerId);
 	$.fn.makeMultipartRequest('POST', 'manageraddtocart', false,
 			formData, false, 'text', function(data) {
+		$('#tagId').attr('href','managercartdetails?dealerId='+dealerId);
 		if(data != ""){
 			var jsonobj = $.parseJSON(data);
 			var count = jsonobj.count;
@@ -263,6 +275,7 @@ function managercartCount(){
 	var formData = new FormData();
 	formData.append('userId', userId);
 	$.fn.makeMultipartRequest('POST', 'managercountCartdetails', false, formData, false, 'text', function(data){
+		$('#tagId').attr('href','managercartdetails?dealerId='+userId);
 		var jsonobj = $.parseJSON(data);
 		var count = jsonobj.count;
 		$("#managercartId").text(count);

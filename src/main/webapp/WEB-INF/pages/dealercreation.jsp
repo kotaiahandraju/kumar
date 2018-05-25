@@ -313,7 +313,7 @@ padding: 3px 14px 0px 11px;
 	<!-- Modal -->
 	
   <div class="modal fade" id="ordersListModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog"> 
+		  <div class="modal-dialog table-responsive"> 
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -475,15 +475,13 @@ $('#gstno').blur(function() {
 						 $('#errorMsg').text( "* GstNo already Exists ") ;
 						 $('#errorMsg').css('color','red');
 							setTimeout(function() { $("#errorMsg").text(''); }, 3000);
-							emailvalidation =false;
+							gstvalidation =false;
 						}
 					else
 						{
-						$('#gstno').css('border-color', 'red');
-						  $('#errorMsg').text( "* Enter Valid Gstno ") ;
-							 $('#errorMsg').css('color','red');
-								setTimeout(function() { $("#errorMsg").text(''); }, 3000);
-						 gstvalidation =false;
+						$('#gstno').css('border-color', 'none');
+						$('#submit1').prop('disabled', false);
+						 gstvalidation =true;
 						}
 					
 				},
@@ -630,7 +628,7 @@ function showTableData(response){
 	var table=$('#tableId').html('');
 	serviceUnitArray = {};
 	var protectType = null;
-	var tableHeadm = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
+	var tableHeadm = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables table-responsive" id="example">'+
     	'<thead><tr><th> Name</th><th>Business Name</th><th>Address</th><th>city</th><th>GST Number</th><th>Phone Number</th><th>Branch</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHeadm);
@@ -829,7 +827,7 @@ $('#ordersListModal').modal('toggle');
 	var table=$('#modal_body').html('');
 	serviceUnitArray1 = {};
 	var protectType = null;
-	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
+	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables table-responsive" id="example">'+
     	'<thead style="background:#4f8edc; color:#ffffff;"><tr><th> Name</th><th>Business Name</th><th>Designation</th><th>Address</th><th>city</th><th>Pin Code</th><th>GST Number</th><th>Shop Number</th><th>Phone Number</th><th>Email</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#modal_body").html(tableHead);
