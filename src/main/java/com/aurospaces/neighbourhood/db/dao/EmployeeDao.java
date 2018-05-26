@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -288,7 +289,7 @@ public class EmployeeDao extends BaseEmployeeDao
 	}
  public boolean isUsernameDuplicate(String userName){
 	 jdbcTemplate =custom.getJdbcTemplate();
-	 try{
+	 
 		 StringBuffer buffer = new StringBuffer();
 		 buffer.append(" select count(*) from login where upper(userName) = upper('"+userName+"') ");
 		 int count = jdbcTemplate.queryForInt(buffer.toString());
@@ -296,10 +297,6 @@ public class EmployeeDao extends BaseEmployeeDao
 			 return true; 
 		 }else
 			 return false;
-	 }catch(Exception e){
-		 e.printStackTrace();
-	 }
-	 return false;
  }
  
  //mobile app using 
@@ -422,6 +419,35 @@ public Boolean dealerContactPhoneExistsOrNotOnEdit(String phoneNumber, String ed
 	 }else
 		 return false;
 }
+
+public EmployeeBean getBranchHeadBean(String branchId) {
+	
+	jdbcTemplate = custom.getJdbcTemplate();
+	String sql = "select * from kumar_employee where branch_id = ? and   roleId= '2' ";
+	List<EmployeeBean> retlist = jdbcTemplate.query(sql,
+	new Object[]{branchId},
+	ParameterizedBeanPropertyRowMapper.newInstance(EmployeeBean.class));
+	if(retlist.size() > 0)
+		return retlist.get(0);
+	return null;
+}
+
+
+
+public Boolean UsernameExistsOrNotOnEdit(String username, String editFields) {
+	jdbcTemplate =custom.getJdbcTemplate();
+		
+		 String  hql =" select count(*) from kumar_employee where  username='"+username+"' and id <>  "+editFields+" ";
+		 
+		 System.out.println(hql);
+		 
+		 int count = jdbcTemplate.queryForInt(hql);
+		 if(count>0){
+			 return true; 
+		 }else
+			 return false;
+}
+
 
  
 }
