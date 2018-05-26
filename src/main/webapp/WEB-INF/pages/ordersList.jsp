@@ -163,7 +163,7 @@ table#dependent_table tbody tr td:first-child::before {
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		        <h4 class="modal-title" id="exampleModalLabel"><span id="dealer_name_str"></span></h4>
-		      <span class="col-md-4" id="dname">as</span>  <span class="col-md-4" id="kumarid">as</span>  <span class="col-md-3" id="korderdDate">as</span><br>
+		       <span class="col-md-2" style="width:9.5%"><b>Dealer Name :</b></span><span class="col-md-3" id="dname">as</span> <span class="col-md-2" style="width:8%"><b>Order ID :</b></span> <span class="col-md-3" id="kumarid">as</span><span class="col-md-2" style="width:8.8%"><b>Order Date :</b></span>  <span class="col-md-2" id="korderdDate">as</span><br>
 		      </div>
 		      <div class="modal-body" id="modal_body">
 		      
@@ -182,7 +182,7 @@ table#dependent_table tbody tr td:first-child::before {
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		        <h4 class="modal-title" id="exampleModalLabel"><span id="dealer_name_str"></span></h4>
-		      <span class="col-md-4" id="dname"></span>  <span class="col-md-4" id="kumarid2"></span>  <span class="col-md-4" id="korderdDate2"></span><br>
+		       <span class="col-md-2" style="width:9.5%"><b>Dealer Name :</b></span><span class="col-md-3" id="dname"></span> <span class="col-md-2" style="width:8%"><b>Order ID :</b></span> <span class="col-md-3" id="kumarid2"></span> <span class="col-md-2" style="width:8.8%"><b>Order Date :</b></span>  <span class="col-md-2" id="korderdDate2"></span><br>
 		      </div>
 		      <div class="modal-body" id="history_modal_body">
 		      
