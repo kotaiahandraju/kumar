@@ -40,6 +40,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 
+/**
+ * @author Charvik101
+ *
+ */
 @Controller
 @RequestMapping(value = "/admin")
 public class EmployeeController {
@@ -230,8 +234,21 @@ public class EmployeeController {
 		{
 			String username=request.getParameter("username");
 
+			String editFields=request.getParameter("editFields");
+
 			username = username.replaceAll("\\s+","");
-			return empDao.isUsernameDuplicate(username);
+			
+			if(editFields.equals("0"))
+			{
+				return empDao.isUsernameDuplicate(username);
+				
+				
+			}
+			else
+			{
+				return empDao. UsernameExistsOrNotOnEdit(username,editFields);
+				
+			}
 		}
 	 
 	 
@@ -309,6 +326,83 @@ public class EmployeeController {
 		}
 	 
 	 
+	 
+	 
+
+	 /**  here also check employee email exists or not when create users on admin
+	 * @param request
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("/empemailexists")
+		public  @ResponseBody  Boolean employeeEmailExists(HttpServletRequest request, HttpSession session)
+		{
+			String cemail=request.getParameter("cemail");
+			String editFields=request.getParameter("editFields");
+			
+			
+			if(editFields.equals("0"))
+			{
+				return empDao.dealerEmailExistsOrNot(cemail);
+				
+			}
+			else
+			{
+				return empDao.dealerEmailExistsOrNotOnEdit(cemail,editFields);
+				
+			}
+	 
+		}
+	
+	
+	 @RequestMapping("/empUsername")
+		public  @ResponseBody  Boolean checkUsername(HttpServletRequest request, HttpSession session)
+		{
+			String username=request.getParameter("username");
+			String editFields=request.getParameter("editFields");
+
+			username = username.replaceAll("\\s+","");
+			
+			if(editFields.equals("0"))
+			{
+				return empDao.isUsernameDuplicate(username);
+				
+				
+			}
+			else
+			{
+				return empDao. UsernameExistsOrNotOnEdit(username,editFields);
+				
+			}
+		}
+	 
+	 
+	 
+	 
+	 @RequestMapping("/empkmobileexists")
+		public  @ResponseBody  Boolean checkEmpExists(HttpServletRequest request, HttpSession session)
+		{
+			String phoneNumber=request.getParameter("phoneNumber");
+			String editFields=request.getParameter("editFields");
+			
+			
+			if(editFields.equals("0"))
+			{
+				return empDao.dealerContactPhoneExistsOrNot(phoneNumber);
+				
+			}
+			else
+			{
+				return empDao.dealerContactPhoneExistsOrNotOnEdit(phoneNumber,editFields);
+				
+			}
+			
+			
+
+			
+		}
+	 
+
 	 
 	 
 	 

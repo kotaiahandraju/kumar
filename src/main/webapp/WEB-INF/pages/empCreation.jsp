@@ -93,6 +93,7 @@ table#dependent_table tbody tr td:first-child::before {
 						
 						<div class="col-md-4">
                     			<div class="form-group">
+                    				<form:hidden path="id"/>
                     				<label for="focusedinput" class="col-md-6 control-label">Branch Name<span class="impColor">*</span></label>
                     				<div class="col-md-6">
                     					<form:select path="branchId" value="" class="form-control validate " onfocus="removeBorder(this.id)">
@@ -114,7 +115,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">E-mail<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-                    					<form:input path="email" class="form-control validate emailOnly" placeholder="E-mail"/>
+                    					<form:input path="email" class="form-control validate" placeholder="E-mail"/>
 								    	</div>
                     			</div>
                     		</div>
@@ -126,9 +127,9 @@ table#dependent_table tbody tr td:first-child::before {
 								    	</div>
                     			</div>
                     		</div>
-							<div class="col-md-4">
+							<div class="col-md-4" id= "userdiv">
 								<div class="form-group">
-									<form:hidden path="id"/>
+								
 									<label for="username" class="col-md-6 control-label">Username <span class="impColor">*</span></label>
 									<div class="col-md-6">
 										<form:input path="username" class="form-control validate" placeholder="Username"/>
@@ -150,7 +151,7 @@ table#dependent_table tbody tr td:first-child::before {
 				      	<div class="row">
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar text-center">
-					      			<input class="btn-primary btn" type="submit" value="Submit" id="submit1"/>
+					      			<input class="btn-primary btn" type="submit" value="Submit" id="submit2"/>
 					      			<input class="btn-danger btn cancel" type="reset" value="Reset" />
 				      			</div>
 				      		</div>
@@ -163,6 +164,14 @@ table#dependent_table tbody tr td:first-child::before {
 	</div> <!-- container -->
 
 <script type="text/javascript">
+
+var emailvalidation =false;
+var usernamevalidation =false;
+var mobilevalidation =false;
+var editFields =0;
+
+
+
 var listOrders1 =${allOrders1};
 
 console.log(listOrders1);
@@ -212,6 +221,9 @@ function showTableData(response){
 var prodcutName='';
 
 function editEmpCreation(id){
+	
+	editFields =id;
+	
 	$("#id").val(id);
 	$("#branchId").val(serviceUnitArray[id].branchId);
 	$("#name").val(serviceUnitArray[id].name);
@@ -222,7 +234,9 @@ function editEmpCreation(id){
 	$("#phoneNumber").val(serviceUnitArray[id].phoneNumber);
 	$("#status").val(serviceUnitArray[id].status);
 	$("#submit1").val("Update");
+	document.getElementById("username").readOnly  = true;
 	$(window).scrollTop($('#moveTo').offset().top);
+	
 }
 
 function deleteEmpCreation(id,status){
@@ -333,13 +347,46 @@ $('#phoneNumber').blur(function() {
 	
 	  if( phoneNumber.length == 10)
 		  {
-		  mobilevalidation =true;
-		  $('#submit1').prop("disabled",false);
+		 // mobilevalidation =true;
+		  $.ajax({
+				type : "GET",
+				url : "empkmobileexists",
+				data : "phoneNumber="+phoneNumber+"&editFields="+editFields,
+				dataType : "text",
+				beforeSend : function() {
+		             $.blockUI({ message: 'Please wait' });
+		          }, 
+				success : function(data) {
+					if(data ==='true')
+						{
+	 					$('#phoneNumber').css('border-color', 'red');
+						 $('#errorMsg').text( "* Mobile Number already Exists ") ;
+						 $('#errorMsg').css('color','red');
+							setTimeout(function() { $("#errorMsg").text(''); }, 3000);
+							emailvalidation =false;
+						}
+					else
+						{
+						$('#phoneNumber').css('border-color', 'none');
+						$('#submit1').prop('disabled', false);
+						emailvalidation =true;
+						}
+					
+				},
+				complete: function () {
+		            
+		            $.unblockUI();
+		       },
+				error :  function(e){$.unblockUI();console.log(e);}
+				
+			});
+		  
+		  
 		  }
 	 else
 	  
 	{
-		 $('#submit1').prop("disabled",true);
+		 //$('#submit1').prop("disabled",true);
 		
 		  $('#phoneNumber').css('border-color', 'red');
 		 $('#errorMsg').text( "* Enter Valid Mobile Number ") ;
@@ -350,6 +397,161 @@ $('#phoneNumber').blur(function() {
 	}
 
 		}); 
+		
+		
+		
+$('#email').blur(function() {
+	
+	var cemail=$(this).val();
+	
+	var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	  if( regex.test(cemail))
+		  {
+		
+		  
+		  $.ajax({
+				type : "GET",
+				url : "empemailexists",
+				data : "cemail="+cemail+"&editFields="+editFields,
+				dataType : "text",
+				beforeSend : function() {
+		             $.blockUI({ message: 'Please wait' });
+		          }, 
+				success : function(data) {
+					if(data ==='true')
+						{
+	 					$('#email').css('border-color', 'red');
+						 $('#errorMsg').text( "* Email already Exists ") ;
+						 $('#errorMsg').css('color','red');
+							setTimeout(function() { $("#errorMsg").text(''); }, 3000);
+							emailvalidation =false;
+						}
+					else
+						{
+						$('#email').css('border-color', 'none');
+						$('#submit1').prop('disabled', false);
+						emailvalidation =true;
+						}
+					
+				},
+				complete: function () {
+		            
+		            $.unblockUI();
+		       },
+				error :  function(e){$.unblockUI();console.log(e);}
+				
+			});
+		  
+		  
+		  }
+	 else
+	  
+	{
+		
+		  $('#email').css('border-color', 'red');
+		  $('#errorMsg').text( "* Enter Valid Email ") ;
+			 $('#errorMsg').css('color','red');
+				setTimeout(function() { $("#errorMsg").text(''); }, 3000);
+		 emailvalidation =false;
+		  
+	}
+
+		}); 
+		
+		
+
+	
+	
+	
+$('#username').blur(function() {
+	var username=$(this).val();
+        
+        	 
+	$.ajax({
+				type : "GET",
+				url : "empUsername",
+				data : "username="+username+"&editFields="+editFields,
+				dataType : "text",
+				beforeSend : function() {
+		             $.blockUI({ message: 'Please wait' });
+		          }, 
+				success : function(data) {
+					if(data ==='true')
+						{
+	 					$('#username').css('border-color', 'red');
+						 $('#errorMsg').text( "* Username already Exists ") ;
+						 $('#errorMsg').css('color','red');
+							setTimeout(function() { $("#errorMsg").text(''); }, 3000);
+						 usernamevalidation =false;
+						
+						}
+					else
+						{
+						$('#username').css('border-color', 'none');
+						$('#submit1').prop('disabled', false);
+						usernamevalidation =true;
+						
+						}
+					
+				},
+				complete: function () {
+		            
+		            $.unblockUI();
+		       },
+				error :  function(e){$.unblockUI();console.log(e);}
+				
+			});
+
+		}); 
+		
+		
+		
+$('#submit2').click(function(event) {
+	
+	//alert(usernamevalidation);
+	
+	
+	if(usernamevalidation && emailvalidation && mobilevalidation)
+	 {
+		
+		//alert("hello2");
+	$('#submit1').trigger('click');
+	
+	 }
+	else
+		{
+		showValidations();
+		return false;
+		
+		}
+	
+});
+
+
+function showValidations(){
+	
+	
+	$.each(idArray, function(i, val) {
+		var value = $("#" + idArray[i]).val();
+		var placeholder = $("#" + idArray[i]).attr('placeholder');
+		if (value == null || value == "" || value == "undefined") {
+			$('style').append(styleBlock);
+			$("#" + idArray[i] ).attr("placeholder", placeholder);
+			$("#" + idArray[i] ).css('border-color','#e73d4a');
+			$("#" + idArray[i] ).css('color','#e73d4a');
+			$("#" + idArray[i] ).addClass('placeholder-style your-class');
+			 var id11 = $("#" + idArray[i]+"_chosen").length;
+			if ($("#" + idArray[i]+"_chosen").length)
+			{
+				$("#" + idArray[i]+"_chosen").children('a').css('border-color','#e73d4a');
+			}
+//			$("#" + idArray[i] + "Error").text("Please " + placeholder);
+			validation = false;
+		} 
+	});
+	
+}
+		
 
 
 $("#pageName").text("Employee Creation Master");
