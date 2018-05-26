@@ -150,15 +150,15 @@ function createTableHeader(branch_map){
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
 	'<thead><tr><th rowspan="2"></th>';
 	$.each(branch_map,function(key, value) {
-		var tempStr = '<th colspan="2" align="center">'+value+'</th>';
+		var tempStr = '<th colspan="4" align="center">'+value+'</th>';
 		tableHead += tempStr;
 	});
-	tableHead += '</tr><tr>'; 
+	tableHead += '<th colspan="4" align="center">Overall Orders</th></tr><tr>'; 
 	$.each(branch_map,function(key, value) {
-		var tempStr = '<th align="center">Ordered</th><th align="center">Nullified</th>';
+		var tempStr = '<th align="center">Ordered</th><th align="center">Delivered</th><th align="center">Nullified</th><th align="center">Pending</th>';
 		tableHead += tempStr;
 	});
-	tableHead += '</tr></thead><tbody></tbody></table>';
+	tableHead += '<th align="center">Ordered</th><th align="center">Delivered</th><th align="center">Nullified</th><th align="center">Pending</th></tr></thead><tbody></tbody></table>';
 	$("#tableId").html(tableHead);
 	//if(isClick=='Yes') $('.datatables').dataTable();
 }
@@ -168,13 +168,20 @@ function showTableData(prod_map,branch_map){
 	"</thead><tbody></tbody></table>"; 
 $("#tableId").html(tableHead); */
 	$.each(prod_map,function(key,value) {
+		var total_ordered=0,total_delivered=0,total_nullified=0,total_pending=0;
 		var tblRow ="<tr><td title='"+key+"'>" + key + "</td>";
 		var branch_map = value;
 		$.each(branch_map,function(key2,value2) {
-			var temp_td = "<td title='"+key2+"'>" + value2.split(",")[0] + "</td><td title='"+key2+"'>" + value2.split(",")[1] + "</td>";
+			var quantities = value2.split(",");
+			var pending_qty = parseInt(quantities[0]-(parseInt(quantities[1])+parseInt(quantities[2])));
+			total_ordered += parseInt(quantities[0]);
+			total_delivered += parseInt(quantities[1]);
+			total_nullified += parseInt(quantities[2]);
+			total_pending += pending_qty;
+			var temp_td = "<td title='"+key2+"'>" + value2.split(",")[0] + "</td><td title='"+key2+"'>" + value2.split(",")[1] + "</td><td title='"+key2+"'>" + value2.split(",")[2] + "</td><td title='"+key2+"'>" + pending_qty + "</td>";
 			tblRow += temp_td;
 		});
-		tblRow += "</tr>";
+		tblRow += "<td>" + total_ordered + "</td><td>" + total_delivered + "</td><td>" + total_nullified + "</td><td>" + total_pending + "</td></tr>";
 		
 		$(tblRow).appendTo("#tableId table tbody");
 	});

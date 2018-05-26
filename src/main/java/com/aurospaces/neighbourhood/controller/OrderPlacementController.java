@@ -370,6 +370,7 @@ public class OrderPlacementController {
 		String sJson = null;
 		try {
 			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			long total_orders=0l, total_delivered=0l, total_nullified=0l, total_pending=0l;
 			Map<String,Map<String,Object>> prod_map = new HashMap<String,Map<String,Object>>();
 			Map<String,String> branches_map = new HashMap<String,String>();
 			if(objuserBean != null){
@@ -381,13 +382,41 @@ public class OrderPlacementController {
 					String product_id = (String)row.get("product_name");
 					if(prod_map.containsKey(product_id)){
 						Map<String,Object> branch = (Map<String,Object>)prod_map.get(product_id);
-						branch.put((String)row.get("branch_name"), row.get("ordered")+","+row.get("nullified"));
+						branch.put((String)row.get("branch_name"), row.get("delivered")+","+row.get("nullified"));
+						//total_delivered += ((Double)row.get("delivered")).longValue();
+						//total_nullified += ((Double)row.get("nullified")).longValue();
 					}else{
 						Map<String,Object> branch = new HashMap<String,Object>();
-						branch.put((String)row.get("branch_name"), row.get("ordered")+","+row.get("nullified"));
+						branch.put((String)row.get("branch_name"), row.get("delivered")+","+row.get("nullified"));
 						prod_map.put(product_id, branch);
+						//total_delivered += ((Double)row.get("delivered")).longValue();
+						//total_nullified += ((Double)row.get("nullified")).longValue();
 					}
 					
+				}
+				List<Map<String, Object>> ordered_list = listDao.getProductsOrderedQtyBranchWise();
+				for(Map<String, Object> row:ordered_list){
+					if(!branches_map.containsKey((String)row.get("branch_name"))){
+						branches_map.put((String)row.get("branch_name"), (String)row.get("branch_name"));
+					}
+					String prod_name = (String)row.get("prod_name");
+					if(prod_map.containsKey(prod_name)){
+						Map<String,Object> branch_map = (Map<String,Object>)prod_map.get(prod_name);
+						if(branch_map.containsKey(row.get("branch_name"))){
+							String values = (String)branch_map.get((String)row.get("branch_name"));
+							branch_map.put((String)row.get("branch_name"), ((Double)row.get("ordered")).intValue()+","+values);
+							//total_orders += ((Double)row.get("ordered")).longValue();
+						}else{
+							branch_map.put((String)row.get("branch_name"), ((Double)row.get("ordered")).intValue()+",0,0");
+							prod_map.put(prod_name, branch_map);
+							//total_orders += ((Double)row.get("ordered")).longValue();
+						}
+					}else{
+						Map<String,Object> branch = new HashMap<String,Object>();
+						branch.put((String)row.get("branch_name"), ((Double)row.get("ordered")).intValue()+",0,0");
+						prod_map.put(prod_name, branch);
+						//total_orders += ((Double)row.get("ordered")).longValue();
+					}
 				}
 				Collection<Map<String,Object>> branch_maps = prod_map.values();
 				Iterator<Map<String,Object>> iter = branch_maps.iterator();
@@ -398,7 +427,7 @@ public class OrderPlacementController {
 					while(iter2.hasNext()){
 						String branch_name = (String)iter2.next();
 						if(!branch_map.containsKey(branch_name)){
-							branch_map.put(branch_name, "0,0");
+							branch_map.put(branch_name, "0,0,0");
 						}
 					}
 					
