@@ -103,6 +103,7 @@ public class PaymentController {
 						if (objuserBean != null) {
 							paymentBean.setEmpId(objuserBean.getEmpId());
 							paymentBean.setBranchId(objuserBean.getBranchId());
+							paymentBean.setConfirm("0");
 						}
 						paymentDao.save(paymentBean);
 						SendSMS.sendSMS(msg, phnumber, objContext);

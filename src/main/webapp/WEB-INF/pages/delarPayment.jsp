@@ -30,7 +30,10 @@ table#dependent_table tbody tr td:first-child::before {
 .addItemButton{
 	cursor: pointer;font-size: small;background: green;color: white;padding: 3px 10px 3px 10px;
 }
-
+td, th {
+    padding: 0;
+    text-align: center;
+}
 #ui-datepicker-div{
 /* 	width: auto !important; */
 }
@@ -53,7 +56,7 @@ table#dependent_table tbody tr td:first-child::before {
                             </div>
                         </div>
                         <div class="panel-body collapse in">
-                        <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
+                       <!--  <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label> -->
                         <div class="table-responsive" id="tableId" >
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
@@ -179,15 +182,15 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Amount</th><th>UTR Number</th><th> Payment Date </th><th></th></tr>'+
+    	'<thead><tr><th>Amount</th><th>UTR Number</th><th> Payment Date </th><th>Payment Status</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		
 		 if(orderObj.confirm == "1"){
-			var deleterow = "<a  ><i class='fa fa-check' style='color:#29c10d'></i></a>"
+			var deleterow = "<a data-toggle='tooltip' title=' Received' ><i class='fa fa-check' style='color:#29c10d'></i></a>"
 		}else{  
-			var deleterow = "<a  ><i class='fa fa-times' style='color:#e40d0d'></i></a>"
+			var deleterow = "<a data-toggle='tooltip' title='Not at Received' ><i class='fa fa-times' style='color:#e40d0d'></i></a>"
 		} 
 // 		var edit = "<a class='edit editIt' onclick='editProductType("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		
@@ -196,7 +199,7 @@ function showTableData(response){
 			+ "<td title='"+orderObj.amount+"'>" + orderObj.amount + "</td>"
 			+ "<td title='"+orderObj.qtrNumber+"'>" + orderObj.qtrNumber + "</td>"
 			+ "<td title='"+orderObj.strpaymentDate+"'>" + orderObj.strpaymentDate + "</td>"
-			+ "<td style='text-align: center;white-space: nowrap;'>"  + deleterow + "</td>"
+			+ "<td  style='text-align: center;white-space: nowrap;'>"  + deleterow + "</td>"
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
