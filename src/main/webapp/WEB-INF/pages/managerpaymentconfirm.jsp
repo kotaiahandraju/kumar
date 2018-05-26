@@ -41,6 +41,10 @@ border-radius:5px;
 padding-left:0px;
 padding-right:0px;
 }
+td, th {
+    padding: 0;
+    text-align: center;
+}
 
 </style>
         <div class="clearfix"></div>
@@ -200,9 +204,9 @@ function showTableData(response){
 	$.each(response,function(i, orderObj) {
 		
 		 if(orderObj.confirm == "1"){
-			var confirm = "<a  ><i class='fa fa-check' style='color:#29c10d'></i></a>"
+			var confirm = "<a  data-toggle='tooltip' title=' Received'  ><i class='fa fa-check' style='color:#29c10d'></i></a>"
 		}else{  
-			var confirm = "<a  ><i class='fa fa-times' style='color:#e40d0d'></i></a>"
+			var confirm = "<a  data-toggle='tooltip' title='Not at Received'  ><i class='fa fa-times' style='color:#e40d0d'></i></a>"
 		} 
 		 if(orderObj.confirm == "0" || orderObj.confirm == null){
 			 var checkbox = "<input class='checkall' type='checkbox' name='checkboxName' onclick='paymentConfirm("+ orderObj.id+ ")'  id='"+orderObj.id+"'      />";

@@ -133,7 +133,7 @@ table#dependent_table tbody tr td:first-child::before {
    <script> var delerId1 = "${param.dealerId}";
    
    $("#delerId").val(delerId1);
-//    managercartCount();
+   managercartCount();
    </script>
 </c:otherwise>
 </c:choose>

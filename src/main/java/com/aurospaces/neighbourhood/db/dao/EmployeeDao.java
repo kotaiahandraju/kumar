@@ -147,12 +147,13 @@ public class EmployeeDao extends BaseEmployeeDao
 	 jdbcTemplate =custom.getJdbcTemplate();
 	 try{
 		 StringBuffer buffer = new StringBuffer();
-		 buffer.append("SELECT kp.*,DATE_FORMAT(payment_date,'%d-%b-%Y') as strpaymentDate,ke.`name` FROM `kumar_payment`kp,`kumar_employee` ke  where 1=1 and ke.`id`=kp.`empId` ");
+		 buffer.append("SELECT kp.*,DATE_FORMAT(payment_date,'%d-%b-%Y') as strpaymentDate,ke.`name` FROM `kumar_payment`kp,`kumar_employee` ke  where 1=1 and ke.`id`=kp.`empId`");
 		 
 		 LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
 			if (objuserBean != null) {
 				 buffer.append(" and kp.branchId ='"+objuserBean.getBranchId()+"' ");
 			}
+			buffer.append(" order by kp.payment_date desc,kp.confirm asc");
 		 String sql=buffer.toString();
 		 System.out.println(sql);
 		 List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
