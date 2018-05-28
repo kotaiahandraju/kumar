@@ -48,7 +48,7 @@ font-weight:600;
 
 
 	<div class="clearfix"></div>
-	<ol class="breadcrumb">
+	<ol class="breadcrumb" id="pbreadcrumb">
     	<li><a href="dashboard">Home</a></li>
 		<li>My Cart</li>
 	</ol>
@@ -165,7 +165,7 @@ font-weight:600;
 						</table>
 					</div>
 									
-								
+						<div align="center"><button onclick="printInvoice()" id="printbtn" class="btn btn-primary">Print</button>					
 								
         			</div>
         					</div>	
@@ -454,6 +454,26 @@ function managercartList(){
 $(document).ready(function(){
 	managercartCount();
 });
+
+
+
+function printInvoice() {
+    //window.print();
+      $("#printbtn").hide();
+      $("#pbreadcrumb").hide();
+      $("#pageName").hide();
+      $("#hideForInvoice").hide();
+      
+      
+      
+
+    
+      window.print();
+      $("#printbtn").show();
+	/* var newWindow = window.open();
+    newWindow.document.write(document.getElementById("invoicediv").innerHTML);
+    newWindow.print(); */ 
+}
 
 var cartDealerId = $("#delerId").val(); 
 $('#cartTag').attr('href','managerorderplace?dealerId='+cartDealerId);

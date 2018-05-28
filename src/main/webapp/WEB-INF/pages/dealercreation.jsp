@@ -232,7 +232,7 @@ padding: 3px 14px 0px 11px;
                     			</div>
            
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">ContactPhone Number <span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Contact Phone Number <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	<form:input path="phoneNumber" value=""  class="form-control validate mobile" placeholder="Phone Number" onkeyup="removeBorder(this.id)" maxlength="10" />
 								      	<span class="hasError" id="locationError"></span>
@@ -360,7 +360,7 @@ $('#username').blur(function() {
 	$.ajax({
 				type : "GET",
 				url : "checkUsername",
-				data : {"username":username},
+				data : "username="+username+"&editFields="+editFields,
 				dataType : "text",
 				beforeSend : function() {
 		             $.blockUI({ message: 'Please wait' });
@@ -518,7 +518,7 @@ $('#phoneNumber').blur(function() {
 					if(data ==='true')
 						{
 	 					$('#phoneNumber').css('border-color', 'red');
-						 $('#errorMsg').text( "* ContactPhone Number already Exists ") ;
+						 $('#errorMsg').text( "* Contact Phone Number already Exists ") ;
 						 $('#errorMsg').css('color','red');
 							setTimeout(function() { $("#errorMsg").text(''); }, 3000);
 							emailvalidation =false;
@@ -544,11 +544,10 @@ $('#phoneNumber').blur(function() {
 		  
 		  }
 	 else
-	  
 	{
 		
 		  $('#phoneNumber').css('border-color', 'red');
-		 $('#errorMsg').text( "* Enter Valid Mobile Number ") ;
+		 $('#errorMsg').text( "* Contact Phone Number already Exists ") ;
 		 $('#errorMsg').css('color','red');
 			setTimeout(function() { $("#errorMsg").text(''); }, 3000);
 		 mobilevalidation =false;
