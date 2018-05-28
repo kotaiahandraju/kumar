@@ -334,6 +334,7 @@ $("#documents").change(function(e) {
 		    }
 	}else{
 		alert("Please Choose Image Only");
+		$("#documents").css('color', 'transparent');
 	}
    
 });
@@ -368,7 +369,11 @@ function inactiveData() {
 				});
 }
 
-
+$("#clearData").click(function(){
+	$("#dynamicImage").remove();
+	 $("#imageId").hide();
+	 $("#imageLable").hide();
+});
 
 $("#pageName").text("Product SubCategory Master");
 $(".productName").addClass("active");

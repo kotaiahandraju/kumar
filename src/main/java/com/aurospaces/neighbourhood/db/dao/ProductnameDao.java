@@ -39,9 +39,9 @@ public class ProductnameDao extends BaseProductnameDao
 	
 	public ProductnameBean getByProductName(ProductnameBean productnameBean) {
 		 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "SELECT * from productname where productname= ?";
+			String sql = "SELECT * from productname where productname =? and productId =?";
 			List<ProductnameBean> retlist = jdbcTemplate.query(sql,
-			new Object[]{productnameBean.getProductname()},
+			new Object[]{productnameBean.getProductname(),productnameBean.getProducttype()},
 			ParameterizedBeanPropertyRowMapper.newInstance(ProductnameBean.class));
 			if(retlist.size() > 0)
 				return retlist.get(0);

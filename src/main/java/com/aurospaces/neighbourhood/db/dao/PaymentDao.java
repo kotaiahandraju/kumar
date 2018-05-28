@@ -29,7 +29,7 @@ public class PaymentDao extends BasePaymentDao
 		jdbcTemplate = custom.getJdbcTemplate();
 		
 		StringBuffer buffer = new StringBuffer();
-		buffer.append(" select *,DATE_FORMAT(payment_date,'%d-%b-%Y') as strpaymentDate  from kumar_payment where 1=1 ");
+		buffer.append(" select *,DATE_FORMAT(payment_date,'%d-%b-%Y') as strpaymentDate  from kumar_payment kp where 1=1 ");
 		LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
 		if (objuserBean != null) {
 			if(objuserBean.getRoleId().equals("3")){
@@ -38,6 +38,7 @@ public class PaymentDao extends BasePaymentDao
 			if(objuserBean.getRoleId().equals("2")){
 				buffer.append(" and branchId= '"+objuserBean.getBranchId()+"' ");
 			}
+			buffer.append(" order by kp.payment_date desc,kp.confirm asc");
 		}
 		String sql =buffer.toString();
 		List<PaymentBean> list = jdbcTemplate.query(sql, new Object[]{},ParameterizedBeanPropertyRowMapper.newInstance(PaymentBean.class));
