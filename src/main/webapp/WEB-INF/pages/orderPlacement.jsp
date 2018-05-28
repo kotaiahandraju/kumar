@@ -157,9 +157,9 @@ function showTableData(response){
 	var protectType = null;
 	var tableHead = "<table cellpadding='0' cellspacing='0' border='0'  class='table table-bordered table-striped' id='example1'>"
     	+"<thead><tr style='background-color: #f7f8fa;'><th style='width:25%'>Product Sub Category</th><th style='width:16%'>Item Code</th><th style='width:49%'>Description</th><th style='width:5%'>Quantity</th></tr>"
-    	+"<tr><th><input autocomplete='off' class='filter' name='Product Sub Category' placeholder='Product Sub Category' data-col='Product Sub Category'/></th>"
-    	+"<th><input autocomplete='off' class='filter' name='Item Code' placeholder='Item Code' data-col='Item Code'/></th>"
-    	+"<th><input autocomplete='off' class='filter' name='Description' placeholder='Description' data-col='Description'/></th></tr>"
+    	+"<tr><th><input autocomplete='off' class='filter' name='Product Sub Category' placeholder='Search Product Sub Category' data-col='Product Sub Category'/></th>"
+    	+"<th><input autocomplete='off' class='filter' name='Item Code' placeholder='Search Item Code' data-col='Item Code'/></th>"
+    	+"<th><input autocomplete='off' class='filter' name='Description' placeholder='Search Description' data-col='Description'/></th></tr>"
    		+ "</thead><tbody></tbody>"
     	+"</table>";
 	$("#tableId").html(tableHead);
