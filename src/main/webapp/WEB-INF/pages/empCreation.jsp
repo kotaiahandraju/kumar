@@ -237,6 +237,12 @@ function editEmpCreation(id){
 	document.getElementById("username").readOnly  = true;
 	$(window).scrollTop($('#moveTo').offset().top);
 	
+
+	 emailvalidation =true;
+ usernamevalidation =true;
+	 mobilevalidation =true;
+
+	
 }
 
 function deleteEmpCreation(id,status){
