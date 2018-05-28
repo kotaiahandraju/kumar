@@ -363,13 +363,13 @@ $('#phoneNumber').blur(function() {
 						 $('#errorMsg').text( "* Mobile Number already Exists ") ;
 						 $('#errorMsg').css('color','red');
 							setTimeout(function() { $("#errorMsg").text(''); }, 3000);
-							emailvalidation =false;
+							mobilevalidation =false;
 						}
 					else
 						{
 						$('#phoneNumber').css('border-color', 'none');
 						$('#submit1').prop('disabled', false);
-						emailvalidation =true;
+						mobilevalidation =true;
 						}
 					
 				},
