@@ -415,8 +415,8 @@ function cartCount(){
               <li class="dropdown"><a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Reports</span>
                   <ul class="dropdown-menu">
                      <!--  <li><a href="../dealerregistration">Edit Profile <i class="pull-right fa fa-pencil"></i></a></li> -->
-                      <li><a href="${baseurl }/admin/reportAllOrders"><i></i> <span>All Orders</span></a></li>
-                      <li><a href="${baseurl }/admin/reportPendinglOrders"><i></i> <span>Pending Orders</span></a></li>
+                      <li><a href="${baseurl }/admin/reportAllOrdersPage"><i></i> <span>All Orders</span></a></li>
+                      <li><a href="${baseurl }/admin/reportPendingOrders"><i></i> <span>Pending Orders</span></a></li>
                       <li><a href="${baseurl }/admin/reportDeliveredOrders"><i></i> <span>Delivered Orders</span></a></li>
                   </ul>
               </li>

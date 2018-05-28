@@ -468,4 +468,93 @@ public class OrderPlacementController {
 		return "productsDeliveredQtyBranchWise";
 		
 	}	
+	
+	@RequestMapping(value="/reportAllOrdersPage")
+	public String reportAllOrdersPage(@ModelAttribute("orderLstForm") EmployeeBean employeeBean,HttpServletRequest request,HttpSession session){
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		List<Map<String,Object>> all_orders = null;
+		try{
+			String sSql = "select id ,branchname from kumar_branch where status='1'";
+			List<BranchBean> list = branchDao.populate(sSql);
+			request.setAttribute("branches_list", list);
+			request.setAttribute("list_type", "all");
+			request.setAttribute("all_orders", "''");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "reportAllOrders";
+		
+	}
+	
+	@RequestMapping(value="/reportAllOrders")
+	public @ResponseBody String reportAllOrders(@ModelAttribute("orderLstForm") EmployeeBean employeeBean,HttpServletRequest request,HttpSession session){
+		JSONObject jsonObj = new JSONObject();
+		List<Map<String,Object>> all_orders = null;
+		try{
+			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			String list_type = request.getParameter("list_type");
+			String from_date = request.getParameter("from_date");
+			String to_date = request.getParameter("to_date");
+			String branch_id = request.getParameter("branch_id");
+			if(branch_id.equalsIgnoreCase("all")){
+				branch_id = null;
+			}
+			if(StringUtils.isNotBlank(list_type)){
+				if(list_type.equalsIgnoreCase("all")){
+					all_orders = listDao.getAllOrders(from_date,to_date,branch_id);
+				}else if(list_type.equalsIgnoreCase("delivered")){
+					all_orders = listDao.getAllOrders(from_date,to_date,branch_id,"completed");
+				}else if(list_type.equalsIgnoreCase("pending")){
+					all_orders = listDao.getAllOrders(from_date,to_date,branch_id,"pending");
+				}
+			}
+			
+			if (all_orders != null && all_orders.size() > 0) {
+				jsonObj.put("all_orders", all_orders);
+			} else {
+				jsonObj.put("all_orders", "");
+			}
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return jsonObj.toString();
+		
+	}
+	@RequestMapping(value="/reportPendingOrders")
+	public String reportPendinglOrders(@ModelAttribute("orderLstForm") EmployeeBean employeeBean,HttpServletRequest request,HttpSession session){
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		List<Map<String,Object>> all_orders = null;
+		try{
+			String sSql = "select id ,branchname from kumar_branch where status='1'";
+			List<BranchBean> list = branchDao.populate(sSql);
+			request.setAttribute("branches_list", list);
+			request.setAttribute("list_type", "pending");
+			request.setAttribute("all_orders", "''");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "reportPendingOrders";
+		
+	}
+	@RequestMapping(value="/reportDeliveredOrders")
+	public String reportDeliveredOrders(@ModelAttribute("orderLstForm") EmployeeBean employeeBean,HttpServletRequest request,HttpSession session){
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		List<Map<String,Object>> all_orders = null;
+		try{
+			String sSql = "select id ,branchname from kumar_branch where status='1'";
+			List<BranchBean> list = branchDao.populate(sSql);
+			request.setAttribute("branches_list", list);
+			request.setAttribute("list_type", "delivered");
+			request.setAttribute("all_orders", "''");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "reportAllOrders";
+		
+	}
 }
