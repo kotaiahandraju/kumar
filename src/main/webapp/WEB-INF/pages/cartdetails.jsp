@@ -409,6 +409,6 @@ function printInvoice() {
 
 
 
-$("#pageName").text("My Cart");
+$("#pageName").text("Invoice");
 // $(".orderplacing").addClass("active"); 
 </script>
