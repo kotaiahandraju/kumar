@@ -206,7 +206,7 @@ function showTableData(response){
 		 if(orderObj.confirm == "1"){
 			var confirm = "<a  data-toggle='tooltip' title=' Received'  ><i class='fa fa-check' style='color:#29c10d'></i></a>"
 		}else{  
-			var confirm = "<a  data-toggle='tooltip' title='Not at Received'  ><i class='fa fa-times' style='color:#e40d0d'></i></a>"
+			var confirm = "<a  data-toggle='tooltip' title='Not yet Received'  ><i class='fa fa-times' style='color:#e40d0d'></i></a>"
 		} 
 		 if(orderObj.confirm == "0" || orderObj.confirm == null){
 			 var checkbox = "<input class='checkall' type='checkbox' name='checkboxName' onclick='paymentConfirm("+ orderObj.id+ ")'  id='"+orderObj.id+"'      />";
@@ -290,6 +290,6 @@ function editPaymentStatus(id) {
 
 
 	
-$("#pageName").text("Order Product");
-$(".managerorderplace").addClass("active");
+$("#pageName").text("Confirm Payment");
+$(".dealerpaymentconfirm").addClass("active");
 </script>
