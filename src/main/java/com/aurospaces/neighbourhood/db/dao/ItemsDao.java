@@ -42,7 +42,7 @@ public class ItemsDao extends BaseItemsDao
 		if(!objuserBean.getRoleId().equals("1")){
 			buffer.append(" AND bp.`branch_id` IN ('all','"+branchId+"') ");
 		}
-		buffer.append(" and i.status='1' order by pn.productId ,pt.producttype ");
+		buffer.append("  order by pn.productId ,pt.producttype ");
 		 String sql = buffer.toString();
 //		 System.out.println(sql);
 		List<ItemsBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
