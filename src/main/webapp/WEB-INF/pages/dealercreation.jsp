@@ -547,7 +547,7 @@ $('#phoneNumber').blur(function() {
 	{
 		
 		  $('#phoneNumber').css('border-color', 'red');
-		 $('#errorMsg').text( "* Contact Phone Number already Exists ") ;
+		 $('#errorMsg').text( "* Enter Valid Contact Phone Number") ;
 		 $('#errorMsg').css('color','red');
 			setTimeout(function() { $("#errorMsg").text(''); }, 3000);
 		 mobilevalidation =false;
