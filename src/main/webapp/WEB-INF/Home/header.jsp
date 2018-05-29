@@ -403,17 +403,8 @@ function cartCount(){
               <li class="dashboard"><a href="${baseurl }/admin/getProductsDeliveredQtyBranchWise"><i class="fa fa-users"></i> <span>Dashboard</span></a></li>
 <%--                <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li> --%>
                <li class="branch"><a href="${baseurl }/admin/branchHome"><i class="fa fa-university"></i> <span>Branch</span></a></li>
-                <li class="productType"><a href="${baseurl }/admin/producttype"><i class="fa fa-clone"></i>
-
- <span>Product Category</span></a></li>&emsp;
-              <li class="productName"><a href="${baseurl }/admin/productName"><i class="fa fa-bookmark"></i>
-
-               <span>Product Subcategory</span></a></li>&emsp;
-              <li class="items"><a href="${baseurl }/admin/items"><i class="fa fa-list-alt"></i>
-
-               <span>Product List</span></a></li>&emsp;
                 <li class="productType"><a href="${baseurl }/admin/producttype"><i class="fa fa-clone"></i>	<span>Product Category</span></a></li>&emsp;
-              <li class="productName"><a href="${baseurl }/admin/productName"><i class="fa fa-bookmark"></i> <span>Product Sub Category</span></a></li>&emsp;
+              <li class="productName"><a href="${baseurl }/admin/productName"><i class="fa fa-bookmark"></i> <span>Product Subcategory</span></a></li>&emsp;
               <li class="items"><a href="${baseurl }/admin/items"><i class="fa fa-list-alt"></i><span>Product List</span></a></li>&emsp;
               <li class="employee"><a href="${baseurl }/admin/employeeCreation"><i class="fa fa-users"></i> <span>Employees</span></a></li>
               <li class="transactions">

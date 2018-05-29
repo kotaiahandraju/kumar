@@ -313,7 +313,8 @@ $("#documents").change(function(e) {
 	 
 	if(fileOK == true){
 		 	if(file_size>64000) {
-	    	    alert("File size is greater than 8kb");
+	    	    alert("File size is greater than 8kb, Please Choose Small Image");
+	    	    $("#documents").css('color', 'transparent');
 	    		  	return false;
 	    		  } 
 		 for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
