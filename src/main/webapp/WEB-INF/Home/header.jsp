@@ -328,7 +328,7 @@ function cartCount(){
 
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
         <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="dashboard"><img src="${baseurl }/img/klogo1.png" class="img-responsive" style="    width: 132px;"></a>
+            <a class="navbar-brand" href="dashboard" style="padding-right:5px;   "><img src="${baseurl }/img/klogo1.png" class="img-responsive" ></a>
             <span class="oms">Order Management System</span>
             <div class="clearfix"></div>
         </div>
@@ -461,4 +461,5 @@ function cartCount(){
 	            </div>
 	            <div class="clearfix"></div>
 	        </div>
+	       
 <!-- Header ends Here -->
