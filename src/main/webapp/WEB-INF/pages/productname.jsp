@@ -39,7 +39,7 @@ table#dependent_table tbody tr td:first-child::before {
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="dashboard">Home</a></li>
-               <li>Product SubCategory </li>
+               <li>Product Sub Category </li>
             </ol>
             <div class="clearfix"></div>
         <div class="container-fluid" id="lpoMain">
@@ -47,7 +47,7 @@ table#dependent_table tbody tr td:first-child::before {
               <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h4>Product SubCategory List</h4>
+                            <h4>Product Subcategory List</h4>
                             <div class="options">   
                                 <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
                             </div>
@@ -73,7 +73,7 @@ table#dependent_table tbody tr td:first-child::before {
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Add SubCategory</h4>
+                        <h4>Add Subcategory</h4>
                         <div class="options"></div>
                     </div>
 	                <form:form modelAttribute="productnameForm" id="formId" action="addProductname" class="form-horizontal" method="post" enctype="multipart/form-data" >
@@ -92,10 +92,10 @@ table#dependent_table tbody tr td:first-child::before {
                     		</div>
                     		<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Product SubCategory <span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Product Subcategory <span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:input type="hidden" path="id"/>
-								      	<form:input type="text" path="productname" class="form-control validate" placeholder="Product Name"/>
+								      	<form:input type="text" path="productname" class="form-control validate" placeholder="Product Subcategory"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -177,7 +177,7 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Product Category</th><th>Product SubCategory</th><th>Image</th><th>Status</th><th></th></tr>'+
+    	'<thead><tr><th>Product Category</th><th>Product Subcategory</th><th>Image</th><th>Status</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -313,7 +313,8 @@ $("#documents").change(function(e) {
 	 
 	if(fileOK == true){
 		 	if(file_size>64000) {
-	    	    alert("File size is greater than 8kb");
+	    	    alert("File size is greater than 8kb, Please Choose Small Image");
+	    	    $("#documents").css('color', 'transparent');
 	    		  	return false;
 	    		  } 
 		 for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
@@ -375,6 +376,6 @@ $("#clearData").click(function(){
 	 $("#imageLable").hide();
 });
 
-$("#pageName").text("Product SubCategory Master");
+$("#pageName").text("Product Subcategory Master");
 $(".productName").addClass("active");
 </script>
