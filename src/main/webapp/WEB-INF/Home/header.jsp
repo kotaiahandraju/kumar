@@ -412,14 +412,14 @@ function cartCount(){
                <span>Product List</span></a></li>&emsp;
               <li class="employee"><a href="${baseurl }/admin/employeeCreation"><i class="fa fa-users"></i> <span>Employees</span></a></li>
               <li class="items"><a href="${baseurl }/admin/getProductsDeliveredQtyBranchWise"><i class="fa fa-users"></i> <span>Padma</span></a></li>
-              <li class="dropdown"><a href="#" data-toggle="dropdown" class='dropdown-toggle'><span>Reports</span>
-                  <ul class="dropdown-menu">
-                     <!--  <li><a href="../dealerregistration">Edit Profile <i class="pull-right fa fa-pencil"></i></a></li> -->
-                      <li><a href="${baseurl }/admin/reportAllOrdersPage"><i></i> <span>All Orders</span></a></li>
+              <li class="transactions">
+            		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Reports</span> <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+					 <li><a href="${baseurl }/admin/reportAllOrdersPage"><i></i> <span>All Orders</span></a></li>
                       <li><a href="${baseurl }/admin/reportPendingOrders"><i></i> <span>Pending Orders</span></a></li>
                       <li><a href="${baseurl }/admin/reportDeliveredOrders"><i></i> <span>Delivered Orders</span></a></li>
-                  </ul>
-              </li>
+					</ul>
+				</li>
               </c:if>
 			 <c:if test="${roleId=='2' }">
 			  <li class="productType"><a href="${baseurl }/admin/producttype"><i class="fa fa-clone"></i>
