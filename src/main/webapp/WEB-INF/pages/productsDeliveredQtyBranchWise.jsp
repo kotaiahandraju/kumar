@@ -44,14 +44,13 @@ table#dependent_table tbody tr td:first-child::before {
 </style>
         <div class="clearfix"></div>
              <ol class="breadcrumb">
-              <li><a href="#">Home</a></li>
-               <li>Orders List </li>
+              <li>Dashboard</li>
             </ol>
             <div class="clearfix"></div>
         <div class="container-fluid" id="lpoMain">
         
         
-         <div class="row" id="moveTo">
+        <!--  <div class="row" id="moveTo">
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -61,7 +60,7 @@ table#dependent_table tbody tr td:first-child::before {
 	                
                     	</div>
                     </div>
-                </div>
+                </div> -->
         
         
         
@@ -467,6 +466,5 @@ function saveDeliverableItemsData(objId){
 	});
 }
 
-$("#pageName").text("Delivery Status");
-$(".orderslist").addClass("active");
+$(".dashboard").addClass("active");
 </script>

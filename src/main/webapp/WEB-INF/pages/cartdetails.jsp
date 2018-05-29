@@ -86,7 +86,7 @@ font-size:28px;
 					<div class="table-responsive" id="tableId">
 						<table class="table " id="example">
 							<thead>
-								<tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>quantity</td>
+								<tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>Quantity</td>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -399,6 +399,7 @@ function printInvoice() {
 	/* var newWindow = window.open();
     newWindow.document.write(document.getElementById("invoicediv").innerHTML);
     newWindow.print(); */ 
+$("#pageName").text("Invoice");
 }
 
 
@@ -407,8 +408,7 @@ function printInvoice() {
 
 
 
+$("#pageName").text("Cart Details");
 
-
-$("#pageName").text("Invoice");
 // $(".orderplacing").addClass("active"); 
 </script>
