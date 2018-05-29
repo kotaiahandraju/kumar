@@ -78,6 +78,7 @@ table#dependent_table tbody tr td:first-child::before {
 							    </div>
                    			</div>
                    		</div>
+                   		<c:if test="${cacheUserBean.roleId == '1'}">
                    		<div class="col-md-4">
                    			<div class="form-group">
                    				<label for="focusedinput" class="col-md-6 control-label">Branch: </label>
@@ -90,6 +91,7 @@ table#dependent_table tbody tr td:first-child::before {
 							    	</div>
                    			</div>
                    		</div>
+                   		</c:if>
                    		</div>
                    		<div class="row">
                    		<div class="col-md-4">
@@ -255,6 +257,11 @@ function getOrdersList() {
 	var from_date = $("#from_date").val();
 	var to_date = $("#to_date").val();
 	var branch_id=$("#branchId").val();
+	var role_id = "${cacheUserBean.roleId}";
+	if(role_id=="2"){ // means branch manager
+		var branchId = "${cacheUserBean.branchId}";
+		branch_id = branchId;
+	}
 		$.ajax({
 					type : "POST",
 					url : "reportAllOrders.htm",

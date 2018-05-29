@@ -411,7 +411,7 @@ function cartCount(){
 
                <span>Product List</span></a></li>&emsp;
               <li class="employee"><a href="${baseurl }/admin/employeeCreation"><i class="fa fa-users"></i> <span>Employees</span></a></li>
-              <li class="items"><a href="${baseurl }/admin/getProductsDeliveredQtyBranchWise"><i class="fa fa-users"></i> <span>Padma</span></a></li>
+              <li class="prod_summary"><a href="${baseurl }/admin/getProductsDeliveredQtyBranchWise"><i class="fa fa-users"></i> <span>Padma</span></a></li>
               <li class="transactions">
             		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Reports</span> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
@@ -432,7 +432,15 @@ function cartCount(){
 			    <li class="dealerpaymentconfirm"><a href="${baseurl }/admin/dealerpaymentconfirm"><i class="fa fa-bolt"></i><span>Confirm Payments </span></a></li>
 			    <li class="orderslist"><a href="${baseurl }/admin/orderslist"><i class="fa fa-clipboard"></i><span>Delivery Status</span></a></li>
 			     <li class="orderplacing"><a href="${baseurl }/admin/managerorderplace"><i class="fa fa-clipboard"></i><span>Order Product</span></a></li>
-			    
+			     <li class="prod_summary"><a href="${baseurl }/admin/getProductsDeliveredQtyBranchWise"><i class="fa fa-users"></i> <span>Padma</span></a></li>
+	             <li class="transactions">
+            		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Reports</span> <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+					 <li class="allOrders"><a href="${baseurl }/admin/reportAllOrdersPage"><i></i> <span>All Orders</span></a></li>
+                      <li class="pendingOrders"><a href="${baseurl }/admin/reportPendingOrders"><i></i> <span>Pending Orders</span></a></li>
+                      <li class="deliveredOrders"><a href="${baseurl }/admin/reportDeliveredOrders"><i></i> <span>Delivered Orders</span></a></li>
+					</ul>
+				</li>
 			   
 			 </c:if>
 			  <c:if test="${roleId=='3' }">
