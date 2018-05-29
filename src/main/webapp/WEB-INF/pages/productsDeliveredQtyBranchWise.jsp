@@ -44,14 +44,13 @@ table#dependent_table tbody tr td:first-child::before {
 </style>
         <div class="clearfix"></div>
              <ol class="breadcrumb">
-              <li><a href="#">Home</a></li>
-               <li>Orders List </li>
+              <li>Dashboard</li>
             </ol>
             <div class="clearfix"></div>
         <div class="container-fluid" id="lpoMain">
         
         
-         <div class="row" id="moveTo">
+        <!--  <div class="row" id="moveTo">
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -61,7 +60,7 @@ table#dependent_table tbody tr td:first-child::before {
 	                
                     	</div>
                     </div>
-                </div>
+                </div> -->
         
         
         
@@ -148,12 +147,12 @@ function createTableHeader(branch_map){
 	
 	
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-	'<thead><tr><th rowspan="2"></th>';
+	'<thead><tr><th colspan="3">Product</th>';
 	$.each(branch_map,function(key, value) {
 		var tempStr = '<th colspan="4" align="center">'+value+'</th>';
 		tableHead += tempStr;
 	});
-	tableHead += '<th colspan="4" align="center">Overall Orders</th></tr><tr>'; 
+	tableHead += '<th colspan="4" align="center">Overall Orders</th></tr><tr><th align="center">Category</th><th align="center">Sub Category</th><th align="center">Item Code</th>'; 
 	$.each(branch_map,function(key, value) {
 		var tempStr = '<th align="center">Ordered</th><th align="center">Delivered</th><th align="center">Nullified</th><th align="center">Pending</th>';
 		tableHead += tempStr;
@@ -169,7 +168,7 @@ function showTableData(prod_map,branch_map){
 $("#tableId").html(tableHead); */
 	$.each(prod_map,function(key,value) {
 		var total_ordered=0,total_delivered=0,total_nullified=0,total_pending=0;
-		var tblRow ="<tr><td title='"+key+"'>" + key + "</td>";
+		var tblRow ="<tr><td>" + key.split("##")[0] + "</td><td>" + key.split("##")[1] + "</td><td>" + key.split("##")[2] + "</td>";
 		var branch_map = value;
 		$.each(branch_map,function(key2,value2) {
 			var quantities = value2.split(",");
@@ -467,6 +466,5 @@ function saveDeliverableItemsData(objId){
 	});
 }
 
-$("#pageName").text("Delivery Status");
-$(".orderslist").addClass("active");
+$(".dashboard").addClass("active");
 </script>
