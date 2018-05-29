@@ -8,6 +8,10 @@
  <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
  <link rel="stylesheet" type="text/css" href="../assets/css/img.css">
  <style>
+ .table > caption + thead > tr:first-child > th, .table > colgroup + thead > tr:first-child > th, .table > thead:first-child > tr:first-child > th, .table > caption + thead > tr:first-child > td, .table > colgroup + thead > tr:first-child > td, .table > thead:first-child > tr:first-child > td {
+    border-top: 0;
+    text-align: center;
+}
  .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td
  {
  border: px solid black !important;
@@ -44,14 +48,10 @@ table#dependent_table tbody tr td:first-child::before {
 </style>
         <div class="clearfix"></div>
              <ol class="breadcrumb">
-              <li><a href="#">Home</a></li>
-               <li>Orders List </li>
+              <li>Dashboard</li>
             </ol>
             <div class="clearfix"></div>
         <div class="container-fluid" id="lpoMain">
-        
-        
-         
         
         
         
@@ -143,12 +143,12 @@ function createTableHeader(branch_map){
 		var tempStr = '<th colspan="4" align="center">'+value+'</th>';
 		tableHead += tempStr;
 	});
-	tableHead += '<th colspan="4" align="center">Overall Orders</th></tr><tr><th align="center">Category</th><th align="center">Sub Category</th><th align="center">Item Code</th>'; 
+	tableHead += '<th colspan="4"  style="max-width:80px; min-width:80px;">Overall Orders</th></tr><tr><th align="center">Category</th><th align="center">Subcategory</th><th align="center">Item Code</th>'; 
 	$.each(branch_map,function(key, value) {
-		var tempStr = '<th align="center">Ordered</th><th align="center">Delivered</th><th align="center">Nullified</th><th align="center">Pending</th>';
+		var tempStr = '<th align="center"  style="max-width:80px; min-width:80px;">Ordered</th><th  style="max-width:80px; min-width:80px;">Delivered</th><th  style="max-width:80px; min-width:80px;">Nullified</th><th  style="max-width:80px; min-width:80px;">Pending</th>';
 		tableHead += tempStr;
 	});
-	tableHead += '<th align="center">Ordered</th><th align="center">Delivered</th><th align="center">Nullified</th><th align="center">Pending</th></tr></thead><tbody></tbody></table>';
+	tableHead += '<th align="center" style="max-width:80px; min-width:80px;">Ordered</th><th  style="max-width:80px; min-width:80px;">Delivered</th><th  style="max-width:80px; min-width:80px;">Nullified</th><th  style="max-width:100px; min-width:100px;">Pending</th></tr></thead><tbody></tbody></table>';
 	$("#tableId").html(tableHead);
 	//if(isClick=='Yes') $('.datatables').dataTable();
 }
@@ -457,6 +457,5 @@ function saveDeliverableItemsData(objId){
 	});
 }
 
-$("#pageName").text("Delivery Status");
-$(".prod_summary").addClass("active");
+$(".dashboard").addClass("active");
 </script>

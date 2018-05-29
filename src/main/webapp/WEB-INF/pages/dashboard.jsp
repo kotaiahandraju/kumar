@@ -171,6 +171,7 @@ $(document).ready(function(){
 <br/>
 <br/>
 
+
 <!-- Body Ends Here -->
 <script type="text/javascript">
 
@@ -201,6 +202,8 @@ $(".dashboard").addClass("active");
 		});
 		chart.render();
 	}
+	
+	
 // 	$(function() {
 // 		$('#source').tableBarChart('#target', '', false);
 // 		$('#source2').tableBarChart('#target2', '', true);

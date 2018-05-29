@@ -41,6 +41,15 @@ table#dependent_table tbody tr td:first-child::before {
 #ui-datepicker-div{
 /* 	width: auto !important; */
 }
+.sub {
+width:100px;
+}
+.form-horizontal .control-label {
+padding-top:2px;
+}
+.lbl {
+padding-top:8px;
+}
 
 </style>
         <div class="clearfix"></div>
@@ -56,23 +65,23 @@ table#dependent_table tbody tr td:first-child::before {
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Select Status</h4>
+                        <h4>Search Orders</h4>
                         <div class="options"></div>
                     </div>
 	                <form:form  modelAttribute="orderLstForm"   class="form-horizontal" method="post" >
                     <div class="panel-body">
                     	<div class="row">
-                    	<div class="col-md-4">
+                    	<div class="col-md-3">
                    			<div class="form-group">
-                   				<label for="focusedinput" class="col-md-6 control-label">From Date: </label>
+                   				<label for="focusedinput" class="col-md-4 control-label">From Date: </label>
                    				<div class="col-md-6">
                    					<input type="text" id="from_date" value="" />
 							    </div>
                    			</div>
                    		</div>
-                   		<div class="col-md-4">
+                   		<div class="col-md-3">
                    			<div class="form-group">
-                   				<label for="focusedinput" class="col-md-6 control-label">To Date: </label>
+                   				<label for="focusedinput" class="col-md-3 control-label">To Date: </label>
                    				<div class="col-md-6">
                    					<input type="text" id="to_date" value="" />
 							    </div>
@@ -81,7 +90,7 @@ table#dependent_table tbody tr td:first-child::before {
                    		<c:if test="${cacheUserBean.roleId == '1'}">
                    		<div class="col-md-4">
                    			<div class="form-group">
-                   				<label for="focusedinput" class="col-md-6 control-label">Branch: </label>
+                   				<label for="focusedinput" class="col-md-2 control-label" style="padding-top:8px;">Branch: </label>
                    				<div class="col-md-6">
                    					<form:select path="branchId" class="form-control validate" >
                    					<form:option value="">--- Select Branch ---</form:option>
@@ -92,28 +101,15 @@ table#dependent_table tbody tr td:first-child::before {
                    			</div>
                    		</div>
                    		</c:if>
-                   		</div>
-                   		<div class="row">
-                   		<div class="col-md-4">
+                   		<div class="col-md-2">
                    			<div class="form-group">
-                   				<div class="col-md-6">
-                   					<input type="button"   value="Submit" onclick="getOrdersList()" />
+                   				<div class=" ">
+                   					<input class="btn btn-primary sub"   value="Search" onclick="getOrdersList()" />
 							    </div>
                    			</div>
                    		</div>
-                    		<%-- <div class="col-md-4">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Branch : </label>
-                    				<div class="col-md-6">
-                    					<form:select path="branchId" class="form-control validate" >
-                    					<form:option value="">--- Select Branch ---</form:option>
-								    	<form:option value="all">All</form:option>
-								    	<form:options items="${branches_list}" itemValue="id" itemLabel="branchname"/>
-								    	</form:select>
-								    	</div>
-                    			</div>
-                    		</div> --%>
-                    	</div>
+                   		</div>
+                   		
                     		
                     		</div>
                     		</form:form>

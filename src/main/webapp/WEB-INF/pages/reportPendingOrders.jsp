@@ -33,6 +33,15 @@ table#dependent_table tbody tr td:first-child::before {
 /* 	min-width: 1em; */
 /* 	margin-right: 0.5em; */
 }
+.sub {
+width:100px;
+}
+.form-horizontal .control-label {
+padding-top:2px;
+}
+.lbl {
+padding-top:8px;
+}
 
 .addItemButton{
 	cursor: pointer;font-size: small;background: green;color: white;padding: 3px 10px 3px 10px;
@@ -56,15 +65,15 @@ table#dependent_table tbody tr td:first-child::before {
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Select Status</h4>
+                        <h4>Search Orders</h4>
                         <div class="options"></div>
                     </div>
 	                <form:form  modelAttribute="orderLstForm"   class="form-horizontal" method="post" >
                     <div class="panel-body">
                     	<div class="row">
-                    	<div class="col-md-4">
+                    	<div class="col-md-3">
                    			<div class="form-group">
-                   				<label for="focusedinput" class="col-md-6 control-label">Date : </label>
+                   				<label for="focusedinput" class="col-md-4 control-label">Date : </label>
                    				<div class="col-md-6">
                    					<input type="text" id="from_date" value="" />
                    					
@@ -74,8 +83,8 @@ table#dependent_table tbody tr td:first-child::before {
                    		<c:if test="${cacheUserBean.roleId == '1'}">
                    		<div class="col-md-4">
                    			<div class="form-group">
-                   				<label for="focusedinput" class="col-md-6 control-label">Branch : </label>
-                   				<div class="col-md-6">
+                   				<label for="focusedinput" class="col-md-3 control-label">Branch : </label>
+                   				<div class="col-md-5">
                    					<form:select path="branchId" class="form-control validate" >
                    					<form:option value="">--- Select Branch ---</form:option>
 							    	<form:option value="all">All</form:option>
@@ -85,10 +94,10 @@ table#dependent_table tbody tr td:first-child::before {
                    			</div>
                    		</div>
                    		</c:if>
-                   		<div class="col-md-4">
+                   		<div class="col-md-2">
                    			<div class="form-group">
-                   				<div class="col-md-6">
-                   					<input type="button"   value="Submit" onclick="getOrdersList()" />
+                   				<div class="">
+                   					<input class="btn btn-primary sub"   value="Search" onclick="getOrdersList()" />
 							    </div>
                    			</div>
                    		</div>

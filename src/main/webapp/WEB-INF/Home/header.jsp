@@ -328,7 +328,7 @@ function cartCount(){
 
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
         <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="dashboard"><img src="${baseurl }/img/klogo1.png" class="img-responsive" style="    width: 132px;"></a>
+            <a class="navbar-brand" href="dashboard" style="padding-right:5px;   "><img src="${baseurl }/img/klogo1.png" class="img-responsive" ></a>
             <span class="oms">Order Management System</span>
             <div class="clearfix"></div>
         </div>
@@ -398,41 +398,38 @@ function cartCount(){
         <div class="collapse navbar-collapse navbar-ex1-collapse" id="horizontal-navbar" style="padding:0px">
             <ul class="nav navbar-nav">
             
-            <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+            
                <c:if test="${roleId=='1' }">
+              <li class="dashboard"><a href="${baseurl }/admin/getProductsDeliveredQtyBranchWise"><i class="fa fa-users"></i> <span>Dashboard</span></a></li>
+<%--                <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li> --%>
                <li class="branch"><a href="${baseurl }/admin/branchHome"><i class="fa fa-university"></i> <span>Branch</span></a></li>
-                <li class="productType"><a href="${baseurl }/admin/producttype"><i class="fa fa-clone"></i>
-
- <span>Product Category</span></a></li>&emsp;
-              <li class="productName"><a href="${baseurl }/admin/productName"><i class="fa fa-bookmark"></i>
-
-               <span>Product Sub Category</span></a></li>&emsp;
-              <li class="items"><a href="${baseurl }/admin/items"><i class="fa fa-list-alt"></i>
-
-               <span>Product List</span></a></li>&emsp;
+                <li class="productType"><a href="${baseurl }/admin/producttype"><i class="fa fa-clone"></i>	<span>Product Category</span></a></li>&emsp;
+              <li class="productName"><a href="${baseurl }/admin/productName"><i class="fa fa-bookmark"></i> <span>Product Subcategory</span></a></li>&emsp;
+              <li class="items"><a href="${baseurl }/admin/items"><i class="fa fa-list-alt"></i><span>Product List</span></a></li>&emsp;
               <li class="employee"><a href="${baseurl }/admin/employeeCreation"><i class="fa fa-users"></i> <span>Employees</span></a></li>
-              <li class="prod_summary"><a href="${baseurl }/admin/getProductsDeliveredQtyBranchWise"><i class="fa fa-users"></i> <span>Padma</span></a></li>
               <li class="transactions">
             		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Reports</span> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-					 <li class="allOrders"><a href="${baseurl }/admin/reportAllOrdersPage"><i></i> <span>All Orders</span></a></li>
-                      <li class="pendingOrders"><a href="${baseurl }/admin/reportPendingOrders"><i></i> <span>Pending Orders</span></a></li>
-                      <li class="deliveredOrders"><a href="${baseurl }/admin/reportDeliveredOrders"><i></i> <span>Delivered Orders</span></a></li>
+					 <li class="allOrders"><a href="${baseurl }/admin/reportAllOrdersPage"><i class="fa fa-clone" aria-hidden="true"></i>
+<span>All Orders</span></a></li>
+                      <li class="pendingOrders"><a href="${baseurl }/admin/reportPendingOrders"><i class="fa fa-clone" aria-hidden="true"></i>
+ <span>Pending Orders</span></a></li>
+                      <li class="deliveredOrders"><a href="${baseurl }/admin/reportDeliveredOrders"> <i class="fa fa-clone" aria-hidden="true"></i><span>Delivered Orders</span></a></li>
 					</ul>
 				</li>
               </c:if>
 			 <c:if test="${roleId=='2' }">
+			 <li class="dashboard"><a href="${baseurl }/admin/getProductsDeliveredQtyBranchWise"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 			  <li class="productType"><a href="${baseurl }/admin/producttype"><i class="fa fa-clone"></i>
 
 			  <span>Product Category</span></a></li>&emsp;
-              <li class="productName"><a href="${baseurl }/admin/productName"><i class="fa fa-bookmark"></i> <span>Product Sub Category</span></a></li>&emsp;
+              <li class="productName"><a href="${baseurl }/admin/productName"><i class="fa fa-bookmark"></i> <span>Product Subcategory</span></a></li>&emsp;
               <li class="items"><a href="${baseurl }/admin/items"><i class="fa fa-list-alt"></i> <span>Product List</span></a></li>&emsp;
                <li class="dealercreation"><a href="${baseurl }/admin/dealercreation"> <i class="fa fa-user-secret"></i><span>Dealer Creation </span></a></li>
 		<%-- 	   <li class="dealerconfirm"><a href="${baseurl }/admin/dealeraccountconfirm"><i class="fa fa-check-square"></i><span> Confirm  Dealer</span></a></li> --%>
 			    <li class="dealerpaymentconfirm"><a href="${baseurl }/admin/dealerpaymentconfirm"><i class="fa fa-bolt"></i><span>Confirm Payments </span></a></li>
 			    <li class="orderslist"><a href="${baseurl }/admin/orderslist"><i class="fa fa-clipboard"></i><span>Delivery Status</span></a></li>
 			     <li class="orderplacing"><a href="${baseurl }/admin/managerorderplace"><i class="fa fa-clipboard"></i><span>Order Product</span></a></li>
-			     <li class="prod_summary"><a href="${baseurl }/admin/getProductsDeliveredQtyBranchWise"><i class="fa fa-users"></i> <span>Padma</span></a></li>
 	             <li class="transactions">
             		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Reports</span> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
@@ -444,6 +441,7 @@ function cartCount(){
 			   
 			 </c:if>
 			  <c:if test="${roleId=='3' }">
+			  <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 			  <li class="delarpayment"><a href="${baseurl }/admin/delarpayment"> <i class="fa fa-bookmark"></i><span>Payment Information</span></a></li>
 			  <li class="orderplacing"><a href="${baseurl }/admin/orderplacing"><i class="fa fa-clipboard"></i> <span>Order Product</span></a></li>
 			   <li class="ordersList"><a href="${baseurl }/admin/myorderLists"><i class="fa fa-first-order"></i><span>My Orders</span></a></li>
@@ -472,4 +470,5 @@ function cartCount(){
 	            </div>
 	            <div class="clearfix"></div>
 	        </div>
+	       
 <!-- Header ends Here -->

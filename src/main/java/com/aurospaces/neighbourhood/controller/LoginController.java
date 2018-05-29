@@ -79,6 +79,9 @@ public class LoginController {
 					session.setAttribute("roleId", objUserBean.getRoleId());
 					session.setAttribute("userName", objUserBean.getUserName());
 					session.setAttribute("branchName", objUserBean.getBranchName());
+					if(objUserBean.getRoleId().equals("1") || objUserBean.getRoleId().equals("2")){
+						return "redirect:admin/getProductsDeliveredQtyBranchWise";
+					}
 					return "redirect:admin/dashboard";
 //				}
 				
