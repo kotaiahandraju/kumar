@@ -84,7 +84,7 @@ public class DealerCreationController {
 		// load a properties file
 					prop.load(input);
 		       String  msg = prop.getProperty("smsUsernameAndPassword");
-		 msg =msg.replace("_username_",phnumber );
+		 msg =msg.replace("_username_",employeeBean.getUsername() );
 		 msg =msg.replace("_pass_", employeeBean.getPassword());
 		 
 		
