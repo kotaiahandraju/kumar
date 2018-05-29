@@ -65,7 +65,7 @@ padding-top:8px;
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Select Status</h4>
+                        <h4>Search Orders</h4>
                         <div class="options"></div>
                     </div>
 	                <form:form  modelAttribute="orderLstForm"   class="form-horizontal" method="post" >
@@ -102,7 +102,7 @@ padding-top:8px;
                    		<div class="col-md-2">
                    			<div class="form-group">
                    				<div class=" ">
-                   					<input class="btn btn-primary sub"   value="Submit" onclick="getOrdersList()" />
+                   					<input class="btn btn-primary sub"   value="Search" onclick="getOrdersList()" />
 							    </div>
                    			</div>
                    		</div>
