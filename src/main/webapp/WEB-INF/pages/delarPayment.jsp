@@ -190,7 +190,7 @@ function showTableData(response){
 		 if(orderObj.confirm == "1"){
 			var deleterow = "<a data-toggle='tooltip' title=' Received' ><i class='fa fa-check' style='color:#29c10d'></i></a>"
 		}else{  
-			var deleterow = "<a data-toggle='tooltip' title='Not at Received' ><i class='fa fa-times' style='color:#e40d0d'></i></a>"
+			var deleterow = "<a data-toggle='tooltip' title='Not Yet Received' ><i class='fa fa-times' style='color:#e40d0d'></i></a>"
 		} 
 // 		var edit = "<a class='edit editIt' onclick='editProductType("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		

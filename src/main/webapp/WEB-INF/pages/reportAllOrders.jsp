@@ -281,7 +281,13 @@ function getOrdersList() {
 
 
 
-	
-$("#pageName").text("My Orders");
-$(".ordersList").addClass("active");
+
+var listtype = "${list_type}";
+if(listtype=="delivered"){
+	$("#pageName").text("Delivered Orders");
+	$(".deliveredOrders").addClass("active");
+}else{
+	$("#pageName").text("All Orders");
+	$(".allOrders").addClass("active");
+}
 </script>

@@ -84,8 +84,7 @@ font-size:28px;
 					</div>
 					<div class="panel-body collapse in">
 					<div class="table-responsive" id="tableId">
-						<table class="table "
-							id="example">
+						<table class="table " id="example">
 							<thead>
 								<tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>quantity</td>
 								</tr>
@@ -264,7 +263,8 @@ function ordePlacing() {
 	quantity = [];  
 	productId = [];
 	 res="";
-	$('input[name^=quantity]').each(function(){
+	 var table = $('#example1').DataTable();
+	 table.$('input[name^=quantity]').each(function(){
 		if($.trim($(this).val()) != ""){
 			console.log(this.id);
 			
@@ -363,7 +363,7 @@ function showTableDataOnInvoice(response){
 	var table=$('#tableId').html('');
 	serviceUnitArray = {};
 	var protectType = null;
-	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped  datatables" id="example1">'+
+	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped  " id="example1">'+
     	'<thead><tr style="background:#4f8edc;color:#fff;"><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
@@ -409,6 +409,6 @@ function printInvoice() {
 
 
 
-$("#pageName").text("My Cart");
+$("#pageName").text("Invoice");
 // $(".orderplacing").addClass("active"); 
 </script>

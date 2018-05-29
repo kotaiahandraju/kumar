@@ -110,7 +110,7 @@ padding: 3px 14px 0px 11px;
 						</div>
 					</div>
 					<div class="panel-body collapse in">
-					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Active List</label>
+					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show InActive List</label>
 					<div class="table-responsive" id="tableId">
 						<table class="table table-striped table-bordered datatables"
 							id="example">
@@ -547,7 +547,7 @@ $('#phoneNumber').blur(function() {
 	{
 		
 		  $('#phoneNumber').css('border-color', 'red');
-		 $('#errorMsg').text( "* Contact Phone Number already Exists ") ;
+		 $('#errorMsg').text( "* Enter Valid Contact Phone Number") ;
 		 $('#errorMsg').css('color','red');
 			setTimeout(function() { $("#errorMsg").text(''); }, 3000);
 		 mobilevalidation =false;
