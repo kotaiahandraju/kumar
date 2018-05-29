@@ -379,7 +379,7 @@ public class OrderPlacementController {
 					if(!branches_map.containsKey((String)row.get("branch_name"))){
 						branches_map.put((String)row.get("branch_name"), (String)row.get("branch_name"));
 					}
-					String product_id = (String)row.get("product_name");
+					String product_id = (String)row.get("category")+"##"+(String)row.get("sub_category")+"##"+(String)row.get("item_code");
 					if(prod_map.containsKey(product_id)){
 						Map<String,Object> branch = (Map<String,Object>)prod_map.get(product_id);
 						branch.put((String)row.get("branch_name"), row.get("delivered")+","+row.get("nullified"));
@@ -399,7 +399,7 @@ public class OrderPlacementController {
 					if(!branches_map.containsKey((String)row.get("branch_name"))){
 						branches_map.put((String)row.get("branch_name"), (String)row.get("branch_name"));
 					}
-					String prod_name = (String)row.get("prod_name");
+					String prod_name = (String)row.get("category")+"##"+(String)row.get("sub_category")+"##"+(String)row.get("item_code");
 					if(prod_map.containsKey(prod_name)){
 						Map<String,Object> branch_map = (Map<String,Object>)prod_map.get(prod_name);
 						if(branch_map.containsKey(row.get("branch_name"))){
