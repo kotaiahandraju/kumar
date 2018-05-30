@@ -10,7 +10,7 @@ $.fn.makeMultipartRequest = function(method, url, processData, formData,
 		dataType : dataType,
 		 beforeSend : function() {
 //             $.blockUI({ message: '<img src="../img/cylinder.jpg" height="50px" class="fa fa-spin cylinder" />'});
-			 $.blockUI({ message: '<img class="animated flip infinite" src="../assets/img/logo.png" height="50px" />'});
+			 $.blockUI({ message: '<img class="animated flip infinite" src="../assets/img/k1.png" height="50px" />'});
 //             return false;
           }, 
           
@@ -44,6 +44,6 @@ $.fn.makeRequest = function (method,url,data,successFunction)
 			}
 		}, 
 		xhrFields: {withCredentials: true},
-		timeout: 30000
+		timeout: 300000
 	});
 };
