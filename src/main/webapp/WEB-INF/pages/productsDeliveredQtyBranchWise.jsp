@@ -54,19 +54,6 @@ table#dependent_table tbody tr td:first-child::before {
         <div class="container-fluid" id="lpoMain">
         
         
-        <!--  <div class="row" id="moveTo">
-            <div class="col-md-12 col-sm-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h4>Select Dealer</h4>
-                        <div class="options"></div>
-                    </div>
-	                
-                    	</div>
-                    </div>
-                </div> -->
-        
-        
         
             <div class="row" id="row1">
               <div class="col-md-12">

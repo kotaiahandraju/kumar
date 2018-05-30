@@ -370,11 +370,18 @@ public class OrderPlacementController {
 		String sJson = null;
 		try {
 			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			String role_id = objuserBean.getRoleId();
+			
 			long total_orders=0l, total_delivered=0l, total_nullified=0l, total_pending=0l;
 			Map<String,Map<String,Object>> prod_map = new HashMap<String,Map<String,Object>>();
 			Map<String,String> branches_map = new HashMap<String,String>();
 			if(objuserBean != null){
-				branch_prod_list = listDao.getProductsDeliveredQtyBranchWise();
+				if(role_id.equalsIgnoreCase("1")){ // means Admin
+					branch_prod_list = listDao.getProductsDeliveredQtyBranchWise();
+				}else if(role_id.equalsIgnoreCase("2")){ //means branch Manager
+					branch_prod_list = listDao.getProductsDeliveredQtyOfBranch(objuserBean.getBranchId());
+				}
+				
 				for(Map<String, Object> row:branch_prod_list){
 					if(!branches_map.containsKey((String)row.get("branch_name"))){
 						branches_map.put((String)row.get("branch_name"), (String)row.get("branch_name"));
@@ -394,7 +401,13 @@ public class OrderPlacementController {
 					}
 					
 				}
-				List<Map<String, Object>> ordered_list = listDao.getProductsOrderedQtyBranchWise();
+				
+				List<Map<String, Object>> ordered_list = null ;
+				if(role_id.equalsIgnoreCase("1")){ // means Admin
+					ordered_list = listDao.getProductsOrderedQtyBranchWise();
+				}else if(role_id.equalsIgnoreCase("2")){ //means branch Manager
+					ordered_list = listDao.getProductsOrderedQtyOfBranch(objuserBean.getBranchId());
+				}
 				for(Map<String, Object> row:ordered_list){
 					if(!branches_map.containsKey((String)row.get("branch_name"))){
 						branches_map.put((String)row.get("branch_name"), (String)row.get("branch_name"));
@@ -475,9 +488,12 @@ public class OrderPlacementController {
 		String sJson = null;
 		List<Map<String,Object>> all_orders = null;
 		try{
-			String sSql = "select id ,branchname from kumar_branch where status='1'";
-			List<BranchBean> list = branchDao.populate(sSql);
-			request.setAttribute("branches_list", list);
+			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			if(objuserBean.getRoleId().equalsIgnoreCase("1")){
+				String sSql = "select id ,branchname from kumar_branch where status='1'";
+				List<BranchBean> list = branchDao.populate(sSql);
+				request.setAttribute("branches_list", list);
+			}
 			request.setAttribute("list_type", "all");
 			request.setAttribute("all_orders", "''");
 		}catch(Exception e){
