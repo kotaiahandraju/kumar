@@ -437,7 +437,6 @@ function cartCount(){
 			  <li class="orderplacing"><a href="${baseurl }/admin/orderplacing"><i class="fa fa-clipboard"></i> <span>Order Product</span></a></li>
 			   <li class="ordersList"><a href="${baseurl }/admin/myorderLists"><i class="fa fa-first-order"></i><span>My Orders</span></a></li>
 			 </c:if>
-				
 			</ul>
 		</div>
     </nav>
