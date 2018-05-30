@@ -92,7 +92,7 @@ padding-top:8px;
                    			<div class="form-group">
                    				<label for="focusedinput" class="col-md-2 control-label" style="padding-top:8px;">Branch: </label>
                    				<div class="col-md-6">
-                   					<form:select path="branchId" class="form-control validate" >
+                   					<form:select path="branchId" class="form-control " >
                    					<form:option value="">--- Select Branch ---</form:option>
 							    	<form:option value="all">All</form:option>
 							    	<form:options items="${branches_list}" itemValue="id" itemLabel="branchname"/>

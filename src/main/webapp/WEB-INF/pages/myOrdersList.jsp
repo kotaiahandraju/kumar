@@ -328,8 +328,8 @@ function displayHistory(response){
 	$.each(response,function(i, orderObj) {
 		
 		  //$('#dname').text(orderObj.dealerName);
-		  $('#kumarid2').text("Order ID: "+orderObj.order_id);
-		  $('#korderdDate2').text("Ordered On: "+orderObj.ordered_date );
+		  $('#kumarid2').html("<b>Order ID:</b> "+orderObj.order_id);
+		  $('#korderdDate2').html("<b>Ordered On: </b>"+orderObj.ordered_date );
 		  
 		
 		

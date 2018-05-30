@@ -410,10 +410,8 @@ function cartCount(){
               <li class="transactions">
             		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Reports</span> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-					 <li class="allOrders"><a href="${baseurl }/admin/reportAllOrdersPage"><i class="fa fa-clone" aria-hidden="true"></i>
-<span>All Orders</span></a></li>
-                      <li class="pendingOrders"><a href="${baseurl }/admin/reportPendingOrders"><i class="fa fa-clone" aria-hidden="true"></i>
- <span>Pending Orders</span></a></li>
+					 <li class="allOrders"><a href="${baseurl }/admin/reportAllOrdersPage"><i class="fa fa-clone" aria-hidden="true"></i><span>All Orders</span></a></li>
+                      <li class="pendingOrders"><a href="${baseurl }/admin/reportPendingOrders"><i class="fa fa-clone" aria-hidden="true"></i> <span>Pending Orders</span></a></li>
                       <li class="deliveredOrders"><a href="${baseurl }/admin/reportDeliveredOrders"> <i class="fa fa-clone" aria-hidden="true"></i><span>Delivered Orders</span></a></li>
 					</ul>
 				</li>
@@ -433,9 +431,9 @@ function cartCount(){
 	             <li class="transactions">
             		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Reports</span> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-					 <li class="allOrders"><a href="${baseurl }/admin/reportAllOrdersPage"><i></i> <span>All Orders</span></a></li>
-                      <li class="pendingOrders"><a href="${baseurl }/admin/reportPendingOrders"><i></i> <span>Pending Orders</span></a></li>
-                      <li class="deliveredOrders"><a href="${baseurl }/admin/reportDeliveredOrders"><i></i> <span>Delivered Orders</span></a></li>
+					 <li class="allOrders"><a href="${baseurl }/admin/reportAllOrdersPage"><i class="fa fa-clone" aria-hidden="true"></i> <span>All Orders</span></a></li>
+                      <li class="pendingOrders"><a href="${baseurl }/admin/reportPendingOrders"><i class="fa fa-clone" aria-hidden="true"></i> <span>Pending Orders</span></a></li>
+                      <li class="deliveredOrders"><a href="${baseurl }/admin/reportDeliveredOrders"><i class="fa fa-clone" aria-hidden="true"></i> <span>Delivered Orders</span></a></li>
 					</ul>
 				</li>
 			   
