@@ -39,7 +39,7 @@ table#dependent_table tbody tr td:first-child::before {
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="dashboard">Home</a></li>
-               <li>Product Sub Category </li>
+               <li>Product Subcategory </li>
             </ol>
             <div class="clearfix"></div>
         <div class="container-fluid" id="lpoMain">

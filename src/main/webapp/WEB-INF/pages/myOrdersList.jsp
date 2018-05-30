@@ -100,7 +100,7 @@ table#dependent_table tbody tr td:first-child::before {
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
                                 	<tr>
-                                		<th>Dealer Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th>
+                                		<th>Dealer Name</th><th>Product Category</th><th>Product Subcategory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th>
                                 	</tr>
                                 </thead>
                                 <tbody></tbody>
@@ -199,7 +199,7 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Ordered Date </th><th>Order ID</th><th>Firm Name</th><th>Total Items</th><th>Delivery Status</th><th>View</th><th>Delivered Items History</th></tr>'+
+    	'<thead><tr><th>Ordered Date </th><th>Order ID</th><th>Business Name</th><th>Total Items</th><th>Delivery Status</th><th>View</th><th>Delivered Items History</th></tr>'+
     	"</thead><tbody></tbody></table>"; 
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -282,7 +282,7 @@ function displayDealerOrderItems(response){
 	$('#modal_body').html('');
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Ordered Quantity</th><th>Pending Quantity</th><th>Status</th></tr>'+
+    	'<thead><tr><th>Product Category</th><th>Product Subcategory </th><th>Item Code</th><th>Item Description</th><th>Ordered Quantity</th><th>Pending Quantity</th><th>Status</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#modal_body").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -322,7 +322,7 @@ function displayHistory(response){
 	$('#history_modal_body').html('');
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Delivered Product Categeory</th><th>Delivered Product Sub Categeory </th><th>Delivered  Item Code</th><th>Delivered Item Description</th><th>Delivered  Quantity</th><th>Delivered On</th></tr>'+
+    	'<thead><tr><th>Delivered Product Category</th><th>Delivered Product Subcategory </th><th>Delivered  Item Code</th><th>Delivered Item Description</th><th>Delivered  Quantity</th><th>Delivered On</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#history_modal_body").html(tableHead);
 	$.each(response,function(i, orderObj) {

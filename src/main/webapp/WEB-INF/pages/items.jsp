@@ -114,13 +114,13 @@ table#dependent_table tbody tr td:first-child::before {
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-4 control-label">Product
-										SubCategory <span class="impColor">*</span>
+										Subcategory <span class="impColor">*</span>
 									</label>
 									<div class="col-md-7">
 										<form:select path="productname" value=""
 											class="form-control validate"
 											onchange="removeBorder(this.id)">
-											<form:option value="">-- Select Product SubCategory --</form:option>
+											<form:option value="">-- Select Product Subcategory --</form:option>
 											<%-- 								    	<form:options items="${productName }"></form:options> --%>
 										</form:select>
 									</div>

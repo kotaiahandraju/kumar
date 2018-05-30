@@ -102,7 +102,7 @@ padding-top:8px;
                    		<div class="col-md-2">
                    			<div class="form-group">
                    				<div class=" ">
-                   					<input class="btn btn-primary sub"   value="Search" onclick="getOrdersList()" />
+                   					<div class="btn btn-primary sub"   value="Search" onclick="getOrdersList()">Search</div>
 							    </div>
                    			</div>
                    		</div>
@@ -132,7 +132,7 @@ padding-top:8px;
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
                                 	<tr>
-                                		<th>Dealer Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th>
+                                		<th>Dealer Name</th><th>Product Categeory</th><th>Product Subcategeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th>
                                 	</tr>
                                 </thead>
                                 <tbody></tbody>
@@ -219,7 +219,7 @@ function showTableData(response){
 		temp_td = '<th>Delivered On</th>';
 	}
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Ordered Date </th><th>Order ID</th><th>Firm Name</th><th>Branch Name</th><th>Total Items</th><th>Delivery Status</th>'+temp_td+'</tr>'+
+    	'<thead><tr><th>Ordered Date </th><th>Order ID</th><th>Business Name</th><th>Branch Name</th><th>Total Items</th><th>Delivery Status</th>'+temp_td+'</tr>'+
     	"</thead><tbody></tbody></table>"; 
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
