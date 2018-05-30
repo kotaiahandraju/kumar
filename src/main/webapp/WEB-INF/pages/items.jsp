@@ -114,13 +114,13 @@ table#dependent_table tbody tr td:first-child::before {
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-4 control-label">Product
-										SubCategory <span class="impColor">*</span>
+										Subcategory <span class="impColor">*</span>
 									</label>
 									<div class="col-md-7">
 										<form:select path="productname" value=""
 											class="form-control validate"
 											onchange="removeBorder(this.id)">
-											<form:option value="">-- Select Product SubCategory --</form:option>
+											<form:option value="">-- Select Product Subcategory --</form:option>
 											<%-- 								    	<form:options items="${productName }"></form:options> --%>
 										</form:select>
 									</div>
@@ -192,7 +192,7 @@ table#dependent_table tbody tr td:first-child::before {
 		serviceUnitArray = {};
 		var protectType = null;
 		var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'
-				+ '<thead><tr><th>Serial Number</th><th>Item Code</th><th>Description</th><th>Product Category</th><th>Product Sub Category</th><th>Status</th><th></th></tr>'
+				+ '<thead><tr><th>Serial Number</th><th>Item Code</th><th>Description</th><th>Product Category</th><th>Product Subcategory</th><th>Status</th><th></th></tr>'
 				+ "</thead><tbody></tbody></table>";
 		$("#tableId").html(tableHead);
 		$.each(response, function(i, orderObj) {

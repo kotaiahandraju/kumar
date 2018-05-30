@@ -14,7 +14,7 @@
  }
   @media (min-width: 768px) {
 .modal-dialog {
-    width: 957px;
+    width: 85%;
     margin: 30px auto;
 }
 }
@@ -100,7 +100,7 @@ table#dependent_table tbody tr td:first-child::before {
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
                                 	<tr>
-                                		<th>Dealer Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th>
+                                		<th>Dealer Name</th><th>Product Category</th><th>Product Subcategory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th>
                                 	</tr>
                                 </thead>
                                 <tbody></tbody>
@@ -139,7 +139,7 @@ table#dependent_table tbody tr td:first-child::before {
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		        <h4 class="modal-title" id="exampleModalLabel"><span id="dealer_name_str"></span></h4>
-		      <span class="col-md-4" id="dname"></span>  <span class="col-md-4" id="kumarid2"></span>  <span class="col-md-4" id="korderdDate2"></span><br>
+		      <span class="col-md-4" id="dname"></span>  <span class="col-md-4" id="kumarid2"></span>  <span class="col-md-3" id="korderdDate2"></span><br>
 		      </div>
 		      <div class="modal-body" id="history_modal_body">
 		      
@@ -199,7 +199,7 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Ordered Date </th><th>Order ID</th><th>Firm Name</th><th>Total Items</th><th>Delivery Status</th><th>View</th><th>Delivered Items History</th></tr>'+
+    	'<thead><tr><th>Ordered Date </th><th>Order ID</th><th>Business Name</th><th>Total Items</th><th>Delivery Status</th><th>View</th><th>Delivered Items History</th></tr>'+
     	"</thead><tbody></tbody></table>"; 
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -282,7 +282,7 @@ function displayDealerOrderItems(response){
 	$('#modal_body').html('');
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Ordered Quantity</th><th>Pending Quantity</th><th>Status</th></tr>'+
+    	'<thead><tr><th>Product Category</th><th>Product Subcategory </th><th>Item Code</th><th>Item Description</th><th>Ordered Quantity</th><th>Pending Quantity</th><th>Status</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#modal_body").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -322,14 +322,14 @@ function displayHistory(response){
 	$('#history_modal_body').html('');
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Delivered Product Categeory</th><th>Delivered Product Sub Categeory </th><th>Delivered  Item Code</th><th>Delivered Item Description</th><th>Delivered  Quantity</th><th>Delivered On</th></tr>'+
+    	'<thead><tr><th>Delivered Product Category</th><th>Delivered Product Subcategory </th><th>Delivered  Item Code</th><th>Delivered Item Description</th><th>Delivered  Quantity</th><th>Delivered On</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#history_modal_body").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		
 		  //$('#dname').text(orderObj.dealerName);
-		  $('#kumarid2').text("Order ID: "+orderObj.order_id);
-		  $('#korderdDate2').text("Ordered On: "+orderObj.ordered_date );
+		  $('#kumarid2').html("<b>Order ID:</b> "+orderObj.order_id);
+		  $('#korderdDate2').html("<b>Ordered On: </b>"+orderObj.ordered_date );
 		  
 		
 		

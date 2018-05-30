@@ -33,6 +33,15 @@ table#dependent_table tbody tr td:first-child::before {
 /* 	min-width: 1em; */
 /* 	margin-right: 0.5em; */
 }
+.sub {
+width:100px;
+}
+.form-horizontal .control-label {
+padding-top:2px;
+}
+.lbl {
+padding-top:8px;
+}
 
 .addItemButton{
 	cursor: pointer;font-size: small;background: green;color: white;padding: 3px 10px 3px 10px;
@@ -56,25 +65,26 @@ table#dependent_table tbody tr td:first-child::before {
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Select Status</h4>
+                        <h4>Search Orders</h4>
                         <div class="options"></div>
                     </div>
 	                <form:form  modelAttribute="orderLstForm"   class="form-horizontal" method="post" >
                     <div class="panel-body">
                     	<div class="row">
-                    	<div class="col-md-4">
+                    	<div class="col-md-3">
                    			<div class="form-group">
-                   				<label for="focusedinput" class="col-md-6 control-label">Date : </label>
+                   				<label for="focusedinput" class="col-md-4 control-label">Date : </label>
                    				<div class="col-md-6">
                    					<input type="text" id="from_date" value="" />
                    					
 							    </div>
                    			</div>
                    		</div>
+                   		<c:if test="${cacheUserBean.roleId == '1'}">
                    		<div class="col-md-4">
                    			<div class="form-group">
-                   				<label for="focusedinput" class="col-md-6 control-label">Branch : </label>
-                   				<div class="col-md-6">
+                   				<label for="focusedinput" class="col-md-3 control-label">Branch : </label>
+                   				<div class="col-md-5">
                    					<form:select path="branchId" class="form-control validate" >
                    					<form:option value="">--- Select Branch ---</form:option>
 							    	<form:option value="all">All</form:option>
@@ -83,10 +93,12 @@ table#dependent_table tbody tr td:first-child::before {
 							    	</div>
                    			</div>
                    		</div>
-                   		<div class="col-md-4">
+                   		</c:if>
+                   		<div class="col-md-2">
                    			<div class="form-group">
-                   				<div class="col-md-6">
-                   					<input type="button"   value="Submit" onclick="getOrdersList('all')" />
+                   				<div class="">
+                   					<div class="btn btn-primary sub"   value="Search" onclick="getOrdersList('all')">Search</div>
+<!--                    					<input class="btn btn-primary sub"   value="Search" onclick="getOrdersList()" /> -->
 							    </div>
                    			</div>
                    		</div>
@@ -127,7 +139,7 @@ table#dependent_table tbody tr td:first-child::before {
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
                                 	<tr>
-                                		<th>Dealer Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th>
+                                		<th>Dealer Name</th><th>Product Categeory</th><th>Product Subcategeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th>
                                 	</tr>
                                 </thead>
                                 <tbody></tbody>
@@ -210,7 +222,7 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Ordered Date </th><th>Order ID</th><th>Firm Name</th><th>Branch Name</th><th>Total Items</th><th>Delivery Status</th></tr>'+
+    	'<thead><tr><th>Ordered Date </th><th>Order ID</th><th>Business Name</th><th>Branch Name</th><th>Total Items</th><th>Delivery Status</th></tr>'+
     	"</thead><tbody></tbody></table>"; 
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -238,6 +250,11 @@ function getOrdersList() {
 	var from_date = $("#from_date").val();
 	var to_date = $("#to_date").val();
 	var branch_id=$("#branchId").val();
+	var role_id = "${cacheUserBean.roleId}";
+	if(role_id=="2"){ // means branch manager
+		var branchId = "${cacheUserBean.branchId}";
+		branch_id = branchId;
+	}
 		$.ajax({
 					type : "POST",
 					url : "reportAllOrders.htm",

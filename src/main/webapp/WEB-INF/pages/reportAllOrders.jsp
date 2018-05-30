@@ -65,7 +65,7 @@ padding-top:8px;
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Select Status</h4>
+                        <h4>Search Orders</h4>
                         <div class="options"></div>
                     </div>
 	                <form:form  modelAttribute="orderLstForm"   class="form-horizontal" method="post" >
@@ -87,11 +87,12 @@ padding-top:8px;
 							    </div>
                    			</div>
                    		</div>
+                   		<c:if test="${cacheUserBean.roleId == '1'}">
                    		<div class="col-md-4">
                    			<div class="form-group">
                    				<label for="focusedinput" class="col-md-2 control-label" style="padding-top:8px;">Branch: </label>
                    				<div class="col-md-6">
-                   					<form:select path="branchId" class="form-control validate" >
+                   					<form:select path="branchId" class="form-control " >
                    					<form:option value="">--- Select Branch ---</form:option>
 							    	<form:option value="all">All</form:option>
 							    	<form:options items="${branches_list}" itemValue="id" itemLabel="branchname"/>
@@ -99,10 +100,11 @@ padding-top:8px;
 							    	</div>
                    			</div>
                    		</div>
+                   		</c:if>
                    		<div class="col-md-2">
                    			<div class="form-group">
                    				<div class=" ">
-                   					<input class="btn btn-primary sub"   value="Submit" onclick="getOrdersList()" />
+                   					<div class="btn btn-primary sub"   value="Search" onclick="getOrdersList()">Search</div>
 							    </div>
                    			</div>
                    		</div>
@@ -132,7 +134,7 @@ padding-top:8px;
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
                                 	<tr>
-                                		<th>Dealer Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th>
+                                		<th>Dealer Name</th><th>Product Categeory</th><th>Product Subcategeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th>
                                 	</tr>
                                 </thead>
                                 <tbody></tbody>
@@ -219,7 +221,7 @@ function showTableData(response){
 		temp_td = '<th>Delivered On</th>';
 	}
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Ordered Date </th><th>Order ID</th><th>Firm Name</th><th>Branch Name</th><th>Total Items</th><th>Delivery Status</th>'+temp_td+'</tr>'+
+    	'<thead><tr><th>Ordered Date </th><th>Order ID</th><th>Business Name</th><th>Branch Name</th><th>Total Items</th><th>Delivery Status</th>'+temp_td+'</tr>'+
     	"</thead><tbody></tbody></table>"; 
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -251,6 +253,11 @@ function getOrdersList() {
 	var from_date = $("#from_date").val();
 	var to_date = $("#to_date").val();
 	var branch_id=$("#branchId").val();
+	var role_id = "${cacheUserBean.roleId}";
+	if(role_id=="2"){ // means branch manager
+		var branchId = "${cacheUserBean.branchId}";
+		branch_id = branchId;
+	}
 		$.ajax({
 					type : "POST",
 					url : "reportAllOrders.htm",

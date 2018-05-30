@@ -2948,7 +2948,7 @@ button.close {
 .nav > li > a {
   position: relative;
   display: block;
-  padding: 10px 15px;
+  padding: 10px 14px;
 }
 .nav > li > a:hover,
 .nav > li > a:focus {

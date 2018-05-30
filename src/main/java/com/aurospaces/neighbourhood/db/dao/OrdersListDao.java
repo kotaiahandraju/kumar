@@ -276,6 +276,45 @@ public List<Map<String,Object>> getProductsOrderedQtyBranchWise(){
 	
 }
 
+public List<Map<String,Object>> getProductsDeliveredQtyOfBranch(String branch_id){
+	List<Map<String,Object>> list=null;
+	
+	try{
+		jdbcTemplate = custom.getJdbcTemplate();
+		String sql ="select (select pt.producttype from producttype pt where pt.id = (select i.productId from items i where i.id = invoice.product_id)) as category, "
+				+"(select pn.productname from productname pn where pn.id=(select i.productname from items i where i.id = invoice.product_id)) as sub_category, "
+				+" (select i.itemcode from items i where i.id = invoice.product_id) as item_code, "
+				+"(select kb.branchname from kumar_branch kb where kb.id = (select ol.branchId from orders_list ol where ol.orderId = order_id limit 1)) as branch_name,product_id,ifnull(sum(dispatched_items_quantity),0) as delivered, ifnull(sum(nullified_qty),0) as nullified from invoice "
+				+" where order_id in (select ol.orderId from orders_list ol where ol.branchId = '"+branch_id+"') "
+				+" group by branch_name, product_id ";
+		list =jdbcTemplate.queryForList(sql);
+		System.out.println(sql);
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+	return list;
+	
+}
+public List<Map<String,Object>> getProductsOrderedQtyOfBranch(String branch_id){
+	List<Map<String,Object>> list=null;
+	
+	try{
+		jdbcTemplate = custom.getJdbcTemplate();
+		String sql ="select (select pt.producttype from producttype pt where pt.id =(select i.productId from items i where i.id = ol.productId)) as category, "
+				+" (select pn.productname from productname pn where pn.id=(select i.productname from items i where i.id = ol.productId)) as sub_category, "
+				+" (select i.itemcode from items i where i.id = ol.productId) as item_code, "
+				+" (select kb.branchname from kumar_branch kb where kb.id = ol.branchId) as branch_name,ol.productId,ol.branchId,ifnull(sum(ol.quantity),0) as ordered from orders_list ol where ol.orderId is not null "
+				+" and ol.branchId = '"+branch_id+"' "
+				+" group by ol.productId,ol.branchId";
+		list =jdbcTemplate.queryForList(sql);
+		System.out.println(sql);
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+	return list;
+	
+}
+
 /*public List<Map<String, Object>> getMyOrdersList() 
 {
 List<Map<String,Object>> list=null;

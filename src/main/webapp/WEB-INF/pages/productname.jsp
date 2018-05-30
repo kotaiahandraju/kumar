@@ -39,7 +39,7 @@ table#dependent_table tbody tr td:first-child::before {
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="dashboard">Home</a></li>
-               <li>Product Sub Category </li>
+               <li>Product Subcategory </li>
             </ol>
             <div class="clearfix"></div>
         <div class="container-fluid" id="lpoMain">
@@ -105,7 +105,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<img id="imageId" style="display: none;    width: 20%;" src=""><span id="imageLable" style="display: none;"></span>
                     			<label for="focusedinput" class="col-md-4 control-label">File Upload<span class="impColor">*</span></label>
 													<input id="imagePath" name="imagePath" type="hidden" value="">
-													<input type="file" name="file" class="col-md-8" style="margin-top: 3%;" id="documents" onchange="">
+													<input type="file" name="file" class="col-md-8" style="margin-top: 2%;" id="documents" onchange="">
 													<span class="hasError" id="documentsError"></span>
                     			
 								  	</div>
