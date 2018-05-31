@@ -291,6 +291,8 @@ if(listtype=="delivered"){
 	$(".deliveredOrders").addClass("active");
 }else{
 	$("#pageName").text("All Orders");
+	$(".allOrders").addClass("active");
+	$(".pendingOrders").removeClass('active');
 	$(".allOrders1").addClass("active");
 }
 </script>
