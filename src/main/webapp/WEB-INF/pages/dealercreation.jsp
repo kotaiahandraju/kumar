@@ -110,7 +110,7 @@ padding: 3px 14px 0px 11px;
 						</div>
 					</div>
 					<div class="panel-body collapse in">
-					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show InActive List</label>
+					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
 					<div class="table-responsive" id="tableId">
 						<table class="table table-striped table-bordered datatables"
 							id="example">
@@ -786,14 +786,16 @@ function inactiveData() {
 		
 		$.fn.makeMultipartRequest('POST', 'inActiveDealer', false,
 				formData, false, 'text', function(data) {
-			if(data != ""){
-				var jsonobj = $.parseJSON(data);
+			var jsonobj = $.parseJSON(data);
+			if(jsonobj.allOrders1 != ""){
 				var alldata = jsonobj.allOrders1;
 				showTableData(alldata);
 				  tooltip();
 				  console.log(jsonobj);
 	          
 			}else{
+				var alldata = jsonobj.allOrders1;
+				showTableData(alldata);
 				alert("Inactive List Empty");
 			}
 			

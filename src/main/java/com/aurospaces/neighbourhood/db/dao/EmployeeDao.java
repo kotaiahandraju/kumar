@@ -154,7 +154,7 @@ public class EmployeeDao extends BaseEmployeeDao
 			if (objuserBean != null) {
 				 buffer.append(" and kp.branchId ='"+objuserBean.getBranchId()+"' ");
 			}
-			buffer.append(" order by kp.confirm desc");
+			buffer.append(" order by kp.confirm asc");
 		 String sql=buffer.toString();
 		 System.out.println(sql);
 		 List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);

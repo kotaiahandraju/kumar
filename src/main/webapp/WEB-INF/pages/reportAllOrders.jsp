@@ -73,9 +73,9 @@ padding-top:8px;
                     	<div class="row">
                     	<div class="col-md-3">
                    			<div class="form-group">
-                   				<label for="focusedinput" class="col-md-4 control-label">From Date: </label>
+                   				<label for="focusedinput" class="col-md-4 control-label" >From Date: </label>
                    				<div class="col-md-6">
-                   					<input type="text" id="from_date" value="" />
+                   					<input type="text" id="from_date" value="" readonly="readonly" />
 							    </div>
                    			</div>
                    		</div>
@@ -83,7 +83,7 @@ padding-top:8px;
                    			<div class="form-group">
                    				<label for="focusedinput" class="col-md-3 control-label">To Date: </label>
                    				<div class="col-md-6">
-                   					<input type="text" id="to_date" value="" />
+                   					<input type="text" id="to_date" value=""  readonly="readonly"/>
 							    </div>
                    			</div>
                    		</div>
@@ -92,7 +92,7 @@ padding-top:8px;
                    			<div class="form-group">
                    				<label for="focusedinput" class="col-md-2 control-label" style="padding-top:8px;">Branch: </label>
                    				<div class="col-md-6">
-                   					<form:select path="branchId" class="form-control validate" >
+                   					<form:select path="branchId" class="form-control " >
                    					<form:option value="">--- Select Branch ---</form:option>
 							    	<form:option value="all">All</form:option>
 							    	<form:options items="${branches_list}" itemValue="id" itemLabel="branchname"/>
@@ -104,7 +104,7 @@ padding-top:8px;
                    		<div class="col-md-2">
                    			<div class="form-group">
                    				<div class=" ">
-                   					<input class="btn btn-primary sub"   value="Search" onclick="getOrdersList()" />
+                   					<div class="btn btn-primary sub"   value="Search" onclick="getOrdersList()">Search</div>
 							    </div>
                    			</div>
                    		</div>
@@ -134,7 +134,7 @@ padding-top:8px;
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
                                 	<tr>
-                                		<th>Dealer Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th>
+                                		<th>Dealer Name</th><th>Product Categeory</th><th>Product Subcategeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th>
                                 	</tr>
                                 </thead>
                                 <tbody></tbody>
@@ -221,7 +221,7 @@ function showTableData(response){
 		temp_td = '<th>Delivered On</th>';
 	}
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Ordered Date </th><th>Order ID</th><th>Firm Name</th><th>Branch Name</th><th>Total Items</th><th>Delivery Status</th>'+temp_td+'</tr>'+
+    	'<thead><tr><th>Ordered Date </th><th>Order ID</th><th>Business Name</th><th>Branch Name</th><th>Total Items</th><th>Delivery Status</th>'+temp_td+'</tr>'+
     	"</thead><tbody></tbody></table>"; 
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -292,5 +292,7 @@ if(listtype=="delivered"){
 }else{
 	$("#pageName").text("All Orders");
 	$(".allOrders").addClass("active");
+	$(".pendingOrders").removeClass('active');
+	$(".allOrders1").addClass("active");
 }
 </script>

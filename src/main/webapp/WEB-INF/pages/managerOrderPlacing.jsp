@@ -99,7 +99,7 @@ table#dependent_table tbody tr td:first-child::before {
 						<table class="table "
 							id="example">
 							<thead>
-								<tr><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>quantity</td>
+								<tr><th>Product Subcategory</th><td>Item Code</td><th>Description</th><td>quantity</td>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -119,7 +119,7 @@ table#dependent_table tbody tr td:first-child::before {
 						<table class="table "
 							id="example1">
 							<thead>
-								<tr><th> Product category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><td>quantity</td>
+								<tr><th> Product category</th><th>Product Subcategory</th><th>Item Code</th><th>Description</th><td>quantity</td>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -164,8 +164,8 @@ function showTableData(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = "<table cellpadding='0' cellspacing='0' border='0'  class='table table-bordered table-striped' id='example1'>"
-    	+"<thead><tr style='background-color: #f7f8fa;'><th style='width:25%'>Product Sub Category</th><th style='width:16%'>Item Code</th><th style='width:49%'>Description</th><th style='width:5%'>Quantity</th></tr>"
-    	+"<tr><th><input autocomplete='off' class='filter' name='Product Sub Category' placeholder='Search Product Sub Category' data-col='Product Sub Category'/></th>"
+    	+"<thead><tr style='background-color: #f7f8fa;'><th style='width:25%'>Product Subcategory</th><th style='width:16%'>Item Code</th><th style='width:49%'>Description</th><th style='width:5%'>Quantity</th></tr>"
+    	+"<tr><th><input autocomplete='off' class='filter' name='Product Sub Category' placeholder='Search Product Subcategory' data-col='Product Sub Category'/></th>"
     	+"<th><input autocomplete='off' class='filter' name='Item Code' placeholder='Search Item Code' data-col='Item Code'/></th>"
     	+"<th><input autocomplete='off' class='filter' name='Description' placeholder='Search Description' data-col='Description'/></th></tr>"
    		+ "</thead><tbody></tbody>"
