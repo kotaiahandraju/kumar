@@ -73,9 +73,9 @@ padding-top:8px;
                     	<div class="row">
                     	<div class="col-md-3">
                    			<div class="form-group">
-                   				<label for="focusedinput" class="col-md-4 control-label">From Date: </label>
+                   				<label for="focusedinput" class="col-md-4 control-label" >From Date: </label>
                    				<div class="col-md-6">
-                   					<input type="text" id="from_date" value="" />
+                   					<input type="text" id="from_date" value="" readonly="readonly" />
 							    </div>
                    			</div>
                    		</div>
@@ -83,7 +83,7 @@ padding-top:8px;
                    			<div class="form-group">
                    				<label for="focusedinput" class="col-md-3 control-label">To Date: </label>
                    				<div class="col-md-6">
-                   					<input type="text" id="to_date" value="" />
+                   					<input type="text" id="to_date" value=""  readonly="readonly"/>
 							    </div>
                    			</div>
                    		</div>

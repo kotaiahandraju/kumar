@@ -75,7 +75,7 @@ padding-top:8px;
                    			<div class="form-group">
                    				<label for="focusedinput" class="col-md-4 control-label">Date : </label>
                    				<div class="col-md-6">
-                   					<input type="text" id="from_date" value="" />
+                   					<input type="text" id="from_date" value="" readonly="readonly" />
                    					
 							    </div>
                    			</div>
