@@ -8,6 +8,9 @@
  <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
  <link rel="stylesheet" type="text/css" href="../assets/css/img.css">
  <style>
+ .table > colgroup + thead > tr:first-child > th {
+border-right:1px solid #006699 !important;
+} 
  .table > caption + thead > tr:first-child > th, .table > colgroup + thead > tr:first-child > th, .table > thead:first-child > tr:first-child > th, .table > caption + thead > tr:first-child > td, .table > colgroup + thead > tr:first-child > td, .table > thead:first-child > tr:first-child > td {
     border-top: 0;
     text-align: center;
@@ -138,9 +141,9 @@ function createTableHeader(branch_map){
 	
 	
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-	'<thead><tr><th colspan="3">Product</th>';
+	'<thead><tr style="background:#4e8ede; color:#fff;"><th colspan="3">Product</th>';
 	$.each(branch_map,function(key, value) {
-		var tempStr = '<th colspan="4" align="center">'+value+'</th>';
+		var tempStr = '<th colspan="4" align="center" style="">'+value+'</th>';
 		tableHead += tempStr;
 	});
 	tableHead += '<th colspan="4"  style="max-width:80px; min-width:80px;">Overall Orders</th></tr><tr><th align="center">Category</th><th align="center">Subcategory</th><th align="center">Item Code</th>'; 

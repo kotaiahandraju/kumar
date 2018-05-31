@@ -49,7 +49,11 @@ tbody tr:nth-child(even) th {
   height: 400px;
 }
 </style> -->
-
+<style>
+.table  colgroup {
+border:1px solid #006699;
+} 
+</style>
 <script>
 $(document).ready(function(){
     if(!window.location.hash) {
