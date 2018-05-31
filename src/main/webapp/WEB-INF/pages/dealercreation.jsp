@@ -786,14 +786,16 @@ function inactiveData() {
 		
 		$.fn.makeMultipartRequest('POST', 'inActiveDealer', false,
 				formData, false, 'text', function(data) {
-			if(data != ""){
-				var jsonobj = $.parseJSON(data);
+			var jsonobj = $.parseJSON(data);
+			if(jsonobj.allOrders1 != ""){
 				var alldata = jsonobj.allOrders1;
 				showTableData(alldata);
 				  tooltip();
 				  console.log(jsonobj);
 	          
 			}else{
+				var alldata = jsonobj.allOrders1;
+				showTableData(alldata);
 				alert("Inactive List Empty");
 			}
 			
