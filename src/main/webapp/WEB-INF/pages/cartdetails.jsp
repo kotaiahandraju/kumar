@@ -84,9 +84,9 @@ font-size:28px;
 					</div>
 					<div class="panel-body collapse in">
 					<div class="table-responsive" id="tableId">
-						<table class="table " id="example">
+						<table class="table table-bordered table-striped" id="example">
 							<thead>
-								<tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>Quantity</td>
+								<tr><th> Product Category</th><th>Product Subcategory</th><td>Item Code</td><th>Description</th><td>Quantity</td>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -138,7 +138,7 @@ font-size:28px;
 									<div class="table-responsive" id="tableIdm">
 						<table class="table table-bordered table-striped">
 							<thead>
-								<tr  style="background:#4f8edc;color:#fff;"><th>Product Category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><th>Quantity</th>
+								<tr  style="background:#4f8edc;color:#fff;"><th>Product Category</th><th>Product Subcategory</th><th>Item Code</th><th>Description</th><th>Quantity</th>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -234,7 +234,7 @@ function showTableData(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped  datatables" id="example1">'+
-    	'<thead><tr  style="background:#4f8edc;color:#fff;"><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
+    	'<thead><tr  style="background:#4f8edc;color:#fff;"><th> Product Category</th><th>Product Subcategory</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -364,7 +364,7 @@ function showTableDataOnInvoice(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped  " id="example1">'+
-    	'<thead><tr style="background:#4f8edc;color:#fff;"><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
+    	'<thead><tr style="background:#4f8edc;color:#fff;"><th> Product Category</th><th>Product Subcategory</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
