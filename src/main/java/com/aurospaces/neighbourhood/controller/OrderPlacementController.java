@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.Set;
+import java.util.TreeMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -443,7 +444,13 @@ public class OrderPlacementController {
 							branch_map.put(branch_name, "0,0,0");
 						}
 					}
-					
+				}
+				Iterator prod_keys = prod_map.keySet().iterator();
+				while(prod_keys.hasNext()){
+					String key = (String)prod_keys.next();
+					Map<String,Object> value =  prod_map.get(key);
+					Map<String, Object> sortedValue = new TreeMap<String, Object>(value);
+					prod_map.put(key, sortedValue);
 				}
 				/*Map<String,Object> branch = new HashMap<String,Object>();
 				branch.put("vijayawada", "30,10");
@@ -454,8 +461,9 @@ public class OrderPlacementController {
 				branch2.put("guntur", "100,0");
 				branch2.put("vijayawada", "300,10");*/
 				
+				Map<String, String> sortedBranches = new TreeMap<String, String>(branches_map);
 				objectMapper = new ObjectMapper();
-				sJson = objectMapper.writeValueAsString(branches_map);
+				sJson = objectMapper.writeValueAsString(sortedBranches);
 				request.setAttribute("branches_map", sJson);
 				
 				
