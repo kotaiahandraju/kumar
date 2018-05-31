@@ -16,7 +16,6 @@ $.fn.makeMultipartRequest = function(method, url, processData, formData,
           
 		success : successFunction,
 		complete: function () {
-            
             $.unblockUI();
        },
 		error :  function(e){$.unblockUI();console.log(e);}
