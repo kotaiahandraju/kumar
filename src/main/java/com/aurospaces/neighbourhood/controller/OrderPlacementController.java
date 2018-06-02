@@ -488,7 +488,134 @@ public class OrderPlacementController {
 		}
 		return "productsDeliveredQtyBranchWise";
 		
-	}	
+	}
+	
+	@RequestMapping(value = "/getProductsDeliveredQtyDealerWise")
+	public  String getProductsDeliveredQtyDealerWise(@ModelAttribute("orderLstForm") EmployeeBean employeeBean,Model model,HttpServletRequest request,HttpSession session) 
+	{
+		List<Map<String, Object>> branch_prod_list = null;
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		try {
+			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			String role_id = objuserBean.getRoleId();
+			
+			long total_orders=0l, total_delivered=0l, total_nullified=0l, total_pending=0l;
+			Map<String,Map<String,Object>> prod_map = new HashMap<String,Map<String,Object>>();
+			Map<String,String> branches_map = new HashMap<String,String>();
+			if(objuserBean != null){
+				if(role_id.equalsIgnoreCase("1")){ // means Admin
+					branch_prod_list = listDao.getProductsDeliveredQtyBranchWise();
+				}else if(role_id.equalsIgnoreCase("2")){ //means branch Manager
+					branch_prod_list = listDao.getProductsDeliveredQtyDealerWise(objuserBean.getBranchId());
+				}
+				
+				for(Map<String, Object> row:branch_prod_list){
+					if(!branches_map.containsKey((String)row.get("dealer_name"))){
+						branches_map.put((String)row.get("dealer_name"), (String)row.get("dealer_name"));
+					}
+					String product_id = (String)row.get("category")+"##"+(String)row.get("sub_category")+"##"+(String)row.get("item_code");
+					if(prod_map.containsKey(product_id)){
+						Map<String,Object> branch = (Map<String,Object>)prod_map.get(product_id);
+						branch.put((String)row.get("dealer_name"), row.get("delivered")+","+row.get("nullified"));
+						//total_delivered += ((Double)row.get("delivered")).longValue();
+						//total_nullified += ((Double)row.get("nullified")).longValue();
+					}else{
+						Map<String,Object> branch = new HashMap<String,Object>();
+						branch.put((String)row.get("dealer_name"), row.get("delivered")+","+row.get("nullified"));
+						prod_map.put(product_id, branch);
+						//total_delivered += ((Double)row.get("delivered")).longValue();
+						//total_nullified += ((Double)row.get("nullified")).longValue();
+					}
+					
+				}
+				
+				List<Map<String, Object>> ordered_list = null ;
+				if(role_id.equalsIgnoreCase("1")){ // means Admin
+					ordered_list = listDao.getProductsOrderedQtyBranchWise();
+				}else if(role_id.equalsIgnoreCase("2")){ //means branch Manager
+					ordered_list = listDao.getProductsOrderedQtyDealerWise(objuserBean.getBranchId());
+				}
+				for(Map<String, Object> row:ordered_list){
+					if(!branches_map.containsKey((String)row.get("dealer_name"))){
+						branches_map.put((String)row.get("dealer_name"), (String)row.get("dealer_name"));
+					}
+					String prod_name = (String)row.get("category")+"##"+(String)row.get("sub_category")+"##"+(String)row.get("item_code");
+					if(prod_map.containsKey(prod_name)){
+						Map<String,Object> branch_map = (Map<String,Object>)prod_map.get(prod_name);
+						if(branch_map.containsKey(row.get("dealer_name"))){
+							String values = (String)branch_map.get((String)row.get("dealer_name"));
+							branch_map.put((String)row.get("dealer_name"), ((Double)row.get("ordered")).intValue()+","+values);
+							//total_orders += ((Double)row.get("ordered")).longValue();
+						}else{
+							branch_map.put((String)row.get("dealer_name"), ((Double)row.get("ordered")).intValue()+",0,0");
+							prod_map.put(prod_name, branch_map);
+							//total_orders += ((Double)row.get("ordered")).longValue();
+						}
+					}else{
+						Map<String,Object> branch = new HashMap<String,Object>();
+						branch.put((String)row.get("dealer_name"), ((Double)row.get("ordered")).intValue()+",0,0");
+						prod_map.put(prod_name, branch);
+						//total_orders += ((Double)row.get("ordered")).longValue();
+					}
+				}
+				Collection<Map<String,Object>> branch_maps = prod_map.values();
+				Iterator<Map<String,Object>> iter = branch_maps.iterator();
+				while(iter.hasNext()){
+					Map<String, Object> branch_map = iter.next();
+					Set br_keys = branches_map.keySet();
+					Iterator iter2 = br_keys.iterator();
+					while(iter2.hasNext()){
+						String branch_name = (String)iter2.next();
+						if(!branch_map.containsKey(branch_name)){
+							branch_map.put(branch_name, "0,0,0");
+						}
+					}
+				}
+				Iterator prod_keys = prod_map.keySet().iterator();
+				while(prod_keys.hasNext()){
+					String key = (String)prod_keys.next();
+					Map<String,Object> value =  prod_map.get(key);
+					Map<String, Object> sortedValue = new TreeMap<String, Object>(value);
+					prod_map.put(key, sortedValue);
+				}
+				/*Map<String,Object> branch = new HashMap<String,Object>();
+				branch.put("vijayawada", "30,10");
+				branch.put("guntur", "10,0");
+				
+				
+				Map<String,Object> branch2 = new HashMap<String,Object>();
+				branch2.put("guntur", "100,0");
+				branch2.put("vijayawada", "300,10");*/
+				
+				Map<String, String> sortedBranches = new TreeMap<String, String>(branches_map);
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(sortedBranches);
+				request.setAttribute("branches_map", sJson);
+				
+				
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(prod_map);
+				request.setAttribute("delivered_qty_list", sJson);
+				
+				/*branch_prod_list = listDao.getProductsDeliveredQtyBranchWise();
+				objectMapper = new ObjectMapper();
+				if (branch_prod_list != null && branch_prod_list.size() > 0) {
+	
+					objectMapper = new ObjectMapper();
+					sJson = objectMapper.writeValueAsString(branch_prod_list);
+					request.setAttribute("delivered_qty_list", sJson);
+				} else {
+					request.setAttribute("delivered_qty_list", "''");
+				}*/
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return "productsDeliveredQtyDealerWise";
+		
+	}
 	
 	@RequestMapping(value="/reportAllOrdersPage")
 	public String reportAllOrdersPage(@ModelAttribute("orderLstForm") EmployeeBean employeeBean,HttpServletRequest request,HttpSession session){

@@ -60,6 +60,9 @@
  <definition name="productsDeliveredQtyBranchWise" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/productsDeliveredQtyBranchWise.jsp" />
  </definition>
+ <definition name="productsDeliveredQtyDealerWise" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/productsDeliveredQtyDealerWise.jsp" />
+ </definition>
  <definition name="reportAllOrders" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/reportAllOrders.jsp" />
  </definition>
