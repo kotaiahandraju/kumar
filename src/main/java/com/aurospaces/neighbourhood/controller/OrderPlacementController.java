@@ -628,9 +628,21 @@ public class OrderPlacementController {
 				String sSql = "select id ,branchname from kumar_branch where status='1'";
 				List<BranchBean> list = branchDao.populate(sSql);
 				request.setAttribute("branches_list", list);
+				
+				all_orders = listDao.getAllOrders("","","");
+				
+			}else if(objuserBean.getRoleId().equalsIgnoreCase("2")){ // branch manager
+				all_orders = listDao.getAllOrders("","",objuserBean.getBranchId());
+			}
+			if (all_orders != null && all_orders.size() > 0) {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(all_orders);
+				request.setAttribute("all_orders", sJson);
+			} else {
+				request.setAttribute("all_orders", "''");
 			}
 			request.setAttribute("list_type", "all");
-			request.setAttribute("all_orders", "''");
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -658,6 +670,8 @@ public class OrderPlacementController {
 					all_orders = listDao.getAllOrders(from_date,to_date,branch_id,"completed");
 				}else if(list_type.equalsIgnoreCase("pending")){
 					all_orders = listDao.getAllOrders(from_date,to_date,branch_id,"pending");
+				}else if(list_type.equalsIgnoreCase("partially")){
+					all_orders = listDao.getAllOrders(from_date,to_date,branch_id,"partially");
 				}
 			}
 			
@@ -680,15 +694,60 @@ public class OrderPlacementController {
 		String sJson = null;
 		List<Map<String,Object>> all_orders = null;
 		try{
-			String sSql = "select id ,branchname from kumar_branch where status='1'";
-			List<BranchBean> list = branchDao.populate(sSql);
-			request.setAttribute("branches_list", list);
+			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			if(objuserBean.getRoleId().equalsIgnoreCase("1")){
+				String sSql = "select id ,branchname from kumar_branch where status='1'";
+				List<BranchBean> list = branchDao.populate(sSql);
+				request.setAttribute("branches_list", list);
+				
+				all_orders = listDao.getAllOrders("","","","pending");
+				
+			}else if(objuserBean.getRoleId().equalsIgnoreCase("2")){ // branch manager
+				all_orders = listDao.getAllOrders("","",objuserBean.getBranchId(),"pending");
+			}
+			if (all_orders != null && all_orders.size() > 0) {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(all_orders);
+				request.setAttribute("all_orders", sJson);
+			} else {
+				request.setAttribute("all_orders", "''");
+			}
 			request.setAttribute("list_type", "pending");
-			request.setAttribute("all_orders", "''");
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		return "reportPendingOrders";
+		
+	}
+	@RequestMapping(value="/reportPartiallyDeliveredOrders")
+	public String reportPartiallyDeliveredOrders(@ModelAttribute("orderLstForm") EmployeeBean employeeBean,HttpServletRequest request,HttpSession session){
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		List<Map<String,Object>> all_orders = null;
+		try{
+			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			if(objuserBean.getRoleId().equalsIgnoreCase("1")){
+				String sSql = "select id ,branchname from kumar_branch where status='1'";
+				List<BranchBean> list = branchDao.populate(sSql);
+				request.setAttribute("branches_list", list);
+				
+				all_orders = listDao.getAllOrders("","","","partially");
+				
+			}else if(objuserBean.getRoleId().equalsIgnoreCase("2")){ // branch manager
+				all_orders = listDao.getAllOrders("","",objuserBean.getBranchId(),"partially");
+			}
+			if (all_orders != null && all_orders.size() > 0) {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(all_orders);
+				request.setAttribute("all_orders", sJson);
+			} else {
+				request.setAttribute("all_orders", "''");
+			}
+			request.setAttribute("list_type", "partially");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "reportAllOrders";
 		
 	}
 	@RequestMapping(value="/reportDeliveredOrders")
@@ -697,11 +756,25 @@ public class OrderPlacementController {
 		String sJson = null;
 		List<Map<String,Object>> all_orders = null;
 		try{
-			String sSql = "select id ,branchname from kumar_branch where status='1'";
-			List<BranchBean> list = branchDao.populate(sSql);
-			request.setAttribute("branches_list", list);
+			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			if(objuserBean.getRoleId().equalsIgnoreCase("1")){
+				String sSql = "select id ,branchname from kumar_branch where status='1'";
+				List<BranchBean> list = branchDao.populate(sSql);
+				request.setAttribute("branches_list", list);
+				
+				all_orders = listDao.getAllOrders("","","","completed");
+				
+			}else if(objuserBean.getRoleId().equalsIgnoreCase("2")){ // branch manager
+				all_orders = listDao.getAllOrders("","",objuserBean.getBranchId(),"completed");
+			}
+			if (all_orders != null && all_orders.size() > 0) {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(all_orders);
+				request.setAttribute("all_orders", sJson);
+			} else {
+				request.setAttribute("all_orders", "''");
+			}
 			request.setAttribute("list_type", "delivered");
-			request.setAttribute("all_orders", "''");
 		}catch(Exception e){
 			e.printStackTrace();
 		}
