@@ -290,14 +290,17 @@ public List<Map<String,Object>> getProductsOrderedQtyBranchWise(){
 
 public List<Map<String,Object>> getProductsDeliveredQtyOfBranch(String branch_id){
 	List<Map<String,Object>> list=null;
-	
+	String branch_clause = " 1 ";
+	if(StringUtils.isNotBlank(branch_id) && !branch_id.equalsIgnoreCase("all")){
+		branch_clause = " order_id in (select ol.orderId from orders_list ol where ol.branchId = '"+branch_id+"') ";
+	}
 	try{
 		jdbcTemplate = custom.getJdbcTemplate();
 		String sql ="select (select pt.producttype from producttype pt where pt.id = (select i.productId from items i where i.id = invoice.product_id)) as category, "
 				+"(select pn.productname from productname pn where pn.id=(select i.productname from items i where i.id = invoice.product_id)) as sub_category, "
 				+" (select i.itemcode from items i where i.id = invoice.product_id) as item_code, "
 				+"(select kb.branchname from kumar_branch kb where kb.id = (select ol.branchId from orders_list ol where ol.orderId = order_id limit 1)) as branch_name,product_id,ifnull(sum(dispatched_items_quantity),0) as delivered, ifnull(sum(nullified_qty),0) as nullified from invoice "
-				+" where order_id in (select ol.orderId from orders_list ol where ol.branchId = '"+branch_id+"') "
+				+" where "+branch_clause+" "
 				+" group by branch_name, product_id ";
 		list =jdbcTemplate.queryForList(sql);
 		System.out.println(sql);
@@ -307,9 +310,12 @@ public List<Map<String,Object>> getProductsDeliveredQtyOfBranch(String branch_id
 	return list;
 	
 }
-public List<Map<String,Object>> getProductsDeliveredQtyDealerWise(String branch_id){
+public List<Map<String,Object>> getProductsDeliveredQtyDealerWise(String branch_id, String dealer_id){
 	List<Map<String,Object>> list=null;
-	
+	String dealer_clause = " 1 ";
+	if(StringUtils.isNotBlank(dealer_id) && !dealer_id.equalsIgnoreCase("all")){
+		dealer_clause = " ol.delerId = "+dealer_id;
+	}
 	try{
 		jdbcTemplate = custom.getJdbcTemplate();
 		String sql ="select (select ke.businessName from kumar_employee ke where ke.id = (select ol.delerId from orders_list ol where ol.orderId = order_id limit 1)) as dealer_name, "
@@ -317,7 +323,7 @@ public List<Map<String,Object>> getProductsDeliveredQtyDealerWise(String branch_
 				+"(select pn.productname from productname pn where pn.id=(select i.productname from items i where i.id = invoice.product_id)) as sub_category, "
 				+" (select i.itemcode from items i where i.id = invoice.product_id) as item_code, "
 				+"(select kb.branchname from kumar_branch kb where kb.id = (select ol.branchId from orders_list ol where ol.orderId = order_id limit 1)) as branch_name,product_id,ifnull(sum(dispatched_items_quantity),0) as delivered, ifnull(sum(nullified_qty),0) as nullified from invoice "
-				+" where order_id in (select ol.orderId from orders_list ol where ol.branchId = '"+branch_id+"') "
+				+" where order_id in (select ol.orderId from orders_list ol where ol.branchId = '"+branch_id+"' and  "+dealer_clause+") "
 				+" group by dealer_name, product_id ";
 		list =jdbcTemplate.queryForList(sql);
 		System.out.println(sql);
@@ -329,14 +335,17 @@ public List<Map<String,Object>> getProductsDeliveredQtyDealerWise(String branch_
 }
 public List<Map<String,Object>> getProductsOrderedQtyOfBranch(String branch_id){
 	List<Map<String,Object>> list=null;
-	
+	String branch_clause = " 1 ";
+	if(StringUtils.isNotBlank(branch_id) && !branch_id.equalsIgnoreCase("all")){
+		branch_clause = " ol.branchId = '"+branch_id+"'  ";
+	}
 	try{
 		jdbcTemplate = custom.getJdbcTemplate();
 		String sql ="select (select pt.producttype from producttype pt where pt.id =(select i.productId from items i where i.id = ol.productId)) as category, "
 				+" (select pn.productname from productname pn where pn.id=(select i.productname from items i where i.id = ol.productId)) as sub_category, "
 				+" (select i.itemcode from items i where i.id = ol.productId) as item_code, "
 				+" (select kb.branchname from kumar_branch kb where kb.id = ol.branchId) as branch_name,ol.productId,ol.branchId,ifnull(sum(ol.quantity),0) as ordered from orders_list ol where ol.orderId is not null "
-				+" and ol.branchId = '"+branch_id+"' "
+				+" and "+branch_clause+" "
 				+" group by ol.productId,ol.branchId";
 		list =jdbcTemplate.queryForList(sql);
 		System.out.println(sql);
@@ -347,9 +356,12 @@ public List<Map<String,Object>> getProductsOrderedQtyOfBranch(String branch_id){
 	
 }
 
-public List<Map<String,Object>> getProductsOrderedQtyDealerWise(String branch_id){
+public List<Map<String,Object>> getProductsOrderedQtyDealerWise(String branch_id, String dealer_id){
 	List<Map<String,Object>> list=null;
-	
+	String dealer_clause = " 1 ";
+	if(StringUtils.isNotBlank(dealer_id) && !dealer_id.equalsIgnoreCase("all")){
+		dealer_clause = " ol.delerId = "+dealer_id;
+	}
 	try{
 		jdbcTemplate = custom.getJdbcTemplate();
 		String sql ="select (select ke.businessName from kumar_employee ke where ke.id = ol.delerId) as dealer_name, "
@@ -358,6 +370,7 @@ public List<Map<String,Object>> getProductsOrderedQtyDealerWise(String branch_id
 				+" (select i.itemcode from items i where i.id = ol.productId) as item_code, "
 				+" (select kb.branchname from kumar_branch kb where kb.id = ol.branchId) as branch_name,ol.productId,ol.branchId,ifnull(sum(ol.quantity),0) as ordered from orders_list ol where ol.orderId is not null "
 				+" and ol.branchId = '"+branch_id+"' "
+				+" and "+dealer_clause
 				+" group by ol.delerId, ol.productId";
 		list =jdbcTemplate.queryForList(sql);
 		System.out.println(sql);

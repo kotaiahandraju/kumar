@@ -56,13 +56,51 @@ table#dependent_table tbody tr td:first-child::before {
             <div class="clearfix"></div>
         <div class="container-fluid" id="lpoMain">
         
-        
+        	<div class="row" id="moveTo">
+            <div class="col-md-12 col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4>Select Branch</h4>
+                        <div class="options"></div>
+                    </div>
+	                <form:form  modelAttribute="orderLstForm"   class="form-horizontal" method="post" id="products_summary_form" name="products_summary_form">
+                    <div class="panel-body">
+                    	<div class="row">
+                    	
+                   		<c:if test="${cacheUserBean.roleId == '1'}">
+                   		<div class="col-md-4">
+                   			<div class="form-group">
+                   				<label for="focusedinput" class="col-md-2 control-label" style="padding-top:8px;">Branch: </label>
+                   				<div class="col-md-6">
+                   					<form:select path="branchId" class="form-control " >
+							    	<form:option value="all">All</form:option>
+							    	<form:options items="${branches_list}" itemValue="id" itemLabel="branchname"/>
+							    	</form:select>
+							    	</div>
+                   			</div>
+                   		</div>
+                   		</c:if>
+                   		<div class="col-md-2">
+                   			<div class="form-group">
+                   				<div class=" ">
+                   					<div class="btn btn-primary sub"   value="Search" onclick="getProductsList()">Submit</div>
+							    </div>
+                   			</div>
+                   		</div>
+                   		</div>
+                   		
+                    		
+                    		</div>
+                    		</form:form>
+                    	</div>
+                    </div>
+                </div> 
         
             <div class="row" id="row1">
               <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h4>Orders List</h4>
+                            <h4>Products Summary</h4>
                             <div class="options">   
                                 <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
                             </div>
@@ -458,6 +496,46 @@ function saveDeliverableItemsData(objId){
 				console.log(e);
          }
 	});
+}
+
+function getProductsList(){
+	var branch_id = $("#branchId").val();
+	$("#products_summary_form").attr("action","getProductsDeliveredQtyBranchWise.htm?branch_id="+branch_id);
+	$("#products_summary_form").submit();
+	/* $.ajax({
+		type : "POST",
+		url : "getProductsDeliveredQtyBranchWise.htm",
+		data :"branch_id="+branch_id,
+		 beforeSend : function() {
+             $.blockUI({ message: 'Please wait' });
+          },
+		success: function (response) {
+            	 $.unblockUI();
+            	 var resJson=JSON.parse(response);
+            	 var msg = resJson.message;
+             if(typeof msg != "undefined"){
+            	 	if(msg=="success"){
+            	 		alert("Data saved successfully");
+            	 		serviceUnitArray1[objId].pending_qty = balance_qty;
+            	 		$("#pending_qty"+objId).html(balance_qty);
+            	 		if(balance_qty==0){
+            	 			//$("#modal_body tbody ")
+            	 			$('#row'+objId).find("td").last().remove();
+            	 			$('#row'+objId).find("td").last().remove();
+            	 			var new_td = '<td colspan="2" align="center">Completed</td>';
+            	 			$(new_td).appendTo($('#row'+objId));
+            	 		}
+            	 	}else{
+            	 		alert("Some problem occured! Please try again.");
+            	 	}
+             }
+//              window.location.reload();
+             },
+         error: function (e) { 
+        	 $.unblockUI();
+				console.log(e);
+         }
+	}); */
 }
 
 $(".dashboard").addClass("active");

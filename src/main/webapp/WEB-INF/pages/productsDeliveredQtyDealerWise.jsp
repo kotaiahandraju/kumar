@@ -56,13 +56,51 @@ table#dependent_table tbody tr td:first-child::before {
             <div class="clearfix"></div>
         <div class="container-fluid" id="lpoMain">
         
-        
+        	<div class="row" id="moveTo">
+            <div class="col-md-12 col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4>Select Dealer</h4>
+                        <div class="options"></div>
+                    </div>
+	                <form:form  modelAttribute="orderLstForm"   class="form-horizontal" method="post" id="products_summary_form" name="products_summary_form">
+                    <div class="panel-body">
+                    	<div class="row">
+                    	
+                   		<c:if test="${cacheUserBean.roleId == '2'}">
+                   		<div class="col-md-4">
+                   			<div class="form-group">
+                   				<label for="focusedinput" class="col-md-6 control-label">Dealer : </label>
+                   				<div class="col-md-6">
+                   					<form:select path="name" class="form-control ">
+							    	<form:option value="all">All</form:option>
+							    	<form:options items="${dealersList }"></form:options>
+							    	</form:select>
+							    	</div>
+                   			</div>
+                   		</div>
+                   		</c:if>
+                   		<div class="col-md-2">
+                   			<div class="form-group">
+                   				<div class=" ">
+                   					<div class="btn btn-primary sub"   value="Search" onclick="getProductsList()">Submit</div>
+							    </div>
+                   			</div>
+                   		</div>
+                   		</div>
+                   		
+                    		
+                    		</div>
+                    		</form:form>
+                    	</div>
+                    </div>
+                </div> 
         
             <div class="row" id="row1">
               <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h4>Orders List</h4>
+                            <h4>Products Summary</h4>
                             <div class="options">   
                                 <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
                             </div>
@@ -458,6 +496,11 @@ function saveDeliverableItemsData(objId){
 				console.log(e);
          }
 	});
+}
+function getProductsList(){
+	var dealer_id = $("#name").val();
+	$("#products_summary_form").attr("action","getProductsDeliveredQtyDealerWise.htm?dealer_id="+dealer_id);
+	$("#products_summary_form").submit();
 }
 
 $(".dashboard").addClass("active");
