@@ -225,16 +225,10 @@ function showTableData(response){
 }
 function getDealerOrdersItems(order_id){
 // 	event.preventDefault();
-	
-		$.ajax({
-					type : "POST",
-					url : "getItemsOfOrder.htm",
-					data :"order_id="+order_id,
-					 beforeSend : function() {
-			             $.blockUI({ message: 'Please wait' });
-			          },
-					success: function (response) {
-		                	 $.unblockUI();
+	var formData = new FormData();
+	formData.append('order_id', order_id);
+		$.fn.makeMultipartRequest('POST', 'getItemsOfOrder', false,	formData, false, 'text', function(response) {
+		
 		                	 
 		                 if(response != null ){
 		                	 var resJson=JSON.parse(response);
@@ -242,38 +236,20 @@ function getDealerOrdersItems(order_id){
 		                	}
 		                 $('#orderListModal').modal('toggle');
 	                		$('#orderListModal').modal('show');
-		                 },
-		             error: function (e) { 
-		            	 $.unblockUI();
-							console.log(e);
-		             }
 				});
 	
 }
 function getDeliveredItemsHistory(order_id){
 // 	event.preventDefault();
-	
-		$.ajax({
-					type : "POST",
-					url : "getDeliveredItemsHistory.htm",
-					data :"order_id="+order_id,
-					 beforeSend : function() {
-			             $.blockUI({ message: 'Please wait' });
-			          },
-					success: function (response) {
-		                	 $.unblockUI();
-		                	 
+	var formData = new FormData();
+	formData.append('order_id', order_id);
+		$.fn.makeMultipartRequest('POST', 'getDeliveredItemsHistory', false,	formData, false, 'text', function(response) {
 		                 if(response != null ){
 		                	 var resJson=JSON.parse(response);
 		                	 displayHistory(resJson.itemsList);
 		                	}
 		                 $('#historyModal').modal('toggle');
 	                		$('#historyModal').modal('show');
-		                 },
-		             error: function (e) { 
-		            	 $.unblockUI();
-							console.log(e);
-		             }
 				});
 	
 }
