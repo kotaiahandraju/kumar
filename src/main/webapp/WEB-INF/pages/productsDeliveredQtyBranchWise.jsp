@@ -72,7 +72,7 @@ table#dependent_table tbody tr td:first-child::before {
                    			<div class="form-group">
                    				<label for="focusedinput" class="col-md-2 control-label" style="padding-top:8px;">Branch: </label>
                    				<div class="col-md-6">
-                   					<form:select path="branchId" class="form-control " >
+                   					<form:select path="branchId" class="form-control " onchange="getProductsList()">
 							    	<form:option value="all">All</form:option>
 							    	<form:options items="${branches_list}" itemValue="id" itemLabel="branchname"/>
 							    	</form:select>
@@ -80,13 +80,13 @@ table#dependent_table tbody tr td:first-child::before {
                    			</div>
                    		</div>
                    		</c:if>
-                   		<div class="col-md-2">
+                   		<!-- <div class="col-md-2">
                    			<div class="form-group">
                    				<div class=" ">
                    					<div class="btn btn-primary sub"   value="Search" onclick="getProductsList()">Submit</div>
 							    </div>
                    			</div>
-                   		</div>
+                   		</div> -->
                    		</div>
                    		
                     		
@@ -184,12 +184,19 @@ function createTableHeader(branch_map){
 		var tempStr = '<th colspan="4" align="center" style="">'+value+'</th>';
 		tableHead += tempStr;
 	});
-	tableHead += '<th colspan="4"  style="max-width:80px; min-width:80px;">Overall Orders</th></tr><tr><th align="center">Category</th><th align="center">Subcategory</th><th align="center">Item Code</th>'; 
+	var selected_val = $("#branchId").val();
+	if(selected_val=="all"){
+		tableHead += '<th colspan="4"  style="max-width:80px; min-width:80px;">Overall Orders</th>';
+	}
+	tableHead += '</tr><tr><th align="center">Category</th><th align="center">Subcategory</th><th align="center">Item Code</th>'; 
 	$.each(branch_map,function(key, value) {
 		var tempStr = '<th align="center"  style="max-width:80px; min-width:80px;">Ordered</th><th  style="max-width:90px; min-width:90px;">Delivered</th><th  style="max-width:80px; min-width:80px;">Nullified</th><th  style="max-width:80px; min-width:80px;">Pending</th>';
 		tableHead += tempStr;
 	});
-	tableHead += '<th align="center" style="max-width:80px; min-width:80px;">Ordered</th><th  style="max-width:90px; min-width:90px;">Delivered</th><th  style="max-width:80px; min-width:80px;">Nullified</th><th  style="max-width:100px; min-width:100px;">Pending</th></tr></thead><tbody></tbody></table>';
+	if(selected_val=="all"){
+		tableHead += '<th align="center" style="max-width:80px; min-width:80px;">Ordered</th><th  style="max-width:90px; min-width:90px;">Delivered</th><th  style="max-width:80px; min-width:80px;">Nullified</th><th  style="max-width:100px; min-width:100px;">Pending</th>';
+	}
+	tableHead += '</tr></thead><tbody></tbody></table>';
 	$("#tableId").html(tableHead);
 	//if(isClick=='Yes') $('.datatables').dataTable();
 }
@@ -212,7 +219,11 @@ $("#tableId").html(tableHead); */
 			var temp_td = "<td title='"+key2+"'>" + value2.split(",")[0] + "</td><td title='"+key2+"'>" + value2.split(",")[1] + "</td><td title='"+key2+"'>" + value2.split(",")[2] + "</td><td title='"+key2+"'>" + pending_qty + "</td>";
 			tblRow += temp_td;
 		});
-		tblRow += "<td>" + total_ordered + "</td><td>" + total_delivered + "</td><td>" + total_nullified + "</td><td>" + total_pending + "</td></tr>";
+		var selected_val = $("#branchId").val();
+		if(selected_val=="all"){
+			tblRow += "<td>" + total_ordered + "</td><td>" + total_delivered + "</td><td>" + total_nullified + "</td><td>" + total_pending + "</td>";
+		}
+		tblRow += "</tr>";
 		
 		$(tblRow).appendTo("#tableId table tbody");
 	});
@@ -537,6 +548,13 @@ function getProductsList(){
          }
 	}); */
 }
-
+/* $(function(){
+	var oTable = $('#example').dataTable( {
+		"sScrollX": "100%",
+		"sScrollXInner": "100%",
+		"bScrollCollapse": true
+	} );
+	new $.fn.dataTable.FixedColumns( oTable );
+} ); */
 $(".dashboard").addClass("active");
 </script>

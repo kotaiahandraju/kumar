@@ -106,7 +106,6 @@ table#dependent_table tbody tr td:first-child::before {
                     				<label for="focusedinput" class="col-md-6 control-label">Delivery Status : </label>
                     				<div class="col-md-6">
                     					<form:select path="status" class="form-control " onchange="orederLists();">
-                    					<form:option value="">--- Select Status ---</form:option>
 								    	<form:option value="all">All</form:option>
 								    	<form:option value="pending">Pending</form:option>
 								    	<form:option value="partially">Partially delivered</form:option>
@@ -271,58 +270,31 @@ function showTableData(response){
 	if(isClick=='Yes') $('.datatables').dataTable();
 }
 function getDealerOrdersItems(order_id){
-	//event.preventDefault();
-	
-		$.ajax({
-					type : "POST",
-					url : "getItemsOfOrder.htm",
-					data :"order_id="+order_id,
-					 beforeSend : function() {
-			             $.blockUI({ message: 'Please wait' });displayDealerOrderItems
-			             
-			             
-			          },
-					success: function (response) {
-		                	 $.unblockUI();
-		                	 
+	var formData = new FormData();
+	formData.append('order_id', order_id);
+	$.fn.makeMultipartRequest('POST', 'getItemsOfOrder', false,	formData, false, 'text', function(response) {
 		                 if(response != null ){
 		                	 var resJson=JSON.parse(response);
 		                	 displayDealerOrderItems(resJson.itemsList);
 		                	}
 		                 $('#orderListModal').modal('toggle');
 	                		$('#orderListModal').modal('show');
-		                 },
-		             error: function (e) { 
-		            	 $.unblockUI();
-							console.log(e);
-		             }
+		              
 				});
 	
 }
 function getDeliveredItemsHistory(order_id){
 	//event.preventDefault();
-	
-		$.ajax({
-					type : "POST",
-					url : "getDeliveredItemsHistory.htm",
-					data :"order_id="+order_id,
-					 beforeSend : function() {
-			             $.blockUI({ message: 'Please wait' });
-			          },
-					success: function (response) {
-		                	 $.unblockUI();
-		                	 
+	var formData = new FormData();
+	formData.append('order_id', order_id);
+		$.fn.makeMultipartRequest('POST', 'getDeliveredItemsHistory', false,	formData, false, 'text', function(response) {
+					
 		                 if(response != null ){
 		                	 var resJson=JSON.parse(response);
 		                	 displayHistory(resJson.itemsList);
 		                	}
 		                 $('#historyModal').modal('toggle');
 	                		$('#historyModal').modal('show');
-		                 },
-		             error: function (e) { 
-		            	 $.unblockUI();
-							console.log(e);
-		             }
 				});
 	
 }
