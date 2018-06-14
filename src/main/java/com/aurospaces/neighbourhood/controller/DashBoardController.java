@@ -13,14 +13,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.aurospaces.neighbourhood.bean.ddd;
-import com.aurospaces.neighbourhood.db.dao.AddGasDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SuppressWarnings("unused")
 @Controller
 @RequestMapping(value="admin")
 public class DashBoardController {
-	@Autowired AddGasDao addGasDao;
 	private Logger logger = Logger.getLogger(DashBoardController.class);
 	@RequestMapping(value = "/dashboard")
 	public String fillingStationHome( ModelMap model, HttpServletRequest request,

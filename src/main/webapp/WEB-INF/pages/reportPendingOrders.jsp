@@ -80,13 +80,20 @@ padding-top:8px;
 							    </div>
                    			</div>
                    		</div>
+                   		<div class="col-md-3">
+                   			<div class="form-group">
+                   				<label for="focusedinput" class="col-md-3 control-label">To Date: </label>
+                   				<div class="col-md-6">
+                   					<input type="text" id="to_date" value=""  readonly="readonly"/>
+							    </div>
+                   			</div>
+                   		</div>
                    		<c:if test="${cacheUserBean.roleId == '1'}">
                    		<div class="col-md-4">
                    			<div class="form-group">
                    				<label for="focusedinput" class="col-md-3 control-label">Branch : </label>
                    				<div class="col-md-5">
                    					<form:select path="branchId" class="form-control validate" >
-                   					<form:option value="">--- Select Branch ---</form:option>
 							    	<form:option value="all">All</form:option>
 							    	<form:options items="${branches_list}" itemValue="id" itemLabel="branchname"/>
 							    	</form:select>
@@ -97,7 +104,7 @@ padding-top:8px;
                    		<div class="col-md-2">
                    			<div class="form-group">
                    				<div class="">
-                   					<div class="btn btn-primary sub"   value="Search" onclick="getOrdersList('all')">Search</div>
+                   					<div class="btn btn-primary sub"   value="Search" onclick="getOrdersList()">Search</div>
 <!--                    					<input class="btn btn-primary sub"   value="Search" onclick="getOrdersList()" /> -->
 							    </div>
                    			</div>

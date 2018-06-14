@@ -371,14 +371,22 @@ public class OrderPlacementController {
 		String sJson = null;
 		try {
 			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			
+			if(objuserBean.getRoleId().equalsIgnoreCase("1")){
+				String sSql = "select id ,branchname from kumar_branch where status='1'";
+				List<BranchBean> list = branchDao.populate(sSql);
+				request.setAttribute("branches_list", list);
+			}else if(objuserBean.getRoleId().equalsIgnoreCase("2")){ // branch manager
+			}
+			
+			
 			String role_id = objuserBean.getRoleId();
 			
-			long total_orders=0l, total_delivered=0l, total_nullified=0l, total_pending=0l;
 			Map<String,Map<String,Object>> prod_map = new HashMap<String,Map<String,Object>>();
 			Map<String,String> branches_map = new HashMap<String,String>();
 			if(objuserBean != null){
 				if(role_id.equalsIgnoreCase("1")){ // means Admin
-					branch_prod_list = listDao.getProductsDeliveredQtyBranchWise();
+					branch_prod_list = listDao.getProductsDeliveredQtyOfBranch(request.getParameter("branch_id"));
 				}else if(role_id.equalsIgnoreCase("2")){ //means branch Manager
 					branch_prod_list = listDao.getProductsDeliveredQtyOfBranch(objuserBean.getBranchId());
 				}
@@ -405,10 +413,11 @@ public class OrderPlacementController {
 				
 				List<Map<String, Object>> ordered_list = null ;
 				if(role_id.equalsIgnoreCase("1")){ // means Admin
-					ordered_list = listDao.getProductsOrderedQtyBranchWise();
+					ordered_list = listDao.getProductsOrderedQtyOfBranch(request.getParameter("branch_id"));
 				}else if(role_id.equalsIgnoreCase("2")){ //means branch Manager
 					ordered_list = listDao.getProductsOrderedQtyOfBranch(objuserBean.getBranchId());
 				}
+				
 				for(Map<String, Object> row:ordered_list){
 					if(!branches_map.containsKey((String)row.get("branch_name"))){
 						branches_map.put((String)row.get("branch_name"), (String)row.get("branch_name"));
@@ -432,6 +441,7 @@ public class OrderPlacementController {
 						//total_orders += ((Double)row.get("ordered")).longValue();
 					}
 				}
+				
 				Collection<Map<String,Object>> branch_maps = prod_map.values();
 				Iterator<Map<String,Object>> iter = branch_maps.iterator();
 				while(iter.hasNext()){
@@ -452,14 +462,6 @@ public class OrderPlacementController {
 					Map<String, Object> sortedValue = new TreeMap<String, Object>(value);
 					prod_map.put(key, sortedValue);
 				}
-				/*Map<String,Object> branch = new HashMap<String,Object>();
-				branch.put("vijayawada", "30,10");
-				branch.put("guntur", "10,0");
-				
-				
-				Map<String,Object> branch2 = new HashMap<String,Object>();
-				branch2.put("guntur", "100,0");
-				branch2.put("vijayawada", "300,10");*/
 				
 				Map<String, String> sortedBranches = new TreeMap<String, String>(branches_map);
 				objectMapper = new ObjectMapper();
@@ -507,7 +509,7 @@ public class OrderPlacementController {
 				if(role_id.equalsIgnoreCase("1")){ // means Admin
 					branch_prod_list = listDao.getProductsDeliveredQtyBranchWise();
 				}else if(role_id.equalsIgnoreCase("2")){ //means branch Manager
-					branch_prod_list = listDao.getProductsDeliveredQtyDealerWise(objuserBean.getBranchId());
+					branch_prod_list = listDao.getProductsDeliveredQtyDealerWise(objuserBean.getBranchId(),request.getParameter("dealer_id"));
 				}
 				
 				for(Map<String, Object> row:branch_prod_list){
@@ -534,7 +536,7 @@ public class OrderPlacementController {
 				if(role_id.equalsIgnoreCase("1")){ // means Admin
 					ordered_list = listDao.getProductsOrderedQtyBranchWise();
 				}else if(role_id.equalsIgnoreCase("2")){ //means branch Manager
-					ordered_list = listDao.getProductsOrderedQtyDealerWise(objuserBean.getBranchId());
+					ordered_list = listDao.getProductsOrderedQtyDealerWise(objuserBean.getBranchId(),request.getParameter("dealer_id"));
 				}
 				for(Map<String, Object> row:ordered_list){
 					if(!branches_map.containsKey((String)row.get("dealer_name"))){
@@ -579,15 +581,6 @@ public class OrderPlacementController {
 					Map<String, Object> sortedValue = new TreeMap<String, Object>(value);
 					prod_map.put(key, sortedValue);
 				}
-				/*Map<String,Object> branch = new HashMap<String,Object>();
-				branch.put("vijayawada", "30,10");
-				branch.put("guntur", "10,0");
-				
-				
-				Map<String,Object> branch2 = new HashMap<String,Object>();
-				branch2.put("guntur", "100,0");
-				branch2.put("vijayawada", "300,10");*/
-				
 				Map<String, String> sortedBranches = new TreeMap<String, String>(branches_map);
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(sortedBranches);
@@ -628,9 +621,21 @@ public class OrderPlacementController {
 				String sSql = "select id ,branchname from kumar_branch where status='1'";
 				List<BranchBean> list = branchDao.populate(sSql);
 				request.setAttribute("branches_list", list);
+				
+				all_orders = listDao.getAllOrders("","","");
+				
+			}else if(objuserBean.getRoleId().equalsIgnoreCase("2")){ // branch manager
+				all_orders = listDao.getAllOrders("","",objuserBean.getBranchId());
+			}
+			if (all_orders != null && all_orders.size() > 0) {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(all_orders);
+				request.setAttribute("all_orders", sJson);
+			} else {
+				request.setAttribute("all_orders", "''");
 			}
 			request.setAttribute("list_type", "all");
-			request.setAttribute("all_orders", "''");
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -658,6 +663,8 @@ public class OrderPlacementController {
 					all_orders = listDao.getAllOrders(from_date,to_date,branch_id,"completed");
 				}else if(list_type.equalsIgnoreCase("pending")){
 					all_orders = listDao.getAllOrders(from_date,to_date,branch_id,"pending");
+				}else if(list_type.equalsIgnoreCase("partially")){
+					all_orders = listDao.getAllOrders(from_date,to_date,branch_id,"partially");
 				}
 			}
 			
@@ -680,15 +687,60 @@ public class OrderPlacementController {
 		String sJson = null;
 		List<Map<String,Object>> all_orders = null;
 		try{
-			String sSql = "select id ,branchname from kumar_branch where status='1'";
-			List<BranchBean> list = branchDao.populate(sSql);
-			request.setAttribute("branches_list", list);
+			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			if(objuserBean.getRoleId().equalsIgnoreCase("1")){
+				String sSql = "select id ,branchname from kumar_branch where status='1'";
+				List<BranchBean> list = branchDao.populate(sSql);
+				request.setAttribute("branches_list", list);
+				
+				all_orders = listDao.getAllOrders("","","","pending");
+				
+			}else if(objuserBean.getRoleId().equalsIgnoreCase("2")){ // branch manager
+				all_orders = listDao.getAllOrders("","",objuserBean.getBranchId(),"pending");
+			}
+			if (all_orders != null && all_orders.size() > 0) {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(all_orders);
+				request.setAttribute("all_orders", sJson);
+			} else {
+				request.setAttribute("all_orders", "''");
+			}
 			request.setAttribute("list_type", "pending");
-			request.setAttribute("all_orders", "''");
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		return "reportPendingOrders";
+		
+	}
+	@RequestMapping(value="/reportPartiallyDeliveredOrders")
+	public String reportPartiallyDeliveredOrders(@ModelAttribute("orderLstForm") EmployeeBean employeeBean,HttpServletRequest request,HttpSession session){
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		List<Map<String,Object>> all_orders = null;
+		try{
+			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			if(objuserBean.getRoleId().equalsIgnoreCase("1")){
+				String sSql = "select id ,branchname from kumar_branch where status='1'";
+				List<BranchBean> list = branchDao.populate(sSql);
+				request.setAttribute("branches_list", list);
+				
+				all_orders = listDao.getAllOrders("","","","partially");
+				
+			}else if(objuserBean.getRoleId().equalsIgnoreCase("2")){ // branch manager
+				all_orders = listDao.getAllOrders("","",objuserBean.getBranchId(),"partially");
+			}
+			if (all_orders != null && all_orders.size() > 0) {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(all_orders);
+				request.setAttribute("all_orders", sJson);
+			} else {
+				request.setAttribute("all_orders", "''");
+			}
+			request.setAttribute("list_type", "partially");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "reportAllOrders";
 		
 	}
 	@RequestMapping(value="/reportDeliveredOrders")
@@ -697,11 +749,25 @@ public class OrderPlacementController {
 		String sJson = null;
 		List<Map<String,Object>> all_orders = null;
 		try{
-			String sSql = "select id ,branchname from kumar_branch where status='1'";
-			List<BranchBean> list = branchDao.populate(sSql);
-			request.setAttribute("branches_list", list);
+			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
+			if(objuserBean.getRoleId().equalsIgnoreCase("1")){
+				String sSql = "select id ,branchname from kumar_branch where status='1'";
+				List<BranchBean> list = branchDao.populate(sSql);
+				request.setAttribute("branches_list", list);
+				
+				all_orders = listDao.getAllOrders("","","","completed");
+				
+			}else if(objuserBean.getRoleId().equalsIgnoreCase("2")){ // branch manager
+				all_orders = listDao.getAllOrders("","",objuserBean.getBranchId(),"completed");
+			}
+			if (all_orders != null && all_orders.size() > 0) {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(all_orders);
+				request.setAttribute("all_orders", sJson);
+			} else {
+				request.setAttribute("all_orders", "''");
+			}
 			request.setAttribute("list_type", "delivered");
-			request.setAttribute("all_orders", "''");
 		}catch(Exception e){
 			e.printStackTrace();
 		}
