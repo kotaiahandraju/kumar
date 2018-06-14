@@ -537,6 +537,13 @@ function getProductsList(){
          }
 	}); */
 }
-
+/* $(function(){
+	var oTable = $('#example').dataTable( {
+		"sScrollX": "100%",
+		"sScrollXInner": "100%",
+		"bScrollCollapse": true
+	} );
+	new $.fn.dataTable.FixedColumns( oTable );
+} ); */
 $(".dashboard").addClass("active");
 </script>

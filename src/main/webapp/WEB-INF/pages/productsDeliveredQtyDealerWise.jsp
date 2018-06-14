@@ -497,6 +497,10 @@ function saveDeliverableItemsData(objId){
          }
 	});
 }
+
+
+
+
 function getProductsList(){
 	var dealer_id = $("#name").val();
 	$("#products_summary_form").attr("action","getProductsDeliveredQtyDealerWise.htm?dealer_id="+dealer_id);
