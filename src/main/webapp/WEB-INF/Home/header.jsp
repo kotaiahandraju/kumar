@@ -407,7 +407,7 @@ function cartCount(){
               <li class="productName"><a href="${baseurl }/admin/productName"><i class="fa fa-bookmark"></i> <span>Product Subcategory</span></a></li>&emsp;
               <li class="items"><a href="${baseurl }/admin/items"><i class="fa fa-list-alt"></i><span>Product List</span></a></li>&emsp;
               <li class="employee"><a href="${baseurl }/admin/employeeCreation"><i class="fa fa-users"></i> <span>Employees</span></a></li>
-              <li class=" allOrders1">
+              <li class=" ">
             		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Reports</span> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 					 <li class="allOrders"><a href="${baseurl }/admin/reportAllOrdersPage"><i class="fa fa-clone" aria-hidden="true"></i><span>All Orders</span></a></li>
