@@ -145,7 +145,8 @@ font-size:28px;
 						</table>
 					</div>
 									
-						<div align="center"><button onclick="printInvoice()" id="printbtn" class="btn btn-primary">Print</button>		
+						<div align="center"><button onclick="printInvoice()" id="printbtn" class="btn btn-primary">Print</button>
+						<button onclick="cancelPrint()" id="cancelbtn" class="btn btn-primary">Cancel</button>		
 							</div>	
         			</div>
         			
@@ -388,6 +389,7 @@ function printInvoice() {
       $("#printbtn").hide();
       $("#pbreadcrumb").hide();
       $("#pageName").hide();
+      $("#cancelbtn").hide();
       
       
       
@@ -400,9 +402,11 @@ function printInvoice() {
     newWindow.document.write(document.getElementById("invoicediv").innerHTML);
     newWindow.print(); */ 
 $("#pageName").text("Invoice");
+}F
+
+function cancelPrint() {
+	window.location.href="orderplacing";
 }
-
-
 
 
 

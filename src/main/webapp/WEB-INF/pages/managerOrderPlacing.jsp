@@ -142,9 +142,11 @@ table#dependent_table tbody tr td:first-child::before {
  <script type='text/javascript'>
     //<![CDATA[
       $(document).ready(function() {
-        $('.filter').multifilter()
+        $('.filter').multifilter();
+        managercartCount();
       })
     //]]>
+    
   </script>
 <script type="text/javascript">
 var listOrders1 =${allOrders1};

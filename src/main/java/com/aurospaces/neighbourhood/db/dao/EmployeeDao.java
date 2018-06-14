@@ -448,6 +448,19 @@ public Boolean UsernameExistsOrNotOnEdit(String username, String editFields) {
 			 return false;
 }
 
+public EmployeeBean getMobileNo(String empid) {
+	System.out.println("empid==="+empid);
+	jdbcTemplate = custom.getJdbcTemplate();
+	String sql = "select phone_number,name,branch_id from kumar_employee where id =?";
+	List<EmployeeBean> retlist = jdbcTemplate.query(sql,
+	new Object[]{empid},
+	ParameterizedBeanPropertyRowMapper.newInstance(EmployeeBean.class));
+	System.out.println("retlist==="+retlist.size());
+	if(retlist.size() > 0)
+		return retlist.get(0);
+	return null;
+}
+
 
  
 }

@@ -136,10 +136,9 @@ font-weight:600;
 				<div class="container-fluid " id="invoicediv">
         			<div class="col-md-12">
         			<div class="col-md-4"></div>
-        			        			<div class="col-md-3"><img height="100px" src="../img/klogo.png"/>
-        			        			</div>
+        			        			
         				<div class="col-md-5">
-				<h1 class="invo">Invoice</h1>
+				<h1 class="invo">Order Confirmed</h1>
 							</div>
 							<div class="clearfix"></div>
 								 <div class="form-group">
@@ -165,7 +164,8 @@ font-weight:600;
 						</table>
 					</div>
 									
-						<div align="center"><button onclick="printInvoice('#invoicediv')" id="printbtn" class="btn btn-primary">Print</button>					
+						<div align="center"><button onclick="printInvoice('#invoicediv')" id="printbtn" class="btn btn-primary">Print</button>
+						<button onclick="cancelPrint()" id="cancelbtn" class="btn btn-primary">Cancel</button>						
 								
         			</div>
         					</div>	
@@ -461,7 +461,9 @@ $(document).ready(function(){
 function printInvoice(elem)
 {
 	$(".noPrint").hide();
-	$(".printbtn").hide();
+	$("#printbtn").hide();
+    $("#cancelbtn").hide();
+
 	 $("#printFooter").show();
     Popup($(elem).html());
     
@@ -482,7 +484,8 @@ function Popup(data)
 
 $(".printbtn").show();
 $(".noPrint").show();
-$("#printFooter").hide();
+$("#printbtn").show();
+$("#cancelbtn").show();
     if (is_chrome) {
         mywindow.onload = function() { // wait until all resources loaded 
             mywindow.focus(); // necessary for IE >= 10
@@ -498,8 +501,7 @@ $("#printFooter").hide();
         mywindow.print();
         mywindow.close();
    }
-	
-	
+    
 	
    /* var mywindow = window.open('', 'new div');
     mywindow.document.write('<html><head><title>Donor Details</title></head><body>');
@@ -510,36 +512,9 @@ $("#printFooter").hide();
     $(".printbtn").show();*/
     return true;
 }
-
-
-//function printInvoice()
-//{
- //  var divToPrint=document.getElementById("invoicediv");
-   //newWin= window.open("");
-   //newWin.document.write('<link rel="stylesheet" type="text/css" href="../assets/css/img.css">');
-   //newWin.document.write(divToPrint.outerHTML);
-   //newWin.print();
-   //newWin.close();
-  // $("#printbtn").hide();
-//}
-// function printInvoice() {
-//     //window.print();
-//       $("#printbtn").hide();
-//       $("#pbreadcrumb").hide();
-//       $("#pageName").hide();
-//       $("#hideForInvoice").hide();
-      
-      
-      
-
-    
-//       window.print();
-//       $("#printbtn").show();
-// 	/* var newWindow = window.open();
-//     newWindow.document.write(document.getElementById("invoicediv").innerHTML);
-//     newWindow.print(); */ 
-// }
-
+function cancelPrint() {
+	window.location.href="managerorderplace";
+}
 var cartDealerId = $("#delerId").val(); 
 $('#cartTag').attr('href','managerorderplace?dealerId='+cartDealerId);
 

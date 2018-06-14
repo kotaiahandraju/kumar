@@ -1,11 +1,15 @@
 package com.aurospaces.neighbourhood.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
@@ -39,6 +43,7 @@ import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.OrdersListDao;
 import com.aurospaces.neighbourhood.db.dao.ProductnameDao;
 import com.aurospaces.neighbourhood.util.KumarUtil;
+import com.aurospaces.neighbourhood.util.SendSMS;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import CommonUtils.CommonUtils;
@@ -83,7 +88,9 @@ public class OrderPlacementController {
 	@RequestMapping(value="/dealerorderproducts")
 	public @ResponseBody String dealerorderproducts(OrdersListBean orderslistbean,ModelMap model,HttpServletRequest request,RedirectAttributes redir,HttpSession session){
 		JSONArray jsonArray = new JSONArray();
-		
+		InputStream input = null;
+		String body = null;
+		 Properties prop = new Properties();
 		
 		try{
 			if(StringUtils.isNotBlank(orderslistbean.getProductId())){
@@ -128,6 +135,8 @@ public class OrderPlacementController {
 					System.out.println(String.format("%4s", branchCount).replace(' ', '0'));
 					orderslistbean.setOrderId(branchCode+"/"+CommonUtils.getYear()+""+year+"/"+CommonUtils.getMonth()+"/"+String.format("%4s", branchCount).replace(' ', '0'));
 					ordersListDao.save(orderslistbean);
+					
+						}
 					jsonObj1.put("invoiceId", orderslistbean.getInvoiceId());
 					jsonObj1.put("orderId", orderslistbean.getOrderId());
 					
@@ -138,12 +147,47 @@ public class OrderPlacementController {
 					jsonArray.put(jsonObj1);
 					jsonArray.put(jsonObj2);
 				}
+			
+			
+			String propertiespath = objContext.getRealPath("Resources" +File.separator+"DataBase.properties");
+			//String propertiespath = "C:\\PRO\\Database.properties";
+	
+			input = new FileInputStream(propertiespath);
+			// load a properties file
+			prop.load(input);
+			 EmployeeBean objDealerMobileNo=null;
+				EmployeeBean objMobileNo=employeeDao.getMobileNo(objuserBean.getEmpId());
+				String mobileNo=objMobileNo.getPhoneNumber();
+				 System.out.println("----branch mobile :"+mobileNo);
+				String msg = prop.getProperty("smsForManager");
+				msg =msg.replace("_invoice_",orderslistbean.getOrderId());
+				if(StringUtils.isNotBlank(mobileNo)){
+					// delar send sms
+				SendSMS.sendSMS(msg,mobileNo, objContext);
+				
+				}
+				 String roleId=objuserBean.getRoleId();
+				 System.out.println("roleId=="+roleId+"----objMobileNo.getBranchId()---"+objMobileNo.getBranchId());
+				 if(roleId.equals("3")) {
+					 System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
+					 objDealerMobileNo= employeeDao.getBranchHeadBean(objMobileNo.getBranchId());
+				 }else {
+					  objDealerMobileNo=employeeDao.getMobileNo(orderslistbean.getDelerId());
+				 }
+				
+				
+				String dealerMobile=objDealerMobileNo.getPhoneNumber();
+				System.out.println("dealer Id "+dealerMobile);
+					String msg1 = prop.getProperty("smsForDealer");
+					msg1 =msg1.replace("_invoice_",orderslistbean.getOrderId());
+					SendSMS.sendSMS(msg1,dealerMobile, objContext);
+
 				if(StringUtils.isEmpty(orderslistbean.getDelerId())) {
 				 cartDao.deleteByUserId(Integer.parseInt(objuserBean.getEmpId()));
 				}else {
 					cartDao.deleteByUserId(Integer.parseInt(orderslistbean.getDelerId()));
 				}
-			}
+			
 			}
 			
 		}catch(Exception e){
