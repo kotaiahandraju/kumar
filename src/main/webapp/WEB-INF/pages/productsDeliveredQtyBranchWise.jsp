@@ -72,7 +72,7 @@ table#dependent_table tbody tr td:first-child::before {
                    			<div class="form-group">
                    				<label for="focusedinput" class="col-md-2 control-label" style="padding-top:8px;">Branch: </label>
                    				<div class="col-md-6">
-                   					<form:select path="branchId" class="form-control " >
+                   					<form:select path="branchId" class="form-control " onchange="getProductsList()">
 							    	<form:option value="all">All</form:option>
 							    	<form:options items="${branches_list}" itemValue="id" itemLabel="branchname"/>
 							    	</form:select>
@@ -80,13 +80,13 @@ table#dependent_table tbody tr td:first-child::before {
                    			</div>
                    		</div>
                    		</c:if>
-                   		<div class="col-md-2">
+                   		<!-- <div class="col-md-2">
                    			<div class="form-group">
                    				<div class=" ">
                    					<div class="btn btn-primary sub"   value="Search" onclick="getProductsList()">Submit</div>
 							    </div>
                    			</div>
-                   		</div>
+                   		</div> -->
                    		</div>
                    		
                     		
@@ -548,6 +548,13 @@ function getProductsList(){
          }
 	}); */
 }
-
+/* $(function(){
+	var oTable = $('#example').dataTable( {
+		"sScrollX": "100%",
+		"sScrollXInner": "100%",
+		"bScrollCollapse": true
+	} );
+	new $.fn.dataTable.FixedColumns( oTable );
+} ); */
 $(".dashboard").addClass("active");
 </script>
