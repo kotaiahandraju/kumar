@@ -81,6 +81,7 @@ function topFunction() {
 <script type='text/javascript' src='${baseurl }/assets/plugins/charts-morrisjs/morris.min.js'></script> 
 <script type='text/javascript' src='${baseurl }/assets/demo/demo-morrisjs.js'></script> 
 <script type='text/javascript' src='${baseurl }/js/customValidation.js'></script> 
+<script type='text/javascript' src='${baseurl }/js/dataTables.fixedColumns.js'></script> 
 
 <%-- <script type='text/javascript' src='${baseurl }/assets/plugins/datatables/dataTables.fixedColumns.min.js'> </script> --%>
 <script type='text/javascript' src="${baseurl }/js/select2.min.js" ></script>
