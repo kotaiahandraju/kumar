@@ -72,7 +72,7 @@ table#dependent_table tbody tr td:first-child::before {
                    			<div class="form-group">
                    				<label for="focusedinput" class="col-md-6 control-label">Dealer : </label>
                    				<div class="col-md-6">
-                   					<form:select path="name" class="form-control ">
+                   					<form:select path="name" class="form-control " onchange="getProductsList()">
 							    	<form:option value="all">All</form:option>
 							    	<form:options items="${dealersList }"></form:options>
 							    	</form:select>
@@ -80,13 +80,13 @@ table#dependent_table tbody tr td:first-child::before {
                    			</div>
                    		</div>
                    		</c:if>
-                   		<div class="col-md-2">
+                   		<!-- <div class="col-md-2">
                    			<div class="form-group">
                    				<div class=" ">
                    					<div class="btn btn-primary sub"   value="Search" onclick="getProductsList()">Submit</div>
 							    </div>
                    			</div>
-                   		</div>
+                   		</div> -->
                    		</div>
                    		
                     		
