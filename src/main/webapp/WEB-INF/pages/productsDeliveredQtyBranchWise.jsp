@@ -50,9 +50,7 @@ table#dependent_table tbody tr td:first-child::before {
 
 </style>
         <div class="clearfix"></div>
-             <ol class="breadcrumb">
-              <li>Dashboard</li>
-            </ol>
+            
             <div class="clearfix"></div>
         <div class="container-fluid" id="lpoMain">
         
@@ -178,7 +176,7 @@ function createTableHeader(branch_map){
 	var table=$('#tableId').html('');
 	
 	
-	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
+	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatable datatables" id="example">'+
 	'<thead><tr style="background:#4e8ede; color:#fff;"><th colspan="3">Product</th>';
 	$.each(branch_map,function(key, value) {
 		var tempStr = '<th colspan="4" align="center" style="">'+value+'</th>';
