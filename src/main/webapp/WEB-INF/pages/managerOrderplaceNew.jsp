@@ -12,6 +12,50 @@
  <script src="${baseurl }/tablesearch/multifilter.js"></script>
 <link rel="stylesheet" href="${baseurl }/tablesearch/style.css" />
  <style>
+ .mobile {
+ margin-bottom:5px;
+ width:100px;}
+ .accordion0 {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 5px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 13px;
+    transition: 0.4s;
+    margin-bottom:5px;
+}
+
+.active, .accordion0:hover {
+    background-color: #ccc;
+}
+
+.accordion0:after {
+    content: '\002B';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+.active:after {
+    content: "\2212";
+}
+
+.panel0 {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    margin-bottom:10px;
+    margin-top:5px;
+}
+ 
+ 
  .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td
  {
  border: 0px solid black !important;
@@ -96,7 +140,7 @@ table#dependent_table tbody tr td:first-child::before {
 					</div>
 					<div class="panel-body collapse in">
 					<!-- <div class="table-responsive" id="tableId"> -->
-					<div class="accordion" id="accordionEx" role="tablist" aria-multiselectable="true">
+					<div id="accordionEx" >
 					
 						
 					</div>
@@ -180,7 +224,10 @@ function showTableData(sub_category_map){
 		var prod_name = key.split("##")[0];
 		var prod_id_name = key.split("##")[1];
 		
-		var subcategory_div = '<div class="card">'
+		var subcategory_div = '<button class="accordion0">'+prod_id_name+'</button><div class="panel0">';
+			
+			
+			/* '<div class="card">'
 							+ '	<div class="card-header" role="tab" id="heading'+prod_name+'"> '
 							+ '		<a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapse'+prod_name+'" aria-expanded="false" aria-controls="collapse'+prod_name+'">'
 							+ '			<h5 class="mb-0">'
@@ -189,16 +236,18 @@ function showTableData(sub_category_map){
 							+ '		</a>'
 							+ '	</div>'
 							+ '	<div id="collapse'+prod_name+'" class="collapse" role="tabpanel" aria-labelledby="heading'+prod_name+'" data-parent="#accordionEx">'
-							+ '		<div class="card-body">';
+							+ '		<div class="card-body">'; */
 		var val_map = value;
 		$.each(val_map,function(key2,value2) {
-			subcategory_div		+='			<div class="col-md-4">'+key2+'</div><div class="col-md-4">'+value2+'</div></br>';
+			var itemcode = key2.split("##")[0];
+			var id = key2.split("##")[1];
+			var quantity ="<input type='text' name='quantity[]' maxlength='4' class='mobile' id='"+id+"quantity' />"
+			subcategory_div		+='	<div class="col-md-4">'+itemcode+'</div><div class="col-md-6">'+value2+'</div><div class="col-md-2">'+quantity+'</div></br>';
 		});	       
 		
 
-		subcategory_div		+=  '		</div>'
-							+ '	</div>'
-							+'</div>';
+		subcategory_div		+=   '	</div>';
+						
 		$(subcategory_div).appendTo("#accordionEx");
 		
 	});
@@ -315,7 +364,20 @@ function managercartCount(){
 	});
 }
 
+var acc = document.getElementsByClassName("accordion0");
+var i;
 
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight){
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
 
 $("#pageName").text("Order Product");
 $(".orderplacing").addClass("active"); 

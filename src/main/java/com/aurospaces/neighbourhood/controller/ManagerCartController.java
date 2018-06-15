@@ -77,9 +77,10 @@ public class ManagerCartController {
 				if(sub_category_map.containsKey(key)){
 					Map<String,Object> val_map = sub_category_map.get(key);
 					val_map.put(item.getItemcode(),item.getItemdescrption());
+					
 				}else{
 					Map<String,Object> val_map = new HashMap<String,Object>();
-					val_map.put(item.getItemcode(),item.getItemdescrption());
+					val_map.put(item.getItemcode()+"##"+item.getId(),item.getItemdescrption());
 					sub_category_map.put(key, val_map);
 				}
 			}
