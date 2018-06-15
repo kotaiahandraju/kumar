@@ -19,12 +19,18 @@ protected String productname ;
 protected String productTypeName ;
 protected String productIdName ;
 protected String subcategory;
-protected String branchId;
+protected String branchId,itemprice;
 
 
 
 
 
+public String getItemprice() {
+	return itemprice;
+}
+public void setItemprice(String itemprice) {
+	this.itemprice = itemprice;
+}
 public String getBranchId() {
 	return branchId;
 }

@@ -74,6 +74,7 @@ table#dependent_table tbody tr td:first-child::before {
 									<th>Serial No</th>
 									<th>Item Code</th>
 									<th>Description</th>
+									<th>Price</th>
 									<th>Status</th>
 								</tr>
 							</thead>
@@ -154,6 +155,14 @@ table#dependent_table tbody tr td:first-child::before {
 											class="form-control validate" placeholder="Description" />
 									</div>
 								</div>
+								<div class="form-group">
+									<label for="focusedinput" class="col-md-4 control-label">Price<span
+										class="impColor">*</span></label>
+									<div class="col-md-7">
+										<form:input path="itemprice"
+											class="form-control validate" placeholder="Price" />
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -192,7 +201,7 @@ table#dependent_table tbody tr td:first-child::before {
 		serviceUnitArray = {};
 		var protectType = null;
 		var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'
-				+ '<thead><tr><th>Serial Number</th><th>Item Code</th><th>Description</th><th>Product Category</th><th>Product Subcategory</th><th>Status</th><th></th></tr>'
+				+ '<thead><tr><th>Serial Number</th><th>Item Code</th><th>Description</th><th>Product Category</th><th>Product Subcategory</th><th>Price</th><th>Status</th><th></th></tr>'
 				+ "</thead><tbody></tbody></table>";
 		$("#tableId").html(tableHead);
 		$.each(response, function(i, orderObj) {
@@ -217,6 +226,8 @@ table#dependent_table tbody tr td:first-child::before {
 					+ orderObj.productTypeName + "</td>"
 					+ "<td title='"+orderObj.productIdName+"'>"
 					+ orderObj.productIdName + "</td>"
+					+ "<td title='"+orderObj.itemprice+"'>"
+					+ orderObj.itemprice + "</td>"
 					+ "<td title='"+orderObj.itemsStatus+"'>"
 					+ orderObj.itemsStatus + "</td>"
 					+ "<td style='text-align: center;white-space: nowrap;'>"
@@ -241,6 +252,7 @@ table#dependent_table tbody tr td:first-child::before {
 		$("#serialno").val(serviceUnitArray[id].serialno);
 		$("#itemdescrption").val(serviceUnitArray[id].itemdescrption);
 		$("#itemsStatus").val(serviceUnitArray[id].itemsStatus);
+		$("#itemprice").val(serviceUnitArray[id].itemprice);
 		$("#status").val(serviceUnitArray[id].status);
 		$("#submit1").val("Update");
 		$(window).scrollTop($('#moveTo').offset().top);

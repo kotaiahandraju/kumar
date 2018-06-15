@@ -26,7 +26,7 @@ public class BaseItemsDao{
 	JdbcTemplate jdbcTemplate;
 
  
-	public final String INSERT_SQL = "INSERT INTO items( created_time, updated_time, productId,productname, serialno, itemcode, itemdescrption,status) values (?, ?, ?, ?, ?, ?,?,?)"; 
+	public final String INSERT_SQL = "INSERT INTO items( created_time, updated_time, productId,productname, serialno, itemcode, itemdescrption,itemprice,status) values (?,?, ?, ?, ?, ?, ?,?,?)"; 
 
 
 
@@ -68,7 +68,8 @@ ps.setString(4, items.getProductname());
 ps.setString(5, items.getSerialno());
 ps.setString(6, items.getItemcode());
 ps.setString(7, items.getItemdescrption());
-ps.setString(8, items.getStatus());
+ps.setString(8,items.getItemprice());
+ps.setString(9, items.getStatus());
 
 							return ps;
 						}
@@ -83,9 +84,9 @@ ps.setString(8, items.getStatus());
 		else
 		{
 
-			String sql = "UPDATE items  set productId = ? ,productname = ?,serialno = ? ,itemcode = ? ,itemdescrption = ?  where id = ? ";
+			String sql = "UPDATE items  set productId = ? ,productname = ?,serialno = ? ,itemcode = ? ,itemdescrption = ?,itemprice =?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{items.getProductId(),items.getProductname(),items.getSerialno(),items.getItemcode(),items.getItemdescrption(),items.getId()});
+			jdbcTemplate.update(sql, new Object[]{items.getProductId(),items.getProductname(),items.getSerialno(),items.getItemcode(),items.getItemdescrption(),items.getItemprice(),items.getId()});
 		}
 	}
 		

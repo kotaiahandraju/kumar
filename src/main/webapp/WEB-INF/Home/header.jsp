@@ -412,7 +412,7 @@ function cartCount(){
 					<ul class="dropdown-menu">
 					 <li class="allOrders"><a href="${baseurl }/admin/reportAllOrdersPage"><i class="fa fa-clone" aria-hidden="true"></i><span>All Orders</span></a></li>
                       <li class="pendingOrders"><a href="${baseurl }/admin/reportPendingOrders"><i class="fa fa-clone" aria-hidden="true"></i> <span>Pending Orders</span></a></li>
-                      <li class="pendingOrders"><a href="${baseurl }/admin/reportPartiallyDeliveredOrders"><i class="fa fa-clone" aria-hidden="true"></i> <span>Partially Delivered Orders</span></a></li>
+                      <li class="pendingOrders1"><a href="${baseurl }/admin/reportPartiallyDeliveredOrders"><i class="fa fa-clone" aria-hidden="true"></i> <span>Partially Delivered Orders</span></a></li>
                       <li class="deliveredOrders"><a href="${baseurl }/admin/reportDeliveredOrders"> <i class="fa fa-clone" aria-hidden="true"></i><span>Delivered Orders</span></a></li>
 					</ul>
 				</li>

@@ -181,7 +181,7 @@ table#dependent_table tbody tr td:first-child::before {
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		        <h4 class="modal-title" id="exampleModalLabel"><span id="dealer_name_str"></span></h4>
-		       <span class="col-md-2" style="width:9.5%"><b>Dealer Name :</b></span><span class="col-md-3" id="dname"></span> <span class="col-md-2" style="width:8%"><b>Order ID :</b></span> <span class="col-md-3" id="kumarid2"></span> <span class="col-md-2" style="width:8.8%"><b>Order Date :</b></span>  <span class="col-md-2" id="korderdDate2"></span><br>
+		       <span class="col-md-2" style="width:9.5%"><b>Dealer Name :</b></span><span class="col-md-3" id="dname1"></span> <span class="col-md-2" style="width:8%"><b>Order ID :</b></span> <span class="col-md-3" id="kumarid2"></span> <span class="col-md-2" style="width:8.8%"><b>Order Date :</b></span>  <span class="col-md-2" id="korderdDate2"></span><br>
 		      </div>
 		      <div class="modal-body" id="history_modal_body">
 		      
@@ -251,6 +251,7 @@ function showTableData(response){
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		
+		
 		orderedDate= orderObj.created_on;
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
@@ -295,6 +296,10 @@ function getDeliveredItemsHistory(order_id){
 		                	}
 		                 $('#historyModal').modal('toggle');
 	                		$('#historyModal').modal('show');
+	                		 $('#dname').text("");
+	               		  	 $('#kumarid').text("");
+	               		 	 $('#korderdDate').text("");
+	                		
 				});
 	
 }
@@ -365,6 +370,9 @@ function displayDealerOrderItems(response){
 	});
 }
 function displayHistory(response){
+	 $('#dname1').text("");
+	  	 $('#kumarid2').text("");
+	 	 $('#korderdDate2').text("");
 	//serviceUnitArray ={};
 	serviceUnitArray1 ={};
 	$('#history_modal_body').html('');
@@ -375,7 +383,7 @@ function displayHistory(response){
 	$("#history_modal_body").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		
-		  //$('#dname').text(orderObj.dealerName);
+		  $('#dname1').text(orderObj.dealerName);
 		  $('#kumarid2').text(orderObj.order_id);
 		  $('#korderdDate2').text(orderObj.ordered_date );
 		  
