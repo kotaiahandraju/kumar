@@ -429,6 +429,7 @@ function cartCount(){
 			    <li class="dealerpaymentconfirm"><a href="${baseurl }/admin/dealerpaymentconfirm"><i class="fa fa-bolt"></i><span>Confirm Payments </span></a></li>
 			    <li class="orderslist"><a href="${baseurl }/admin/orderslist"><i class="fa fa-clipboard"></i><span>Delivery Status</span></a></li>
 			     <li class="orderplacing"><a href="${baseurl }/admin/managerorderplace"><i class="fa fa-clipboard"></i><span>Order Product</span></a></li>
+			     <li class="orderplacing"><a href="${baseurl }/admin/managerOrderplaceNew"><i class="fa fa-clipboard"></i><span>Padma</span></a></li>
 	             <li class="allOrders1">
             		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Reports</span> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
