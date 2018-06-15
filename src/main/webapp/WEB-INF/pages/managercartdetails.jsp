@@ -39,10 +39,7 @@ table#dependent_table tbody tr td:first-child::before {
 #ui-datepicker-div{
 /* 	width: auto !important; */
 }
-.invo {
-padding-top:15px;
-font-weight:600;
-}
+.invo {padding-top:15px;font-weight:600;text-align: center;}
 </style>
 
 
@@ -135,11 +132,8 @@ font-weight:600;
 				<div class="clearfix"></div>
 				<div class="container-fluid " id="invoicediv">
         			<div class="col-md-12">
-        			<div class="col-md-4"></div>
-        			        			
-        				<div class="col-md-5">
+        			
 				<h1 class="invo">Order Confirmed</h1>
-							</div>
 							<div class="clearfix"></div>
 								 <div class="form-group">
     <label class="col-md-1" for="Invoiceid">Invoice ID</label>
@@ -476,7 +470,7 @@ function Popup(data)
 
     var is_chrome = Boolean(mywindow.chrome);
     var isPrinting = false;
-    mywindow.document.write('<html><head><title>Lpo Details</title> <link rel="stylesheet" type="text/css" href="../assets/css/img.css"><link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css"></head><body>');
+    mywindow.document.write('<html><head><title>Lpo Details</title><style>.invo {padding-top:15px;font-weight:600;text-align: center;}</style><link rel="stylesheet" type="text/css" href="../assets/css/img.css"><link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css"></head><body>');
     mywindow.document.write(data);
    
     mywindow.document.write('</body></html>');
