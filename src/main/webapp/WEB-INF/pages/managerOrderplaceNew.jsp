@@ -171,20 +171,17 @@ table#dependent_table tbody tr td:first-child::before {
    <script> var delerId1 = "";</script>
 </c:when>
 <c:otherwise>
-   <script> var delerId1 = "${param.dealerId}";
+   <script> 
+   var delerId1 = "${param.dealerId}";
    
    $("#delerId").val(delerId1);
+   $(document).ready(function() {
    managercartCount();
+   });
    </script>
 </c:otherwise>
 </c:choose>
- <script type='text/javascript'>
-    //<![CDATA[
-      $(document).ready(function() {
-        $('.filter').multifilter()
-      })
-    //]]>
-  </script>
+ 
 <script type="text/javascript">
 var subCategoryMap =${sub_category_map};
 

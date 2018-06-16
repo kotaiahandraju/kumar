@@ -109,7 +109,7 @@ table#dependent_table tbody tr td:first-child::before {
 					</div>
 			<br>
 					<div class="pull-right">
-					<a href="managerorderplace" id="cartTag"><span class="btn btn-warning" ><!-- <i class="fa fa-shopping-cart"></i> --> ADD MORE ITEMS</span></a> 
+					<a href="managerOrderplaceNew" id="cartTag"><span class="btn btn-warning" ><!-- <i class="fa fa-shopping-cart"></i> --> ADD MORE ITEMS</span></a> 
 					<span class="btn btn-danger"  onclick="ordePlacing();"><!-- <i class="fa fa-bolt" aria-hidden="true"></i> -->CONFIRM ORDER</span>
 					</div>
 				</div>
@@ -507,10 +507,10 @@ $("#cancelbtn").show();
     return true;
 }
 function cancelPrint() {
-	window.location.href="managerorderplace";
+	window.location.href="managerOrderplaceNew";
 }
 var cartDealerId = $("#delerId").val(); 
-$('#cartTag').attr('href','managerorderplace?dealerId='+cartDealerId);
+$('#cartTag').attr('href','managerOrderplaceNew?dealerId='+cartDealerId);
 
 $("#pageName").text("Cart");
 // $(".orderplacing").addClass("active"); 
