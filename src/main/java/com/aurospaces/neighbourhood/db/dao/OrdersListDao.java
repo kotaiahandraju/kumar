@@ -368,7 +368,7 @@ public List<Map<String,Object>> getProductsOrderedQtyDealerWise(String branch_id
 				+ "(select pt.producttype from producttype pt where pt.id =(select i.productId from items i where i.id = ol.productId)) as category, "
 				+" (select pn.productname from productname pn where pn.id=(select i.productname from items i where i.id = ol.productId)) as sub_category, "
 				+" (select i.itemcode from items i where i.id = ol.productId) as item_code, "
-				+" (select kb.branchname from kumar_branch kb where kb.id = ol.branchId) as branch_name,ol.productId,ol.branchId,ifnull(sum(ol.quantity),0) as ordered from orders_list ol where ol.orderId is not null "
+				+" (select kb.branchname from kumar_branch kb where kb.id = ol.branchId) as branch_name,ol.productId,ol.branchId,ifnull(sum(ol.quantity),0) as ordered from orders_list ol, kumar_employee ke where ol.delerId=ke.id and ke.roleId = '3' and  ol.orderId is not null "
 				+" and ol.branchId = '"+branch_id+"' "
 				+" and "+dealer_clause
 				+" group by ol.delerId, ol.productId";
