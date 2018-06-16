@@ -339,6 +339,7 @@ function ordePlacing() {
 			   
 			   $('#orderPlacement').hide();
 			   $('#invoicediv').show();
+			   managercartCount();
 			   
 			/* var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
 	    	'<thead><tr><th>Product Name</th><th>Item Code</th><th>Quantity</th><th>Price<i class="fas fa-rupee-sign"></i></th><th></th></tr>'+
@@ -366,7 +367,7 @@ function ordePlacing() {
 			$("#invoiceId").text(invoiceId);
 			$("#orderId").text(orderId);  */
 			
-		//window.location.href = "${baseurl}/admin/cartdetails";
+// 		window.location.href = "${baseurl}/admin/cartdetails";
 		}
 		
 	});
