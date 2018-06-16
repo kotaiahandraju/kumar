@@ -171,7 +171,7 @@ public class LoginController {
 				SendSMS.sendSMS(msg, mobilenumber, objContext);
 				
 				redir.addFlashAttribute("msg", "Password Sent Your Registered Mobile Number");
-				redir.addFlashAttribute("cssMsg", "warning");
+				redir.addFlashAttribute("cssMsg", "success");
 				
 			}
 			else

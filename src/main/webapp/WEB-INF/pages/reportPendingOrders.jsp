@@ -15,8 +15,9 @@
  }
   @media (min-width: 768px) {
 .modal-dialog {
-    width: 957px;
+    width: 92%;
     margin: 30px auto;
+    background:#fff;
 }
 }
 table #dependent_table{
