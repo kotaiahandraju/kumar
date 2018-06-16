@@ -70,7 +70,7 @@ public class ProductTypeController {
 	@RequestMapping(value = "/addProductType")
 	public String addProductType(@ModelAttribute ProductTypeBean productTypeBean, RedirectAttributes redir) {
 
-			System.out.println("111111111111111111111111111"+productTypeBean);
+//			System.out.println("111111111111111111111111111"+productTypeBean.getId());
 		int id = 0;
 		String size = null;
 
@@ -78,7 +78,7 @@ public class ProductTypeController {
 			
 			productTypeBean.setStatus("1");
 			ProductTypeBean productTypeBean2 = productTypeDao.getByProductTpye(productTypeBean);
-			System.out.println("111111111111113333333333111111111"+productTypeBean2);
+//			System.out.println("111111111111113333333333111111111"+productTypeBean2);
 			int dummyId = 0;
 			if (productTypeBean2 != null) {
 				dummyId = productTypeBean2.getId();

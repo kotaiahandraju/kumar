@@ -79,7 +79,7 @@ ps.setString(4, productTypeBean.getStatus());
 
 			String sql = "UPDATE producttype  set producttype = ? where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{productTypeBean.getUpdatedTime(),productTypeBean.getId()});
+			jdbcTemplate.update(sql, new Object[]{productTypeBean.getProducttype(),productTypeBean.getId()});
 		}
 	}
 		
