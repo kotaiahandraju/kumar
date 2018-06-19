@@ -88,7 +88,7 @@ public class ProductTypeController {
 				if (id == dummyId || productTypeBean2 == null) {
 
 					productTypeDao.save(productTypeBean);
-					redir.addFlashAttribute("msg", "Record Updated Successfully");
+					redir.addFlashAttribute("msg", "Product Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
 				} else {
 					redir.addFlashAttribute("msg", "Already Record Exist");
@@ -98,7 +98,7 @@ public class ProductTypeController {
 			if (productTypeBean.getId() == 0 && productTypeBean2 == null) {
 				productTypeDao.save(productTypeBean);
 
-				redir.addFlashAttribute("msg", "Record Inserted Successfully");
+				redir.addFlashAttribute("msg", "Product Inserted Successfully");
 				redir.addFlashAttribute("cssMsg", "success");
 			}
 			if (productTypeBean.getId() == 0 && productTypeBean2 != null) {

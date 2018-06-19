@@ -75,13 +75,22 @@ public class ManagerCartController {
 			for(ItemsBean item:listOrderBeans){
 				String key = item.getProductname()+"##"+item.getProductIdName();
 				if(sub_category_map.containsKey(key)){
+					System.out.println("keyyy1"+key);
+					System.out.println("111111111111111111111111111111111");
 					Map<String,Object> val_map = sub_category_map.get(key);
+					System.out.println("map1"+val_map);
 					val_map.put(item.getItemcode(),item.getItemdescrption());
+					System.out.println("map2"+val_map);
 					
 				}else{
+					System.out.println("keyyy2"+key);
+					System.out.println("22222222222222222222222222222");
 					Map<String,Object> val_map = new HashMap<String,Object>();
 					val_map.put(item.getItemcode()+"##"+item.getId(),item.getItemdescrption());
+					System.out.println("map1"+val_map);
+					System.out.println("itemCode---"+item.getId());
 					sub_category_map.put(key, val_map);
+					System.out.println("map2"+val_map);
 				}
 			}
 			objectMapper = new ObjectMapper();

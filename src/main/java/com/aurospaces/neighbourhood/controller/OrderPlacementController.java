@@ -578,8 +578,10 @@ public class OrderPlacementController {
 				
 				List<Map<String, Object>> ordered_list = null ;
 				if(role_id.equalsIgnoreCase("1")){ // means Admin
+					System.out.println("CONDITION1");
 					ordered_list = listDao.getProductsOrderedQtyBranchWise();
 				}else if(role_id.equalsIgnoreCase("2")){ //means branch Manager
+					System.out.println("CONDITION1");
 					ordered_list = listDao.getProductsOrderedQtyDealerWise(objuserBean.getBranchId(),request.getParameter("dealer_id"));
 				}
 				for(Map<String, Object> row:ordered_list){
@@ -621,11 +623,11 @@ public class OrderPlacementController {
 				Iterator prod_keys = prod_map.keySet().iterator();
 				while(prod_keys.hasNext()){
 					String key = (String)prod_keys.next();
-					System.out.println("---key-- ::"+key);
+//					System.out.println("---key-- ::"+key);
 					
 					
 					Map<String,Object> value =  prod_map.get(key);
-					System.out.println("---value-- ::"+value);
+//					System.out.println("---value-- ::"+value);
 					Map<String, Object> sortedValue = new TreeMap<String, Object>(value);
 					prod_map.put(key, sortedValue);
 				}

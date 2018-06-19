@@ -111,7 +111,7 @@ public class ItemController {
 				if (id == dummyId || itemsBean2 == null) {
 
 					itemsDao.save(itemsBean);
-					redir.addFlashAttribute("msg", "Record Updated Successfully");
+					redir.addFlashAttribute("msg", "Product List Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
 				} else {
 					redir.addFlashAttribute("msg", "Already Record Exist");
@@ -138,7 +138,7 @@ public class ItemController {
 				
 				
 				
-				redir.addFlashAttribute("msg", "Record Inserted Successfully");
+				redir.addFlashAttribute("msg", "Product List Inserted Successfully");
 				redir.addFlashAttribute("cssMsg", "success");
 			}
 			if (itemsBean.getId() == 0 && itemsBean2 != null) {
