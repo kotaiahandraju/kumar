@@ -8,7 +8,7 @@
  <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
  <link rel="stylesheet" type="text/css" href="../assets/css/img.css">
  <style>
- .table > colgroup + thead > tr:first-child > th {
+.table-bordered > thead > tr > td, .table-bordered > tbody > tr > td{
 border-right:1px solid #006699 !important;
 } 
  .table > caption + thead > tr:first-child > th, .table > colgroup + thead > tr:first-child > th, .table > thead:first-child > tr:first-child > th, .table > caption + thead > tr:first-child > td, .table > colgroup + thead > tr:first-child > td, .table > thead:first-child > tr:first-child > td {

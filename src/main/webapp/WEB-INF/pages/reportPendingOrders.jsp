@@ -279,6 +279,8 @@ function getOrdersList() {
 				});
 }
 	
-$("#pageName").text("Pending Orders");
-$(".pendingOrders").addClass("active");
+/* $("#pageName").text("Pending Orders");
+$(".dropdown-menu .pendingOrders a").addClass("active");
+ */
+
 </script>

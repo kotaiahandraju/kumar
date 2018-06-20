@@ -56,6 +56,14 @@
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 <style type="text/css">
+.pending0 .dropdown-toggle {
+background: #595f69 !important;
+    color: #ffffff !important;
+}
+.dropdown-menu .dropdown-toggle {
+background: #595f69 !important;
+    color: #ffffff !important;
+}
 @media only screen and (max-width: 320px) {
 .oms {
 font-size:11px !important;
@@ -407,12 +415,12 @@ function cartCount(){
               <li class="productName"><a href="${baseurl }/admin/productName"><i class="fa fa-bookmark"></i> <span>Product Subcategory</span></a></li>&emsp;
               <li class="items"><a href="${baseurl }/admin/items"><i class="fa fa-list-alt"></i><span>Product List</span></a></li>&emsp;
               <li class="employee"><a href="${baseurl }/admin/employeeCreation"><i class="fa fa-users"></i> <span>Employees</span></a></li>
-              <li class=" allOrders1">
+              <li class="pending0">
             		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Reports</span> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-					 <li class="allOrders"><a href="${baseurl }/admin/reportAllOrdersPage"><i class="fa fa-clone" aria-hidden="true"></i><span>All Orders</span></a></li>
-                      <li class="pendingOrders"><a href="${baseurl }/admin/reportPendingOrders"><i class="fa fa-clone" aria-hidden="true"></i> <span>Pending Orders</span></a></li>
-                      <li class="deliveredOrders"><a href="${baseurl }/admin/reportDeliveredOrders"> <i class="fa fa-clone" aria-hidden="true"></i><span>Delivered Orders</span></a></li>
+					 <li class=""><a href="${baseurl }/admin/reportAllOrdersPage"><i class="fa fa-clone" aria-hidden="true"></i><span>All Orders</span></a></li>
+                      <li class="pending0"><a href="${baseurl }/admin/reportPendingOrders"><i class="fa fa-clone" aria-hidden="true"></i> <span>Pending Orders</span></a></li>
+                      <li class=""><a href="${baseurl }/admin/reportDeliveredOrders"> <i class="fa fa-clone" aria-hidden="true"></i><span>Delivered Orders</span></a></li>
 					</ul>
 				</li>
               </c:if>
@@ -428,7 +436,7 @@ function cartCount(){
 			    <li class="dealerpaymentconfirm"><a href="${baseurl }/admin/dealerpaymentconfirm"><i class="fa fa-bolt"></i><span>Confirm Payments </span></a></li>
 			    <li class="orderslist"><a href="${baseurl }/admin/orderslist"><i class="fa fa-clipboard"></i><span>Delivery Status</span></a></li>
 			     <li class="orderplacing"><a href="${baseurl }/admin/managerorderplace"><i class="fa fa-clipboard"></i><span>Order Product</span></a></li>
-	             <li class="allOrders1">
+	             <li class="allOrders1 pendingOrders">
             		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Reports</span> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 					 <li class="allOrders"><a href="${baseurl }/admin/reportAllOrdersPage"><i class="fa fa-clone" aria-hidden="true"></i> <span>All Orders</span></a></li>
@@ -467,5 +475,7 @@ function cartCount(){
 	            </div>
 	            <div class="clearfix"></div>
 	        </div>
+	       <script>
 	       
+	       </script>
 <!-- Header ends Here -->
