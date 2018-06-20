@@ -407,7 +407,7 @@ public class OrderPlacementController {
 		
 	}
 	
-	@RequestMapping(value = "/getProductsDeliveredQtyBranchWise")
+	@RequestMapping(value = "/dashboardforbranchwise")
 	public  String getProductsDeliveredQtyBranchWise(@ModelAttribute("orderLstForm") EmployeeBean employeeBean,Model model,HttpServletRequest request,HttpSession session) 
 	{
 		List<Map<String, Object>> branch_prod_list = null;
@@ -536,7 +536,7 @@ public class OrderPlacementController {
 		
 	}
 	
-	@RequestMapping(value = "/getProductsDeliveredQtyDealerWise")
+	@RequestMapping(value = "/dashboardfordealerwise")
 	public  String getProductsDeliveredQtyDealerWise(@ModelAttribute("orderLstForm") EmployeeBean employeeBean,Model model,HttpServletRequest request,HttpSession session) 
 	{
 		List<Map<String, Object>> branch_prod_list = null;
@@ -578,10 +578,8 @@ public class OrderPlacementController {
 				
 				List<Map<String, Object>> ordered_list = null ;
 				if(role_id.equalsIgnoreCase("1")){ // means Admin
-					System.out.println("CONDITION1");
 					ordered_list = listDao.getProductsOrderedQtyBranchWise();
 				}else if(role_id.equalsIgnoreCase("2")){ //means branch Manager
-					System.out.println("CONDITION1");
 					ordered_list = listDao.getProductsOrderedQtyDealerWise(objuserBean.getBranchId(),request.getParameter("dealer_id"));
 				}
 				for(Map<String, Object> row:ordered_list){

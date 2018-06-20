@@ -136,7 +136,7 @@ public class EmployeeController {
 				loginDao.save(login);
 				SendSMS.sendSMS(msg, employeeBean.getPhoneNumber(), objContext);
 
-				redir.addFlashAttribute("msg", "Employee Inserted Successfully");
+				redir.addFlashAttribute("msg", "Employee Creation Successfully");
 				redir.addFlashAttribute("cssMsg", "success");
 			}
 			if (employeeBean.getId() == 0 && employeeBean2 != null) {

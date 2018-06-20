@@ -81,10 +81,10 @@ public class LoginController {
 					session.setAttribute("userName", objUserBean.getUserName());
 					session.setAttribute("branchName", objUserBean.getBranchName());
 					if(objUserBean.getRoleId().equals("1")){
-						return "redirect:admin/getProductsDeliveredQtyBranchWise";
+						return "redirect:admin/dashboardforbranchwise";
 					}
 					if(objUserBean.getRoleId().equals("2")){
-						return "redirect:admin/getProductsDeliveredQtyDealerWise";
+						return "redirect:admin/dashboardfordealerwise";
 					}
 					return "redirect:admin/dashboard";
 //				}

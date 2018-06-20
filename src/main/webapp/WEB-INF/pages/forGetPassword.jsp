@@ -13,7 +13,7 @@
 <!--     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'> -->
     
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries. Placeholdr.js enables the placeholder attribute -->
-    <!--[if lt IE 9]>
+    <!--[if lt IE 9]>]
         <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js"></script>
         <script type="text/javascript" src="assets/plugins/charts-flot/excanvas.min.js"></script>
@@ -101,11 +101,23 @@ font-size: 32px;
 padding-left:0px;
 padding-right:0px;
 }
-.alert-success, .alert-warning, .alert-danger{color: white !important;}
-.alert-success{background-color: #4CAF50 !important;}
-.alert-warning{background-color: #ff6600 !important;}
-.alert-danger{background-color: #d43f3a !important;}
-
+.alert-success, .alert-warning, .alert-danger{color: white !important;} 
+.alert-success{background-color: #4CAF50 !important;} 
+ .alert-warning{background-color: #ff6600 !important;} 
+ .alert-danger{background-color: #d43f3a !important;} 
+.msgcss
+{
+/* 	width: 50% !important; */
+/* 	font-weight: bold; */
+	margin: auto;
+	text-align: center;
+	top: 3px !important;
+	left:0;
+	right:0;
+	position: fixed;
+	font-size: 14px;
+	z-index:99999;
+}
 .your-class::-webkit-input-placeholder {color: #e73d4a !important;}
 .your-class::-moz-placeholder {color: #e73d4a !important;}
 
@@ -180,13 +192,14 @@ window.setTimeout(function() {
 <h4>Enter your Mobile number</h4>
 <span id="errorMsg"> </span>
 <c:if test="${not empty msg}">
-				<div class="col-sm-12" style="margin-bottom: -1.3em;">
-					<div class="form-group col-md-4">
-						<div class="msgcss fadeIn animated alert alert-danger" style="text-align: center;">${msg}</div><div class="col-sm-4" ></div>
-					</div>
-					<div class="col-sm-4" ></div></div><div class="clearfix"></div>
-				
-			</c:if>
+		<div class="msgcss row">
+			<div class="col-sm-4 col-sm-offset-4">
+				<div class="form-group">
+					<div class="alert alert-${cssMsg} fadeIn animated">${msg}</div>
+				</div>
+			</div>
+		</div>
+	</c:if>
 <!-- <p>Mobile Number *</p> -->
 <div class="form-group">
 					<div class="col-md-3 forgote">
