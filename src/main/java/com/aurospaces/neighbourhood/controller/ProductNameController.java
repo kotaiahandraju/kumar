@@ -149,7 +149,7 @@ public class ProductNameController {
 					}
 					
 					productnameDao.save(productnameBean);
-					redir.addFlashAttribute("msg", "Record Updated Successfully");
+					redir.addFlashAttribute("msg", "Product Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
 				} else {
 					redir.addFlashAttribute("msg", "Already Record Exist");
@@ -159,7 +159,7 @@ public class ProductNameController {
 			if (productnameBean.getId() == 0 && productnameBean2 == null) {
 				productnameDao.save(productnameBean);
 
-				redir.addFlashAttribute("msg", "Record Inserted Successfully");
+				redir.addFlashAttribute("msg", "Product Inserted Successfully");
 				redir.addFlashAttribute("cssMsg", "success");
 			}
 			if (productnameBean.getId() == 0 && productnameBean2 != null) {

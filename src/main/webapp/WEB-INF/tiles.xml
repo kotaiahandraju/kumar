@@ -60,6 +60,9 @@
  <definition name="productsDeliveredQtyBranchWise" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/productsDeliveredQtyBranchWise.jsp" />
  </definition>
+ <definition name="productsDeliveredQtyDealerWise" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/productsDeliveredQtyDealerWise.jsp" />
+ </definition>
  <definition name="reportAllOrders" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/reportAllOrders.jsp" />
  </definition>
@@ -104,6 +107,9 @@
  </definition>
  <definition name="managerorderplace" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/managerOrderPlacing.jsp" />
+ </definition>
+ <definition name="managerOrderplaceNew" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/managerOrderplaceNew.jsp" />
  </definition>
 	<definition name="managercartdetails" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/managercartdetails.jsp" />

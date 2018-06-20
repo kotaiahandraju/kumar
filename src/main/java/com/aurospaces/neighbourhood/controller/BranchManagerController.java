@@ -266,7 +266,7 @@ public class BranchManagerController {
 					objectMapper = new ObjectMapper();
 					sJson = objectMapper.writeValueAsString(listOrderBeans);
 					request.setAttribute("allOrders1", "''");
-					jsonObj.put("allOrders1", listOrderBeans);
+					jsonObj.put("allOrders1", "");
 				}
 			}catch(Exception e){
 				e.printStackTrace();

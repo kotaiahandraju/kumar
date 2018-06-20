@@ -85,7 +85,7 @@ public class BranchController {
 				if (id == dummyId || branchBean2 == null) {
 
 					branchDao.save(branchBean);
-					redir.addFlashAttribute("msg", "Record Updated Successfully");
+					redir.addFlashAttribute("msg", "Branch Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
 				} else {
 					redir.addFlashAttribute("msg", "Already Record Exist");
@@ -95,7 +95,7 @@ public class BranchController {
 			if (branchBean.getId() == 0 && branchBean2 == null) {
 				branchDao.save(branchBean);
 
-				redir.addFlashAttribute("msg", "Record Inserted Successfully");
+				redir.addFlashAttribute("msg", "Branch Inserted Successfully");
 				redir.addFlashAttribute("cssMsg", "success");
 			}
 			if (branchBean.getId() == 0 && branchBean2 != null) {

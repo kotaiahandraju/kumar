@@ -50,19 +50,55 @@ table#dependent_table tbody tr td:first-child::before {
 
 </style>
         <div class="clearfix"></div>
-             <ol class="breadcrumb">
-              <li>Dashboard</li>
-            </ol>
+            
             <div class="clearfix"></div>
         <div class="container-fluid" id="lpoMain">
         
-        
+        	<div class="row" id="moveTo">
+            <div class="col-md-12 col-sm-12">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h4>Select Branch</h4>
+                        <div class="options"></div>
+                    </div>
+	                <form:form  modelAttribute="orderLstForm"   class="form-horizontal" method="post" id="products_summary_form" name="products_summary_form">
+                    <div class="panel-body">
+                    	<div class="row">
+                    	
+                   		<c:if test="${cacheUserBean.roleId == '1'}">
+                   		<div class="col-md-4">
+                   			<div class="form-group">
+                   				<label for="focusedinput" class="col-md-2 control-label" style="padding-top:8px;">Branch: </label>
+                   				<div class="col-md-6">
+                   					<form:select path="branchId" class="form-control " onchange="getProductsList()">
+							    	<form:option value="all">All</form:option>
+							    	<form:options items="${branches_list}" itemValue="id" itemLabel="branchname"/>
+							    	</form:select>
+							    	</div>
+                   			</div>
+                   		</div>
+                   		</c:if>
+                   		<!-- <div class="col-md-2">
+                   			<div class="form-group">
+                   				<div class=" ">
+                   					<div class="btn btn-primary sub"   value="Search" onclick="getProductsList()">Submit</div>
+							    </div>
+                   			</div>
+                   		</div> -->
+                   		</div>
+                   		
+                    		
+                    		</div>
+                    		</form:form>
+                    	</div>
+                    </div>
+                </div> 
         
             <div class="row" id="row1">
               <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h4>Orders List</h4>
+                            <h4>Products Summary</h4>
                             <div class="options">   
                                 <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
                             </div>
@@ -140,18 +176,25 @@ function createTableHeader(branch_map){
 	var table=$('#tableId').html('');
 	
 	
-	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
+	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatable datatables" id="example">'+
 	'<thead><tr style="background:#4e8ede; color:#fff;"><th colspan="3">Product</th>';
 	$.each(branch_map,function(key, value) {
 		var tempStr = '<th colspan="4" align="center" style="">'+value+'</th>';
 		tableHead += tempStr;
 	});
-	tableHead += '<th colspan="4"  style="max-width:80px; min-width:80px;">Overall Orders</th></tr><tr><th align="center">Category</th><th align="center">Subcategory</th><th align="center">Item Code</th>'; 
+	var selected_val = $("#branchId").val();
+	if(selected_val=="all"){
+		tableHead += '<th colspan="4"  style="max-width:80px; min-width:80px;">Overall Orders</th>';
+	}
+	tableHead += '</tr><tr><th align="center">Category</th><th align="center">Subcategory</th><th align="center">Item Code</th>'; 
 	$.each(branch_map,function(key, value) {
 		var tempStr = '<th align="center"  style="max-width:80px; min-width:80px;">Ordered</th><th  style="max-width:90px; min-width:90px;">Delivered</th><th  style="max-width:80px; min-width:80px;">Nullified</th><th  style="max-width:80px; min-width:80px;">Pending</th>';
 		tableHead += tempStr;
 	});
-	tableHead += '<th align="center" style="max-width:80px; min-width:80px;">Ordered</th><th  style="max-width:90px; min-width:90px;">Delivered</th><th  style="max-width:80px; min-width:80px;">Nullified</th><th  style="max-width:100px; min-width:100px;">Pending</th></tr></thead><tbody></tbody></table>';
+	if(selected_val=="all"){
+		tableHead += '<th align="center" style="max-width:80px; min-width:80px;">Ordered</th><th  style="max-width:90px; min-width:90px;">Delivered</th><th  style="max-width:80px; min-width:80px;">Nullified</th><th  style="max-width:100px; min-width:100px;">Pending</th>';
+	}
+	tableHead += '</tr></thead><tbody></tbody></table>';
 	$("#tableId").html(tableHead);
 	//if(isClick=='Yes') $('.datatables').dataTable();
 }
@@ -174,7 +217,11 @@ $("#tableId").html(tableHead); */
 			var temp_td = "<td title='"+key2+"'>" + value2.split(",")[0] + "</td><td title='"+key2+"'>" + value2.split(",")[1] + "</td><td title='"+key2+"'>" + value2.split(",")[2] + "</td><td title='"+key2+"'>" + pending_qty + "</td>";
 			tblRow += temp_td;
 		});
-		tblRow += "<td>" + total_ordered + "</td><td>" + total_delivered + "</td><td>" + total_nullified + "</td><td>" + total_pending + "</td></tr>";
+		var selected_val = $("#branchId").val();
+		if(selected_val=="all"){
+			tblRow += "<td>" + total_ordered + "</td><td>" + total_delivered + "</td><td>" + total_nullified + "</td><td>" + total_pending + "</td>";
+		}
+		tblRow += "</tr>";
 		
 		$(tblRow).appendTo("#tableId table tbody");
 	});
@@ -460,5 +507,52 @@ function saveDeliverableItemsData(objId){
 	});
 }
 
+function getProductsList(){
+	var branch_id = $("#branchId").val();
+	$("#products_summary_form").attr("action","getProductsDeliveredQtyBranchWise.htm?branch_id="+branch_id);
+	$("#products_summary_form").submit();
+	/* $.ajax({
+		type : "POST",
+		url : "getProductsDeliveredQtyBranchWise.htm",
+		data :"branch_id="+branch_id,
+		 beforeSend : function() {
+             $.blockUI({ message: 'Please wait' });
+          },
+		success: function (response) {
+            	 $.unblockUI();
+            	 var resJson=JSON.parse(response);
+            	 var msg = resJson.message;
+             if(typeof msg != "undefined"){
+            	 	if(msg=="success"){
+            	 		alert("Data saved successfully");
+            	 		serviceUnitArray1[objId].pending_qty = balance_qty;
+            	 		$("#pending_qty"+objId).html(balance_qty);
+            	 		if(balance_qty==0){
+            	 			//$("#modal_body tbody ")
+            	 			$('#row'+objId).find("td").last().remove();
+            	 			$('#row'+objId).find("td").last().remove();
+            	 			var new_td = '<td colspan="2" align="center">Completed</td>';
+            	 			$(new_td).appendTo($('#row'+objId));
+            	 		}
+            	 	}else{
+            	 		alert("Some problem occured! Please try again.");
+            	 	}
+             }
+//              window.location.reload();
+             },
+         error: function (e) { 
+        	 $.unblockUI();
+				console.log(e);
+         }
+	}); */
+}
+/* $(function(){
+	var oTable = $('#example').dataTable( {
+		"sScrollX": "100%",
+		"sScrollXInner": "100%",
+		"bScrollCollapse": true
+	} );
+	new $.fn.dataTable.FixedColumns( oTable );
+} ); */
 $(".dashboard").addClass("active");
 </script>

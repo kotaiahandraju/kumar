@@ -117,7 +117,7 @@ public class EmployeeController {
 					login.setPassword(employeeBean.getPassword());
 					login.setBranchId(employeeBean.getBranchId());
 					loginDao.updateLogin(login);
-					redir.addFlashAttribute("msg", "Record Updated Successfully");
+					redir.addFlashAttribute("msg", "Employee Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
 				} else {
 					redir.addFlashAttribute("msg", "Already Record Exist");
@@ -136,7 +136,7 @@ public class EmployeeController {
 				loginDao.save(login);
 				SendSMS.sendSMS(msg, employeeBean.getPhoneNumber(), objContext);
 
-				redir.addFlashAttribute("msg", "Record Inserted Successfully");
+				redir.addFlashAttribute("msg", "Employee Creation Successfully");
 				redir.addFlashAttribute("cssMsg", "success");
 			}
 			if (employeeBean.getId() == 0 && employeeBean2 != null) {

@@ -21,6 +21,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.EmployeeBean;
@@ -79,8 +80,11 @@ public class LoginController {
 					session.setAttribute("roleId", objUserBean.getRoleId());
 					session.setAttribute("userName", objUserBean.getUserName());
 					session.setAttribute("branchName", objUserBean.getBranchName());
-					if(objUserBean.getRoleId().equals("1") || objUserBean.getRoleId().equals("2")){
-						return "redirect:admin/getProductsDeliveredQtyBranchWise";
+					if(objUserBean.getRoleId().equals("1")){
+						return "redirect:admin/dashboardforbranchwise";
+					}
+					if(objUserBean.getRoleId().equals("2")){
+						return "redirect:admin/dashboardfordealerwise";
 					}
 					return "redirect:admin/dashboard";
 //				}
@@ -167,7 +171,7 @@ public class LoginController {
 				SendSMS.sendSMS(msg, mobilenumber, objContext);
 				
 				redir.addFlashAttribute("msg", "Password Sent Your Registered Mobile Number");
-				redir.addFlashAttribute("cssMsg", "warning");
+				redir.addFlashAttribute("cssMsg", "success");
 				
 			}
 			else
@@ -183,4 +187,27 @@ public class LoginController {
 		 
 			return "redirect:forgetpassword";
 		}
+	
+	
+	@RequestMapping(value = "/sampleUrl")
+	@ResponseBody public String sampleUrl(ModelMap model, HttpServletRequest request, HttpSession objSession,
+			HttpServletResponse response)  {
+//		System.out.println("logout page...");
+		String name="pavan";
+		JSONObject jsonObject=new JSONObject();
+		try {
+			 //TODO: externalize the Allow-Origin
+	        response.addHeader("Access-Control-Allow-Origin", "*");
+	        response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
+	        response.addHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
+	        response.addHeader("Access-Control-Max-Age", "1728000");
+			
+			jsonObject.put("data", name);
+			System.out.println("hello sampleUrl ");
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		return String.valueOf(jsonObject);
+	}
 }

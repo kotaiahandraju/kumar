@@ -3,6 +3,7 @@
  */
 package com.aurospaces.neighbourhood.controller;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +61,56 @@ public class ManagerCartController {
 			e.printStackTrace();
 		}
 		return "managerorderplace";
+		
+	}
+	
+	@RequestMapping(value="/managerOrderplaceNew")
+	public String managerOrderplaceNew(@ModelAttribute("managerorderLstForm") OrdersListBean ordersListBean,HttpServletRequest request){
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		List<ItemsBean> listOrderBeans = null;
+		Map<String,Map<String,Object>> sub_category_map = new HashMap<String,Map<String,Object>>();
+		try{
+			listOrderBeans = itemsDao.getItems("1");
+			for(ItemsBean item:listOrderBeans){
+				String key = item.getProductname()+"##"+item.getProductIdName();
+				if(sub_category_map.containsKey(key)){
+					System.out.println("keyyy1"+key);
+					System.out.println("111111111111111111111111111111111");
+					Map<String,Object> val_map = sub_category_map.get(key);
+					System.out.println("map1"+val_map);
+					val_map.put(item.getItemcode(),item.getItemdescrption());
+					System.out.println("map2"+val_map);
+					
+				}else{
+					System.out.println("keyyy2"+key);
+					System.out.println("22222222222222222222222222222");
+					Map<String,Object> val_map = new HashMap<String,Object>();
+					val_map.put(item.getItemcode()+"##"+item.getId(),item.getItemdescrption());
+					System.out.println("map1"+val_map);
+					System.out.println("itemCode---"+item.getId());
+					sub_category_map.put(key, val_map);
+					System.out.println("map2"+val_map);
+				}
+			}
+			objectMapper = new ObjectMapper();
+			sJson = objectMapper.writeValueAsString(sub_category_map);
+			request.setAttribute("sub_category_map", sJson);
+			
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+			}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "managerOrderplaceNew";
 		
 	}
 	

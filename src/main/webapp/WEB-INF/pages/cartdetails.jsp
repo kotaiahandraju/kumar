@@ -116,9 +116,9 @@ font-size:28px;
 				<div class="clearfix"></div>
 				<div class="container-fluid " id="invoicediv" style="display: none;">
         			<div class="col-md-12">
-        			<div align="center"><img height="80px" src="${baseurl }/img/klogo.png"/>
+        			<div align="center">
         			        			
-				<span class="invo"><b>Invoice</b></span>
+				<span class="invo"><b>Order Confirmed</b></span>
 							</div>
 							</div>
 							<div class="clearfix"></div>
@@ -145,7 +145,8 @@ font-size:28px;
 						</table>
 					</div>
 									
-						<div align="center"><button onclick="printInvoice()" id="printbtn" class="btn btn-primary">Print</button>		
+						<div align="center"><button onclick="printInvoice('#invoicediv')" id="printbtn" class="btn btn-primary">Print</button>
+						<button onclick="cancelPrint()" id="cancelbtn" class="btn btn-primary">Cancel</button>		
 							</div>	
         			</div>
         			
@@ -383,11 +384,65 @@ function showTableDataOnInvoice(response){
 }
 
 
-function printInvoice() {
+
+function printInvoice(elem)
+{
+	$(".noPrint").hide();
+	$("#printbtn").hide();
+    $("#cancelbtn").hide();
+
+	 $("#printFooter").show();
+    Popup($(elem).html());
+    
+}
+
+
+function Popup(data)
+{
+	var mywindow = window.open('','new div');
+
+    var is_chrome = Boolean(mywindow.chrome);
+    var isPrinting = false;
+    mywindow.document.write('<html><head><title>card Details</title><style>.invo {padding-top:15px;font-weight:600;text-align: center;}</style><link rel="stylesheet" type="text/css" href="../assets/css/img.css"><link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css"></head><body>');
+    mywindow.document.write(data);
+   
+    mywindow.document.write('</body></html>');
+    mywindow.document.close(); // necessary for IE >= 10 and necessary before onload for chrome
+
+$(".printbtn").show();
+$(".noPrint").show();
+$("#printbtn").show();
+$("#cancelbtn").show();
+    if (is_chrome) {
+        mywindow.onload = function() { // wait until all resources loaded 
+            mywindow.focus(); // necessary for IE >= 10
+            mywindow.print();  // change window to mywindow
+            mywindow.close();// change window to mywindow
+        };
+    
+    
+   } else {
+        mywindow.document.close(); // necessary for IE >= 10
+        mywindow.focus(); // necessary for IE >= 10
+
+        mywindow.print();
+        mywindow.close();
+   }
+    
+	
+  
+    return true;
+}
+
+
+
+
+/* function printInvoice() {
     //window.print();
       $("#printbtn").hide();
       $("#pbreadcrumb").hide();
       $("#pageName").hide();
+      $("#cancelbtn").hide();
       
       
       
@@ -399,10 +454,12 @@ function printInvoice() {
 	/* var newWindow = window.open();
     newWindow.document.write(document.getElementById("invoicediv").innerHTML);
     newWindow.print(); */ 
-$("#pageName").text("Invoice");
+// $("#pageName").text("Invoice");
+// }
+
+function cancelPrint() {
+	window.location.href="orderplacing";
 }
-
-
 
 
 

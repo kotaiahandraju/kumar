@@ -39,10 +39,7 @@ table#dependent_table tbody tr td:first-child::before {
 #ui-datepicker-div{
 /* 	width: auto !important; */
 }
-.invo {
-padding-top:15px;
-font-weight:600;
-}
+.invo {padding-top:15px;font-weight:600;text-align: center;}
 </style>
 
 
@@ -112,7 +109,7 @@ font-weight:600;
 					</div>
 			<br>
 					<div class="pull-right">
-					<a href="managerorderplace" id="cartTag"><span class="btn btn-warning" ><!-- <i class="fa fa-shopping-cart"></i> --> ADD MORE ITEMS</span></a> 
+					<a href="managerOrderplaceNew" id="cartTag"><span class="btn btn-warning" ><!-- <i class="fa fa-shopping-cart"></i> --> ADD MORE ITEMS</span></a> 
 					<span class="btn btn-danger"  onclick="ordePlacing();"><!-- <i class="fa fa-bolt" aria-hidden="true"></i> -->CONFIRM ORDER</span>
 					</div>
 				</div>
@@ -135,12 +132,8 @@ font-weight:600;
 				<div class="clearfix"></div>
 				<div class="container-fluid " id="invoicediv">
         			<div class="col-md-12">
-        			<div class="col-md-4"></div>
-        			        			<div class="col-md-3"><img height="100px" src="${baseurl }/img/klogo.png"/>
-        			        			</div>
-        				<div class="col-md-5">
-				<h1 class="invo">Invoice</h1>
-							</div>
+        			
+				<h1 class="invo">Order Confirmed</h1>
 							<div class="clearfix"></div>
 								 <div class="form-group">
     <label class="col-md-1" for="Invoiceid">Invoice ID</label>
@@ -165,7 +158,8 @@ font-weight:600;
 						</table>
 					</div>
 									
-						<div align="center"><button onclick="printInvoice()" id="printbtn" class="btn btn-primary">Print</button>					
+						<div align="center"><button onclick="printInvoice('#invoicediv')" id="printbtn" class="btn btn-primary">Print</button>
+						<button onclick="cancelPrint()" id="cancelbtn" class="btn btn-primary">Cancel</button>						
 								
         			</div>
         					</div>	
@@ -345,6 +339,7 @@ function ordePlacing() {
 			   
 			   $('#orderPlacement').hide();
 			   $('#invoicediv').show();
+			   managercartCount();
 			   
 			/* var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
 	    	'<thead><tr><th>Product Name</th><th>Item Code</th><th>Quantity</th><th>Price<i class="fas fa-rupee-sign"></i></th><th></th></tr>'+
@@ -372,7 +367,7 @@ function ordePlacing() {
 			$("#invoiceId").text(invoiceId);
 			$("#orderId").text(orderId);  */
 			
-		//window.location.href = "${baseurl}/admin/cartdetails";
+// 		window.location.href = "${baseurl}/admin/cartdetails";
 		}
 		
 	});
@@ -457,26 +452,66 @@ $(document).ready(function(){
 
 
 
-function printInvoice() {
-    //window.print();
-      $("#printbtn").hide();
-      $("#pbreadcrumb").hide();
-      $("#pageName").hide();
-      $("#hideForInvoice").hide();
-      
-      
-      
 
+function printInvoice(elem)
+{
+	$(".noPrint").hide();
+	$("#printbtn").hide();
+    $("#cancelbtn").hide();
+
+	 $("#printFooter").show();
+    Popup($(elem).html());
     
-      window.print();
-      $("#printbtn").show();
-	/* var newWindow = window.open();
-    newWindow.document.write(document.getElementById("invoicediv").innerHTML);
-    newWindow.print(); */ 
 }
 
+
+function Popup(data)
+{
+	var mywindow = window.open('','new div');
+
+    var is_chrome = Boolean(mywindow.chrome);
+    var isPrinting = false;
+    mywindow.document.write('<html><head><title>Lpo Details</title><style>.invo {padding-top:15px;font-weight:600;text-align: center;}</style><link rel="stylesheet" type="text/css" href="../assets/css/img.css"><link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css"></head><body>');
+    mywindow.document.write(data);
+   
+    mywindow.document.write('</body></html>');
+    mywindow.document.close(); // necessary for IE >= 10 and necessary before onload for chrome
+
+$(".printbtn").show();
+$(".noPrint").show();
+$("#printbtn").show();
+$("#cancelbtn").show();
+    if (is_chrome) {
+        mywindow.onload = function() { // wait until all resources loaded 
+            mywindow.focus(); // necessary for IE >= 10
+            mywindow.print();  // change window to mywindow
+            mywindow.close();// change window to mywindow
+        };
+    
+    
+   } else {
+        mywindow.document.close(); // necessary for IE >= 10
+        mywindow.focus(); // necessary for IE >= 10
+
+        mywindow.print();
+        mywindow.close();
+   }
+    
+	
+   /* var mywindow = window.open('', 'new div');
+    mywindow.document.write('<html><head><title>Donor Details</title></head><body>');
+    mywindow.document.write(data);
+    mywindow.document.write('</body></html>');
+    mywindow.print();
+    mywindow.close();
+    $(".printbtn").show();*/
+    return true;
+}
+function cancelPrint() {
+	window.location.href="managerOrderplaceNew";
+}
 var cartDealerId = $("#delerId").val(); 
-$('#cartTag').attr('href','managerorderplace?dealerId='+cartDealerId);
+$('#cartTag').attr('href','managerOrderplaceNew?dealerId='+cartDealerId);
 
 $("#pageName").text("Cart");
 // $(".orderplacing").addClass("active"); 

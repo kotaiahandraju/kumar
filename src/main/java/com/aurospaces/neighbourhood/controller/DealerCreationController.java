@@ -110,7 +110,7 @@ public class DealerCreationController {
 				if (id == dummyId || objEmployeeBean == null) {
 
 					employeeDao.save(employeeBean);
-					redirect.addFlashAttribute("msg", "Record Updated Successfully");
+					redirect.addFlashAttribute("msg", "Dealer Updated Successfully");
 					redirect.addFlashAttribute("cssMsg", "warning");
 				} else {
 					redirect.addFlashAttribute("msg", "Already Record Exist");
@@ -135,7 +135,7 @@ public class DealerCreationController {
 				objLoginBean.setPassword(employeeBean.getPassword());
 				loginDao.save(objLoginBean);
 				SendSMS.sendSMS(msg, phnumber, objContext);
-				redirect.addFlashAttribute("msg", " Registered Successfully");
+				redirect.addFlashAttribute("msg", "  Dealer Registered Successfully");
 				redirect.addFlashAttribute("cssMsg", "success");
 				
 			}

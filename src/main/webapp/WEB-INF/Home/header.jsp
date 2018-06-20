@@ -408,7 +408,7 @@ function cartCount(){
             
             
                <c:if test="${roleId=='1' }">
-              <li class="dashboard"><a href="${baseurl }/admin/getProductsDeliveredQtyBranchWise"><i class="fa fa-users"></i> <span>Dashboard</span></a></li>
+              <li class="dashboard"><a href="${baseurl }/admin/dashboardforbranchwise"><i class="fa fa-users"></i> <span>Dashboard</span></a></li>
 <%--                <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li> --%>
                <li class="branch"><a href="${baseurl }/admin/branchHome"><i class="fa fa-university"></i> <span>Branch</span></a></li>
                 <li class="productType"><a href="${baseurl }/admin/producttype"><i class="fa fa-clone"></i>	<span>Product Category</span></a></li>&emsp;
@@ -418,14 +418,15 @@ function cartCount(){
               <li class="pending0">
             		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Reports</span> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-					 <li class=""><a href="${baseurl }/admin/reportAllOrdersPage"><i class="fa fa-clone" aria-hidden="true"></i><span>All Orders</span></a></li>
-                      <li class="pending0"><a href="${baseurl }/admin/reportPendingOrders"><i class="fa fa-clone" aria-hidden="true"></i> <span>Pending Orders</span></a></li>
-                      <li class=""><a href="${baseurl }/admin/reportDeliveredOrders"> <i class="fa fa-clone" aria-hidden="true"></i><span>Delivered Orders</span></a></li>
+					 <li class="allOrders"><a href="${baseurl }/admin/reportAllOrdersPage"><i class="fa fa-clone" aria-hidden="true"></i><span>All Orders</span></a></li>
+                      <li class="pendingOrders"><a href="${baseurl }/admin/reportPendingOrders"><i class="fa fa-clone" aria-hidden="true"></i> <span>Pending Orders</span></a></li>
+                      <li class="pendingOrders1"><a href="${baseurl }/admin/reportPartiallyDeliveredOrders"><i class="fa fa-clone" aria-hidden="true"></i> <span>Partially Delivered Orders</span></a></li>
+                      <li class="deliveredOrders"><a href="${baseurl }/admin/reportDeliveredOrders"> <i class="fa fa-clone" aria-hidden="true"></i><span>Delivered Orders</span></a></li>
 					</ul>
 				</li>
               </c:if>
 			 <c:if test="${roleId=='2' }">
-			 <li class="dashboard"><a href="${baseurl }/admin/getProductsDeliveredQtyBranchWise"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+			 <li class="dashboard"><a href="${baseurl }/admin/dashboardfordealerwise"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 			  <li class="productType"><a href="${baseurl }/admin/producttype"><i class="fa fa-clone"></i>
 
 			  <span>Product Category</span></a></li>&emsp;
@@ -434,6 +435,7 @@ function cartCount(){
                <li class="dealercreation"><a href="${baseurl }/admin/dealercreation"> <i class="fa fa-user-secret"></i><span>Dealer Creation </span></a></li>
 		<%-- 	   <li class="dealerconfirm"><a href="${baseurl }/admin/dealeraccountconfirm"><i class="fa fa-check-square"></i><span> Confirm  Dealer</span></a></li> --%>
 			    <li class="dealerpaymentconfirm"><a href="${baseurl }/admin/dealerpaymentconfirm"><i class="fa fa-bolt"></i><span>Confirm Payments </span></a></li>
+			     <li class="orderplacing"><a href="${baseurl }/admin/managerOrderplaceNew"><i class="fa fa-clipboard"></i><span>Order Product</span></a></li>
 			    <li class="orderslist"><a href="${baseurl }/admin/orderslist"><i class="fa fa-clipboard"></i><span>Delivery Status</span></a></li>
 			     <li class="orderplacing"><a href="${baseurl }/admin/managerorderplace"><i class="fa fa-clipboard"></i><span>Order Product</span></a></li>
 	             <li class="allOrders1 pendingOrders">

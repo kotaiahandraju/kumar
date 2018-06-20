@@ -15,7 +15,7 @@
  }
   @media (min-width: 768px) {
 .modal-dialog {
-    width: 957px;
+    width: 90%;
     margin: 30px auto;
 }
 }
@@ -93,7 +93,6 @@ padding-top:8px;
                    				<label for="focusedinput" class="col-md-2 control-label" style="padding-top:8px;">Branch: </label>
                    				<div class="col-md-6">
                    					<form:select path="branchId" class="form-control " >
-                   					<form:option value="">--- Select Branch ---</form:option>
 							    	<form:option value="all">All</form:option>
 							    	<form:options items="${branches_list}" itemValue="id" itemLabel="branchname"/>
 							    	</form:select>
@@ -147,11 +146,29 @@ padding-top:8px;
 
            
             </div>
-            
+            <div class="modal fade" id="orderListModal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog table-responsive"> 
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="exampleModalLabel"><span id="dealer_name_str"></span></h4>
+		       <span class="col-md-2" style="width:9.5%"><b>Dealer Name :</b></span><span class="col-md-3" id="dname">as</span> <span class="col-md-2" style="width:8%"><b>Order ID :</b></span> <span class="col-md-3" id="kumarid">as</span><span class="col-md-2" style="width:8.8%"><b>Order Date :</b></span>  <span class="col-md-2" id="korderdDate">as</span><br>
+		      </div>
+		      <div class="modal-body" id="modal_body">
+		      
+				      
+		      </div>
+		      <div class="modal-footer">
+		       <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+</div>
 
 
 <!-- <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script> -->
 <script type="text/javascript">
+
 
 /* $(document).ready(function() {
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
@@ -233,7 +250,8 @@ function showTableData(response){
 		var tblRow ="<tr>"
 			//+ "<td title='"+orderObj.dealerName+"'>" + orderObj.dealerName + "</td>"
 			+ "<td title='"+orderObj.created_on+"'>" + orderObj.created_on + "</td>"
-			+ "<td title='"+orderObj.orderId+"'>" + orderObj.orderId + "</td>"
+// 			+ "<td title='"+orderObj.orderId+"'>" + orderObj.orderId + "</td>"
+			+ '<td><a   href="#" type="button" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">' + orderObj.orderId + '</a></td>'
 			+ "<td title='"+orderObj.businessName+"'>" + orderObj.businessName + "</td>"
 			+ "<td title='"+orderObj.branch_name+"'>" + orderObj.branch_name + "</td>"
 			+ "<td title='"+orderObj.total_quantity+"'>" + orderObj.total_quantity + "</td>"
@@ -281,7 +299,69 @@ function getOrdersList() {
 		             }
 				});
 }
+function getDealerOrdersItems(order_id){
+	var formData = new FormData();
+	formData.append('order_id', order_id);
+	$.fn.makeMultipartRequest('POST', 'getItemsOfOrder', false,	formData, false, 'text', function(response) {
+		                 if(response != null ){
+		                	 
+		                	 var resJson=JSON.parse(response);
+		                	 displayDealerOrderItems(resJson.itemsList);
+		                	}
+		                 $('#orderListModal').modal('toggle');
+	                		$('#orderListModal').modal('show');
+		              
+				});
+	
+}
 
+function displayDealerOrderItems(response){
+	//serviceUnitArray ={};
+	serviceUnitArray1 ={};
+	$('#modal_body').html('');
+	var protectType = null;
+	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
+    	'<thead><tr><th>Business Name</th><th>Product Category</th><th>Product Subcategory </th><th>Item Code</th><th>Item Description</th><th>Ordered Quantity</th><th>Delivered Quantity</th><th>Nullified Quantity</th><th>Pending Quantity</th><th>Deliver Quantity</th><th>Nullify Quantity</th><th ></th></tr>'+
+    	"</thead><tbody></tbody></table>";
+	$("#modal_body").html(tableHead);
+	$.each(response,function(i, orderObj) {
+		
+		  $('#dname').text(orderObj.dealerName);
+		  $('#kumarid').text(orderObj.orderId);
+		  $('#korderdDate').text(orderObj.created_time );
+		  
+		
+		
+		serviceUnitArray1[orderObj.id] = orderObj;
+		//if(i==0)
+			/* $("#dealer_name_str").html(orderObj.dealerName+"\'s order("+orderObj.orderId+") items"); */
+		var text_field_str = '<td colspan="3" align="center">Completed</td>';
+		if(typeof orderObj.pending_qty != "undefined"){
+				var int_val = parseInt(orderObj.pending_qty);
+				if(int_val>0){
+					text_field_str = "<td><input type='text' readonly='true' width='40px'  maxlength ='4' class='mobile' id='qty"+orderObj.id+"' /></td>"
+									+"<td><input type='text' readonly='true' width='40px'  maxlength ='4' class='mobile' id='nullify_qty"+orderObj.id+"' value='0'/></td>"
+				}
+		}
+		var tblRow ="<tr id='row"+orderObj.id+"'>"
+			+ "<td title='"+orderObj.businessName+"'>" + orderObj.businessName + "</td>"
+			+ "<td title='"+orderObj.categeory+"'>" + orderObj.categeory + "</td>"
+			+ "<td title='"+orderObj.subCategeory+"'>" + orderObj.subCategeory + "</td>"
+			+ "<td title='"+orderObj.itemcode+"'>" + orderObj.itemcode + "</td>"
+			+ "<td title='"+orderObj.itemdescrption+"'>" + orderObj.itemdescrption + "</td>"
+			+ "<td title='"+orderObj.quantity+"'>" + orderObj.quantity + "</td>"
+			+ "<td id='delivered_qty"+orderObj.id+"' title='"+orderObj.delivered_qty+"'>" + orderObj.delivered_qty + "</td>"
+			+ "<td id='nullified_qty"+orderObj.id+"' title='"+orderObj.nullified_qty+"'>" + orderObj.nullified_qty + "</td>"
+			+ "<td id='pending_qty"+orderObj.id+"' title='"+orderObj.pending_qty+"'>" + orderObj.pending_qty + "</td>"
+			+ text_field_str
+			//+ "<td>"+text_field_str+"</td>"
+			//+ "<td><input type='button' id='deliverable_submit_btn' value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>"
+			+"</tr>";
+		$(tblRow).appendTo("#modal_body tbody");
+		
+	});
+	
+}
 
 
 
@@ -289,8 +369,13 @@ var listtype = "${list_type}";
 if(listtype=="delivered"){
 	$("#pageName").text("Delivered Orders");
 	$(".deliveredOrders").addClass("active");
+}else if(listtype == "partially"){
+	$("#pageName").text("Partial Orders");
+	$(".pendingOrders1").addClass("active");
 }else{
 	$("#pageName").text("All Orders");
+	$(".allOrders").addClass("active");
+	$(".pendingOrders").removeClass('active');
 	$(".allOrders1").addClass("active");
 }
 </script>

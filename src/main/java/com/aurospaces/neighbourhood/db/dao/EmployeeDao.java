@@ -154,7 +154,7 @@ public class EmployeeDao extends BaseEmployeeDao
 			if (objuserBean != null) {
 				 buffer.append(" and kp.branchId ='"+objuserBean.getBranchId()+"' ");
 			}
-			buffer.append(" order by kp.confirm asc");
+			buffer.append(" order by kp.payment_date desc,kp.confirm asc");
 		 String sql=buffer.toString();
 		 System.out.println(sql);
 		 List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
@@ -446,6 +446,19 @@ public Boolean UsernameExistsOrNotOnEdit(String username, String editFields) {
 			 return true; 
 		 }else
 			 return false;
+}
+
+public EmployeeBean getMobileNo(String empid) {
+	System.out.println("empid==="+empid);
+	jdbcTemplate = custom.getJdbcTemplate();
+	String sql = "select phone_number,name,branch_id from kumar_employee where id =?";
+	List<EmployeeBean> retlist = jdbcTemplate.query(sql,
+	new Object[]{empid},
+	ParameterizedBeanPropertyRowMapper.newInstance(EmployeeBean.class));
+	System.out.println("retlist==="+retlist.size());
+	if(retlist.size() > 0)
+		return retlist.get(0);
+	return null;
 }
 
 
