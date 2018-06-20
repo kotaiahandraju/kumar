@@ -400,7 +400,7 @@ function cartCount(){
             
             
                <c:if test="${roleId=='1' }">
-              <li class="dashboard"><a href="${baseurl }/admin/getProductsDeliveredQtyBranchWise"><i class="fa fa-users"></i> <span>Dashboard</span></a></li>
+              <li class="dashboard"><a href="${baseurl }/admin/dashboardforbranchwise"><i class="fa fa-users"></i> <span>Dashboard</span></a></li>
 <%--                <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li> --%>
                <li class="branch"><a href="${baseurl }/admin/branchHome"><i class="fa fa-university"></i> <span>Branch</span></a></li>
                 <li class="productType"><a href="${baseurl }/admin/producttype"><i class="fa fa-clone"></i>	<span>Product Category</span></a></li>&emsp;
@@ -418,7 +418,7 @@ function cartCount(){
 				</li>
               </c:if>
 			 <c:if test="${roleId=='2' }">
-			 <li class="dashboard"><a href="${baseurl }/admin/getProductsDeliveredQtyDealerWise"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+			 <li class="dashboard"><a href="${baseurl }/admin/dashboardfordealerwise"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 			  <li class="productType"><a href="${baseurl }/admin/producttype"><i class="fa fa-clone"></i>
 
 			  <span>Product Category</span></a></li>&emsp;
