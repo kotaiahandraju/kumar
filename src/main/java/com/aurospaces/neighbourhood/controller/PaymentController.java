@@ -81,7 +81,7 @@ public class PaymentController {
 				LoginBean objuserBeana = (LoginBean) session.getAttribute("cacheUserBean");
 				
 				EmployeeBean retlist =	employeeDao.getBranchHeadBean(objuserBeana.getBranchId());
-				
+				EmployeeBean empList=employeeDao.getById(Integer.parseInt(objuserBeana.getEmpId()));
 				String phnumber =retlist.getPhoneNumber();
 				
 				 String propertiespath = objContext.getRealPath("Resources" +File.separator+"DataBase.properties");
@@ -107,6 +107,13 @@ public class PaymentController {
 						}
 						paymentDao.save(paymentBean);
 						SendSMS.sendSMS(msg, phnumber, objContext);
+						  String  msg1 = prop.getProperty("dealerConfirmedPaymentSms");
+						  msg1 =msg1.replace("_username_",objuserBeana.getUserName() );
+							 msg1 =msg1.replace("_pass_", paymentBean.getQtrNumber());
+							 if(StringUtils.isNotEmpty(empList.getPhoneNumber())) {
+								 SendSMS.sendSMS(msg1, empList.getPhoneNumber(), objContext);
+							 }
+							 
 					redir.addFlashAttribute("msg", "Payment Created Successfully");
 					redir.addFlashAttribute("cssMsg", "success");
 			} catch (Exception e) {
