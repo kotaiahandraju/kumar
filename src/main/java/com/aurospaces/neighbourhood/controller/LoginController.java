@@ -165,7 +165,7 @@ public class LoginController {
 			{
 				//String msg ="your password is"+employee.getPassword();
 				msg =msg.replace("_pass_", employee.getPassword());
-				 msg =msg.replace("_username_",mobilenumber );
+				 msg =msg.replace("_username_",employee.getUsername() );
 				 
 				
 				SendSMS.sendSMS(msg, mobilenumber, objContext);
