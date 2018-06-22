@@ -519,13 +519,12 @@ function addCart() {
 			cartCount();
 			alert(jsonobj.msg);
 			$("#managercartId").text(count);
-// 		window.location.href = "${baseurl}/admin/cartdetails";
 			$('input[name^=quantity]').each(function(){
 				$(this).val("");
 			});
 		}
 		$('#tagId').attr('href','cartdetails');
-		
+		window.location.href = "${baseurl}/admin/orderplacing";
 	});
 	
 }

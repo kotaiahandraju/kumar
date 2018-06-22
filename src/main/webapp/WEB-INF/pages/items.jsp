@@ -160,7 +160,7 @@ table#dependent_table tbody tr td:first-child::before {
 										class="impColor">*</span></label>
 									<div class="col-md-7">
 										<form:input path="itemprice"
-											class="form-control validate" placeholder="Price" />
+											class="form-control validate numericOnly" placeholder="Price" />
 									</div>
 								</div>
 							</div>

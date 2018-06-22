@@ -186,6 +186,16 @@ padding-top:8px;
 /* $(document).ready(function() {
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 }); */
+
+$(function(){
+	$('.datatables').DataTable({
+		  dom: 'lBfrtip',
+	        buttons: [
+	            'copy', 'csv', 'excel', 'pdf', 'print'
+	        ]
+	});
+});
+
  var lstOrders =${all_orders};
 
 // console.log(lstOrders);
@@ -268,7 +278,13 @@ function showTableData(response){
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
-	if(isClick=='Yes') $('.datatables').dataTable();
+	if(isClick=='Yes') {
+		$('.datatables').DataTable({
+			  dom: 'lBfrtip',
+		        buttons: ['copy', 'csv', 'excel', 'pdf', 'print'
+		        ]
+		});
+}
 }
 
 function getOrdersList() {

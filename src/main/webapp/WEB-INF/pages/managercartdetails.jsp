@@ -481,7 +481,7 @@ function Popup(data)
 
     var is_chrome = Boolean(mywindow.chrome);
     var isPrinting = false;
-    mywindow.document.write('<html><head><title>Lpo Details</title><style>.invo {padding-top:15px;font-weight:600;text-align: center;}@media print{table { page-break-after:auto }tr    { page-break-inside:avoid; page-break-after:auto }td    { page-break-inside:avoid; page-break-after:auto }thead { display:table-header-group }tfoot { display:table-footer-group }}table { page-break-inside:auto }   div   { page-break-inside:avoid; }  thead { display:table-header-group }  tfoot { display:table-footer-group }</style><link rel="stylesheet" type="text/css" href="../assets/css/img.css"><link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css"></head><body>');
+    mywindow.document.write('<html><head><title>Order Details</title><style>.invo {padding-top:15px;font-weight:600;text-align: center;}@media print{table { page-break-after:auto }tr    { page-break-inside:avoid; page-break-after:auto }td    { page-break-inside:avoid; page-break-after:auto }thead { display:table-header-group }tfoot { display:table-footer-group }}table { page-break-inside:auto }   div   { page-break-inside:avoid; }  thead { display:table-header-group }  tfoot { display:table-footer-group }</style><link rel="stylesheet" type="text/css" href="../assets/css/img.css"><link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css"></head><body>');
     mywindow.document.write(data);
    
     mywindow.document.write('</body></html>');
