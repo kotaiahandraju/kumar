@@ -180,22 +180,24 @@ function createTableHeader(branch_map){
 	
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
 	'<thead><tr style="background:#4e8ede; color:#fff;"><th colspan="3">Product</th>';
-	$.each(branch_map,function(key, value) {
-		var tempStr = '<th colspan="4" align="center" style="">'+value+'</th>';
-		tableHead += tempStr;
-	});
 	var selected_val = $("#name").val();
 	if(selected_val=="all"){
 		tableHead += '<th colspan="4"  style="max-width:80px; min-width:80px;">Overall Orders</th>';
 	}
+	$.each(branch_map,function(key, value) {
+		var tempStr = '<th colspan="4" align="center" style="">'+value+'</th>';
+		tableHead += tempStr;
+	});
+	
 	tableHead += '</tr><tr><th align="center">Category</th><th align="center">Subcategory</th><th align="center">Item Code</th>'; 
+	if(selected_val=="all"){
+		tableHead += '<th align="center" style="max-width:80px; min-width:80px;">Ordered</th><th  style="max-width:90px; min-width:90px;">Delivered</th><th  style="max-width:80px; min-width:80px;">Nullified</th><th  style="max-width:100px; min-width:100px;">Pending</th>';
+	}
 	$.each(branch_map,function(key, value) {
 		var tempStr = '<th align="center"  style="max-width:80px; min-width:80px;">Ordered</th><th  style="max-width:90px; min-width:90px;">Delivered</th><th  style="max-width:80px; min-width:80px;">Nullified</th><th  style="max-width:80px; min-width:80px;">Pending</th>';
 		tableHead += tempStr;
 	});
-	if(selected_val=="all"){
-		tableHead += '<th align="center" style="max-width:80px; min-width:80px;">Ordered</th><th  style="max-width:90px; min-width:90px;">Delivered</th><th  style="max-width:80px; min-width:80px;">Nullified</th><th  style="max-width:100px; min-width:100px;">Pending</th>';
-	}
+	
 	tableHead += '</tr></thead><tbody></tbody></table>';
 	$("#tableId").html(tableHead);
 	//if(isClick=='Yes') $('.datatables').dataTable();
@@ -209,20 +211,25 @@ $("#tableId").html(tableHead); */
 		var total_ordered=0,total_delivered=0,total_nullified=0,total_pending=0;
 		var tblRow ="<tr><td>" + key.split("##")[0] + "</td><td>" + key.split("##")[1] + "</td><td>" + key.split("##")[2] + "</td>";
 		var branch_map = value;
+		var selected_val = $("#name").val();
+		if(selected_val=="all"){
+			$.each(branch_map,function(key2,value2) {
+				var quantities = value2.split(",");
+				var pending_qty = parseInt(quantities[0]-(parseInt(quantities[1])+parseInt(quantities[2])));
+				total_ordered += parseInt(quantities[0]);
+				total_delivered += parseInt(quantities[1]);
+				total_nullified += parseInt(quantities[2]);
+				total_pending += pending_qty;
+			});
+			tblRow += "<td>" + total_ordered + "</td><td>" + total_delivered + "</td><td>" + total_nullified + "</td><td>" + total_pending + "</td>";
+		}
 		$.each(branch_map,function(key2,value2) {
 			var quantities = value2.split(",");
 			var pending_qty = parseInt(quantities[0]-(parseInt(quantities[1])+parseInt(quantities[2])));
-			total_ordered += parseInt(quantities[0]);
-			total_delivered += parseInt(quantities[1]);
-			total_nullified += parseInt(quantities[2]);
-			total_pending += pending_qty;
 			var temp_td = "<td title='"+key2+"'>" + value2.split(",")[0] + "</td><td title='"+key2+"'>" + value2.split(",")[1] + "</td><td title='"+key2+"'>" + value2.split(",")[2] + "</td><td title='"+key2+"'>" + pending_qty + "</td>";
 			tblRow += temp_td;
 		});
-		var selected_val = $("#name").val();
-		if(selected_val=="all"){
-			tblRow += "<td>" + total_ordered + "</td><td>" + total_delivered + "</td><td>" + total_nullified + "</td><td>" + total_pending + "</td>";
-		}
+		
 		tblRow += "</tr>";
 		
 		$(tblRow).appendTo("#tableId table tbody");
