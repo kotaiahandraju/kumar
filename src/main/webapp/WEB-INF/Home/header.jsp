@@ -36,12 +36,15 @@
 <link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/charts-morrisjs/morris.css' /> 
 <link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/codeprettifier/prettify.css' /> 
 <link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/form-toggle/toggles.css' /> 
-<link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/datatables/dataTables.css' /> 
+<%-- <link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/datatables/dataTables.css' />  --%>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.18/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.2/css/buttons.dataTables.min.css">
 
 <link href="${baseurl }/assets/css/datepicker1.css" rel="stylesheet" type="text/css" />
 
-<script type='text/javascript' src='${baseurl }/assets/js/jquery-1.10.2.min.js'></script>
+<script type='text/javascript' src='https://code.jquery.com/jquery-1.11.3.min.js'></script>
 
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
 <script type='text/javascript' src="${baseurl }/js/jquery.blockUI.min.js" ></script>

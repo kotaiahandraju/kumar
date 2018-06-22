@@ -71,7 +71,7 @@ function topFunction() {
 <script type='text/javascript' src='${baseurl }/assets/plugins/easypiechart/jquery.easypiechart.min.js'></script> 
 <script type='text/javascript' src='${baseurl }/assets/plugins/sparklines/jquery.sparklines.min.js'></script> 
 <script type='text/javascript' src='${baseurl }/assets/plugins/form-toggle/toggle.min.js'></script> 
-<script type='text/javascript' src='${baseurl }/assets/plugins/datatables/jquery.dataTables.min.js'></script> 
+<script type='text/javascript' src='https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js'></script> 
 <script type='text/javascript' src='${baseurl }/assets/plugins/datatables/dataTables.bootstrap.js'></script> 
 <script type='text/javascript' src='${baseurl }/assets/demo/demo-datatables.js'></script> 
 <script type='text/javascript' src='${baseurl }/assets/js/placeholdr.js'></script> 
@@ -81,7 +81,17 @@ function topFunction() {
 <script type='text/javascript' src='${baseurl }/assets/plugins/charts-morrisjs/morris.min.js'></script> 
 <script type='text/javascript' src='${baseurl }/assets/demo/demo-morrisjs.js'></script> 
 <script type='text/javascript' src='${baseurl }/js/customValidation.js'></script> 
-<script type='text/javascript' src='${baseurl }/js/dataTables.fixedColumns.js'></script> 
+
+
+<script type='text/javascript' src='https://cdn.datatables.net/buttons/1.5.2/js/dataTables.buttons.min.js'></script> 
+<script type='text/javascript' src='https://cdn.datatables.net/buttons/1.5.2/js/buttons.flash.min.js'></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js'></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js'></script>
+<script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js'></script>
+<script type='text/javascript' src='https://cdn.datatables.net/buttons/1.5.2/js/buttons.html5.min.js'></script>
+<script type='text/javascript' src='https://cdn.datatables.net/buttons/1.5.2/js/buttons.print.min.js'></script>
+
+
 
 <%-- <script type='text/javascript' src='${baseurl }/assets/plugins/datatables/dataTables.fixedColumns.min.js'> </script> --%>
 <script type='text/javascript' src="${baseurl }/js/select2.min.js" ></script>
@@ -90,6 +100,8 @@ function topFunction() {
 	
 <script type="text/javascript">
 var isClick = 'Yes';
+$.fn.dataTableExt.sErrMode = 'console';
+
 
 </script>
 </body>
