@@ -97,8 +97,8 @@ public class ProductNameController {
 				String ext1 = FilenameUtils.getExtension(name);
 				filepath= MiscUtils.generateRandomString(5)+"."+ext1;
 				//filepath= name+file.getContentType();
-				String rootPath = request.getSession().getServletContext().getRealPath("/");
-				File dir = new File(rootPath + File.separator + "documents");
+				String rootPath = System.getProperty("catalina.base");
+				File dir = new File(rootPath + File.separator + "webapps"+ File.separator + "kumarimages");
 				if (!dir.exists()) {
 					dir.mkdirs();
 				}
@@ -115,13 +115,9 @@ public class ProductNameController {
 				} catch (IOException e) {
 					System.out.println("error : " + e);
 				}
-				filepath= "documents/"+filepath;
+				filepath= "kumarimages/"+filepath;
 				productnameBean.setDocuments(filepath);
-				sTomcatRootPath = System.getProperty("catalina.base");
-				sDirPath = sTomcatRootPath + File.separator + "webapps"+ File.separator + "documents" ;
-				System.out.println(sDirPath);
-				File file1 = new File(sDirPath);
-				file.transferTo(file1);
+				
 			}
 			
 			

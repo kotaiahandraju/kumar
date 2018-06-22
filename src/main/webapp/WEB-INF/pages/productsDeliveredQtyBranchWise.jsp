@@ -509,7 +509,7 @@ function saveDeliverableItemsData(objId){
 
 function getProductsList(){
 	var branch_id = $("#branchId").val();
-	$("#products_summary_form").attr("action","getProductsDeliveredQtyBranchWise.htm?branch_id="+branch_id);
+	$("#products_summary_form").attr("action","dashboardforbranchwise.htm?branch_id="+branch_id);
 	$("#products_summary_form").submit();
 	/* $.ajax({
 		type : "POST",

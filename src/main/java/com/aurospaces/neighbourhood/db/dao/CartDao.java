@@ -30,7 +30,7 @@ public class CartDao extends BaseCartDao
 	@Autowired HttpSession session;
 	public int countcartdetails(CartBean objCartBean){
 		 jdbcTemplate = custom.getJdbcTemplate();
-		 int count;
+		 int count = 0;
 		 if(StringUtils.isEmpty(objCartBean.getUserId())) {
 			 LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
 				if (objuserBean != null) {
@@ -40,10 +40,6 @@ public class CartDao extends BaseCartDao
 			 
 			  count = jdbcTemplate.queryForInt(sql,new Object []{objCartBean.getUserId()});
 			
-		 }else {
-			 String sql =" SELECT COUNT(*) FROM `cart` WHERE `userId`=? ";
-			 
-			  count = jdbcTemplate.queryForInt(sql,new Object []{objCartBean.getUserId()});
 		 }
 		 
 		return count;

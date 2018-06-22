@@ -202,7 +202,6 @@ font-size:28px;
 				</div> 
 				</div> -->
 				<!-- Invoice Model End -->	
-
 <script type="text/javascript">
  var listOrders1 =${allOrders1};
  

@@ -305,7 +305,7 @@ $(".orderplacing").addClass("active");
     outline: none;
     font-size: 13px;
     transition: 0.4s;
-    margin-bottom:5px;
+    margin-bottom:-15px;
 }
 
 .active, .accordion0:hover {
@@ -410,21 +410,7 @@ table#dependent_table tbody tr td:first-child::before {
 					</div>
 				</div>
 				</div>
-	<c:choose>
-<c:when test="${empty param.dealerId}">
-   <script> var delerId1 = "";</script>
-</c:when>
-<c:otherwise>
-   <script> 
-   var delerId1 = "${param.dealerId}";
-   
-   $("#delerId").val(delerId1);
-   $(document).ready(function() {
-   managercartCount();
-   });
-   </script>
-</c:otherwise>
-</c:choose>
+	
  
 <script type="text/javascript">
 var subCategoryMap =${sub_category_map};
@@ -503,7 +489,6 @@ var res="";
 function addCart() {
 	quantity = [];  
 	productId = [];
-	var dealerId=$("#delerId").val();
 	 res="";
 	$('input[name^=quantity]').each(function(){
 		if($.trim($(this).val()) != ""){
@@ -521,21 +506,17 @@ function addCart() {
 	if(productId == "" || productId== null){
 		alert("No Products selected ");
 		return false;
-	}else if($("#delerId").val() == "" || $("#delerId").val()== null){
-		$("#delerId").css("border","red solid 1px");
-		alert("Please Select Dealer ");
-		return false;
 	}
 	var formData = new FormData();
 	formData.append('quantity', quantity);
 	formData.append('productId', productId);
-	formData.append('userId',dealerId);
 	
 	$.fn.makeMultipartRequest('POST', 'addtocart', false,
 			formData, false, 'text', function(data) {
 		if(data != ""){
 			var jsonobj = $.parseJSON(data);
 			var count = jsonobj.count;
+			cartCount();
 			alert(jsonobj.msg);
 			$("#managercartId").text(count);
 // 		window.location.href = "${baseurl}/admin/cartdetails";
@@ -564,6 +545,10 @@ function orderNow() {
 		    productId.push(res);
 		}
 	});
+	if(productId == "" || productId== null){
+		alert("No Products selected ");
+		return false;
+	}
 	console.log(quantity);
 	console.log(productId); 
 	var formData = new FormData();
@@ -584,18 +569,7 @@ function orderNow() {
 	
 }
 	
-/* function managercartCount(){
-	var userId=$("#delerId").val();
-	var formData = new FormData();
-	formData.append('userId', userId);
-	$.fn.makeMultipartRequest('POST', 'managercountCartdetails', false, formData, false, 'text', function(data){
-		$('#tagId').attr('href','cartdetails?dealerId='+userId);
-		var jsonobj = $.parseJSON(data);
-		var count = jsonobj.count;
-		$("#managercartId").text(count);
-	
-	});
-} */
+
 
 var acc = document.getElementsByClassName("accordion0");
 var i;
