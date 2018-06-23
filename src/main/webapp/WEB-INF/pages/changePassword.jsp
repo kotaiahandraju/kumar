@@ -28,8 +28,8 @@
 							           
 										<div class="col-md-6">
 											<div class="form-group" id="passwordDiv">
-												<label class="col-md-3 control-label no-padding-right">Current	Password<span class="impColor">*</span></label>
-												<div class="col-md-6">
+												<label class="col-md-5 control-label no-padding-right">Current	Password<span class="impColor">*</span></label>
+												<div class="col-md-5">
 													<input type ="password"	name="password" id="password" class="form-control validate " placeholder="Enter Password" />
 												</div>
 											</div>
@@ -37,8 +37,8 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group" id="passwordDiv">
-												<label class="col-md-3 control-label no-padding-right">New Password<span class="impColor">*</span></label>
-												<div class="col-md-6">
+												<label class="col-md-5 control-label no-padding-right">New Password<span class="impColor">*</span></label>
+												<div class="col-md-5">
 													<input type ="password"	name="npassword" id="npassword" class="form-control validate"	placeholder="Enter  New Password" />
 												</div>
 											</div>
@@ -46,8 +46,8 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group" id="passwordDiv">
-												<label class="col-md-3 control-label no-padding-right">Confirm Password<span class="impColor">*</span></label>
-												<div class="col-md-6">
+												<label class="col-md-5 control-label no-padding-right">Confirm Password<span class="impColor">*</span></label>
+												<div class="col-md-5">
 													<input type ="password"	name="cpassword" id="cpassword" class="form-control validate"	placeholder="Re-Enter New Password" />
 												</div>
 								           
@@ -65,13 +65,15 @@
 								</div></div>
 								</form>
 								</div>
+								
 								</div>
 								
 								</div>
 					
 					</div>
 				</div>
-			</div>
+				
+			</div><div class="clearfix"></div><br>
 			<!-- /.page-content -->
 		<!-- /.main-content-inner -->
 	<!-- /.main-content -->

@@ -40,6 +40,11 @@ table#dependent_table tbody tr td:first-child::before {
 /* 	width: auto !important; */
 }
 .invo {padding-top:15px;font-weight:600;text-align: center;}
+.form-horizontal .control-label {
+    text-align: left;
+    margin-bottom: 0;
+    padding-top: 8px;
+}
 </style>
 
 
@@ -51,19 +56,16 @@ table#dependent_table tbody tr td:first-child::before {
 	</ol>
 	<div class="clearfix"></div>
 	<div class="container-fluid" id ="hideForInvoice">
-	<div class="col-md-12 col-sm-12">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
-					<h4>Select Dealer</h4>
-				</div>
+	<div class="col-md-12 col-sm-12" style="padding-left:0px; padding-right:0px;">
+		
 				<form:form class="form-horizontal" modelAttribute="managercartdetailsForm" action="" method="Post">
-					<div class="panel-body" style="border-radius: 0px;">
+					<div class="panel-body" style="border-radius: 0px; border:none;">
 						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-4 control-label">Select Dealer <span class="impColor">*</span>
+									<label for="focusedinput" class="col-md-3 control-label" align="left">Select Dealer <span class="impColor">*</span>
 									</label>
-									<div class="col-md-7">
+									<div class="col-md-5">
 										<form:select path="delerId" class="form-control" onchange="managercartCount(),managercartList();">
 								    	<form:option value="">-- Select Dealer --</form:option>
 								    	<form:options items="${dealersList }"></form:options>
@@ -84,8 +86,8 @@ table#dependent_table tbody tr td:first-child::before {
 						</div>
 					</div> -->
 				</form:form>
-			</div>
-		</div>
+			
+		</div><div class="clearfix"></div>
 		<div class="row" id="orderPlacement">
 			<div class="col-md-12">
 				<div class="panel panel-primary">
@@ -98,7 +100,7 @@ table#dependent_table tbody tr td:first-child::before {
 					</div>
 					<div class="panel-body collapse in">
 					<div class="table-responsive" id="tableId">
-						<table class="table "
+						<table class="table table-bordered table-striped"
 							id="example">
 							<thead>
 								<tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>quantity</td>

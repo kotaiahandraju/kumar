@@ -59,6 +59,21 @@ function topFunction() {
 }
 </script>
  
+<%--  <script src="${baseurl }/newjs/jquery.min.js"></script> --%>
+  <script src="${baseurl }/newjs/popper.min.js"></script>
+  <script src="${baseurl }/newjs/bootstrap.min.js"></script>
+  <script src="${baseurl }/newjs/pace.min.js"></script>
+  <script src="${baseurl }/newjs/Chart.min.js"></script>
+  <script src="${baseurl }/newjs/app.js"></script>
+<%--   <script src="${baseurl }/newjs/toastr.min.js"></script> --%>
+  <script src="${baseurl }/newjs/gauge.min.js"></script>
+  <script src="${baseurl }/newjs/moment.min.js"></script>
+  <script src="${baseurl }/newjs/daterangepicker.min.js"></script>
+  <script src="${baseurl }/newjs/main.js"></script>
+
+</body>
+
+</html>
 <script type='text/javascript' src='${baseurl }/assets/js/jqueryui-1.10.3.min.js'></script> 
 
 

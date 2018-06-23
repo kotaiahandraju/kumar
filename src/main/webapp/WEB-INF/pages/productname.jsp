@@ -177,16 +177,16 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Product Category</th><th>Product Subcategory</th><th>Image</th><th>Status</th><th></th></tr>'+
+    	'<thead><tr><th>Product Category</th><th>Product Subcategory</th><th>Image</th><th>Status</th><th  style="text-align:center">Actions</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='deleteProductName("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
+			var deleterow = "<a class='deactivate btn btn-danger' onclick='deleteProductName("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
-			var deleterow = "<a class='activate' onclick='deleteProductName("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
+			var deleterow = "<a class='activate btn btn-danger' onclick='deleteProductName("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
-		var edit = "<a class='edit editIt' onclick='editProductName("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
+		var edit = "<a class='edit editIt btn btn-info' onclick='editProductName("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 // 		alert(orderObj.lponumber);
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"

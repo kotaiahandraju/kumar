@@ -20,7 +20,8 @@ div.dataTables_length label {
 }
 
 div.dataTables_length select {
-  width: 75px;
+  width: 60px;
+  height:28px !important;
 }
 
 div.dataTables_filter label {

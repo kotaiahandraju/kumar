@@ -64,17 +64,13 @@ padding-top:8px;
         
           <div class="row" id="moveTo">
             <div class="col-md-12 col-sm-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
                         <h4>Search Orders</h4>
                         <div class="options"></div>
-                    </div>
 	                <form:form  modelAttribute="orderLstForm"   class="form-horizontal" method="post" >
-                    <div class="panel-body">
                     	<div class="row">
                     	<div class="col-md-3">
                    			<div class="form-group">
-                   				<label for="focusedinput" class="col-md-4 control-label">Date : </label>
+                   				<label for="focusedinput" class="col-md-5 control-label">From Date : </label>
                    				<div class="col-md-6">
                    					<input type="text" id="from_date" value="" readonly="readonly" />
                    					
@@ -83,7 +79,7 @@ padding-top:8px;
                    		</div>
                    		<div class="col-md-3">
                    			<div class="form-group">
-                   				<label for="focusedinput" class="col-md-3 control-label">To Date: </label>
+                   				<label for="focusedinput" class="col-md-5 control-label">To Date: </label>
                    				<div class="col-md-6">
                    					<input type="text" id="to_date" value=""  readonly="readonly"/>
 							    </div>
@@ -92,7 +88,7 @@ padding-top:8px;
                    		<c:if test="${cacheUserBean.roleId == '1'}">
                    		<div class="col-md-4">
                    			<div class="form-group">
-                   				<label for="focusedinput" class="col-md-3 control-label">Branch : </label>
+                   				<label for="focusedinput" class="col-md-5 control-label">Branch : </label>
                    				<div class="col-md-5">
                    					<form:select path="branchId" class="form-control validate" >
 							    	<form:option value="all">All</form:option>
@@ -103,7 +99,7 @@ padding-top:8px;
                    		</div>
                    		</c:if>
                    		<div class="col-md-2">
-                   			<div class="form-group">
+                   			<div class="">
                    				<div class="">
                    					<div class="btn btn-primary sub"   value="Search" onclick="getOrdersList()">Search</div>
 <!--                    					<input class="btn btn-primary sub"   value="Search" onclick="getOrdersList()" /> -->
@@ -123,15 +119,12 @@ padding-top:8px;
                     			</div>
                     		</div> --%>
                     	</div>
-                    		
-                    		</div>
                     		</form:form>
-                    	</div>
                     </div>
                 </div> 
         
         
-        
+        <br>
             <div class="row" id="row1">
               <div class="col-md-12">
                     <div class="panel panel-primary">
@@ -161,12 +154,12 @@ padding-top:8px;
            
             </div>
              <div class="modal fade" id="orderListModal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog table-responsive"> 
-		    <div class="modal-content">
+		  <div class="modal-dialog"> 
+		    <div class="modal-content  table-responsive">
 		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		        <h4 class="modal-title" id="exampleModalLabel"><span id="dealer_name_str"></span></h4>
-		       <span class="col-md-2" style="width:9.5%"><b>Dealer Name :</b></span><span class="col-md-3" id="dname">as</span> <span class="col-md-2" style="width:8%"><b>Order ID :</b></span> <span class="col-md-3" id="kumarid">as</span><span class="col-md-2" style="width:8.8%"><b>Order Date :</b></span>  <span class="col-md-2" id="korderdDate">as</span><br>
+		       <span class="col-md-2"><b>Dealer Name :</b></span><span class="col-md-3" id="dname">as</span> <span class="col-md-2" style="width:8%"><b>Order ID :</b></span> <span class="col-md-3" id="kumarid">as</span><span class="col-md-2" style="width:8.8%"><b>Order Date :</b></span>  <span class="col-md-2" id="korderdDate">as</span><br>
+		       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		      </div>
 		      <div class="modal-body" id="modal_body">
 		      
@@ -257,7 +250,7 @@ function showTableData(response){
 			//+ "<td title='"+orderObj.dealerName+"'>" + orderObj.dealerName + "</td>"
 			+ "<td title='"+orderObj.created_on+"'>" + orderObj.created_on + "</td>"
 // 			+ "<td title='"+orderObj.orderId+"'>" + orderObj.orderId + "</td>"
-			+ '<td><a   href="#" type="button" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">' + orderObj.orderId + '</a></td>'
+			+ '<td><a   href="#"  onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">' + orderObj.orderId + '</a></td>'
 			+ "<td title='"+orderObj.businessName+"'>" + orderObj.businessName + "</td>"
 			+ "<td title='"+orderObj.branch_name+"'>" + orderObj.branch_name + "</td>"
 			+ "<td title='"+orderObj.total_quantity+"'>" + orderObj.total_quantity + "</td>"

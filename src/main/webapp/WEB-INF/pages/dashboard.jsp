@@ -53,6 +53,8 @@ tbody tr:nth-child(even) th {
 .table  colgroup {
 border:1px solid #006699;
 } 
+.main{
+height:580px;}
 </style>
 <script>
 $(document).ready(function(){
@@ -172,8 +174,7 @@ $(document).ready(function(){
 </div> <!-- page-content -->
  
 <div id="target"> </div>
-<br/>
-<br/>
+
 
 
 <!-- Body Ends Here -->

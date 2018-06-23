@@ -9,7 +9,7 @@
  <link rel="stylesheet" type="text/css" href="../assets/css/img.css">
  <style>
 .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td{
-border-right:1px solid #006699 !important;
+/* border-right:1px solid #006699 !important; */
 } 
  .table > caption + thead > tr:first-child > th, .table > colgroup + thead > tr:first-child > th, .table > thead:first-child > tr:first-child > th, .table > caption + thead > tr:first-child > td, .table > colgroup + thead > tr:first-child > td, .table > thead:first-child > tr:first-child > td {
     border-top: 0;
@@ -50,19 +50,22 @@ table#dependent_table tbody tr td:first-child::before {
 
 </style>
         <div class="clearfix"></div>
-            
+            <ol class="breadcrumb">
+        <li class="breadcrumb-item">Home</li>
+        <li class="breadcrumb-item"><a href="#">Admin</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+      </ol>
+
+      
             <div class="clearfix"></div>
         <div class="container-fluid" id="lpoMain">
         
         	<div class="row" id="moveTo">
             <div class="col-md-12 col-sm-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
                         <h4>Select Branch</h4>
                         <div class="options"></div>
-                    </div>
+                   
 	                <form:form  modelAttribute="orderLstForm"   class="form-horizontal" method="post" id="products_summary_form" name="products_summary_form">
-                    <div class="panel-body">
                     	<div class="row">
                     	
                    		<c:if test="${cacheUserBean.roleId == '1'}">
@@ -88,15 +91,14 @@ table#dependent_table tbody tr td:first-child::before {
                    		</div>
                    		
                     		
-                    		</div>
                     		</form:form>
-                    	</div>
+                    	
                     </div>
                 </div> 
         
             <div class="row" id="row1">
               <div class="col-md-12">
-                    <div class="panel panel-primary">
+                    <div class="panel panel-info">
                         <div class="panel-heading">
                             <h4>Products Summary</h4>
                             <div class="options">   
@@ -177,7 +179,7 @@ function createTableHeader(branch_map){
 	
 	
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatable datatables" id="example">'+
-	'<thead><tr style="background:#4e8ede; color:#fff;"><th colspan="3">Product</th>';
+	'<thead><tr style="background:#f8f9fb; color:#000;"><th colspan="3">Product</th>';
 	$.each(branch_map,function(key, value) {
 		var tempStr = '<th colspan="4" align="center" style="">'+value+'</th>';
 		tableHead += tempStr;

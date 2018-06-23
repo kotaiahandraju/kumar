@@ -18,7 +18,13 @@ table #dependent_table{
 /* 	width: 100%; */
 	counter-reset: rowNumber;
 }
-
+.table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
+    border-bottom-width: 2px;
+    font-weight: 500;
+    font-size: 11px;
+    text-transform: uppercase;
+    min-width: 135px;
+}
 table tbody tr.rowInc{
 	counter-increment: rowNumber;
 }
@@ -189,17 +195,17 @@ function showTableData(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Branch Name</th><th>Employee Name</th><th>Username</th><th>Password</th><th>Role</th><th>Email</th><th>Mobile Number</th><th>Status</th><th></th></tr>'+
+    	'<thead><tr><th>Branch Name</th><th>Employee Name</th><th>Username</th><th>Password</th><th>Role</th><th>Email</th><th>Mobile Number</th><th>Status</th><th  style="text-align:center">Actions</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='deleteEmpCreation("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
+			var deleterow = "<a class='deactivate btn btn-danger' onclick='deleteEmpCreation("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
-			var deleterow = "<a class='activate' onclick='deleteEmpCreation("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
+			var deleterow = "<a class='activate btn btn-danger' onclick='deleteEmpCreation("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
-		var edit = "<a class='edit editIt' onclick='editEmpCreation("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
+		var edit = "<a class='edit editIt btn btn-info' onclick='editEmpCreation("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.bName+"'>" + orderObj.bName + "</td>"

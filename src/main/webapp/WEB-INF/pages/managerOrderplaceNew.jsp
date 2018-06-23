@@ -94,19 +94,17 @@ table#dependent_table tbody tr td:first-child::before {
 	</ol>
 	<div class="clearfix"></div>
 	<div class="container-fluid">
-	<div class="col-md-12 col-sm-12">
-			<div class="panel panel-primary">
-				<div class="panel-heading">
+	<div class="col-md-12 col-sm-12" style="padding-left:0px; padding-right:0px;">
+				
 					<h4>Select Dealer</h4>
-				</div>
+				
 				<form:form class="form-horizontal" modelAttribute="managerorderLstForm" action="" method="Post">
-					<div class="panel-body" style="border-radius: 0px;">
-						<div class="row">
+					
 							<div class="col-md-6">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-4 control-label">Select Dealer <span class="impColor">*</span>
+									<label for="focusedinput" class="col-md-3 control-label">Select Dealer <span class="impColor">*</span>
 									</label>
-									<div class="col-md-7">
+									<div class="col-md-5">
 										<form:select path="delerId" class="form-control" onchange="managercartCount();">
 								    	<form:option value="">-- Select Dealer --</form:option>
 								    	<form:options items="${dealersList }"></form:options>
@@ -114,9 +112,8 @@ table#dependent_table tbody tr td:first-child::before {
 									</div>
 								</div>
 							</div>
-							
-						</div>
-					</div>
+					
+					
 					<!-- <div class="panel-footer">
 						<div class="row">
 							<div class="col-sm-12">
@@ -127,8 +124,7 @@ table#dependent_table tbody tr td:first-child::before {
 						</div>
 					</div> -->
 				</form:form>
-			</div>
-		</div>
+		</div><div class="clearfix"></div>
 		<div class="row" id="orderPlacement">
 			<div class="col-md-12">
 				<div class="panel panel-primary">

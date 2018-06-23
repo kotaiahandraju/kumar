@@ -27,6 +27,10 @@
 <link rel='stylesheet' type='text/css' href='assets/plugins/datatables/dataTables.css' />
 
 <style type="text/css">
+@media screen and (max-width: 640px) and (min-width: 320px) { 
+body {
+margin-top:5px !important;}
+}
 .loghead {
 padding:5px;
 background:#293f4b;

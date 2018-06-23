@@ -58,19 +58,18 @@ table#dependent_table tbody tr td:first-child::before {
         
         	<div class="row" id="moveTo">
             <div class="col-md-12 col-sm-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
+                
                         <h4>Select Dealer</h4>
                         <div class="options"></div>
-                    </div>
+                    
 	                <form:form  modelAttribute="orderLstForm"   class="form-horizontal" method="post" id="products_summary_form" name="products_summary_form">
-                    <div class="panel-body">
+                    
                     	<div class="row">
                     	
                    		<c:if test="${cacheUserBean.roleId == '2'}">
                    		<div class="col-md-4">
                    			<div class="form-group">
-                   				<label for="focusedinput" class="col-md-6 control-label">Dealer : </label>
+                   				<label for="focusedinput" class="col-md-3 control-label">Dealer : </label>
                    				<div class="col-md-6">
                    					<form:select path="name" class="form-control " onchange="getProductsList()">
 							    	<form:option value="all">All</form:option>
@@ -90,9 +89,8 @@ table#dependent_table tbody tr td:first-child::before {
                    		</div>
                    		
                     		
-                    		</div>
+                    		
                     		</form:form>
-                    	</div>
                     </div>
                 </div> 
         
@@ -179,7 +177,7 @@ function createTableHeader(branch_map){
 	
 	
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-	'<thead><tr style="background:#4e8ede; color:#fff;"><th colspan="3">Product</th>';
+	'<thead><tr style="background:#f1f1f1; color:#000;"><th colspan="3">Product</th>';
 	$.each(branch_map,function(key, value) {
 		var tempStr = '<th colspan="4" align="center" style="">'+value+'</th>';
 		tableHead += tempStr;

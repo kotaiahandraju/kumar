@@ -216,7 +216,7 @@ function showTableData(response){
 		 if(orderObj.comment == "" || orderObj.comment == null){
 			 orderObj.comment= "--";
 		 }
-	var edit = "<a class='edit editIt' onclick='editPaymentStatus("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
+	var edit = "<a class='edit editIt btn btn-info' onclick='editPaymentStatus("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"

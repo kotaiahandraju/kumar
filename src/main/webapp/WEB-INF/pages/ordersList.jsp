@@ -82,17 +82,13 @@ table#dependent_table tbody tr td:first-child::before {
         
          <div class="row" id="moveTo">
             <div class="col-md-12 col-sm-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
                         <h4>Select Dealer</h4>
                         <div class="options"></div>
-                    </div>
 	                <form:form  modelAttribute="orderLstForm"   class="form-horizontal" method="post" >
-                    <div class="panel-body">
                     	<div class="row">
                     		<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Dealer : <span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-3 control-label">Dealer : <span class="impColor">*</span></label>
                     				<div class="col-md-6">
                     					<form:select path="name" class="form-control " onchange="orederLists();">
 								    	<form:option value="all">All</form:option>
@@ -103,7 +99,7 @@ table#dependent_table tbody tr td:first-child::before {
                     		</div>
                     		<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Delivery Status : </label>
+                    				<label for="focusedinput" class="col-md-5 control-label">Delivery Status : </label>
                     				<div class="col-md-6">
                     					<form:select path="status" class="form-control " onchange="orederLists();">
 								    	<form:option value="all">All</form:option>
@@ -115,14 +111,11 @@ table#dependent_table tbody tr td:first-child::before {
                     			</div>
                     		</div>
                     	</div>
-                    		
-                    		</div>
                     		</form:form>
-                    	</div>
                     </div>
                 </div>
         
-        
+        <br>
         
             <div class="row" id="row1">
               <div class="col-md-12">
@@ -156,13 +149,13 @@ table#dependent_table tbody tr td:first-child::before {
 
 
   
-<div class="modal fade" id="orderListModal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog table-responsive"> 
-		    <div class="modal-content">
+<div class="modal fade" id="orderListModal" id="myModal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog"> 
+		    <div class="modal-content table-responsive">
 		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		        <h4 class="modal-title" id="exampleModalLabel"><span id="dealer_name_str"></span></h4>
-		       <span class="col-md-2" style="width:9.5%"><b>Dealer Name :</b></span><span class="col-md-3" id="dname">as</span> <span class="col-md-2" style="width:8%"><b>Order ID :</b></span> <span class="col-md-3" id="kumarid">as</span><span class="col-md-2" style="width:8.8%"><b>Order Date :</b></span>  <span class="col-md-2" id="korderdDate">as</span><br>
+		       <span class="col-md-2"><b>Dealer Name :</b></span><span class="col-md-3" id="dname">as</span> <span class="col-md-2"><b>Order ID :</b></span> <span class="col-md-3" id="kumarid">as</span><span class="col-md-2" style="width:8.8%"><b>Order Date :</b></span>  <span class="col-md-2" id="korderdDate">as</span><br>
+		       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		      </div>
 		      <div class="modal-body" id="modal_body">
 		      
@@ -175,13 +168,13 @@ table#dependent_table tbody tr td:first-child::before {
 		  </div>
 </div>
 
-<div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog table-responsive"> 
-		    <div class="modal-content">
+<div class="modal fade" id="historyModal" tabindex="-1" data-backdrop="false" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		  <div class="modal-dialog"> 
+		    <div class="modal-content table-responsive">
 		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		        <h4 class="modal-title" id="exampleModalLabel"><span id="dealer_name_str"></span></h4>
-		       <span class="col-md-2" style="width:9.5%"><b>Dealer Name :</b></span><span class="col-md-3" id="dname1"></span> <span class="col-md-2" style="width:8%"><b>Order ID :</b></span> <span class="col-md-3" id="kumarid2"></span> <span class="col-md-2" style="width:8.8%"><b>Order Date :</b></span>  <span class="col-md-2" id="korderdDate2"></span><br>
+		       <span class="col-md-2"><b>Dealer Name :</b></span><span class="col-md-3" id="dname1"></span> <span class="col-md-2"><b>Order ID :</b></span> <span class="col-md-3" id="kumarid2"></span> <span class="col-md-2" style="width:8.8%"><b>Order Date :</b></span>  <span class="col-md-2" id="korderdDate2"></span><br>
+		       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		      </div>
 		      <div class="modal-body" id="history_modal_body">
 		      
@@ -257,14 +250,14 @@ function showTableData(response){
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.created_on+"'>" + orderObj.created_on + "</td>"
 			/* + "<td title='"+orderObj.orderId+"'>" + orderObj.orderId + "</td>" */
-			+ '<td><a   href="#" type="button" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">' + orderObj.orderId + '</a></td>'
+			+ '<td><a   href="#"  onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">' + orderObj.orderId + '</a></td>'
 			+ "<td title='"+orderObj.businessName+"'>" + orderObj.businessName + "</td>"
 		
 			+ "<td title='"+orderObj.total_quantity+"'>" + orderObj.total_quantity + "</td>"
 			+ "<td title='"+orderObj.dealerName+"'>" + orderObj.dealerName + "</td>"
 			+ "<td title='"+orderObj.completed_status+"'>" + orderObj.completed_status + "</td>"
 		/* 	+ '<td><a   href="#"  onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">View Order</a></td>' */
-			+ '<td><a href="#" type="button" onclick="getDeliveredItemsHistory(\''+orderObj.orderId+'\');">View History</a></td>'
+			+ '<td><a href="#"  onclick="getDeliveredItemsHistory(\''+orderObj.orderId+'\');">View History</a></td>'
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});

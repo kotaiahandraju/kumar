@@ -16,7 +16,12 @@ table #dependent_table{
 /* 	width: 100%; */
 	counter-reset: rowNumber;
 }
-
+.badge-success {
+   border-radius:0px;
+}
+.badge-warning {
+   border-radius:0px;
+}
 table tbody tr.rowInc{
 	counter-increment: rowNumber;
 }
@@ -29,6 +34,11 @@ table#dependent_table tbody tr td:first-child::before {
 
 .addItemButton{
 	cursor: pointer;font-size: small;background: green;color: white;padding: 3px 10px 3px 10px;
+}
+.form-check-label {
+    margin-bottom: 0;
+   margin-left:15px;
+   margin-bottom:5px;
 }
 
 #ui-datepicker-div{
@@ -45,7 +55,7 @@ table#dependent_table tbody tr td:first-child::before {
         <div class="container-fluid" id="lpoMain">
             <div class="row" id="row1">
               <div class="col-md-12">
-                    <div class="panel panel-primary">
+                    <div class="panel panel-info">
                         <div class="panel-heading">
                             <h4>Branch List</h4>
                             <div class="options">   
@@ -71,7 +81,7 @@ table#dependent_table tbody tr td:first-child::before {
 
             <div class="row" id="moveTo">
             <div class="col-md-12 col-sm-12">
-                <div class="panel panel-primary">
+                <div class="panel panel-info">
                     <div class="panel-heading">
                         <h4>Add Branch</h4>
                         <div class="options"></div>
@@ -164,23 +174,29 @@ function showTableData(response){
 	
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Branch Name</th><th>Branch Code</th><th>Status</th><th></th></tr>'+
+    	'<thead><tr><th>Branch Name</th><th>Branch Code</th><th>Status</th><th  style="text-align:center">Actions</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='deleteBranch("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
+			var deleterow = "<a class='deactivate btn btn-danger' onclick='deleteBranch("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
-			var deleterow = "<a class='activate' onclick='deleteBranch("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
+			var deleterow = "<a class='activate btn btn-danger' onclick='deleteBranch("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
-		var edit = "<a class='edit editIt' onclick='editBranch("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
+		
+		if(orderObj.branchStatus == "Active"){
+			var active =  "<td title='"+orderObj.branchStatus+"'><span class='badge badge-success'>" + orderObj.branchStatus +"</span></td>"
+		}else{  
+			var active = "<td title='"+orderObj.branchStatus+"'><span class='badge badge-warning'>" + orderObj.branchStatus +"</span></td>"
+		}
+		var edit = "<a class='edit editIt btn btn-info' onclick='editBranch("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.branchname+"'>" + orderObj.branchname + "</td>"
 			+ "<td title='"+orderObj.branchcode+"'>" + orderObj.branchcode + "</td>"
-			+ "<td title='"+orderObj.branchStatus+"'>" + orderObj.branchStatus + "</td>"
+			+ active
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");

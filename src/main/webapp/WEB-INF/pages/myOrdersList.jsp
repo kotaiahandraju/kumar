@@ -53,17 +53,13 @@ table#dependent_table tbody tr td:first-child::before {
         
           <div class="row" id="moveTo">
             <div class="col-md-12 col-sm-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
                         <h4>Select Status</h4>
                         <div class="options"></div>
-                    </div>
 	                <form:form  modelAttribute="orderLstForm"   class="form-horizontal" method="post" >
-                    <div class="panel-body">
                     	<div class="row">
                     		<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Delivery Status : </label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Delivery Status : </label>
                     				<div class="col-md-6">
                     					<form:select path="status" class="form-control validate" onchange="orederLists();">
                     					<form:option value="">--- Select Status ---</form:option>
@@ -77,14 +73,12 @@ table#dependent_table tbody tr td:first-child::before {
                     		</div>
                     	</div>
                     		
-                    		</div>
                     		</form:form>
-                    	</div>
                     </div>
                 </div> 
         
         
-        
+        <br>
             <div class="row" id="row1">
               <div class="col-md-12">
                     <div class="panel panel-primary">
@@ -115,19 +109,19 @@ table#dependent_table tbody tr td:first-child::before {
             </div>
             
 <div class="modal fade" id="orderListModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-		  <div class="modal-dialog table-responsive"> 
-		    <div class="modal-content">
+		  <div class="modal-dialog"> 
+		    <div class="modal-content  table-responsive">
 		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		        <h4 class="modal-title" id="exampleModalLabel"><span id="dealer_name_str"></span></h4>
+		     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		       <span aria-hidden="true">&times;</span>
 		        </button>
-		        <h4 class="modal-title" id="exampleModalLabel"><span id="dealer_name_str"></span></h4>
 		      </div>
 		      <div class="modal-body" id="modal_body">
 				      
 		      </div>
 		      <div class="modal-footer">
-		       <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+		       <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
 		      </div>
 		    </div>
 		  </div>
@@ -135,11 +129,11 @@ table#dependent_table tbody tr td:first-child::before {
 
 <div class="modal fade" id="historyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog"> 
-		    <div class="modal-content">
+		    <div class="modal-content  table-responsive">
 		      <div class="modal-header">
-		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		        <h4 class="modal-title" id="exampleModalLabel"><span id="dealer_name_str"></span></h4>
 		      <span class="col-md-4" id="dname"></span>  <span class="col-md-4" id="kumarid2"></span>  <span class="col-md-3" id="korderdDate2"></span><br>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		      </div>
 		      <div class="modal-body" id="history_modal_body">
 		      
@@ -209,7 +203,7 @@ function showTableData(response){
 		var tblRow ="<tr>"
 			//+ "<td title='"+orderObj.dealerName+"'>" + orderObj.dealerName + "</td>"
 			+ "<td title='"+orderObj.created_on+"'>" + orderObj.created_on + "</td>"
-			+ '<td><a   href="#" type="button" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">' + orderObj.orderId + '</a></td>'
+			+ '<td><a   href="#" onclick="getDealerOrdersItems(\''+orderObj.orderId+'\');">' + orderObj.orderId + '</a></td>'
 			//+ "<td title='"+orderObj.orderId+"'>" + orderObj.orderId + "</td>"
 			+ "<td title='"+orderObj.businessName+"'>" + orderObj.businessName + "</td>"
 		
@@ -320,7 +314,7 @@ function displayHistory(response){
 				var int_val = parseInt(orderObj.pending_qty);
 				if(int_val>0){
 					text_field_str = "<td><input type='text'  maxlength ='3' class='mobile' id='qty"+orderObj.id+"' /></td>"
-									+"<td><input type='button'   value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>";
+									+"<td><input    value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>";
 				}
 		}
 		var tblRow ="<tr id='row"+orderObj.id+"'>"
