@@ -13,6 +13,20 @@
  
  
  <style>
+ 
+ @media print
+{
+  table { page-break-after:auto }
+  tr    { page-break-inside:avoid; page-break-after:auto }
+  td    { page-break-inside:avoid; page-break-after:auto }
+  thead { display:table-header-group }
+  tfoot { display:table-footer-group }
+}
+table { page-break-inside:auto }
+    div   { page-break-inside:avoid; } /* This is the key */
+    thead { display:table-header-group }
+    tfoot { display:table-footer-group }
+
  .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td
  {
  border: 0px solid black !important;
@@ -137,20 +151,16 @@ table#dependent_table tbody tr td:first-child::before {
         			
 				<h1 class="invo">Order Confirmed</h1>
 							<div class="clearfix"></div>
-								 <div class="form-group">
     <label class="col-md-1" for="Invoiceid">Invoice ID</label>
     <span  type="invoice" class="col-md-11 " id="invoice">fsd</span>
-  </div>
 							<div class="clearfix"></div>	
 								
-								 <div class="form-group">
     <label class="col-md-1" for="Orderid">Order ID &nbsp; &nbsp;</label>
     <span type="order" class="col-md-11 " id="order">dfds</span>
-  </div>
 								
 								<div class="clearfix"></div>	
 									
-									<div class="table-responsive" id="tableIdm">
+									<span class="table-responsive" id="tableIdm">
 						<table class="table table-bordered table-striped">
 							<thead>
 								<tr><th>Product Category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><th>Quantity</th>
@@ -158,7 +168,7 @@ table#dependent_table tbody tr td:first-child::before {
 							</thead>
 							<tbody></tbody>
 						</table>
-					</div>
+					</span>
 									
 						<div align="center"><button onclick="printInvoice('#invoicediv')" id="printbtn" class="btn btn-primary">Print</button>
 						<button onclick="cancelPrint()" id="cancelbtn" class="btn btn-primary">Cancel</button>						
@@ -473,7 +483,7 @@ function Popup(data)
 
     var is_chrome = Boolean(mywindow.chrome);
     var isPrinting = false;
-    mywindow.document.write('<html><head><title>Lpo Details</title><style>.invo {padding-top:15px;font-weight:600;text-align: center;}</style><link rel="stylesheet" type="text/css" href="../assets/css/img.css"><link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css"></head><body>');
+    mywindow.document.write('<html><head><title>Order Details</title><style>.invo {padding-top:15px;font-weight:600;text-align: center;}@media print{table { page-break-after:auto }tr    { page-break-inside:avoid; page-break-after:auto }td    { page-break-inside:avoid; page-break-after:auto }thead { display:table-header-group }tfoot { display:table-footer-group }}table { page-break-inside:auto }   div   { page-break-inside:avoid; }  thead { display:table-header-group }  tfoot { display:table-footer-group }</style><link rel="stylesheet" type="text/css" href="../assets/css/img.css"><link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css"></head><body>');
     mywindow.document.write(data);
    
     mywindow.document.write('</body></html>');

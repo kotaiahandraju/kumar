@@ -192,7 +192,7 @@ function showTableData(response){
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.producttype+"'>" + orderObj.producttype + "</td>"
 			+ "<td title='"+orderObj.productname+"'>" + orderObj.productname + "</td>"
-			+ "<td title='image'><img style='width: 50px;height: 40px;' src=${baseurl }/"+orderObj.documents +"></td>"
+			+ "<td title='image'><img style='width: 50px;height: 40px;' src='../../../"+orderObj.documents +"'></td>"
 			+ "<td title='"+orderObj.productnameStatus+"'>" + orderObj.productnameStatus + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
 			+"</tr>";

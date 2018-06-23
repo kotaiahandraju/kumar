@@ -188,9 +188,9 @@ padding: 3px 14px 0px 11px;
                     			</div>
                     			
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Alternative Mobile</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Alternative Mobile <span class="impColor">*</span></label></label>
 								    <div class="col-md-6">
-								    	<form:input path="alternativeNumber" value=""  class="form-control  mobile" placeholder="Alternative Mobile" onkeyup="removeBorder(this.id)" maxlength="13" />
+								    	<form:input path="alternativeNumber" value=""  class="form-control validate mobile" placeholder="Alternative Mobile" onkeyup="removeBorder(this.id)" maxlength="13" />
 								      	<span class="hasError" id="locationError"></span>
 								    </div>
                     			</div>

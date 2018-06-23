@@ -86,7 +86,7 @@ function topFunction() {
 <script type='text/javascript' src='${baseurl }/assets/plugins/easypiechart/jquery.easypiechart.min.js'></script> 
 <script type='text/javascript' src='${baseurl }/assets/plugins/sparklines/jquery.sparklines.min.js'></script> 
 <script type='text/javascript' src='${baseurl }/assets/plugins/form-toggle/toggle.min.js'></script> 
-<script type='text/javascript' src='${baseurl }/assets/plugins/datatables/jquery.dataTables.min.js'></script> 
+<script type='text/javascript' src='${baseurl }/js/jquery.dataTables.min.js'></script> 
 <script type='text/javascript' src='${baseurl }/assets/plugins/datatables/dataTables.bootstrap.js'></script> 
 <script type='text/javascript' src='${baseurl }/assets/demo/demo-datatables.js'></script> 
 <script type='text/javascript' src='${baseurl }/assets/js/placeholdr.js'></script> 
@@ -96,7 +96,17 @@ function topFunction() {
 <script type='text/javascript' src='${baseurl }/assets/plugins/charts-morrisjs/morris.min.js'></script> 
 <script type='text/javascript' src='${baseurl }/assets/demo/demo-morrisjs.js'></script> 
 <script type='text/javascript' src='${baseurl }/js/customValidation.js'></script> 
-<script type='text/javascript' src='${baseurl }/js/dataTables.fixedColumns.js'></script> 
+
+
+<script type='text/javascript' src='${baseurl }/js/dataTables.buttons.min.js'></script> 
+<script type='text/javascript' src='${baseurl }/js/buttons.flash.min.js'></script>
+<script type='text/javascript' src='${baseurl }/js/jszip.min.js'></script>
+<script type='text/javascript' src='${baseurl }/js/pdfmake.min.js'></script>
+<script type='text/javascript' src='${baseurl }/js/vfs_fonts.js'></script>
+<script type='text/javascript' src='${baseurl }/js/buttons.html5.min.js'></script>
+<script type='text/javascript' src='${baseurl }/js/buttons.print.min.js'></script>
+
+
 
 <%-- <script type='text/javascript' src='${baseurl }/assets/plugins/datatables/dataTables.fixedColumns.min.js'> </script> --%>
 <script type='text/javascript' src="${baseurl }/js/select2.min.js" ></script>
@@ -105,6 +115,8 @@ function topFunction() {
 	
 <script type="text/javascript">
 var isClick = 'Yes';
+$.fn.dataTableExt.sErrMode = 'console';
+
 
 </script>
 </body>

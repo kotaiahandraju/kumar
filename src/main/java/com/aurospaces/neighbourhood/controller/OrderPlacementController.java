@@ -64,8 +64,9 @@ public class OrderPlacementController {
 		ObjectMapper objectMapper = null;
 		String sJson = null;
 		List<ItemsBean> listOrderBeans = null;
+		Map<String,Map<String,Object>> sub_category_map = new HashMap<String,Map<String,Object>>();
 		try{
-			System.out.println("orderPlacementorderPlacementorderPlacement");
+			/*System.out.println("orderPlacementorderPlacementorderPlacement");
 			listOrderBeans = itemsDao.getItems("1");
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
@@ -76,7 +77,53 @@ public class OrderPlacementController {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
 				request.setAttribute("allOrders1", "''");
+			}*/
+			
+			
+			
+
+			listOrderBeans = itemsDao.getItems("1");
+			for(ItemsBean item:listOrderBeans){
+				String key = item.getProductname()+"##"+item.getProductIdName();
+				if(sub_category_map.containsKey(key)){
+					System.out.println("keyyy1"+key);
+					System.out.println("111111111111111111111111111111111");
+					Map<String,Object> val_map = sub_category_map.get(key);
+					System.out.println("map1"+val_map);
+					val_map.put(item.getItemcode(),item.getItemdescrption());
+					System.out.println("map2"+val_map);
+					
+				}else{
+					System.out.println("keyyy2"+key);
+					System.out.println("22222222222222222222222222222");
+					Map<String,Object> val_map = new HashMap<String,Object>();
+					val_map.put(item.getItemcode()+"##"+item.getId(),item.getItemdescrption());
+					System.out.println("map1"+val_map);
+					System.out.println("itemCode---"+item.getId());
+					sub_category_map.put(key, val_map);
+					System.out.println("map2"+val_map);
+				}
 			}
+			objectMapper = new ObjectMapper();
+			sJson = objectMapper.writeValueAsString(sub_category_map);
+			request.setAttribute("sub_category_map", sJson);
+			
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+			}
+			
+		
+			
+			
+			
+			
+			
 			
 		}catch(Exception e){
 			e.printStackTrace();
@@ -175,12 +222,14 @@ public class OrderPlacementController {
 					  objDealerMobileNo=employeeDao.getMobileNo(orderslistbean.getDelerId());
 				 }
 				
+				if(objDealerMobileNo !=null) {
+					String dealerMobile=objDealerMobileNo.getPhoneNumber();
+					System.out.println("dealer Id "+dealerMobile);
+						String msg1 = prop.getProperty("smsForDealer");
+						msg1 =msg1.replace("_invoice_",orderslistbean.getOrderId());
+						SendSMS.sendSMS(msg1,dealerMobile, objContext);
+				}
 				
-				String dealerMobile=objDealerMobileNo.getPhoneNumber();
-				System.out.println("dealer Id "+dealerMobile);
-					String msg1 = prop.getProperty("smsForDealer");
-					msg1 =msg1.replace("_invoice_",orderslistbean.getOrderId());
-					SendSMS.sendSMS(msg1,dealerMobile, objContext);
 
 				if(StringUtils.isEmpty(orderslistbean.getDelerId())) {
 				 cartDao.deleteByUserId(Integer.parseInt(objuserBean.getEmpId()));

@@ -87,6 +87,19 @@ public class PaymentDao extends BasePaymentDao
 		String sql = "update kumar_payment set `comment`=?,  `confirm`=? WHERE id=?";
 		jdbcTemplate.update(sql, new Object[]{paymentBean.getComment(),paymentBean.getConfirm(),paymentBean.getId()});
 	}
+	/*public getMobileNoByDealerId(String empId){
+		List<Map<String,Object>> list=null;
+		
+			jdbcTemplate = custom.getJdbcTemplate();
+			String sql ="select * from kumar_employee where id=?";
+			list =jdbcTemplate.queryForList(sql, new Object[]{empId});
+			System.out.println(sql);
+			if(list.size() > 0)
+				return list.get(0);
+			return null;
+			
+	}*/
+		
 	
 
 }

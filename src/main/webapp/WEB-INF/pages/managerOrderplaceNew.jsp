@@ -26,7 +26,7 @@
     outline: none;
     font-size: 13px;
     transition: 0.4s;
-    margin-bottom:5px;
+    margin-bottom:-15px;
 }
 
 .active, .accordion0:hover {

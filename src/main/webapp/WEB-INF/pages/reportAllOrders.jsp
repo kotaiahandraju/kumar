@@ -259,9 +259,14 @@ function showTableData(response){
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
-	if(isClick=='Yes') $('.datatables').dataTable();
+	if(isClick=='Yes') {
+		$('.datatables').DataTable({
+			  dom: 'lBfrtip',
+		        buttons: ['copy', 'csv', 'excel', 'pdf', 'print'
+		        ]
+		});
 }
-
+}
 function getOrdersList() {
 	var list_type = "${list_type}";
 	var from_date = $("#from_date").val();
@@ -360,6 +365,14 @@ function displayDealerOrderItems(response){
 }
 
 
+$(function(){
+	$('.datatables').DataTable({
+		  dom: 'lBfrtip',
+	        buttons: [
+	            'copy', 'csv', 'excel', 'pdf', 'print'
+	        ]
+	});
+});
 
 var listtype = "${list_type}";
 if(listtype=="delivered"){

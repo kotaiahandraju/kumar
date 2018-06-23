@@ -115,27 +115,15 @@ font-size:28px;
 				</div>
 				<div class="clearfix"></div>
 				<div class="container-fluid " id="invoicediv" style="display: none;">
-        			<div class="col-md-12">
-        			<div align="center">
         			        			
 				<span class="invo"><b>Order Confirmed</b></span>
-							</div>
-							</div>
-							<div class="clearfix"></div>
-								 <div class="form-group">
     <label class="col-md-1" for="Invoiceid"><b>Invoice ID</b></label>
     <span  type="invoice" class="col-md-11 " id="invoice">fsd</span>
-  </div>
-							<div class="clearfix"></div>	
-								
-								 <div class="form-group">
     <label class="col-md-1" for="Orderid"><b>Order ID &nbsp; &nbsp;</b></label>
     <span type="order" class="col-md-11 " id="order">dfds</span>
-  </div>
 								
-								<div class="clearfix"></div>	
 									
-									<div class="table-responsive" id="tableIdm">
+									<span class="table-responsive" id="tableIdm">
 						<table class="table table-bordered table-striped">
 							<thead>
 								<tr  style="background:#4f8edc;color:#fff;"><th>Product Category</th><th>Product Subcategory</th><th>Item Code</th><th>Description</th><th>Quantity</th>
@@ -143,7 +131,7 @@ font-size:28px;
 							</thead>
 							<tbody></tbody>
 						</table>
-					</div>
+					</span>
 									
 						<div align="center"><button onclick="printInvoice('#invoicediv')" id="printbtn" class="btn btn-primary">Print</button>
 						<button onclick="cancelPrint()" id="cancelbtn" class="btn btn-primary">Cancel</button>		
@@ -214,7 +202,6 @@ font-size:28px;
 				</div> 
 				</div> -->
 				<!-- Invoice Model End -->	
-
 <script type="text/javascript">
  var listOrders1 =${allOrders1};
  
@@ -403,7 +390,7 @@ function Popup(data)
 
     var is_chrome = Boolean(mywindow.chrome);
     var isPrinting = false;
-    mywindow.document.write('<html><head><title>card Details</title><style>.invo {padding-top:15px;font-weight:600;text-align: center;}</style><link rel="stylesheet" type="text/css" href="../assets/css/img.css"><link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css"></head><body>');
+    mywindow.document.write('<html><head><title>Order Details</title><style>.invo {padding-top:15px;font-weight:600;text-align: center;}@media print{table { page-break-after:auto }tr    { page-break-inside:avoid; page-break-after:auto }td    { page-break-inside:avoid; page-break-after:auto }thead { display:table-header-group }tfoot { display:table-footer-group }}table { page-break-inside:auto }   div   { page-break-inside:avoid; }  thead { display:table-header-group }  tfoot { display:table-footer-group }</style><link rel="stylesheet" type="text/css" href="../assets/css/img.css"><link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css"></head><body>');
     mywindow.document.write(data);
    
     mywindow.document.write('</body></html>');
@@ -436,26 +423,6 @@ $("#cancelbtn").show();
 
 
 
-
-/* function printInvoice() {
-    //window.print();
-      $("#printbtn").hide();
-      $("#pbreadcrumb").hide();
-      $("#pageName").hide();
-      $("#cancelbtn").hide();
-      
-      
-      
-      
-
-    
-      window.print();
-      $("#printbtn").show();
-	/* var newWindow = window.open();
-    newWindow.document.write(document.getElementById("invoicediv").innerHTML);
-    newWindow.print(); */ 
-// $("#pageName").text("Invoice");
-// }
 
 function cancelPrint() {
 	window.location.href="orderplacing";
