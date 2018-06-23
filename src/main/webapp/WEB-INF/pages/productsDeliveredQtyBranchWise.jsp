@@ -184,7 +184,7 @@ function createTableHeader(branch_map){
 		var tempStr = '<th colspan="4" align="center" style="">'+value+'</th>';
 		tableHead += tempStr;
 	}); */
-	'<thead><tr style="background:#4e8ede; color:#fff;"><th colspan="3">Product</th>';
+	'<thead><tr style="background:#f8f9fb; color:#000;"><th colspan="3">Product</th>';
 	var selected_val = $("#branchId").val();
 	if(selected_val=="all"){
 		tableHead += '<th colspan="4"  style="max-width:80px; min-width:80px;">Overall Orders</th>';
