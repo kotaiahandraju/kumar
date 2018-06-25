@@ -38,7 +38,7 @@ public class PaymentDao extends BasePaymentDao
 			if(objuserBean.getRoleId().equals("2")){
 				buffer.append(" and branchId= '"+objuserBean.getBranchId()+"' ");
 			}
-			buffer.append(" order by kp.payment_date desc,kp.confirm asc");
+			buffer.append(" order by kp.confirm asc,kp.payment_date desc");
 		}
 		String sql =buffer.toString();
 		List<PaymentBean> list = jdbcTemplate.query(sql, new Object[]{},ParameterizedBeanPropertyRowMapper.newInstance(PaymentBean.class));

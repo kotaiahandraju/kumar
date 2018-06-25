@@ -16,12 +16,7 @@ table #dependent_table{
 /* 	width: 100%; */
 	counter-reset: rowNumber;
 }
-.badge-success {
-   border-radius:0px;
-}
-.badge-warning {
-   border-radius:0px;
-}
+
 table tbody tr.rowInc{
 	counter-increment: rowNumber;
 }

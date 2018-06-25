@@ -322,7 +322,7 @@ function displayDealerOrderItems(response){
 	$('#modal_body').html('');
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Business Name</th><th>Product Category</th><th>Product Subcategory </th><th>Item Code</th><th>Item Description</th><th>Ordered Quantity</th><th>Delivered Quantity</th><th>Nullified Quantity</th><th>Pending Quantity</th><th>Deliver Quantity</th><th>Nullify Quantity</th><th ></th></tr>'+
+    	'<thead><tr><th>Business Name</th><th>Product Category</th><th>Product Subcategory </th><th>Item Code</th><th>Item Description</th><th>Ordered Quantity</th><th>Delivered Quantity</th><th>Nullified Quantity</th><th>Pending Quantity</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#modal_body").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -354,7 +354,7 @@ function displayDealerOrderItems(response){
 			+ "<td id='delivered_qty"+orderObj.id+"' title='"+orderObj.delivered_qty+"'>" + orderObj.delivered_qty + "</td>"
 			+ "<td id='nullified_qty"+orderObj.id+"' title='"+orderObj.nullified_qty+"'>" + orderObj.nullified_qty + "</td>"
 			+ "<td id='pending_qty"+orderObj.id+"' title='"+orderObj.pending_qty+"'>" + orderObj.pending_qty + "</td>"
-			+ text_field_str
+// 			+ text_field_str
 			//+ "<td>"+text_field_str+"</td>"
 			//+ "<td><input type='button' id='deliverable_submit_btn' value='Submit' onclick='saveDeliverableItemsData("+orderObj.id+")' /></td>"
 			+"</tr>";
@@ -366,10 +366,33 @@ function displayDealerOrderItems(response){
 
 
 $(function(){
+	var printCounter = 0;
 	$('.datatables').DataTable({
 		  dom: 'lBfrtip',
 	        buttons: [
-	            'copy', 'csv', 'excel', 'pdf', 'print'
+	            'copy',
+	            {
+	                extend: 'excel',
+	                messageTop: 'Order list.'
+	            },
+	            {
+	                extend: 'pdf',
+	                messageBottom: null
+	            },
+	            {
+	                extend: 'print',
+	                messageTop: function () {
+	                    printCounter++;
+	 
+	                    if ( printCounter === 1 ) {
+	                        return 'Order list.';
+	                    }
+	                    else {
+	                        return 'Order list '+printCounter+' times';
+	                    }
+	                },
+	                messageBottom: null
+	            }
 	        ]
 	});
 });

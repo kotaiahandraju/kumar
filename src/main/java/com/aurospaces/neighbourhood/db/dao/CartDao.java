@@ -36,12 +36,10 @@ public class CartDao extends BaseCartDao
 				if (objuserBean != null) {
 					objCartBean.setUserId(objuserBean.getEmpId());
 				}
-			 String sql =" SELECT COUNT(*) FROM `cart` WHERE `userId`=? ";
-			 
-			  count = jdbcTemplate.queryForInt(sql,new Object []{objCartBean.getUserId()});
-			
 		 }
-		 
+		 	String sql =" SELECT COUNT(*) FROM `cart` WHERE `userId`=? ";
+		 	count = jdbcTemplate.queryForInt(sql,new Object []{objCartBean.getUserId()});
+		  
 		return count;
 		
 	}

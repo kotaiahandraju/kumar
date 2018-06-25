@@ -186,6 +186,11 @@ function showTableData(response){
 		}else{  
 			var deleterow = "<a class='activate btn btn-danger' onclick='deleteProductName("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
+		if(orderObj.productnameStatus == "Active"){
+			var active =  "<td title='"+orderObj.productnameStatus+"'><span class='badge badge-success'>" + orderObj.productnameStatus +"</span></td>"
+		}else{  
+			var active = "<td title='"+orderObj.productnameStatus+"'><span class='badge badge-warning'>" + orderObj.productnameStatus +"</span></td>"
+		}
 		var edit = "<a class='edit editIt btn btn-info' onclick='editProductName("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 // 		alert(orderObj.lponumber);
 		serviceUnitArray[orderObj.id] = orderObj;
@@ -193,7 +198,7 @@ function showTableData(response){
 			+ "<td title='"+orderObj.producttype+"'>" + orderObj.producttype + "</td>"
 			+ "<td title='"+orderObj.productname+"'>" + orderObj.productname + "</td>"
 			+ "<td title='image'><img style='width: 50px;height: 40px;' src='../../../"+orderObj.documents +"'></td>"
-			+ "<td title='"+orderObj.productnameStatus+"'>" + orderObj.productnameStatus + "</td>"
+			+ active
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
