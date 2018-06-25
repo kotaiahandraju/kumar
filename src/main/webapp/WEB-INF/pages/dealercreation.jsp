@@ -133,8 +133,8 @@ padding: 3px 14px 0px 11px;
 					<div class="panel-heading">
 						<h4>Dealer Creation</h4>
 					</div>
-					<div style="margin-top:20px;" class="body">
-                <div class="col-md-12">
+<!-- 					<div style="margin-top:20px;" class="body"> -->
+                <div class="col-md-12" style="padding-left:0px; padding-right:0px;">
                        
                     <span id="errorMsg"></span>
                         <div class="options"></div>
@@ -280,8 +280,11 @@ padding: 3px 14px 0px 11px;
 								    </div>
                     			</div> --%>
                     		
-                    		
-                    		
+                    		<br>
+                    		<div class="btn-toolbar text-center">
+						      			<input type="submit" id="submit2" value="Submit" class="btn-primary btn"/>
+						      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
+					      			</div>
                     		
                     		
                     	
@@ -289,27 +292,23 @@ padding: 3px 14px 0px 11px;
                     		</div>
                     		
                     		
-                     
-                    	
 	                    <div class="panel-footer">
 					      	<div class="row">
 					      		<div class="col-sm-12">
-					      			<div class="btn-toolbar text-center">
-						      			<input type="submit" id="submit2" value="Submit" class="btn-primary btn"/>
-						      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
-					      			</div>
+					      			
 					      		</div>
 					      	</div>
 					      </div>
 					</form:form>
 					</div>
-				</div>
+<!-- 				</div> -->
 				</div>
 			</div>
 		</div>
 		</div>
                     
-	</div> <!-- container -->
+	</div>
+	<br><br> <!-- container -->
 	<!-- Modal -->
 	
   <div class="modal fade" id="ordersListModal"  role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

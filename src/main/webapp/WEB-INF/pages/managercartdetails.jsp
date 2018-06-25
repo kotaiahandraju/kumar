@@ -388,11 +388,11 @@ function ordePlacing() {
 
 
 function removecartdata(id){
-	if(delerId ==""){
+	/* if(delerId ==""){
 		alert('');
 		return false;
 		
-	}
+	} */
 	var formData = new FormData();
 	formData.append('id', id);
 	formData.append('delerId', delerId);
