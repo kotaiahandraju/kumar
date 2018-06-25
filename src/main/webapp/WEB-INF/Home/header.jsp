@@ -86,6 +86,14 @@
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 <style type="text/css">
+
+.badge-success {
+   border-radius:0px;
+}
+.badge-warning {
+   border-radius:0px;
+}
+
 .pending0 .dropdown-toggle {
 	background: #595f69 !important;
 	color: #ffffff !important;
@@ -562,7 +570,7 @@ span.has-error, span.hasError {
 					</c:if>
 					<c:if test="${roleId=='2' }">
 						<li class="nav-item"><a class="nav-link"
-							href="${baseurl }/admin/dashboardforbranchwise"><i
+							href="${baseurl }/admin/dashboardfordealerwise"><i
 								class="fa fa-users"></i> <span>Dashboard</span></a></li>
 						<li class="nav-item"><a class="nav-link"
 							href="${baseurl }/admin/producttype"><i class="fa fa-clone"></i>

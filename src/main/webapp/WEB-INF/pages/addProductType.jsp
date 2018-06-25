@@ -166,12 +166,17 @@ function showTableData(response){
 		}else{  
 			var deleterow = "<a class='activate btn btn-danger' onclick='deleteProductType("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
+		if(orderObj.productstatus == "Active"){
+			var active =  "<td title='"+orderObj.productstatus+"'><span class='badge badge-success'>" + orderObj.productstatus +"</span></td>"
+		}else{  
+			var active = "<td title='"+orderObj.productstatus+"'><span class='badge badge-warning'>" + orderObj.productstatus +"</span></td>"
+		}
 		var edit = "<a class='edit editIt btn btn-info' onclick='editProductType("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.producttype+"'>" + orderObj.producttype + "</td>"
-			+ "<td title='"+orderObj.productstatus+"'>" + orderObj.productstatus + "</td>"
+			+ active
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");

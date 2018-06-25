@@ -214,6 +214,11 @@ table#dependent_table tbody tr td:first-child::before {
 						+ orderObj.id
 						+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 			}
+			if(orderObj.itemsStatus == "Active"){
+				var active =  "<td title='"+orderObj.itemsStatus+"'><span class='badge badge-success'>" + orderObj.itemsStatus +"</span></td>"
+			}else{  
+				var active = "<td title='"+orderObj.itemsStatus+"'><span class='badge badge-warning'>" + orderObj.itemsStatus +"</span></td>"
+			}
 			var edit = "<a class='edit editIt btn btn-info' onclick='editItem("
 					+ orderObj.id + ")'><i class='fa fa-edit'></i></a>"
 			serviceUnitArray[orderObj.id] = orderObj;
@@ -228,8 +233,7 @@ table#dependent_table tbody tr td:first-child::before {
 					+ orderObj.productIdName + "</td>"
 					+ "<td title='"+orderObj.itemprice+"'>"
 					+ orderObj.itemprice + "</td>"
-					+ "<td title='"+orderObj.itemsStatus+"'>"
-					+ orderObj.itemsStatus + "</td>"
+					+ active
 					+ "<td style='text-align: center;white-space: nowrap;'>"
 					+ edit + "&nbsp;&nbsp;" + deleterow + "</td>" + "</tr>";
 			$(tblRow).appendTo("#tableId table tbody");

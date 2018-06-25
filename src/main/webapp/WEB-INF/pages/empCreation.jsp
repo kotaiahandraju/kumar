@@ -205,6 +205,11 @@ function showTableData(response){
 		}else{  
 			var deleterow = "<a class='activate btn btn-danger' onclick='deleteEmpCreation("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
+		if(orderObj.empCreationStatus == "Active"){
+			var active =  "<td title='"+orderObj.empCreationStatus+"'><span class='badge badge-success'>" + orderObj.empCreationStatus +"</span></td>"
+		}else{  
+			var active = "<td title='"+orderObj.empCreationStatus+"'><span class='badge badge-warning'>" + orderObj.empCreationStatus +"</span></td>"
+		}
 		var edit = "<a class='edit editIt btn btn-info' onclick='editEmpCreation("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
@@ -215,7 +220,7 @@ function showTableData(response){
 			+ "<td title='"+orderObj.roleName+"'>" + orderObj.roleName + "</td>"
 			+ "<td title='"+orderObj.email+"'>" + orderObj.email + "</td>"
 			+ "<td title='"+orderObj.phoneNumber+"'>" + orderObj.phoneNumber + "</td>"
-			+ "<td title='"+orderObj.empCreationStatus+"'>" + orderObj.empCreationStatus + "</td>"
+			+ active
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
