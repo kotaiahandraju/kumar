@@ -10842,6 +10842,9 @@ body.collapse-leftbar #search.keep-open form button[type="submit"] {
   float: right;
   display:none;
 }
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+    border: 1px solid #f1f1f1 !important;
+}
 .panel0 {
     padding: 0 18px;
     background-color: white;
