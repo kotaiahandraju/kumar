@@ -10842,6 +10842,15 @@ body.collapse-leftbar #search.keep-open form button[type="submit"] {
   float: right;
   display:none;
 }
+.panel0 {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    margin-bottom: 2px !important;
+    margin-top: 10px !important;
+}
 .panel-heading .options:before,
 .panel-heading .options:after {
   content: " ";

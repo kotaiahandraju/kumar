@@ -459,7 +459,7 @@ margin-top:-10px;
 		<ul class="nav navbar-nav ml-auto">
 
 			<c:if test="${cacheUserBean.roleId=='3' }">
-				<li class="nav-item carth"><a class="nav-link"
+				<li class="nav-item carth"><a style="margin-top:-8px" class="nav-link"
 					href="cartdetails"><i class="fa fa-shopping-cart"></i> Cart <span
 						class="badge" id="cartId"></span></a></li>
 			</c:if>
@@ -619,7 +619,7 @@ margin-top:-10px;
 					<c:if test="${roleId=='3' }">
 					<li class="nav-item dashboard"><a class="nav-link" href="${baseurl }/admin/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
 			  <li class="nav-item  delarpayment"><a class="nav-link" href="${baseurl }/admin/delarpayment"> <i class="fa fa-bookmark"></i><span>Payment Information</span></a></li>
-			  <li class="nav-item orderplacing"><a class="nav-link" href="${baseurl }/admin/orderplacing"><i class="fa fa-clipboard"></i> <span>Order Product</span></a></li>
+			  <li class="nav-item "><a class="nav-link" href="${baseurl }/admin/orderplacing"><i class="fa fa-clipboard"></i> <span>Order Product</span></a></li>
 			   <li class="nav-item ordersList"><a class="nav-link" href="${baseurl }/admin/myorderLists"><i class="fa fa-first-order"></i><span>My Orders</span></a></li>
 					</c:if>
 				</ul>
