@@ -52,7 +52,7 @@
     overflow: hidden;
     transition: max-height 0.2s ease-out;
     margin-bottom:10px;
-    margin-top:5px;
+    margin-top:10px;
 }
  
  

@@ -10890,6 +10890,7 @@ body.collapse-leftbar #search.keep-open form button[type="submit"] {
   padding: 20px 20px;
   border-bottom-right-radius: 1px;
   border-bottom-left-radius: 1px;
+  width:100%;
 }
 .panel-footer:before,
 .panel-footer:after {
