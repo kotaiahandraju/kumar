@@ -446,9 +446,9 @@ h6 .small,
 .h6 .small {
   font-size: 75%;
 }
-table.dataTable thead .sorting, th,td {
+/* table.dataTable thead .sorting, th,td {
 	text-align:center;
-}
+} */
 h1,
 .h1 {
   font-size: 38px;
