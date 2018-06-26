@@ -446,6 +446,9 @@ h6 .small,
 .h6 .small {
   font-size: 75%;
 }
+table.dataTable thead .sorting, th,td {
+	text-align:center;
+}
 h1,
 .h1 {
   font-size: 38px;
@@ -458,9 +461,17 @@ h3,
 .h3 {
   font-size: 24px;
 }
+#example_length select.form-control {
+	width:59px !important;
+	display: inline-block;
+}
+.dataTables_wrapper .dataTables_filter input {
+    margin-left: 0.5em;
+    float: right;
+}
 h4,
 .h4 {
-  font-size: 18px;
+  font-size: 15px;
 }
 h5,
 .h5 {

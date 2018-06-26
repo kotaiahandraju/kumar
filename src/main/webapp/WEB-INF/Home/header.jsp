@@ -241,7 +241,7 @@
 	color: #fff;
 	list-style: none;
 	margin-left: 881px;
-	font-size: 18px;
+	font-size: 16px;
 }
 
 @media only screen and (max-width: 600px) and (min-width: 400px) {
@@ -466,9 +466,9 @@ span.has-error, span.hasError {
 					$('#tagId').attr('href',
 							'managercartdetails?dealerId=' + paramid);
 				</script>
-				<li class="nav-item carth"><a class="nav-link"
-					href="managercartdetails" id="tagId"><i
-						class="fa fa-shopping-cart"></i> Cart <span class="badge"
+				<li class="nav-item carth"><a style="margin-top:-7px" class="nav-link"
+					href="managercartdetails" id="tagId">
+					<i class="fa fa-shopping-cart"></i> Cart <span class="badge"
 						id="managercartId"></span> </a></li>
 			</c:if>
 			<c:if test="${cacheUserBean.roleId=='1' }">
@@ -519,12 +519,12 @@ span.has-error, span.hasError {
 	</header>
 	<div class="app-body">
 		<div class="sidebar">
-			<form class="sidebar-form">
+		<%-- 	<form class="sidebar-form">
 				<div class="form-group p-2  mb-0">
 					<input type="text" class="form-control" aria-describedby="search"
 						placeholder="Search...">
 				</div>
-			</form>
+			</form> --%>
 			<nav class="sidebar-nav">
 				<ul class="nav">
 					<c:if test="${roleId=='1' }">
