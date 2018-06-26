@@ -370,6 +370,9 @@ span.has-error, span.hasError {
 	/* 	width: 100% !important; */
 	
 }
+.navbar-toggler-icon {
+margin-top:-10px;
+}
 </style>
 <script type="text/javascript">
 	var isClick = 'No';
