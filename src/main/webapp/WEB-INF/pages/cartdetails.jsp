@@ -53,6 +53,7 @@ body {-webkit-print-color-adjust: exact;}
 padding-top:15px;
 font-weight:600;
 font-size:28px;
+text-align:center;
 }
 .table-bordered {
     border: 1px solid #dee2e6;
@@ -116,13 +117,23 @@ font-size:28px;
 				<div class="clearfix"></div>
 				<div class="container-fluid " id="invoicediv" style="display: none;">
         			        			
-				<span class="invo"><b>Order Confirmed</b></span>
-    <label class="col-md-1" for="Invoiceid"><b>Invoice ID</b></label>
+<!-- 				<h1 class="invo"><b>Order Confirmed</b></h1><div class="clearfix"></div> -->
+<!--     <label class="col-md-1" for="Invoiceid"><b>Invoice ID</b></label> -->
+<!--     <span  type="invoice" class="col-md-11 " id="invoice">fsd</span> -->
+<!--     <label class="col-md-1" for="Orderid"><b>Order ID &nbsp; &nbsp;</b></label> -->
+<!--     <span type="order" class="col-md-11 " id="order">dfds</span> -->
+								
+									<h1 class="invo">Order Confirmed</h1>
+							<div class="clearfix"></div>
+    <label class="col-md-1" for="Invoiceid">Invoice ID</label>
     <span  type="invoice" class="col-md-11 " id="invoice">fsd</span>
-    <label class="col-md-1" for="Orderid"><b>Order ID &nbsp; &nbsp;</b></label>
+							<div class="clearfix"></div>	
+								
+    <label class="col-md-1" for="Orderid">Order ID &nbsp; &nbsp;</label>
     <span type="order" class="col-md-11 " id="order">dfds</span>
 								
-									
+								<div class="clearfix">
+								</div>	
 									<span class="table-responsive" id="tableIdm">
 						<table class="table table-bordered table-striped">
 							<thead>
@@ -234,8 +245,8 @@ function showTableData(response){
 				+ "<td title='"+orderObj.itemcode+"'>" + orderObj.itemcode+ "</td>" 
 				+ "<td title='"+orderObj.itemdescrption+"'>"+ orderObj.itemdescrption + "</td>"
 				+ "<td >" + quantity+ "</td>"
-				+ "<th class='labelCss notPrintMe hideme' style='width: 10px;'><span><a href='javascript:void(0);' style='color: red;' onclick='removecartdata("
-				+ orderObj.id + ");'><i class='fa fa-trash' style='color: red;text-decoration: none;cursor: pointer;'></i></a></span></th>"
+				+ "<th class='labelCss notPrintMe hideme' style='width: 10px;'><span><a href='javascript:void(0);' style='color: red; text-align:center;' onclick='removecartdata("
+				+ orderObj.id + ");'><i class='btn btn-danger fa fa-trash' style='color: red;text-decoration: none;cursor: pointer;'></i></a></span></th>"
 		$(tblRow).appendTo("#tableId table tbody");
 		
 	});

@@ -10576,7 +10576,7 @@ base-chart.chart {
       border: 0; }
       .app-header.navbar .nav-item .nav-link .badge, .app-header.navbar .nav-item .dropdown-toggle .badge {
         position: absolute;
-        top: 78%;
+        top: 88%;
         left: 78%;
         margin-top: -16px;
         margin-left: 0; }
