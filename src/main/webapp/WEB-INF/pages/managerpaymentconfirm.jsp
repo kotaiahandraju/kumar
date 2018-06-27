@@ -12,6 +12,13 @@
  {
  border: 0px solid black !important;
  }
+ [class*="panel-"].panel .panel-body {
+    padding: 20px;
+    border-left: 1px solid #dddddd;
+    border-right: 1px solid #dddddd;
+    border-bottom: none;
+    background-color: #fff;
+}
 table #dependent_table{
 /* 	width: 100%; */
 	counter-reset: rowNumber;
@@ -103,7 +110,7 @@ td, th {
                     	<div class="row">
                     		
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Payment Status<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Payment Status<span class="impColor">*</span></label>
                     					<div class="col-md-1"></div>
                     				<div class="col-md-6">
 		                            	<input type="hidden" id="id"/>
@@ -115,10 +122,10 @@ td, th {
                     			</div>
                     		<div class="clearfix"></div></br>
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Comment</label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Comment</label>
                     				<div class="col-md-1"></div>
                     				<div class="col-md-6">
-								      	<textarea id="comment" class="form-control validate" placeholder="Comment"></textarea>
+								      	<textarea id="comment" class="form-control validate" placeholder="Comment" style="padding:5px 24px;"></textarea>
 								  	</div>
                     			</div>
                     		

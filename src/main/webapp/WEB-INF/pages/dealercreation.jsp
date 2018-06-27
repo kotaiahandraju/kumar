@@ -281,14 +281,10 @@ padding: 3px 14px 0px 11px;
                     			</div> --%>
                     		
                     		<br>
-<<<<<<< HEAD
-                    		
-=======
-                    		<div class="btn-toolbar text-center">
+                    		<!-- <div class="btn-toolbar text-center">
 						      			<input type="submit" id="submit2" value="Submit" class="btn-primary btn"/>
 						      			<input type="reset" value="Cancel" class="btn-danger btn cancel"/>
-					      			</div>
->>>>>>> d2b2d9f9286b7b14694bc18c37968d023814998a
+					      			</div> -->
                     		
                     		
                     	
@@ -301,7 +297,7 @@ padding: 3px 14px 0px 11px;
 					      		<div class="col-sm-12">
 					      			<div class="btn-toolbar text-center">
 						      			<input type="submit" id="submit2" value="Submit" class="btn-primary btn"/>
-						      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
+						      			<input type="reset" value="Cancel" class="btn-danger btn cancel"/>
 					      			</div>
 					      		</div>
 					      	</div>
