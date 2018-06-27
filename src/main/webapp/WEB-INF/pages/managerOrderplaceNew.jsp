@@ -14,7 +14,7 @@
  <style>
  .mobile {
  margin-bottom:5px;
- width:40px;}
+ width:100px;}
  .accordion0 {
     background-color: #eee;
     color: #444;
