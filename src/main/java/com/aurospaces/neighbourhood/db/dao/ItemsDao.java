@@ -38,13 +38,13 @@ public class ItemsDao extends BaseItemsDao
 		}
 		 //String sql="SELECT *, DATE_FORMAT(expirydate,'%d/%m/%Y') AS expirtdate1  FROM cylindermaster";
 		StringBuffer buffer= new StringBuffer();
-		buffer.append("SELECT i.*,ifnull(i.itemprice,'--') as itemprice ,pn.productname as productIdName,pt.producttype As productTypeName, CASE WHEN i.status IN ('0') THEN 'Deactive' WHEN i.status in ('1') THEN 'Active'  ELSE '-----' END as itemsStatus   FROM items i, productname pn,producttype pt ,`branch_products` bp where i.status='"+status+"' and i.productId=pt.id and  i.productname=pn.id AND bp.`product_id`=i.id ");
+		buffer.append("SELECT i.*,ifnull(i.itemprice,'0') as itemprice ,pn.productname as productIdName,pt.producttype As productTypeName, CASE WHEN i.status IN ('0') THEN 'Deactive' WHEN i.status in ('1') THEN 'Active'  ELSE '-----' END as itemsStatus   FROM items i, productname pn,producttype pt ,`branch_products` bp where i.status='"+status+"' and i.productId=pt.id and  i.productname=pn.id AND bp.`product_id`=i.id ");
 		if(!objuserBean.getRoleId().equals("1")){
 			buffer.append(" AND bp.`branch_id` IN ('all','"+branchId+"') ");
 		}
 		buffer.append("  order by pn.productId ,pt.producttype ");
 		 String sql = buffer.toString();
-		 //System.out.println(sql);
+		 System.out.println(sql);
 		List<ItemsBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
 				ParameterizedBeanPropertyRowMapper.newInstance(ItemsBean.class));
 		

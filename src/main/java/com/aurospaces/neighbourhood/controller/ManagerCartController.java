@@ -79,14 +79,14 @@ public class ManagerCartController {
 					//System.out.println("111111111111111111111111111111111");
 					Map<String,Object> val_map = sub_category_map.get(key);
 					//System.out.println("map1"+val_map);
-					val_map.put(item.getItemcode(),item.getItemdescrption());
+					val_map.put(item.getItemcode()+"##"+item.getId()+"##"+item.getItemprice(),item.getItemdescrption());
 					//System.out.println("map2"+val_map);
 					
 				}else{
 					//System.out.println("keyyy2"+key);
 					//System.out.println("22222222222222222222222222222");
 					Map<String,Object> val_map = new HashMap<String,Object>();
-					val_map.put(item.getItemcode()+"##"+item.getId(),item.getItemdescrption());
+					val_map.put(item.getItemcode()+"##"+item.getId()+"##"+item.getItemprice(),item.getItemdescrption());
 					//System.out.println("map1"+val_map);
 					//System.out.println("itemCode---"+item.getId());
 					sub_category_map.put(key, val_map);
