@@ -140,7 +140,7 @@ System.out.println("delar registration");
 	}
 	 @RequestMapping(value = "/validateOTP")
 		public @ResponseBody String validateOTP(EmployeeBean employeeBean,HttpServletRequest request, HttpSession session) {
-			System.out.println("validateOTP...");
+			//System.out.println("validateOTP...");
 			List<Map<String, Object>> listOrderBeans = null;
 			JSONObject jsonObj = new JSONObject();
 			InputStream input = null;

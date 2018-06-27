@@ -63,9 +63,9 @@ public class ProductnameDao extends BaseProductnameDao
 	{
 
 		String query = "select pn.id,pn.productname  from productname pn where  pn.productId=? group by pn.id ";
-		System.out.println(query);
+//		System.out.println(query);
 		List<ProductnameBean> handler = jdbcTemplate.query(query, new Object[]{productId},ParameterizedBeanPropertyRowMapper.newInstance(ProductnameBean.class));
-		 System.out.println(query);
+//		 System.out.println(query);
      
 		 return handler;
 	}

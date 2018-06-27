@@ -587,18 +587,14 @@ margin-top:-10px;
 						<li class="nav-item"><a class="nav-link"
 							href="${baseurl }/admin/dealercreation"> <i
 								class="fa fa-user-secret"></i><span>Dealer Creation </span></a></li>
-						<li class="nav-item"><a class="nav-link"
-							href="${baseurl }/admin/dealerpaymentconfirm"><i
-								class="fa fa-bolt"></i><span>Confirm Payments </span></a></li>
+						
 						<li class="nav-item"><a class="nav-link"
 							href="${baseurl }/admin/managerOrderplaceNew"><i
 								class="fa fa-clipboard"></i><span>Order Product</span></a></li>
 						<li class="nav-item"><a class="nav-link"
-							href="${baseurl }/admin/orderslist"><i
-								class="fa fa-clipboard"></i><span>Delivery Status</span></a></li>
-						<li class="nav-item nav-dropdown"><a
-							class="nav-link nav-dropdown-toggle" href="#"><i
-								class="fa fa-list"></i> <span>Reports</span></a>
+							href="${baseurl }/admin/orderslist"><i class="fa fa-clipboard"></i><span>Delivery Status</span></a></li>
+							<li class="nav-item"><a class="nav-link" href="${baseurl }/admin/dealerpaymentconfirm"><i class="fa fa-bolt"></i><span>Confirm Payments </span></a></li>
+						<li class="nav-item nav-dropdown"><a class="nav-link nav-dropdown-toggle" href="#"><i class="fa fa-list"></i> <span>Reports</span></a>
 							<ul class="nav-dropdown-items">
 								<li class="nav-item"><a class="nav-link"
 									href="${baseurl }/admin/reportAllOrdersPage"><i

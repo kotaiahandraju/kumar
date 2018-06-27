@@ -45,7 +45,7 @@ public class KhaibarUsersDao extends BaseKhaibarUsersDao
 				jdbcTemplate = custom.getJdbcTemplate();
 				String sql ="SELECT * from login where username = '"+userObj.getUserName()+"' and password ='"+userObj.getPassword()+"' and status='1'";
 				list =jdbcTemplate.queryForList(sql, new Object[]{});
-				System.out.println(sql);
+//				System.out.println(sql);
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -60,7 +60,7 @@ public class KhaibarUsersDao extends BaseKhaibarUsersDao
 				jdbcTemplate = custom.getJdbcTemplate();
 				String sql ="SELECT * from items ";
 				list =jdbcTemplate.queryForList(sql, new Object[]{});
-				System.out.println("rest list-----------------"+list);
+//				System.out.println("rest list-----------------"+list);
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -74,7 +74,7 @@ public class KhaibarUsersDao extends BaseKhaibarUsersDao
 				jdbcTemplate = custom.getJdbcTemplate();
 				String sql ="SELECT * from producttype ";
 				list =jdbcTemplate.queryForList(sql, new Object[]{});
-				System.out.println("rest list2-----------------"+list);
+//				System.out.println("rest list2-----------------"+list);
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -88,7 +88,7 @@ public class KhaibarUsersDao extends BaseKhaibarUsersDao
 				jdbcTemplate = custom.getJdbcTemplate();
 				String sql ="SELECT * from productname ";
 				list =jdbcTemplate.queryForList(sql, new Object[]{});
-				System.out.println("rest list3-----------------"+list);
+//				System.out.println("rest list3-----------------"+list);
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -103,7 +103,7 @@ public class KhaibarUsersDao extends BaseKhaibarUsersDao
 				jdbcTemplate = custom.getJdbcTemplate();
 				String sql ="SELECT * from login where roleId = '3' and branchId =? and status='1'";
 				list =jdbcTemplate.queryForList(sql, new Object[]{branchId});
-				System.out.println(sql);
+//				System.out.println(sql);
 			}catch(Exception e){
 				e.printStackTrace();
 			}
@@ -117,7 +117,7 @@ public class KhaibarUsersDao extends BaseKhaibarUsersDao
 				jdbcTemplate = custom.getJdbcTemplate();
 				String sql ="SELECT DATE(ol.created_time) AS dateoforder,ol.*,i.* FROM `orders_list` ol,`items` i WHERE `delerId` = ? AND i.id=ol.`productId` order by ol.created_time desc ";
 				list =jdbcTemplate.queryForList(sql, new Object[]{delarId});
-				System.out.println(sql);
+//				System.out.println(sql);
 			}catch(Exception e){
 				e.printStackTrace();
 			}

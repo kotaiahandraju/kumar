@@ -62,7 +62,7 @@ public class ItemController {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
 				request.setAttribute("allOrders1", sJson);
-					System.out.println(sJson);
+					//System.out.println(sJson);
 			} else {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -156,7 +156,7 @@ public class ItemController {
 	 @RequestMapping(value = "/itemDelete")
 	public @ResponseBody String itemDelete(ItemsBean productTypeBean, ModelMap model,
 			HttpServletRequest request, HttpSession session, BindingResult objBindingResult) {
-		System.out.println("deleteCylinder page...");
+		//System.out.println("deleteCylinder page...");
 		List<ItemsBean> listOrderBeans = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
@@ -223,7 +223,7 @@ public class ItemController {
 			try {
 				String sSql = "select id,producttype from producttype where  status='1'";
 				List<ProductnameBean> list = productnameDao.populateProductType(sSql);
-				System.out.println("--------List-----"+list.size());
+				//System.out.println("--------List-----"+list.size());
 				for (ProductnameBean bean : list) {
 					statesMap.put(bean.getId(), bean.getProducttype());
 				}
@@ -241,7 +241,7 @@ public class ItemController {
 			try {
 				String sSql = "select id,productname from productname where  status='1'";
 				List<ProductnameBean> list = productnameDao.populateProductName(sSql);
-				System.out.println("--------List-----"+list.size());
+				//System.out.println("--------List-----"+list.size());
 				for (ProductnameBean bean : list) {
 					statesMap.put(bean.getId(), bean.getProductname());
 				}

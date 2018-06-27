@@ -154,7 +154,7 @@ public class EmployeeController {
 	 @RequestMapping(value = "/deleteEmpCreation")
 	public @ResponseBody String deleteEmpCreation(EmployeeBean employeeBean, ModelMap model,
 			HttpServletRequest request, HttpSession session, BindingResult objBindingResult) {
-		System.out.println("deleteCylinder page...");
+		//System.out.println("deleteCylinder page...");
 		List<EmployeeBean> listOrderBeans = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
@@ -215,7 +215,7 @@ public class EmployeeController {
 			try {
 				String sSql = "select id,branchname from kumar_branch where  status='1'";
 				List<EmployeeBean> list = empDao.branchNames(sSql);
-				System.out.println("--------List-----"+list.size());
+				//System.out.println("--------List-----"+list.size());
 				for (EmployeeBean bean : list) {
 					statesMap.put(bean.getId(), bean.getBranchname());
 				}

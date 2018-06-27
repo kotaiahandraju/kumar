@@ -79,8 +79,8 @@ public class ProductNameController {
 	@RequestMapping(value = "/addProductname", method = RequestMethod.POST)
 	public String addProductname(ProductnameBean productnameBean, @RequestParam("file") MultipartFile file,RedirectAttributes redir,HttpServletRequest request) {
 
-		System.out.println("111111111111113333333333111111111"+productnameBean);
-		System.out.println("saving staffDetails page..."+file.getOriginalFilename()+"----------requestImage------"+productnameBean.getImagePath());
+		//System.out.println("111111111111113333333333111111111"+productnameBean);
+		//System.out.println("saving staffDetails page..."+file.getOriginalFilename()+"----------requestImage------"+productnameBean.getImagePath());
 		int id = 0;
 		String size = null;
 		String name=null;
@@ -173,14 +173,14 @@ public class ProductNameController {
 	 @RequestMapping(value = "/deleteProductName")
 	public @ResponseBody String deleteProductName(ProductnameBean productnameBean, ModelMap model,
 			HttpServletRequest request, HttpSession session, BindingResult objBindingResult) {
-		System.out.println("deleteCylinder page...");
+		//System.out.println("deleteCylinder page...");
 		List<ProductnameBean> listOrderBeans = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
 		String sJson = null;
 		boolean delete = false;
 		try {
-			System.out.println("---id---"+productnameBean.getId());
+			//System.out.println("---id---"+productnameBean.getId());
 			if (productnameBean.getId() != 0 && productnameBean.getStatus() != "") {
 				delete = productnameDao.delete(productnameBean.getId(),
 						productnameBean.getStatus());
@@ -241,7 +241,7 @@ public class ProductNameController {
 			try {
 				String sSql = "select id,producttype from producttype where  status='1'";
 				List<ProductnameBean> list = productnameDao.populateProductType(sSql);
-				System.out.println("--------List-----"+list.size());
+				//System.out.println("--------List-----"+list.size());
 				for (ProductnameBean bean : list) {
 					statesMap.put(bean.getId(), bean.getProducttype());
 				}
@@ -262,7 +262,7 @@ public class ProductNameController {
 			productnameBeans =  productnameDao.getProductNameFilter(productId);
 			ObjectMapper objmapper=new ObjectMapper();
 			json=objmapper.writeValueAsString(productnameBeans);
-			System.out.println("productnameBeans.size()==="+productnameBeans.size());
+			//System.out.println("productnameBeans.size()==="+productnameBeans.size());
 			request.setAttribute("seviceList", json);
 		  return json;
 

@@ -158,7 +158,7 @@ table#dependent_table tbody tr td:first-child::before {
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar text-center">
 					      			<input class="btn-primary btn" type="submit" value="Submit" id="submit2"/>
-					      			<input class="btn-danger btn cancel" type="reset" value="Reset" />
+					      			<input class="btn-danger btn cancel" type="reset" value="Cancel" />
 				      			</div>
 				      		</div>
 				    	</div>
@@ -244,7 +244,7 @@ function editEmpCreation(id){
 	$("#email").val(serviceUnitArray[id].email);
 	$("#phoneNumber").val(serviceUnitArray[id].phoneNumber);
 	$("#status").val(serviceUnitArray[id].status);
-	$("#submit1").val("Update");
+	$("#submit2").val("Update");
 	document.getElementById("username").readOnly  = true;
 	$(window).scrollTop($('#moveTo').offset().top);
 	

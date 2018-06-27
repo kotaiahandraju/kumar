@@ -52,7 +52,7 @@ public class ProductTypeController {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
 				request.setAttribute("allOrders1", sJson);
-				 System.out.println(sJson);
+				 //System.out.println(sJson);
 			} else {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -116,7 +116,7 @@ public class ProductTypeController {
 	 @RequestMapping(value = "/deleteproducttype")
 	public @ResponseBody String deleteproducttype(ProductTypeBean productTypeBean, ModelMap model,
 			HttpServletRequest request, HttpSession session, BindingResult objBindingResult) {
-		System.out.println("deleteCylinder page...");
+		//System.out.println("deleteCylinder page...");
 		List<ProductTypeBean> listOrderBeans = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
@@ -124,7 +124,7 @@ public class ProductTypeController {
 		boolean delete = false;
 		try {
 			
-			System.out.println("1111111111111111111111111111");
+			//System.out.println("1111111111111111111111111111");
 			if (productTypeBean.getId() != 0 && productTypeBean.getStatus() != "") {
 				delete = productTypeDao.delete(productTypeBean.getId(),
 						productTypeBean.getStatus());

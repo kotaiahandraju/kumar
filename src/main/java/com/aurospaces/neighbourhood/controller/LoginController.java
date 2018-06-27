@@ -176,7 +176,7 @@ public class LoginController {
 			}
 			else
 			{
-				System.out.println("employee not registered");
+				//System.out.println("employee not registered");
 				redir.addFlashAttribute("msg", "Employee Mobile Number Not Registered");
 				redir.addFlashAttribute("cssMsg", "warning");
 				
@@ -203,7 +203,7 @@ public class LoginController {
 	        response.addHeader("Access-Control-Max-Age", "1728000");
 			
 			jsonObject.put("data", name);
-			System.out.println("hello sampleUrl ");
+			//System.out.println("hello sampleUrl ");
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e);

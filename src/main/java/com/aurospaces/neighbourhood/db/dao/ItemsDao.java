@@ -44,7 +44,7 @@ public class ItemsDao extends BaseItemsDao
 		}
 		buffer.append("  order by pn.productId ,pt.producttype ");
 		 String sql = buffer.toString();
-		 System.out.println(sql);
+		 //System.out.println(sql);
 		List<ItemsBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
 				ParameterizedBeanPropertyRowMapper.newInstance(ItemsBean.class));
 		

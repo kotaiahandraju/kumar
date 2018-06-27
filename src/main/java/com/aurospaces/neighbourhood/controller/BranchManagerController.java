@@ -135,7 +135,7 @@ public class BranchManagerController {
 			String json = null;
 			JSONObject jsonObject=new JSONObject();
 		try {
-			System.out.println("authDetailsauthDetailsauthDetails");
+			//System.out.println("authDetailsauthDetailsauthDetails");
 			
 			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
 			boolean duplicate = employeeDao.isUsernameDuplicate(employeeBean.getUsername());
@@ -204,7 +204,7 @@ public class BranchManagerController {
 	 @RequestMapping(value = "/deleteDealer")
 		public @ResponseBody String deleteDealer(EmployeeBean  employeeBean, ModelMap model,
 				HttpServletRequest request, HttpSession session, BindingResult objBindingResult) {
-			System.out.println("deleteCylinder page...");
+			//System.out.println("deleteCylinder page...");
 			List<Map<String, Object>> listOrderBeans = null;
 			JSONObject jsonObj = new JSONObject();
 			ObjectMapper objectMapper = null;

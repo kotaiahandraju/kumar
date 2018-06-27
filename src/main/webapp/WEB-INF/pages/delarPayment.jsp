@@ -117,7 +117,7 @@ td, th {
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar pull-right">
 					      			<input class="btn-primary btn " type="submit" id="submit1" value="Submit" />
-					      			<input class="btn-danger btn  cancel" type="reset" id="clearData" value="Reset" />
+					      			<input class="btn-danger btn  cancel" type="reset" id="clearData" value="Cancel" />
 				      			</div>
 				      		</div>
 				    	</div>
