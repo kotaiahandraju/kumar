@@ -172,7 +172,7 @@ table#dependent_table tbody tr td:first-child::before {
 								<div class="btn-toolbar text-center">
 									<input class="btn-primary btn" type="submit" value="Submit"
 										id="submit1" /> <input class="btn-danger btn cancel"
-										type="reset" value="Reset" />
+										type="reset" value="Cancel" />
 								</div>
 							</div>
 						</div>

@@ -46,13 +46,13 @@ public class BranchController {
 		String sJson = null;
 		List<BranchBean> listOrderBeans = null;
 		try {
-			System.out.println("dsgfahdfglaefrhuiwehfuwrfefluyg");
+//		System.out.println("dsgfahdfglaefrhuiwehfuwrfefluyg");
 			listOrderBeans = branchDao.getBranchDetails("1");
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
 				request.setAttribute("allOrders1", sJson);
-				 System.out.println(sJson);
+				// System.out.println(sJson);
 			} else {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -113,14 +113,14 @@ public class BranchController {
 	 @RequestMapping(value = "/deleteBranch")
 	public @ResponseBody String deleteBranch(BranchBean branchBean, ModelMap model,
 			HttpServletRequest request, HttpSession session, BindingResult objBindingResult) {
-		System.out.println("deleteCylinder page...");
+		//System.out.println("deleteCylinder page...");
 		List<BranchBean> listOrderBeans = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
 		String sJson = null;
 		boolean delete = false;
 		try {
-			System.out.println("---id---"+branchBean.getId());
+			//System.out.println("---id---"+branchBean.getId());
 			if (branchBean.getId() != 0 && branchBean.getStatus() != "") {
 				delete = branchDao.delete(branchBean.getId(),
 						branchBean.getStatus());
@@ -168,7 +168,7 @@ public class BranchController {
 
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
-				System.out.println(sJson+"aaaaaa111");
+				//System.out.println(sJson+"aaaaaa111");
 			}
 			
 			return sJson;

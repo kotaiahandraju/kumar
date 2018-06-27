@@ -86,22 +86,13 @@ public class OrderPlacementController {
 			for(ItemsBean item:listOrderBeans){
 				String key = item.getProductname()+"##"+item.getProductIdName();
 				if(sub_category_map.containsKey(key)){
-					System.out.println("keyyy1"+key);
-					System.out.println("111111111111111111111111111111111");
 					Map<String,Object> val_map = sub_category_map.get(key);
-					System.out.println("map1"+val_map);
 					val_map.put(item.getItemcode(),item.getItemdescrption());
-					System.out.println("map2"+val_map);
 					
 				}else{
-					System.out.println("keyyy2"+key);
-					System.out.println("22222222222222222222222222222");
 					Map<String,Object> val_map = new HashMap<String,Object>();
 					val_map.put(item.getItemcode()+"##"+item.getId(),item.getItemdescrption());
-					System.out.println("map1"+val_map);
-					System.out.println("itemCode---"+item.getId());
 					sub_category_map.put(key, val_map);
-					System.out.println("map2"+val_map);
 				}
 			}
 			objectMapper = new ObjectMapper();
@@ -131,7 +122,6 @@ public class OrderPlacementController {
 		return "orderPlacement";
 		
 	}
-	@SuppressWarnings("null")
 	@RequestMapping(value="/dealerorderproducts")
 	public @ResponseBody String dealerorderproducts(OrdersListBean orderslistbean,ModelMap model,HttpServletRequest request,RedirectAttributes redir,HttpSession session){
 		JSONArray jsonArray = new JSONArray();
@@ -179,7 +169,7 @@ public class OrderPlacementController {
 					orderslistbean.setInvoiceId(kumarUtil.randNum());
 					int year=Integer.parseInt(CommonUtils.getYear())+1;
 					branchCount=Integer.parseInt(String.format("%4s", branchCount).replace(' ', '0'));
-					System.out.println(String.format("%4s", branchCount).replace(' ', '0'));
+//					System.out.println(String.format("%4s", branchCount).replace(' ', '0'));
 					orderslistbean.setOrderId(branchCode+"/"+CommonUtils.getYear()+""+year+"/"+CommonUtils.getMonth()+"/"+String.format("%4s", branchCount).replace(' ', '0'));
 					ordersListDao.save(orderslistbean);
 					
@@ -205,7 +195,7 @@ public class OrderPlacementController {
 			 EmployeeBean objDealerMobileNo=null;
 				EmployeeBean objMobileNo=employeeDao.getMobileNo(objuserBean.getEmpId());
 				String mobileNo=objMobileNo.getPhoneNumber();
-				 System.out.println("----branch mobile :"+mobileNo);
+				 //System.out.println("----branch mobile :"+mobileNo);
 				String msg = prop.getProperty("smsForManager");
 				msg =msg.replace("_invoice_",orderslistbean.getOrderId());
 				if(StringUtils.isNotBlank(mobileNo)){
@@ -214,9 +204,9 @@ public class OrderPlacementController {
 				
 				}
 				 String roleId=objuserBean.getRoleId();
-				 System.out.println("roleId=="+roleId+"----objMobileNo.getBranchId()---"+objMobileNo.getBranchId());
+				 //System.out.println("roleId=="+roleId+"----objMobileNo.getBranchId()---"+objMobileNo.getBranchId());
 				 if(roleId.equals("3")) {
-					 System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
+					// System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
 					 objDealerMobileNo= employeeDao.getBranchHeadBean(objMobileNo.getBranchId());
 				 }else {
 					  objDealerMobileNo=employeeDao.getMobileNo(orderslistbean.getDelerId());
@@ -224,7 +214,7 @@ public class OrderPlacementController {
 				
 				if(objDealerMobileNo !=null) {
 					String dealerMobile=objDealerMobileNo.getPhoneNumber();
-					System.out.println("dealer Id "+dealerMobile);
+					//System.out.println("dealer Id "+dealerMobile);
 						String msg1 = prop.getProperty("smsForDealer");
 						msg1 =msg1.replace("_invoice_",orderslistbean.getOrderId());
 						SendSMS.sendSMS(msg1,dealerMobile, objContext);
@@ -249,7 +239,7 @@ public class OrderPlacementController {
 	
 	 @RequestMapping(value = "/orederLists")
 		public @ResponseBody String orederLists(@RequestParam("dealerId") String dealerId,@RequestParam("status") String status,HttpServletRequest request, HttpSession session) {
-			System.out.println("orederLists page...");
+//			System.out.println("orederLists page...");
 			List<Map<String, Object>> listOrderBeans = null;
 			JSONObject jsonObj = new JSONObject();
 			ObjectMapper objectMapper = null;
@@ -419,7 +409,7 @@ public class OrderPlacementController {
 		/*System.out.println("...............enter into myorders list...............");
 		model.addAttribute("orderLstForm",new OrdersListBean());
 		return "ordersList";*/
-		System.out.println("orederLists page...");
+		//System.out.println("orederLists page...");
 		List<Map<String, Object>> listOrderBeans = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;

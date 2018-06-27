@@ -197,6 +197,7 @@ function editEmployee(id) {
 	
 	$("#employeename").val(serviceUnitArray[id].employeename);
 	$("#status").val(serviceUnitArray[id].status);
+	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 }
 

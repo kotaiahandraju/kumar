@@ -156,7 +156,7 @@ public class EmployeeDao extends BaseEmployeeDao
 			}
 			buffer.append(" order by kp.confirm asc,kp.payment_date desc");
 		 String sql=buffer.toString();
-		 System.out.println(sql);
+//		 System.out.println(sql);
 		 List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
 		 if(list.size() >0)
 			 return list;
@@ -179,7 +179,7 @@ public class EmployeeDao extends BaseEmployeeDao
 				 buffer.append(" and kp.branchId ='"+objuserBean.getBranchId()+"' ");
 			}
 		 String sql=buffer.toString();
-		 System.out.println(sql);
+//		 System.out.println(sql);
 		 List<Map<String,Object>> list = jdbcTemplate.queryForList(sql);
 		 if(list.size() >0)
 			 return list;
@@ -363,7 +363,7 @@ public Boolean dealerEmailExistsOrNotOnEdit(String cemail, String editFields) {
 		
 		 String  hql =" select count(*) from kumar_employee where  email='"+cemail+"' and id <>  "+editFields+" ";
 		 
-		 System.out.println(hql);
+//		 System.out.println(hql);
 		 
 		 int count = jdbcTemplate.queryForInt(hql);
 		 if(count>0){
@@ -439,7 +439,7 @@ public Boolean UsernameExistsOrNotOnEdit(String username, String editFields) {
 		
 		 String  hql =" select count(*) from kumar_employee where  username='"+username+"' and id <>  "+editFields+" ";
 		 
-		 System.out.println(hql);
+//		 System.out.println(hql);
 		 
 		 int count = jdbcTemplate.queryForInt(hql);
 		 if(count>0){
@@ -449,13 +449,13 @@ public Boolean UsernameExistsOrNotOnEdit(String username, String editFields) {
 }
 
 public EmployeeBean getMobileNo(String empid) {
-	System.out.println("empid==="+empid);
+//	System.out.println("empid==="+empid);
 	jdbcTemplate = custom.getJdbcTemplate();
 	String sql = "select phone_number,name,branch_id from kumar_employee where id =?";
 	List<EmployeeBean> retlist = jdbcTemplate.query(sql,
 	new Object[]{empid},
 	ParameterizedBeanPropertyRowMapper.newInstance(EmployeeBean.class));
-	System.out.println("retlist==="+retlist.size());
+//	System.out.println("retlist==="+retlist.size());
 	if(retlist.size() > 0)
 		return retlist.get(0);
 	return null;

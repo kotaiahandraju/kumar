@@ -74,7 +74,7 @@ public class PaymentDao extends BasePaymentDao
 		jdbcTemplate = custom.getJdbcTemplate();
 		
 	String sql =" select kp.*,DATE_FORMAT(payment_date,'%d-%b-%Y') as strpaymentDate,ke.name  from kumar_payment kp,kumar_employee ke where 1=1 and kp.empId=ke.id 	 and branchId= '"+paymentBean.getBranchId()+"' ";
-		System.out.println(sql);
+//		System.out.println(sql);
 		List<PaymentBean>  list = jdbcTemplate.query(sql, new Object[]{},ParameterizedBeanPropertyRowMapper.newInstance(PaymentBean.class));
 		if(list.size() > 0)
 			return list;
