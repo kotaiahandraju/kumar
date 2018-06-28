@@ -25,8 +25,23 @@ protected Date updatedTime ;
 protected String productId ;
 
 /** Field mapping. **/
-protected String quantity ;
+protected String quantity,amount,totalamount ;
 
+
+
+
+public String getTotalamount() {
+	return totalamount;
+}
+public void setTotalamount(String totalamount) {
+	this.totalamount = totalamount;
+}
+public String getAmount() {
+	return amount;
+}
+public void setAmount(String amount) {
+	this.amount = amount;
+}
 /** Field mapping. **/
 protected String userId ;
 

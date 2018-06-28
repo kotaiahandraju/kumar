@@ -206,6 +206,7 @@ function editBranch(id) {
 	$("#branchname").val(serviceUnitArray[id].branchname);
 	$("#branchcode").val(serviceUnitArray[id].branchcode);
 	$("#status").val(serviceUnitArray[id].status);
+	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 }
 

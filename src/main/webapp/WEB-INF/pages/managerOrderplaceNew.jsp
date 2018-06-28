@@ -287,7 +287,7 @@ function addCart() {
 	formData.append('quantity', quantity);
 	formData.append('productId', productId);
 	formData.append('userId',dealerId);
-	
+	formData.append('amount', amount);
 	$.fn.makeMultipartRequest('POST', 'manageraddtocart', false,
 			formData, false, 'text', function(data) {
 		if(data != ""){
@@ -337,6 +337,7 @@ function orderNow() {
 	var formData = new FormData();
 	formData.append('quantity', quantity);
 	formData.append('productId', productId);
+	formData.append('amount', amount);
 	formData.append('userId', dealerId);
 	$.fn.makeMultipartRequest('POST', 'manageraddtocart', false,
 			formData, false, 'text', function(data) {

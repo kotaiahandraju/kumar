@@ -122,13 +122,18 @@ public class ManagerCartController {
 			if(StringUtils.isNotBlank(cartBean.getProductId())){
 				String productArray[] = cartBean.getProductId().split(",");
 				String quantityArray[] = cartBean.getQuantity().split(",");
+				String amountArray[] = cartBean.getAmount().split(",");
 			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
 			if (objuserBean != null) {
 				cartBean.setBranchId(objuserBean.getBranchId());
 				for(int i=0;i<productArray.length;i++){
+				int totalamount	=Integer.parseInt(amountArray[i]) * Integer.parseInt(quantityArray[i]);
 					cartBean.setId(0);
 					cartBean.setProductId(productArray[i]);
 					cartBean.setQuantity(quantityArray[i]);
+					cartBean.setAmount(amountArray[i]);
+					cartBean.setTotalamount(String.valueOf(totalamount));
+					
 					List<CartBean> cartList= cartDao.checkProductIdAndDealerId(cartBean);
 					if(cartList.size() > 0) {
 						for (CartBean cartBean2 : cartList) {
@@ -138,6 +143,10 @@ public class ManagerCartController {
 								
 								int iQty=Integer.parseInt(existQty)+Integer.parseInt(quantityArray[i]);
 								cartBean.setQuantity(String.valueOf(iQty));
+//								int iAmount=Integer.parseInt(cartBean2.getAmount())+Integer.parseInt(amountArray[i]);
+								int itoAmount=Integer.parseInt(cartBean2.getTotalamount()) + totalamount;
+//								cartBean.setAmount(String.valueOf(iAmount));
+								cartBean.setTotalamount(String.valueOf(itoAmount));
 							}
 							cartDao.updateCart(cartBean);
 						}

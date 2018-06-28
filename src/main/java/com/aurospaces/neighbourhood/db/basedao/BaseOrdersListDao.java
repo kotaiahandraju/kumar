@@ -26,7 +26,7 @@ public class BaseOrdersListDao{
 	JdbcTemplate jdbcTemplate;
 
  
-	public final String INSERT_SQL = "INSERT INTO orders_list( created_time, updated_time, delerId, quantity, productId,invoiceId,branchId,orderId) values (?,?, ?, ?, ?, ?,?,?)";
+	public final String INSERT_SQL = "INSERT INTO orders_list( created_time, updated_time, delerId, quantity, productId,invoiceId,branchId,orderId,amount,totalamount) values (?,?, ?, ?, ?, ?,?,?,?,?)";
 
 
 
@@ -69,6 +69,9 @@ ps.setString(5, ordersList.getProductId());
 ps.setString(6, ordersList.getInvoiceId());
 ps.setString(7, ordersList.getBranchId());
 ps.setString(8, ordersList.getOrderId());
+ps.setString(9, ordersList.getAmount());
+ps.setString(10, ordersList.getTotalamount());
+
 							return ps;
 						}
 				},
@@ -82,9 +85,9 @@ ps.setString(8, ordersList.getOrderId());
 		else
 		{
 
-			String sql = "UPDATE orders_list  set delerId = ? ,quantity = ? ,productId = ?,oderId=? where id = ? ";
+			String sql = "UPDATE orders_list  set delerId = ? ,quantity = ? ,productId = ?,oderId=? ,amount = ? ,totalamount = ?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{ordersList.getDelerId(),ordersList.getQuantity(),ordersList.getProductId(),ordersList.getId()});
+			jdbcTemplate.update(sql, new Object[]{ordersList.getDelerId(),ordersList.getQuantity(),ordersList.getProductId(),ordersList.getAmount(),ordersList.getTotalamount(),ordersList.getId()});
 		}
 	}
 		
