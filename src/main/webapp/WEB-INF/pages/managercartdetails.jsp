@@ -13,7 +13,13 @@
  
  
  <style>
- 
+ .dataTables_wrapper .dataTables_filter input {
+    margin-left: 0.5em;
+    border: 1px solid #ccc;
+}
+table.dataTable thead th, table.dataTable thead td {
+font-weight: 500;
+}
  @media print
 {
   table { page-break-after:auto }
@@ -30,6 +36,7 @@ table { page-break-inside:auto }
  .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td
  {
  border: 0px solid black !important;
+ font-weight:normal;
  }
 table #dependent_table{
 /* 	width: 100%; */
@@ -158,7 +165,8 @@ table#dependent_table tbody tr td:first-child::before {
     <label class="col-md-1" for="Orderid">Order ID &nbsp; &nbsp;</label>
     <span type="order" class="col-md-11 " id="order">dfds</span>
 								
-								<div class="clearfix"></div>	
+								<div class="clearfix">
+								</div>	
 									
 									<span class="table-responsive" id="tableIdm">
 						<table class="table table-bordered table-striped">
@@ -290,7 +298,7 @@ function showTableData(response){
 				+ "<td >" + quantity+ "</td>"
 				+ "<td title='"+orderObj.totalamount+"' id='"+orderObj.productId+"totalamount'>"+ orderObj.totalamount + "</td>"
 				+ "<th class='labelCss notPrintMe hideme' style='width: 10px;'><span><a href='javascript:void(0);' style='color: red;' onclick='removecartdata("
-				+ orderObj.id + ");'><i class='fa fa-trash' style='color: red;text-decoration: none;cursor: pointer;'></i></a></span></th>"
+				+ orderObj.id + ");'><i  class='btn btn-danger  fa fa-trash' style='color: red;text-decoration: none;cursor: pointer;'></i></a></span></th>"
 		$(tblRow).appendTo("#tableId table tbody");
 		
 	});
@@ -421,8 +429,8 @@ function showTableDataOnInvoice(response){
 	var table=$('#tableId').html('');
 	serviceUnitArray = {};
 	var protectType = null;
-	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
-    	'<thead><tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><th>Quantity</th><th>Price</th><th>Total Amount</th><th></th></tr>'+
+	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped datatables" id="example1">'+
+    	'<thead><tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {

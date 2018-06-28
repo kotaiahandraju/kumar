@@ -373,7 +373,7 @@ table#dependent_table tbody tr td:first-child::before {
 	</ol>
 	<div class="clearfix"></div>
 	
-		<div class="row" id="orderPlacement">
+		<div class="row" id="orderPlacement" style="padding-left:15px; padding-right:15px;">
 			<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">

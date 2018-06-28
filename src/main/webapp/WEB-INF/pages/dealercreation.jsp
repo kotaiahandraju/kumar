@@ -281,10 +281,10 @@ padding: 3px 14px 0px 11px;
                     			</div> --%>
                     		
                     		<br>
-                    		<div class="btn-toolbar text-center">
+                    		<!-- <div class="btn-toolbar text-center">
 						      			<input type="submit" id="submit2" value="Submit" class="btn-primary btn"/>
 						      			<input type="reset" value="Cancel" class="btn-danger btn cancel"/>
-					      			</div>
+					      			</div> -->
                     		
                     		
                     	
@@ -293,9 +293,12 @@ padding: 3px 14px 0px 11px;
                     		
                     		
 	                    <div class="panel-footer">
-					      	<div class="row">
+					      	<div class="row pull-right">
 					      		<div class="col-sm-12">
-					      			
+					      			<div class="btn-toolbar text-center">
+						      			<input type="submit" id="submit2" value="Submit" class="btn-primary btn"/>
+						      			<input type="reset" value="Cancel" class="btn-danger btn cancel"/>
+					      			</div>
 					      		</div>
 					      	</div>
 					      </div>
