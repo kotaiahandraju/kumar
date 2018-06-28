@@ -288,7 +288,7 @@ function showTableData(response){
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		serviceUnitArray[orderObj.id] = orderObj;
-		var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" onkeyup='pricecal(this.id)'  class='numericOnly' maxlength='3' id='"+orderObj.productId+"quantity' />"
+		var quantity ="<input type='text' style='width:45px' name='quantity[]' value="+orderObj.quantity+" onkeyup='pricecal(this.id)'  class='numericOnly' maxlength='3' id='"+orderObj.productId+"quantity' />"
 		var tblRow = "<tr>"
 				+ "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>"
 				+ "<td title='"+orderObj.productIdName+"'>"	+ orderObj.productIdName + "</td>"
