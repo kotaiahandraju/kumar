@@ -90,7 +90,7 @@ table#dependent_table tbody tr td:first-child::before {
 		<div class="col-md-12 col-sm-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
-					<h4>Add Product</h4>
+					<h4>Create Product</h4>
 				</div>
 				<form:form modelAttribute="itemsForm" action="addItems"
 					class="form-horizontal" method="Post">

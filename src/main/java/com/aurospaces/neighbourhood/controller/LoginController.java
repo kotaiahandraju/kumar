@@ -1,9 +1,10 @@
 package com.aurospaces.neighbourhood.controller;
-
+import javax.ws.rs.core.MediaType;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -11,6 +12,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import javax.ws.rs.Consumes;
 
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,13 +22,19 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import com.aurospaces.neighbourhood.bean.BranchBean;
 import com.aurospaces.neighbourhood.bean.EmployeeBean;
 import com.aurospaces.neighbourhood.bean.LoginBean;
+import com.aurospaces.neighbourhood.bean.SampleBean;
+import com.aurospaces.neighbourhood.db.dao.BranchDao;
 import com.aurospaces.neighbourhood.db.dao.KhaibarUsersDao;
 import com.aurospaces.neighbourhood.db.dao.LoginDao;
 import com.aurospaces.neighbourhood.util.SendSMS;
@@ -35,7 +44,7 @@ public class LoginController {
 	@Autowired KhaibarUsersDao objKhaibarUsersDao;
 	
 	@Autowired ServletContext objContext;
-	
+	@Autowired BranchDao branchDao;
 	@Autowired LoginDao loginDao;
 	@RequestMapping(value = "/LoginHome")
 	public String LoginHome(Map<String, Object> model1, ModelMap model, HttpServletRequest request,
@@ -193,16 +202,17 @@ public class LoginController {
 	@ResponseBody public String sampleUrl(ModelMap model, HttpServletRequest request, HttpSession objSession,
 			HttpServletResponse response)  {
 //		System.out.println("logout page...");
-		String name="pavan";
+		String name="Angular js learning";
 		JSONObject jsonObject=new JSONObject();
+		List<Map<String, Object>> branchBean=null;
 		try {
 			 //TODO: externalize the Allow-Origin
 	        response.addHeader("Access-Control-Allow-Origin", "*");
 	        response.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
 	        response.addHeader("Access-Control-Allow-Headers", "X-PINGOTHER, Origin, X-Requested-With, Content-Type, Accept");
 	        response.addHeader("Access-Control-Max-Age", "1728000");
-			
-			jsonObject.put("data", name);
+	        branchBean= loginDao.getallPracticeData();
+			jsonObject.put("data", branchBean);
 			//System.out.println("hello sampleUrl ");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -210,4 +220,63 @@ public class LoginController {
 		}
 		return String.valueOf(jsonObject);
 	}
+	
+	@RequestMapping(value = "/sampleUrl1")
+	@ResponseBody public String sampleUrl1(@RequestBody SampleBean sampleBean)  {
+		JSONObject jsonObject=new JSONObject();
+		System.out.println("logout sampleUrl1..."+sampleBean.getName()+"---mobile--");
+		
+		
+		try {
+			
+
+			loginDao.saveBillDetails(sampleBean);
+			
+		List<Map<String, Object>> retList=loginDao.getallPracticeData();
+			jsonObject.put("data", retList);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		return String.valueOf(jsonObject);
+	}
+	
+	
+	@RequestMapping (value = "/sampleDeleteUrl")
+	@ResponseBody public String sampleDeleteUrl(@RequestBody SampleBean sampleBean,HttpServletRequest request)  {
+		JSONObject jsonObject=new JSONObject();
+		
+		try {
+			
+//			String name = request.getParameter("name");
+			loginDao.deletePractice(sampleBean.getName());
+			
+		List<Map<String, Object>> retList=loginDao.getallPracticeData();
+			jsonObject.put("data", retList);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		return String.valueOf(jsonObject);
+	}
+	
+	
+	@RequestMapping(value = "/sampleUrlHome")
+		public String sampleUrlHome()  {
+//		
+		try {
+			System.out.println("Sample sampleUrl1...");
+			
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		return "practice";
+	}
+	
+	
 }
