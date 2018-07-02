@@ -62,7 +62,7 @@ public class CartDao extends BaseCartDao
 		if(StringUtils.isNotEmpty(dealerId)) {
 			
 			 jdbcTemplate = custom.getJdbcTemplate();
-				String sql = " SELECT c.totalamount,c.`quantity`,c.id,i.id AS productId,i.`itemcode`,i.`itemdescrption`,ifnull(i.itemprice,'0') as itemprice,pn.productname AS productIdName,pt.producttype AS productTypeName  FROM  `cart` c, items i, productname pn,producttype pt  WHERE  i.productId=pt.id AND c.`productId`=i.id AND   i.productname=pn.id AND c.userid=? ";
+				String sql = " SELECT  concat(ke.name,'(',ke.businessName,')') as name ,c.totalamount,c.`quantity`,c.id,i.id AS productId,i.`itemcode`,i.`itemdescrption`,ifnull(i.itemprice,'0') as itemprice,pn.productname AS productIdName,pt.producttype AS productTypeName  FROM  `cart` c, items i, productname pn,producttype pt,kumar_employee ke  WHERE  i.productId=pt.id AND c.`productId`=i.id AND ke.id=c.userid and  i.productname=pn.id AND c.userid=? ";
 				
 				List<Map<String,Object>> retlist = jdbcTemplate.queryForList(sql,new Object[]{dealerId});
 				if(retlist.size() > 0)
