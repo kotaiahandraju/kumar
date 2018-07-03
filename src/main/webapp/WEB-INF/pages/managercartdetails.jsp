@@ -445,6 +445,7 @@ function showTableDataOnInvoice(response){
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		serviceUnitArray[orderObj.id] = orderObj;
+		//display dealer name on OrderPlacing
 		 $("#dealername").text(orderObj.name);
 		var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" class='numericOnly' id='"+orderObj.productId+"quantity' />"
 		var tblRow = "<tr>"
