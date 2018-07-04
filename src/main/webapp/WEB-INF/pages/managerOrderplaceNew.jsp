@@ -96,7 +96,7 @@ table#dependent_table tbody tr td:first-child::before {
 	<div class="container-fluid">
 	<div class="col-md-12 col-sm-12" style="padding-left:0px; padding-right:0px;">
 				
-					<h4>Select Dealer</h4>
+					<h4>Order Product</h4>
 				
 				<form:form class="form-horizontal" modelAttribute="managerorderLstForm" action="" method="Post">
 					
@@ -298,6 +298,7 @@ function addCart() {
 // 		window.location.href = "${baseurl}/admin/cartdetails";
 			$('input[name^=quantity]').each(function(){
 				$(this).val("");
+				$("input[name^=totalamount]").val("");
 			});
 		}
 		$('#tagId').attr('href','managercartdetails?dealerId='+dealerId);

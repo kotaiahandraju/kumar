@@ -321,6 +321,7 @@ table#dependent_table tbody tr td:first-child::before {
 						console.log(resJson);
 					} else {
 						alert("Inactive List Empty");
+						$('#inActive').prop('checked', false);
 					}
 
 				});

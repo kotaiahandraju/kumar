@@ -249,6 +249,7 @@ function inactiveData() {
 						console.log(resJson);
 			}else{
 				alert("Inactive List Empty");
+				$('#inActive').prop('checked', false);
 			}
 			
 				});

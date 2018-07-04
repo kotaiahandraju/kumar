@@ -638,7 +638,7 @@ function showTableData(response){
 		if(orderObj.status == "1"){
 			var deleterow = "<a class='deactivate btn btn-danger' onclick='deleteDealer("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
-			var deleterow = "<a class='activate btn btn-danger' onclick='deleteDealer("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
+			var deleterow = "<a class='activate btn btn-success' onclick='deleteDealer("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
 		if(orderObj.confirm == "1"){
 			var confirm = "<a class='' >UsernameAssigned</i></a>"
@@ -661,7 +661,7 @@ function showTableData(response){
 			+ "<td title='"+orderObj.branchname+"'>" + orderObj.branchname + "</td>"
 			/* + "<td title='"+orderObj.description+"'>" + orderObj.description + "</td>" */
 			
-			+ "<td style='text-align: center;white-space: nowrap;'>"  + deleterow + "&nbsp;&nbsp;"+edit+ "</td>"
+			+ "<td style='text-align: center;white-space: nowrap;'>"  +edit + "&nbsp;&nbsp;"+deleterow+ "</td>"
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 		
@@ -799,6 +799,7 @@ function inactiveData() {
 				var alldata = jsonobj.allOrders1;
 				showTableData(alldata);
 				alert("Inactive List Empty");
+				$('#inActive').prop('checked', false);
 			}
 			
 				});
