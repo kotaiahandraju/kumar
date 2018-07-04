@@ -73,7 +73,7 @@ table#dependent_table tbody tr td:first-child::before {
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Add Subcategory</h4>
+                        <h4>Create Subcategory</h4>
                         <div class="options"></div>
                     </div>
 	                <form:form modelAttribute="productnameForm" id="formId" action="addProductname" class="form-horizontal" method="post" enctype="multipart/form-data" >
@@ -81,9 +81,9 @@ table#dependent_table tbody tr td:first-child::before {
                     	<div class="row">
                     	<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Product Category <span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Product Category <span class="impColor" >*</span></label>
                     				<div class="col-md-6">
-                    	<form:select path="producttype" value="" class="form-control validate" >
+                    	<form:select path="producttype" value="" class="form-control validate" onchange="removeBorder(this.id)" >
 								    	<form:option value="">-- Select Category --</form:option>
 								    	<form:options items="${productType }"></form:options>
 								    	</form:select>

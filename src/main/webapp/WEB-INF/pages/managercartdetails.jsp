@@ -79,7 +79,7 @@ table#dependent_table tbody tr td:first-child::before {
 	<div class="container-fluid" id ="hideForInvoice">
 	<div class="col-md-12 col-sm-12" style="padding-left:0px; padding-right:0px;">
 		
-				<form:form class="form-horizontal" modelAttribute="managercartdetailsForm" action="" method="Post">
+				<form:form class="form-horizontal" modelAttribute="managercartdetailsForm" action="" method="Post" id="delerSelctionId">
 					<div class="panel-body" style="border-radius: 0px; border:none;">
 						<div class="row">
 							<div class="col-md-6">
@@ -158,12 +158,21 @@ table#dependent_table tbody tr td:first-child::before {
         			
 				<h1 class="invo">Order Confirmed</h1>
 							<div class="clearfix"></div>
-    <label class="col-md-1" for="Invoiceid">Invoice ID</label>
-    <span  type="invoice" class="col-md-11 " id="invoice">fsd</span>
+							
+							
+	<label class="col-md-2" for="Orderid">Dealer Name &nbsp; &nbsp;</label>
+    <span type="order" class="col-md-9" id="dealername"></span>
+								<div class="clearfix"></div>
+							
+    <label class="col-md-2" for="Invoiceid">Invoice ID</label>
+    <span  type="invoice" class="col-md-9 " id="invoice"></span>
 							<div class="clearfix"></div>	
 								
-    <label class="col-md-1" for="Orderid">Order ID &nbsp; &nbsp;</label>
-    <span type="order" class="col-md-11 " id="order">dfds</span>
+    <label class="col-md-2" for="Orderid">Order ID &nbsp; &nbsp;</label>
+    <span type="order" class="col-md-9 " id="order"></span>
+    	<div class="clearfix"></div>
+    
+    
 								
 								<div class="clearfix">
 								</div>	
@@ -334,6 +343,7 @@ function ordePlacing() {
 		    amount.push($("#"+res+"price").text());
 		}
 	});
+		$('#delerSelctionId').hide();
 	console.log(quantity);
 	console.log(productId); 
 	console.log("----amount----------"+amount);
@@ -358,7 +368,7 @@ function ordePlacing() {
 			$('#cartId').text("0");
 			   $('#invoice').text(invoiceId);
 			   $('#order').text(orderId);
-			   
+			  
 			   if (listOrders1 != "") {
 					showTableDataOnInvoice(listOrders1);
 				}
@@ -435,6 +445,8 @@ function showTableDataOnInvoice(response){
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		serviceUnitArray[orderObj.id] = orderObj;
+		//display dealer name on OrderPlacing
+		 $("#dealername").text(orderObj.name);
 		var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" class='numericOnly' id='"+orderObj.productId+"quantity' />"
 		var tblRow = "<tr>"
 				+ "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>"
@@ -444,6 +456,7 @@ function showTableDataOnInvoice(response){
 				+ "<td title='"+orderObj.quantity+"'>"+ orderObj.quantity + "</td>"
 				+ "<td title='"+orderObj.itemprice+"'>"+ orderObj.itemprice + "</td>"
 				+ "<td title='"+orderObj.totalamount+"'>"+ orderObj.totalamount + "</td>"
+				
 		$(tblRow).appendTo("#tableIdm table tbody");
 		
 	});
@@ -488,7 +501,7 @@ function printInvoice(elem)
 	$(".noPrint").hide();
 	$("#printbtn").hide();
     $("#cancelbtn").hide();
-
+    $("#delerSelctionId").hide();
 	 $("#printFooter").show();
     Popup($(elem).html());
     
@@ -506,7 +519,7 @@ function Popup(data)
    
     mywindow.document.write('</body></html>');
     mywindow.document.close(); // necessary for IE >= 10 and necessary before onload for chrome
-
+$("#delerSelctionId").hide();
 $(".printbtn").show();
 $(".noPrint").show();
 $("#printbtn").show();

@@ -2,7 +2,9 @@
 package com.aurospaces.neighbourhood.db.dao;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
@@ -70,6 +72,20 @@ public class LoginDao extends BaseLoginDao
 		return null;
 		    
 	}
+	
+	public  List<Map<String,Object>> getallPracticeData(){
+			
+			 jdbcTemplate = custom.getJdbcTemplate();
+				String sql = " SELECT *from practice ";
+				
+				List<Map<String,Object>> retlist = jdbcTemplate.queryForList(sql,new Object[]{});
+				if(retlist.size() > 0)
+					return retlist;
+				return null;
+		
+		
+	}
+	
 
 }
 

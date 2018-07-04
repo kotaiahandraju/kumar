@@ -100,12 +100,12 @@ table#dependent_table tbody tr td:first-child::before {
 				
 				<form:form class="form-horizontal" modelAttribute="managerorderLstForm" action="" method="Post">
 					
-							<div class="col-md-6">
+							<div class="col-md-6" >
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-3 control-label">Select Dealer <span class="impColor">*</span>
 									</label>
 									<div class="col-md-5">
-										<form:select path="delerId" class="form-control" onchange="managercartCount();">
+										<form:select path="delerId" class="form-control" onchange="managercartCount();removeBorder(this.id)" >
 								    	<form:option value="">-- Select Dealer --</form:option>
 								    	<form:options items="${dealersList }"></form:options>
 								    	</form:select>

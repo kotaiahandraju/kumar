@@ -42,7 +42,7 @@ td, th {
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="dashboard">Home</a></li>
-               <li>Add Payment</li>
+               <li>Inform Payment</li>
             </ol>
             <div class="clearfix"></div>
         <div class="container-fluid" id="lpoMain">
@@ -50,7 +50,7 @@ td, th {
               <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h4>Add Payment List</h4>
+                            <h4>Payment Status Summary</h4>
                             <div class="options">   
                                 <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
                             </div>
@@ -76,7 +76,7 @@ td, th {
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Add Payment</h4>
+                        <h4>Inform Payment</h4>
                         <div class="options"></div>
                     </div>
 	                <form:form  modelAttribute="delarpayment"  action="adddelarpayment" class="form-horizontal" method="post" >
@@ -103,7 +103,7 @@ td, th {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Payment Date <span class="impColor">*</span></label>
                     				<div class="col-md-6">
-								      	<form:input type="text" path="strpaymentDate" class="form-control validate" placeholder="Payment Date " readonly="true" onfocus="removeBorder(this.id)" onclick="removeBorder(this.id)"/>
+								      	<form:input type="text" path="strpaymentDate" class="form-control validate" placeholder="Payment Date " readonly="true" onchange="removeBorder(this.id)" onclick="removeBorder(this.id)"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -210,6 +210,6 @@ function showTableData(response){
 
 
 	
-$("#pageName").text("Dealer Payment");
+$("#pageName").text("Payment Status Summary");
 $(".delarpayment").addClass("active");
 </script>

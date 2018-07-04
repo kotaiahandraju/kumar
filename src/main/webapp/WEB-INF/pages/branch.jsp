@@ -78,7 +78,7 @@ table#dependent_table tbody tr td:first-child::before {
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        <h4>Add Branch</h4>
+                        <h4>Create Branch</h4>
                         <div class="options"></div>
                     </div>
 	                <form:form  modelAttribute="branchForm"  action="addBranch" class="form-horizontal" method="post" >

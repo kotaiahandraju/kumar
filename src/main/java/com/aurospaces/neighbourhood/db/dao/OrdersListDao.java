@@ -186,7 +186,7 @@ public List<Map<String,Object>> getItemsOfOrder(String order_id){
 		String sql ="select (ol.quantity-ifnull((select sum(ifnull(inv.dispatched_items_quantity,0)+ifnull(inv.nullified_qty,0)) from invoice inv where inv.order_id=ol.orderId and inv.product_id=ol.productId),0)) as pending_qty, "
 				+" ifnull((select sum(inv.dispatched_items_quantity) from invoice inv where inv.order_id=ol.orderId and inv.product_id=ol.productId),0) as delivered_qty, "
 				+" ifnull((select sum(inv.nullified_qty) from invoice inv where inv.order_id=ol.orderId and inv.product_id=ol.productId),0) as  nullified_qty,"
-				+" ol.*,ke.name as dealerName,ke.businessName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption  from orders_list ol,items i,kumar_employee ke,producttype pt,productname pn where ol.orderId = ? and ke.id=ol.delerId and ol.productId=i.id and i.productId=pt.id and i.productname=pn.id ORDER BY ol.updated_time Desc";
+				+" ol.*,ke.name as dealerName,ke.businessName,pt.producttype as categeory,pn.productName as subCategeory,i.itemcode ,i.itemdescrption,ifnull(i.itemprice,'0') as itemprice,ol.totalamount from orders_list ol,items i,kumar_employee ke,producttype pt,productname pn where ol.orderId = ? and ke.id=ol.delerId and ol.productId=i.id and i.productId=pt.id and i.productname=pn.id ORDER BY ol.updated_time Desc";
 		list =jdbcTemplate.queryForList(sql, new Object[]{order_id});
 	}catch(Exception e){
 		e.printStackTrace();
