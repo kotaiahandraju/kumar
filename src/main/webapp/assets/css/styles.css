@@ -2319,9 +2319,11 @@ fieldset[disabled] .btn-primary.active {
   background-color: #ffffff;
 }
 .btn-success {
-  color: #ffffff;
+  color: #ffffff !important;
   background-color: #85c744;
   border-color: #85c744;
+  color:#fff;
+      border-radius: 0.25rem !important;
 }
 .btn-success:hover,
 .btn-success:focus,
@@ -8546,6 +8548,7 @@ fieldset[disabled] .btn-alizarin-alt.active {
 }
 .badge-danger {
   background-color: #e73c3c;
+      border-radius: 0;
 }
 .badge-danger[href]:hover,
 .badge-danger[href]:focus {

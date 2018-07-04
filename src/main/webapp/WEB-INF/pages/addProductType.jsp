@@ -164,12 +164,12 @@ function showTableData(response){
 		if(orderObj.status == "1"){
 			var deleterow = "<a class='deactivate btn btn-danger' onclick='deleteProductType("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
-			var deleterow = "<a class='activate btn btn-danger' onclick='deleteProductType("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
+			var deleterow = "<a class='activate btn btn-success' onclick='deleteProductType("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
 		if(orderObj.productstatus == "Active"){
 			var active =  "<td title='"+orderObj.productstatus+"'><span class='badge badge-success'>" + orderObj.productstatus +"</span></td>"
 		}else{  
-			var active = "<td title='"+orderObj.productstatus+"'><span class='badge badge-warning'>" + orderObj.productstatus +"</span></td>"
+			var active = "<td title='"+orderObj.productstatus+"'><span class='badge badge-danger'>" + orderObj.productstatus +"</span></td>"
 		}
 		var edit = "<a class='edit editIt btn btn-info' onclick='editProductType("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		
@@ -252,6 +252,7 @@ function inactiveData() {
 						console.log(resJson);
 			}else{
 				alert("Inactive List Empty");
+				$('#inActive').prop('checked', false);
 			}
 				});
 }
