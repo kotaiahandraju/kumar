@@ -105,7 +105,7 @@ table#dependent_table tbody tr td:first-child::before {
 									<label for="focusedinput" class="col-md-3 control-label">Select Dealer <span class="impColor">*</span>
 									</label>
 									<div class="col-md-5">
-										<form:select path="delerId" class="form-control" onchange="managercartCount();removeBorder(this.id)" >
+										<form:select path="delerId" class="form-control" onchange="managercartCount();">
 								    	<form:option value="">-- Select Dealer --</form:option>
 								    	<form:options items="${dealersList }"></form:options>
 								    	</form:select>
@@ -237,7 +237,7 @@ function showTableData(sub_category_map){
 			var itemprice =key2.split("##")[2]; 
 			var quantity ="<input type='text' width='40px' name='quantity[]' placeholder='Quantity' onkeyup='pricecal(this.id)' maxlength='4' class='mobile' id='"+id+"quantity'  />"
 			var totalamount ="<input type='text'  name='totalamount[]'  maxlength='4'  id='"+id+"totalamount' readonly=true />"
-			subcategory_div		+='	<div class="col-md-2">'+itemcode+'</div><div class="col-md-5">'+value2+'</div><div class="col-md-1" id="'+id+'price">'+itemprice+'</div><div class="col-md-2">'+quantity+'</div><div class="col-md-2">'+totalamount+'</div></br>';
+			subcategory_div		+='	<div class="col-md-3">'+itemcode+'</div><div class="col-md-4">'+value2+'</div><div class="col-md-1" id="'+id+'price">'+itemprice+'</div><div class="col-md-2">'+quantity+'</div><div class="col-md-2">'+totalamount+'</div></br>';
 		});	       
 		
 

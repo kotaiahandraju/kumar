@@ -210,14 +210,14 @@ table#dependent_table tbody tr td:first-child::before {
 				var deleterow = "<a class='deactivate btn btn-danger' onclick='deleteItem("
 						+ orderObj.id + ",0)'><i class='fa fa-eye'></i></a>"
 			} else {
-				var deleterow = "<a class='activate btn btn-danger' onclick='deleteItem("
+				var deleterow = "<a class='activate btn btn-success' onclick='deleteItem("
 						+ orderObj.id
 						+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 			}
 			if(orderObj.itemsStatus == "Active"){
 				var active =  "<td title='"+orderObj.itemsStatus+"'><span class='badge badge-success'>" + orderObj.itemsStatus +"</span></td>"
 			}else{  
-				var active = "<td title='"+orderObj.itemsStatus+"'><span class='badge badge-warning'>" + orderObj.itemsStatus +"</span></td>"
+				var active = "<td title='"+orderObj.itemsStatus+"'><span class='badge badge-danger'>" + orderObj.itemsStatus +"</span></td>"
 			}
 			var edit = "<a class='edit editIt btn btn-info' onclick='editItem("
 					+ orderObj.id + ")'><i class='fa fa-edit'></i></a>"

@@ -81,9 +81,9 @@ table#dependent_table tbody tr td:first-child::before {
                     	<div class="row">
                     	<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Product Category <span class="impColor" >*</span></label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Product Category <span class="impColor">*</span></label>
                     				<div class="col-md-6">
-                    	<form:select path="producttype" value="" class="form-control validate" onchange="removeBorder(this.id)" >
+                    	<form:select path="producttype" value="" class="form-control validate"  onchange="removeBorder(this.id)">
 								    	<form:option value="">-- Select Category --</form:option>
 								    	<form:options items="${productType }"></form:options>
 								    	</form:select>
@@ -184,12 +184,12 @@ function showTableData(response){
 		if(orderObj.status == "1"){
 			var deleterow = "<a class='deactivate btn btn-danger' onclick='deleteProductName("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
-			var deleterow = "<a class='activate btn btn-danger' onclick='deleteProductName("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
+			var deleterow = "<a class='activate btn btn-success' onclick='deleteProductName("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
 		if(orderObj.productnameStatus == "Active"){
 			var active =  "<td title='"+orderObj.productnameStatus+"'><span class='badge badge-success'>" + orderObj.productnameStatus +"</span></td>"
 		}else{  
-			var active = "<td title='"+orderObj.productnameStatus+"'><span class='badge badge-warning'>" + orderObj.productnameStatus +"</span></td>"
+			var active = "<td title='"+orderObj.productnameStatus+"'><span class='badge badge-danger'>" + orderObj.productnameStatus +"</span></td>"
 		}
 		var edit = "<a class='edit editIt btn btn-info' onclick='editProductName("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 // 		alert(orderObj.lponumber);

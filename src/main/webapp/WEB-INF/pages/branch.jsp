@@ -177,13 +177,13 @@ function showTableData(response){
 		if(orderObj.status == "1"){
 			var deleterow = "<a class='deactivate btn btn-danger' onclick='deleteBranch("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
-			var deleterow = "<a class='activate btn btn-danger' onclick='deleteBranch("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
+			var deleterow = "<a class='activate btn btn-success' onclick='deleteBranch("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
 		
 		if(orderObj.branchStatus == "Active"){
 			var active =  "<td title='"+orderObj.branchStatus+"'><span class='badge badge-success'>" + orderObj.branchStatus +"</span></td>"
 		}else{  
-			var active = "<td title='"+orderObj.branchStatus+"'><span class='badge badge-warning'>" + orderObj.branchStatus +"</span></td>"
+			var active = "<td title='"+orderObj.branchStatus+"'><span class='badge badge-danger'>" + orderObj.branchStatus +"</span></td>"
 		}
 		var edit = "<a class='edit editIt btn btn-info' onclick='editBranch("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		
@@ -268,6 +268,7 @@ function inactiveData() {
 						console.log(resJson);
 			}else{
 				alert("Inactive List Empty");
+				$('#inActive').prop('checked', false);
 			}
 			
 				});

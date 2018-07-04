@@ -203,12 +203,12 @@ function showTableData(response){
 		if(orderObj.status == "1"){
 			var deleterow = "<a class='deactivate btn btn-danger' onclick='deleteEmpCreation("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
-			var deleterow = "<a class='activate btn btn-danger' onclick='deleteEmpCreation("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
+			var deleterow = "<a class='activate btn btn-success' onclick='deleteEmpCreation("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
 		if(orderObj.empCreationStatus == "Active"){
 			var active =  "<td title='"+orderObj.empCreationStatus+"'><span class='badge badge-success'>" + orderObj.empCreationStatus +"</span></td>"
 		}else{  
-			var active = "<td title='"+orderObj.empCreationStatus+"'><span class='badge badge-warning'>" + orderObj.empCreationStatus +"</span></td>"
+			var active = "<td title='"+orderObj.empCreationStatus+"'><span class='badge badge-danger'>" + orderObj.empCreationStatus +"</span></td>"
 		}
 		var edit = "<a class='edit editIt btn btn-info' onclick='editEmpCreation("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
@@ -309,6 +309,7 @@ function inactiveData() {
 						console.log(resJson);
 			}else{
 				alert("Inactive List Empty");
+				$('#inActive').prop('checked', false);
 			}
 			
 				});
