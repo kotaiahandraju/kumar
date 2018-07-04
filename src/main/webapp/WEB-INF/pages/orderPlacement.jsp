@@ -466,10 +466,19 @@ function showTableData(sub_category_map){
 							+ '		<div class="card-body">'; */
 		var val_map = value;
 		$.each(val_map,function(key2,value2) {
-			var itemcode = key2.split("##")[0];
+			/* var itemcode = key2.split("##")[0];
 			var id = key2.split("##")[1];
 			var quantity ="<input type='text' name='quantity[]' maxlength='4' class='mobile' id='"+id+"quantity' />"
-			subcategory_div		+='	<div class="col-md-4">'+itemcode+'</div><div class="col-md-6">'+value2+'</div><div class="col-md-2">'+quantity+'</div></br>';
+			subcategory_div		+='	<div class="col-md-4">'+itemcode+'</div><div class="col-md-6">'+value2+'</div><div class="col-md-2">'+quantity+'</div></br>'; */
+			
+			var itemcode = key2.split("##")[0];
+			var id = key2.split("##")[1];
+			var itemprice =key2.split("##")[2]; 
+			var quantity ="<input type='text' width='40px' name='quantity[]' placeholder='Quantity' onkeyup='pricecal(this.id)' maxlength='4' class='mobile' id='"+id+"quantity'  />"
+			var totalamount ="<input type='text'  name='totalamount[]'  maxlength='4'  id='"+id+"totalamount' readonly=true />"
+			subcategory_div		+='	<div class="col-md-2">'+itemcode+'</div><div class="col-md-5">'+value2+'</div><div class="col-md-1" id="'+id+'price">'+itemprice+'</div><div class="col-md-2">'+quantity+'</div><div class="col-md-2">'+totalamount+'</div></br>';
+			
+			
 		});	       
 		
 
@@ -485,17 +494,20 @@ function showTableData(sub_category_map){
 var quantity = [];  
 var productId = []; 
 var res="";
-
+var amount =[];
 function addCart() {
 	quantity = [];  
 	productId = [];
 	 res="";
+	 amount =[];
+	 
 	$('input[name^=quantity]').each(function(){
 		if($.trim($(this).val()) != ""){
 			console.log(this.id);
 			quantity.push($(this).val());
 			var str = this.id; 
 			res= str.replace("quantity", "");
+			 amount.push($("#"+res+"price").text());
 		    console.log(res);
 		    productId.push(res);
 		}
@@ -510,6 +522,7 @@ function addCart() {
 	var formData = new FormData();
 	formData.append('quantity', quantity);
 	formData.append('productId', productId);
+	formData.append('amount', amount);
 	
 	$.fn.makeMultipartRequest('POST', 'addtocart', false,
 			formData, false, 'text', function(data) {
@@ -532,6 +545,7 @@ function addCart() {
 function orderNow() {
 	quantity = [];  
 	productId = [];
+	 amount =[];
 	var dealerId=$("#delerId").val();
 	 res="";
 	$('input[name^=quantity]').each(function(){
@@ -540,6 +554,7 @@ function orderNow() {
 			quantity.push($(this).val());
 			var str = this.id; 
 			res= str.replace("quantity", "");
+			amount.push($("#"+res+"price").text());
 		    console.log(res);
 		    productId.push(res);
 		}
@@ -554,6 +569,7 @@ function orderNow() {
 	formData.append('quantity', quantity);
 	formData.append('productId', productId);
 	formData.append('userId', dealerId);
+	formData.append('amount', amount);
 	$.fn.makeMultipartRequest('POST', 'addtocart', false,
 			formData, false, 'text', function(data) {
 		$('#tagId').attr('href','cartdetails');
@@ -585,6 +601,18 @@ for (i = 0; i < acc.length; i++) {
   });
 }
 
+function pricecal(id){
+	
+	 var id =  id.replace("quantity", ""); 
+	 var quantity = $("#"+id+"quantity").val();
+	 
+	  if(quantity != ""){
+	   var price =$("#"+id+"price").text();
+	   var totalamount = price*quantity ;
+		$("#"+id+"totalamount").val(totalamount);
+	  }
+	}
+	
 $("#pageName").text("Order Product");
 $(".orderplacing").addClass("active"); 
 </script>

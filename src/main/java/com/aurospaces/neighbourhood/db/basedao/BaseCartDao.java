@@ -26,7 +26,7 @@ public class BaseCartDao{
 	JdbcTemplate jdbcTemplate;
 
  
-	public final String INSERT_SQL = "INSERT INTO cart( created_time, updated_time, productId, quantity, userId, branchId) values (?, ?, ?, ?, ?, ?)"; 
+	public final String INSERT_SQL = "INSERT INTO cart( created_time, updated_time, productId, quantity, userId, branchId,amount,totalamount) values (?, ?, ?, ?, ?, ?,?,?)"; 
 
 
 
@@ -67,6 +67,8 @@ ps.setString(3, cart.getProductId());
 ps.setString(4, cart.getQuantity());
 ps.setString(5, cart.getUserId());
 ps.setString(6, cart.getBranchId());
+ps.setString(7, cart.getAmount());
+ps.setString(8, cart.getTotalamount());
 
 							return ps;
 						}
@@ -81,9 +83,9 @@ ps.setString(6, cart.getBranchId());
 		else
 		{
 
-			String sql = "UPDATE cart  set productId = ? ,quantity = ? ,userId = ? ,branchId = ?  where id = ? ";
+			String sql = "UPDATE cart  set productId = ? ,quantity = ? ,userId = ? ,branchId = ? ,amount = ? ,totalamount = ? where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{cart.getProductId(),cart.getQuantity(),cart.getUserId(),cart.getBranchId(),cart.getId()});
+			jdbcTemplate.update(sql, new Object[]{cart.getProductId(),cart.getQuantity(),cart.getUserId(),cart.getBranchId(),cart.getAmount(),cart.getTotalamount(),cart.getId()});
 		}
 	}
 	
@@ -91,9 +93,9 @@ ps.setString(6, cart.getBranchId());
 	{
 		jdbcTemplate = custom.getJdbcTemplate();
 
-			String sql = "UPDATE cart  set quantity = ?  where userId = ? and productId = ?";
+			String sql = "UPDATE cart  set quantity = ?,amount = ?,totalamount = ?  where userId = ? and productId = ?";
 	
-			int update =jdbcTemplate.update(sql, new Object[]{cart.getQuantity(),cart.getUserId(),cart.getProductId()});
+			int update =jdbcTemplate.update(sql, new Object[]{cart.getQuantity(),cart.getAmount(),cart.getTotalamount(),cart.getUserId(),cart.getProductId()});
 	}
 		
 		@Transactional

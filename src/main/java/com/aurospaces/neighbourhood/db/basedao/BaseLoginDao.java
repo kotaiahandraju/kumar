@@ -16,6 +16,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aurospaces.neighbourhood.bean.LoginBean;
+import com.aurospaces.neighbourhood.bean.SampleBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 
 
@@ -105,6 +106,34 @@ ps.setString(8, login.getBranchId());
 			if(retlist.size() > 0)
 				return retlist.get(0);
 			return null;
+		}
+	 
+	 
+	 public String saveBillDetails( SampleBean sampleBean ) {
+		 jdbcTemplate = custom.getJdbcTemplate();
+			String isSave = null;
+			try{
+
+				 String INSERT_SQL1 = "INSERT INTO practice(name, address, email, mobile) values (?, ?,?, ?)";
+				System.out.println("INSERT_SQL1==="+INSERT_SQL1);
+				int insert = jdbcTemplate.update(
+					INSERT_SQL1,
+					new Object[] {sampleBean.getName(), sampleBean.getAddress(), sampleBean.getEmail(), sampleBean.getMobile()});
+				System.out.println("222insert==="+insert);
+			if (insert > 0) {
+				//isSave = true;
+			}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			return isSave;
+		}
+	 
+	 @Transactional
+		public void deletePractice(String id) {
+			jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "DELETE FROM practice WHERE name=?";
+			jdbcTemplate.update(sql, new Object[]{id});
 		}
 
 	

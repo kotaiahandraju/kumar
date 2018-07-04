@@ -79,7 +79,7 @@ table#dependent_table tbody tr td:first-child::before {
 	<div class="container-fluid" id ="hideForInvoice">
 	<div class="col-md-12 col-sm-12" style="padding-left:0px; padding-right:0px;">
 		
-				<form:form class="form-horizontal" modelAttribute="managercartdetailsForm" action="" method="Post">
+				<form:form class="form-horizontal" modelAttribute="managercartdetailsForm" action="" method="Post" id="delerSelctionId">
 					<div class="panel-body" style="border-radius: 0px; border:none;">
 						<div class="row">
 							<div class="col-md-6">
@@ -124,7 +124,7 @@ table#dependent_table tbody tr td:first-child::before {
 						<table class="table table-bordered table-striped"
 							id="example">
 							<thead>
-								<tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>quantity</td>
+								<tr><th> Product category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><th>quantity</th>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -158,12 +158,21 @@ table#dependent_table tbody tr td:first-child::before {
         			
 				<h1 class="invo">Order Confirmed</h1>
 							<div class="clearfix"></div>
-    <label class="col-md-1" for="Invoiceid">Invoice ID</label>
-    <span  type="invoice" class="col-md-11 " id="invoice">fsd</span>
+							
+							
+	<label class="col-md-2" for="Orderid">Dealer Name &nbsp; &nbsp;</label>
+    <span type="order" class="col-md-9" id="dealername"></span>
+								<div class="clearfix"></div>
+							
+    <label class="col-md-2" for="Invoiceid">Invoice ID</label>
+    <span  type="invoice" class="col-md-9 " id="invoice"></span>
 							<div class="clearfix"></div>	
 								
-    <label class="col-md-1" for="Orderid">Order ID &nbsp; &nbsp;</label>
-    <span type="order" class="col-md-11 " id="order">dfds</span>
+    <label class="col-md-2" for="Orderid">Order ID &nbsp; &nbsp;</label>
+    <span type="order" class="col-md-9 " id="order"></span>
+    	<div class="clearfix"></div>
+    
+    
 								
 								<div class="clearfix">
 								</div>	
@@ -171,7 +180,7 @@ table#dependent_table tbody tr td:first-child::before {
 									<span class="table-responsive" id="tableIdm">
 						<table class="table table-bordered table-striped">
 							<thead>
-								<tr><th>Product Category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><th>Quantity</th>
+								<tr><th>Product Category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><th>Quantity</th><th>Price</th><th>Total Amount</th>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -283,18 +292,20 @@ function showTableData(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
-    	'<thead><tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
+    	'<thead><tr><th> Product category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><th>Price</th><th>Quantity</th><th>Total Amount</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		serviceUnitArray[orderObj.id] = orderObj;
-		var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" class='numericOnly' maxlength='3' id='"+orderObj.productId+"quantity' />"
+		var quantity ="<input type='text' style='width:45px' name='quantity[]' value="+orderObj.quantity+" onkeyup='pricecal(this.id)'  class='numericOnly' maxlength='3' id='"+orderObj.productId+"quantity' />"
 		var tblRow = "<tr>"
 				+ "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>"
 				+ "<td title='"+orderObj.productIdName+"'>"	+ orderObj.productIdName + "</td>"
 				+ "<td title='"+orderObj.itemcode+"'>" + orderObj.itemcode+ "</td>" 
 				+ "<td title='"+orderObj.itemdescrption+"'>"+ orderObj.itemdescrption + "</td>"
+				+ "<td title='"+orderObj.itemprice+"' id='"+orderObj.productId+"price'>"+ orderObj.itemprice + "</td>"
 				+ "<td >" + quantity+ "</td>"
+				+ "<td title='"+orderObj.totalamount+"' id='"+orderObj.productId+"totalamount'>"+ orderObj.totalamount + "</td>"
 				+ "<th class='labelCss notPrintMe hideme' style='width: 10px;'><span><a href='javascript:void(0);' style='color: red;' onclick='removecartdata("
 				+ orderObj.id + ");'><i  class='btn btn-danger  fa fa-trash' style='color: red;text-decoration: none;cursor: pointer;'></i></a></span></th>"
 		$(tblRow).appendTo("#tableId table tbody");
@@ -307,6 +318,7 @@ function showTableData(response){
 var quantity = [];  
 var productId = []; 
 var res="";
+var amount =[];
 var delerId='${dealerId}';
 if(delerId !=""){
 	$("#delerId").val(delerId);
@@ -318,6 +330,7 @@ function ordePlacing() {
 	quantity = [];  
 	productId = [];
 	 res="";
+	 amount =[];
 	$('input[name^=quantity]').each(function(){
 		if($.trim($(this).val()) != ""){
 			console.log(this.id);
@@ -327,10 +340,13 @@ function ordePlacing() {
 			res= str.replace("quantity", "");
 		    console.log(res);
 		    productId.push(res);
+		    amount.push($("#"+res+"price").text());
 		}
 	});
+		$('#delerSelctionId').hide();
 	console.log(quantity);
 	console.log(productId); 
+	console.log("----amount----------"+amount);
 	if(productId == "" || productId== null){
 		alert("No Products selected ");
 		return false;
@@ -339,7 +355,7 @@ function ordePlacing() {
 	formData.append('quantity', quantity);
 	formData.append('productId', productId);
 	formData.append('delerId', delerId);
-	
+	formData.append('amount', amount);
 	$.fn.makeMultipartRequest('POST', 'dealerorderproducts', false,
 			formData, false, 'text', function(data) {
 		console.log(data);
@@ -352,7 +368,7 @@ function ordePlacing() {
 			$('#cartId').text("0");
 			   $('#invoice').text(invoiceId);
 			   $('#order').text(orderId);
-			   
+			  
 			   if (listOrders1 != "") {
 					showTableDataOnInvoice(listOrders1);
 				}
@@ -409,9 +425,11 @@ function removecartdata(id){
 		var jsonobj = $.parseJSON(data);
 		var allOrders = jsonobj.allOrders1;
 		showTableData(allOrders);
+		
 		listOrders1=allOrders;
-		var count = jsonobj.count;
-		$("#cartId").text(count);
+// 		var count = jsonobj.count;
+// 		$("#cartId").text(count);
+		managercartCount();
 		alert(jsonobj.msg);
 		
 	});
@@ -427,6 +445,8 @@ function showTableDataOnInvoice(response){
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		serviceUnitArray[orderObj.id] = orderObj;
+		//display dealer name on OrderPlacing
+		 $("#dealername").text(orderObj.name);
 		var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" class='numericOnly' id='"+orderObj.productId+"quantity' />"
 		var tblRow = "<tr>"
 				+ "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>"
@@ -434,6 +454,9 @@ function showTableDataOnInvoice(response){
 				+ "<td title='"+orderObj.itemcode+"'>" + orderObj.itemcode+ "</td>" 
 				+ "<td title='"+orderObj.itemdescrption+"'>"+ orderObj.itemdescrption + "</td>"
 				+ "<td title='"+orderObj.quantity+"'>"+ orderObj.quantity + "</td>"
+				+ "<td title='"+orderObj.itemprice+"'>"+ orderObj.itemprice + "</td>"
+				+ "<td title='"+orderObj.totalamount+"'>"+ orderObj.totalamount + "</td>"
+				
 		$(tblRow).appendTo("#tableIdm table tbody");
 		
 	});
@@ -478,7 +501,7 @@ function printInvoice(elem)
 	$(".noPrint").hide();
 	$("#printbtn").hide();
     $("#cancelbtn").hide();
-
+    $("#delerSelctionId").hide();
 	 $("#printFooter").show();
     Popup($(elem).html());
     
@@ -496,7 +519,7 @@ function Popup(data)
    
     mywindow.document.write('</body></html>');
     mywindow.document.close(); // necessary for IE >= 10 and necessary before onload for chrome
-
+$("#delerSelctionId").hide();
 $(".printbtn").show();
 $(".noPrint").show();
 $("#printbtn").show();
@@ -530,6 +553,20 @@ $("#cancelbtn").show();
 function cancelPrint() {
 	window.location.href="managerOrderplaceNew";
 }
+
+function pricecal(id){
+	
+	 var id =  id.replace("quantity", ""); 
+	 var quantity = $("#"+id+"quantity").val();
+	 
+	  if(quantity != ""){
+	   var price =$("#"+id+"price").text();
+	   var totalamount = price*quantity ;
+		$("#"+id+"totalamount").text(totalamount);
+	  }
+	}
+
+
 var cartDealerId = $("#delerId").val(); 
 $('#cartTag').attr('href','managerOrderplaceNew?dealerId='+cartDealerId);
 

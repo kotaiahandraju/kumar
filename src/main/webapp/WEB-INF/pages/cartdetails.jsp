@@ -137,7 +137,7 @@ text-align:center;
 									<span class="table-responsive" id="tableIdm">
 						<table class="table table-bordered table-striped">
 							<thead>
-								<tr  style="background:#4f8edc;color:#fff;"><th>Product Category</th><th>Product Subcategory</th><th>Item Code</th><th>Description</th><th>Quantity</th>
+								<tr  style="background:#4f8edc;color:#fff;"><th>Product Category</th><th>Product Subcategory</th><th>Item Code</th><th>Description</th><th>Price</th><th>Quantity</th><th>Total Amount</th>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -233,18 +233,20 @@ function showTableData(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped  datatables" id="example1">'+
-    	'<thead><tr  style="background:#4f8edc;color:#fff;"><th> Product Category</th><th>Product Subcategory</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
+    	'<thead><tr  style="background:#4f8edc;color:#fff;"><th> Product Category</th><th>Product Subcategory</th><td>Item Code</td><th>Description</th><th>Price</th><th>Quantity</th><th>Total Amount</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		serviceUnitArray[orderObj.id] = orderObj;
-		var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" class='numericOnly' maxlength='4' id='"+orderObj.productId+"quantity' />"
+		var quantity ="<input type='text' name='quantity[]' style='width:45px' onkeyup='pricecal(this.id)' value="+orderObj.quantity+" class='numericOnly' maxlength='4' id='"+orderObj.productId+"quantity' />"
 		var tblRow = "<tr>"
 				+ "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>"
 				+ "<td title='"+orderObj.productIdName+"'>"	+ orderObj.productIdName + "</td>"
 				+ "<td title='"+orderObj.itemcode+"'>" + orderObj.itemcode+ "</td>" 
 				+ "<td title='"+orderObj.itemdescrption+"'>"+ orderObj.itemdescrption + "</td>"
+				+ "<td title='"+orderObj.itemprice+"' id='"+orderObj.productId+"price'>"+ orderObj.itemprice + "</td>"
 				+ "<td >" + quantity+ "</td>"
+				+ "<td title='"+orderObj.totalamount+"' id='"+orderObj.productId+"totalamount'>"+ orderObj.totalamount + "</td>"
 				+ "<th class='labelCss notPrintMe hideme' style='width: 10px;'><span><a href='javascript:void(0);' style='color: red; text-align:center;' onclick='removecartdata("
 				+ orderObj.id + ");'><i class='btn btn-danger fa fa-trash' style='color: red;text-decoration: none;cursor: pointer;'></i></a></span></th>"
 		$(tblRow).appendTo("#tableId table tbody");
@@ -257,13 +259,15 @@ function showTableData(response){
 var quantity = [];  
 var productId = []; 
 var res="";
+var amount =[];
 $("#invoiceModal").hide();
 function ordePlacing() {
 	quantity = [];  
 	productId = [];
 	 res="";
+	 amount =[];
 	 var table = $('#example1').DataTable();
-	 table.$('input[name^=quantity]').each(function(){
+	table.$('input[name^=quantity]').each(function(){
 		if($.trim($(this).val()) != ""){
 			console.log(this.id);
 			
@@ -272,17 +276,20 @@ function ordePlacing() {
 			res= str.replace("quantity", "");
 		    console.log(res);
 		    productId.push(res);
+		    amount.push($("#"+res+"price").text());
 		}
 	});
+	
 	console.log(quantity);
 	console.log(productId); 
-	if(productId == "" || productId== null){
+	/* if(productId == "" || productId== null){
 		alert("No Products selected ");
 		return false;
-	}
+	} */
 	var formData = new FormData();
 	formData.append('quantity', quantity);
 	formData.append('productId', productId);
+	formData.append('amount', amount);
 	
 	$.fn.makeMultipartRequest('POST', 'dealerorderproducts', false,
 			formData, false, 'text', function(data) {
@@ -363,18 +370,20 @@ function showTableDataOnInvoice(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped  " id="example1">'+
-    	'<thead><tr style="background:#4f8edc;color:#fff;"><th> Product Category</th><th>Product Subcategory</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
+    	'<thead><tr style="background:#4f8edc;color:#fff;"><th> Product Category</th><th>Product Subcategory</th><td>Item Code</td><th>Description</th><th>Price</th><th>Quantity</th><th>Total Amount</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		serviceUnitArray[orderObj.id] = orderObj;
-		var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" class='numericOnly' id='"+orderObj.productId+"quantity' />"
+		var quantity ="<input type='text'  name='quantity[]'  value="+orderObj.quantity+" class='numericOnly' id='"+orderObj.productId+"quantity' />"
 		var tblRow = "<tr>"
 				+ "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>"
 				+ "<td title='"+orderObj.productIdName+"'>"	+ orderObj.productIdName + "</td>"
 				+ "<td title='"+orderObj.itemcode+"'>" + orderObj.itemcode+ "</td>" 
 				+ "<td title='"+orderObj.itemdescrption+"'>"+ orderObj.itemdescrption + "</td>"
+				+ "<td title='"+orderObj.itemprice+"' id='"+orderObj.productId+"price'>"+ orderObj.itemprice + "</td>"
 				+ "<td title='"+orderObj.quantity+"'>"+ orderObj.quantity + "</td>"
+				+ "<td title='"+orderObj.totalamount+"' id='"+orderObj.productId+"totalamount'>"+ orderObj.totalamount + "</td>"
 		$(tblRow).appendTo("#tableIdm table tbody");
 		
 	});
@@ -439,7 +448,17 @@ function cancelPrint() {
 	window.location.href="orderplacing";
 }
 
-
+function pricecal(id){
+	
+	 var id =  id.replace("quantity", ""); 
+	 var quantity = $("#"+id+"quantity").val();
+	 
+	  if(quantity != ""){
+	   var price =$("#"+id+"price").text();
+	   var totalamount = price*quantity ;
+		$("#"+id+"totalamount").text(totalamount);
+	  }
+	}
 
 
 

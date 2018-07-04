@@ -73,7 +73,7 @@ table#dependent_table tbody tr td:first-child::before {
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Add Product Category</h4>
+                        <h4>Create Product Category</h4>
                         <div class="options"></div>
                     </div>
 	                <form:form  modelAttribute="productForm"  action="addProductType" class="form-horizontal" method="post" >

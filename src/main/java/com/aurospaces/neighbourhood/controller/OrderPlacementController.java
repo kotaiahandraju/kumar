@@ -87,11 +87,13 @@ public class OrderPlacementController {
 				String key = item.getProductname()+"##"+item.getProductIdName();
 				if(sub_category_map.containsKey(key)){
 					Map<String,Object> val_map = sub_category_map.get(key);
-					val_map.put(item.getItemcode(),item.getItemdescrption());
+//					val_map.put(item.getItemcode(),"##"+item.getItemprice(),item.getItemdescrption());
+					val_map.put(item.getItemcode()+"##"+item.getId()+"##"+item.getItemprice(),item.getItemdescrption());
 					
 				}else{
 					Map<String,Object> val_map = new HashMap<String,Object>();
-					val_map.put(item.getItemcode()+"##"+item.getId(),item.getItemdescrption());
+//					val_map.put(item.getItemcode()+"##"+item.getId(),"##"+item.getItemprice(),item.getItemdescrption());
+					val_map.put(item.getItemcode()+"##"+item.getId()+"##"+item.getItemprice(),item.getItemdescrption());
 					sub_category_map.put(key, val_map);
 				}
 			}
@@ -133,6 +135,7 @@ public class OrderPlacementController {
 			if(StringUtils.isNotBlank(orderslistbean.getProductId())){
 				String productArray[] = orderslistbean.getProductId().split(",");
 				String quantityArray[] = orderslistbean.getQuantity().split(",");
+				String amountArray[] = orderslistbean.getAmount().split(",");
 			LoginBean objuserBean = (LoginBean) session.getAttribute("cacheUserBean");
 			if (objuserBean != null) {
 				String prefix = "Kumar";
@@ -163,10 +166,15 @@ public class OrderPlacementController {
 				JSONObject jsonObj1 = new JSONObject();
 				JSONObject jsonObj2 = new JSONObject();
 				for(int i=0;i<productArray.length;i++){
+					
+					int totalamount	=Integer.parseInt(amountArray[i]) * Integer.parseInt(quantityArray[i]);
+					
 					orderslistbean.setId(0);
 					orderslistbean.setProductId(productArray[i]);
 					orderslistbean.setQuantity(quantityArray[i]);
 					orderslistbean.setInvoiceId(kumarUtil.randNum());
+					orderslistbean.setAmount(amountArray[i]);
+					orderslistbean.setTotalamount(String.valueOf(totalamount));
 					int year=Integer.parseInt(CommonUtils.getYear())+1;
 					branchCount=Integer.parseInt(String.format("%4s", branchCount).replace(' ', '0'));
 //					System.out.println(String.format("%4s", branchCount).replace(' ', '0'));
