@@ -81,9 +81,9 @@ table#dependent_table tbody tr td:first-child::before {
                     	<div class="row">
                     	<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Product Category <span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Product Category <span class="impColor" >*</span></label>
                     				<div class="col-md-6">
-                    	<form:select path="producttype" value="" class="form-control validate" >
+                    	<form:select path="producttype" value="" class="form-control validate" onchange="removeBorder(this.id)" >
 								    	<form:option value="">-- Select Category --</form:option>
 								    	<form:options items="${productType }"></form:options>
 								    	</form:select>

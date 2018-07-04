@@ -104,7 +104,7 @@ table#dependent_table tbody tr td:first-child::before {
 									<div class="col-md-7">
 										<form:select path="producttype" value=""
 											class="form-control validate"
-											onchange="productNameFilter('');">
+											onchange="productNameFilter('');removeBorder(this.id)">
 											<form:option value="">-- Select Product Category --</form:option>
 											<form:options items="${productType }"></form:options>
 										</form:select>

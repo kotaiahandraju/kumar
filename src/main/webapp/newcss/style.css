@@ -12396,7 +12396,8 @@ app-root {
       flex-direction: row;
   -ms-flex-positive: 1;
       flex-grow: 1;
-  overflow-x: hidden; }
+  overflow-x: hidden;
+  min-height:100%; }
   .app-body .main {
     -ms-flex: 1;
         flex: 1;

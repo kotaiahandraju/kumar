@@ -173,7 +173,7 @@ table#dependent_table tbody tr td:first-child::before {
 		    <div class="modal-content ">
 		      <div class="modal-header">
 		        <h4 class="modal-title" id="exampleModalLabel"><span id="dealer_name_str"></span></h4>
-		       <span class="col-md-2"><b>Dealer Name :</b></span><span class="col-md-3" id="dname1"></span> <span class="col-md-2"><b>Order ID :</b></span> <span class="col-md-3" id="kumarid2"></span> <span class="col-md-2" style="width:8.8%"><b>Order Date :</b></span>  <span class="col-md-2" id="korderdDate2"></span><br>
+		       <span class="col-md-2" style="max-width:114px;"><b>Dealer Name :</b></span><span class="col-md-3" id="dname1"></span> <span class="col-md-2" style="max-width:100px;" ><b>Order ID :</b></span> <span class="col-md-3" id="kumarid2"></span> <span class="col-md-2" style="max-width:114px;"><b>Order Date :</b></span>  <span class="col-md-3" id="korderdDate2"></span><br>
 		       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		      </div>
 		      <div class="modal-body" id="history_modal_body">

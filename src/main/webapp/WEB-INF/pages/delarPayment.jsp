@@ -103,7 +103,7 @@ td, th {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Payment Date <span class="impColor">*</span></label>
                     				<div class="col-md-6">
-								      	<form:input type="text" path="strpaymentDate" class="form-control validate" placeholder="Payment Date " readonly="true" onfocus="removeBorder(this.id)" onclick="removeBorder(this.id)"/>
+								      	<form:input type="text" path="strpaymentDate" class="form-control validate" placeholder="Payment Date " readonly="true" onchange="removeBorder(this.id)" onclick="removeBorder(this.id)"/>
 								  	</div>
                     			</div>
                     		</div>
