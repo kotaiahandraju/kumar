@@ -29,7 +29,7 @@
     margin-bottom:-15px;
 }
 
-.active, .accordion0:hover {
+.accordion0 .active, .accordion0:hover {
     background-color: #ccc;
 }
 
@@ -41,7 +41,7 @@
     margin-left: 5px;
 }
 
-.active:after {
+.accordion0.active:after {
     content: "\2212";
 }
 
@@ -96,7 +96,7 @@ table#dependent_table tbody tr td:first-child::before {
 	<div class="container-fluid">
 	<div class="col-md-12 col-sm-12" style="padding-left:0px; padding-right:0px;">
 				
-					<h4>Order Product</h4>
+<!-- 					<h4>Order Product</h4> -->
 				
 				<form:form class="form-horizontal" modelAttribute="managerorderLstForm" action="" method="Post">
 					
@@ -393,5 +393,5 @@ function pricecal(id){
   }
 }
 $("#pageName").text("Order Product");
-$(".orderplacing").addClass("active"); 
+// $(".orderplacing").addClass("active"); 
 </script>

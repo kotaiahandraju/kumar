@@ -124,7 +124,7 @@ table#dependent_table tbody tr td:first-child::before {
 						<table class="table table-bordered table-striped"
 							id="example">
 							<thead>
-								<tr><th> Product category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><th>quantity</th>
+								<tr style="background:#f0f2f7;color:#383e4b;"><th> Product category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><th>quantity</th>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -144,7 +144,7 @@ table#dependent_table tbody tr td:first-child::before {
 						<table class="table "
 							id="example1">
 							<thead>
-								<tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>quantity</td>
+								<tr style="background:#f0f2f7;color:#383e4b;"><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><td>quantity</td>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -180,7 +180,7 @@ table#dependent_table tbody tr td:first-child::before {
 									<span class="table-responsive" id="tableIdm">
 						<table class="table table-bordered table-striped">
 							<thead>
-								<tr><th>Product Category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><th>Quantity</th><th>Price</th><th>Total Amount</th>
+								<tr style="background:#f0f2f7;color:#383e4b;"><th>Product Category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><th>Quantity</th><th>Price</th><th>Total Amount</th>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -292,7 +292,7 @@ function showTableData(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
-    	'<thead><tr><th> Product category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><th>Price</th><th>Quantity</th><th>Total Amount</th><th></th></tr>'+
+    	'<thead><tr  style="background:#f0f2f7;color:#383e4b;"><th> Product category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><th>Price</th><th>Quantity</th><th>Total Amount</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {

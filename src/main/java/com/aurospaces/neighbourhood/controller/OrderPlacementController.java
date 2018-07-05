@@ -66,33 +66,16 @@ public class OrderPlacementController {
 		List<ItemsBean> listOrderBeans = null;
 		Map<String,Map<String,Object>> sub_category_map = new HashMap<String,Map<String,Object>>();
 		try{
-			/*System.out.println("orderPlacementorderPlacementorderPlacement");
-			listOrderBeans = itemsDao.getItems("1");
-			if (listOrderBeans != null && listOrderBeans.size() > 0) {
-				objectMapper = new ObjectMapper();
-				sJson = objectMapper.writeValueAsString(listOrderBeans);
-				request.setAttribute("allOrders1", sJson);
-					System.out.println(sJson);
-			} else {
-				objectMapper = new ObjectMapper();
-				sJson = objectMapper.writeValueAsString(listOrderBeans);
-				request.setAttribute("allOrders1", "''");
-			}*/
-			
-			
-			
 
 			listOrderBeans = itemsDao.getItems("1");
 			for(ItemsBean item:listOrderBeans){
 				String key = item.getProductname()+"##"+item.getProductIdName();
 				if(sub_category_map.containsKey(key)){
 					Map<String,Object> val_map = sub_category_map.get(key);
-//					val_map.put(item.getItemcode(),"##"+item.getItemprice(),item.getItemdescrption());
 					val_map.put(item.getItemcode()+"##"+item.getId()+"##"+item.getItemprice(),item.getItemdescrption());
 					
 				}else{
 					Map<String,Object> val_map = new HashMap<String,Object>();
-//					val_map.put(item.getItemcode()+"##"+item.getId(),"##"+item.getItemprice(),item.getItemdescrption());
 					val_map.put(item.getItemcode()+"##"+item.getId()+"##"+item.getItemprice(),item.getItemdescrption());
 					sub_category_map.put(key, val_map);
 				}

@@ -317,7 +317,7 @@ table#dependent_table tbody tr td:first-child::before {
 						var resJson = JSON.parse(data);
 						showTableData(resJson);
 						tooltip();
-
+						
 						console.log(resJson);
 					} else {
 						alert("Inactive List Empty");

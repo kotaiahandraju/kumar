@@ -18,7 +18,12 @@ table #dependent_table{
 /* 	width: 100%; */
 	counter-reset: rowNumber;
 }
-
+table.dataTable tbody tr {
+    background-color: #ffffff;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #fff !important;
+}
 table tbody tr.rowInc{
 	counter-increment: rowNumber;
 }
@@ -233,7 +238,7 @@ function showTableData(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped  datatables" id="example1">'+
-    	'<thead><tr  style="background:#4f8edc;color:#fff;"><th> Product Category</th><th>Product Subcategory</th><td>Item Code</td><th>Description</th><th>Price</th><th>Quantity</th><th>Total Amount</th><th></th></tr>'+
+    	'<thead><tr  style="background:#f0f2f7;color:#383e4b;"><th> Product Category</th><th>Product Subcategory</th><td>Item Code</td><th>Description</th><th>Price</th><th>Quantity</th><th>Total Amount</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -370,7 +375,7 @@ function showTableDataOnInvoice(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped  " id="example1">'+
-    	'<thead><tr style="background:#4f8edc;color:#fff;"><th> Product Category</th><th>Product Subcategory</th><td>Item Code</td><th>Description</th><th>Price</th><th>Quantity</th><th>Total Amount</th><th></th></tr>'+
+    	'<thead><tr style="background:#f0f2f7;color:#383e4b;"><th> Product Category</th><th>Product Subcategory</th><td>Item Code</td><th>Description</th><th>Price</th><th>Quantity</th><th>Total Amount</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {

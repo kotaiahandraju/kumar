@@ -308,7 +308,7 @@ $(".orderplacing").addClass("active");
     margin-bottom:-15px;
 }
 
-.active, .accordion0:hover {
+.accordion0 .active, .accordion0:hover {
     background-color: #ccc;
 }
 
@@ -320,7 +320,7 @@ $(".orderplacing").addClass("active");
     margin-left: 5px;
 }
 
-.active:after {
+.accordion0 .active:after {
     content: "\2212";
 }
 
