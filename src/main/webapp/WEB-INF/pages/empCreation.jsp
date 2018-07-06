@@ -103,7 +103,7 @@ table#dependent_table tbody tr td:first-child::before {
                     				<label for="focusedinput" class="col-md-6 control-label">Branch Name<span class="impColor">*</span></label>
                     				<div class="col-md-6">
                     					<form:select path="branchId" value="" class="form-control validate " onfocus="removeBorder(this.id)">
-								    	<form:option value="">-- Select Branch Name --</form:option>
+								    	<form:option value="">Select Branch Name</form:option>
 								    	<form:options items="${branchId }"></form:options>
 								    	</form:select>
 								    	</div>

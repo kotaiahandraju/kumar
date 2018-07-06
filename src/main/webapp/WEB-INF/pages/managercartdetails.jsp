@@ -148,6 +148,7 @@ table#dependent_table tbody tr td:first-child::before {
 								</tr>
 							</thead>
 							<tbody></tbody>
+							
 						</table>
 					</div>
 				</div>
@@ -291,11 +292,13 @@ function showTableData(response){
 	var table=$('#tableId').html('');
 	serviceUnitArray = {};
 	var protectType = null;
+	var grandtotal =0.00;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
     	'<thead><tr  style="background:#f0f2f7;color:#383e4b;"><th> Product category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><th>Price</th><th>Quantity</th><th>Total Amount</th><th></th></tr>'+
-    	"</thead><tbody></tbody></table>";
+    	"</thead><tbody></tbody><tfoot><tr><th colspan='6' style='text-align:right;' >Total</th><th id='grandtotal'>800</th></tr></tfoot></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
+		grandtotal =grandtotal+parseFloat(orderObj.totalamount);
 		serviceUnitArray[orderObj.id] = orderObj;
 		var quantity ="<input type='text' style='width:45px' name='quantity[]' value="+orderObj.quantity+" onkeyup='pricecal(this.id)'  class='numericOnly' maxlength='3' id='"+orderObj.productId+"quantity' />"
 		var tblRow = "<tr>"
@@ -311,6 +314,7 @@ function showTableData(response){
 		$(tblRow).appendTo("#tableId table tbody");
 		
 	});
+	$("#grandtotal").text(grandtotal);
 	if(isClick=='Yes') $('.datatables').dataTable();
 	
 }
@@ -559,11 +563,13 @@ function pricecal(id){
 	 var id =  id.replace("quantity", ""); 
 	 var quantity = $("#"+id+"quantity").val();
 	 
-	  if(quantity != ""){
+	  if(quantity == ""){
+		  quantity =0; 
+	  }
 	   var price =$("#"+id+"price").text();
 	   var totalamount = price*quantity ;
 		$("#"+id+"totalamount").text(totalamount);
-	  }
+	  
 	}
 
 
