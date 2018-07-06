@@ -156,7 +156,7 @@ table#dependent_table tbody tr td:first-child::before {
                     <div class="panel-footer">
 				      	<div class="row">
 				      		<div class="col-sm-12">
-				      			<div class="btn-toolbar text-center">
+				      			<div class="btn-toolbar text-center" style="float:right;">
 					      			<input class="btn-primary btn" type="submit" value="Submit" id="submit2"/>
 					      			<input class="btn-danger btn cancel" type="reset" value="Cancel" />
 				      			</div>
@@ -168,7 +168,7 @@ table#dependent_table tbody tr td:first-child::before {
             </div>
         </div>
 	</div> <!-- container -->
-
+<br><Br>
 <script type="text/javascript">
 
 var emailvalidation =false;

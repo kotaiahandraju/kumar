@@ -128,7 +128,7 @@ table#dependent_table tbody tr td:first-child::before {
 				    </div>
          			</form:form>				    
                 </div>
-            </div>
+            </div><BR><BR>
             
         <!-- container -->
 <!--  -print Div -->
