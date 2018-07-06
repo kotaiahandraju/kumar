@@ -185,7 +185,7 @@ table#dependent_table tbody tr td:first-child::before {
 								</tr>
 							</thead>
 							<tbody></tbody>
-							<tfoot><tr><th colspan='6' style='text-align:right;' >Total</th><th id='grandtotal1'></th></tr></tfoot>
+							<tfoot><tr><th colspan='6' style='text-align:right;' >Grandtotal</th><th id='grandtotal1'></th></tr></tfoot>
 						</table>
 					</span>
 									
@@ -296,7 +296,7 @@ function showTableData(response){
 	var grandtotal =0.00;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
     	'<thead><tr  style="background:#f0f2f7;color:#383e4b;"><th> Product category</th><th>Product Sub category</th><th>Item Code</th><th>Description</th><th>Price</th><th>Quantity</th><th>Total Amount</th><th></th></tr>'+
-    	"</thead><tbody></tbody><tfoot><tr><th colspan='6' style='text-align:right;' >Total</th><th id='grandtotal'>800</th></tr></tfoot></table>";
+    	"</thead><tbody></tbody><tfoot><tr><th colspan='6' style='text-align:right;' >Grandtotal</th><th id='grandtotal'>800</th></tr></tfoot></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		grandtotal =grandtotal+parseFloat(orderObj.totalamount);
@@ -447,7 +447,7 @@ function showTableDataOnInvoice(response){
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped datatables" id="example1">'+
     	'<thead><tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
-    	"</thead><tbody></tbody><tfoot><tr><th colspan='6' style='text-align:right;' >Total</th><th></th></tr></tfoot></table>";
+    	"</thead><tbody></tbody><tfoot><tr><th colspan='6' style='text-align:right;' >Grandtotal</th><th></th></tr></tfoot></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		grandtotal =grandtotal+parseFloat(orderObj.totalamount);
