@@ -329,9 +329,12 @@ if(delerId !=""){
 	$("#delerId").val(delerId);
 }
 
-
 $("#invoiceModal").hide();
+
+var grandTotalAmount=0;
 function ordePlacing() {
+	
+	grandTotalAmount=$("#grandtotal").text();
 	quantity = [];  
 	productId = [];
 	 res="";
@@ -375,40 +378,12 @@ function ordePlacing() {
 			   $('#order').text(orderId);
 			  
 			   if (listOrders1 != "") {
-					showTableDataOnInvoice(listOrders1);
+					showTableDataOnInvoice(listOrders1,grandTotalAmount);
 				}
 			   
 			   $('#orderPlacement').hide();
 			   $('#invoicediv').show();
 			   managercartCount();
-			   
-			/* var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table datatables" id="example1">'+
-	    	'<thead><tr><th>Product Name</th><th>Item Code</th><th>Quantity</th><th>Price<i class="fas fa-rupee-sign"></i></th><th></th></tr>'+
-	    	"</thead><tbody></tbody></table>";
-		$("#productsList").html(tableHead); */
-		
-		/* $.each(result[0], function(key, value){
-		    console.log(key, value);
-		}); */
-		/* $.each(jsonobj[1],function(key, value) {
-			//produ = orderObj[1];
-			//var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" class='numericOnly' id='"+orderObj.productId+"quantity' />"
-			var tblRow = "<tr>"
-					+ "<td title=''></td>"
-					+ "<td title='"+key+"'>"+ key + "</td>"
-					+ "<td title='"+value+"'>"+ value + "</td>"
-					+ "<td title=''></td>"
-			//$(tblRow).appendTo("#productsList table tbody");
-			
-		}); */
-		
-			 /* $("#hideForInvoice").hide();			
-			$("#invoiceModal").show();
-			
-			$("#invoiceId").text(invoiceId);
-			$("#orderId").text(orderId);  */
-			
-// 		window.location.href = "${baseurl}/admin/cartdetails";
 		}
 		
 	});
@@ -440,7 +415,7 @@ function removecartdata(id){
 	});
 }
 
-function showTableDataOnInvoice(response){
+function showTableDataOnInvoice(response,grandTotalAmount){
 	var table=$('#tableId').html('');
 	var grandtotal =0.00;
 	serviceUnitArray = {};
@@ -467,7 +442,7 @@ function showTableDataOnInvoice(response){
 		$(tblRow).appendTo("#tableIdm table tbody");
 		
 	});	
-	$("#grandtotal1").text(grandtotal);
+	$("#grandtotal1").text(grandTotalAmount);
 }
 
 function managercartCount(){
@@ -548,13 +523,6 @@ $("#cancelbtn").show();
    }
     
 	
-   /* var mywindow = window.open('', 'new div');
-    mywindow.document.write('<html><head><title>Donor Details</title></head><body>');
-    mywindow.document.write(data);
-    mywindow.document.write('</body></html>');
-    mywindow.print();
-    mywindow.close();
-    $(".printbtn").show();*/
     return true;
 }
 function cancelPrint() {
@@ -563,10 +531,10 @@ function cancelPrint() {
 
 
 function pricecal(id){
-	
+	var count=0;
 	 var id =  id.replace("quantity", ""); 
 	 var quantity = $("#"+id+"quantity").val();
-	 var count=0;
+	 
 	 var count1=0;
 	  if(quantity == ""){
 		  quantity =0; 
