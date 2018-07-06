@@ -8,7 +8,7 @@
   display: none;
   position: fixed;
   bottom: 20px;
-  right: 30px;
+  right: 9px;
   z-index: 99;
   font-size: 18px;
   border: none;

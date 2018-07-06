@@ -107,7 +107,7 @@ table#dependent_table tbody tr td:first-child::before {
 					<div class="panel-footer hideme">
 						<div class="row">
 				      		<div class="col-sm-12">
-				      			<div class="btn-toolbar pull-right">
+				      			<div class="btn-toolbar pull-right" style="float:right">
 					      			<input class="btn-primary btn" type="submit" id="submit1" value="Submit" />
 					      			<input class="btn-danger btn cancel" type="reset" id="clearData" value="Reset" />
 				      			</div>
@@ -117,7 +117,7 @@ table#dependent_table tbody tr td:first-child::before {
          			</form:form>				    
                 </div>
             </div>
-            
+            <br><Br>
 
 
 <!-- <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script> -->
