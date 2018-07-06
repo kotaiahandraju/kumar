@@ -105,7 +105,7 @@ table#dependent_table tbody tr td:first-child::before {
 									<label for="focusedinput" class="col-md-3 control-label">Select Dealer <span class="impColor">*</span>
 									</label>
 									<div class="col-md-5">
-										<form:select path="delerId" class="form-control" onchange="managercartCount();">
+										<form:select path="delerId" class="form-control" onchange="managercartCount(),removeBorder(this.id)">
 								    	<form:option value="">-- Select Dealer --</form:option>
 								    	<form:options items="${dealersList }"></form:options>
 								    	</form:select>
