@@ -146,6 +146,7 @@ text-align:center;
 								</tr>
 							</thead>
 							<tbody></tbody>
+							<tfoot><tr><th colspan='6' style='text-align:right;' >Total</th><th id='grandtotal1'></th></tr></tfoot>
 						</table>
 					</span>
 									
@@ -236,12 +237,14 @@ var data = {};
 function showTableData(response){
 	var table=$('#tableId').html('');
 	serviceUnitArray = {};
+	var grandtotal =0.00;
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped  datatables" id="example1">'+
     	'<thead><tr  style="background:#f0f2f7;color:#383e4b;"><th> Product Category</th><th>Product Subcategory</th><td>Item Code</td><th>Description</th><th>Price</th><th>Quantity</th><th>Total Amount</th><th></th></tr>'+
-    	"</thead><tbody></tbody></table>";
+    	"</thead><tbody></tbody><tfoot><tr><th colspan='6' style='text-align:right;' >Total</th><th id='grandtotal'>800</th></tr></tfoot></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
+		grandtotal =grandtotal+parseFloat(orderObj.totalamount);
 		serviceUnitArray[orderObj.id] = orderObj;
 		var quantity ="<input type='text' name='quantity[]' style='width:45px' onkeyup='pricecal(this.id)' value="+orderObj.quantity+" class='form-control validate mobile' maxlength='4' id='"+orderObj.productId+"quantity' />"
 		var tblRow = "<tr>"
@@ -251,13 +254,13 @@ function showTableData(response){
 				+ "<td title='"+orderObj.itemdescrption+"'>"+ orderObj.itemdescrption + "</td>"
 				+ "<td title='"+orderObj.itemprice+"' id='"+orderObj.productId+"price'>"+ orderObj.itemprice + "</td>"
 				+ "<td >" + quantity+ "</td>"
-				+ "<td title='"+orderObj.totalamount+"' id='"+orderObj.productId+"totalamount'>"+ orderObj.totalamount + "</td>"
+				+ "<td title='"+orderObj.totalamount+"' name='totalamount[]' id='"+orderObj.productId+"totalamount'>"+ orderObj.totalamount + "</td>"
 				+ "<th class='labelCss notPrintMe hideme' style='width: 10px;'><span><a href='javascript:void(0);' style='color: red; text-align:center;' onclick='removecartdata("
 				+ orderObj.id + ");'><i class='btn btn-danger fa fa-trash' style='color: red;text-decoration: none;cursor: pointer;'></i></a></span></th>"
 		$(tblRow).appendTo("#tableId table tbody");
 		
 	});
-	
+	$("#grandtotal").text(grandtotal);
 	if(isClick=='Yes') $('.datatables').dataTable({ "pageLength": 50});
 }
 
@@ -373,12 +376,14 @@ function removecartdata(id){
 function showTableDataOnInvoice(response){
 	var table=$('#tableId').html('');
 	serviceUnitArray = {};
+	var grandtotal =0.00;
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped  " id="example1">'+
     	'<thead><tr style="background:#f0f2f7;color:#383e4b;"><th> Product Category</th><th>Product Subcategory</th><td>Item Code</td><th>Description</th><th>Price</th><th>Quantity</th><th>Total Amount</th><th></th></tr>'+
-    	"</thead><tbody></tbody></table>";
+    	"</thead><tbody></tbody><tfoot><tr><th colspan='6' style='text-align:right;' >Total</th><th></th></tr></tfoot></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
+		grandtotal =grandtotal+parseFloat(orderObj.totalamount);
 		serviceUnitArray[orderObj.id] = orderObj;
 		var quantity ="<input type='text'  name='quantity[]'  value="+orderObj.quantity+" class='form-control validate mobile' id='"+orderObj.productId+"quantity' />"
 		var tblRow = "<tr>"
@@ -392,7 +397,7 @@ function showTableDataOnInvoice(response){
 		$(tblRow).appendTo("#tableIdm table tbody");
 		
 	});
-	
+	$("#grandtotal1").text(grandtotal);
 }
 
 
@@ -457,12 +462,26 @@ function pricecal(id){
 	
 	 var id =  id.replace("quantity", ""); 
 	 var quantity = $("#"+id+"quantity").val();
+	 var count=0;
 	 
-	  if(quantity != ""){
+	  if(quantity == ""){
+		  quantity =0; 
+	  }
 	   var price =$("#"+id+"price").text();
 	   var totalamount = price*quantity ;
 		$("#"+id+"totalamount").text(totalamount);
-	  }
+		
+		$('td[name^=totalamount]').each(function(){
+			if($.trim($(this).text()) != ""){
+				console.log(this.id);
+				count += parseInt($(this).text());
+				
+			}
+		});
+		console.log("-------------grandtotal--------- :"+count);
+	
+		$("#grandtotal").text(count);
+	  
 	}
 
 

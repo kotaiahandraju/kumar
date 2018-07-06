@@ -561,13 +561,11 @@ function cancelPrint() {
 	window.location.href="managerOrderplaceNew";
 }
 
-var grandtotal = [];
 
 function pricecal(id){
 	
 	 var id =  id.replace("quantity", ""); 
 	 var quantity = $("#"+id+"quantity").val();
-	 var grandtotal =[];
 	 var count=0;
 	 var count1=0;
 	  if(quantity == ""){
@@ -581,13 +579,10 @@ function pricecal(id){
 			if($.trim($(this).text()) != ""){
 				console.log(this.id);
 				count += parseInt($(this).text());
-				grandtotal.push($(this).text());
 				
 			}
 		});
 		console.log("-------------grandtotal--------- :"+count);
-	
-// 		grandtotal =grandtotal+parseFloat(totalamount);
 		$("#grandtotal").text(count);
 
 	
