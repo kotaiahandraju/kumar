@@ -185,6 +185,7 @@ table#dependent_table tbody tr td:first-child::before {
 								</tr>
 							</thead>
 							<tbody></tbody>
+							<tfoot><tr><th colspan='6' style='text-align:right;' >Total</th><th id='grandtotal1'></th></tr></tfoot>
 						</table>
 					</span>
 									
@@ -441,13 +442,15 @@ function removecartdata(id){
 
 function showTableDataOnInvoice(response){
 	var table=$('#tableId').html('');
+	var grandtotal =0.00;
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped datatables" id="example1">'+
     	'<thead><tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
-    	"</thead><tbody></tbody></table>";
+    	"</thead><tbody></tbody><tfoot><tr><th colspan='6' style='text-align:right;' >Total</th><th></th></tr></tfoot></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
+		grandtotal =grandtotal+parseFloat(orderObj.totalamount);
 		serviceUnitArray[orderObj.id] = orderObj;
 		//display dealer name on OrderPlacing
 		 $("#dealername").text(orderObj.name);
@@ -464,6 +467,7 @@ function showTableDataOnInvoice(response){
 		$(tblRow).appendTo("#tableIdm table tbody");
 		
 	});	
+	$("#grandtotal1").text(grandtotal);
 }
 
 function managercartCount(){
