@@ -300,7 +300,7 @@ function showTableData(response){
 	$.each(response,function(i, orderObj) {
 		grandtotal =grandtotal+parseFloat(orderObj.totalamount);
 		serviceUnitArray[orderObj.id] = orderObj;
-		var quantity ="<input type='text' style='width:45px' name='quantity[]' value="+orderObj.quantity+" onkeyup='pricecal(this.id)'  class='numericOnly' maxlength='3' id='"+orderObj.productId+"quantity' />"
+		var quantity ="<input type='text' style='width:45px' name='quantity[]' value="+orderObj.quantity+" onkeyup='pricecal(this.id)'  class='form-control validate mobile' maxlength='3' id='"+orderObj.productId+"quantity' />"
 		var tblRow = "<tr>"
 				+ "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>"
 				+ "<td title='"+orderObj.productIdName+"'>"	+ orderObj.productIdName + "</td>"
@@ -443,15 +443,17 @@ function showTableDataOnInvoice(response){
 	var table=$('#tableId').html('');
 	serviceUnitArray = {};
 	var protectType = null;
+	var grandtotal =0.00;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped datatables" id="example1">'+
     	'<thead><tr><th> Product category</th><th>Product Sub category</th><td>Item Code</td><th>Description</th><th>Quantity</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
+		grandtotal =grandtotal+parseFloat(orderObj.totalamount);
 		serviceUnitArray[orderObj.id] = orderObj;
 		//display dealer name on OrderPlacing
 		 $("#dealername").text(orderObj.name);
-		var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" class='numericOnly' id='"+orderObj.productId+"quantity' />"
+		var quantity ="<input type='text' name='quantity[]' value="+orderObj.quantity+" class='form-control validate mobile' id='"+orderObj.productId+"quantity' />"
 		var tblRow = "<tr>"
 				+ "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>"
 				+ "<td title='"+orderObj.productIdName+"'>"	+ orderObj.productIdName + "</td>"
@@ -463,8 +465,7 @@ function showTableDataOnInvoice(response){
 				
 		$(tblRow).appendTo("#tableIdm table tbody");
 		
-	});
-	
+	});	
 }
 
 function managercartCount(){

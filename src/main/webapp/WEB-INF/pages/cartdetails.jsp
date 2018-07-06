@@ -243,7 +243,7 @@ function showTableData(response){
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		serviceUnitArray[orderObj.id] = orderObj;
-		var quantity ="<input type='text' name='quantity[]' style='width:45px' onkeyup='pricecal(this.id)' value="+orderObj.quantity+" class='numericOnly' maxlength='4' id='"+orderObj.productId+"quantity' />"
+		var quantity ="<input type='text' name='quantity[]' style='width:45px' onkeyup='pricecal(this.id)' value="+orderObj.quantity+" class='form-control validate mobile' maxlength='4' id='"+orderObj.productId+"quantity' />"
 		var tblRow = "<tr>"
 				+ "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>"
 				+ "<td title='"+orderObj.productIdName+"'>"	+ orderObj.productIdName + "</td>"
@@ -380,7 +380,7 @@ function showTableDataOnInvoice(response){
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		serviceUnitArray[orderObj.id] = orderObj;
-		var quantity ="<input type='text'  name='quantity[]'  value="+orderObj.quantity+" class='numericOnly' id='"+orderObj.productId+"quantity' />"
+		var quantity ="<input type='text'  name='quantity[]'  value="+orderObj.quantity+" class='form-control validate mobile' id='"+orderObj.productId+"quantity' />"
 		var tblRow = "<tr>"
 				+ "<td title='"+orderObj.productTypeName+"'>"+ orderObj.productTypeName + "</td>"
 				+ "<td title='"+orderObj.productIdName+"'>"	+ orderObj.productIdName + "</td>"

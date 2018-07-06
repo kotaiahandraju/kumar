@@ -61,7 +61,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Delivery Status : </label>
                     				<div class="col-md-6">
-                    					<form:select path="status" class="form-control validate" onchange="orederLists();">
+                    					<form:select path="status" class="form-control validate" onchange="orederLists() ,removeBorder(this.id);">
                     					<form:option value="">--- Select Status ---</form:option>
 								    	<form:option value="all">All</form:option>
 								    	<form:option value="pending">Pending</form:option>
