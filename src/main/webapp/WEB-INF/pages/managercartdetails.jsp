@@ -308,7 +308,7 @@ function showTableData(response){
 				+ "<td title='"+orderObj.itemdescrption+"'>"+ orderObj.itemdescrption + "</td>"
 				+ "<td title='"+orderObj.itemprice+"' id='"+orderObj.productId+"price'>"+ orderObj.itemprice + "</td>"
 				+ "<td >" + quantity+ "</td>"
-				+ "<td title='"+orderObj.totalamount+"' id='"+orderObj.productId+"totalamount'>"+ orderObj.totalamount + "</td>"
+				+ "<td title='"+orderObj.totalamount+"' name='totalamount[]' id='"+orderObj.productId+"totalamount'>"+ orderObj.totalamount + "</td>"
 				+ "<th class='labelCss notPrintMe hideme' style='width: 10px;'><span><a href='javascript:void(0);' style='color: red;' onclick='removecartdata("
 				+ orderObj.id + ");'><i  class='btn btn-danger  fa fa-trash' style='color: red;text-decoration: none;cursor: pointer;'></i></a></span></th>"
 		$(tblRow).appendTo("#tableId table tbody");
@@ -465,6 +465,7 @@ function showTableDataOnInvoice(response){
 		
 	});
 	
+	
 }
 
 function managercartCount(){
@@ -558,21 +559,34 @@ function cancelPrint() {
 	window.location.href="managerOrderplaceNew";
 }
 
+var grandtotal = [];
+
 function pricecal(id){
 	
 	 var id =  id.replace("quantity", ""); 
 	 var quantity = $("#"+id+"quantity").val();
-	 var grandtotal =0.00;
-	 
+	 var grandtotal =[];
+	 var count=0;
+	 var count1=0;
 	  if(quantity == ""){
 		  quantity =0; 
 	  }
 	   var price =$("#"+id+"price").text();
 	   var totalamount = price*quantity ;
 		$("#"+id+"totalamount").text(totalamount);
+		
+		$('td[name^=totalamount]').each(function(){
+			if($.trim($(this).text()) != ""){
+				console.log(this.id);
+				count += parseInt($(this).text());
+				grandtotal.push($(this).text());
+				
+			}
+		});
+		console.log("-------------grandtotal--------- :"+count);
 	
-		grandtotal =grandtotal+parseFloat(totalamount);
-		$("#grandtotal").text(grandtotal);
+// 		grandtotal =grandtotal+parseFloat(totalamount);
+		$("#grandtotal").text(count);
 
 	
 	  
