@@ -562,6 +562,7 @@ function pricecal(id){
 	
 	 var id =  id.replace("quantity", ""); 
 	 var quantity = $("#"+id+"quantity").val();
+	 var grandtotal =0.00;
 	 
 	  if(quantity == ""){
 		  quantity =0; 
@@ -569,6 +570,11 @@ function pricecal(id){
 	   var price =$("#"+id+"price").text();
 	   var totalamount = price*quantity ;
 		$("#"+id+"totalamount").text(totalamount);
+	
+		grandtotal =grandtotal+parseFloat(totalamount);
+		$("#grandtotal").text(grandtotal);
+
+	
 	  
 	}
 
