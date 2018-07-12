@@ -42,6 +42,9 @@ table#dependent_table tbody tr td:first-child::before {
 #ui-datepicker-div{
 /* 	width: auto !important; */
 }
+#headId{
+color:#000 !important;
+font-size: 15px;}
 
 </style>
 
@@ -89,7 +92,7 @@ table#dependent_table tbody tr td:first-child::before {
 		<div class="row" id="moveTo">
 			<div class="col-md-12 col-sm-12">
 				<div class="panel panel-primary">
-					<div class="panel-heading">
+					<div class="panel-heading" id="headId">
 						<h4>Employee Creation</h4>
 					</div>
 					<form:form modelAttribute="employeeCreationForm" action="addEmployeeCreation" class="form-horizontal" method="Post" >
@@ -245,6 +248,7 @@ function editEmpCreation(id){
 	$("#phoneNumber").val(serviceUnitArray[id].phoneNumber);
 	$("#status").val(serviceUnitArray[id].status);
 	$("#submit2").val("Update");
+	$("#headId").text("Employee Updation");
 	document.getElementById("username").readOnly  = true;
 	$(window).scrollTop($('#moveTo').offset().top);
 	

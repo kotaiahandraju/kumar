@@ -34,6 +34,10 @@ table#dependent_table tbody tr td:first-child::before {
 #ui-datepicker-div{
 /* 	width: auto !important; */
 }
+#headId{
+color:#000 !important;
+font-size: 15px;}
+
 
 </style>
         <div class="clearfix"></div>
@@ -72,7 +76,7 @@ table#dependent_table tbody tr td:first-child::before {
             <div class="row" id="moveTo">
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">
+                    <div class="panel-heading" id="headId">
                         <h4>Create Product Category</h4>
                         <div class="options"></div>
                     </div>
@@ -191,6 +195,7 @@ function editProductType(id) {
 	$("#producttype").val(serviceUnitArray[id].producttype);
 	$("#status").val(serviceUnitArray[id].status);
 	$("#submit1").val("Update");
+	$("#headId").text("Update Product Category");
 	$(window).scrollTop($('#moveTo').offset().top);
 }
 

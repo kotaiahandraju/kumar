@@ -76,6 +76,10 @@ border-radius:5px;
 padding: 3px 14px 0px 11px;
     margin-left: 5px;
 }
+#headId{
+color:#000 !important;
+font-size: 15px;}
+
 </style>
 
 <div class="clearfix"></div>
@@ -130,7 +134,7 @@ padding: 3px 14px 0px 11px;
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-primary">
-					<div class="panel-heading">
+					<div class="panel-heading" id="headId">
 						<h4>Dealer Creation</h4>
 					</div>
 <!-- 					<div style="margin-top:20px;" class="body"> -->
@@ -691,6 +695,7 @@ function editEmpCreation(id){
 	$("#username").val(serviceUnitArray[id].username);
 	$("#designation").val(serviceUnitArray[id].designation);
 	$("#submit2").val("Update");
+	$("#headId").text("Dealer Updation");
 	document.getElementById("username").readOnly  = true;
 	$(window).scrollTop($('#moveTo').offset().top);
 	

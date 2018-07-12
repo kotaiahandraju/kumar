@@ -39,6 +39,10 @@ table#dependent_table tbody tr td:first-child::before {
 #ui-datepicker-div{
 /* 	width: auto !important; */
 }
+#headId{
+color:#000 !important;
+font-size: 15px;}
+
 
 </style>
         <div class="clearfix"></div>
@@ -77,8 +81,7 @@ table#dependent_table tbody tr td:first-child::before {
             <div class="row" id="moveTo">
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-info">
-                    <div class="panel-heading">
-                        <h4>Create Branch</h4>
+                    <div class="panel-heading" id="headId"><h4>Create Branch</h4>
                         <div class="options"></div>
                     </div>
 	                <form:form  modelAttribute="branchForm"  action="addBranch" class="form-horizontal" method="post" >
@@ -207,6 +210,7 @@ function editBranch(id) {
 	$("#branchcode").val(serviceUnitArray[id].branchcode);
 	$("#status").val(serviceUnitArray[id].status);
 	$("#submit1").val("Update");
+	$("#headId").text("Update Branch");
 	$(window).scrollTop($('#moveTo').offset().top);
 }
 

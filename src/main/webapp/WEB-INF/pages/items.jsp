@@ -34,6 +34,9 @@ table#dependent_table tbody tr td:first-child::before {
 #ui-datepicker-div{
 /* 	width: auto !important; */
 }
+#headId{
+color:#000 !important;
+font-size: 15px;}
 
 </style>
 
@@ -89,7 +92,7 @@ table#dependent_table tbody tr td:first-child::before {
 	<div class="row" id="moveTo">
 		<div class="col-md-12 col-sm-12">
 			<div class="panel panel-primary">
-				<div class="panel-heading">
+				<div class="panel-heading" id="headId">
 					<h4>Create Product</h4>
 				</div>
 				<form:form modelAttribute="itemsForm" action="addItems"
@@ -259,6 +262,7 @@ table#dependent_table tbody tr td:first-child::before {
 		$("#itemprice").val(serviceUnitArray[id].itemprice);
 		$("#status").val(serviceUnitArray[id].status);
 		$("#submit1").val("Update");
+		$("#headId").text("Update Product");
 		$(window).scrollTop($('#moveTo').offset().top);
 	}
 

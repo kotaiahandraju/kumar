@@ -34,6 +34,10 @@ table#dependent_table tbody tr td:first-child::before {
 #ui-datepicker-div{
 /* 	width: auto !important; */
 }
+#headId{
+color:#000 !important;
+font-size: 15px;}
+
 
 </style>
         <div class="clearfix"></div>
@@ -72,8 +76,7 @@ table#dependent_table tbody tr td:first-child::before {
             <div class="row" id="moveTo">
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h4>Create Subcategory</h4>
+                    <div class="panel-heading" id="headId"><h4>Create Subcategory</h4>
                         <div class="options"></div>
                     </div>
 	                <form:form modelAttribute="productnameForm" id="formId" action="addProductname" class="form-horizontal" method="post" enctype="multipart/form-data" >
@@ -225,6 +228,7 @@ function editProductName(id) {
 	$("#status").val(serviceUnitArray[id].status);
 	
 	$("#submit1").val("Update");
+	$("#headId").text("Update Subcategory");
 	$(window).scrollTop($('#moveTo').offset().top);
 }
 
