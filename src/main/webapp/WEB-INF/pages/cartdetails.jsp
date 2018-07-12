@@ -308,14 +308,15 @@ function ordePlacing() {
 			var jsonobj = $.parseJSON(data);
 			var orderId = jsonobj[0].orderId;
 			var invoiceId = jsonobj[0].invoiceId;
-		
+			 var invoiceOrderList = jsonobj[0].invoiceDetails1;
+			 
 			$('#orderSuccessMsg').text("Order Sucessfully");
 			$('#cartId').text("0");
 			   $('#invoice').text(invoiceId);
 			   $('#order').text(orderId);
 			   
 			   if (listOrders1 != "") {
-					showTableDataOnInvoice(listOrders1,grandTotalAmount);
+					showTableDataOnInvoice(invoiceOrderList,grandTotalAmount);
 				}
 			   
 			   $('#orderPlacement').hide();

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.aurospaces.neighbourhood.bean.CartBean;
 import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.LoginBean;
+import com.aurospaces.neighbourhood.bean.OrdersListBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 import com.aurospaces.neighbourhood.db.basedao.BaseCartDao;
 
@@ -84,6 +85,19 @@ public class CartDao extends BaseCartDao
 		
 		
 	}
+	
+	public  List<Map<String,Object>> getallOrderListDetailsByUserId(String userid){
+		 jdbcTemplate = custom.getJdbcTemplate();
+			 String sql = "SELECT  concat(ke.name,'(',ke.businessName,')') as name ,c.totalamount,c.`quantity`,c.id,i.id AS productId,i.`itemcode`,i.`itemdescrption`,ifnull(i.itemprice,'0') as itemprice,pn.productname AS productIdName,pt.producttype AS productTypeName FROM  `orders_list` c, items i, productname pn,producttype pt,kumar_employee ke WHERE  i.productId=pt.id AND c.`productId`=i.id AND ke.id=c.delerId and  i.productname=pn.id AND c.orderId=?";
+				
+				List<Map<String,Object>> retlist = jdbcTemplate.queryForList(sql,new Object[]{userid});
+				if(retlist.size() > 0)
+					return retlist;
+				return null;
+		
+	}
+	
+	
 	public int countcartdetailsforMobile(CartBean objCartBean){
 		 jdbcTemplate = custom.getJdbcTemplate();
 		

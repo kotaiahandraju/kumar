@@ -113,7 +113,11 @@ public class OrderPlacementController {
 		InputStream input = null;
 		String body = null;
 		 Properties prop = new Properties();
-		
+		 List<Map<String,Object>> listOrderBeans = null;
+		 ObjectMapper objectMapper =null;
+		 String sJson = null;
+		 JSONObject jsonObj1 = new JSONObject();
+			JSONObject jsonObj2 = new JSONObject();
 		try{
 			if(StringUtils.isNotBlank(orderslistbean.getProductId())){
 				String productArray[] = orderslistbean.getProductId().split(",");
@@ -146,8 +150,6 @@ public class OrderPlacementController {
 				
 //				prefix = prefix+"-"+ objuserBean.getBranchId()+"-";
 //				System.out.println(" Custom generated Sequence value " + prefix.concat(new Integer(rand_int).toString()));
-				JSONObject jsonObj1 = new JSONObject();
-				JSONObject jsonObj2 = new JSONObject();
 				for(int i=0;i<productArray.length;i++){
 					
 					int totalamount	=Integer.parseInt(amountArray[i]) * Integer.parseInt(quantityArray[i]);
@@ -165,15 +167,16 @@ public class OrderPlacementController {
 					ordersListDao.save(orderslistbean);
 					
 						}
+				
 					jsonObj1.put("invoiceId", orderslistbean.getInvoiceId());
 					jsonObj1.put("orderId", orderslistbean.getOrderId());
+					
 					
 					jsonObj2.put(orderslistbean.getProductId(), orderslistbean.getQuantity()) ;
 					
 					model.addAttribute("invoiceDetails", jsonObj1);
 					model.addAttribute("productList", jsonObj2);
-					jsonArray.put(jsonObj1);
-					jsonArray.put(jsonObj2);
+					
 				}
 			
 			
@@ -217,7 +220,21 @@ public class OrderPlacementController {
 				}else {
 					cartDao.deleteByUserId(Integer.parseInt(orderslistbean.getDelerId()));
 				}
-			
+				
+				listOrderBeans = cartDao.getallOrderListDetailsByUserId(orderslistbean.getOrderId());
+				if (listOrderBeans != null && listOrderBeans.size() > 0) {
+					objectMapper = new ObjectMapper();
+					sJson = objectMapper.writeValueAsString(listOrderBeans);
+					request.setAttribute("allOrders1", sJson);
+						System.out.println(sJson);
+				} else {
+					objectMapper = new ObjectMapper();
+					sJson = objectMapper.writeValueAsString(listOrderBeans);
+					request.setAttribute("allOrders1", "''");
+				}
+				jsonObj1.put("invoiceDetails1", listOrderBeans);
+				jsonArray.put(jsonObj1);
+				jsonArray.put(jsonObj2);
 			}
 			
 		}catch(Exception e){
