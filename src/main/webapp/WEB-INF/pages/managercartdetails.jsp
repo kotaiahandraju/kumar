@@ -13,6 +13,11 @@
  
  
  <style>
+ table.dataTable tfoot th, table.dataTable tfoot td {
+    padding: 10px 18px 6px 18px;
+   border-top: 1px solid #ccc; 
+   
+}
  .dataTables_wrapper .dataTables_filter input {
     margin-left: 0.5em;
     border: 1px solid #ccc;
@@ -161,7 +166,7 @@ table#dependent_table tbody tr td:first-child::before {
 							<div class="clearfix"></div>
 							
 							
-	<label class="col-md-2" for="Orderid">Dealer Name &nbsp; &nbsp;</label>
+	<label class="col-md-2" for="Orderid">Dealer Name</label>
     <span type="order" class="col-md-9" id="dealername"></span>
 								<div class="clearfix"></div>
 							
@@ -169,7 +174,7 @@ table#dependent_table tbody tr td:first-child::before {
     <span  type="invoice" class="col-md-9 " id="invoice"></span>
 							<div class="clearfix"></div>	
 								
-    <label class="col-md-2" for="Orderid">Order ID &nbsp; &nbsp;</label>
+    <label class="col-md-2" for="Orderid">Order ID</label>
     <span type="order" class="col-md-9 " id="order"></span>
     	<div class="clearfix"></div>
     

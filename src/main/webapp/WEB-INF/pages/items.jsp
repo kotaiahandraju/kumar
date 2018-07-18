@@ -173,7 +173,7 @@ font-size: 15px;}
 						<div class="row">
 							<div class="col-sm-12">
 								<div class="btn-toolbar text-center" style="float:right">
-									<input class="btn-primary btn" type="submit" value="Submit"
+									<input class="btn-success btn" type="submit" value="Submit"
 										id="submit1" /> <input class="btn-danger btn cancel"
 										type="reset" value="Cancel" />
 								</div>
@@ -243,11 +243,12 @@ font-size: 15px;}
 
 		});
 	
-		if (isClick == 'Yes')
+		if (isClick == 'Yes'){
 			$('.datatables').dataTable();
+			$('.dataTables_filter input').attr("placeholder", "Search");
 		
 	}
-
+	}
 	var prodcutName = '';
 
 	function editItem(id) {

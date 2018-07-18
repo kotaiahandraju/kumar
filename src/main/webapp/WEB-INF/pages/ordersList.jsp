@@ -151,10 +151,10 @@ table#dependent_table tbody tr td:first-child::before {
   
 <div class="modal fade" id="orderListModal" id="myModal" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		  <div class="modal-dialog"> 
-		    <div class="modal-content table-responsive">
+		    <div class="modal-content ">
 		      <div class="modal-header">
 		        <h4 class="modal-title" id="exampleModalLabel"><span id="dealer_name_str"></span></h4>
-		       <span class="col-md-2" style="max-width:119px;"><b>Dealer Name :</b></span><span class="col-md-3" id="dname">as</span> <span class="col-md-2" style="max-width:100px;"><b>Order ID :</b></span> <span class="col-md-3" id="kumarid">as</span><span class="col-md-2" style="max-width:119px;"><b>Order Date :</b></span>  <span class="col-md-3" id="korderdDate">as</span><br>
+		       <span class="col-md-2" style="max-width:119px;"><b>Dealer Name :</b></span><span class="col-md-2" id="dname">as</span> <span class="col-md-2" style="max-width:100px;"><b>Order ID :</b></span> <span class="col-md-3" id="kumarid">as</span><span class="col-md-2" style="max-width:119px;"><b>Order Date :</b></span>  <span class="col-md-3" id="korderdDate">as</span><br>
 		       <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 		      </div>
 		      <div class="modal-body" id="modal_body">

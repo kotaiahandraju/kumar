@@ -101,7 +101,7 @@ font-size: 15px;}
 						<div class="row">
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar pull-right">
-					      			<input class="btn-primary btn" type="submit" id="submit1" value="Submit" />
+					      			<input class="btn-success btn" type="submit" id="submit1" value="Submit" />
 					      			<input class="btn-danger btn cancel" type="reset" id="clearData" value="Cancel" />
 				      			</div>
 				      		</div>
@@ -185,7 +185,11 @@ function showTableData(response){
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
-	if(isClick=='Yes') $('.datatables').dataTable();
+	if(isClick=='Yes')
+		{
+		$('.datatables').dataTable();
+		$('.dataTables_filter input').attr("placeholder", "Search");
+		}
 }
 
 function editProductType(id) {

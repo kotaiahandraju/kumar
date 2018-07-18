@@ -302,6 +302,7 @@ function addCart() {
 			});
 		}
 		$('#tagId').attr('href','managercartdetails?dealerId='+dealerId);
+		window.location.href = "${baseurl}/admin/managerOrderplaceNew?dealerId="+dealerId;
 		
 	});
 	

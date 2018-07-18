@@ -24,6 +24,9 @@ window.setTimeout(function() {
 }, 5000);
 </script>
 <style type="text/css">
+.btn-primary {
+    border-radius: 5px;
+}
 .impColor{color:red;}
 .your-class::-webkit-input-placeholder {color: #e73d4a !important;}
 .your-class::-moz-placeholder {color: #e73d4a !important;}
@@ -300,7 +303,7 @@ font-size: 15px;}
 					      	<div class="row pull-right">
 					      		<div class="col-sm-12">
 					      			<div class="btn-toolbar text-center">
-						      			<input type="submit" id="submit2" value="Submit" class="btn-primary btn"/>
+						      			<input type="submit" id="submit2" value="Submit" class="btn-success btn"/>
 						      			<input type="reset" value="Cancel" class="btn-danger btn cancel"/>
 					      			</div>
 					      		</div>
@@ -634,7 +637,7 @@ function showTableData(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHeadm = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables table-responsive" id="example">'+
-    	'<thead><tr><th> Name</th><th>Business Name</th><th>Address</th><th>city</th><th>GST Number</th><th>Phone Number</th><th>Branch</th><th>Action</th></tr>'+
+    	'<thead><tr><th> Name</th><th>Business Name</th><th>Address</th><th>city</th><th>GST Number</th><th>Phone Number</th><th>Branch</th><th style="width:100%;">Action</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHeadm);
 	$.each(response,function(i, orderObj) {
@@ -670,7 +673,11 @@ function showTableData(response){
 		$(tblRow).appendTo("#tableId table tbody");
 		
 	});
-	if(isClick=='Yes') $('.datatables').dataTable();
+	if(isClick=='Yes') 
+		{
+		$('.datatables').dataTable();
+		$('.dataTables_filter input').attr("placeholder", "Search");
+		}
 	
 }
 
@@ -837,7 +844,7 @@ $('#ordersListModal').modal('toggle');
 	serviceUnitArray1 = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables table-responsive" id="example">'+
-    	'<thead style="background:#4f8edc; color:#ffffff;"><tr><th> Name</th><th>Business Name</th><th>Designation</th><th>Address</th><th>city</th><th>Pin Code</th><th>GST Number</th><th>Shop Number</th><th>Phone Number</th><th>Email</th><th></th></tr>'+
+    	'<thead style="background:#4f8edc; color:#ffffff;"><tr><th> Name</th><th>Business Name</th><th>Designation</th><th>Address</th><th>city</th><th>Pin Code</th><th>GST Number</th><th>Shop Number</th><th>Phone Number</th><th>Email</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#modal_body").html(tableHead);
 /* 	$.each(response,function(i, orderObj) { */

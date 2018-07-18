@@ -80,9 +80,9 @@ ps.setString(5, branch.getStatus());
 		else
 		{
 
-			String sql = "UPDATE kumar_branch  set branch_cr_time = ? ,branchname = ?,branchcode =?,status = ?  where id = ? ";
+			String sql = "UPDATE kumar_branch  set branch_cr_time = ? ,branchname = ?,branchcode =? where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{branch.getBranchCrTime(),branch.getBranchname(),branch.getBranchcode(),branch.getStatus(),branch.getId()});
+			jdbcTemplate.update(sql, new Object[]{branch.getBranchCrTime(),branch.getBranchname(),branch.getBranchcode(),branch.getId()});
 		}
 	}
 		
